@@ -1,0 +1,7 @@
+[submodule "subprojects/mohair-protocol"]
+	path = subprojects/mohair-protocol
+	url = https://github.com/drin/mohair-protocol.git
+	branch = feat-skytether-engine
+[submodule "subprojects/substrait-protocol"]
+	path = subprojects/substrait-protocol
+	url = https://github.com/drin/substrait.git
