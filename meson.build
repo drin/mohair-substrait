@@ -4,7 +4,7 @@
 # >> configuration
 project('libmohair-substrait'
   ,'cpp'
-  ,version         : '0.1.0'
+  ,version         : '0.1.2'
   ,default_options : ['warning_level=3','cpp_std=c++17']
 )
 
@@ -33,6 +33,7 @@ inc_mohairsubstrait = include_directories(cpp_srcdir)
 
 # use pkg-config to generate library build info
 module_pkgcfg = import('pkgconfig')
+module_cmake  = import('cmake')
 
 
 # >> Required dependencies
@@ -132,7 +133,12 @@ lib_mohairsubstrait = library('mohair-substrait'
   ,install            : true
 )
 
+# Generate pkgconfig and cmake config files
 module_pkgcfg.generate(lib_mohairsubstrait)
+module_cmake.write_basic_package_version_file(
+   name   : 'mohair-substrait'
+  ,version: meson.project_version()
+)
 
 
 # ------------------------------
@@ -164,3 +170,12 @@ bin_readsubstrait = executable('read-substrait'
   ,install            : true
 )
 
+
+# ------------------------------
+# Build tests
+
+test_readsubstrait_fpath = 'resources' / 'test' / 'test-subplan.substrait'
+test('Read sample substrait plan'
+  ,bin_readsubstrait
+  ,args: [test_readsubstrait_fpath, '>test-readsubstrait.out']
+)
