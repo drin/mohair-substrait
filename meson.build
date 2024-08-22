@@ -141,9 +141,10 @@ module_cmake.write_basic_package_version_file(
    name   : 'MohairSubstrait'
   ,version: meson.project_version()
 )
-module_cmake.write_basic_package_config_file(
-   name   : 'MohairSubstrait'
-  ,version: meson.project_version()
+module_cmake.configure_package_config_file(
+   name         : 'MohairSubstrait'
+  ,input        : 'MohairSubstraitConfig.cmake.in'
+  ,configuration: mohair_cfgdata
 )
 
 
