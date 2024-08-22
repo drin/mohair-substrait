@@ -1,0 +1,41 @@
+# ------------------------------
+# License
+#
+# Copyright 2024 Aldrin Montana
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# ------------------------------
+# Overview
+#
+# This config sets the following variables in your project::
+#
+#   ARROW_FULL_SO_VERSION - full shared library version of the found Arrow
+#   ARROW_SO_VERSION - shared library version of the found Arrow
+#   ARROW_VERSION - version of the found Arrow
+#   ARROW_* - options used when the found Arrow is build such as ARROW_COMPUTE
+#   Arrow_FOUND - true if Arrow found on the system
+#
+# This config sets the following targets in your project::
+#
+#   Arrow::arrow_shared - for linked as shared library if shared library is built
+#   Arrow::arrow_static - for linked as static library if static library is built
+
+@PACKAGE_INIT@
+
+set(SUBSTRAIT_VERSION "@SUBSTRAIT_VERSION@")
+set(MOHAIR_VERSION    "@MOHAIR_VERSION@")
+
+include(CMakeFindDependencyMacro)
+find_dependency(Protobuf)

@@ -1,0 +1,12 @@
+option('substrait_version'
+  ,type       : 'string'
+  ,value      : 'v0.55.0'
+  ,description: 'The version of the substrait protocol in use'
+)
+
+option('mohair_version'
+  ,type       : 'string'
+  ,value      : 'v0.1.0'
+  ,description: 'The version of the mohair protocol in use'
+)
+
