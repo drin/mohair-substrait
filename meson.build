@@ -48,11 +48,13 @@ version_fields = version_str.split('.')
 is_debug       = get_option('buildtype') == 'debug' ? 1 : 0
 
 mohair_cfgdata = configuration_data({
-   'VERSION_STR'   : meson.project_version()
-  ,'VERSION_MAJOR' : version_fields[0]
-  ,'VERSION_MINOR' : version_fields[1]
-  ,'VERSION_PATCH' : version_fields[2]
-  ,'BUILD_IS_DEBUG': is_debug
+   'VERSION_STR'      : meson.project_version()
+  ,'VERSION_MAJOR'    : version_fields[0]
+  ,'VERSION_MINOR'    : version_fields[1]
+  ,'VERSION_PATCH'    : version_fields[2]
+  ,'BUILD_IS_DEBUG'   : is_debug
+  ,'SUBSTRAIT_VERSION': get_option('substrait_version')
+  ,'MOHAIR_VERSION'   : get_option('mohair_version')
 })
 
 mohair_cfgfile = configure_file(
@@ -136,7 +138,11 @@ lib_mohairsubstrait = library('mohair-substrait'
 # Generate pkgconfig and cmake config files
 module_pkgcfg.generate(lib_mohairsubstrait)
 module_cmake.write_basic_package_version_file(
-   name   : 'mohair-substrait'
+   name   : 'MohairSubstrait'
+  ,version: meson.project_version()
+)
+module_cmake.write_basic_package_config_file(
+   name   : 'MohairSubstrait'
   ,version: meson.project_version()
 )
 
