@@ -3,7 +3,7 @@
 // source: substrait/algebra.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/algebra.pb.h"
+#include "mohair-substrait/substrait/algebra.pb.h"
 
 #include <algorithm>
 #include <type_traits>

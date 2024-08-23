@@ -3,7 +3,7 @@
 // source: substrait/parameterized_types.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/parameterized_types.pb.h"
+#include "mohair-substrait/substrait/parameterized_types.pb.h"
 
 #include <algorithm>
 #include <type_traits>

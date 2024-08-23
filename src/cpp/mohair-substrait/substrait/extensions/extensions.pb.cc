@@ -3,7 +3,7 @@
 // source: substrait/extensions/extensions.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/extensions/extensions.pb.h"
+#include "mohair-substrait/substrait/extensions/extensions.pb.h"
 
 #include <algorithm>
 #include <type_traits>

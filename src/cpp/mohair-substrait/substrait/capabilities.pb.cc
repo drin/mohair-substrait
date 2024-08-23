@@ -3,7 +3,7 @@
 // source: substrait/capabilities.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/capabilities.pb.h"
+#include "mohair-substrait/substrait/capabilities.pb.h"
 
 #include <algorithm>
 #include <type_traits>

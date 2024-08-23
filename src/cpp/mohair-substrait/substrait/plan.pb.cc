@@ -3,7 +3,7 @@
 // source: substrait/plan.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/plan.pb.h"
+#include "mohair-substrait/substrait/plan.pb.h"
 
 #include <algorithm>
 #include <type_traits>
