@@ -17,8 +17,8 @@ project('libmohair-substrait'
 cpp_srcdir    = 'src' / 'cpp'
 
 # dir for generated protobuf code
-cpp_proto_substrait = cpp_srcdir / 'substrait'
-cpp_proto_mohair    = cpp_srcdir / 'mohair'
+cpp_proto_substrait = cpp_srcdir / 'mohair-substrait' / 'substrait'
+cpp_proto_mohair    = cpp_srcdir / 'mohair-substrait' / 'mohair'
 
 # dir for binary sources (1-1 with binaries)
 cpp_tooldir   = cpp_srcdir / 'toolbox'
