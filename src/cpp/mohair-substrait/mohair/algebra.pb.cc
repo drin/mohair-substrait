@@ -3,7 +3,7 @@
 // source: mohair/algebra.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "mohair/algebra.pb.h"
+#include "mohair-substrait/mohair/algebra.pb.h"
 
 #include <algorithm>
 #include <type_traits>

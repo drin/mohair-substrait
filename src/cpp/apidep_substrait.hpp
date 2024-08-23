@@ -31,9 +31,9 @@
 #include <google/protobuf/text_format.h>
 
 // >> Generated protobuf deps for substrait
-#include "substrait/plan.pb.h"
-#include "substrait/algebra.pb.h"
-#include "substrait/extensions/extensions.pb.h"
+#include "mohair-substrait/substrait/plan.pb.h"
+#include "mohair-substrait/substrait/algebra.pb.h"
+#include "mohair-substrait/substrait/extensions/extensions.pb.h"
 
 
 // ------------------------------
