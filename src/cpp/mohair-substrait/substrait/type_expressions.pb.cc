@@ -3,7 +3,7 @@
 // source: substrait/type_expressions.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/type_expressions.pb.h"
+#include "mohair-substrait/substrait/type_expressions.pb.h"
 
 #include <algorithm>
 #include <type_traits>

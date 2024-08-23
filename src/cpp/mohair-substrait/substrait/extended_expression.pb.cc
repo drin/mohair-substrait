@@ -3,7 +3,7 @@
 // source: substrait/extended_expression.proto
 // Protobuf C++ Version: 5.27.3
 
-#include "substrait/extended_expression.pb.h"
+#include "mohair-substrait/substrait/extended_expression.pb.h"
 
 #include <algorithm>
 #include <type_traits>

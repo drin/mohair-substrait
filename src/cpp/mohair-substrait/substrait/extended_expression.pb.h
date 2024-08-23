@@ -28,10 +28,10 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
-#include "substrait/algebra.pb.h"
-#include "substrait/extensions/extensions.pb.h"
-#include "substrait/plan.pb.h"
-#include "substrait/type.pb.h"
+#include "mohair-substrait/substrait/algebra.pb.h"
+#include "mohair-substrait/substrait/extensions/extensions.pb.h"
+#include "mohair-substrait/substrait/plan.pb.h"
+#include "mohair-substrait/substrait/type.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
