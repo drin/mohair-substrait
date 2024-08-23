@@ -19,14 +19,26 @@ function change_namespace() {
   target_dirpath="${3:?"Required: directory path to search"}"
 
   re_replace_ns="s%include \"${old_ns}/%include \"${new_ns}/%"
-  src_fpaths=($(grep -Rl 'include "substrait' "${target_dirpath}"))
+  src_fpaths=($(grep -Rl "include \"${old_ns}[/]" "${target_dirpath}"))
+
+  # Check if `@src_fpaths` is empty
+  if [[ ${#src_fpaths[@]} -eq 0 ]]; then
+    echo "[${target_dirpath}]: No source files to modify"
+    return 0
+
+  else
+    echo "[${target_dirpath}]: Modifying [${#src_fpaths[@]}] files"
+
+  fi
 
   # Mac syntax for sed (`-i` requires some additional argument)
   if [[ $(is_mac) -eq 1 ]]; then
+    echo "[mac] Changing include paths..."
     sed -i '' "${re_replace_ns}" "${src_fpaths[@]}"
 
   # Linux syntax for sed
   else
+    echo "[linux] Changing include paths..."
     sed -i "${re_replace_ns}" "${src_fpaths[@]}"
 
   fi
@@ -35,8 +47,15 @@ function change_namespace() {
 
 # Take input from the user
 srcgen_dirpath="${1:?"Please provide a directory path containing generated source files"}"
+
+# Change the namespace for substrait files
 generated_ns="substrait"
 target_ns="mohair-substrait/substrait"
+echo "Changing includes for 'substrait/'"
+change_namespace "${generated_ns}" "${target_ns}" "${srcgen_dirpath}"
 
-# Call the change_namespace function with some hardcoded values
+# Change the namespace for mohair files
+generated_ns="mohair"
+target_ns="mohair-substrait/mohair"
+echo -e "\nChanging includes for 'mohair/'"
 change_namespace "${generated_ns}" "${target_ns}" "${srcgen_dirpath}"
