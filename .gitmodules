@@ -5,3 +5,4 @@
 [submodule "subprojects/substrait-protocol"]
 	path = subprojects/substrait-protocol
 	url = https://github.com/drin/substrait.git
+	branch = feat-skytether-engine
