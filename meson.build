@@ -38,7 +38,7 @@ module_cmake  = import('cmake')
 
 # >> Required dependencies
 
-# Protobuf 
+# Protobuf
 dep_proto  = dependency('protobuf')
 
 
@@ -75,6 +75,7 @@ adapter_hdrlist = [
 ]
 
 # >> For generated substrait and mohair definitions
+# NOTE: we have a list for each distinct directory to make installing headers easier
 substrait_hdrlist = [
    cpp_proto_substrait / 'type.pb.h'
   ,cpp_proto_substrait / 'function.pb.h'
@@ -84,7 +85,10 @@ substrait_hdrlist = [
   ,cpp_proto_substrait / 'parameterized_types.pb.h'
   ,cpp_proto_substrait / 'type_expressions.pb.h'
   ,cpp_proto_substrait / 'extended_expression.pb.h'
-  ,cpp_proto_substrait / 'extensions' / 'extensions.pb.h'
+]
+
+substrait_ext_hdrlist = [
+  cpp_proto_substrait / 'extensions' / 'extensions.pb.h'
 ]
 
 mohair_hdrlist = [
@@ -121,7 +125,13 @@ protocol_srclist = [
 # Composed header and source lists (organized by library/binary)
 
 # >> Library for mohair substrait interface
-library_hdrlist = adapter_hdrlist + substrait_hdrlist + mohair_hdrlist
+library_hdrlist = (
+    adapter_hdrlist
+  + substrait_hdrlist
+  + substrait_ext_hdrlist
+  + mohair_hdrlist
+)
+
 library_srclist = adapter_srclist + protocol_srclist
 
 
@@ -151,9 +161,12 @@ module_cmake.configure_package_config_file(
 # ------------------------------
 # Installation
 
-install_headers(adapter_hdrlist  , subdir: 'mohair-substrait')
-install_headers(substrait_hdrlist, subdir: 'mohair-substrait' / 'substrait')
-install_headers(mohair_hdrlist   , subdir: 'mohair-substrait' / 'mohair')
+# NOTE: if use `library_hdrlist` and `preserve_path`, everything goes under a `src/cpp`
+#       directory, which we don't want. So we just do each individually
+install_headers(adapter_hdrlist      , subdir: 'mohair-substrait')
+install_headers(substrait_hdrlist    , subdir: 'mohair-substrait' / 'substrait')
+install_headers(substrait_ext_hdrlist, subdir: 'mohair-substrait' / 'substrait' / 'extensions')
+install_headers(mohair_hdrlist       , subdir: 'mohair-substrait' / 'mohair')
 
 dep_mohairsubstrait = declare_dependency(
    include_directories: inc_mohairsubstrait
