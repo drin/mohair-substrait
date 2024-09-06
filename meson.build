@@ -38,8 +38,20 @@ module_cmake  = import('cmake')
 
 # >> Required dependencies
 
+# Required for mac
+dep_cf    = dependency('CoreFoundation', required: false)
+
 # Protobuf
-dep_proto  = dependency('protobuf')
+dep_proto = dependency('protobuf', static: false)
+dep_absl  = dependency('absl'
+  ,static : false
+  ,modules: [
+      'absl::log_internal_check_op'
+     ,'absl::log_internal_message'
+     ,'absl::status'
+     ,'absl::time_zone'
+   ]
+)
 
 
 # >> Make configuration data available to source files
@@ -61,6 +73,7 @@ mohair_cfgfile = configure_file(
    input        : cpp_srcdir / 'mohair-substrait-config.hpp.in'
   ,output       : 'mohair-substrait-config.hpp'
   ,configuration: mohair_cfgdata
+  ,install_dir  : get_option('includedir') / 'mohair-substrait'
 )
 
 
@@ -141,7 +154,8 @@ library_srclist = adapter_srclist + protocol_srclist
 lib_mohairsubstrait = library('mohair-substrait'
   ,library_srclist
   ,include_directories: inc_mohairsubstrait
-  ,dependencies       : dep_proto
+  ,dependencies       : [dep_proto, dep_absl, dep_cf]
+  ,pic                : true
   ,install            : true
 )
 
@@ -170,7 +184,7 @@ install_headers(mohair_hdrlist       , subdir: 'mohair-substrait' / 'mohair')
 
 dep_mohairsubstrait = declare_dependency(
    include_directories: inc_mohairsubstrait
-  ,dependencies       : [dep_proto]
+  ,dependencies       : [dep_proto, dep_absl, dep_cf]
   ,link_with          : lib_mohairsubstrait
 )
 
@@ -186,7 +200,7 @@ bin_readsubstrait_srclist = [ cpp_tooldir  / 'read-substrait.cpp' ]
 bin_readsubstrait = executable('read-substrait'
   ,bin_readsubstrait_srclist
   # ,include_directories: inc_mohairsubstrait
-  ,dependencies       : [ dep_mohairsubstrait, dep_proto ]
+  ,dependencies       : [ dep_mohairsubstrait ]
   ,install            : true
 )
 

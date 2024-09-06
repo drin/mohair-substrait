@@ -39,3 +39,6 @@ set(MOHAIR_VERSION    "@MOHAIR_VERSION@")
 
 include(CMakeFindDependencyMacro)
 find_dependency(Protobuf)
+
+# include(${CMAKE_CURRENT_LIST_DIR}/MohairSubstrait.cmake)
+# set(MohairSubstrait_LIBRARIES MohairSubstrait::mohair-substrait)
