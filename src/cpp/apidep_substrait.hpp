@@ -27,8 +27,9 @@
 // Dependencies
 #pragma once
 
-// >> Protobuf deps for interacting with framework
-#include <google/protobuf/text_format.h>
+// >> Protobuf framework deps
+#include "google/protobuf/text_format.h"
+#include "google/protobuf/util/json_util.h"
 
 // >> Generated protobuf deps for substrait
 #include "mohair-substrait/substrait/plan.pb.h"
@@ -37,13 +38,18 @@
 
 
 // ------------------------------
-// Type Aliases
+// Aliases
 
-//  >> Protobuf framework types
-using google::protobuf::TextFormat;
+// >> type aliases
+namespace mohair {
 
-//  >> Substrait types
-using substrait::Plan;
-using substrait::PlanRel;
-using substrait::Rel;
+  // Protobuf types
+  using google::protobuf::Message;
+
+  // >> Substrait types
+  using substrait::Plan;
+  using substrait::PlanRel;
+  using substrait::Rel;
+
+} // namespace: mohair
 

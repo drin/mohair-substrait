@@ -34,23 +34,24 @@
 
 
 // ------------------------------
-// Type Aliases
-
-using mohair::PlanAnchor;              // >> Mohair query processing types
-using mohair::ErrRel;
-
-using mohair::ServiceConfig;           // >> Mohair topology types
-using mohair::DeviceClass;
-
-
-// ------------------------------
-// Public global variables
+// Aliases
 
 namespace mohair {
-  const string version       = VERSION_STRING;
-  const string version_major = VERSION_MAJOR;
-  const string version_minor = VERSION_MINOR;
-  const string version_patch = VERSION_PATCH;
+
+  // mohair-protocol types (for query processing)
+  using mohair::PlanAnchor;
+  using mohair::ErrRel;
+
+  // mohair-protocol types (for topology representation)
+  using mohair::ServiceConfig;
+  using mohair::DeviceClass;
+
+
+  // global variables (within the library)
+  const string version       = MOHAIR_VERSION_STRING;
+  const string version_major = MOHAIR_VERSION_MAJOR;
+  const string version_minor = MOHAIR_VERSION_MINOR;
+  const string version_patch = MOHAIR_VERSION_PATCH;
 };
 
 
@@ -58,6 +59,13 @@ namespace mohair {
 // Functions
 
 namespace mohair {
+
+  // TODO: hide `Message` to be internal linkage only
+  // >> Wrapper functions for protobuf framework
+  bool StringifyPlan (const Message& msg    , string* text_result);
+  bool StringifyRel  (const Message& msg    , string* text_result);
+  bool SerializeJson (const string& msg_json, Message* msg_result);
+  bool JsonifyMessage(const Message& msg    , string* json_result);
 
   // >> Reader functions
   // helper functions
