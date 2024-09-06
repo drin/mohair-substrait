@@ -48,22 +48,28 @@
 
 
 // ------------------------------
-// Type aliases
+// Aliases (internalized to library namespace)
 
 // >> namespace aliases
 namespace fs = std::filesystem;
 
-// >> pointer type aliases
-using std::shared_ptr;
-using std::unique_ptr;
 
-// >> data type aliases
-using std::string;
+// >> type aliases
+namespace mohair {
 
-// >> data structure type aliases
-using std::vector;
+  // pointer type aliases
+  using std::shared_ptr;
+  using std::unique_ptr;
 
-// >> I/O type aliases
-using std::stringstream;
-using std::fstream;
+  // data type aliases
+  using std::string;
+
+  // data structure type aliases
+  using std::vector;
+
+  // I/O type aliases
+  using std::stringstream;
+  using std::fstream;
+
+} // namespace: mohair
 

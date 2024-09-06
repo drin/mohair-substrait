@@ -50,6 +50,7 @@ struct ToolInterface {
 
     auto query_plan = SubstraitMessage::FromFile(plan_fpath.string());
     mohair::PrintSubstraitPlan(query_plan->payload.get());
+    return 0;
   }
 };
 

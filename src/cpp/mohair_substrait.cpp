@@ -25,6 +25,36 @@
 // ------------------------------
 // Functions
 
+// >> Wrapper functions for protobuf framework functions
+namespace mohair {
+
+  // Types to wrap
+  using google::protobuf::TextFormat;
+
+  // Functions to wrap
+  using google::protobuf::util::JsonStringToMessage;
+  using google::protobuf::util::MessageToJsonString;
+
+  // Wrapper implementation for `TextFormat::PrintToString`
+  bool StringifyMessage(const Message& msg, string* text_result) {
+    return TextFormat::PrintToString(msg, text_result);
+  }
+
+  // TODO: decide if I should return a status object that has an error message
+  // Wrapper implementation for `JsonStringToMessage`
+  bool SerializeJson(const string& msg_json, Message* msg_result) {
+    absl::Status status = JsonStringToMessage(msg_json, msg_result);
+    return status.ok();
+  }
+
+  bool JsonifyMessage(const Message& msg, string* json_result) {
+    absl::Status status = MessageToJsonString(msg, json_result);
+    return status.ok();
+  }
+
+
+} // namespace: mohair
+
 namespace mohair {
 
   //  >> Reader functions
@@ -91,22 +121,21 @@ namespace mohair {
 
 
   // >> Debug functions
-  template <typename MsgType>
-  void PrintProtoMessage(MsgType *msg) {
-    string proto_str;
+  void PrintProtoMessage(const Message& msg) {
+    string msg_text;
 
-    auto success = TextFormat::PrintToString(*msg, &proto_str);
-    if (not success) {
+    bool status_stringify { StringifyMessage(msg, &msg_text) };
+    if (not status_stringify) {
       std::cerr << "Unable to print message" << std::endl;
       return;
     }
 
     std::cout << "Proto message:" << std::endl
-              << proto_str        << std::endl;
+              << msg_text         << std::endl;
   }
 
-  void  PrintSubstraitRel(Rel  *rel_msg ) { PrintProtoMessage<Rel>(rel_msg);   }
-  void PrintSubstraitPlan(Plan *plan_msg) { PrintProtoMessage<Plan>(plan_msg); }
+  void  PrintSubstraitRel(Rel  *rel_msg ) { PrintProtoMessage(*rel_msg);  }
+  void PrintSubstraitPlan(Plan *plan_msg) { PrintProtoMessage(*plan_msg); }
 
 
   // >> Helper functions
