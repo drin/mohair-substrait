@@ -17,8 +17,8 @@ project('libmohair-substrait'
 cpp_srcdir    = 'src' / 'cpp'
 
 # dir for generated protobuf code
-cpp_proto_substrait = cpp_srcdir / 'mohair-substrait' / 'substrait'
-cpp_proto_mohair    = cpp_srcdir / 'mohair-substrait' / 'mohair'
+cpp_proto_substrait = cpp_srcdir / 'substrait'
+cpp_proto_mohair    = cpp_srcdir / 'mohair'
 
 # dir for binary sources (1-1 with binaries)
 cpp_tooldir   = cpp_srcdir / 'toolbox'
@@ -42,7 +42,7 @@ module_cmake  = import('cmake')
 dep_cf    = dependency('CoreFoundation', required: false)
 
 # Protobuf
-dep_proto = dependency('protobuf', static: false)
+dep_proto = dependency('protobuf', static: true)
 dep_absl  = dependency('absl'
   ,static : false
   ,modules: [
@@ -185,7 +185,7 @@ install_headers(mohair_hdrlist       , subdir: 'mohair-substrait' / 'mohair')
 dep_mohairsubstrait = declare_dependency(
    include_directories: inc_mohairsubstrait
   ,dependencies       : [dep_proto, dep_absl, dep_cf]
-  ,link_with          : lib_mohairsubstrait
+  ,link_with          : [lib_mohairsubstrait]
 )
 
 

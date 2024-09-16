@@ -34,16 +34,16 @@ configure_file(${CMAKE_CURRENT_LIST_DIR}/src/cpp/mohair-substrait-config.hpp.in
 find_package(Protobuf REQUIRED)
 
 # conditionally, depend on absl
-if (Protobuf_VERSION VERSION_GREATER_EQUAL 4)
-  find_package(absl REQUIRED)
-endif()
+# if (Protobuf_VERSION VERSION_GREATER_EQUAL 4)
+#   find_package(absl REQUIRED)
+# endif()
 
 
 # library for mohair-substrait
-find_library(MohairSubstrait_LIBRARIES libmohair-substrait.a REQUIRED)
+# find_library(MohairSubstrait_LIBRARIES libmohair-substrait.a REQUIRED)
 
 # headers for mohair-substrait
-find_path(MohairSubstrait_INCLUDE_DIRS mohair-substrait REQUIRED)
+# find_path(MohairSubstrait_INCLUDE_DIRS mohair-substrait REQUIRED)
 
 
 # ------------------------------
@@ -51,17 +51,17 @@ find_path(MohairSubstrait_INCLUDE_DIRS mohair-substrait REQUIRED)
 
 # Adapter and substrait protocol sources
 set(ADAPTER_SOURCES  src/cpp/mohair_substrait.cpp)
-set(PROTOCOL_SOURCES src/cpp/mohair-substrait/mohair/algebra.pb.cc
-                     src/cpp/mohair-substrait/mohair/topology.pb.cc
-                     src/cpp/mohair-substrait/substrait/type.pb.cc
-                     src/cpp/mohair-substrait/substrait/function.pb.cc
-                     src/cpp/mohair-substrait/substrait/plan.pb.cc
-                     src/cpp/mohair-substrait/substrait/algebra.pb.cc
-                     src/cpp/mohair-substrait/substrait/capabilities.pb.cc
-                     src/cpp/mohair-substrait/substrait/parameterized_types.pb.cc
-                     src/cpp/mohair-substrait/substrait/type_expressions.pb.cc
-                     src/cpp/mohair-substrait/substrait/extended_expression.pb.cc
-                     src/cpp/mohair-substrait/substrait/extensions/extensions.pb.cc)
+set(PROTOCOL_SOURCES src/cpp/mohair/algebra.pb.cc
+                     src/cpp/mohair/topology.pb.cc
+                     src/cpp/substrait/type.pb.cc
+                     src/cpp/substrait/function.pb.cc
+                     src/cpp/substrait/plan.pb.cc
+                     src/cpp/substrait/algebra.pb.cc
+                     src/cpp/substrait/capabilities.pb.cc
+                     src/cpp/substrait/parameterized_types.pb.cc
+                     src/cpp/substrait/type_expressions.pb.cc
+                     src/cpp/substrait/extended_expression.pb.cc
+                     src/cpp/substrait/extensions/extensions.pb.cc)
 
 # Executable sources
 set(TOOL_READSUB_SOURCES src/cpp/toolbox/read-substrait.cpp)
@@ -88,21 +88,23 @@ set_target_properties(${PROJ_LIB_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(${PROJ_LIB_NAME} PUBLIC protobuf::libprotobuf)
 
 # conditionally, link against absl
-if (Protobuf_VERSION VERSION_GREATER_EQUAL 4)
-  # this is needed for generated protobuf libs that use ABSL_DCHECK*()
-  target_link_libraries(${PROJ_LIB_NAME} PUBLIC absl::status
-                                            absl::log_internal_check_op)
-endif()
+# if (Protobuf_VERSION VERSION_GREATER_EQUAL 4)
+#   # this is needed for generated protobuf libs that use ABSL_DCHECK*()
+#   target_link_libraries(${PROJ_LIB_NAME} PUBLIC absl::status
+#                                                 absl::log_internal_check_op)
+# endif()
 
 
 # ------------------------------
 # Library headers
 
 # >> Internal headers (in-project) common across library targets
-include_directories(src/cpp)
+# include_directories(src/cpp)
 
 # >> External headers
-target_include_directories(${PROJ_LIB_NAME} PUBLIC ${Protobuf_INCLUDE_DIRS})
+target_include_directories(${PROJ_LIB_NAME} PUBLIC  ${Protobuf_INCLUDE_DIRS}
+                                                    ${CMAKE_INSTALL_INCLUDEDIR}/mohair-substrait
+                                            PRIVATE src/cpp)
 
 
 # ------------------------------
