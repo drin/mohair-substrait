@@ -32,9 +32,9 @@
 #include "google/protobuf/util/json_util.h"
 
 // >> Generated protobuf deps for substrait
-#include "mohair-substrait/substrait/plan.pb.h"
-#include "mohair-substrait/substrait/algebra.pb.h"
-#include "mohair-substrait/substrait/extensions/extensions.pb.h"
+#include "substrait/plan.pb.h"
+#include "substrait/algebra.pb.h"
+#include "substrait/extensions/extensions.pb.h"
 
 
 // ------------------------------
