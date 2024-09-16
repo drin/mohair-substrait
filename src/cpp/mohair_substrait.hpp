@@ -29,8 +29,8 @@
 // >> Internal deps
 #include "mohair-substrait-config.hpp" // Library configuration
 
-#include "mohair-substrait/mohair/algebra.pb.h"  // Mohair protocol types
-#include "mohair-substrait/mohair/topology.pb.h"
+#include "mohair/algebra.pb.h"  // Mohair protocol types
+#include "mohair/topology.pb.h"
 
 
 // ------------------------------
