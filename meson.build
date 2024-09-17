@@ -51,7 +51,7 @@ subdir(cpp_srcdir)
 
 # pkg-config
 module_pkgcfg = import('pkgconfig')
-module_pkgcfg.generate(libmohair_substrait)
+module_pkgcfg.generate(libmohair_substrait, subdirs: 'mohair-substrait')
 
 # cmake (NOTE: this is mostly a placeholder)
 module_cmake = import('cmake')
