@@ -30,8 +30,8 @@ libabsl_dep     = dependency('absl'
 # ------------------------------
 # Reference paths
 
-mohair_srcdir    = 'mohair'
-substrait_srcdir = 'substrait'
+mohair_srcdir    = 'skytether' / 'mohair'
+substrait_srcdir = 'skytether' / 'substrait'
 
 
 # ------------------------------

@@ -29,8 +29,8 @@
 // >> Internal deps
 #include "mohair-substrait-config.hpp" // Library configuration
 
-#include "mohair/algebra.pb.h"  // Mohair protocol types
-#include "mohair/topology.pb.h"
+#include "skytether/mohair/algebra.pb.h"  // Mohair protocol types
+#include "skytether/mohair/topology.pb.h"
 
 
 // ------------------------------
@@ -39,12 +39,12 @@
 namespace mohair {
 
   // mohair-protocol types (for query processing)
-  using mohair::PlanAnchor;
-  using mohair::ErrRel;
+  using skytether::mohair::PlanAnchor;
+  using skytether::mohair::ErrRel;
 
   // mohair-protocol types (for topology representation)
-  using mohair::ServiceConfig;
-  using mohair::DeviceClass;
+  using skytether::mohair::ServiceConfig;
+  using skytether::mohair::DeviceClass;
 
 
   // global variables (within the library)
