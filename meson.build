@@ -4,7 +4,7 @@
 # >> project info
 project('libmohair-substrait'
   ,'cpp'
-  ,version         : '0.1.9'
+  ,version         : '0.1.10'
   ,meson_version   : '1.6.0'
   ,license         : 'Apache-2.0'
   ,license_files   : 'LICENSE'
