@@ -32,9 +32,9 @@
 #include "google/protobuf/util/json_util.h"
 
 // >> Generated protobuf deps for substrait
-#include "substrait/plan.pb.h"
-#include "substrait/algebra.pb.h"
-#include "substrait/extensions/extensions.pb.h"
+#include "skytether/substrait/plan.pb.h"
+#include "skytether/substrait/algebra.pb.h"
+#include "skytether/substrait/extensions/extensions.pb.h"
 
 
 // ------------------------------
@@ -47,9 +47,9 @@ namespace mohair {
   using google::protobuf::Message;
 
   // >> Substrait types
-  using substrait::Plan;
-  using substrait::PlanRel;
-  using substrait::Rel;
+  using skytether::substrait::Plan;
+  using skytether::substrait::PlanRel;
+  using skytether::substrait::Rel;
 
 } // namespace: mohair
 
