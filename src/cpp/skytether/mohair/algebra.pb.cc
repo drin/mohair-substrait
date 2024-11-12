@@ -110,13 +110,13 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr SkySliceRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
+        slice_key_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
         domain_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         partition_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        slice_key_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         execstats_{nullptr},
@@ -145,8 +145,6 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr SkyRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        slices_{},
-        _slices_cached_byte_size_{0},
         domain_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
@@ -178,6 +176,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr SkyPartitionRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
+        slices_{},
+        _slices_cached_byte_size_{0},
         domain_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
@@ -258,7 +258,9 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _impl_.domain_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _impl_.partition_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _impl_.slices_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _impl_.execstats_),
+        ~0u,
         ~0u,
         ~0u,
         0,
@@ -270,10 +272,10 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.slice_key_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.domain_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.partition_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.slice_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.slice_key_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.execstats_),
         ~0u,
         ~0u,
@@ -290,9 +292,7 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.domain_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.partition_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.slices_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.execstats_),
-        ~0u,
         ~0u,
         ~0u,
         0,
@@ -330,9 +330,9 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::skytether::mohair::ExecutionStats)},
-        {10, 21, -1, sizeof(::skytether::mohair::SkyPartitionRel)},
-        {24, 37, -1, sizeof(::skytether::mohair::SkySliceRel)},
-        {42, 54, -1, sizeof(::skytether::mohair::SkyRel)},
+        {10, 22, -1, sizeof(::skytether::mohair::SkyPartitionRel)},
+        {26, 39, -1, sizeof(::skytether::mohair::SkySliceRel)},
+        {44, 55, -1, sizeof(::skytether::mohair::SkyRel)},
         {58, -1, -1, sizeof(::skytether::mohair::ErrRel)},
         {68, -1, -1, sizeof(::skytether::mohair::QueryRel)},
         {77, 86, -1, sizeof(::skytether::mohair::PlanAnchor)},
@@ -352,28 +352,28 @@ const char descriptor_table_protodef_skytether_2fmohair_2falgebra_2eproto[] ABSL
     "her.mohair\032\031google/protobuf/any.proto\032!s"
     "kytether/substrait/algebra.proto\"F\n\016Exec"
     "utionStats\022\032\n\010executed\030\001 \001(\010R\010executed\022\030"
-    "\n\007runtime\030\002 \001(\001R\007runtime\"\207\001\n\017SkyPartitio"
+    "\n\007runtime\030\002 \001(\001R\007runtime\"\237\001\n\017SkyPartitio"
     "nRel\022\026\n\006domain\030\001 \001(\tR\006domain\022\034\n\tpartitio"
-    "n\030\002 \001(\tR\tpartition\022>\n\texecstats\030\004 \001(\0132 ."
-    "skytether.mohair.ExecutionStatsR\texecsta"
-    "ts\"\266\001\n\013SkySliceRel\022\026\n\006domain\030\001 \001(\tR\006doma"
-    "in\022\034\n\tpartition\030\002 \001(\tR\tpartition\022\024\n\005slic"
-    "e\030\003 \001(\rR\005slice\022\033\n\tslice_key\030\004 \001(\tR\010slice"
-    "Key\022>\n\texecstats\030\005 \001(\0132 .skytether.mohai"
-    "r.ExecutionStatsR\texecstats\"\226\001\n\006SkyRel\022\026"
-    "\n\006domain\030\001 \001(\tR\006domain\022\034\n\tpartition\030\002 \001("
-    "\tR\tpartition\022\026\n\006slices\030\003 \003(\rR\006slices\022>\n\t"
-    "execstats\030\004 \001(\0132 .skytether.mohair.Execu"
-    "tionStatsR\texecstats\"\177\n\006ErrRel\022\027\n\007err_ms"
-    "g\030\001 \001(\tR\006errMsg\022;\n\010err_code\030\002 \001(\0162 .skyt"
-    "ether.mohair.ErrRel.ErrTypeR\007errCode\"\037\n\007"
-    "ErrType\022\024\n\020INVALID_MSG_TYPE\020\000\" \n\010QueryRe"
-    "l\022\024\n\005query\030\001 \001(\014R\005query\"E\n\nPlanAnchor\0227\n"
-    "\nanchor_rel\030\001 \001(\0132\030.skytether.substrait."
-    "RelR\tanchorRelB\205\001\n\024com.skytether.mohairB"
-    "\014AlgebraProtoP\001\242\002\003SMX\252\002\020Skytether.Mohair"
-    "\312\002\020Skytether\\Mohair\342\002\034Skytether\\Mohair\\G"
-    "PBMetadata\352\002\021Skytether::Mohairb\006proto3"
+    "n\030\002 \001(\tR\tpartition\022\026\n\006slices\030\003 \003(\rR\006slic"
+    "es\022>\n\texecstats\030\004 \001(\0132 .skytether.mohair"
+    ".ExecutionStatsR\texecstats\"\266\001\n\013SkySliceR"
+    "el\022\033\n\tslice_key\030\001 \001(\tR\010sliceKey\022\026\n\006domai"
+    "n\030\002 \001(\tR\006domain\022\034\n\tpartition\030\003 \001(\tR\tpart"
+    "ition\022\024\n\005slice\030\004 \001(\rR\005slice\022>\n\texecstats"
+    "\030\005 \001(\0132 .skytether.mohair.ExecutionStats"
+    "R\texecstats\"~\n\006SkyRel\022\026\n\006domain\030\001 \001(\tR\006d"
+    "omain\022\034\n\tpartition\030\002 \001(\tR\tpartition\022>\n\te"
+    "xecstats\030\003 \001(\0132 .skytether.mohair.Execut"
+    "ionStatsR\texecstats\"\177\n\006ErrRel\022\027\n\007err_msg"
+    "\030\001 \001(\tR\006errMsg\022;\n\010err_code\030\002 \001(\0162 .skyte"
+    "ther.mohair.ErrRel.ErrTypeR\007errCode\"\037\n\007E"
+    "rrType\022\024\n\020INVALID_MSG_TYPE\020\000\" \n\010QueryRel"
+    "\022\024\n\005query\030\001 \001(\014R\005query\"E\n\nPlanAnchor\0227\n\n"
+    "anchor_rel\030\001 \001(\0132\030.skytether.substrait.R"
+    "elR\tanchorRelB\205\001\n\024com.skytether.mohairB\014"
+    "AlgebraProtoP\001\242\002\003SMX\252\002\020Skytether.Mohair\312"
+    "\002\020Skytether\\Mohair\342\002\034Skytether\\Mohair\\GP"
+    "BMetadata\352\002\021Skytether::Mohairb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skytether_2fmohair_2falgebra_2eproto_deps[2] =
     {
@@ -384,7 +384,7 @@ static ::absl::once_flag descriptor_table_skytether_2fmohair_2falgebra_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skytether_2fmohair_2falgebra_2eproto = {
     false,
     false,
-    1038,
+    1037,
     descriptor_table_protodef_skytether_2fmohair_2falgebra_2eproto,
     "skytether/mohair/algebra.proto",
     &descriptor_table_skytether_2fmohair_2falgebra_2eproto_once,
@@ -673,6 +673,8 @@ inline PROTOBUF_NDEBUG_INLINE SkyPartitionRel::Impl_::Impl_(
     const Impl_& from, const ::skytether::mohair::SkyPartitionRel& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
+        slices_{visibility, arena, from.slices_},
+        _slices_cached_byte_size_{0},
         domain_(arena, from.domain_),
         partition_(arena, from.partition_) {}
 
@@ -700,6 +702,8 @@ inline PROTOBUF_NDEBUG_INLINE SkyPartitionRel::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
+        slices_{visibility, arena},
+        _slices_cached_byte_size_{0},
         domain_(arena),
         partition_(arena) {}
 
@@ -749,15 +753,15 @@ const ::google::protobuf::MessageLite::ClassData* SkyPartitionRel::GetClassData(
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 1, 56, 2> SkyPartitionRel::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 1, 56, 2> SkyPartitionRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_._has_bits_),
     0, // no _extensions_
     4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967284,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    4,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -776,7 +780,9 @@ const ::_pbi::TcParseTable<2, 3, 1, 56, 2> SkyPartitionRel::_table_ = {
     // string partition = 2 [json_name = "partition"];
     {::_pbi::TcParser::FastUS1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_.partition_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated uint32 slices = 3 [json_name = "slices"];
+    {::_pbi::TcParser::FastV32P1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_.slices_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -786,6 +792,9 @@ const ::_pbi::TcParseTable<2, 3, 1, 56, 2> SkyPartitionRel::_table_ = {
     // string partition = 2 [json_name = "partition"];
     {PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_.partition_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // repeated uint32 slices = 3 [json_name = "slices"];
+    {PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_.slices_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
     // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
     {PROTOBUF_FIELD_OFFSET(SkyPartitionRel, _impl_.execstats_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
@@ -806,6 +815,7 @@ PROTOBUF_NOINLINE void SkyPartitionRel::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.slices_.Clear();
   _impl_.domain_.ClearToEmpty();
   _impl_.partition_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
@@ -848,6 +858,15 @@ PROTOBUF_NOINLINE void SkyPartitionRel::Clear() {
             target = stream->WriteStringMaybeAliased(2, _s, target);
           }
 
+          // repeated uint32 slices = 3 [json_name = "slices"];
+          {
+            int byte_size = this_._impl_._slices_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteUInt32Packed(
+                  3, this_._internal_slices(), byte_size, target);
+            }
+          }
+
           cached_has_bits = this_._impl_._has_bits_[0];
           // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
           if (cached_has_bits & 0x00000001u) {
@@ -880,6 +899,22 @@ PROTOBUF_NOINLINE void SkyPartitionRel::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated uint32 slices = 3 [json_name = "slices"];
+             {
+              std::size_t data_size = ::_pbi::WireFormatLite::UInt32Size(
+                  this_._internal_slices())
+              ;
+              this_._impl_._slices_cached_byte_size_.Set(
+                  ::_pbi::ToCachedSize(data_size));
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size))
+              ;
+              total_size += tag_size + data_size;
+            }
+          }
            {
             // string domain = 1 [json_name = "domain"];
             if (!this_._internal_domain().empty()) {
@@ -914,6 +949,7 @@ void SkyPartitionRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_slices()->MergeFrom(from._internal_slices());
   if (!from._internal_domain().empty()) {
     _this->_internal_set_domain(from._internal_domain());
   }
@@ -948,6 +984,7 @@ void SkyPartitionRel::InternalSwap(SkyPartitionRel* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.slices_.InternalSwap(&other->_impl_.slices_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.domain_, &other->_impl_.domain_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.partition_, &other->_impl_.partition_, arena);
   swap(_impl_.execstats_, other->_impl_.execstats_);
@@ -980,9 +1017,9 @@ inline PROTOBUF_NDEBUG_INLINE SkySliceRel::Impl_::Impl_(
     const Impl_& from, const ::skytether::mohair::SkySliceRel& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
+        slice_key_(arena, from.slice_key_),
         domain_(arena, from.domain_),
-        partition_(arena, from.partition_),
-        slice_key_(arena, from.slice_key_) {}
+        partition_(arena, from.partition_) {}
 
 SkySliceRel::SkySliceRel(
     ::google::protobuf::Arena* arena,
@@ -1009,9 +1046,9 @@ inline PROTOBUF_NDEBUG_INLINE SkySliceRel::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
+        slice_key_(arena),
         domain_(arena),
-        partition_(arena),
-        slice_key_(arena) {}
+        partition_(arena) {}
 
 inline void SkySliceRel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -1029,9 +1066,9 @@ SkySliceRel::~SkySliceRel() {
 }
 inline void SkySliceRel::SharedDtor() {
   ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.slice_key_.Destroy();
   _impl_.domain_.Destroy();
   _impl_.partition_.Destroy();
-  _impl_.slice_key_.Destroy();
   delete _impl_.execstats_;
   _impl_.~Impl_();
 }
@@ -1084,18 +1121,18 @@ const ::_pbi::TcParseTable<3, 5, 1, 61, 2> SkySliceRel::_table_ = {
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // string domain = 1 [json_name = "domain"];
+    // string slice_key = 1 [json_name = "sliceKey"];
     {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.domain_)}},
-    // string partition = 2 [json_name = "partition"];
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_key_)}},
+    // string domain = 2 [json_name = "domain"];
     {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.partition_)}},
-    // uint32 slice = 3 [json_name = "slice"];
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.domain_)}},
+    // string partition = 3 [json_name = "partition"];
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.partition_)}},
+    // uint32 slice = 4 [json_name = "slice"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SkySliceRel, _impl_.slice_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_)}},
-    // string slice_key = 4 [json_name = "sliceKey"];
-    {::_pbi::TcParser::FastUS1,
-     {34, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_key_)}},
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_)}},
     // .skytether.mohair.ExecutionStats execstats = 5 [json_name = "execstats"];
     {::_pbi::TcParser::FastMtS1,
      {42, 0, 0, PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.execstats_)}},
@@ -1104,29 +1141,29 @@ const ::_pbi::TcParseTable<3, 5, 1, 61, 2> SkySliceRel::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // string domain = 1 [json_name = "domain"];
-    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.domain_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // string partition = 2 [json_name = "partition"];
-    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.partition_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // uint32 slice = 3 [json_name = "slice"];
-    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
-    // string slice_key = 4 [json_name = "sliceKey"];
+    // string slice_key = 1 [json_name = "sliceKey"];
     {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_key_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string domain = 2 [json_name = "domain"];
+    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.domain_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string partition = 3 [json_name = "partition"];
+    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.partition_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // uint32 slice = 4 [json_name = "slice"];
+    {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
     // .skytether.mohair.ExecutionStats execstats = 5 [json_name = "execstats"];
     {PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.execstats_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::mohair::ExecutionStats>()},
   }}, {{
-    "\34\6\11\0\11\0\0\0"
+    "\34\11\6\11\0\0\0\0"
     "skytether.mohair.SkySliceRel"
+    "slice_key"
     "domain"
     "partition"
-    "slice_key"
   }},
 };
 
@@ -1137,9 +1174,9 @@ PROTOBUF_NOINLINE void SkySliceRel::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.slice_key_.ClearToEmpty();
   _impl_.domain_.ClearToEmpty();
   _impl_.partition_.ClearToEmpty();
-  _impl_.slice_key_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     ABSL_DCHECK(_impl_.execstats_ != nullptr);
@@ -1165,35 +1202,35 @@ PROTOBUF_NOINLINE void SkySliceRel::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // string domain = 1 [json_name = "domain"];
-          if (!this_._internal_domain().empty()) {
-            const std::string& _s = this_._internal_domain();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkySliceRel.domain");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // string partition = 2 [json_name = "partition"];
-          if (!this_._internal_partition().empty()) {
-            const std::string& _s = this_._internal_partition();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkySliceRel.partition");
-            target = stream->WriteStringMaybeAliased(2, _s, target);
-          }
-
-          // uint32 slice = 3 [json_name = "slice"];
-          if (this_._internal_slice() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-                3, this_._internal_slice(), target);
-          }
-
-          // string slice_key = 4 [json_name = "sliceKey"];
+          // string slice_key = 1 [json_name = "sliceKey"];
           if (!this_._internal_slice_key().empty()) {
             const std::string& _s = this_._internal_slice_key();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
                 _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkySliceRel.slice_key");
-            target = stream->WriteStringMaybeAliased(4, _s, target);
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string domain = 2 [json_name = "domain"];
+          if (!this_._internal_domain().empty()) {
+            const std::string& _s = this_._internal_domain();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkySliceRel.domain");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          // string partition = 3 [json_name = "partition"];
+          if (!this_._internal_partition().empty()) {
+            const std::string& _s = this_._internal_partition();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkySliceRel.partition");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
+          }
+
+          // uint32 slice = 4 [json_name = "slice"];
+          if (this_._internal_slice() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                4, this_._internal_slice(), target);
           }
 
           cached_has_bits = this_._impl_._has_bits_[0];
@@ -1229,20 +1266,20 @@ PROTOBUF_NOINLINE void SkySliceRel::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // string domain = 1 [json_name = "domain"];
+            // string slice_key = 1 [json_name = "sliceKey"];
+            if (!this_._internal_slice_key().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_slice_key());
+            }
+            // string domain = 2 [json_name = "domain"];
             if (!this_._internal_domain().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                               this_._internal_domain());
             }
-            // string partition = 2 [json_name = "partition"];
+            // string partition = 3 [json_name = "partition"];
             if (!this_._internal_partition().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                               this_._internal_partition());
-            }
-            // string slice_key = 4 [json_name = "sliceKey"];
-            if (!this_._internal_slice_key().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_slice_key());
             }
           }
            {
@@ -1255,7 +1292,7 @@ PROTOBUF_NOINLINE void SkySliceRel::Clear() {
             }
           }
            {
-            // uint32 slice = 3 [json_name = "slice"];
+            // uint32 slice = 4 [json_name = "slice"];
             if (this_._internal_slice() != 0) {
               total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
                   this_._internal_slice());
@@ -1274,14 +1311,14 @@ void SkySliceRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_slice_key().empty()) {
+    _this->_internal_set_slice_key(from._internal_slice_key());
+  }
   if (!from._internal_domain().empty()) {
     _this->_internal_set_domain(from._internal_domain());
   }
   if (!from._internal_partition().empty()) {
     _this->_internal_set_partition(from._internal_partition());
-  }
-  if (!from._internal_slice_key().empty()) {
-    _this->_internal_set_slice_key(from._internal_slice_key());
   }
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
@@ -1314,9 +1351,9 @@ void SkySliceRel::InternalSwap(SkySliceRel* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.slice_key_, &other->_impl_.slice_key_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.domain_, &other->_impl_.domain_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.partition_, &other->_impl_.partition_, arena);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.slice_key_, &other->_impl_.slice_key_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(SkySliceRel, _impl_.slice_)
       + sizeof(SkySliceRel::_impl_.slice_)
@@ -1352,8 +1389,6 @@ inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
     const Impl_& from, const ::skytether::mohair::SkyRel& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
-        slices_{visibility, arena, from.slices_},
-        _slices_cached_byte_size_{0},
         domain_(arena, from.domain_),
         partition_(arena, from.partition_) {}
 
@@ -1381,8 +1416,6 @@ inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
-        slices_{visibility, arena},
-        _slices_cached_byte_size_{0},
         domain_(arena),
         partition_(arena) {}
 
@@ -1432,15 +1465,15 @@ const ::google::protobuf::MessageLite::ClassData* SkyRel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 1, 47, 2> SkyRel::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 1, 47, 2> SkyRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._has_bits_),
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    3,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -1450,18 +1483,16 @@ const ::_pbi::TcParseTable<2, 4, 1, 47, 2> SkyRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::mohair::SkyRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
-    {::_pbi::TcParser::FastMtS1,
-     {34, 0, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // string domain = 1 [json_name = "domain"];
     {::_pbi::TcParser::FastUS1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.domain_)}},
     // string partition = 2 [json_name = "partition"];
     {::_pbi::TcParser::FastUS1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_)}},
-    // repeated uint32 slices = 3 [json_name = "slices"];
-    {::_pbi::TcParser::FastV32P1,
-     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.slices_)}},
+    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
+    {::_pbi::TcParser::FastMtS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -1471,10 +1502,7 @@ const ::_pbi::TcParseTable<2, 4, 1, 47, 2> SkyRel::_table_ = {
     // string partition = 2 [json_name = "partition"];
     {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // repeated uint32 slices = 3 [json_name = "slices"];
-    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.slices_), -1, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
-    // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
+    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
     {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
@@ -1494,7 +1522,6 @@ PROTOBUF_NOINLINE void SkyRel::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.slices_.Clear();
   _impl_.domain_.ClearToEmpty();
   _impl_.partition_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
@@ -1537,20 +1564,11 @@ PROTOBUF_NOINLINE void SkyRel::Clear() {
             target = stream->WriteStringMaybeAliased(2, _s, target);
           }
 
-          // repeated uint32 slices = 3 [json_name = "slices"];
-          {
-            int byte_size = this_._impl_._slices_cached_byte_size_.Get();
-            if (byte_size > 0) {
-              target = stream->WriteUInt32Packed(
-                  3, this_._internal_slices(), byte_size, target);
-            }
-          }
-
           cached_has_bits = this_._impl_._has_bits_[0];
-          // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
+          // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
           if (cached_has_bits & 0x00000001u) {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                4, *this_._impl_.execstats_, this_._impl_.execstats_->GetCachedSize(), target,
+                3, *this_._impl_.execstats_, this_._impl_.execstats_->GetCachedSize(), target,
                 stream);
           }
 
@@ -1579,22 +1597,6 @@ PROTOBUF_NOINLINE void SkyRel::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated uint32 slices = 3 [json_name = "slices"];
-             {
-              std::size_t data_size = ::_pbi::WireFormatLite::UInt32Size(
-                  this_._internal_slices())
-              ;
-              this_._impl_._slices_cached_byte_size_.Set(
-                  ::_pbi::ToCachedSize(data_size));
-              std::size_t tag_size = data_size == 0
-                  ? 0
-                  : 1 + ::_pbi::WireFormatLite::Int32Size(
-                                      static_cast<int32_t>(data_size))
-              ;
-              total_size += tag_size + data_size;
-            }
-          }
-           {
             // string domain = 1 [json_name = "domain"];
             if (!this_._internal_domain().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1607,7 +1609,7 @@ PROTOBUF_NOINLINE void SkyRel::Clear() {
             }
           }
            {
-            // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
+            // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
             cached_has_bits =
                 this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
@@ -1628,7 +1630,6 @@ void SkyRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_slices()->MergeFrom(from._internal_slices());
   if (!from._internal_domain().empty()) {
     _this->_internal_set_domain(from._internal_domain());
   }
@@ -1663,7 +1664,6 @@ void SkyRel::InternalSwap(SkyRel* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.slices_.InternalSwap(&other->_impl_.slices_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.domain_, &other->_impl_.domain_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.partition_, &other->_impl_.partition_, arena);
   swap(_impl_.execstats_, other->_impl_.execstats_);
