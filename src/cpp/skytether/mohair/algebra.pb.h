@@ -881,13 +881,29 @@ class SkySliceRel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kDomainFieldNumber = 1,
-    kPartitionFieldNumber = 2,
-    kSliceKeyFieldNumber = 4,
+    kSliceKeyFieldNumber = 1,
+    kDomainFieldNumber = 2,
+    kPartitionFieldNumber = 3,
     kExecstatsFieldNumber = 5,
-    kSliceFieldNumber = 3,
+    kSliceFieldNumber = 4,
   };
-  // string domain = 1 [json_name = "domain"];
+  // string slice_key = 1 [json_name = "sliceKey"];
+  void clear_slice_key() ;
+  const std::string& slice_key() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_slice_key(Arg_&& arg, Args_... args);
+  std::string* mutable_slice_key();
+  PROTOBUF_NODISCARD std::string* release_slice_key();
+  void set_allocated_slice_key(std::string* value);
+
+  private:
+  const std::string& _internal_slice_key() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_slice_key(
+      const std::string& value);
+  std::string* _internal_mutable_slice_key();
+
+  public:
+  // string domain = 2 [json_name = "domain"];
   void clear_domain() ;
   const std::string& domain() const;
   template <typename Arg_ = const std::string&, typename... Args_>
@@ -903,7 +919,7 @@ class SkySliceRel final : public ::google::protobuf::Message
   std::string* _internal_mutable_domain();
 
   public:
-  // string partition = 2 [json_name = "partition"];
+  // string partition = 3 [json_name = "partition"];
   void clear_partition() ;
   const std::string& partition() const;
   template <typename Arg_ = const std::string&, typename... Args_>
@@ -917,22 +933,6 @@ class SkySliceRel final : public ::google::protobuf::Message
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_partition(
       const std::string& value);
   std::string* _internal_mutable_partition();
-
-  public:
-  // string slice_key = 4 [json_name = "sliceKey"];
-  void clear_slice_key() ;
-  const std::string& slice_key() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_slice_key(Arg_&& arg, Args_... args);
-  std::string* mutable_slice_key();
-  PROTOBUF_NODISCARD std::string* release_slice_key();
-  void set_allocated_slice_key(std::string* value);
-
-  private:
-  const std::string& _internal_slice_key() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_slice_key(
-      const std::string& value);
-  std::string* _internal_mutable_slice_key();
 
   public:
   // .skytether.mohair.ExecutionStats execstats = 5 [json_name = "execstats"];
@@ -950,7 +950,7 @@ class SkySliceRel final : public ::google::protobuf::Message
   ::skytether::mohair::ExecutionStats* _internal_mutable_execstats();
 
   public:
-  // uint32 slice = 3 [json_name = "slice"];
+  // uint32 slice = 4 [json_name = "slice"];
   void clear_slice() ;
   ::uint32_t slice() const;
   void set_slice(::uint32_t value);
@@ -988,9 +988,9 @@ class SkySliceRel final : public ::google::protobuf::Message
                           const SkySliceRel& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr slice_key_;
     ::google::protobuf::internal::ArenaStringPtr domain_;
     ::google::protobuf::internal::ArenaStringPtr partition_;
-    ::google::protobuf::internal::ArenaStringPtr slice_key_;
     ::skytether::mohair::ExecutionStats* execstats_;
     ::uint32_t slice_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -1141,29 +1141,10 @@ class SkyRel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSlicesFieldNumber = 3,
     kDomainFieldNumber = 1,
     kPartitionFieldNumber = 2,
-    kExecstatsFieldNumber = 4,
+    kExecstatsFieldNumber = 3,
   };
-  // repeated uint32 slices = 3 [json_name = "slices"];
-  int slices_size() const;
-  private:
-  int _internal_slices_size() const;
-
-  public:
-  void clear_slices() ;
-  ::uint32_t slices(int index) const;
-  void set_slices(int index, ::uint32_t value);
-  void add_slices(::uint32_t value);
-  const ::google::protobuf::RepeatedField<::uint32_t>& slices() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* mutable_slices();
-
-  private:
-  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_slices() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* _internal_mutable_slices();
-
-  public:
   // string domain = 1 [json_name = "domain"];
   void clear_domain() ;
   const std::string& domain() const;
@@ -1196,7 +1177,7 @@ class SkyRel final : public ::google::protobuf::Message
   std::string* _internal_mutable_partition();
 
   public:
-  // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
+  // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
   bool has_execstats() const;
   void clear_execstats() ;
   const ::skytether::mohair::ExecutionStats& execstats() const;
@@ -1216,7 +1197,7 @@ class SkyRel final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 1,
+      2, 3, 1,
       47, 2>
       _table_;
 
@@ -1239,8 +1220,6 @@ class SkyRel final : public ::google::protobuf::Message
                           const SkyRel& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedField<::uint32_t> slices_;
-    mutable ::google::protobuf::internal::CachedSize _slices_cached_byte_size_;
     ::google::protobuf::internal::ArenaStringPtr domain_;
     ::google::protobuf::internal::ArenaStringPtr partition_;
     ::skytether::mohair::ExecutionStats* execstats_;
@@ -1392,10 +1371,29 @@ class SkyPartitionRel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kSlicesFieldNumber = 3,
     kDomainFieldNumber = 1,
     kPartitionFieldNumber = 2,
     kExecstatsFieldNumber = 4,
   };
+  // repeated uint32 slices = 3 [json_name = "slices"];
+  int slices_size() const;
+  private:
+  int _internal_slices_size() const;
+
+  public:
+  void clear_slices() ;
+  ::uint32_t slices(int index) const;
+  void set_slices(int index, ::uint32_t value);
+  void add_slices(::uint32_t value);
+  const ::google::protobuf::RepeatedField<::uint32_t>& slices() const;
+  ::google::protobuf::RepeatedField<::uint32_t>* mutable_slices();
+
+  private:
+  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_slices() const;
+  ::google::protobuf::RepeatedField<::uint32_t>* _internal_mutable_slices();
+
+  public:
   // string domain = 1 [json_name = "domain"];
   void clear_domain() ;
   const std::string& domain() const;
@@ -1448,7 +1446,7 @@ class SkyPartitionRel final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 1,
+      2, 4, 1,
       56, 2>
       _table_;
 
@@ -1471,6 +1469,8 @@ class SkyPartitionRel final : public ::google::protobuf::Message
                           const SkyPartitionRel& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedField<::uint32_t> slices_;
+    mutable ::google::protobuf::internal::CachedSize _slices_cached_byte_size_;
     ::google::protobuf::internal::ArenaStringPtr domain_;
     ::google::protobuf::internal::ArenaStringPtr partition_;
     ::skytether::mohair::ExecutionStats* execstats_;
@@ -1838,6 +1838,51 @@ inline void SkyPartitionRel::set_allocated_partition(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkyPartitionRel.partition)
 }
 
+// repeated uint32 slices = 3 [json_name = "slices"];
+inline int SkyPartitionRel::_internal_slices_size() const {
+  return _internal_slices().size();
+}
+inline int SkyPartitionRel::slices_size() const {
+  return _internal_slices_size();
+}
+inline void SkyPartitionRel::clear_slices() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slices_.Clear();
+}
+inline ::uint32_t SkyPartitionRel::slices(int index) const {
+  // @@protoc_insertion_point(field_get:skytether.mohair.SkyPartitionRel.slices)
+  return _internal_slices().Get(index);
+}
+inline void SkyPartitionRel::set_slices(int index, ::uint32_t value) {
+  _internal_mutable_slices()->Set(index, value);
+  // @@protoc_insertion_point(field_set:skytether.mohair.SkyPartitionRel.slices)
+}
+inline void SkyPartitionRel::add_slices(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_slices()->Add(value);
+  // @@protoc_insertion_point(field_add:skytether.mohair.SkyPartitionRel.slices)
+}
+inline const ::google::protobuf::RepeatedField<::uint32_t>& SkyPartitionRel::slices() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.mohair.SkyPartitionRel.slices)
+  return _internal_slices();
+}
+inline ::google::protobuf::RepeatedField<::uint32_t>* SkyPartitionRel::mutable_slices()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.mohair.SkyPartitionRel.slices)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_slices();
+}
+inline const ::google::protobuf::RepeatedField<::uint32_t>&
+SkyPartitionRel::_internal_slices() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.slices_;
+}
+inline ::google::protobuf::RepeatedField<::uint32_t>* SkyPartitionRel::_internal_mutable_slices() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.slices_;
+}
+
 // .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
 inline bool SkyPartitionRel::has_execstats() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
@@ -1938,7 +1983,57 @@ inline void SkyPartitionRel::set_allocated_execstats(::skytether::mohair::Execut
 
 // SkySliceRel
 
-// string domain = 1 [json_name = "domain"];
+// string slice_key = 1 [json_name = "sliceKey"];
+inline void SkySliceRel::clear_slice_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slice_key_.ClearToEmpty();
+}
+inline const std::string& SkySliceRel::slice_key() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.mohair.SkySliceRel.slice_key)
+  return _internal_slice_key();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SkySliceRel::set_slice_key(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slice_key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skytether.mohair.SkySliceRel.slice_key)
+}
+inline std::string* SkySliceRel::mutable_slice_key() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_slice_key();
+  // @@protoc_insertion_point(field_mutable:skytether.mohair.SkySliceRel.slice_key)
+  return _s;
+}
+inline const std::string& SkySliceRel::_internal_slice_key() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.slice_key_.Get();
+}
+inline void SkySliceRel::_internal_set_slice_key(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slice_key_.Set(value, GetArena());
+}
+inline std::string* SkySliceRel::_internal_mutable_slice_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.slice_key_.Mutable( GetArena());
+}
+inline std::string* SkySliceRel::release_slice_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skytether.mohair.SkySliceRel.slice_key)
+  return _impl_.slice_key_.Release();
+}
+inline void SkySliceRel::set_allocated_slice_key(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slice_key_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.slice_key_.IsDefault()) {
+          _impl_.slice_key_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkySliceRel.slice_key)
+}
+
+// string domain = 2 [json_name = "domain"];
 inline void SkySliceRel::clear_domain() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.domain_.ClearToEmpty();
@@ -1988,7 +2083,7 @@ inline void SkySliceRel::set_allocated_domain(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkySliceRel.domain)
 }
 
-// string partition = 2 [json_name = "partition"];
+// string partition = 3 [json_name = "partition"];
 inline void SkySliceRel::clear_partition() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.partition_.ClearToEmpty();
@@ -2038,7 +2133,7 @@ inline void SkySliceRel::set_allocated_partition(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkySliceRel.partition)
 }
 
-// uint32 slice = 3 [json_name = "slice"];
+// uint32 slice = 4 [json_name = "slice"];
 inline void SkySliceRel::clear_slice() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.slice_ = 0u;
@@ -2058,56 +2153,6 @@ inline ::uint32_t SkySliceRel::_internal_slice() const {
 inline void SkySliceRel::_internal_set_slice(::uint32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.slice_ = value;
-}
-
-// string slice_key = 4 [json_name = "sliceKey"];
-inline void SkySliceRel::clear_slice_key() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.slice_key_.ClearToEmpty();
-}
-inline const std::string& SkySliceRel::slice_key() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skytether.mohair.SkySliceRel.slice_key)
-  return _internal_slice_key();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SkySliceRel::set_slice_key(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.slice_key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:skytether.mohair.SkySliceRel.slice_key)
-}
-inline std::string* SkySliceRel::mutable_slice_key() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_slice_key();
-  // @@protoc_insertion_point(field_mutable:skytether.mohair.SkySliceRel.slice_key)
-  return _s;
-}
-inline const std::string& SkySliceRel::_internal_slice_key() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.slice_key_.Get();
-}
-inline void SkySliceRel::_internal_set_slice_key(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.slice_key_.Set(value, GetArena());
-}
-inline std::string* SkySliceRel::_internal_mutable_slice_key() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.slice_key_.Mutable( GetArena());
-}
-inline std::string* SkySliceRel::release_slice_key() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skytether.mohair.SkySliceRel.slice_key)
-  return _impl_.slice_key_.Release();
-}
-inline void SkySliceRel::set_allocated_slice_key(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.slice_key_.SetAllocated(value, GetArena());
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.slice_key_.IsDefault()) {
-          _impl_.slice_key_.Set("", GetArena());
-        }
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkySliceRel.slice_key)
 }
 
 // .skytether.mohair.ExecutionStats execstats = 5 [json_name = "execstats"];
@@ -2310,52 +2355,7 @@ inline void SkyRel::set_allocated_partition(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.mohair.SkyRel.partition)
 }
 
-// repeated uint32 slices = 3 [json_name = "slices"];
-inline int SkyRel::_internal_slices_size() const {
-  return _internal_slices().size();
-}
-inline int SkyRel::slices_size() const {
-  return _internal_slices_size();
-}
-inline void SkyRel::clear_slices() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.slices_.Clear();
-}
-inline ::uint32_t SkyRel::slices(int index) const {
-  // @@protoc_insertion_point(field_get:skytether.mohair.SkyRel.slices)
-  return _internal_slices().Get(index);
-}
-inline void SkyRel::set_slices(int index, ::uint32_t value) {
-  _internal_mutable_slices()->Set(index, value);
-  // @@protoc_insertion_point(field_set:skytether.mohair.SkyRel.slices)
-}
-inline void SkyRel::add_slices(::uint32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_slices()->Add(value);
-  // @@protoc_insertion_point(field_add:skytether.mohair.SkyRel.slices)
-}
-inline const ::google::protobuf::RepeatedField<::uint32_t>& SkyRel::slices() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:skytether.mohair.SkyRel.slices)
-  return _internal_slices();
-}
-inline ::google::protobuf::RepeatedField<::uint32_t>* SkyRel::mutable_slices()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:skytether.mohair.SkyRel.slices)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_slices();
-}
-inline const ::google::protobuf::RepeatedField<::uint32_t>&
-SkyRel::_internal_slices() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.slices_;
-}
-inline ::google::protobuf::RepeatedField<::uint32_t>* SkyRel::_internal_mutable_slices() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.slices_;
-}
-
-// .skytether.mohair.ExecutionStats execstats = 4 [json_name = "execstats"];
+// .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
 inline bool SkyRel::has_execstats() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.execstats_ != nullptr);
