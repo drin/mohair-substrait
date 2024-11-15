@@ -248,6 +248,20 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _impl_.executed_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _impl_.runtime_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.domain_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.partition_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.execstats_),
+        ~0u,
+        ~0u,
+        0,
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyPartitionRel, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -279,20 +293,6 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkySliceRel, _impl_.execstats_),
         ~0u,
         ~0u,
-        ~0u,
-        ~0u,
-        0,
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.domain_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.partition_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_.execstats_),
         ~0u,
         ~0u,
         0,
@@ -330,18 +330,18 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::skytether::mohair::ExecutionStats)},
-        {10, 22, -1, sizeof(::skytether::mohair::SkyPartitionRel)},
-        {26, 39, -1, sizeof(::skytether::mohair::SkySliceRel)},
-        {44, 55, -1, sizeof(::skytether::mohair::SkyRel)},
+        {10, 21, -1, sizeof(::skytether::mohair::SkyRel)},
+        {24, 36, -1, sizeof(::skytether::mohair::SkyPartitionRel)},
+        {40, 53, -1, sizeof(::skytether::mohair::SkySliceRel)},
         {58, -1, -1, sizeof(::skytether::mohair::ErrRel)},
         {68, -1, -1, sizeof(::skytether::mohair::QueryRel)},
         {77, 86, -1, sizeof(::skytether::mohair::PlanAnchor)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skytether::mohair::_ExecutionStats_default_instance_._instance,
+    &::skytether::mohair::_SkyRel_default_instance_._instance,
     &::skytether::mohair::_SkyPartitionRel_default_instance_._instance,
     &::skytether::mohair::_SkySliceRel_default_instance_._instance,
-    &::skytether::mohair::_SkyRel_default_instance_._instance,
     &::skytether::mohair::_ErrRel_default_instance_._instance,
     &::skytether::mohair::_QueryRel_default_instance_._instance,
     &::skytether::mohair::_PlanAnchor_default_instance_._instance,
@@ -352,18 +352,18 @@ const char descriptor_table_protodef_skytether_2fmohair_2falgebra_2eproto[] ABSL
     "her.mohair\032\031google/protobuf/any.proto\032!s"
     "kytether/substrait/algebra.proto\"F\n\016Exec"
     "utionStats\022\032\n\010executed\030\001 \001(\010R\010executed\022\030"
-    "\n\007runtime\030\002 \001(\001R\007runtime\"\237\001\n\017SkyPartitio"
-    "nRel\022\026\n\006domain\030\001 \001(\tR\006domain\022\034\n\tpartitio"
-    "n\030\002 \001(\tR\tpartition\022\026\n\006slices\030\003 \003(\rR\006slic"
-    "es\022>\n\texecstats\030\004 \001(\0132 .skytether.mohair"
-    ".ExecutionStatsR\texecstats\"\266\001\n\013SkySliceR"
-    "el\022\033\n\tslice_key\030\001 \001(\tR\010sliceKey\022\026\n\006domai"
-    "n\030\002 \001(\tR\006domain\022\034\n\tpartition\030\003 \001(\tR\tpart"
-    "ition\022\024\n\005slice\030\004 \001(\rR\005slice\022>\n\texecstats"
-    "\030\005 \001(\0132 .skytether.mohair.ExecutionStats"
-    "R\texecstats\"~\n\006SkyRel\022\026\n\006domain\030\001 \001(\tR\006d"
-    "omain\022\034\n\tpartition\030\002 \001(\tR\tpartition\022>\n\te"
-    "xecstats\030\003 \001(\0132 .skytether.mohair.Execut"
+    "\n\007runtime\030\002 \001(\001R\007runtime\"~\n\006SkyRel\022\026\n\006do"
+    "main\030\001 \001(\tR\006domain\022\034\n\tpartition\030\002 \001(\tR\tp"
+    "artition\022>\n\texecstats\030\003 \001(\0132 .skytether."
+    "mohair.ExecutionStatsR\texecstats\"\237\001\n\017Sky"
+    "PartitionRel\022\026\n\006domain\030\001 \001(\tR\006domain\022\034\n\t"
+    "partition\030\002 \001(\tR\tpartition\022\026\n\006slices\030\003 \003"
+    "(\rR\006slices\022>\n\texecstats\030\004 \001(\0132 .skytethe"
+    "r.mohair.ExecutionStatsR\texecstats\"\266\001\n\013S"
+    "kySliceRel\022\033\n\tslice_key\030\001 \001(\tR\010sliceKey\022"
+    "\026\n\006domain\030\002 \001(\tR\006domain\022\034\n\tpartition\030\003 \001"
+    "(\tR\tpartition\022\024\n\005slice\030\004 \001(\rR\005slice\022>\n\te"
+    "xecstats\030\005 \001(\0132 .skytether.mohair.Execut"
     "ionStatsR\texecstats\"\177\n\006ErrRel\022\027\n\007err_msg"
     "\030\001 \001(\tR\006errMsg\022;\n\010err_code\030\002 \001(\0162 .skyte"
     "ther.mohair.ErrRel.ErrTypeR\007errCode\"\037\n\007E"
@@ -647,6 +647,313 @@ void ExecutionStats::InternalSwap(ExecutionStats* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata ExecutionStats::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SkyRel::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<SkyRel>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._has_bits_);
+};
+
+SkyRel::SkyRel(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.mohair.SkyRel)
+}
+inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skytether::mohair::SkyRel& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        domain_(arena, from.domain_),
+        partition_(arena, from.partition_) {}
+
+SkyRel::SkyRel(
+    ::google::protobuf::Arena* arena,
+    const SkyRel& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SkyRel* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.execstats_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::mohair::ExecutionStats>(
+                              arena, *from._impl_.execstats_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:skytether.mohair.SkyRel)
+}
+inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        domain_(arena),
+        partition_(arena) {}
+
+inline void SkyRel::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.execstats_ = {};
+}
+SkyRel::~SkyRel() {
+  // @@protoc_insertion_point(destructor:skytether.mohair.SkyRel)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void SkyRel::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.domain_.Destroy();
+  _impl_.partition_.Destroy();
+  delete _impl_.execstats_;
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    SkyRel::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_SkyRel_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &SkyRel::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<SkyRel>(),
+            ::google::protobuf::Message::GetNewImpl<SkyRel>(),
+            ::google::protobuf::Message::GetClearImpl<SkyRel>(), &SkyRel::ByteSizeLong,
+                &SkyRel::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._cached_size_),
+            false,
+        },
+        &SkyRel::kDescriptorMethods,
+        &descriptor_table_skytether_2fmohair_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* SkyRel::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 47, 2> SkyRel::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::mohair::SkyRel>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // string domain = 1 [json_name = "domain"];
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.domain_)}},
+    // string partition = 2 [json_name = "partition"];
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_)}},
+    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
+    {::_pbi::TcParser::FastMtS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string domain = 1 [json_name = "domain"];
+    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.domain_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string partition = 2 [json_name = "partition"];
+    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
+    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skytether::mohair::ExecutionStats>()},
+  }}, {{
+    "\27\6\11\0\0\0\0\0"
+    "skytether.mohair.SkyRel"
+    "domain"
+    "partition"
+  }},
+};
+
+PROTOBUF_NOINLINE void SkyRel::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.mohair.SkyRel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.domain_.ClearToEmpty();
+  _impl_.partition_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.execstats_ != nullptr);
+    _impl_.execstats_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SkyRel::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SkyRel& this_ = static_cast<const SkyRel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SkyRel::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SkyRel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.mohair.SkyRel)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string domain = 1 [json_name = "domain"];
+          if (!this_._internal_domain().empty()) {
+            const std::string& _s = this_._internal_domain();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkyRel.domain");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string partition = 2 [json_name = "partition"];
+          if (!this_._internal_partition().empty()) {
+            const std::string& _s = this_._internal_partition();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkyRel.partition");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                3, *this_._impl_.execstats_, this_._impl_.execstats_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.mohair.SkyRel)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SkyRel::ByteSizeLong(const MessageLite& base) {
+          const SkyRel& this_ = static_cast<const SkyRel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SkyRel::ByteSizeLong() const {
+          const SkyRel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.mohair.SkyRel)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string domain = 1 [json_name = "domain"];
+            if (!this_._internal_domain().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_domain());
+            }
+            // string partition = 2 [json_name = "partition"];
+            if (!this_._internal_partition().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_partition());
+            }
+          }
+           {
+            // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.execstats_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SkyRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SkyRel*>(&to_msg);
+  auto& from = static_cast<const SkyRel&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.mohair.SkyRel)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_domain().empty()) {
+    _this->_internal_set_domain(from._internal_domain());
+  }
+  if (!from._internal_partition().empty()) {
+    _this->_internal_set_partition(from._internal_partition());
+  }
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.execstats_ != nullptr);
+    if (_this->_impl_.execstats_ == nullptr) {
+      _this->_impl_.execstats_ =
+          ::google::protobuf::Message::CopyConstruct<::skytether::mohair::ExecutionStats>(arena, *from._impl_.execstats_);
+    } else {
+      _this->_impl_.execstats_->MergeFrom(*from._impl_.execstats_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SkyRel::CopyFrom(const SkyRel& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.mohair.SkyRel)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SkyRel::InternalSwap(SkyRel* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.domain_, &other->_impl_.domain_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.partition_, &other->_impl_.partition_, arena);
+  swap(_impl_.execstats_, other->_impl_.execstats_);
+}
+
+::google::protobuf::Metadata SkyRel::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -1363,313 +1670,6 @@ void SkySliceRel::InternalSwap(SkySliceRel* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata SkySliceRel::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class SkyRel::_Internal {
- public:
-  using HasBits =
-      decltype(std::declval<SkyRel>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._has_bits_);
-};
-
-SkyRel::SkyRel(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:skytether.mohair.SkyRel)
-}
-inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::skytether::mohair::SkyRel& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        domain_(arena, from.domain_),
-        partition_(arena, from.partition_) {}
-
-SkyRel::SkyRel(
-    ::google::protobuf::Arena* arena,
-    const SkyRel& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SkyRel* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.execstats_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::mohair::ExecutionStats>(
-                              arena, *from._impl_.execstats_)
-                        : nullptr;
-
-  // @@protoc_insertion_point(copy_constructor:skytether.mohair.SkyRel)
-}
-inline PROTOBUF_NDEBUG_INLINE SkyRel::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0},
-        domain_(arena),
-        partition_(arena) {}
-
-inline void SkyRel::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.execstats_ = {};
-}
-SkyRel::~SkyRel() {
-  // @@protoc_insertion_point(destructor:skytether.mohair.SkyRel)
-  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  SharedDtor();
-}
-inline void SkyRel::SharedDtor() {
-  ABSL_DCHECK(GetArena() == nullptr);
-  _impl_.domain_.Destroy();
-  _impl_.partition_.Destroy();
-  delete _impl_.execstats_;
-  _impl_.~Impl_();
-}
-
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::MessageLite::ClassDataFull
-    SkyRel::_class_data_ = {
-        ::google::protobuf::Message::ClassData{
-            &_SkyRel_default_instance_._instance,
-            &_table_.header,
-            nullptr,  // OnDemandRegisterArenaDtor
-            nullptr,  // IsInitialized
-            &SkyRel::MergeImpl,
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-            ::google::protobuf::Message::GetDeleteImpl<SkyRel>(),
-            ::google::protobuf::Message::GetNewImpl<SkyRel>(),
-            ::google::protobuf::Message::GetClearImpl<SkyRel>(), &SkyRel::ByteSizeLong,
-                &SkyRel::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-            PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._cached_size_),
-            false,
-        },
-        &SkyRel::kDescriptorMethods,
-        &descriptor_table_skytether_2fmohair_2falgebra_2eproto,
-        nullptr,  // tracker
-};
-const ::google::protobuf::MessageLite::ClassData* SkyRel::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 1, 47, 2> SkyRel::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(SkyRel, _impl_._has_bits_),
-    0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::skytether::mohair::SkyRel>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // string domain = 1 [json_name = "domain"];
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.domain_)}},
-    // string partition = 2 [json_name = "partition"];
-    {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_)}},
-    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
-    {::_pbi::TcParser::FastMtS1,
-     {26, 0, 0, PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // string domain = 1 [json_name = "domain"];
-    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.domain_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // string partition = 2 [json_name = "partition"];
-    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.partition_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
-    {PROTOBUF_FIELD_OFFSET(SkyRel, _impl_.execstats_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-  }}, {{
-    {::_pbi::TcParser::GetTable<::skytether::mohair::ExecutionStats>()},
-  }}, {{
-    "\27\6\11\0\0\0\0\0"
-    "skytether.mohair.SkyRel"
-    "domain"
-    "partition"
-  }},
-};
-
-PROTOBUF_NOINLINE void SkyRel::Clear() {
-// @@protoc_insertion_point(message_clear_start:skytether.mohair.SkyRel)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.domain_.ClearToEmpty();
-  _impl_.partition_.ClearToEmpty();
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(_impl_.execstats_ != nullptr);
-    _impl_.execstats_->Clear();
-  }
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* SkyRel::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const SkyRel& this_ = static_cast<const SkyRel&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* SkyRel::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const SkyRel& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:skytether.mohair.SkyRel)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // string domain = 1 [json_name = "domain"];
-          if (!this_._internal_domain().empty()) {
-            const std::string& _s = this_._internal_domain();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkyRel.domain");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // string partition = 2 [json_name = "partition"];
-          if (!this_._internal_partition().empty()) {
-            const std::string& _s = this_._internal_partition();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.mohair.SkyRel.partition");
-            target = stream->WriteStringMaybeAliased(2, _s, target);
-          }
-
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
-          if (cached_has_bits & 0x00000001u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                3, *this_._impl_.execstats_, this_._impl_.execstats_->GetCachedSize(), target,
-                stream);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:skytether.mohair.SkyRel)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t SkyRel::ByteSizeLong(const MessageLite& base) {
-          const SkyRel& this_ = static_cast<const SkyRel&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t SkyRel::ByteSizeLong() const {
-          const SkyRel& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:skytether.mohair.SkyRel)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // string domain = 1 [json_name = "domain"];
-            if (!this_._internal_domain().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_domain());
-            }
-            // string partition = 2 [json_name = "partition"];
-            if (!this_._internal_partition().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_partition());
-            }
-          }
-           {
-            // .skytether.mohair.ExecutionStats execstats = 3 [json_name = "execstats"];
-            cached_has_bits =
-                this_._impl_._has_bits_[0];
-            if (cached_has_bits & 0x00000001u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.execstats_);
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void SkyRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<SkyRel*>(&to_msg);
-  auto& from = static_cast<const SkyRel&>(from_msg);
-  ::google::protobuf::Arena* arena = _this->GetArena();
-  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.mohair.SkyRel)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_domain().empty()) {
-    _this->_internal_set_domain(from._internal_domain());
-  }
-  if (!from._internal_partition().empty()) {
-    _this->_internal_set_partition(from._internal_partition());
-  }
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(from._impl_.execstats_ != nullptr);
-    if (_this->_impl_.execstats_ == nullptr) {
-      _this->_impl_.execstats_ =
-          ::google::protobuf::Message::CopyConstruct<::skytether::mohair::ExecutionStats>(arena, *from._impl_.execstats_);
-    } else {
-      _this->_impl_.execstats_->MergeFrom(*from._impl_.execstats_);
-    }
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void SkyRel::CopyFrom(const SkyRel& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:skytether.mohair.SkyRel)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void SkyRel::InternalSwap(SkyRel* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.domain_, &other->_impl_.domain_, arena);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.partition_, &other->_impl_.partition_, arena);
-  swap(_impl_.execstats_, other->_impl_.execstats_);
-}
-
-::google::protobuf::Metadata SkyRel::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
