@@ -6,7 +6,7 @@ option('substrait_version'
 
 option('mohair_version'
   ,type       : 'string'
-  ,value      : 'v0.1.0'
+  ,value      : 'v1.0.0'
   ,description: 'The version of the mohair protocol in use'
 )
 
