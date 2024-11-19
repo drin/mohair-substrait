@@ -5,9 +5,11 @@
 project('libmohair-substrait'
   ,'cpp'
   ,version         : '1.1.0'
-  ,meson_version   : '1.6.0'
+   # NOTE: for compatibility with debian 20241111 (bookworm?)
+  ,meson_version   : '>=1.0.1' 
   ,license         : 'Apache-2.0'
-  ,license_files   : 'LICENSE'
+   # NOTE: since 1.1.0
+  # ,license_files   : 'LICENSE' 
   ,default_options : ['warning_level=3','cpp_std=c++17']
 )
 
