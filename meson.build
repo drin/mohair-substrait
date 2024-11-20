@@ -6,6 +6,7 @@ project('libmohair-substrait'
   ,'cpp'
   ,version         : '1.0.1'
    # NOTE: for compatibility with debian 20241111 (bookworm?)
+   #       we should actually be compatible with >=1.6.0
   ,meson_version   : '>=1.0.1' 
   ,license         : 'Apache-2.0'
    # NOTE: since 1.1.0
