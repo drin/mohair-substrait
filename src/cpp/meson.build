@@ -18,29 +18,13 @@ libcorefoundation_dep = dependency('CoreFoundation', required: false)
 libprotobuf_dep = dependency('protobuf', static: true)
 
 # Abseil
-if meson.version() == '1.0.1'
-  libabsl_dep = [
-     dependency('absl_log_internal_check_op', static: true)
-    ,dependency('absl_log_internal_message' , static: true)
-    ,dependency('absl_status'               , static: true)
-    ,dependency('absl_time_zone'            , static: true)
-  ]
-
-# NOTE: not sure when this type of syntax became reliable
-elif meson.version() == '1.6.0'
-  libabsl_dep = [
-    dependency('absl'
-      ,static : false
-      ,modules: [
-          'absl::log_internal_check_op'
-         ,'absl::log_internal_message'
-         ,'absl::status'
-         ,'absl::time_zone'
-       ]
-    )
-  ]
-
-endif
+# NOTE: This approach, instead of cmake modules, seems more robust
+libabsl_dep = [
+   dependency('absl_log_internal_check_op', static: true)
+  ,dependency('absl_log_internal_message' , static: true)
+  ,dependency('absl_status'               , static: true)
+  ,dependency('absl_time_zone'            , static: true)
+]
 
 
 # ------------------------------
@@ -108,14 +92,14 @@ libmohair_substrait_inc = include_directories('.')
 libmohair_substrait = library('mohair-substrait'
   ,libmohair_substrait_sources
   ,include_directories: libmohair_substrait_inc
-  ,dependencies       : [libcorefoundation_dep, libprotobuf_dep] + libabsl_dep
+  ,dependencies       : [libcorefoundation_dep, libprotobuf_dep, libabsl_dep]
   ,pic                : true
   ,install            : true
 )
 
 libmohair_substrait_dep = declare_dependency(
    include_directories: libmohair_substrait_inc
-  ,dependencies       : [libcorefoundation_dep, libprotobuf_dep] + libabsl_dep
+  ,dependencies       : [libcorefoundation_dep, libprotobuf_dep, libabsl_dep]
   ,link_with          : [libmohair_substrait]
 )
 
