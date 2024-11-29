@@ -33,7 +33,7 @@
 // >> Namespaces
 namespace fs = std::filesystem;
 
-using mohair::SubstraitMessage;
+using mohair_substrait::SubstraitMessage;
 
 
 // ------------------------------
@@ -49,7 +49,7 @@ struct ToolInterface {
     }
 
     auto query_plan = SubstraitMessage::FromFile(plan_fpath.string());
-    mohair::PrintSubstraitPlan(query_plan->payload.get());
+    mohair_substrait::PrintSubstraitPlan(query_plan->payload.get());
     return 0;
   }
 };
