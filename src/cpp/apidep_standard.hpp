@@ -55,7 +55,7 @@ namespace fs = std::filesystem;
 
 
 // >> type aliases
-namespace mohair {
+namespace mohair_substrait {
 
   // pointer type aliases
   using std::shared_ptr;
@@ -71,5 +71,5 @@ namespace mohair {
   using std::stringstream;
   using std::fstream;
 
-} // namespace: mohair
+} // namespace: mohair_substrait
 

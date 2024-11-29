@@ -41,7 +41,7 @@
 // Aliases
 
 // >> type aliases
-namespace mohair {
+namespace mohair_substrait {
 
   // Protobuf types
   using google::protobuf::Message;
@@ -51,5 +51,5 @@ namespace mohair {
   using skytether::substrait::PlanRel;
   using skytether::substrait::Rel;
 
-} // namespace: mohair
+} // namespace: mohair_substrait
 

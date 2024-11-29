@@ -36,7 +36,7 @@
 // ------------------------------
 // Aliases
 
-namespace mohair {
+namespace mohair_substrait {
 
   // mohair-protocol types (for query processing)
   using skytether::mohair::PlanAnchor;
@@ -52,13 +52,14 @@ namespace mohair {
   const string version_major = MOHAIR_VERSION_MAJOR;
   const string version_minor = MOHAIR_VERSION_MINOR;
   const string version_patch = MOHAIR_VERSION_PATCH;
-};
+
+} // namespace: mohair_substrait
 
 
 // ------------------------------
 // Functions
 
-namespace mohair {
+namespace mohair_substrait {
 
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
@@ -87,13 +88,13 @@ namespace mohair {
   // >> Helper functions
   int FindPlanRoot(Plan& substrait_plan);
 
-} // namespace: mohair
+} // namespace: mohair_substrait
 
 
 // ------------------------------
 // Classes and structs
 
-namespace mohair {
+namespace mohair_substrait {
 
   //! A base class representing a query plan sent as a message
   struct PlanMessage {
@@ -133,4 +134,4 @@ namespace mohair {
     static unique_ptr<PlanMessage> FromFile(string plan_fpath);
   };
 
-} // namespace: mohair
+} // namespace: mohair_substrait

@@ -26,7 +26,7 @@
 // Functions
 
 // >> Wrapper functions for protobuf framework functions
-namespace mohair {
+namespace mohair_substrait {
 
   // Types to wrap
   using google::protobuf::TextFormat;
@@ -53,9 +53,9 @@ namespace mohair {
   }
 
 
-} // namespace: mohair
+} // namespace: mohair_substrait
 
-namespace mohair {
+namespace mohair_substrait {
 
   //  >> Reader functions
   //! Returns a binary input stream for the given file path
@@ -163,13 +163,13 @@ namespace mohair {
   }
 
 
-} // namespace: mohair
+} // namespace: mohair_substrait
 
 
 // ------------------------------
 // Method implementations
 
-namespace mohair {
+namespace mohair_substrait {
 
   // >> Methods for SubstraitMessage
   string SubstraitMessage::Serialize() {
@@ -211,4 +211,5 @@ namespace mohair {
     return SubstraitMessage::FromFile(plan_fpath.data());
   }
 
-} // namespace: mohair
+} // namespace: mohair_substrait
+
