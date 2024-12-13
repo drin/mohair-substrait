@@ -5,4 +5,4 @@ plugins:
   - remote: buf.build/protocolbuffers/cpp:v28.3
     out: src/cpp
   - remote: buf.build/protocolbuffers/python:v28.3
-    out: src/python
+    out: src/python/mohair_substrait
