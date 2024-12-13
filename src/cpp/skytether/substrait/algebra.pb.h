@@ -335,6 +335,9 @@ extern MergeJoinRelDefaultTypeInternal _MergeJoinRel_default_instance_;
 class NamedObjectWrite;
 struct NamedObjectWriteDefaultTypeInternal;
 extern NamedObjectWriteDefaultTypeInternal _NamedObjectWrite_default_instance_;
+class NamedTable;
+struct NamedTableDefaultTypeInternal;
+extern NamedTableDefaultTypeInternal _NamedTable_default_instance_;
 class NestedLoopJoinRel;
 struct NestedLoopJoinRelDefaultTypeInternal;
 extern NestedLoopJoinRelDefaultTypeInternal _NestedLoopJoinRel_default_instance_;
@@ -392,9 +395,15 @@ extern RelCommon_EmitDefaultTypeInternal _RelCommon_Emit_default_instance_;
 class RelCommon_Hint;
 struct RelCommon_HintDefaultTypeInternal;
 extern RelCommon_HintDefaultTypeInternal _RelCommon_Hint_default_instance_;
+class RelCommon_Hint_LoadedComputation;
+struct RelCommon_Hint_LoadedComputationDefaultTypeInternal;
+extern RelCommon_Hint_LoadedComputationDefaultTypeInternal _RelCommon_Hint_LoadedComputation_default_instance_;
 class RelCommon_Hint_RuntimeConstraint;
 struct RelCommon_Hint_RuntimeConstraintDefaultTypeInternal;
 extern RelCommon_Hint_RuntimeConstraintDefaultTypeInternal _RelCommon_Hint_RuntimeConstraint_default_instance_;
+class RelCommon_Hint_SavedComputation;
+struct RelCommon_Hint_SavedComputationDefaultTypeInternal;
+extern RelCommon_Hint_SavedComputationDefaultTypeInternal _RelCommon_Hint_SavedComputation_default_instance_;
 class RelCommon_Hint_Stats;
 struct RelCommon_Hint_StatsDefaultTypeInternal;
 extern RelCommon_Hint_StatsDefaultTypeInternal _RelCommon_Hint_Stats_default_instance_;
@@ -410,6 +419,12 @@ extern SortFieldDefaultTypeInternal _SortField_default_instance_;
 class SortRel;
 struct SortRelDefaultTypeInternal;
 extern SortRelDefaultTypeInternal _SortRel_default_instance_;
+class UpdateRel;
+struct UpdateRelDefaultTypeInternal;
+extern UpdateRelDefaultTypeInternal _UpdateRel_default_instance_;
+class UpdateRel_TransformExpression;
+struct UpdateRel_TransformExpressionDefaultTypeInternal;
+extern UpdateRel_TransformExpressionDefaultTypeInternal _UpdateRel_TransformExpression_default_instance_;
 class WriteRel;
 struct WriteRelDefaultTypeInternal;
 extern WriteRelDefaultTypeInternal _WriteRel_default_instance_;
@@ -422,6 +437,35 @@ namespace protobuf {
 
 namespace skytether {
 namespace substrait {
+enum RelCommon_Hint_ComputationType : int {
+  RelCommon_Hint_ComputationType_COMPUTATION_TYPE_UNSPECIFIED = 0,
+  RelCommon_Hint_ComputationType_COMPUTATION_TYPE_HASHTABLE = 1,
+  RelCommon_Hint_ComputationType_COMPUTATION_TYPE_BLOOM_FILTER = 2,
+  RelCommon_Hint_ComputationType_COMPUTATION_TYPE_UNKNOWN = 9999,
+  RelCommon_Hint_ComputationType_RelCommon_Hint_ComputationType_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  RelCommon_Hint_ComputationType_RelCommon_Hint_ComputationType_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool RelCommon_Hint_ComputationType_IsValid(int value);
+extern const uint32_t RelCommon_Hint_ComputationType_internal_data_[];
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint_ComputationType_ComputationType_MIN = static_cast<RelCommon_Hint_ComputationType>(0);
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint_ComputationType_ComputationType_MAX = static_cast<RelCommon_Hint_ComputationType>(9999);
+constexpr int RelCommon_Hint_ComputationType_ComputationType_ARRAYSIZE = 9999 + 1;
+const ::google::protobuf::EnumDescriptor*
+RelCommon_Hint_ComputationType_descriptor();
+template <typename T>
+const std::string& RelCommon_Hint_ComputationType_Name(T value) {
+  static_assert(std::is_same<T, RelCommon_Hint_ComputationType>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to ComputationType_Name().");
+  return ::google::protobuf::internal::NameOfEnum(RelCommon_Hint_ComputationType_descriptor(), value);
+}
+inline bool RelCommon_Hint_ComputationType_Parse(absl::string_view name, RelCommon_Hint_ComputationType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<RelCommon_Hint_ComputationType>(
+      RelCommon_Hint_ComputationType_descriptor(), name, value);
+}
 enum JoinRel_JoinType : int {
   JoinRel_JoinType_JOIN_TYPE_UNSPECIFIED = 0,
   JoinRel_JoinType_JOIN_TYPE_INNER = 1,
@@ -469,9 +513,11 @@ inline bool JoinRel_JoinType_Parse(absl::string_view name, JoinRel_JoinType* val
 enum SetRel_SetOp : int {
   SetRel_SetOp_SET_OP_UNSPECIFIED = 0,
   SetRel_SetOp_SET_OP_MINUS_PRIMARY = 1,
+  SetRel_SetOp_SET_OP_MINUS_PRIMARY_ALL = 7,
   SetRel_SetOp_SET_OP_MINUS_MULTISET = 2,
   SetRel_SetOp_SET_OP_INTERSECTION_PRIMARY = 3,
   SetRel_SetOp_SET_OP_INTERSECTION_MULTISET = 4,
+  SetRel_SetOp_SET_OP_INTERSECTION_MULTISET_ALL = 8,
   SetRel_SetOp_SET_OP_UNION_DISTINCT = 5,
   SetRel_SetOp_SET_OP_UNION_ALL = 6,
   SetRel_SetOp_SetRel_SetOp_INT_MIN_SENTINEL_DO_NOT_USE_ =
@@ -483,8 +529,8 @@ enum SetRel_SetOp : int {
 bool SetRel_SetOp_IsValid(int value);
 extern const uint32_t SetRel_SetOp_internal_data_[];
 constexpr SetRel_SetOp SetRel_SetOp_SetOp_MIN = static_cast<SetRel_SetOp>(0);
-constexpr SetRel_SetOp SetRel_SetOp_SetOp_MAX = static_cast<SetRel_SetOp>(6);
-constexpr int SetRel_SetOp_SetOp_ARRAYSIZE = 6 + 1;
+constexpr SetRel_SetOp SetRel_SetOp_SetOp_MAX = static_cast<SetRel_SetOp>(8);
+constexpr int SetRel_SetOp_SetOp_ARRAYSIZE = 8 + 1;
 const ::google::protobuf::EnumDescriptor*
 SetRel_SetOp_descriptor();
 template <typename T>
@@ -497,7 +543,7 @@ const std::string& SetRel_SetOp_Name(T value) {
 template <>
 inline const std::string& SetRel_SetOp_Name(SetRel_SetOp value) {
   return ::google::protobuf::internal::NameOfDenseEnum<SetRel_SetOp_descriptor,
-                                                 0, 6>(
+                                                 0, 8>(
       static_cast<int>(value));
 }
 inline bool SetRel_SetOp_Parse(absl::string_view name, SetRel_SetOp* value) {
@@ -610,6 +656,42 @@ inline const std::string& WriteRel_WriteOp_Name(WriteRel_WriteOp value) {
 inline bool WriteRel_WriteOp_Parse(absl::string_view name, WriteRel_WriteOp* value) {
   return ::google::protobuf::internal::ParseNamedEnum<WriteRel_WriteOp>(
       WriteRel_WriteOp_descriptor(), name, value);
+}
+enum WriteRel_CreateMode : int {
+  WriteRel_CreateMode_CREATE_MODE_UNSPECIFIED = 0,
+  WriteRel_CreateMode_CREATE_MODE_APPEND_IF_EXISTS = 1,
+  WriteRel_CreateMode_CREATE_MODE_REPLACE_IF_EXISTS = 2,
+  WriteRel_CreateMode_CREATE_MODE_IGNORE_IF_EXISTS = 3,
+  WriteRel_CreateMode_CREATE_MODE_ERROR_IF_EXISTS = 4,
+  WriteRel_CreateMode_WriteRel_CreateMode_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  WriteRel_CreateMode_WriteRel_CreateMode_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool WriteRel_CreateMode_IsValid(int value);
+extern const uint32_t WriteRel_CreateMode_internal_data_[];
+constexpr WriteRel_CreateMode WriteRel_CreateMode_CreateMode_MIN = static_cast<WriteRel_CreateMode>(0);
+constexpr WriteRel_CreateMode WriteRel_CreateMode_CreateMode_MAX = static_cast<WriteRel_CreateMode>(4);
+constexpr int WriteRel_CreateMode_CreateMode_ARRAYSIZE = 4 + 1;
+const ::google::protobuf::EnumDescriptor*
+WriteRel_CreateMode_descriptor();
+template <typename T>
+const std::string& WriteRel_CreateMode_Name(T value) {
+  static_assert(std::is_same<T, WriteRel_CreateMode>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to CreateMode_Name().");
+  return WriteRel_CreateMode_Name(static_cast<WriteRel_CreateMode>(value));
+}
+template <>
+inline const std::string& WriteRel_CreateMode_Name(WriteRel_CreateMode value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<WriteRel_CreateMode_descriptor,
+                                                 0, 4>(
+      static_cast<int>(value));
+}
+inline bool WriteRel_CreateMode_Parse(absl::string_view name, WriteRel_CreateMode* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<WriteRel_CreateMode>(
+      WriteRel_CreateMode_descriptor(), name, value);
 }
 enum WriteRel_OutputMode : int {
   WriteRel_OutputMode_OUTPUT_MODE_UNSPECIFIED = 0,
@@ -1099,6 +1181,406 @@ inline bool AggregationPhase_Parse(absl::string_view name, AggregationPhase* val
 
 // -------------------------------------------------------------------
 
+class RelCommon_Hint_SavedComputation final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.RelCommon.Hint.SavedComputation) */ {
+ public:
+  inline RelCommon_Hint_SavedComputation() : RelCommon_Hint_SavedComputation(nullptr) {}
+  ~RelCommon_Hint_SavedComputation() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR RelCommon_Hint_SavedComputation(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline RelCommon_Hint_SavedComputation(const RelCommon_Hint_SavedComputation& from) : RelCommon_Hint_SavedComputation(nullptr, from) {}
+  inline RelCommon_Hint_SavedComputation(RelCommon_Hint_SavedComputation&& from) noexcept
+      : RelCommon_Hint_SavedComputation(nullptr, std::move(from)) {}
+  inline RelCommon_Hint_SavedComputation& operator=(const RelCommon_Hint_SavedComputation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RelCommon_Hint_SavedComputation& operator=(RelCommon_Hint_SavedComputation&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const RelCommon_Hint_SavedComputation& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const RelCommon_Hint_SavedComputation* internal_default_instance() {
+    return reinterpret_cast<const RelCommon_Hint_SavedComputation*>(
+        &_RelCommon_Hint_SavedComputation_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(RelCommon_Hint_SavedComputation& a, RelCommon_Hint_SavedComputation& b) { a.Swap(&b); }
+  inline void Swap(RelCommon_Hint_SavedComputation* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RelCommon_Hint_SavedComputation* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  RelCommon_Hint_SavedComputation* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<RelCommon_Hint_SavedComputation>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const RelCommon_Hint_SavedComputation& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const RelCommon_Hint_SavedComputation& from) { RelCommon_Hint_SavedComputation::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(RelCommon_Hint_SavedComputation* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.RelCommon.Hint.SavedComputation"; }
+
+ protected:
+  explicit RelCommon_Hint_SavedComputation(::google::protobuf::Arena* arena);
+  RelCommon_Hint_SavedComputation(::google::protobuf::Arena* arena, const RelCommon_Hint_SavedComputation& from);
+  RelCommon_Hint_SavedComputation(::google::protobuf::Arena* arena, RelCommon_Hint_SavedComputation&& from) noexcept
+      : RelCommon_Hint_SavedComputation(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kComputationIdFieldNumber = 1,
+    kTypeFieldNumber = 2,
+  };
+  // int32 computation_id = 1 [json_name = "computationId"];
+  void clear_computation_id() ;
+  ::int32_t computation_id() const;
+  void set_computation_id(::int32_t value);
+
+  private:
+  ::int32_t _internal_computation_id() const;
+  void _internal_set_computation_id(::int32_t value);
+
+  public:
+  // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+  void clear_type() ;
+  ::skytether::substrait::RelCommon_Hint_ComputationType type() const;
+  void set_type(::skytether::substrait::RelCommon_Hint_ComputationType value);
+
+  private:
+  ::skytether::substrait::RelCommon_Hint_ComputationType _internal_type() const;
+  void _internal_set_type(::skytether::substrait::RelCommon_Hint_ComputationType value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skytether.substrait.RelCommon.Hint.SavedComputation)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_RelCommon_Hint_SavedComputation_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const RelCommon_Hint_SavedComputation& from_msg);
+    ::int32_t computation_id_;
+    int type_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RelCommon_Hint_LoadedComputation final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.RelCommon.Hint.LoadedComputation) */ {
+ public:
+  inline RelCommon_Hint_LoadedComputation() : RelCommon_Hint_LoadedComputation(nullptr) {}
+  ~RelCommon_Hint_LoadedComputation() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR RelCommon_Hint_LoadedComputation(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline RelCommon_Hint_LoadedComputation(const RelCommon_Hint_LoadedComputation& from) : RelCommon_Hint_LoadedComputation(nullptr, from) {}
+  inline RelCommon_Hint_LoadedComputation(RelCommon_Hint_LoadedComputation&& from) noexcept
+      : RelCommon_Hint_LoadedComputation(nullptr, std::move(from)) {}
+  inline RelCommon_Hint_LoadedComputation& operator=(const RelCommon_Hint_LoadedComputation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RelCommon_Hint_LoadedComputation& operator=(RelCommon_Hint_LoadedComputation&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const RelCommon_Hint_LoadedComputation& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const RelCommon_Hint_LoadedComputation* internal_default_instance() {
+    return reinterpret_cast<const RelCommon_Hint_LoadedComputation*>(
+        &_RelCommon_Hint_LoadedComputation_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 5;
+  friend void swap(RelCommon_Hint_LoadedComputation& a, RelCommon_Hint_LoadedComputation& b) { a.Swap(&b); }
+  inline void Swap(RelCommon_Hint_LoadedComputation* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RelCommon_Hint_LoadedComputation* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  RelCommon_Hint_LoadedComputation* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<RelCommon_Hint_LoadedComputation>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const RelCommon_Hint_LoadedComputation& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const RelCommon_Hint_LoadedComputation& from) { RelCommon_Hint_LoadedComputation::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(RelCommon_Hint_LoadedComputation* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.RelCommon.Hint.LoadedComputation"; }
+
+ protected:
+  explicit RelCommon_Hint_LoadedComputation(::google::protobuf::Arena* arena);
+  RelCommon_Hint_LoadedComputation(::google::protobuf::Arena* arena, const RelCommon_Hint_LoadedComputation& from);
+  RelCommon_Hint_LoadedComputation(::google::protobuf::Arena* arena, RelCommon_Hint_LoadedComputation&& from) noexcept
+      : RelCommon_Hint_LoadedComputation(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kComputationIdReferenceFieldNumber = 1,
+    kTypeFieldNumber = 2,
+  };
+  // int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+  void clear_computation_id_reference() ;
+  ::int32_t computation_id_reference() const;
+  void set_computation_id_reference(::int32_t value);
+
+  private:
+  ::int32_t _internal_computation_id_reference() const;
+  void _internal_set_computation_id_reference(::int32_t value);
+
+  public:
+  // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+  void clear_type() ;
+  ::skytether::substrait::RelCommon_Hint_ComputationType type() const;
+  void set_type(::skytether::substrait::RelCommon_Hint_ComputationType value);
+
+  private:
+  ::skytether::substrait::RelCommon_Hint_ComputationType _internal_type() const;
+  void _internal_set_type(::skytether::substrait::RelCommon_Hint_ComputationType value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skytether.substrait.RelCommon.Hint.LoadedComputation)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_RelCommon_Hint_LoadedComputation_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const RelCommon_Hint_LoadedComputation& from_msg);
+    ::int32_t computation_id_reference_;
+    int type_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RelCommon_Emit final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skytether.substrait.RelCommon.Emit) */ {
  public:
@@ -1494,7 +1976,7 @@ class ReferenceRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ReferenceRel*>(
         &_ReferenceRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 118;
+  static constexpr int kIndexInFileMessages = 123;
   friend void swap(ReferenceRel& a, ReferenceRel& b) { a.Swap(&b); }
   inline void Swap(ReferenceRel* other) {
     if (other == this) return;
@@ -1681,7 +2163,7 @@ class ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions final : public ::google:
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 11;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions& a, ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions* other) {
     if (other == this) return;
@@ -1824,7 +2306,7 @@ class ReadRel_LocalFiles_FileOrFiles_OrcReadOptions final : public ::google::pro
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_OrcReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_OrcReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 13;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_OrcReadOptions& a, ReadRel_LocalFiles_FileOrFiles_OrcReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_OrcReadOptions* other) {
     if (other == this) return;
@@ -1967,7 +2449,7 @@ class ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions final : public ::google::pr
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 12;
+  static constexpr int kIndexInFileMessages = 14;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions& a, ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions* other) {
     if (other == this) return;
@@ -2111,7 +2593,7 @@ class ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions final : p
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 13;
+  static constexpr int kIndexInFileMessages = 15;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions& a, ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions* other) {
     if (other == this) return;
@@ -2384,7 +2866,7 @@ class ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions final : public ::google::p
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 12;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions& a, ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions* other) {
     if (other == this) return;
@@ -2528,7 +3010,7 @@ class FunctionOption final : public ::google::protobuf::Message
     return reinterpret_cast<const FunctionOption*>(
         &_FunctionOption_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 54;
+  static constexpr int kIndexInFileMessages = 59;
   friend void swap(FunctionOption& a, FunctionOption& b) { a.Swap(&b); }
   inline void Swap(FunctionOption* other) {
     if (other == this) return;
@@ -2745,7 +3227,7 @@ class Expression_WindowFunction_Bound_Unbounded final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Unbounded*>(
         &_Expression_WindowFunction_Bound_Unbounded_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 78;
+  static constexpr int kIndexInFileMessages = 83;
   friend void swap(Expression_WindowFunction_Bound_Unbounded& a, Expression_WindowFunction_Bound_Unbounded& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Unbounded* other) {
     if (other == this) return;
@@ -2889,7 +3371,7 @@ class Expression_WindowFunction_Bound_Preceding final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Preceding*>(
         &_Expression_WindowFunction_Bound_Preceding_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 75;
+  static constexpr int kIndexInFileMessages = 80;
   friend void swap(Expression_WindowFunction_Bound_Preceding& a, Expression_WindowFunction_Bound_Preceding& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Preceding* other) {
     if (other == this) return;
@@ -3077,7 +3559,7 @@ class Expression_WindowFunction_Bound_Following final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Following*>(
         &_Expression_WindowFunction_Bound_Following_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 76;
+  static constexpr int kIndexInFileMessages = 81;
   friend void swap(Expression_WindowFunction_Bound_Following& a, Expression_WindowFunction_Bound_Following& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Following* other) {
     if (other == this) return;
@@ -3264,7 +3746,7 @@ class Expression_WindowFunction_Bound_CurrentRow final : public ::google::protob
     return reinterpret_cast<const Expression_WindowFunction_Bound_CurrentRow*>(
         &_Expression_WindowFunction_Bound_CurrentRow_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 77;
+  static constexpr int kIndexInFileMessages = 82;
   friend void swap(Expression_WindowFunction_Bound_CurrentRow& a, Expression_WindowFunction_Bound_CurrentRow& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_CurrentRow* other) {
     if (other == this) return;
@@ -3408,7 +3890,7 @@ class Expression_MaskExpression_MapSelect_MapKeyExpression final : public ::goog
     return reinterpret_cast<const Expression_MaskExpression_MapSelect_MapKeyExpression*>(
         &_Expression_MaskExpression_MapSelect_MapKeyExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 104;
+  static constexpr int kIndexInFileMessages = 109;
   friend void swap(Expression_MaskExpression_MapSelect_MapKeyExpression& a, Expression_MaskExpression_MapSelect_MapKeyExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect_MapKeyExpression* other) {
     if (other == this) return;
@@ -3602,7 +4084,7 @@ class Expression_MaskExpression_MapSelect_MapKey final : public ::google::protob
     return reinterpret_cast<const Expression_MaskExpression_MapSelect_MapKey*>(
         &_Expression_MaskExpression_MapSelect_MapKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 103;
+  static constexpr int kIndexInFileMessages = 108;
   friend void swap(Expression_MaskExpression_MapSelect_MapKey& a, Expression_MaskExpression_MapSelect_MapKey& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect_MapKey* other) {
     if (other == this) return;
@@ -3796,7 +4278,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice final : publ
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 100;
+  static constexpr int kIndexInFileMessages = 105;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice& a, Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice* other) {
     if (other == this) return;
@@ -3996,7 +4478,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem_ListElement final : pu
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem_ListElement*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_ListElement_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 99;
+  static constexpr int kIndexInFileMessages = 104;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListElement& a, Expression_MaskExpression_ListSelect_ListSelectItem_ListElement& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListElement* other) {
     if (other == this) return;
@@ -4184,7 +4666,7 @@ class Expression_Literal_VarChar final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_VarChar*>(
         &_Expression_Literal_VarChar_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 57;
+  static constexpr int kIndexInFileMessages = 62;
   friend void swap(Expression_Literal_VarChar& a, Expression_Literal_VarChar& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_VarChar* other) {
     if (other == this) return;
@@ -4390,7 +4872,7 @@ class Expression_Literal_PrecisionTimestamp final : public ::google::protobuf::M
     return reinterpret_cast<const Expression_Literal_PrecisionTimestamp*>(
         &_Expression_Literal_PrecisionTimestamp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 59;
+  static constexpr int kIndexInFileMessages = 64;
   friend void swap(Expression_Literal_PrecisionTimestamp& a, Expression_Literal_PrecisionTimestamp& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_PrecisionTimestamp* other) {
     if (other == this) return;
@@ -4590,7 +5072,7 @@ class Expression_Literal_IntervalYearToMonth final : public ::google::protobuf::
     return reinterpret_cast<const Expression_Literal_IntervalYearToMonth*>(
         &_Expression_Literal_IntervalYearToMonth_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 62;
+  static constexpr int kIndexInFileMessages = 67;
   friend void swap(Expression_Literal_IntervalYearToMonth& a, Expression_Literal_IntervalYearToMonth& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalYearToMonth* other) {
     if (other == this) return;
@@ -4795,7 +5277,7 @@ class Expression_Literal_IntervalDayToSecond final : public ::google::protobuf::
     return reinterpret_cast<const Expression_Literal_IntervalDayToSecond*>(
         &_Expression_Literal_IntervalDayToSecond_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 63;
+  static constexpr int kIndexInFileMessages = 68;
   friend void swap(Expression_Literal_IntervalDayToSecond& a, Expression_Literal_IntervalDayToSecond& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalDayToSecond* other) {
     if (other == this) return;
@@ -5044,7 +5526,7 @@ class Expression_Literal_Decimal final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Decimal*>(
         &_Expression_Literal_Decimal_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 58;
+  static constexpr int kIndexInFileMessages = 63;
   friend void swap(Expression_Literal_Decimal& a, Expression_Literal_Decimal& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Decimal* other) {
     if (other == this) return;
@@ -5261,7 +5743,7 @@ class Expression_FieldReference_RootReference final : public ::google::protobuf:
     return reinterpret_cast<const Expression_FieldReference_RootReference*>(
         &_Expression_FieldReference_RootReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 107;
+  static constexpr int kIndexInFileMessages = 112;
   friend void swap(Expression_FieldReference_RootReference& a, Expression_FieldReference_RootReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference_RootReference* other) {
     if (other == this) return;
@@ -5405,7 +5887,7 @@ class Expression_FieldReference_OuterReference final : public ::google::protobuf
     return reinterpret_cast<const Expression_FieldReference_OuterReference*>(
         &_Expression_FieldReference_OuterReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 108;
+  static constexpr int kIndexInFileMessages = 113;
   friend void swap(Expression_FieldReference_OuterReference& a, Expression_FieldReference_OuterReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference_OuterReference* other) {
     if (other == this) return;
@@ -5592,7 +6074,7 @@ class Expression_Enum_Empty final : public ::google::protobuf::internal::ZeroFie
     return reinterpret_cast<const Expression_Enum_Empty*>(
         &_Expression_Enum_Empty_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 55;
+  static constexpr int kIndexInFileMessages = 60;
   friend void swap(Expression_Enum_Empty& a, Expression_Enum_Empty& b) { a.Swap(&b); }
   inline void Swap(Expression_Enum_Empty* other) {
     if (other == this) return;
@@ -5736,7 +6218,7 @@ class Expression_EmbeddedFunction_WebAssemblyFunction final : public ::google::p
     return reinterpret_cast<const Expression_EmbeddedFunction_WebAssemblyFunction*>(
         &_Expression_EmbeddedFunction_WebAssemblyFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 90;
+  static constexpr int kIndexInFileMessages = 95;
   friend void swap(Expression_EmbeddedFunction_WebAssemblyFunction& a, Expression_EmbeddedFunction_WebAssemblyFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction_WebAssemblyFunction* other) {
     if (other == this) return;
@@ -5954,7 +6436,7 @@ class Expression_EmbeddedFunction_PythonPickleFunction final : public ::google::
     return reinterpret_cast<const Expression_EmbeddedFunction_PythonPickleFunction*>(
         &_Expression_EmbeddedFunction_PythonPickleFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 89;
+  static constexpr int kIndexInFileMessages = 94;
   friend void swap(Expression_EmbeddedFunction_PythonPickleFunction& a, Expression_EmbeddedFunction_PythonPickleFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction_PythonPickleFunction* other) {
     if (other == this) return;
@@ -6172,7 +6654,7 @@ class ExchangeRel_RoundRobin final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_RoundRobin*>(
         &_ExchangeRel_RoundRobin_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 36;
+  static constexpr int kIndexInFileMessages = 38;
   friend void swap(ExchangeRel_RoundRobin& a, ExchangeRel_RoundRobin& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_RoundRobin* other) {
     if (other == this) return;
@@ -6359,7 +6841,7 @@ class ExchangeRel_Broadcast final : public ::google::protobuf::internal::ZeroFie
     return reinterpret_cast<const ExchangeRel_Broadcast*>(
         &_ExchangeRel_Broadcast_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 35;
+  static constexpr int kIndexInFileMessages = 37;
   friend void swap(ExchangeRel_Broadcast& a, ExchangeRel_Broadcast& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_Broadcast* other) {
     if (other == this) return;
@@ -6508,7 +6990,7 @@ class ComparisonJoinKey_ComparisonType final : public ::google::protobuf::Messag
     return reinterpret_cast<const ComparisonJoinKey_ComparisonType*>(
         &_ComparisonJoinKey_ComparisonType_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 48;
+  static constexpr int kIndexInFileMessages = 53;
   friend void swap(ComparisonJoinKey_ComparisonType& a, ComparisonJoinKey_ComparisonType& b) { a.Swap(&b); }
   inline void Swap(ComparisonJoinKey_ComparisonType* other) {
     if (other == this) return;
@@ -6737,7 +7219,7 @@ class ReadRel_LocalFiles_FileOrFiles final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles*>(
         &_ReadRel_LocalFiles_FileOrFiles_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 14;
+  static constexpr int kIndexInFileMessages = 16;
   friend void swap(ReadRel_LocalFiles_FileOrFiles& a, ReadRel_LocalFiles_FileOrFiles& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles* other) {
     if (other == this) return;
@@ -7183,7 +7665,7 @@ class ReadRel_ExtensionTable final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_ExtensionTable*>(
         &_ReadRel_ExtensionTable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 10;
   friend void swap(ReadRel_ExtensionTable& a, ReadRel_ExtensionTable& b) { a.Swap(&b); }
   inline void Swap(ReadRel_ExtensionTable* other) {
     if (other == this) return;
@@ -7377,7 +7859,7 @@ class ExtensionObject final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionObject*>(
         &_ExtensionObject_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 45;
+  static constexpr int kIndexInFileMessages = 47;
   friend void swap(ExtensionObject& a, ExtensionObject& b) { a.Swap(&b); }
   inline void Swap(ExtensionObject* other) {
     if (other == this) return;
@@ -7578,7 +8060,7 @@ class Expression_WindowFunction_Bound final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_WindowFunction_Bound*>(
         &_Expression_WindowFunction_Bound_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 79;
+  static constexpr int kIndexInFileMessages = 84;
   friend void swap(Expression_WindowFunction_Bound& a, Expression_WindowFunction_Bound& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound* other) {
     if (other == this) return;
@@ -7860,7 +8342,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem final : public ::googl
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 101;
+  static constexpr int kIndexInFileMessages = 106;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem& a, Expression_MaskExpression_ListSelect_ListSelectItem& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem* other) {
     if (other == this) return;
@@ -8091,7 +8573,7 @@ class Expression_Literal_IntervalCompound final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_Literal_IntervalCompound*>(
         &_Expression_Literal_IntervalCompound_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 64;
+  static constexpr int kIndexInFileMessages = 69;
   friend void swap(Expression_Literal_IntervalCompound& a, Expression_Literal_IntervalCompound& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalCompound* other) {
     if (other == this) return;
@@ -8307,7 +8789,7 @@ class Expression_Enum final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Enum*>(
         &_Expression_Enum_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 56;
+  static constexpr int kIndexInFileMessages = 61;
   friend void swap(Expression_Enum& a, Expression_Enum& b) { a.Swap(&b); }
   inline void Swap(Expression_Enum* other) {
     if (other == this) return;
@@ -8540,7 +9022,7 @@ class ExchangeRel_ExchangeTarget final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_ExchangeTarget*>(
         &_ExchangeRel_ExchangeTarget_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 37;
+  static constexpr int kIndexInFileMessages = 39;
   friend void swap(ExchangeRel_ExchangeTarget& a, ExchangeRel_ExchangeTarget& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_ExchangeTarget* other) {
     if (other == this) return;
@@ -9200,7 +9682,7 @@ class ReadRel_NamedTable final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_NamedTable*>(
         &_ReadRel_NamedTable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(ReadRel_NamedTable& a, ReadRel_NamedTable& b) { a.Swap(&b); }
   inline void Swap(ReadRel_NamedTable* other) {
     if (other == this) return;
@@ -9418,7 +9900,7 @@ class ReadRel_LocalFiles final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_LocalFiles*>(
         &_ReadRel_LocalFiles_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 15;
+  static constexpr int kIndexInFileMessages = 17;
   friend void swap(ReadRel_LocalFiles& a, ReadRel_LocalFiles& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles* other) {
     if (other == this) return;
@@ -9577,6 +10059,224 @@ class ReadRel_LocalFiles final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class NamedTable final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.NamedTable) */ {
+ public:
+  inline NamedTable() : NamedTable(nullptr) {}
+  ~NamedTable() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR NamedTable(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline NamedTable(const NamedTable& from) : NamedTable(nullptr, from) {}
+  inline NamedTable(NamedTable&& from) noexcept
+      : NamedTable(nullptr, std::move(from)) {}
+  inline NamedTable& operator=(const NamedTable& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline NamedTable& operator=(NamedTable&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const NamedTable& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const NamedTable* internal_default_instance() {
+    return reinterpret_cast<const NamedTable*>(
+        &_NamedTable_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 52;
+  friend void swap(NamedTable& a, NamedTable& b) { a.Swap(&b); }
+  inline void Swap(NamedTable* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(NamedTable* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  NamedTable* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<NamedTable>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const NamedTable& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const NamedTable& from) { NamedTable::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(NamedTable* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.NamedTable"; }
+
+ protected:
+  explicit NamedTable(::google::protobuf::Arena* arena);
+  NamedTable(::google::protobuf::Arena* arena, const NamedTable& from);
+  NamedTable(::google::protobuf::Arena* arena, NamedTable&& from) noexcept
+      : NamedTable(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kNamesFieldNumber = 1,
+    kAdvancedExtensionFieldNumber = 10,
+  };
+  // repeated string names = 1 [json_name = "names"];
+  int names_size() const;
+  private:
+  int _internal_names_size() const;
+
+  public:
+  void clear_names() ;
+  const std::string& names(int index) const;
+  std::string* mutable_names(int index);
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_names(int index, Arg_&& value, Args_... args);
+  std::string* add_names();
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void add_names(Arg_&& value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<std::string>& names() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* mutable_names();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_names() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_names();
+
+  public:
+  // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+  bool has_advanced_extension() const;
+  void clear_advanced_extension() ;
+  const ::skytether::substrait::extensions::AdvancedExtension& advanced_extension() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::extensions::AdvancedExtension* release_advanced_extension();
+  ::skytether::substrait::extensions::AdvancedExtension* mutable_advanced_extension();
+  void set_allocated_advanced_extension(::skytether::substrait::extensions::AdvancedExtension* value);
+  void unsafe_arena_set_allocated_advanced_extension(::skytether::substrait::extensions::AdvancedExtension* value);
+  ::skytether::substrait::extensions::AdvancedExtension* unsafe_arena_release_advanced_extension();
+
+  private:
+  const ::skytether::substrait::extensions::AdvancedExtension& _internal_advanced_extension() const;
+  ::skytether::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
+
+  public:
+  // @@protoc_insertion_point(class_scope:skytether.substrait.NamedTable)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 1,
+      44, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_NamedTable_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const NamedTable& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField<std::string> names_;
+    ::skytether::substrait::extensions::AdvancedExtension* advanced_extension_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class NamedObjectWrite final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skytether.substrait.NamedObjectWrite) */ {
  public:
@@ -9632,7 +10332,7 @@ class NamedObjectWrite final : public ::google::protobuf::Message
     return reinterpret_cast<const NamedObjectWrite*>(
         &_NamedObjectWrite_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 44;
+  static constexpr int kIndexInFileMessages = 46;
   friend void swap(NamedObjectWrite& a, NamedObjectWrite& b) { a.Swap(&b); }
   inline void Swap(NamedObjectWrite* other) {
     if (other == this) return;
@@ -9850,7 +10550,7 @@ class Expression_MaskExpression_ListSelect final : public ::google::protobuf::Me
     return reinterpret_cast<const Expression_MaskExpression_ListSelect*>(
         &_Expression_MaskExpression_ListSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 102;
+  static constexpr int kIndexInFileMessages = 107;
   friend void swap(Expression_MaskExpression_ListSelect& a, Expression_MaskExpression_ListSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect* other) {
     if (other == this) return;
@@ -10069,7 +10769,7 @@ class Expression_MaskExpression_MapSelect final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_MaskExpression_MapSelect*>(
         &_Expression_MaskExpression_MapSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 105;
+  static constexpr int kIndexInFileMessages = 110;
   friend void swap(Expression_MaskExpression_MapSelect& a, Expression_MaskExpression_MapSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect* other) {
     if (other == this) return;
@@ -10324,7 +11024,7 @@ class Expression_MaskExpression_Select final : public ::google::protobuf::Messag
     return reinterpret_cast<const Expression_MaskExpression_Select*>(
         &_Expression_MaskExpression_Select_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 96;
+  static constexpr int kIndexInFileMessages = 101;
   friend void swap(Expression_MaskExpression_Select& a, Expression_MaskExpression_Select& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_Select* other) {
     if (other == this) return;
@@ -10575,7 +11275,7 @@ class Expression_MaskExpression_StructItem final : public ::google::protobuf::Me
     return reinterpret_cast<const Expression_MaskExpression_StructItem*>(
         &_Expression_MaskExpression_StructItem_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 98;
+  static constexpr int kIndexInFileMessages = 103;
   friend void swap(Expression_MaskExpression_StructItem& a, Expression_MaskExpression_StructItem& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_StructItem* other) {
     if (other == this) return;
@@ -10781,7 +11481,7 @@ class Expression_MaskExpression_StructSelect final : public ::google::protobuf::
     return reinterpret_cast<const Expression_MaskExpression_StructSelect*>(
         &_Expression_MaskExpression_StructSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 97;
+  static constexpr int kIndexInFileMessages = 102;
   friend void swap(Expression_MaskExpression_StructSelect& a, Expression_MaskExpression_StructSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_StructSelect* other) {
     if (other == this) return;
@@ -11009,7 +11709,7 @@ class Expression_Literal final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal*>(
         &_Expression_Literal_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 68;
+  static constexpr int kIndexInFileMessages = 73;
   friend void swap(Expression_Literal& a, Expression_Literal& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal* other) {
     if (other == this) return;
@@ -11790,7 +12490,7 @@ class Expression_Literal_List final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_List*>(
         &_Expression_Literal_List_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 66;
+  static constexpr int kIndexInFileMessages = 71;
   friend void swap(Expression_Literal_List& a, Expression_Literal_List& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_List* other) {
     if (other == this) return;
@@ -11985,7 +12685,7 @@ class Expression_Literal_Map final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Map*>(
         &_Expression_Literal_Map_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 61;
+  static constexpr int kIndexInFileMessages = 66;
   friend void swap(Expression_Literal_Map& a, Expression_Literal_Map& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Map* other) {
     if (other == this) return;
@@ -12181,7 +12881,7 @@ class Expression_Literal_Map_KeyValue final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Map_KeyValue*>(
         &_Expression_Literal_Map_KeyValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 60;
+  static constexpr int kIndexInFileMessages = 65;
   friend void swap(Expression_Literal_Map_KeyValue& a, Expression_Literal_Map_KeyValue& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Map_KeyValue* other) {
     if (other == this) return;
@@ -12392,7 +13092,7 @@ class Expression_Literal_Struct final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Struct*>(
         &_Expression_Literal_Struct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 65;
+  static constexpr int kIndexInFileMessages = 70;
   friend void swap(Expression_Literal_Struct& a, Expression_Literal_Struct& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Struct* other) {
     if (other == this) return;
@@ -12592,7 +13292,7 @@ class Expression_Literal_UserDefined final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_UserDefined*>(
         &_Expression_Literal_UserDefined_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 67;
+  static constexpr int kIndexInFileMessages = 72;
   friend void swap(Expression_Literal_UserDefined& a, Expression_Literal_UserDefined& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_UserDefined* other) {
     if (other == this) return;
@@ -12852,7 +13552,7 @@ class RelCommon_Hint final : public ::google::protobuf::Message
     return reinterpret_cast<const RelCommon_Hint*>(
         &_RelCommon_Hint_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(RelCommon_Hint& a, RelCommon_Hint& b) { a.Swap(&b); }
   inline void Swap(RelCommon_Hint* other) {
     if (other == this) return;
@@ -12937,14 +13637,96 @@ class RelCommon_Hint final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
   using Stats = RelCommon_Hint_Stats;
   using RuntimeConstraint = RelCommon_Hint_RuntimeConstraint;
+  using SavedComputation = RelCommon_Hint_SavedComputation;
+  using LoadedComputation = RelCommon_Hint_LoadedComputation;
+  using ComputationType = RelCommon_Hint_ComputationType;
+  static constexpr ComputationType COMPUTATION_TYPE_UNSPECIFIED = RelCommon_Hint_ComputationType_COMPUTATION_TYPE_UNSPECIFIED;
+  static constexpr ComputationType COMPUTATION_TYPE_HASHTABLE = RelCommon_Hint_ComputationType_COMPUTATION_TYPE_HASHTABLE;
+  static constexpr ComputationType COMPUTATION_TYPE_BLOOM_FILTER = RelCommon_Hint_ComputationType_COMPUTATION_TYPE_BLOOM_FILTER;
+  static constexpr ComputationType COMPUTATION_TYPE_UNKNOWN = RelCommon_Hint_ComputationType_COMPUTATION_TYPE_UNKNOWN;
+  static inline bool ComputationType_IsValid(int value) {
+    return RelCommon_Hint_ComputationType_IsValid(value);
+  }
+  static constexpr ComputationType ComputationType_MIN = RelCommon_Hint_ComputationType_ComputationType_MIN;
+  static constexpr ComputationType ComputationType_MAX = RelCommon_Hint_ComputationType_ComputationType_MAX;
+  static constexpr int ComputationType_ARRAYSIZE = RelCommon_Hint_ComputationType_ComputationType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* ComputationType_descriptor() {
+    return RelCommon_Hint_ComputationType_descriptor();
+  }
+  template <typename T>
+  static inline const std::string& ComputationType_Name(T value) {
+    return RelCommon_Hint_ComputationType_Name(value);
+  }
+  static inline bool ComputationType_Parse(absl::string_view name, ComputationType* value) {
+    return RelCommon_Hint_ComputationType_Parse(name, value);
+  }
 
   // accessors -------------------------------------------------------
   enum : int {
+    kOutputNamesFieldNumber = 4,
+    kSavedComputationsFieldNumber = 11,
+    kLoadedComputationsFieldNumber = 12,
     kAliasFieldNumber = 3,
     kStatsFieldNumber = 1,
     kConstraintFieldNumber = 2,
     kAdvancedExtensionFieldNumber = 10,
   };
+  // repeated string output_names = 4 [json_name = "outputNames"];
+  int output_names_size() const;
+  private:
+  int _internal_output_names_size() const;
+
+  public:
+  void clear_output_names() ;
+  const std::string& output_names(int index) const;
+  std::string* mutable_output_names(int index);
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_output_names(int index, Arg_&& value, Args_... args);
+  std::string* add_output_names();
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void add_output_names(Arg_&& value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<std::string>& output_names() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* mutable_output_names();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_output_names() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_output_names();
+
+  public:
+  // repeated .skytether.substrait.RelCommon.Hint.SavedComputation saved_computations = 11 [json_name = "savedComputations"];
+  int saved_computations_size() const;
+  private:
+  int _internal_saved_computations_size() const;
+
+  public:
+  void clear_saved_computations() ;
+  ::skytether::substrait::RelCommon_Hint_SavedComputation* mutable_saved_computations(int index);
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>* mutable_saved_computations();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>& _internal_saved_computations() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>* _internal_mutable_saved_computations();
+  public:
+  const ::skytether::substrait::RelCommon_Hint_SavedComputation& saved_computations(int index) const;
+  ::skytether::substrait::RelCommon_Hint_SavedComputation* add_saved_computations();
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>& saved_computations() const;
+  // repeated .skytether.substrait.RelCommon.Hint.LoadedComputation loaded_computations = 12 [json_name = "loadedComputations"];
+  int loaded_computations_size() const;
+  private:
+  int _internal_loaded_computations_size() const;
+
+  public:
+  void clear_loaded_computations() ;
+  ::skytether::substrait::RelCommon_Hint_LoadedComputation* mutable_loaded_computations(int index);
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>* mutable_loaded_computations();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>& _internal_loaded_computations() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>* _internal_mutable_loaded_computations();
+  public:
+  const ::skytether::substrait::RelCommon_Hint_LoadedComputation& loaded_computations(int index) const;
+  ::skytether::substrait::RelCommon_Hint_LoadedComputation* add_loaded_computations();
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>& loaded_computations() const;
   // string alias = 3 [json_name = "alias"];
   void clear_alias() ;
   const std::string& alias() const;
@@ -13011,8 +13793,8 @@ class RelCommon_Hint final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 3,
-      48, 2>
+      2, 7, 5,
+      60, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -13034,205 +13816,13 @@ class RelCommon_Hint final : public ::google::protobuf::Message
                           const RelCommon_Hint& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField<std::string> output_names_;
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::RelCommon_Hint_SavedComputation > saved_computations_;
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::RelCommon_Hint_LoadedComputation > loaded_computations_;
     ::google::protobuf::internal::ArenaStringPtr alias_;
     ::skytether::substrait::RelCommon_Hint_Stats* stats_;
     ::skytether::substrait::RelCommon_Hint_RuntimeConstraint* constraint_;
     ::skytether::substrait::extensions::AdvancedExtension* advanced_extension_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
-};
-// -------------------------------------------------------------------
-
-class ReadRel_VirtualTable final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:skytether.substrait.ReadRel.VirtualTable) */ {
- public:
-  inline ReadRel_VirtualTable() : ReadRel_VirtualTable(nullptr) {}
-  ~ReadRel_VirtualTable() PROTOBUF_FINAL;
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR ReadRel_VirtualTable(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline ReadRel_VirtualTable(const ReadRel_VirtualTable& from) : ReadRel_VirtualTable(nullptr, from) {}
-  inline ReadRel_VirtualTable(ReadRel_VirtualTable&& from) noexcept
-      : ReadRel_VirtualTable(nullptr, std::move(from)) {}
-  inline ReadRel_VirtualTable& operator=(const ReadRel_VirtualTable& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ReadRel_VirtualTable& operator=(ReadRel_VirtualTable&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetArena() == from.GetArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ReadRel_VirtualTable& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ReadRel_VirtualTable* internal_default_instance() {
-    return reinterpret_cast<const ReadRel_VirtualTable*>(
-        &_ReadRel_VirtualTable_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 7;
-  friend void swap(ReadRel_VirtualTable& a, ReadRel_VirtualTable& b) { a.Swap(&b); }
-  inline void Swap(ReadRel_VirtualTable* other) {
-    if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetArena() == other->GetArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ReadRel_VirtualTable* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ReadRel_VirtualTable* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
-    return ::google::protobuf::Message::DefaultConstruct<ReadRel_VirtualTable>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const ReadRel_VirtualTable& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const ReadRel_VirtualTable& from) { ReadRel_VirtualTable::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  void SharedDtor();
-  void InternalSwap(ReadRel_VirtualTable* other);
- private:
-  friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "skytether.substrait.ReadRel.VirtualTable"; }
-
- protected:
-  explicit ReadRel_VirtualTable(::google::protobuf::Arena* arena);
-  ReadRel_VirtualTable(::google::protobuf::Arena* arena, const ReadRel_VirtualTable& from);
-  ReadRel_VirtualTable(::google::protobuf::Arena* arena, ReadRel_VirtualTable&& from) noexcept
-      : ReadRel_VirtualTable(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static const ::google::protobuf::Message::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kValuesFieldNumber = 1,
-  };
-  // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
-  int values_size() const;
-  private:
-  int _internal_values_size() const;
-
-  public:
-  void clear_values() ;
-  ::skytether::substrait::Expression_Literal_Struct* mutable_values(int index);
-  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>* mutable_values();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>& _internal_values() const;
-  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>* _internal_mutable_values();
-  public:
-  const ::skytether::substrait::Expression_Literal_Struct& values(int index) const;
-  ::skytether::substrait::Expression_Literal_Struct* add_values();
-  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>& values() const;
-  // @@protoc_insertion_point(class_scope:skytether.substrait.ReadRel.VirtualTable)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 1,
-      0, 2>
-      _table_;
-
-  static constexpr const void* _raw_default_instance_ =
-      &_ReadRel_VirtualTable_default_instance_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const ReadRel_VirtualTable& from_msg);
-    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::Expression_Literal_Struct > values_;
-    mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -13301,7 +13891,7 @@ class Expression_ReferenceSegment final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_ReferenceSegment*>(
         &_Expression_ReferenceSegment_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 95;
+  static constexpr int kIndexInFileMessages = 100;
   friend void swap(Expression_ReferenceSegment& a, Expression_ReferenceSegment& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment* other) {
     if (other == this) return;
@@ -13555,7 +14145,7 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
     return reinterpret_cast<const Expression_ReferenceSegment_ListElement*>(
         &_Expression_ReferenceSegment_ListElement_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 94;
+  static constexpr int kIndexInFileMessages = 99;
   friend void swap(Expression_ReferenceSegment_ListElement& a, Expression_ReferenceSegment_ListElement& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_ListElement* other) {
     if (other == this) return;
@@ -13761,7 +14351,7 @@ class Expression_ReferenceSegment_MapKey final : public ::google::protobuf::Mess
     return reinterpret_cast<const Expression_ReferenceSegment_MapKey*>(
         &_Expression_ReferenceSegment_MapKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 92;
+  static constexpr int kIndexInFileMessages = 97;
   friend void swap(Expression_ReferenceSegment_MapKey& a, Expression_ReferenceSegment_MapKey& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_MapKey* other) {
     if (other == this) return;
@@ -13972,7 +14562,7 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
     return reinterpret_cast<const Expression_ReferenceSegment_StructField*>(
         &_Expression_ReferenceSegment_StructField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 93;
+  static constexpr int kIndexInFileMessages = 98;
   friend void swap(Expression_ReferenceSegment_StructField& a, Expression_ReferenceSegment_StructField& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_StructField* other) {
     if (other == this) return;
@@ -14178,7 +14768,7 @@ class Expression_MaskExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MaskExpression*>(
         &_Expression_MaskExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 106;
+  static constexpr int kIndexInFileMessages = 111;
   friend void swap(Expression_MaskExpression& a, Expression_MaskExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression* other) {
     if (other == this) return;
@@ -14394,7 +14984,7 @@ class RelCommon final : public ::google::protobuf::Message
     return reinterpret_cast<const RelCommon*>(
         &_RelCommon_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(RelCommon& a, RelCommon& b) { a.Swap(&b); }
   inline void Swap(RelCommon* other) {
     if (other == this) return;
@@ -14661,7 +15251,7 @@ class ExtensionLeafRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionLeafRel*>(
         &_ExtensionLeafRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 30;
+  static constexpr int kIndexInFileMessages = 32;
   friend void swap(ExtensionLeafRel& a, ExtensionLeafRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionLeafRel* other) {
     if (other == this) return;
@@ -14872,7 +15462,7 @@ class AggregateFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateFunction*>(
         &_AggregateFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 117;
+  static constexpr int kIndexInFileMessages = 122;
   friend void swap(AggregateFunction& a, AggregateFunction& b) { a.Swap(&b); }
   inline void Swap(AggregateFunction* other) {
     if (other == this) return;
@@ -15198,7 +15788,7 @@ class AggregateRel final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel*>(
         &_AggregateRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 23;
+  static constexpr int kIndexInFileMessages = 25;
   friend void swap(AggregateRel& a, AggregateRel& b) { a.Swap(&b); }
   inline void Swap(AggregateRel* other) {
     if (other == this) return;
@@ -15288,6 +15878,7 @@ class AggregateRel final : public ::google::protobuf::Message
   enum : int {
     kGroupingsFieldNumber = 3,
     kMeasuresFieldNumber = 4,
+    kGroupingExpressionsFieldNumber = 5,
     kCommonFieldNumber = 1,
     kInputFieldNumber = 2,
     kAdvancedExtensionFieldNumber = 10,
@@ -15326,6 +15917,23 @@ class AggregateRel final : public ::google::protobuf::Message
   const ::skytether::substrait::AggregateRel_Measure& measures(int index) const;
   ::skytether::substrait::AggregateRel_Measure* add_measures();
   const ::google::protobuf::RepeatedPtrField<::skytether::substrait::AggregateRel_Measure>& measures() const;
+  // repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+  int grouping_expressions_size() const;
+  private:
+  int _internal_grouping_expressions_size() const;
+
+  public:
+  void clear_grouping_expressions() ;
+  ::skytether::substrait::Expression* mutable_grouping_expressions(int index);
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* mutable_grouping_expressions();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& _internal_grouping_expressions() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* _internal_mutable_grouping_expressions();
+  public:
+  const ::skytether::substrait::Expression& grouping_expressions(int index) const;
+  ::skytether::substrait::Expression* add_grouping_expressions();
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& grouping_expressions() const;
   // .skytether.substrait.RelCommon common = 1 [json_name = "common"];
   bool has_common() const;
   void clear_common() ;
@@ -15376,7 +15984,7 @@ class AggregateRel final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 5, 5,
+      3, 6, 6,
       0, 2>
       _table_;
 
@@ -15401,6 +16009,7 @@ class AggregateRel final : public ::google::protobuf::Message
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::RepeatedPtrField< ::skytether::substrait::AggregateRel_Grouping > groupings_;
     ::google::protobuf::RepeatedPtrField< ::skytether::substrait::AggregateRel_Measure > measures_;
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::Expression > grouping_expressions_;
     ::skytether::substrait::RelCommon* common_;
     ::skytether::substrait::Rel* input_;
     ::skytether::substrait::extensions::AdvancedExtension* advanced_extension_;
@@ -15466,7 +16075,7 @@ class AggregateRel_Grouping final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel_Grouping*>(
         &_AggregateRel_Grouping_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 21;
+  static constexpr int kIndexInFileMessages = 23;
   friend void swap(AggregateRel_Grouping& a, AggregateRel_Grouping& b) { a.Swap(&b); }
   inline void Swap(AggregateRel_Grouping* other) {
     if (other == this) return;
@@ -15553,30 +16162,49 @@ class AggregateRel_Grouping final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kGroupingExpressionsFieldNumber = 1,
+    kExpressionReferencesFieldNumber = 2,
   };
-  // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
-  int grouping_expressions_size() const;
+  // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
+  [[deprecated]]  int grouping_expressions_size() const;
   private:
   int _internal_grouping_expressions_size() const;
 
   public:
-  void clear_grouping_expressions() ;
-  ::skytether::substrait::Expression* mutable_grouping_expressions(int index);
-  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* mutable_grouping_expressions();
+  [[deprecated]]  void clear_grouping_expressions() ;
+  [[deprecated]] ::skytether::substrait::Expression* mutable_grouping_expressions(int index);
+  [[deprecated]] ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* mutable_grouping_expressions();
 
   private:
   const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& _internal_grouping_expressions() const;
   ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* _internal_mutable_grouping_expressions();
   public:
-  const ::skytether::substrait::Expression& grouping_expressions(int index) const;
-  ::skytether::substrait::Expression* add_grouping_expressions();
-  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& grouping_expressions() const;
+  [[deprecated]] const ::skytether::substrait::Expression& grouping_expressions(int index) const;
+  [[deprecated]] ::skytether::substrait::Expression* add_grouping_expressions();
+  [[deprecated]] const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& grouping_expressions() const;
+  // repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+  int expression_references_size() const;
+  private:
+  int _internal_expression_references_size() const;
+
+  public:
+  void clear_expression_references() ;
+  ::uint32_t expression_references(int index) const;
+  void set_expression_references(int index, ::uint32_t value);
+  void add_expression_references(::uint32_t value);
+  const ::google::protobuf::RepeatedField<::uint32_t>& expression_references() const;
+  ::google::protobuf::RepeatedField<::uint32_t>* mutable_expression_references();
+
+  private:
+  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_expression_references() const;
+  ::google::protobuf::RepeatedField<::uint32_t>* _internal_mutable_expression_references();
+
+  public:
   // @@protoc_insertion_point(class_scope:skytether.substrait.AggregateRel.Grouping)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 1,
+      1, 2, 1,
       0, 2>
       _table_;
 
@@ -15598,6 +16226,8 @@ class AggregateRel_Grouping final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const AggregateRel_Grouping& from_msg);
     ::google::protobuf::RepeatedPtrField< ::skytether::substrait::Expression > grouping_expressions_;
+    ::google::protobuf::RepeatedField<::uint32_t> expression_references_;
+    mutable ::google::protobuf::internal::CachedSize _expression_references_cached_byte_size_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -15661,7 +16291,7 @@ class AggregateRel_Measure final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel_Measure*>(
         &_AggregateRel_Measure_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 22;
+  static constexpr int kIndexInFileMessages = 24;
   friend void swap(AggregateRel_Measure& a, AggregateRel_Measure& b) { a.Swap(&b); }
   inline void Swap(AggregateRel_Measure* other) {
     if (other == this) return;
@@ -15872,7 +16502,7 @@ class ComparisonJoinKey final : public ::google::protobuf::Message
     return reinterpret_cast<const ComparisonJoinKey*>(
         &_ComparisonJoinKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 49;
+  static constexpr int kIndexInFileMessages = 54;
   friend void swap(ComparisonJoinKey& a, ComparisonJoinKey& b) { a.Swap(&b); }
   inline void Swap(ComparisonJoinKey* other) {
     if (other == this) return;
@@ -16122,7 +16752,7 @@ class ConsistentPartitionWindowRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ConsistentPartitionWindowRel*>(
         &_ConsistentPartitionWindowRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 25;
+  static constexpr int kIndexInFileMessages = 27;
   friend void swap(ConsistentPartitionWindowRel& a, ConsistentPartitionWindowRel& b) { a.Swap(&b); }
   inline void Swap(ConsistentPartitionWindowRel* other) {
     if (other == this) return;
@@ -16408,7 +17038,7 @@ class ConsistentPartitionWindowRel_WindowRelFunction final : public ::google::pr
     return reinterpret_cast<const ConsistentPartitionWindowRel_WindowRelFunction*>(
         &_ConsistentPartitionWindowRel_WindowRelFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 24;
+  static constexpr int kIndexInFileMessages = 26;
   friend void swap(ConsistentPartitionWindowRel_WindowRelFunction& a, ConsistentPartitionWindowRel_WindowRelFunction& b) { a.Swap(&b); }
   inline void Swap(ConsistentPartitionWindowRel_WindowRelFunction* other) {
     if (other == this) return;
@@ -16722,7 +17352,7 @@ class CrossRel final : public ::google::protobuf::Message
     return reinterpret_cast<const CrossRel*>(
         &_CrossRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 19;
+  static constexpr int kIndexInFileMessages = 21;
   friend void swap(CrossRel& a, CrossRel& b) { a.Swap(&b); }
   inline void Swap(CrossRel* other) {
     if (other == this) return;
@@ -16972,7 +17602,7 @@ class DdlRel final : public ::google::protobuf::Message
     return reinterpret_cast<const DdlRel*>(
         &_DdlRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 46;
+  static constexpr int kIndexInFileMessages = 48;
   friend void swap(DdlRel& a, DdlRel& b) { a.Swap(&b); }
   inline void Swap(DdlRel* other) {
     if (other == this) return;
@@ -17345,7 +17975,7 @@ class ExchangeRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel*>(
         &_ExchangeRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 38;
+  static constexpr int kIndexInFileMessages = 40;
   friend void swap(ExchangeRel& a, ExchangeRel& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel* other) {
     if (other == this) return;
@@ -17729,7 +18359,7 @@ class ExchangeRel_MultiBucketExpression final : public ::google::protobuf::Messa
     return reinterpret_cast<const ExchangeRel_MultiBucketExpression*>(
         &_ExchangeRel_MultiBucketExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 34;
+  static constexpr int kIndexInFileMessages = 36;
   friend void swap(ExchangeRel_MultiBucketExpression& a, ExchangeRel_MultiBucketExpression& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_MultiBucketExpression* other) {
     if (other == this) return;
@@ -17935,7 +18565,7 @@ class ExchangeRel_ScatterFields final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_ScatterFields*>(
         &_ExchangeRel_ScatterFields_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 32;
+  static constexpr int kIndexInFileMessages = 34;
   friend void swap(ExchangeRel_ScatterFields& a, ExchangeRel_ScatterFields& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_ScatterFields* other) {
     if (other == this) return;
@@ -18130,7 +18760,7 @@ class ExchangeRel_SingleBucketExpression final : public ::google::protobuf::Mess
     return reinterpret_cast<const ExchangeRel_SingleBucketExpression*>(
         &_ExchangeRel_SingleBucketExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 33;
+  static constexpr int kIndexInFileMessages = 35;
   friend void swap(ExchangeRel_SingleBucketExpression& a, ExchangeRel_SingleBucketExpression& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_SingleBucketExpression* other) {
     if (other == this) return;
@@ -18324,7 +18954,7 @@ class ExpandRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel*>(
         &_ExpandRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 41;
+  static constexpr int kIndexInFileMessages = 43;
   friend void swap(ExpandRel& a, ExpandRel& b) { a.Swap(&b); }
   inline void Swap(ExpandRel* other) {
     if (other == this) return;
@@ -18561,7 +19191,7 @@ class ExpandRel_ExpandField final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel_ExpandField*>(
         &_ExpandRel_ExpandField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 39;
+  static constexpr int kIndexInFileMessages = 41;
   friend void swap(ExpandRel_ExpandField& a, ExpandRel_ExpandField& b) { a.Swap(&b); }
   inline void Swap(ExpandRel_ExpandField* other) {
     if (other == this) return;
@@ -18790,7 +19420,7 @@ class ExpandRel_SwitchingField final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel_SwitchingField*>(
         &_ExpandRel_SwitchingField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 40;
+  static constexpr int kIndexInFileMessages = 42;
   friend void swap(ExpandRel_SwitchingField& a, ExpandRel_SwitchingField& b) { a.Swap(&b); }
   inline void Swap(ExpandRel_SwitchingField* other) {
     if (other == this) return;
@@ -19000,7 +19630,7 @@ class Expression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression*>(
         &_Expression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 115;
+  static constexpr int kIndexInFileMessages = 120;
   friend void swap(Expression& a, Expression& b) { a.Swap(&b); }
   inline void Swap(Expression* other) {
     if (other == this) return;
@@ -19464,7 +20094,7 @@ class Expression_Cast final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Cast*>(
         &_Expression_Cast_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 83;
+  static constexpr int kIndexInFileMessages = 88;
   friend void swap(Expression_Cast& a, Expression_Cast& b) { a.Swap(&b); }
   inline void Swap(Expression_Cast* other) {
     if (other == this) return;
@@ -19718,7 +20348,7 @@ class Expression_FieldReference final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_FieldReference*>(
         &_Expression_FieldReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 109;
+  static constexpr int kIndexInFileMessages = 114;
   friend void swap(Expression_FieldReference& a, Expression_FieldReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference* other) {
     if (other == this) return;
@@ -20023,7 +20653,7 @@ class Expression_IfThen final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_IfThen*>(
         &_Expression_IfThen_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 82;
+  static constexpr int kIndexInFileMessages = 87;
   friend void swap(Expression_IfThen& a, Expression_IfThen& b) { a.Swap(&b); }
   inline void Swap(Expression_IfThen* other) {
     if (other == this) return;
@@ -20237,7 +20867,7 @@ class Expression_IfThen_IfClause final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_IfThen_IfClause*>(
         &_Expression_IfThen_IfClause_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 81;
+  static constexpr int kIndexInFileMessages = 86;
   friend void swap(Expression_IfThen_IfClause& a, Expression_IfThen_IfClause& b) { a.Swap(&b); }
   inline void Swap(Expression_IfThen_IfClause* other) {
     if (other == this) return;
@@ -20448,7 +21078,7 @@ class Expression_MultiOrList final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MultiOrList*>(
         &_Expression_MultiOrList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 88;
+  static constexpr int kIndexInFileMessages = 93;
   friend void swap(Expression_MultiOrList& a, Expression_MultiOrList& b) { a.Swap(&b); }
   inline void Swap(Expression_MultiOrList* other) {
     if (other == this) return;
@@ -20663,7 +21293,7 @@ class Expression_MultiOrList_Record final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MultiOrList_Record*>(
         &_Expression_MultiOrList_Record_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 87;
+  static constexpr int kIndexInFileMessages = 92;
   friend void swap(Expression_MultiOrList_Record& a, Expression_MultiOrList_Record& b) { a.Swap(&b); }
   inline void Swap(Expression_MultiOrList_Record* other) {
     if (other == this) return;
@@ -20864,7 +21494,7 @@ class Expression_Nested final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested*>(
         &_Expression_Nested_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 73;
+  static constexpr int kIndexInFileMessages = 78;
   friend void swap(Expression_Nested& a, Expression_Nested& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested* other) {
     if (other == this) return;
@@ -21142,7 +21772,7 @@ class Expression_Nested_List final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_List*>(
         &_Expression_Nested_List_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 72;
+  static constexpr int kIndexInFileMessages = 77;
   friend void swap(Expression_Nested_List& a, Expression_Nested_List& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_List* other) {
     if (other == this) return;
@@ -21337,7 +21967,7 @@ class Expression_Nested_Map final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Map*>(
         &_Expression_Nested_Map_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 70;
+  static constexpr int kIndexInFileMessages = 75;
   friend void swap(Expression_Nested_Map& a, Expression_Nested_Map& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Map* other) {
     if (other == this) return;
@@ -21533,7 +22163,7 @@ class Expression_Nested_Map_KeyValue final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Map_KeyValue*>(
         &_Expression_Nested_Map_KeyValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 69;
+  static constexpr int kIndexInFileMessages = 74;
   friend void swap(Expression_Nested_Map_KeyValue& a, Expression_Nested_Map_KeyValue& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Map_KeyValue* other) {
     if (other == this) return;
@@ -21744,7 +22374,7 @@ class Expression_Nested_Struct final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Struct*>(
         &_Expression_Nested_Struct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 71;
+  static constexpr int kIndexInFileMessages = 76;
   friend void swap(Expression_Nested_Struct& a, Expression_Nested_Struct& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Struct* other) {
     if (other == this) return;
@@ -21939,7 +22569,7 @@ class Expression_ScalarFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_ScalarFunction*>(
         &_Expression_ScalarFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 74;
+  static constexpr int kIndexInFileMessages = 79;
   friend void swap(Expression_ScalarFunction& a, Expression_ScalarFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_ScalarFunction* other) {
     if (other == this) return;
@@ -22202,7 +22832,7 @@ class Expression_SingularOrList final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_SingularOrList*>(
         &_Expression_SingularOrList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 86;
+  static constexpr int kIndexInFileMessages = 91;
   friend void swap(Expression_SingularOrList& a, Expression_SingularOrList& b) { a.Swap(&b); }
   inline void Swap(Expression_SingularOrList* other) {
     if (other == this) return;
@@ -22422,7 +23052,7 @@ class Expression_Subquery final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery*>(
         &_Expression_Subquery_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 114;
+  static constexpr int kIndexInFileMessages = 119;
   friend void swap(Expression_Subquery& a, Expression_Subquery& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery* other) {
     if (other == this) return;
@@ -22699,7 +23329,7 @@ class Expression_Subquery_InPredicate final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery_InPredicate*>(
         &_Expression_Subquery_InPredicate_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 111;
+  static constexpr int kIndexInFileMessages = 116;
   friend void swap(Expression_Subquery_InPredicate& a, Expression_Subquery_InPredicate& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_InPredicate* other) {
     if (other == this) return;
@@ -22912,7 +23542,7 @@ class Expression_Subquery_Scalar final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery_Scalar*>(
         &_Expression_Subquery_Scalar_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 110;
+  static constexpr int kIndexInFileMessages = 115;
   friend void swap(Expression_Subquery_Scalar& a, Expression_Subquery_Scalar& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_Scalar* other) {
     if (other == this) return;
@@ -23106,7 +23736,7 @@ class Expression_Subquery_SetComparison final : public ::google::protobuf::Messa
     return reinterpret_cast<const Expression_Subquery_SetComparison*>(
         &_Expression_Subquery_SetComparison_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 113;
+  static constexpr int kIndexInFileMessages = 118;
   friend void swap(Expression_Subquery_SetComparison& a, Expression_Subquery_SetComparison& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_SetComparison* other) {
     if (other == this) return;
@@ -23385,7 +24015,7 @@ class Expression_Subquery_SetPredicate final : public ::google::protobuf::Messag
     return reinterpret_cast<const Expression_Subquery_SetPredicate*>(
         &_Expression_Subquery_SetPredicate_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 112;
+  static constexpr int kIndexInFileMessages = 117;
   friend void swap(Expression_Subquery_SetPredicate& a, Expression_Subquery_SetPredicate& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_SetPredicate* other) {
     if (other == this) return;
@@ -23611,7 +24241,7 @@ class Expression_SwitchExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_SwitchExpression*>(
         &_Expression_SwitchExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 85;
+  static constexpr int kIndexInFileMessages = 90;
   friend void swap(Expression_SwitchExpression& a, Expression_SwitchExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_SwitchExpression* other) {
     if (other == this) return;
@@ -23842,7 +24472,7 @@ class Expression_SwitchExpression_IfValue final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_SwitchExpression_IfValue*>(
         &_Expression_SwitchExpression_IfValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 84;
+  static constexpr int kIndexInFileMessages = 89;
   friend void swap(Expression_SwitchExpression_IfValue& a, Expression_SwitchExpression_IfValue& b) { a.Swap(&b); }
   inline void Swap(Expression_SwitchExpression_IfValue* other) {
     if (other == this) return;
@@ -24053,7 +24683,7 @@ class Expression_WindowFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_WindowFunction*>(
         &_Expression_WindowFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 80;
+  static constexpr int kIndexInFileMessages = 85;
   friend void swap(Expression_WindowFunction& a, Expression_WindowFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction* other) {
     if (other == this) return;
@@ -24445,7 +25075,7 @@ class ExtensionMultiRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionMultiRel*>(
         &_ExtensionMultiRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 31;
+  static constexpr int kIndexInFileMessages = 33;
   friend void swap(ExtensionMultiRel& a, ExtensionMultiRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionMultiRel* other) {
     if (other == this) return;
@@ -24675,7 +25305,7 @@ class ExtensionSingleRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionSingleRel*>(
         &_ExtensionSingleRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 29;
+  static constexpr int kIndexInFileMessages = 31;
   friend void swap(ExtensionSingleRel& a, ExtensionSingleRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionSingleRel* other) {
     if (other == this) return;
@@ -24899,11 +25529,21 @@ class FetchRel final : public ::google::protobuf::Message
   static const FetchRel& default_instance() {
     return *internal_default_instance();
   }
+  enum OffsetModeCase {
+    kOffset = 3,
+    kOffsetExpr = 5,
+    OFFSET_MODE_NOT_SET = 0,
+  };
+  enum CountModeCase {
+    kCount = 4,
+    kCountExpr = 6,
+    COUNT_MODE_NOT_SET = 0,
+  };
   static inline const FetchRel* internal_default_instance() {
     return reinterpret_cast<const FetchRel*>(
         &_FetchRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 20;
+  static constexpr int kIndexInFileMessages = 22;
   friend void swap(FetchRel& a, FetchRel& b) { a.Swap(&b); }
   inline void Swap(FetchRel* other) {
     if (other == this) return;
@@ -24993,7 +25633,9 @@ class FetchRel final : public ::google::protobuf::Message
     kInputFieldNumber = 2,
     kAdvancedExtensionFieldNumber = 10,
     kOffsetFieldNumber = 3,
+    kOffsetExprFieldNumber = 5,
     kCountFieldNumber = 4,
+    kCountExprFieldNumber = 6,
   };
   // .skytether.substrait.RelCommon common = 1 [json_name = "common"];
   bool has_common() const;
@@ -25040,32 +25682,84 @@ class FetchRel final : public ::google::protobuf::Message
   ::skytether::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
 
   public:
-  // int64 offset = 3 [json_name = "offset"];
-  void clear_offset() ;
-  ::int64_t offset() const;
-  void set_offset(::int64_t value);
+  // int64 offset = 3 [json_name = "offset", deprecated = true];
+  [[deprecated]]  bool has_offset() const;
+  [[deprecated]]  void clear_offset() ;
+  [[deprecated]] ::int64_t offset() const;
+  [[deprecated]] void set_offset(::int64_t value);
 
   private:
   ::int64_t _internal_offset() const;
   void _internal_set_offset(::int64_t value);
 
   public:
-  // int64 count = 4 [json_name = "count"];
-  void clear_count() ;
-  ::int64_t count() const;
-  void set_count(::int64_t value);
+  // .skytether.substrait.Expression offset_expr = 5 [json_name = "offsetExpr"];
+  bool has_offset_expr() const;
+  private:
+  bool _internal_has_offset_expr() const;
+
+  public:
+  void clear_offset_expr() ;
+  const ::skytether::substrait::Expression& offset_expr() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::Expression* release_offset_expr();
+  ::skytether::substrait::Expression* mutable_offset_expr();
+  void set_allocated_offset_expr(::skytether::substrait::Expression* value);
+  void unsafe_arena_set_allocated_offset_expr(::skytether::substrait::Expression* value);
+  ::skytether::substrait::Expression* unsafe_arena_release_offset_expr();
+
+  private:
+  const ::skytether::substrait::Expression& _internal_offset_expr() const;
+  ::skytether::substrait::Expression* _internal_mutable_offset_expr();
+
+  public:
+  // int64 count = 4 [json_name = "count", deprecated = true];
+  [[deprecated]]  bool has_count() const;
+  [[deprecated]]  void clear_count() ;
+  [[deprecated]] ::int64_t count() const;
+  [[deprecated]] void set_count(::int64_t value);
 
   private:
   ::int64_t _internal_count() const;
   void _internal_set_count(::int64_t value);
 
   public:
+  // .skytether.substrait.Expression count_expr = 6 [json_name = "countExpr"];
+  bool has_count_expr() const;
+  private:
+  bool _internal_has_count_expr() const;
+
+  public:
+  void clear_count_expr() ;
+  const ::skytether::substrait::Expression& count_expr() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::Expression* release_count_expr();
+  ::skytether::substrait::Expression* mutable_count_expr();
+  void set_allocated_count_expr(::skytether::substrait::Expression* value);
+  void unsafe_arena_set_allocated_count_expr(::skytether::substrait::Expression* value);
+  ::skytether::substrait::Expression* unsafe_arena_release_count_expr();
+
+  private:
+  const ::skytether::substrait::Expression& _internal_count_expr() const;
+  ::skytether::substrait::Expression* _internal_mutable_count_expr();
+
+  public:
+  void clear_offset_mode();
+  OffsetModeCase offset_mode_case() const;
+  void clear_count_mode();
+  CountModeCase count_mode_case() const;
   // @@protoc_insertion_point(class_scope:skytether.substrait.FetchRel)
  private:
   class _Internal;
+  void set_has_offset();
+  void set_has_offset_expr();
+  void set_has_count();
+  void set_has_count_expr();
+  inline bool has_offset_mode() const;
+  inline void clear_has_offset_mode();
+  inline bool has_count_mode() const;
+  inline void clear_has_count_mode();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 5, 3,
+      1, 7, 5,
       0, 2>
       _table_;
 
@@ -25091,8 +25785,19 @@ class FetchRel final : public ::google::protobuf::Message
     ::skytether::substrait::RelCommon* common_;
     ::skytether::substrait::Rel* input_;
     ::skytether::substrait::extensions::AdvancedExtension* advanced_extension_;
-    ::int64_t offset_;
-    ::int64_t count_;
+    union OffsetModeUnion {
+      constexpr OffsetModeUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::int64_t offset_;
+      ::skytether::substrait::Expression* offset_expr_;
+    } offset_mode_;
+    union CountModeUnion {
+      constexpr CountModeUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::int64_t count_;
+      ::skytether::substrait::Expression* count_expr_;
+    } count_mode_;
+    ::uint32_t _oneof_case_[2];
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -25155,7 +25860,7 @@ class FilterRel final : public ::google::protobuf::Message
     return reinterpret_cast<const FilterRel*>(
         &_FilterRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 27;
+  static constexpr int kIndexInFileMessages = 29;
   friend void swap(FilterRel& a, FilterRel& b) { a.Swap(&b); }
   inline void Swap(FilterRel* other) {
     if (other == this) return;
@@ -25406,7 +26111,7 @@ class FunctionArgument final : public ::google::protobuf::Message
     return reinterpret_cast<const FunctionArgument*>(
         &_FunctionArgument_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 53;
+  static constexpr int kIndexInFileMessages = 58;
   friend void swap(FunctionArgument& a, FunctionArgument& b) { a.Swap(&b); }
   inline void Swap(FunctionArgument* other) {
     if (other == this) return;
@@ -25655,7 +26360,7 @@ class HashJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const HashJoinRel*>(
         &_HashJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 50;
+  static constexpr int kIndexInFileMessages = 55;
   friend void swap(HashJoinRel& a, HashJoinRel& b) { a.Swap(&b); }
   inline void Swap(HashJoinRel* other) {
     if (other == this) return;
@@ -26016,7 +26721,7 @@ class JoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const JoinRel*>(
         &_JoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 18;
+  static constexpr int kIndexInFileMessages = 20;
   friend void swap(JoinRel& a, JoinRel& b) { a.Swap(&b); }
   inline void Swap(JoinRel* other) {
     if (other == this) return;
@@ -26337,7 +27042,7 @@ class MergeJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const MergeJoinRel*>(
         &_MergeJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 51;
+  static constexpr int kIndexInFileMessages = 56;
   friend void swap(MergeJoinRel& a, MergeJoinRel& b) { a.Swap(&b); }
   inline void Swap(MergeJoinRel* other) {
     if (other == this) return;
@@ -26698,7 +27403,7 @@ class NestedLoopJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const NestedLoopJoinRel*>(
         &_NestedLoopJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 52;
+  static constexpr int kIndexInFileMessages = 57;
   friend void swap(NestedLoopJoinRel& a, NestedLoopJoinRel& b) { a.Swap(&b); }
   inline void Swap(NestedLoopJoinRel* other) {
     if (other == this) return;
@@ -27002,7 +27707,7 @@ class ProjectRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ProjectRel*>(
         &_ProjectRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 17;
+  static constexpr int kIndexInFileMessages = 19;
   friend void swap(ProjectRel& a, ProjectRel& b) { a.Swap(&b); }
   inline void Swap(ProjectRel* other) {
     if (other == this) return;
@@ -27256,7 +27961,7 @@ class ReadRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel*>(
         &_ReadRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 16;
+  static constexpr int kIndexInFileMessages = 18;
   friend void swap(ReadRel& a, ReadRel& b) { a.Swap(&b); }
   inline void Swap(ReadRel* other) {
     if (other == this) return;
@@ -27581,6 +28286,220 @@ class ReadRel final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class ReadRel_VirtualTable final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.ReadRel.VirtualTable) */ {
+ public:
+  inline ReadRel_VirtualTable() : ReadRel_VirtualTable(nullptr) {}
+  ~ReadRel_VirtualTable() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ReadRel_VirtualTable(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline ReadRel_VirtualTable(const ReadRel_VirtualTable& from) : ReadRel_VirtualTable(nullptr, from) {}
+  inline ReadRel_VirtualTable(ReadRel_VirtualTable&& from) noexcept
+      : ReadRel_VirtualTable(nullptr, std::move(from)) {}
+  inline ReadRel_VirtualTable& operator=(const ReadRel_VirtualTable& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ReadRel_VirtualTable& operator=(ReadRel_VirtualTable&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ReadRel_VirtualTable& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ReadRel_VirtualTable* internal_default_instance() {
+    return reinterpret_cast<const ReadRel_VirtualTable*>(
+        &_ReadRel_VirtualTable_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 9;
+  friend void swap(ReadRel_VirtualTable& a, ReadRel_VirtualTable& b) { a.Swap(&b); }
+  inline void Swap(ReadRel_VirtualTable* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ReadRel_VirtualTable* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ReadRel_VirtualTable* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<ReadRel_VirtualTable>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ReadRel_VirtualTable& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ReadRel_VirtualTable& from) { ReadRel_VirtualTable::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(ReadRel_VirtualTable* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.ReadRel.VirtualTable"; }
+
+ protected:
+  explicit ReadRel_VirtualTable(::google::protobuf::Arena* arena);
+  ReadRel_VirtualTable(::google::protobuf::Arena* arena, const ReadRel_VirtualTable& from);
+  ReadRel_VirtualTable(::google::protobuf::Arena* arena, ReadRel_VirtualTable&& from) noexcept
+      : ReadRel_VirtualTable(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kValuesFieldNumber = 1,
+    kExpressionsFieldNumber = 2,
+  };
+  // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
+  [[deprecated]]  int values_size() const;
+  private:
+  int _internal_values_size() const;
+
+  public:
+  [[deprecated]]  void clear_values() ;
+  [[deprecated]] ::skytether::substrait::Expression_Literal_Struct* mutable_values(int index);
+  [[deprecated]] ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>* mutable_values();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>& _internal_values() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>* _internal_mutable_values();
+  public:
+  [[deprecated]] const ::skytether::substrait::Expression_Literal_Struct& values(int index) const;
+  [[deprecated]] ::skytether::substrait::Expression_Literal_Struct* add_values();
+  [[deprecated]] const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Literal_Struct>& values() const;
+  // repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+  int expressions_size() const;
+  private:
+  int _internal_expressions_size() const;
+
+  public:
+  void clear_expressions() ;
+  ::skytether::substrait::Expression_Nested_Struct* mutable_expressions(int index);
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>* mutable_expressions();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>& _internal_expressions() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>* _internal_mutable_expressions();
+  public:
+  const ::skytether::substrait::Expression_Nested_Struct& expressions(int index) const;
+  ::skytether::substrait::Expression_Nested_Struct* add_expressions();
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>& expressions() const;
+  // @@protoc_insertion_point(class_scope:skytether.substrait.ReadRel.VirtualTable)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 2,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_ReadRel_VirtualTable_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const ReadRel_VirtualTable& from_msg);
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::Expression_Literal_Struct > values_;
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::Expression_Nested_Struct > expressions_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class Rel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skytether.substrait.Rel) */ {
  public:
@@ -27648,6 +28567,7 @@ class Rel final : public ::google::protobuf::Message
     kReference = 21,
     kWrite = 19,
     kDdl = 20,
+    kUpdate = 22,
     kHashJoin = 13,
     kMergeJoin = 14,
     kNestedLoopJoin = 18,
@@ -27660,7 +28580,7 @@ class Rel final : public ::google::protobuf::Message
     return reinterpret_cast<const Rel*>(
         &_Rel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 43;
+  static constexpr int kIndexInFileMessages = 45;
   friend void swap(Rel& a, Rel& b) { a.Swap(&b); }
   inline void Swap(Rel* other) {
     if (other == this) return;
@@ -27761,6 +28681,7 @@ class Rel final : public ::google::protobuf::Message
     kReferenceFieldNumber = 21,
     kWriteFieldNumber = 19,
     kDdlFieldNumber = 20,
+    kUpdateFieldNumber = 22,
     kHashJoinFieldNumber = 13,
     kMergeJoinFieldNumber = 14,
     kNestedLoopJoinFieldNumber = 18,
@@ -28053,6 +28974,25 @@ class Rel final : public ::google::protobuf::Message
   ::skytether::substrait::DdlRel* _internal_mutable_ddl();
 
   public:
+  // .skytether.substrait.UpdateRel update = 22 [json_name = "update"];
+  bool has_update() const;
+  private:
+  bool _internal_has_update() const;
+
+  public:
+  void clear_update() ;
+  const ::skytether::substrait::UpdateRel& update() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::UpdateRel* release_update();
+  ::skytether::substrait::UpdateRel* mutable_update();
+  void set_allocated_update(::skytether::substrait::UpdateRel* value);
+  void unsafe_arena_set_allocated_update(::skytether::substrait::UpdateRel* value);
+  ::skytether::substrait::UpdateRel* unsafe_arena_release_update();
+
+  private:
+  const ::skytether::substrait::UpdateRel& _internal_update() const;
+  ::skytether::substrait::UpdateRel* _internal_mutable_update();
+
+  public:
   // .skytether.substrait.HashJoinRel hash_join = 13 [json_name = "hashJoin"];
   bool has_hash_join() const;
   private:
@@ -28187,6 +29127,7 @@ class Rel final : public ::google::protobuf::Message
   void set_has_reference();
   void set_has_write();
   void set_has_ddl();
+  void set_has_update();
   void set_has_hash_join();
   void set_has_merge_join();
   void set_has_nested_loop_join();
@@ -28197,7 +29138,7 @@ class Rel final : public ::google::protobuf::Message
   inline void clear_has_rel_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 21, 21,
+      0, 22, 22,
       0, 2>
       _table_;
 
@@ -28236,6 +29177,7 @@ class Rel final : public ::google::protobuf::Message
       ::skytether::substrait::ReferenceRel* reference_;
       ::skytether::substrait::WriteRel* write_;
       ::skytether::substrait::DdlRel* ddl_;
+      ::skytether::substrait::UpdateRel* update_;
       ::skytether::substrait::HashJoinRel* hash_join_;
       ::skytether::substrait::MergeJoinRel* merge_join_;
       ::skytether::substrait::NestedLoopJoinRel* nested_loop_join_;
@@ -28307,7 +29249,7 @@ class SetRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SetRel*>(
         &_SetRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 28;
+  static constexpr int kIndexInFileMessages = 30;
   friend void swap(SetRel& a, SetRel& b) { a.Swap(&b); }
   inline void Swap(SetRel* other) {
     if (other == this) return;
@@ -28393,9 +29335,11 @@ class SetRel final : public ::google::protobuf::Message
   using SetOp = SetRel_SetOp;
   static constexpr SetOp SET_OP_UNSPECIFIED = SetRel_SetOp_SET_OP_UNSPECIFIED;
   static constexpr SetOp SET_OP_MINUS_PRIMARY = SetRel_SetOp_SET_OP_MINUS_PRIMARY;
+  static constexpr SetOp SET_OP_MINUS_PRIMARY_ALL = SetRel_SetOp_SET_OP_MINUS_PRIMARY_ALL;
   static constexpr SetOp SET_OP_MINUS_MULTISET = SetRel_SetOp_SET_OP_MINUS_MULTISET;
   static constexpr SetOp SET_OP_INTERSECTION_PRIMARY = SetRel_SetOp_SET_OP_INTERSECTION_PRIMARY;
   static constexpr SetOp SET_OP_INTERSECTION_MULTISET = SetRel_SetOp_SET_OP_INTERSECTION_MULTISET;
+  static constexpr SetOp SET_OP_INTERSECTION_MULTISET_ALL = SetRel_SetOp_SET_OP_INTERSECTION_MULTISET_ALL;
   static constexpr SetOp SET_OP_UNION_DISTINCT = SetRel_SetOp_SET_OP_UNION_DISTINCT;
   static constexpr SetOp SET_OP_UNION_ALL = SetRel_SetOp_SET_OP_UNION_ALL;
   static inline bool SetOp_IsValid(int value) {
@@ -28578,7 +29522,7 @@ class SortField final : public ::google::protobuf::Message
     return reinterpret_cast<const SortField*>(
         &_SortField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 116;
+  static constexpr int kIndexInFileMessages = 121;
   friend void swap(SortField& a, SortField& b) { a.Swap(&b); }
   inline void Swap(SortField* other) {
     if (other == this) return;
@@ -28832,7 +29776,7 @@ class SortRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SortRel*>(
         &_SortRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 26;
+  static constexpr int kIndexInFileMessages = 28;
   friend void swap(SortRel& a, SortRel& b) { a.Swap(&b); }
   inline void Swap(SortRel* other) {
     if (other == this) return;
@@ -29024,6 +29968,478 @@ class SortRel final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class UpdateRel final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.UpdateRel) */ {
+ public:
+  inline UpdateRel() : UpdateRel(nullptr) {}
+  ~UpdateRel() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR UpdateRel(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline UpdateRel(const UpdateRel& from) : UpdateRel(nullptr, from) {}
+  inline UpdateRel(UpdateRel&& from) noexcept
+      : UpdateRel(nullptr, std::move(from)) {}
+  inline UpdateRel& operator=(const UpdateRel& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline UpdateRel& operator=(UpdateRel&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const UpdateRel& default_instance() {
+    return *internal_default_instance();
+  }
+  enum UpdateTypeCase {
+    kNamedTable = 1,
+    UPDATE_TYPE_NOT_SET = 0,
+  };
+  static inline const UpdateRel* internal_default_instance() {
+    return reinterpret_cast<const UpdateRel*>(
+        &_UpdateRel_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 51;
+  friend void swap(UpdateRel& a, UpdateRel& b) { a.Swap(&b); }
+  inline void Swap(UpdateRel* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(UpdateRel* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  UpdateRel* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<UpdateRel>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const UpdateRel& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const UpdateRel& from) { UpdateRel::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(UpdateRel* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.UpdateRel"; }
+
+ protected:
+  explicit UpdateRel(::google::protobuf::Arena* arena);
+  UpdateRel(::google::protobuf::Arena* arena, const UpdateRel& from);
+  UpdateRel(::google::protobuf::Arena* arena, UpdateRel&& from) noexcept
+      : UpdateRel(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+  using TransformExpression = UpdateRel_TransformExpression;
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTransformationsFieldNumber = 4,
+    kTableSchemaFieldNumber = 2,
+    kConditionFieldNumber = 3,
+    kNamedTableFieldNumber = 1,
+  };
+  // repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+  int transformations_size() const;
+  private:
+  int _internal_transformations_size() const;
+
+  public:
+  void clear_transformations() ;
+  ::skytether::substrait::UpdateRel_TransformExpression* mutable_transformations(int index);
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>* mutable_transformations();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>& _internal_transformations() const;
+  ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>* _internal_mutable_transformations();
+  public:
+  const ::skytether::substrait::UpdateRel_TransformExpression& transformations(int index) const;
+  ::skytether::substrait::UpdateRel_TransformExpression* add_transformations();
+  const ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>& transformations() const;
+  // .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+  bool has_table_schema() const;
+  void clear_table_schema() ;
+  const ::skytether::substrait::NamedStruct& table_schema() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::NamedStruct* release_table_schema();
+  ::skytether::substrait::NamedStruct* mutable_table_schema();
+  void set_allocated_table_schema(::skytether::substrait::NamedStruct* value);
+  void unsafe_arena_set_allocated_table_schema(::skytether::substrait::NamedStruct* value);
+  ::skytether::substrait::NamedStruct* unsafe_arena_release_table_schema();
+
+  private:
+  const ::skytether::substrait::NamedStruct& _internal_table_schema() const;
+  ::skytether::substrait::NamedStruct* _internal_mutable_table_schema();
+
+  public:
+  // .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+  bool has_condition() const;
+  void clear_condition() ;
+  const ::skytether::substrait::Expression& condition() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::Expression* release_condition();
+  ::skytether::substrait::Expression* mutable_condition();
+  void set_allocated_condition(::skytether::substrait::Expression* value);
+  void unsafe_arena_set_allocated_condition(::skytether::substrait::Expression* value);
+  ::skytether::substrait::Expression* unsafe_arena_release_condition();
+
+  private:
+  const ::skytether::substrait::Expression& _internal_condition() const;
+  ::skytether::substrait::Expression* _internal_mutable_condition();
+
+  public:
+  // .skytether.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
+  bool has_named_table() const;
+  private:
+  bool _internal_has_named_table() const;
+
+  public:
+  void clear_named_table() ;
+  const ::skytether::substrait::NamedTable& named_table() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::NamedTable* release_named_table();
+  ::skytether::substrait::NamedTable* mutable_named_table();
+  void set_allocated_named_table(::skytether::substrait::NamedTable* value);
+  void unsafe_arena_set_allocated_named_table(::skytether::substrait::NamedTable* value);
+  ::skytether::substrait::NamedTable* unsafe_arena_release_named_table();
+
+  private:
+  const ::skytether::substrait::NamedTable& _internal_named_table() const;
+  ::skytether::substrait::NamedTable* _internal_mutable_named_table();
+
+  public:
+  void clear_update_type();
+  UpdateTypeCase update_type_case() const;
+  // @@protoc_insertion_point(class_scope:skytether.substrait.UpdateRel)
+ private:
+  class _Internal;
+  void set_has_named_table();
+  inline bool has_update_type() const;
+  inline void clear_has_update_type();
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 4, 4,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_UpdateRel_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const UpdateRel& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField< ::skytether::substrait::UpdateRel_TransformExpression > transformations_;
+    ::skytether::substrait::NamedStruct* table_schema_;
+    ::skytether::substrait::Expression* condition_;
+    union UpdateTypeUnion {
+      constexpr UpdateTypeUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::skytether::substrait::NamedTable* named_table_;
+    } update_type_;
+    ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
+class UpdateRel_TransformExpression final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skytether.substrait.UpdateRel.TransformExpression) */ {
+ public:
+  inline UpdateRel_TransformExpression() : UpdateRel_TransformExpression(nullptr) {}
+  ~UpdateRel_TransformExpression() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR UpdateRel_TransformExpression(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline UpdateRel_TransformExpression(const UpdateRel_TransformExpression& from) : UpdateRel_TransformExpression(nullptr, from) {}
+  inline UpdateRel_TransformExpression(UpdateRel_TransformExpression&& from) noexcept
+      : UpdateRel_TransformExpression(nullptr, std::move(from)) {}
+  inline UpdateRel_TransformExpression& operator=(const UpdateRel_TransformExpression& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline UpdateRel_TransformExpression& operator=(UpdateRel_TransformExpression&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const UpdateRel_TransformExpression& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const UpdateRel_TransformExpression* internal_default_instance() {
+    return reinterpret_cast<const UpdateRel_TransformExpression*>(
+        &_UpdateRel_TransformExpression_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 50;
+  friend void swap(UpdateRel_TransformExpression& a, UpdateRel_TransformExpression& b) { a.Swap(&b); }
+  inline void Swap(UpdateRel_TransformExpression* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(UpdateRel_TransformExpression* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  UpdateRel_TransformExpression* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<UpdateRel_TransformExpression>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const UpdateRel_TransformExpression& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const UpdateRel_TransformExpression& from) { UpdateRel_TransformExpression::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(UpdateRel_TransformExpression* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "skytether.substrait.UpdateRel.TransformExpression"; }
+
+ protected:
+  explicit UpdateRel_TransformExpression(::google::protobuf::Arena* arena);
+  UpdateRel_TransformExpression(::google::protobuf::Arena* arena, const UpdateRel_TransformExpression& from);
+  UpdateRel_TransformExpression(::google::protobuf::Arena* arena, UpdateRel_TransformExpression&& from) noexcept
+      : UpdateRel_TransformExpression(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTransformationFieldNumber = 1,
+    kColumnTargetFieldNumber = 2,
+  };
+  // .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+  bool has_transformation() const;
+  void clear_transformation() ;
+  const ::skytether::substrait::Expression& transformation() const;
+  PROTOBUF_NODISCARD ::skytether::substrait::Expression* release_transformation();
+  ::skytether::substrait::Expression* mutable_transformation();
+  void set_allocated_transformation(::skytether::substrait::Expression* value);
+  void unsafe_arena_set_allocated_transformation(::skytether::substrait::Expression* value);
+  ::skytether::substrait::Expression* unsafe_arena_release_transformation();
+
+  private:
+  const ::skytether::substrait::Expression& _internal_transformation() const;
+  ::skytether::substrait::Expression* _internal_mutable_transformation();
+
+  public:
+  // int32 column_target = 2 [json_name = "columnTarget"];
+  void clear_column_target() ;
+  ::int32_t column_target() const;
+  void set_column_target(::int32_t value);
+
+  private:
+  ::int32_t _internal_column_target() const;
+  void _internal_set_column_target(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skytether.substrait.UpdateRel.TransformExpression)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 1,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_UpdateRel_TransformExpression_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const UpdateRel_TransformExpression& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::skytether::substrait::Expression* transformation_;
+    ::int32_t column_target_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skytether_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class WriteRel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skytether.substrait.WriteRel) */ {
  public:
@@ -29084,7 +30500,7 @@ class WriteRel final : public ::google::protobuf::Message
     return reinterpret_cast<const WriteRel*>(
         &_WriteRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 47;
+  static constexpr int kIndexInFileMessages = 49;
   friend void swap(WriteRel& a, WriteRel& b) { a.Swap(&b); }
   inline void Swap(WriteRel* other) {
     if (other == this) return;
@@ -29189,6 +30605,28 @@ class WriteRel final : public ::google::protobuf::Message
   static inline bool WriteOp_Parse(absl::string_view name, WriteOp* value) {
     return WriteRel_WriteOp_Parse(name, value);
   }
+  using CreateMode = WriteRel_CreateMode;
+  static constexpr CreateMode CREATE_MODE_UNSPECIFIED = WriteRel_CreateMode_CREATE_MODE_UNSPECIFIED;
+  static constexpr CreateMode CREATE_MODE_APPEND_IF_EXISTS = WriteRel_CreateMode_CREATE_MODE_APPEND_IF_EXISTS;
+  static constexpr CreateMode CREATE_MODE_REPLACE_IF_EXISTS = WriteRel_CreateMode_CREATE_MODE_REPLACE_IF_EXISTS;
+  static constexpr CreateMode CREATE_MODE_IGNORE_IF_EXISTS = WriteRel_CreateMode_CREATE_MODE_IGNORE_IF_EXISTS;
+  static constexpr CreateMode CREATE_MODE_ERROR_IF_EXISTS = WriteRel_CreateMode_CREATE_MODE_ERROR_IF_EXISTS;
+  static inline bool CreateMode_IsValid(int value) {
+    return WriteRel_CreateMode_IsValid(value);
+  }
+  static constexpr CreateMode CreateMode_MIN = WriteRel_CreateMode_CreateMode_MIN;
+  static constexpr CreateMode CreateMode_MAX = WriteRel_CreateMode_CreateMode_MAX;
+  static constexpr int CreateMode_ARRAYSIZE = WriteRel_CreateMode_CreateMode_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* CreateMode_descriptor() {
+    return WriteRel_CreateMode_descriptor();
+  }
+  template <typename T>
+  static inline const std::string& CreateMode_Name(T value) {
+    return WriteRel_CreateMode_Name(value);
+  }
+  static inline bool CreateMode_Parse(absl::string_view name, CreateMode* value) {
+    return WriteRel_CreateMode_Parse(name, value);
+  }
   using OutputMode = WriteRel_OutputMode;
   static constexpr OutputMode OUTPUT_MODE_UNSPECIFIED = WriteRel_OutputMode_OUTPUT_MODE_UNSPECIFIED;
   static constexpr OutputMode OUTPUT_MODE_NO_OUTPUT = WriteRel_OutputMode_OUTPUT_MODE_NO_OUTPUT;
@@ -29217,6 +30655,7 @@ class WriteRel final : public ::google::protobuf::Message
     kCommonFieldNumber = 7,
     kOpFieldNumber = 4,
     kOutputFieldNumber = 6,
+    kCreateModeFieldNumber = 8,
     kNamedTableFieldNumber = 1,
     kExtensionTableFieldNumber = 2,
   };
@@ -29285,6 +30724,16 @@ class WriteRel final : public ::google::protobuf::Message
   void _internal_set_output(::skytether::substrait::WriteRel_OutputMode value);
 
   public:
+  // .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+  void clear_create_mode() ;
+  ::skytether::substrait::WriteRel_CreateMode create_mode() const;
+  void set_create_mode(::skytether::substrait::WriteRel_CreateMode value);
+
+  private:
+  ::skytether::substrait::WriteRel_CreateMode _internal_create_mode() const;
+  void _internal_set_create_mode(::skytether::substrait::WriteRel_CreateMode value);
+
+  public:
   // .skytether.substrait.NamedObjectWrite named_table = 1 [json_name = "namedTable"];
   bool has_named_table() const;
   private:
@@ -29334,7 +30783,7 @@ class WriteRel final : public ::google::protobuf::Message
   inline void clear_has_write_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 7, 5,
+      3, 8, 5,
       0, 2>
       _table_;
 
@@ -29362,6 +30811,7 @@ class WriteRel final : public ::google::protobuf::Message
     ::skytether::substrait::RelCommon* common_;
     int op_;
     int output_;
+    int create_mode_;
     union WriteTypeUnion {
       constexpr WriteTypeUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -29431,7 +30881,7 @@ class RelRoot final : public ::google::protobuf::Message
     return reinterpret_cast<const RelRoot*>(
         &_RelRoot_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 42;
+  static constexpr int kIndexInFileMessages = 44;
   friend void swap(RelRoot& a, RelRoot& b) { a.Swap(&b); }
   inline void Swap(RelRoot* other) {
     if (other == this) return;
@@ -29654,7 +31104,7 @@ class Expression_EmbeddedFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_EmbeddedFunction*>(
         &_Expression_EmbeddedFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 91;
+  static constexpr int kIndexInFileMessages = 96;
   friend void swap(Expression_EmbeddedFunction& a, Expression_EmbeddedFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction* other) {
     if (other == this) return;
@@ -30167,6 +31617,102 @@ inline void RelCommon_Hint_RuntimeConstraint::set_allocated_advanced_extension(:
 
 // -------------------------------------------------------------------
 
+// RelCommon_Hint_SavedComputation
+
+// int32 computation_id = 1 [json_name = "computationId"];
+inline void RelCommon_Hint_SavedComputation::clear_computation_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.computation_id_ = 0;
+}
+inline ::int32_t RelCommon_Hint_SavedComputation::computation_id() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.SavedComputation.computation_id)
+  return _internal_computation_id();
+}
+inline void RelCommon_Hint_SavedComputation::set_computation_id(::int32_t value) {
+  _internal_set_computation_id(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.RelCommon.Hint.SavedComputation.computation_id)
+}
+inline ::int32_t RelCommon_Hint_SavedComputation::_internal_computation_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.computation_id_;
+}
+inline void RelCommon_Hint_SavedComputation::_internal_set_computation_id(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.computation_id_ = value;
+}
+
+// .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+inline void RelCommon_Hint_SavedComputation::clear_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_ = 0;
+}
+inline ::skytether::substrait::RelCommon_Hint_ComputationType RelCommon_Hint_SavedComputation::type() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.SavedComputation.type)
+  return _internal_type();
+}
+inline void RelCommon_Hint_SavedComputation::set_type(::skytether::substrait::RelCommon_Hint_ComputationType value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.RelCommon.Hint.SavedComputation.type)
+}
+inline ::skytether::substrait::RelCommon_Hint_ComputationType RelCommon_Hint_SavedComputation::_internal_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skytether::substrait::RelCommon_Hint_ComputationType>(_impl_.type_);
+}
+inline void RelCommon_Hint_SavedComputation::_internal_set_type(::skytether::substrait::RelCommon_Hint_ComputationType value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RelCommon_Hint_LoadedComputation
+
+// int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+inline void RelCommon_Hint_LoadedComputation::clear_computation_id_reference() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.computation_id_reference_ = 0;
+}
+inline ::int32_t RelCommon_Hint_LoadedComputation::computation_id_reference() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.LoadedComputation.computation_id_reference)
+  return _internal_computation_id_reference();
+}
+inline void RelCommon_Hint_LoadedComputation::set_computation_id_reference(::int32_t value) {
+  _internal_set_computation_id_reference(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.RelCommon.Hint.LoadedComputation.computation_id_reference)
+}
+inline ::int32_t RelCommon_Hint_LoadedComputation::_internal_computation_id_reference() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.computation_id_reference_;
+}
+inline void RelCommon_Hint_LoadedComputation::_internal_set_computation_id_reference(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.computation_id_reference_ = value;
+}
+
+// .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+inline void RelCommon_Hint_LoadedComputation::clear_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_ = 0;
+}
+inline ::skytether::substrait::RelCommon_Hint_ComputationType RelCommon_Hint_LoadedComputation::type() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.LoadedComputation.type)
+  return _internal_type();
+}
+inline void RelCommon_Hint_LoadedComputation::set_type(::skytether::substrait::RelCommon_Hint_ComputationType value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.RelCommon.Hint.LoadedComputation.type)
+}
+inline ::skytether::substrait::RelCommon_Hint_ComputationType RelCommon_Hint_LoadedComputation::_internal_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skytether::substrait::RelCommon_Hint_ComputationType>(_impl_.type_);
+}
+inline void RelCommon_Hint_LoadedComputation::_internal_set_type(::skytether::substrait::RelCommon_Hint_ComputationType value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // RelCommon_Hint
 
 // .skytether.substrait.RelCommon.Hint.Stats stats = 1 [json_name = "stats"];
@@ -30411,6 +31957,70 @@ inline void RelCommon_Hint::set_allocated_alias(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.RelCommon.Hint.alias)
 }
 
+// repeated string output_names = 4 [json_name = "outputNames"];
+inline int RelCommon_Hint::_internal_output_names_size() const {
+  return _internal_output_names().size();
+}
+inline int RelCommon_Hint::output_names_size() const {
+  return _internal_output_names_size();
+}
+inline void RelCommon_Hint::clear_output_names() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.output_names_.Clear();
+}
+inline std::string* RelCommon_Hint::add_output_names() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  std::string* _s = _internal_mutable_output_names()->Add();
+  // @@protoc_insertion_point(field_add_mutable:skytether.substrait.RelCommon.Hint.output_names)
+  return _s;
+}
+inline const std::string& RelCommon_Hint::output_names(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.output_names)
+  return _internal_output_names().Get(index);
+}
+inline std::string* RelCommon_Hint::mutable_output_names(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.RelCommon.Hint.output_names)
+  return _internal_mutable_output_names()->Mutable(index);
+}
+template <typename Arg_, typename... Args_>
+inline void RelCommon_Hint::set_output_names(int index, Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_output_names()->Mutable(index),
+      std::forward<Arg_>(value), args... );
+  // @@protoc_insertion_point(field_set:skytether.substrait.RelCommon.Hint.output_names)
+}
+template <typename Arg_, typename... Args_>
+inline void RelCommon_Hint::add_output_names(Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_output_names(),
+                               std::forward<Arg_>(value),
+                               args... );
+  // @@protoc_insertion_point(field_add:skytether.substrait.RelCommon.Hint.output_names)
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+RelCommon_Hint::output_names() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.RelCommon.Hint.output_names)
+  return _internal_output_names();
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+RelCommon_Hint::mutable_output_names() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.RelCommon.Hint.output_names)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_output_names();
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+RelCommon_Hint::_internal_output_names() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.output_names_;
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+RelCommon_Hint::_internal_mutable_output_names() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.output_names_;
+}
+
 // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
 inline bool RelCommon_Hint::has_advanced_extension() const {
   bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
@@ -30500,6 +32110,104 @@ inline void RelCommon_Hint::set_allocated_advanced_extension(::skytether::substr
 
   _impl_.advanced_extension_ = reinterpret_cast<::skytether::substrait::extensions::AdvancedExtension*>(value);
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.RelCommon.Hint.advanced_extension)
+}
+
+// repeated .skytether.substrait.RelCommon.Hint.SavedComputation saved_computations = 11 [json_name = "savedComputations"];
+inline int RelCommon_Hint::_internal_saved_computations_size() const {
+  return _internal_saved_computations().size();
+}
+inline int RelCommon_Hint::saved_computations_size() const {
+  return _internal_saved_computations_size();
+}
+inline void RelCommon_Hint::clear_saved_computations() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.saved_computations_.Clear();
+}
+inline ::skytether::substrait::RelCommon_Hint_SavedComputation* RelCommon_Hint::mutable_saved_computations(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.RelCommon.Hint.saved_computations)
+  return _internal_mutable_saved_computations()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>* RelCommon_Hint::mutable_saved_computations()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.RelCommon.Hint.saved_computations)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_saved_computations();
+}
+inline const ::skytether::substrait::RelCommon_Hint_SavedComputation& RelCommon_Hint::saved_computations(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.saved_computations)
+  return _internal_saved_computations().Get(index);
+}
+inline ::skytether::substrait::RelCommon_Hint_SavedComputation* RelCommon_Hint::add_saved_computations() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skytether::substrait::RelCommon_Hint_SavedComputation* _add = _internal_mutable_saved_computations()->Add();
+  // @@protoc_insertion_point(field_add:skytether.substrait.RelCommon.Hint.saved_computations)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>& RelCommon_Hint::saved_computations() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.RelCommon.Hint.saved_computations)
+  return _internal_saved_computations();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>&
+RelCommon_Hint::_internal_saved_computations() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.saved_computations_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_SavedComputation>*
+RelCommon_Hint::_internal_mutable_saved_computations() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.saved_computations_;
+}
+
+// repeated .skytether.substrait.RelCommon.Hint.LoadedComputation loaded_computations = 12 [json_name = "loadedComputations"];
+inline int RelCommon_Hint::_internal_loaded_computations_size() const {
+  return _internal_loaded_computations().size();
+}
+inline int RelCommon_Hint::loaded_computations_size() const {
+  return _internal_loaded_computations_size();
+}
+inline void RelCommon_Hint::clear_loaded_computations() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.loaded_computations_.Clear();
+}
+inline ::skytether::substrait::RelCommon_Hint_LoadedComputation* RelCommon_Hint::mutable_loaded_computations(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.RelCommon.Hint.loaded_computations)
+  return _internal_mutable_loaded_computations()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>* RelCommon_Hint::mutable_loaded_computations()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.RelCommon.Hint.loaded_computations)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_loaded_computations();
+}
+inline const ::skytether::substrait::RelCommon_Hint_LoadedComputation& RelCommon_Hint::loaded_computations(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.RelCommon.Hint.loaded_computations)
+  return _internal_loaded_computations().Get(index);
+}
+inline ::skytether::substrait::RelCommon_Hint_LoadedComputation* RelCommon_Hint::add_loaded_computations() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skytether::substrait::RelCommon_Hint_LoadedComputation* _add = _internal_mutable_loaded_computations()->Add();
+  // @@protoc_insertion_point(field_add:skytether.substrait.RelCommon.Hint.loaded_computations)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>& RelCommon_Hint::loaded_computations() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.RelCommon.Hint.loaded_computations)
+  return _internal_loaded_computations();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>&
+RelCommon_Hint::_internal_loaded_computations() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.loaded_computations_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::RelCommon_Hint_LoadedComputation>*
+RelCommon_Hint::_internal_mutable_loaded_computations() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.loaded_computations_;
 }
 
 // -------------------------------------------------------------------
@@ -31023,7 +32731,7 @@ inline void ReadRel_NamedTable::set_allocated_advanced_extension(::skytether::su
 
 // ReadRel_VirtualTable
 
-// repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
+// repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
 inline int ReadRel_VirtualTable::_internal_values_size() const {
   return _internal_values().size();
 }
@@ -31070,6 +32778,55 @@ inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_L
 ReadRel_VirtualTable::_internal_mutable_values() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.values_;
+}
+
+// repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+inline int ReadRel_VirtualTable::_internal_expressions_size() const {
+  return _internal_expressions().size();
+}
+inline int ReadRel_VirtualTable::expressions_size() const {
+  return _internal_expressions_size();
+}
+inline void ReadRel_VirtualTable::clear_expressions() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.expressions_.Clear();
+}
+inline ::skytether::substrait::Expression_Nested_Struct* ReadRel_VirtualTable::mutable_expressions(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.ReadRel.VirtualTable.expressions)
+  return _internal_mutable_expressions()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>* ReadRel_VirtualTable::mutable_expressions()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.ReadRel.VirtualTable.expressions)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_expressions();
+}
+inline const ::skytether::substrait::Expression_Nested_Struct& ReadRel_VirtualTable::expressions(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.ReadRel.VirtualTable.expressions)
+  return _internal_expressions().Get(index);
+}
+inline ::skytether::substrait::Expression_Nested_Struct* ReadRel_VirtualTable::add_expressions() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skytether::substrait::Expression_Nested_Struct* _add = _internal_mutable_expressions()->Add();
+  // @@protoc_insertion_point(field_add:skytether.substrait.ReadRel.VirtualTable.expressions)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>& ReadRel_VirtualTable::expressions() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.ReadRel.VirtualTable.expressions)
+  return _internal_expressions();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>&
+ReadRel_VirtualTable::_internal_expressions() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.expressions_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression_Nested_Struct>*
+ReadRel_VirtualTable::_internal_mutable_expressions() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.expressions_;
 }
 
 // -------------------------------------------------------------------
@@ -34894,48 +36651,228 @@ inline void FetchRel::set_allocated_input(::skytether::substrait::Rel* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.FetchRel.input)
 }
 
-// int64 offset = 3 [json_name = "offset"];
+// int64 offset = 3 [json_name = "offset", deprecated = true];
+inline bool FetchRel::has_offset() const {
+  return offset_mode_case() == kOffset;
+}
+inline void FetchRel::set_has_offset() {
+  _impl_._oneof_case_[0] = kOffset;
+}
 inline void FetchRel::clear_offset() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.offset_ = ::int64_t{0};
+  if (offset_mode_case() == kOffset) {
+    _impl_.offset_mode_.offset_ = ::int64_t{0};
+    clear_has_offset_mode();
+  }
 }
 inline ::int64_t FetchRel::offset() const {
   // @@protoc_insertion_point(field_get:skytether.substrait.FetchRel.offset)
   return _internal_offset();
 }
 inline void FetchRel::set_offset(::int64_t value) {
-  _internal_set_offset(value);
+  if (offset_mode_case() != kOffset) {
+    clear_offset_mode();
+    set_has_offset();
+  }
+  _impl_.offset_mode_.offset_ = value;
   // @@protoc_insertion_point(field_set:skytether.substrait.FetchRel.offset)
 }
 inline ::int64_t FetchRel::_internal_offset() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.offset_;
-}
-inline void FetchRel::_internal_set_offset(::int64_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.offset_ = value;
+  if (offset_mode_case() == kOffset) {
+    return _impl_.offset_mode_.offset_;
+  }
+  return ::int64_t{0};
 }
 
-// int64 count = 4 [json_name = "count"];
+// .skytether.substrait.Expression offset_expr = 5 [json_name = "offsetExpr"];
+inline bool FetchRel::has_offset_expr() const {
+  return offset_mode_case() == kOffsetExpr;
+}
+inline bool FetchRel::_internal_has_offset_expr() const {
+  return offset_mode_case() == kOffsetExpr;
+}
+inline void FetchRel::set_has_offset_expr() {
+  _impl_._oneof_case_[0] = kOffsetExpr;
+}
+inline void FetchRel::clear_offset_expr() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (offset_mode_case() == kOffsetExpr) {
+    if (GetArena() == nullptr) {
+      delete _impl_.offset_mode_.offset_expr_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.offset_mode_.offset_expr_);
+    }
+    clear_has_offset_mode();
+  }
+}
+inline ::skytether::substrait::Expression* FetchRel::release_offset_expr() {
+  // @@protoc_insertion_point(field_release:skytether.substrait.FetchRel.offset_expr)
+  if (offset_mode_case() == kOffsetExpr) {
+    clear_has_offset_mode();
+    auto* temp = _impl_.offset_mode_.offset_expr_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.offset_mode_.offset_expr_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skytether::substrait::Expression& FetchRel::_internal_offset_expr() const {
+  return offset_mode_case() == kOffsetExpr ? *_impl_.offset_mode_.offset_expr_ : reinterpret_cast<::skytether::substrait::Expression&>(::skytether::substrait::_Expression_default_instance_);
+}
+inline const ::skytether::substrait::Expression& FetchRel::offset_expr() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.FetchRel.offset_expr)
+  return _internal_offset_expr();
+}
+inline ::skytether::substrait::Expression* FetchRel::unsafe_arena_release_offset_expr() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skytether.substrait.FetchRel.offset_expr)
+  if (offset_mode_case() == kOffsetExpr) {
+    clear_has_offset_mode();
+    auto* temp = _impl_.offset_mode_.offset_expr_;
+    _impl_.offset_mode_.offset_expr_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void FetchRel::unsafe_arena_set_allocated_offset_expr(::skytether::substrait::Expression* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_offset_mode();
+  if (value) {
+    set_has_offset_expr();
+    _impl_.offset_mode_.offset_expr_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.FetchRel.offset_expr)
+}
+inline ::skytether::substrait::Expression* FetchRel::_internal_mutable_offset_expr() {
+  if (offset_mode_case() != kOffsetExpr) {
+    clear_offset_mode();
+    set_has_offset_expr();
+    _impl_.offset_mode_.offset_expr_ =
+        ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::Expression>(GetArena());
+  }
+  return _impl_.offset_mode_.offset_expr_;
+}
+inline ::skytether::substrait::Expression* FetchRel::mutable_offset_expr() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skytether::substrait::Expression* _msg = _internal_mutable_offset_expr();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.FetchRel.offset_expr)
+  return _msg;
+}
+
+// int64 count = 4 [json_name = "count", deprecated = true];
+inline bool FetchRel::has_count() const {
+  return count_mode_case() == kCount;
+}
+inline void FetchRel::set_has_count() {
+  _impl_._oneof_case_[1] = kCount;
+}
 inline void FetchRel::clear_count() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.count_ = ::int64_t{0};
+  if (count_mode_case() == kCount) {
+    _impl_.count_mode_.count_ = ::int64_t{0};
+    clear_has_count_mode();
+  }
 }
 inline ::int64_t FetchRel::count() const {
   // @@protoc_insertion_point(field_get:skytether.substrait.FetchRel.count)
   return _internal_count();
 }
 inline void FetchRel::set_count(::int64_t value) {
-  _internal_set_count(value);
+  if (count_mode_case() != kCount) {
+    clear_count_mode();
+    set_has_count();
+  }
+  _impl_.count_mode_.count_ = value;
   // @@protoc_insertion_point(field_set:skytether.substrait.FetchRel.count)
 }
 inline ::int64_t FetchRel::_internal_count() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.count_;
+  if (count_mode_case() == kCount) {
+    return _impl_.count_mode_.count_;
+  }
+  return ::int64_t{0};
 }
-inline void FetchRel::_internal_set_count(::int64_t value) {
+
+// .skytether.substrait.Expression count_expr = 6 [json_name = "countExpr"];
+inline bool FetchRel::has_count_expr() const {
+  return count_mode_case() == kCountExpr;
+}
+inline bool FetchRel::_internal_has_count_expr() const {
+  return count_mode_case() == kCountExpr;
+}
+inline void FetchRel::set_has_count_expr() {
+  _impl_._oneof_case_[1] = kCountExpr;
+}
+inline void FetchRel::clear_count_expr() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.count_ = value;
+  if (count_mode_case() == kCountExpr) {
+    if (GetArena() == nullptr) {
+      delete _impl_.count_mode_.count_expr_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.count_mode_.count_expr_);
+    }
+    clear_has_count_mode();
+  }
+}
+inline ::skytether::substrait::Expression* FetchRel::release_count_expr() {
+  // @@protoc_insertion_point(field_release:skytether.substrait.FetchRel.count_expr)
+  if (count_mode_case() == kCountExpr) {
+    clear_has_count_mode();
+    auto* temp = _impl_.count_mode_.count_expr_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.count_mode_.count_expr_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skytether::substrait::Expression& FetchRel::_internal_count_expr() const {
+  return count_mode_case() == kCountExpr ? *_impl_.count_mode_.count_expr_ : reinterpret_cast<::skytether::substrait::Expression&>(::skytether::substrait::_Expression_default_instance_);
+}
+inline const ::skytether::substrait::Expression& FetchRel::count_expr() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.FetchRel.count_expr)
+  return _internal_count_expr();
+}
+inline ::skytether::substrait::Expression* FetchRel::unsafe_arena_release_count_expr() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skytether.substrait.FetchRel.count_expr)
+  if (count_mode_case() == kCountExpr) {
+    clear_has_count_mode();
+    auto* temp = _impl_.count_mode_.count_expr_;
+    _impl_.count_mode_.count_expr_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void FetchRel::unsafe_arena_set_allocated_count_expr(::skytether::substrait::Expression* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_count_mode();
+  if (value) {
+    set_has_count_expr();
+    _impl_.count_mode_.count_expr_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.FetchRel.count_expr)
+}
+inline ::skytether::substrait::Expression* FetchRel::_internal_mutable_count_expr() {
+  if (count_mode_case() != kCountExpr) {
+    clear_count_mode();
+    set_has_count_expr();
+    _impl_.count_mode_.count_expr_ =
+        ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::Expression>(GetArena());
+  }
+  return _impl_.count_mode_.count_expr_;
+}
+inline ::skytether::substrait::Expression* FetchRel::mutable_count_expr() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skytether::substrait::Expression* _msg = _internal_mutable_count_expr();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.FetchRel.count_expr)
+  return _msg;
 }
 
 // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
@@ -35029,11 +36966,29 @@ inline void FetchRel::set_allocated_advanced_extension(::skytether::substrait::e
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.FetchRel.advanced_extension)
 }
 
+inline bool FetchRel::has_offset_mode() const {
+  return offset_mode_case() != OFFSET_MODE_NOT_SET;
+}
+inline void FetchRel::clear_has_offset_mode() {
+  _impl_._oneof_case_[0] = OFFSET_MODE_NOT_SET;
+}
+inline bool FetchRel::has_count_mode() const {
+  return count_mode_case() != COUNT_MODE_NOT_SET;
+}
+inline void FetchRel::clear_has_count_mode() {
+  _impl_._oneof_case_[1] = COUNT_MODE_NOT_SET;
+}
+inline FetchRel::OffsetModeCase FetchRel::offset_mode_case() const {
+  return FetchRel::OffsetModeCase(_impl_._oneof_case_[0]);
+}
+inline FetchRel::CountModeCase FetchRel::count_mode_case() const {
+  return FetchRel::CountModeCase(_impl_._oneof_case_[1]);
+}
 // -------------------------------------------------------------------
 
 // AggregateRel_Grouping
 
-// repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
+// repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
 inline int AggregateRel_Grouping::_internal_grouping_expressions_size() const {
   return _internal_grouping_expressions().size();
 }
@@ -35080,6 +37035,51 @@ inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>*
 AggregateRel_Grouping::_internal_mutable_grouping_expressions() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.grouping_expressions_;
+}
+
+// repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+inline int AggregateRel_Grouping::_internal_expression_references_size() const {
+  return _internal_expression_references().size();
+}
+inline int AggregateRel_Grouping::expression_references_size() const {
+  return _internal_expression_references_size();
+}
+inline void AggregateRel_Grouping::clear_expression_references() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.expression_references_.Clear();
+}
+inline ::uint32_t AggregateRel_Grouping::expression_references(int index) const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.AggregateRel.Grouping.expression_references)
+  return _internal_expression_references().Get(index);
+}
+inline void AggregateRel_Grouping::set_expression_references(int index, ::uint32_t value) {
+  _internal_mutable_expression_references()->Set(index, value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.AggregateRel.Grouping.expression_references)
+}
+inline void AggregateRel_Grouping::add_expression_references(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_expression_references()->Add(value);
+  // @@protoc_insertion_point(field_add:skytether.substrait.AggregateRel.Grouping.expression_references)
+}
+inline const ::google::protobuf::RepeatedField<::uint32_t>& AggregateRel_Grouping::expression_references() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.AggregateRel.Grouping.expression_references)
+  return _internal_expression_references();
+}
+inline ::google::protobuf::RepeatedField<::uint32_t>* AggregateRel_Grouping::mutable_expression_references()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.AggregateRel.Grouping.expression_references)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_expression_references();
+}
+inline const ::google::protobuf::RepeatedField<::uint32_t>&
+AggregateRel_Grouping::_internal_expression_references() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.expression_references_;
+}
+inline ::google::protobuf::RepeatedField<::uint32_t>* AggregateRel_Grouping::_internal_mutable_expression_references() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.expression_references_;
 }
 
 // -------------------------------------------------------------------
@@ -35570,6 +37570,55 @@ inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::AggregateRel
 AggregateRel::_internal_mutable_measures() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.measures_;
+}
+
+// repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+inline int AggregateRel::_internal_grouping_expressions_size() const {
+  return _internal_grouping_expressions().size();
+}
+inline int AggregateRel::grouping_expressions_size() const {
+  return _internal_grouping_expressions_size();
+}
+inline void AggregateRel::clear_grouping_expressions() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.grouping_expressions_.Clear();
+}
+inline ::skytether::substrait::Expression* AggregateRel::mutable_grouping_expressions(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.AggregateRel.grouping_expressions)
+  return _internal_mutable_grouping_expressions()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>* AggregateRel::mutable_grouping_expressions()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.AggregateRel.grouping_expressions)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_grouping_expressions();
+}
+inline const ::skytether::substrait::Expression& AggregateRel::grouping_expressions(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.AggregateRel.grouping_expressions)
+  return _internal_grouping_expressions().Get(index);
+}
+inline ::skytether::substrait::Expression* AggregateRel::add_grouping_expressions() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skytether::substrait::Expression* _add = _internal_mutable_grouping_expressions()->Add();
+  // @@protoc_insertion_point(field_add:skytether.substrait.AggregateRel.grouping_expressions)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>& AggregateRel::grouping_expressions() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.AggregateRel.grouping_expressions)
+  return _internal_grouping_expressions();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>&
+AggregateRel::_internal_grouping_expressions() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.grouping_expressions_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::Expression>*
+AggregateRel::_internal_mutable_grouping_expressions() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.grouping_expressions_;
 }
 
 // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
@@ -41369,6 +43418,85 @@ inline ::skytether::substrait::DdlRel* Rel::mutable_ddl() ABSL_ATTRIBUTE_LIFETIM
   return _msg;
 }
 
+// .skytether.substrait.UpdateRel update = 22 [json_name = "update"];
+inline bool Rel::has_update() const {
+  return rel_type_case() == kUpdate;
+}
+inline bool Rel::_internal_has_update() const {
+  return rel_type_case() == kUpdate;
+}
+inline void Rel::set_has_update() {
+  _impl_._oneof_case_[0] = kUpdate;
+}
+inline void Rel::clear_update() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (rel_type_case() == kUpdate) {
+    if (GetArena() == nullptr) {
+      delete _impl_.rel_type_.update_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.rel_type_.update_);
+    }
+    clear_has_rel_type();
+  }
+}
+inline ::skytether::substrait::UpdateRel* Rel::release_update() {
+  // @@protoc_insertion_point(field_release:skytether.substrait.Rel.update)
+  if (rel_type_case() == kUpdate) {
+    clear_has_rel_type();
+    auto* temp = _impl_.rel_type_.update_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.rel_type_.update_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skytether::substrait::UpdateRel& Rel::_internal_update() const {
+  return rel_type_case() == kUpdate ? *_impl_.rel_type_.update_ : reinterpret_cast<::skytether::substrait::UpdateRel&>(::skytether::substrait::_UpdateRel_default_instance_);
+}
+inline const ::skytether::substrait::UpdateRel& Rel::update() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.Rel.update)
+  return _internal_update();
+}
+inline ::skytether::substrait::UpdateRel* Rel::unsafe_arena_release_update() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skytether.substrait.Rel.update)
+  if (rel_type_case() == kUpdate) {
+    clear_has_rel_type();
+    auto* temp = _impl_.rel_type_.update_;
+    _impl_.rel_type_.update_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void Rel::unsafe_arena_set_allocated_update(::skytether::substrait::UpdateRel* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_rel_type();
+  if (value) {
+    set_has_update();
+    _impl_.rel_type_.update_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.Rel.update)
+}
+inline ::skytether::substrait::UpdateRel* Rel::_internal_mutable_update() {
+  if (rel_type_case() != kUpdate) {
+    clear_rel_type();
+    set_has_update();
+    _impl_.rel_type_.update_ =
+        ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::UpdateRel>(GetArena());
+  }
+  return _impl_.rel_type_.update_;
+}
+inline ::skytether::substrait::UpdateRel* Rel::mutable_update() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skytether::substrait::UpdateRel* _msg = _internal_mutable_update();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.Rel.update)
+  return _msg;
+}
+
 // .skytether.substrait.HashJoinRel hash_join = 13 [json_name = "hashJoin"];
 inline bool Rel::has_hash_join() const {
   return rel_type_case() == kHashJoin;
@@ -43071,6 +45199,28 @@ inline void WriteRel::set_allocated_input(::skytether::substrait::Rel* value) {
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.WriteRel.input)
 }
 
+// .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+inline void WriteRel::clear_create_mode() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.create_mode_ = 0;
+}
+inline ::skytether::substrait::WriteRel_CreateMode WriteRel::create_mode() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.WriteRel.create_mode)
+  return _internal_create_mode();
+}
+inline void WriteRel::set_create_mode(::skytether::substrait::WriteRel_CreateMode value) {
+  _internal_set_create_mode(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.WriteRel.create_mode)
+}
+inline ::skytether::substrait::WriteRel_CreateMode WriteRel::_internal_create_mode() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skytether::substrait::WriteRel_CreateMode>(_impl_.create_mode_);
+}
+inline void WriteRel::_internal_set_create_mode(::skytether::substrait::WriteRel_CreateMode value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.create_mode_ = value;
+}
+
 // .skytether.substrait.WriteRel.OutputMode output = 6 [json_name = "output"];
 inline void WriteRel::clear_output() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
@@ -43198,6 +45348,615 @@ inline void WriteRel::clear_has_write_type() {
 inline WriteRel::WriteTypeCase WriteRel::write_type_case() const {
   return WriteRel::WriteTypeCase(_impl_._oneof_case_[0]);
 }
+// -------------------------------------------------------------------
+
+// UpdateRel_TransformExpression
+
+// .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+inline bool UpdateRel_TransformExpression::has_transformation() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.transformation_ != nullptr);
+  return value;
+}
+inline void UpdateRel_TransformExpression::clear_transformation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.transformation_ != nullptr) _impl_.transformation_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::skytether::substrait::Expression& UpdateRel_TransformExpression::_internal_transformation() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skytether::substrait::Expression* p = _impl_.transformation_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skytether::substrait::Expression&>(::skytether::substrait::_Expression_default_instance_);
+}
+inline const ::skytether::substrait::Expression& UpdateRel_TransformExpression::transformation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.TransformExpression.transformation)
+  return _internal_transformation();
+}
+inline void UpdateRel_TransformExpression::unsafe_arena_set_allocated_transformation(::skytether::substrait::Expression* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.transformation_);
+  }
+  _impl_.transformation_ = reinterpret_cast<::skytether::substrait::Expression*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.UpdateRel.TransformExpression.transformation)
+}
+inline ::skytether::substrait::Expression* UpdateRel_TransformExpression::release_transformation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::Expression* released = _impl_.transformation_;
+  _impl_.transformation_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArena() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArena() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::skytether::substrait::Expression* UpdateRel_TransformExpression::unsafe_arena_release_transformation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skytether.substrait.UpdateRel.TransformExpression.transformation)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::Expression* temp = _impl_.transformation_;
+  _impl_.transformation_ = nullptr;
+  return temp;
+}
+inline ::skytether::substrait::Expression* UpdateRel_TransformExpression::_internal_mutable_transformation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.transformation_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::Expression>(GetArena());
+    _impl_.transformation_ = reinterpret_cast<::skytether::substrait::Expression*>(p);
+  }
+  return _impl_.transformation_;
+}
+inline ::skytether::substrait::Expression* UpdateRel_TransformExpression::mutable_transformation() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skytether::substrait::Expression* _msg = _internal_mutable_transformation();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.UpdateRel.TransformExpression.transformation)
+  return _msg;
+}
+inline void UpdateRel_TransformExpression::set_allocated_transformation(::skytether::substrait::Expression* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.transformation_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.transformation_ = reinterpret_cast<::skytether::substrait::Expression*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.UpdateRel.TransformExpression.transformation)
+}
+
+// int32 column_target = 2 [json_name = "columnTarget"];
+inline void UpdateRel_TransformExpression::clear_column_target() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.column_target_ = 0;
+}
+inline ::int32_t UpdateRel_TransformExpression::column_target() const {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.TransformExpression.column_target)
+  return _internal_column_target();
+}
+inline void UpdateRel_TransformExpression::set_column_target(::int32_t value) {
+  _internal_set_column_target(value);
+  // @@protoc_insertion_point(field_set:skytether.substrait.UpdateRel.TransformExpression.column_target)
+}
+inline ::int32_t UpdateRel_TransformExpression::_internal_column_target() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.column_target_;
+}
+inline void UpdateRel_TransformExpression::_internal_set_column_target(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.column_target_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// UpdateRel
+
+// .skytether.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
+inline bool UpdateRel::has_named_table() const {
+  return update_type_case() == kNamedTable;
+}
+inline bool UpdateRel::_internal_has_named_table() const {
+  return update_type_case() == kNamedTable;
+}
+inline void UpdateRel::set_has_named_table() {
+  _impl_._oneof_case_[0] = kNamedTable;
+}
+inline void UpdateRel::clear_named_table() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (update_type_case() == kNamedTable) {
+    if (GetArena() == nullptr) {
+      delete _impl_.update_type_.named_table_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.update_type_.named_table_);
+    }
+    clear_has_update_type();
+  }
+}
+inline ::skytether::substrait::NamedTable* UpdateRel::release_named_table() {
+  // @@protoc_insertion_point(field_release:skytether.substrait.UpdateRel.named_table)
+  if (update_type_case() == kNamedTable) {
+    clear_has_update_type();
+    auto* temp = _impl_.update_type_.named_table_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.update_type_.named_table_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skytether::substrait::NamedTable& UpdateRel::_internal_named_table() const {
+  return update_type_case() == kNamedTable ? *_impl_.update_type_.named_table_ : reinterpret_cast<::skytether::substrait::NamedTable&>(::skytether::substrait::_NamedTable_default_instance_);
+}
+inline const ::skytether::substrait::NamedTable& UpdateRel::named_table() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.named_table)
+  return _internal_named_table();
+}
+inline ::skytether::substrait::NamedTable* UpdateRel::unsafe_arena_release_named_table() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skytether.substrait.UpdateRel.named_table)
+  if (update_type_case() == kNamedTable) {
+    clear_has_update_type();
+    auto* temp = _impl_.update_type_.named_table_;
+    _impl_.update_type_.named_table_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void UpdateRel::unsafe_arena_set_allocated_named_table(::skytether::substrait::NamedTable* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_update_type();
+  if (value) {
+    set_has_named_table();
+    _impl_.update_type_.named_table_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.UpdateRel.named_table)
+}
+inline ::skytether::substrait::NamedTable* UpdateRel::_internal_mutable_named_table() {
+  if (update_type_case() != kNamedTable) {
+    clear_update_type();
+    set_has_named_table();
+    _impl_.update_type_.named_table_ =
+        ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::NamedTable>(GetArena());
+  }
+  return _impl_.update_type_.named_table_;
+}
+inline ::skytether::substrait::NamedTable* UpdateRel::mutable_named_table() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skytether::substrait::NamedTable* _msg = _internal_mutable_named_table();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.UpdateRel.named_table)
+  return _msg;
+}
+
+// .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+inline bool UpdateRel::has_table_schema() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.table_schema_ != nullptr);
+  return value;
+}
+inline const ::skytether::substrait::NamedStruct& UpdateRel::_internal_table_schema() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skytether::substrait::NamedStruct* p = _impl_.table_schema_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skytether::substrait::NamedStruct&>(::skytether::substrait::_NamedStruct_default_instance_);
+}
+inline const ::skytether::substrait::NamedStruct& UpdateRel::table_schema() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.table_schema)
+  return _internal_table_schema();
+}
+inline void UpdateRel::unsafe_arena_set_allocated_table_schema(::skytether::substrait::NamedStruct* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.table_schema_);
+  }
+  _impl_.table_schema_ = reinterpret_cast<::skytether::substrait::NamedStruct*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.UpdateRel.table_schema)
+}
+inline ::skytether::substrait::NamedStruct* UpdateRel::release_table_schema() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::NamedStruct* released = _impl_.table_schema_;
+  _impl_.table_schema_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArena() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArena() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::skytether::substrait::NamedStruct* UpdateRel::unsafe_arena_release_table_schema() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skytether.substrait.UpdateRel.table_schema)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::NamedStruct* temp = _impl_.table_schema_;
+  _impl_.table_schema_ = nullptr;
+  return temp;
+}
+inline ::skytether::substrait::NamedStruct* UpdateRel::_internal_mutable_table_schema() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.table_schema_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::NamedStruct>(GetArena());
+    _impl_.table_schema_ = reinterpret_cast<::skytether::substrait::NamedStruct*>(p);
+  }
+  return _impl_.table_schema_;
+}
+inline ::skytether::substrait::NamedStruct* UpdateRel::mutable_table_schema() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skytether::substrait::NamedStruct* _msg = _internal_mutable_table_schema();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.UpdateRel.table_schema)
+  return _msg;
+}
+inline void UpdateRel::set_allocated_table_schema(::skytether::substrait::NamedStruct* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.table_schema_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.table_schema_ = reinterpret_cast<::skytether::substrait::NamedStruct*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.UpdateRel.table_schema)
+}
+
+// .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+inline bool UpdateRel::has_condition() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.condition_ != nullptr);
+  return value;
+}
+inline void UpdateRel::clear_condition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.condition_ != nullptr) _impl_.condition_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline const ::skytether::substrait::Expression& UpdateRel::_internal_condition() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skytether::substrait::Expression* p = _impl_.condition_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skytether::substrait::Expression&>(::skytether::substrait::_Expression_default_instance_);
+}
+inline const ::skytether::substrait::Expression& UpdateRel::condition() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.condition)
+  return _internal_condition();
+}
+inline void UpdateRel::unsafe_arena_set_allocated_condition(::skytether::substrait::Expression* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.condition_);
+  }
+  _impl_.condition_ = reinterpret_cast<::skytether::substrait::Expression*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.UpdateRel.condition)
+}
+inline ::skytether::substrait::Expression* UpdateRel::release_condition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::skytether::substrait::Expression* released = _impl_.condition_;
+  _impl_.condition_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArena() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArena() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::skytether::substrait::Expression* UpdateRel::unsafe_arena_release_condition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skytether.substrait.UpdateRel.condition)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::skytether::substrait::Expression* temp = _impl_.condition_;
+  _impl_.condition_ = nullptr;
+  return temp;
+}
+inline ::skytether::substrait::Expression* UpdateRel::_internal_mutable_condition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.condition_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::Expression>(GetArena());
+    _impl_.condition_ = reinterpret_cast<::skytether::substrait::Expression*>(p);
+  }
+  return _impl_.condition_;
+}
+inline ::skytether::substrait::Expression* UpdateRel::mutable_condition() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::skytether::substrait::Expression* _msg = _internal_mutable_condition();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.UpdateRel.condition)
+  return _msg;
+}
+inline void UpdateRel::set_allocated_condition(::skytether::substrait::Expression* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.condition_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.condition_ = reinterpret_cast<::skytether::substrait::Expression*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.UpdateRel.condition)
+}
+
+// repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+inline int UpdateRel::_internal_transformations_size() const {
+  return _internal_transformations().size();
+}
+inline int UpdateRel::transformations_size() const {
+  return _internal_transformations_size();
+}
+inline void UpdateRel::clear_transformations() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.transformations_.Clear();
+}
+inline ::skytether::substrait::UpdateRel_TransformExpression* UpdateRel::mutable_transformations(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.UpdateRel.transformations)
+  return _internal_mutable_transformations()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>* UpdateRel::mutable_transformations()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.UpdateRel.transformations)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_transformations();
+}
+inline const ::skytether::substrait::UpdateRel_TransformExpression& UpdateRel::transformations(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.UpdateRel.transformations)
+  return _internal_transformations().Get(index);
+}
+inline ::skytether::substrait::UpdateRel_TransformExpression* UpdateRel::add_transformations() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skytether::substrait::UpdateRel_TransformExpression* _add = _internal_mutable_transformations()->Add();
+  // @@protoc_insertion_point(field_add:skytether.substrait.UpdateRel.transformations)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>& UpdateRel::transformations() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.UpdateRel.transformations)
+  return _internal_transformations();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>&
+UpdateRel::_internal_transformations() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.transformations_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skytether::substrait::UpdateRel_TransformExpression>*
+UpdateRel::_internal_mutable_transformations() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.transformations_;
+}
+
+inline bool UpdateRel::has_update_type() const {
+  return update_type_case() != UPDATE_TYPE_NOT_SET;
+}
+inline void UpdateRel::clear_has_update_type() {
+  _impl_._oneof_case_[0] = UPDATE_TYPE_NOT_SET;
+}
+inline UpdateRel::UpdateTypeCase UpdateRel::update_type_case() const {
+  return UpdateRel::UpdateTypeCase(_impl_._oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// NamedTable
+
+// repeated string names = 1 [json_name = "names"];
+inline int NamedTable::_internal_names_size() const {
+  return _internal_names().size();
+}
+inline int NamedTable::names_size() const {
+  return _internal_names_size();
+}
+inline void NamedTable::clear_names() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.names_.Clear();
+}
+inline std::string* NamedTable::add_names() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  std::string* _s = _internal_mutable_names()->Add();
+  // @@protoc_insertion_point(field_add_mutable:skytether.substrait.NamedTable.names)
+  return _s;
+}
+inline const std::string& NamedTable::names(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.NamedTable.names)
+  return _internal_names().Get(index);
+}
+inline std::string* NamedTable::mutable_names(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.NamedTable.names)
+  return _internal_mutable_names()->Mutable(index);
+}
+template <typename Arg_, typename... Args_>
+inline void NamedTable::set_names(int index, Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_names()->Mutable(index),
+      std::forward<Arg_>(value), args... );
+  // @@protoc_insertion_point(field_set:skytether.substrait.NamedTable.names)
+}
+template <typename Arg_, typename... Args_>
+inline void NamedTable::add_names(Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_names(),
+                               std::forward<Arg_>(value),
+                               args... );
+  // @@protoc_insertion_point(field_add:skytether.substrait.NamedTable.names)
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+NamedTable::names() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skytether.substrait.NamedTable.names)
+  return _internal_names();
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+NamedTable::mutable_names() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skytether.substrait.NamedTable.names)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_names();
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+NamedTable::_internal_names() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.names_;
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+NamedTable::_internal_mutable_names() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.names_;
+}
+
+// .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+inline bool NamedTable::has_advanced_extension() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.advanced_extension_ != nullptr);
+  return value;
+}
+inline const ::skytether::substrait::extensions::AdvancedExtension& NamedTable::_internal_advanced_extension() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skytether::substrait::extensions::AdvancedExtension* p = _impl_.advanced_extension_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skytether::substrait::extensions::AdvancedExtension&>(::skytether::substrait::extensions::_AdvancedExtension_default_instance_);
+}
+inline const ::skytether::substrait::extensions::AdvancedExtension& NamedTable::advanced_extension() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skytether.substrait.NamedTable.advanced_extension)
+  return _internal_advanced_extension();
+}
+inline void NamedTable::unsafe_arena_set_allocated_advanced_extension(::skytether::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+  _impl_.advanced_extension_ = reinterpret_cast<::skytether::substrait::extensions::AdvancedExtension*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skytether.substrait.NamedTable.advanced_extension)
+}
+inline ::skytether::substrait::extensions::AdvancedExtension* NamedTable::release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::extensions::AdvancedExtension* released = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArena() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArena() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::skytether::substrait::extensions::AdvancedExtension* NamedTable::unsafe_arena_release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skytether.substrait.NamedTable.advanced_extension)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skytether::substrait::extensions::AdvancedExtension* temp = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  return temp;
+}
+inline ::skytether::substrait::extensions::AdvancedExtension* NamedTable::_internal_mutable_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skytether::substrait::extensions::AdvancedExtension>(GetArena());
+    _impl_.advanced_extension_ = reinterpret_cast<::skytether::substrait::extensions::AdvancedExtension*>(p);
+  }
+  return _impl_.advanced_extension_;
+}
+inline ::skytether::substrait::extensions::AdvancedExtension* NamedTable::mutable_advanced_extension() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skytether::substrait::extensions::AdvancedExtension* _msg = _internal_mutable_advanced_extension();
+  // @@protoc_insertion_point(field_mutable:skytether.substrait.NamedTable.advanced_extension)
+  return _msg;
+}
+inline void NamedTable::set_allocated_advanced_extension(::skytether::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.advanced_extension_ = reinterpret_cast<::skytether::substrait::extensions::AdvancedExtension*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.NamedTable.advanced_extension)
+}
+
 // -------------------------------------------------------------------
 
 // ComparisonJoinKey_ComparisonType
@@ -57718,6 +60477,12 @@ namespace google {
 namespace protobuf {
 
 template <>
+struct is_proto_enum<::skytether::substrait::RelCommon_Hint_ComputationType> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::skytether::substrait::RelCommon_Hint_ComputationType>() {
+  return ::skytether::substrait::RelCommon_Hint_ComputationType_descriptor();
+}
+template <>
 struct is_proto_enum<::skytether::substrait::JoinRel_JoinType> : std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor<::skytether::substrait::JoinRel_JoinType>() {
@@ -57746,6 +60511,12 @@ struct is_proto_enum<::skytether::substrait::WriteRel_WriteOp> : std::true_type 
 template <>
 inline const EnumDescriptor* GetEnumDescriptor<::skytether::substrait::WriteRel_WriteOp>() {
   return ::skytether::substrait::WriteRel_WriteOp_descriptor();
+}
+template <>
+struct is_proto_enum<::skytether::substrait::WriteRel_CreateMode> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::skytether::substrait::WriteRel_CreateMode>() {
+  return ::skytether::substrait::WriteRel_CreateMode_descriptor();
 }
 template <>
 struct is_proto_enum<::skytether::substrait::WriteRel_OutputMode> : std::true_type {};

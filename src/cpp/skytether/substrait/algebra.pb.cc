@@ -26,6 +26,58 @@ namespace _fl = ::google::protobuf::internal::field_layout;
 namespace skytether {
 namespace substrait {
 
+inline constexpr RelCommon_Hint_SavedComputation::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : computation_id_{0},
+        type_{static_cast< ::skytether::substrait::RelCommon_Hint_ComputationType >(0)},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR RelCommon_Hint_SavedComputation::RelCommon_Hint_SavedComputation(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct RelCommon_Hint_SavedComputationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR RelCommon_Hint_SavedComputationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~RelCommon_Hint_SavedComputationDefaultTypeInternal() {}
+  union {
+    RelCommon_Hint_SavedComputation _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RelCommon_Hint_SavedComputationDefaultTypeInternal _RelCommon_Hint_SavedComputation_default_instance_;
+
+inline constexpr RelCommon_Hint_LoadedComputation::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : computation_id_reference_{0},
+        type_{static_cast< ::skytether::substrait::RelCommon_Hint_ComputationType >(0)},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR RelCommon_Hint_LoadedComputation::RelCommon_Hint_LoadedComputation(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct RelCommon_Hint_LoadedComputationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR RelCommon_Hint_LoadedComputationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~RelCommon_Hint_LoadedComputationDefaultTypeInternal() {}
+  union {
+    RelCommon_Hint_LoadedComputation _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RelCommon_Hint_LoadedComputationDefaultTypeInternal _RelCommon_Hint_LoadedComputation_default_instance_;
+
 inline constexpr RelCommon_Emit::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : output_mapping_{},
@@ -1064,6 +1116,32 @@ struct ReadRel_LocalFilesDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_LocalFilesDefaultTypeInternal _ReadRel_LocalFiles_default_instance_;
 
+inline constexpr NamedTable::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        names_{},
+        advanced_extension_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR NamedTable::NamedTable(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct NamedTableDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR NamedTableDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~NamedTableDefaultTypeInternal() {}
+  union {
+    NamedTable _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NamedTableDefaultTypeInternal _NamedTable_default_instance_;
+
 inline constexpr NamedObjectWrite::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -1380,6 +1458,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr RelCommon_Hint::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
+        output_names_{},
+        saved_computations_{},
+        loaded_computations_{},
         alias_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
@@ -1406,31 +1487,6 @@ struct RelCommon_HintDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RelCommon_HintDefaultTypeInternal _RelCommon_Hint_default_instance_;
-
-inline constexpr ReadRel_VirtualTable::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : values_{},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR ReadRel_VirtualTable::ReadRel_VirtualTable(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct ReadRel_VirtualTableDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ReadRel_VirtualTableDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ReadRel_VirtualTableDefaultTypeInternal() {}
-  union {
-    ReadRel_VirtualTable _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_VirtualTableDefaultTypeInternal _ReadRel_VirtualTable_default_instance_;
 
 inline constexpr Expression_ReferenceSegment::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -1653,6 +1709,7 @@ inline constexpr AggregateRel::Impl_::Impl_(
       : _cached_size_{0},
         groupings_{},
         measures_{},
+        grouping_expressions_{},
         common_{nullptr},
         input_{nullptr},
         advanced_extension_{nullptr} {}
@@ -1680,6 +1737,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr AggregateRel_Grouping::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : grouping_expressions_{},
+        expression_references_{},
+        _expression_references_cached_byte_size_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -2710,8 +2769,9 @@ inline constexpr FetchRel::Impl_::Impl_(
         common_{nullptr},
         input_{nullptr},
         advanced_extension_{nullptr},
-        offset_{::int64_t{0}},
-        count_{::int64_t{0}} {}
+        offset_mode_{},
+        count_mode_{},
+        _oneof_case_{} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR FetchRel::FetchRel(::_pbi::ConstantInitialized)
@@ -2974,6 +3034,32 @@ struct ReadRelDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRelDefaultTypeInternal _ReadRel_default_instance_;
 
+inline constexpr ReadRel_VirtualTable::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : values_{},
+        expressions_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ReadRel_VirtualTable::ReadRel_VirtualTable(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ReadRel_VirtualTableDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ReadRel_VirtualTableDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ReadRel_VirtualTableDefaultTypeInternal() {}
+  union {
+    ReadRel_VirtualTable _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_VirtualTableDefaultTypeInternal _ReadRel_VirtualTable_default_instance_;
+
 inline constexpr Rel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : rel_type_{},
@@ -3083,6 +3169,61 @@ struct SortRelDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SortRelDefaultTypeInternal _SortRel_default_instance_;
 
+inline constexpr UpdateRel::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        transformations_{},
+        table_schema_{nullptr},
+        condition_{nullptr},
+        update_type_{},
+        _oneof_case_{} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR UpdateRel::UpdateRel(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct UpdateRelDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateRelDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateRelDefaultTypeInternal() {}
+  union {
+    UpdateRel _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateRelDefaultTypeInternal _UpdateRel_default_instance_;
+
+inline constexpr UpdateRel_TransformExpression::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        transformation_{nullptr},
+        column_target_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR UpdateRel_TransformExpression::UpdateRel_TransformExpression(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct UpdateRel_TransformExpressionDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateRel_TransformExpressionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateRel_TransformExpressionDefaultTypeInternal() {}
+  union {
+    UpdateRel_TransformExpression _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateRel_TransformExpressionDefaultTypeInternal _UpdateRel_TransformExpression_default_instance_;
+
 inline constexpr WriteRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -3091,6 +3232,7 @@ inline constexpr WriteRel::Impl_::Impl_(
         common_{nullptr},
         op_{static_cast< ::skytether::substrait::WriteRel_WriteOp >(0)},
         output_{static_cast< ::skytether::substrait::WriteRel_OutputMode >(0)},
+        create_mode_{static_cast< ::skytether::substrait::WriteRel_CreateMode >(0)},
         write_type_{},
         _oneof_case_{} {}
 
@@ -3169,7 +3311,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Expression_EmbeddedFunctionDefaultTypeInternal _Expression_EmbeddedFunction_default_instance_;
 }  // namespace substrait
 }  // namespace skytether
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[18];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[20];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_skytether_2fsubstrait_2falgebra_2eproto = nullptr;
 const ::uint32_t
@@ -3216,6 +3358,26 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_RuntimeConstraint, _impl_.advanced_extension_),
         0,
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_SavedComputation, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_SavedComputation, _impl_.computation_id_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_SavedComputation, _impl_.type_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_LoadedComputation, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_LoadedComputation, _impl_.computation_id_reference_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint_LoadedComputation, _impl_.type_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3227,11 +3389,17 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.stats_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.constraint_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.alias_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.output_names_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.advanced_extension_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.saved_computations_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon_Hint, _impl_.loaded_computations_),
         0,
         1,
         ~0u,
+        ~0u,
         2,
+        ~0u,
+        ~0u,
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::RelCommon, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3270,6 +3438,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::ReadRel_VirtualTable, _impl_.values_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::ReadRel_VirtualTable, _impl_.expressions_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::ReadRel_ExtensionTable, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::ReadRel_ExtensionTable, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3453,18 +3622,24 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _internal_metadata_),
         ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_._oneof_case_[0]),
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.common_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.input_),
-        PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.offset_),
-        PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.count_),
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.advanced_extension_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.offset_mode_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_.count_mode_),
         0,
         1,
+        ~0u,
+        ~0u,
         ~0u,
         ~0u,
         2,
@@ -3477,6 +3652,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel_Grouping, _impl_.grouping_expressions_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel_Grouping, _impl_.expression_references_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel_Measure, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel_Measure, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3501,9 +3677,11 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel, _impl_.input_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel, _impl_.groupings_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel, _impl_.measures_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel, _impl_.grouping_expressions_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::AggregateRel, _impl_.advanced_extension_),
         0,
         1,
+        ~0u,
         ~0u,
         ~0u,
         2,
@@ -3805,6 +3983,7 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::Rel, _impl_.rel_type_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedObjectWrite, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedObjectWrite, _internal_metadata_),
@@ -3866,6 +4045,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.table_schema_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.op_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.input_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.create_mode_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.output_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.common_),
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::WriteRel, _impl_.write_type_),
@@ -3875,7 +4055,49 @@ const ::uint32_t
         ~0u,
         1,
         ~0u,
+        ~0u,
         2,
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel_TransformExpression, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel_TransformExpression, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel_TransformExpression, _impl_.transformation_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel_TransformExpression, _impl_.column_target_),
+        0,
+        ~0u,
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _internal_metadata_),
+        ~0u,  // no _extensions_
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_._oneof_case_[0]),
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_.table_schema_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_.condition_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_.transformations_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_.update_type_),
+        ~0u,
+        0,
+        1,
+        ~0u,
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedTable, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedTable, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedTable, _impl_.names_),
+        PROTOBUF_FIELD_OFFSET(::skytether::substrait::NamedTable, _impl_.advanced_extension_),
+        ~0u,
+        0,
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skytether::substrait::ComparisonJoinKey_ComparisonType, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -4796,127 +5018,134 @@ static const ::_pbi::MigrationSchema
         {8, -1, -1, sizeof(::skytether::substrait::RelCommon_Emit)},
         {17, 28, -1, sizeof(::skytether::substrait::RelCommon_Hint_Stats)},
         {31, 40, -1, sizeof(::skytether::substrait::RelCommon_Hint_RuntimeConstraint)},
-        {41, 53, -1, sizeof(::skytether::substrait::RelCommon_Hint)},
-        {57, 70, -1, sizeof(::skytether::substrait::RelCommon)},
-        {74, 84, -1, sizeof(::skytether::substrait::ReadRel_NamedTable)},
-        {86, -1, -1, sizeof(::skytether::substrait::ReadRel_VirtualTable)},
-        {95, 104, -1, sizeof(::skytether::substrait::ReadRel_ExtensionTable)},
-        {105, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions)},
-        {113, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions)},
-        {121, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_OrcReadOptions)},
-        {129, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions)},
-        {137, 151, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions)},
-        {157, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles)},
-        {180, 190, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles)},
-        {192, 211, -1, sizeof(::skytether::substrait::ReadRel)},
-        {221, 233, -1, sizeof(::skytether::substrait::ProjectRel)},
-        {237, 252, -1, sizeof(::skytether::substrait::JoinRel)},
-        {259, 271, -1, sizeof(::skytether::substrait::CrossRel)},
-        {275, 288, -1, sizeof(::skytether::substrait::FetchRel)},
-        {293, -1, -1, sizeof(::skytether::substrait::AggregateRel_Grouping)},
-        {302, 312, -1, sizeof(::skytether::substrait::AggregateRel_Measure)},
-        {314, 327, -1, sizeof(::skytether::substrait::AggregateRel)},
-        {332, 349, -1, sizeof(::skytether::substrait::ConsistentPartitionWindowRel_WindowRelFunction)},
-        {358, 372, -1, sizeof(::skytether::substrait::ConsistentPartitionWindowRel)},
-        {378, 390, -1, sizeof(::skytether::substrait::SortRel)},
-        {394, 406, -1, sizeof(::skytether::substrait::FilterRel)},
-        {410, 422, -1, sizeof(::skytether::substrait::SetRel)},
-        {426, 437, -1, sizeof(::skytether::substrait::ExtensionSingleRel)},
-        {440, 450, -1, sizeof(::skytether::substrait::ExtensionLeafRel)},
-        {452, 463, -1, sizeof(::skytether::substrait::ExtensionMultiRel)},
-        {466, -1, -1, sizeof(::skytether::substrait::ExchangeRel_ScatterFields)},
-        {475, 484, -1, sizeof(::skytether::substrait::ExchangeRel_SingleBucketExpression)},
-        {485, 495, -1, sizeof(::skytether::substrait::ExchangeRel_MultiBucketExpression)},
-        {497, -1, -1, sizeof(::skytether::substrait::ExchangeRel_Broadcast)},
-        {505, -1, -1, sizeof(::skytether::substrait::ExchangeRel_RoundRobin)},
-        {514, -1, -1, sizeof(::skytether::substrait::ExchangeRel_ExchangeTarget)},
-        {526, 545, -1, sizeof(::skytether::substrait::ExchangeRel)},
-        {555, -1, -1, sizeof(::skytether::substrait::ExpandRel_ExpandField)},
-        {566, -1, -1, sizeof(::skytether::substrait::ExpandRel_SwitchingField)},
-        {575, 586, -1, sizeof(::skytether::substrait::ExpandRel)},
-        {589, 599, -1, sizeof(::skytether::substrait::RelRoot)},
-        {601, -1, -1, sizeof(::skytether::substrait::Rel)},
-        {631, 641, -1, sizeof(::skytether::substrait::NamedObjectWrite)},
-        {643, 652, -1, sizeof(::skytether::substrait::ExtensionObject)},
-        {653, 670, -1, sizeof(::skytether::substrait::DdlRel)},
-        {678, 694, -1, sizeof(::skytether::substrait::WriteRel)},
-        {701, -1, -1, sizeof(::skytether::substrait::ComparisonJoinKey_ComparisonType)},
-        {712, 723, -1, sizeof(::skytether::substrait::ComparisonJoinKey)},
-        {726, 743, -1, sizeof(::skytether::substrait::HashJoinRel)},
-        {752, 769, -1, sizeof(::skytether::substrait::MergeJoinRel)},
-        {778, 792, -1, sizeof(::skytether::substrait::NestedLoopJoinRel)},
-        {798, -1, -1, sizeof(::skytether::substrait::FunctionArgument)},
-        {810, -1, -1, sizeof(::skytether::substrait::FunctionOption)},
-        {820, -1, -1, sizeof(::skytether::substrait::Expression_Enum_Empty)},
-        {828, -1, -1, sizeof(::skytether::substrait::Expression_Enum)},
-        {839, -1, -1, sizeof(::skytether::substrait::Expression_Literal_VarChar)},
-        {849, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Decimal)},
-        {860, -1, -1, sizeof(::skytether::substrait::Expression_Literal_PrecisionTimestamp)},
-        {870, 880, -1, sizeof(::skytether::substrait::Expression_Literal_Map_KeyValue)},
-        {882, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Map)},
-        {891, -1, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalYearToMonth)},
-        {901, -1, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalDayToSecond)},
-        {915, 925, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalCompound)},
-        {927, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Struct)},
-        {936, -1, -1, sizeof(::skytether::substrait::Expression_Literal_List)},
-        {945, -1, -1, sizeof(::skytether::substrait::Expression_Literal_UserDefined)},
-        {958, -1, -1, sizeof(::skytether::substrait::Expression_Literal)},
-        {999, 1009, -1, sizeof(::skytether::substrait::Expression_Nested_Map_KeyValue)},
-        {1011, -1, -1, sizeof(::skytether::substrait::Expression_Nested_Map)},
-        {1020, -1, -1, sizeof(::skytether::substrait::Expression_Nested_Struct)},
-        {1029, -1, -1, sizeof(::skytether::substrait::Expression_Nested_List)},
-        {1038, -1, -1, sizeof(::skytether::substrait::Expression_Nested)},
-        {1052, 1065, -1, sizeof(::skytether::substrait::Expression_ScalarFunction)},
-        {1070, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Preceding)},
-        {1079, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Following)},
-        {1088, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_CurrentRow)},
-        {1096, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Unbounded)},
-        {1104, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound)},
-        {1117, 1137, -1, sizeof(::skytether::substrait::Expression_WindowFunction)},
-        {1149, 1159, -1, sizeof(::skytether::substrait::Expression_IfThen_IfClause)},
-        {1161, 1171, -1, sizeof(::skytether::substrait::Expression_IfThen)},
-        {1173, 1184, -1, sizeof(::skytether::substrait::Expression_Cast)},
-        {1187, 1197, -1, sizeof(::skytether::substrait::Expression_SwitchExpression_IfValue)},
-        {1199, 1210, -1, sizeof(::skytether::substrait::Expression_SwitchExpression)},
-        {1213, 1223, -1, sizeof(::skytether::substrait::Expression_SingularOrList)},
-        {1225, -1, -1, sizeof(::skytether::substrait::Expression_MultiOrList_Record)},
-        {1234, -1, -1, sizeof(::skytether::substrait::Expression_MultiOrList)},
-        {1244, -1, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
-        {1254, -1, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
-        {1264, 1277, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction)},
-        {1281, 1291, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_MapKey)},
-        {1293, 1303, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_StructField)},
-        {1305, 1315, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_ListElement)},
-        {1317, -1, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment)},
-        {1329, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_Select)},
-        {1341, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_StructSelect)},
-        {1350, 1360, -1, sizeof(::skytether::substrait::Expression_MaskExpression_StructItem)},
-        {1362, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
-        {1371, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
-        {1381, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
-        {1392, 1402, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect)},
-        {1404, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect_MapKey)},
-        {1413, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
-        {1422, 1434, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect)},
-        {1437, 1447, -1, sizeof(::skytether::substrait::Expression_MaskExpression)},
-        {1449, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference_RootReference)},
-        {1457, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference_OuterReference)},
-        {1466, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference)},
-        {1481, 1490, -1, sizeof(::skytether::substrait::Expression_Subquery_Scalar)},
-        {1491, 1501, -1, sizeof(::skytether::substrait::Expression_Subquery_InPredicate)},
-        {1503, 1513, -1, sizeof(::skytether::substrait::Expression_Subquery_SetPredicate)},
-        {1515, 1527, -1, sizeof(::skytether::substrait::Expression_Subquery_SetComparison)},
-        {1531, -1, -1, sizeof(::skytether::substrait::Expression_Subquery)},
-        {1544, -1, -1, sizeof(::skytether::substrait::Expression)},
-        {1565, 1577, -1, sizeof(::skytether::substrait::SortField)},
-        {1580, 1596, -1, sizeof(::skytether::substrait::AggregateFunction)},
-        {1604, -1, -1, sizeof(::skytether::substrait::ReferenceRel)},
+        {41, -1, -1, sizeof(::skytether::substrait::RelCommon_Hint_SavedComputation)},
+        {51, -1, -1, sizeof(::skytether::substrait::RelCommon_Hint_LoadedComputation)},
+        {61, 76, -1, sizeof(::skytether::substrait::RelCommon_Hint)},
+        {83, 96, -1, sizeof(::skytether::substrait::RelCommon)},
+        {100, 110, -1, sizeof(::skytether::substrait::ReadRel_NamedTable)},
+        {112, -1, -1, sizeof(::skytether::substrait::ReadRel_VirtualTable)},
+        {122, 131, -1, sizeof(::skytether::substrait::ReadRel_ExtensionTable)},
+        {132, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions)},
+        {140, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions)},
+        {148, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_OrcReadOptions)},
+        {156, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions)},
+        {164, 178, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions)},
+        {184, -1, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles_FileOrFiles)},
+        {207, 217, -1, sizeof(::skytether::substrait::ReadRel_LocalFiles)},
+        {219, 238, -1, sizeof(::skytether::substrait::ReadRel)},
+        {248, 260, -1, sizeof(::skytether::substrait::ProjectRel)},
+        {264, 279, -1, sizeof(::skytether::substrait::JoinRel)},
+        {286, 298, -1, sizeof(::skytether::substrait::CrossRel)},
+        {302, 319, -1, sizeof(::skytether::substrait::FetchRel)},
+        {326, -1, -1, sizeof(::skytether::substrait::AggregateRel_Grouping)},
+        {336, 346, -1, sizeof(::skytether::substrait::AggregateRel_Measure)},
+        {348, 362, -1, sizeof(::skytether::substrait::AggregateRel)},
+        {368, 385, -1, sizeof(::skytether::substrait::ConsistentPartitionWindowRel_WindowRelFunction)},
+        {394, 408, -1, sizeof(::skytether::substrait::ConsistentPartitionWindowRel)},
+        {414, 426, -1, sizeof(::skytether::substrait::SortRel)},
+        {430, 442, -1, sizeof(::skytether::substrait::FilterRel)},
+        {446, 458, -1, sizeof(::skytether::substrait::SetRel)},
+        {462, 473, -1, sizeof(::skytether::substrait::ExtensionSingleRel)},
+        {476, 486, -1, sizeof(::skytether::substrait::ExtensionLeafRel)},
+        {488, 499, -1, sizeof(::skytether::substrait::ExtensionMultiRel)},
+        {502, -1, -1, sizeof(::skytether::substrait::ExchangeRel_ScatterFields)},
+        {511, 520, -1, sizeof(::skytether::substrait::ExchangeRel_SingleBucketExpression)},
+        {521, 531, -1, sizeof(::skytether::substrait::ExchangeRel_MultiBucketExpression)},
+        {533, -1, -1, sizeof(::skytether::substrait::ExchangeRel_Broadcast)},
+        {541, -1, -1, sizeof(::skytether::substrait::ExchangeRel_RoundRobin)},
+        {550, -1, -1, sizeof(::skytether::substrait::ExchangeRel_ExchangeTarget)},
+        {562, 581, -1, sizeof(::skytether::substrait::ExchangeRel)},
+        {591, -1, -1, sizeof(::skytether::substrait::ExpandRel_ExpandField)},
+        {602, -1, -1, sizeof(::skytether::substrait::ExpandRel_SwitchingField)},
+        {611, 622, -1, sizeof(::skytether::substrait::ExpandRel)},
+        {625, 635, -1, sizeof(::skytether::substrait::RelRoot)},
+        {637, -1, -1, sizeof(::skytether::substrait::Rel)},
+        {668, 678, -1, sizeof(::skytether::substrait::NamedObjectWrite)},
+        {680, 689, -1, sizeof(::skytether::substrait::ExtensionObject)},
+        {690, 707, -1, sizeof(::skytether::substrait::DdlRel)},
+        {715, 732, -1, sizeof(::skytether::substrait::WriteRel)},
+        {740, 750, -1, sizeof(::skytether::substrait::UpdateRel_TransformExpression)},
+        {752, 765, -1, sizeof(::skytether::substrait::UpdateRel)},
+        {769, 779, -1, sizeof(::skytether::substrait::NamedTable)},
+        {781, -1, -1, sizeof(::skytether::substrait::ComparisonJoinKey_ComparisonType)},
+        {792, 803, -1, sizeof(::skytether::substrait::ComparisonJoinKey)},
+        {806, 823, -1, sizeof(::skytether::substrait::HashJoinRel)},
+        {832, 849, -1, sizeof(::skytether::substrait::MergeJoinRel)},
+        {858, 872, -1, sizeof(::skytether::substrait::NestedLoopJoinRel)},
+        {878, -1, -1, sizeof(::skytether::substrait::FunctionArgument)},
+        {890, -1, -1, sizeof(::skytether::substrait::FunctionOption)},
+        {900, -1, -1, sizeof(::skytether::substrait::Expression_Enum_Empty)},
+        {908, -1, -1, sizeof(::skytether::substrait::Expression_Enum)},
+        {919, -1, -1, sizeof(::skytether::substrait::Expression_Literal_VarChar)},
+        {929, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Decimal)},
+        {940, -1, -1, sizeof(::skytether::substrait::Expression_Literal_PrecisionTimestamp)},
+        {950, 960, -1, sizeof(::skytether::substrait::Expression_Literal_Map_KeyValue)},
+        {962, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Map)},
+        {971, -1, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalYearToMonth)},
+        {981, -1, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalDayToSecond)},
+        {995, 1005, -1, sizeof(::skytether::substrait::Expression_Literal_IntervalCompound)},
+        {1007, -1, -1, sizeof(::skytether::substrait::Expression_Literal_Struct)},
+        {1016, -1, -1, sizeof(::skytether::substrait::Expression_Literal_List)},
+        {1025, -1, -1, sizeof(::skytether::substrait::Expression_Literal_UserDefined)},
+        {1038, -1, -1, sizeof(::skytether::substrait::Expression_Literal)},
+        {1079, 1089, -1, sizeof(::skytether::substrait::Expression_Nested_Map_KeyValue)},
+        {1091, -1, -1, sizeof(::skytether::substrait::Expression_Nested_Map)},
+        {1100, -1, -1, sizeof(::skytether::substrait::Expression_Nested_Struct)},
+        {1109, -1, -1, sizeof(::skytether::substrait::Expression_Nested_List)},
+        {1118, -1, -1, sizeof(::skytether::substrait::Expression_Nested)},
+        {1132, 1145, -1, sizeof(::skytether::substrait::Expression_ScalarFunction)},
+        {1150, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Preceding)},
+        {1159, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Following)},
+        {1168, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_CurrentRow)},
+        {1176, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound_Unbounded)},
+        {1184, -1, -1, sizeof(::skytether::substrait::Expression_WindowFunction_Bound)},
+        {1197, 1217, -1, sizeof(::skytether::substrait::Expression_WindowFunction)},
+        {1229, 1239, -1, sizeof(::skytether::substrait::Expression_IfThen_IfClause)},
+        {1241, 1251, -1, sizeof(::skytether::substrait::Expression_IfThen)},
+        {1253, 1264, -1, sizeof(::skytether::substrait::Expression_Cast)},
+        {1267, 1277, -1, sizeof(::skytether::substrait::Expression_SwitchExpression_IfValue)},
+        {1279, 1290, -1, sizeof(::skytether::substrait::Expression_SwitchExpression)},
+        {1293, 1303, -1, sizeof(::skytether::substrait::Expression_SingularOrList)},
+        {1305, -1, -1, sizeof(::skytether::substrait::Expression_MultiOrList_Record)},
+        {1314, -1, -1, sizeof(::skytether::substrait::Expression_MultiOrList)},
+        {1324, -1, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
+        {1334, -1, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
+        {1344, 1357, -1, sizeof(::skytether::substrait::Expression_EmbeddedFunction)},
+        {1361, 1371, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_MapKey)},
+        {1373, 1383, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_StructField)},
+        {1385, 1395, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment_ListElement)},
+        {1397, -1, -1, sizeof(::skytether::substrait::Expression_ReferenceSegment)},
+        {1409, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_Select)},
+        {1421, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_StructSelect)},
+        {1430, 1440, -1, sizeof(::skytether::substrait::Expression_MaskExpression_StructItem)},
+        {1442, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
+        {1451, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
+        {1461, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
+        {1472, 1482, -1, sizeof(::skytether::substrait::Expression_MaskExpression_ListSelect)},
+        {1484, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect_MapKey)},
+        {1493, -1, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
+        {1502, 1514, -1, sizeof(::skytether::substrait::Expression_MaskExpression_MapSelect)},
+        {1517, 1527, -1, sizeof(::skytether::substrait::Expression_MaskExpression)},
+        {1529, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference_RootReference)},
+        {1537, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference_OuterReference)},
+        {1546, -1, -1, sizeof(::skytether::substrait::Expression_FieldReference)},
+        {1561, 1570, -1, sizeof(::skytether::substrait::Expression_Subquery_Scalar)},
+        {1571, 1581, -1, sizeof(::skytether::substrait::Expression_Subquery_InPredicate)},
+        {1583, 1593, -1, sizeof(::skytether::substrait::Expression_Subquery_SetPredicate)},
+        {1595, 1607, -1, sizeof(::skytether::substrait::Expression_Subquery_SetComparison)},
+        {1611, -1, -1, sizeof(::skytether::substrait::Expression_Subquery)},
+        {1624, -1, -1, sizeof(::skytether::substrait::Expression)},
+        {1645, 1657, -1, sizeof(::skytether::substrait::SortField)},
+        {1660, 1676, -1, sizeof(::skytether::substrait::AggregateFunction)},
+        {1684, -1, -1, sizeof(::skytether::substrait::ReferenceRel)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skytether::substrait::_RelCommon_Direct_default_instance_._instance,
     &::skytether::substrait::_RelCommon_Emit_default_instance_._instance,
     &::skytether::substrait::_RelCommon_Hint_Stats_default_instance_._instance,
     &::skytether::substrait::_RelCommon_Hint_RuntimeConstraint_default_instance_._instance,
+    &::skytether::substrait::_RelCommon_Hint_SavedComputation_default_instance_._instance,
+    &::skytether::substrait::_RelCommon_Hint_LoadedComputation_default_instance_._instance,
     &::skytether::substrait::_RelCommon_Hint_default_instance_._instance,
     &::skytether::substrait::_RelCommon_default_instance_._instance,
     &::skytether::substrait::_ReadRel_NamedTable_default_instance_._instance,
@@ -4961,6 +5190,9 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skytether::substrait::_ExtensionObject_default_instance_._instance,
     &::skytether::substrait::_DdlRel_default_instance_._instance,
     &::skytether::substrait::_WriteRel_default_instance_._instance,
+    &::skytether::substrait::_UpdateRel_TransformExpression_default_instance_._instance,
+    &::skytether::substrait::_UpdateRel_default_instance_._instance,
+    &::skytether::substrait::_NamedTable_default_instance_._instance,
     &::skytether::substrait::_ComparisonJoinKey_ComparisonType_default_instance_._instance,
     &::skytether::substrait::_ComparisonJoinKey_default_instance_._instance,
     &::skytether::substrait::_HashJoinRel_default_instance_._instance,
@@ -5039,7 +5271,7 @@ const char descriptor_table_protodef_skytether_2fsubstrait_2falgebra_2eproto[] A
     "tether.substrait\032\031google/protobuf/any.pr"
     "oto\032/skytether/substrait/extensions/exte"
     "nsions.proto\032\036skytether/substrait/type.p"
-    "roto\"\242\007\n\tRelCommon\022\?\n\006direct\030\001 \001(\0132%.sky"
+    "roto\"\310\014\n\tRelCommon\022\?\n\006direct\030\001 \001(\0132%.sky"
     "tether.substrait.RelCommon.DirectH\000R\006dir"
     "ect\0229\n\004emit\030\002 \001(\0132#.skytether.substrait."
     "RelCommon.EmitH\000R\004emit\0227\n\004hint\030\003 \001(\0132#.s"
@@ -5047,14 +5279,20 @@ const char descriptor_table_protodef_skytether_2fsubstrait_2falgebra_2eproto[] A
     "`\n\022advanced_extension\030\004 \001(\01321.skytether."
     "substrait.extensions.AdvancedExtensionR\021"
     "advancedExtension\032\010\n\006Direct\032-\n\004Emit\022%\n\016o"
-    "utput_mapping\030\001 \003(\005R\routputMapping\032\267\004\n\004H"
+    "utput_mapping\030\001 \003(\005R\routputMapping\032\335\t\n\004H"
     "int\022\?\n\005stats\030\001 \001(\0132).skytether.substrait"
     ".RelCommon.Hint.StatsR\005stats\022U\n\nconstrai"
     "nt\030\002 \001(\01325.skytether.substrait.RelCommon"
     ".Hint.RuntimeConstraintR\nconstraint\022\024\n\005a"
-    "lias\030\003 \001(\tR\005alias\022`\n\022advanced_extension\030"
-    "\n \001(\01321.skytether.substrait.extensions.A"
-    "dvancedExtensionR\021advancedExtension\032\247\001\n\005"
+    "lias\030\003 \001(\tR\005alias\022!\n\014output_names\030\004 \003(\tR"
+    "\013outputNames\022`\n\022advanced_extension\030\n \001(\013"
+    "21.skytether.substrait.extensions.Advanc"
+    "edExtensionR\021advancedExtension\022c\n\022saved_"
+    "computations\030\013 \003(\01324.skytether.substrait"
+    ".RelCommon.Hint.SavedComputationR\021savedC"
+    "omputations\022f\n\023loaded_computations\030\014 \003(\013"
+    "25.skytether.substrait.RelCommon.Hint.Lo"
+    "adedComputationR\022loadedComputations\032\247\001\n\005"
     "Stats\022\033\n\trow_count\030\001 \001(\001R\010rowCount\022\037\n\013re"
     "cord_size\030\002 \001(\001R\nrecordSize\022`\n\022advanced_"
     "extension\030\n \001(\01321.skytether.substrait.ex"
@@ -5062,382 +5300,385 @@ const char descriptor_table_protodef_skytether_2fsubstrait_2falgebra_2eproto[] A
     "nsion\032u\n\021RuntimeConstraint\022`\n\022advanced_e"
     "xtension\030\n \001(\01321.skytether.substrait.ext"
     "ensions.AdvancedExtensionR\021advancedExten"
-    "sionB\013\n\temit_kind\"\205\023\n\007ReadRel\0226\n\006common\030"
-    "\001 \001(\0132\036.skytether.substrait.RelCommonR\006c"
-    "ommon\022A\n\013base_schema\030\002 \001(\0132 .skytether.s"
-    "ubstrait.NamedStructR\nbaseSchema\0227\n\006filt"
-    "er\030\003 \001(\0132\037.skytether.substrait.Expressio"
-    "nR\006filter\022M\n\022best_effort_filter\030\013 \001(\0132\037."
-    "skytether.substrait.ExpressionR\020bestEffo"
-    "rtFilter\022N\n\nprojection\030\004 \001(\0132..skytether"
-    ".substrait.Expression.MaskExpressionR\npr"
-    "ojection\022`\n\022advanced_extension\030\n \001(\01321.s"
-    "kytether.substrait.extensions.AdvancedEx"
-    "tensionR\021advancedExtension\022P\n\rvirtual_ta"
-    "ble\030\005 \001(\0132).skytether.substrait.ReadRel."
-    "VirtualTableH\000R\014virtualTable\022J\n\013local_fi"
-    "les\030\006 \001(\0132\'.skytether.substrait.ReadRel."
-    "LocalFilesH\000R\nlocalFiles\022J\n\013named_table\030"
-    "\007 \001(\0132\'.skytether.substrait.ReadRel.Name"
-    "dTableH\000R\nnamedTable\022V\n\017extension_table\030"
-    "\010 \001(\0132+.skytether.substrait.ReadRel.Exte"
-    "nsionTableH\000R\016extensionTable\032\204\001\n\nNamedTa"
-    "ble\022\024\n\005names\030\001 \003(\tR\005names\022`\n\022advanced_ex"
-    "tension\030\n \001(\01321.skytether.substrait.exte"
-    "nsions.AdvancedExtensionR\021advancedExtens"
-    "ion\032V\n\014VirtualTable\022F\n\006values\030\001 \003(\0132..sk"
-    "ytether.substrait.Expression.Literal.Str"
-    "uctR\006values\032>\n\016ExtensionTable\022,\n\006detail\030"
-    "\001 \001(\0132\024.google.protobuf.AnyR\006detail\032\326\n\n\n"
-    "LocalFiles\022I\n\005items\030\001 \003(\01323.skytether.su"
-    "bstrait.ReadRel.LocalFiles.FileOrFilesR\005"
-    "items\022`\n\022advanced_extension\030\n \001(\01321.skyt"
-    "ether.substrait.extensions.AdvancedExten"
-    "sionR\021advancedExtension\032\232\t\n\013FileOrFiles\022"
-    "\033\n\010uri_path\030\001 \001(\tH\000R\007uriPath\022$\n\ruri_path"
-    "_glob\030\002 \001(\tH\000R\013uriPathGlob\022\033\n\010uri_file\030\003"
-    " \001(\tH\000R\007uriFile\022\037\n\nuri_folder\030\004 \001(\tH\000R\tu"
-    "riFolder\022\'\n\017partition_index\030\006 \001(\004R\016parti"
-    "tionIndex\022\024\n\005start\030\007 \001(\004R\005start\022\026\n\006lengt"
-    "h\030\010 \001(\004R\006length\022b\n\007parquet\030\t \001(\0132F.skyte"
-    "ther.substrait.ReadRel.LocalFiles.FileOr"
-    "Files.ParquetReadOptionsH\001R\007parquet\022\\\n\005a"
-    "rrow\030\n \001(\0132D.skytether.substrait.ReadRel"
-    ".LocalFiles.FileOrFiles.ArrowReadOptions"
-    "H\001R\005arrow\022V\n\003orc\030\013 \001(\0132B.skytether.subst"
-    "rait.ReadRel.LocalFiles.FileOrFiles.OrcR"
-    "eadOptionsH\001R\003orc\0224\n\textension\030\014 \001(\0132\024.g"
-    "oogle.protobuf.AnyH\001R\textension\022Y\n\004dwrf\030"
-    "\r \001(\0132C.skytether.substrait.ReadRel.Loca"
-    "lFiles.FileOrFiles.DwrfReadOptionsH\001R\004dw"
-    "rf\022k\n\004text\030\016 \001(\0132U.skytether.substrait.R"
-    "eadRel.LocalFiles.FileOrFiles.DelimiterS"
-    "eparatedTextReadOptionsH\001R\004text\032\024\n\022Parqu"
-    "etReadOptions\032\022\n\020ArrowReadOptions\032\020\n\016Orc"
-    "ReadOptions\032\021\n\017DwrfReadOptions\032\241\002\n!Delim"
-    "iterSeparatedTextReadOptions\022\'\n\017field_de"
-    "limiter\030\001 \001(\tR\016fieldDelimiter\022\"\n\rmax_lin"
-    "e_size\030\002 \001(\004R\013maxLineSize\022\024\n\005quote\030\003 \001(\t"
-    "R\005quote\022/\n\024header_lines_to_skip\030\004 \001(\004R\021h"
-    "eaderLinesToSkip\022\026\n\006escape\030\005 \001(\tR\006escape"
-    "\0226\n\025value_treated_as_null\030\006 \001(\tH\000R\022value"
-    "TreatedAsNull\210\001\001B\030\n\026_value_treated_as_nu"
-    "llB\013\n\tpath_typeB\r\n\013file_formatJ\004\010\005\020\006R\006fo"
-    "rmatB\013\n\tread_type\"\231\002\n\nProjectRel\0226\n\006comm"
-    "on\030\001 \001(\0132\036.skytether.substrait.RelCommon"
-    "R\006common\022.\n\005input\030\002 \001(\0132\030.skytether.subs"
-    "trait.RelR\005input\022A\n\013expressions\030\003 \003(\0132\037."
-    "skytether.substrait.ExpressionR\013expressi"
-    "ons\022`\n\022advanced_extension\030\n \001(\01321.skytet"
-    "her.substrait.extensions.AdvancedExtensi"
-    "onR\021advancedExtension\"\223\006\n\007JoinRel\0226\n\006com"
-    "mon\030\001 \001(\0132\036.skytether.substrait.RelCommo"
-    "nR\006common\022,\n\004left\030\002 \001(\0132\030.skytether.subs"
-    "trait.RelR\004left\022.\n\005right\030\003 \001(\0132\030.skyteth"
-    "er.substrait.RelR\005right\022\?\n\nexpression\030\004 "
-    "\001(\0132\037.skytether.substrait.ExpressionR\nex"
-    "pression\022I\n\020post_join_filter\030\005 \001(\0132\037.sky"
-    "tether.substrait.ExpressionR\016postJoinFil"
-    "ter\0229\n\004type\030\006 \001(\0162%.skytether.substrait."
-    "JoinRel.JoinTypeR\004type\022`\n\022advanced_exten"
-    "sion\030\n \001(\01321.skytether.substrait.extensi"
-    "ons.AdvancedExtensionR\021advancedExtension"
-    "\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000"
-    "\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER"
-    "\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGH"
-    "T\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\027\n\023JOIN_TYP"
-    "E_LEFT_ANTI\020\006\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\007"
-    "\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\010\022\030\n\024JOIN_TYPE_"
-    "RIGHT_ANTI\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n"
-    "\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_R"
-    "IGHT_MARK\020\014\"\202\002\n\010CrossRel\0226\n\006common\030\001 \001(\013"
-    "2\036.skytether.substrait.RelCommonR\006common"
-    "\022,\n\004left\030\002 \001(\0132\030.skytether.substrait.Rel"
-    "R\004left\022.\n\005right\030\003 \001(\0132\030.skytether.substr"
-    "ait.RelR\005right\022`\n\022advanced_extension\030\n \001"
-    "(\01321.skytether.substrait.extensions.Adva"
-    "ncedExtensionR\021advancedExtension\"\202\002\n\010Fet"
-    "chRel\0226\n\006common\030\001 \001(\0132\036.skytether.substr"
-    "ait.RelCommonR\006common\022.\n\005input\030\002 \001(\0132\030.s"
-    "kytether.substrait.RelR\005input\022\026\n\006offset\030"
-    "\003 \001(\003R\006offset\022\024\n\005count\030\004 \001(\003R\005count\022`\n\022a"
-    "dvanced_extension\030\n \001(\01321.skytether.subs"
-    "trait.extensions.AdvancedExtensionR\021adva"
-    "ncedExtension\"\320\004\n\014AggregateRel\0226\n\006common"
-    "\030\001 \001(\0132\036.skytether.substrait.RelCommonR\006"
-    "common\022.\n\005input\030\002 \001(\0132\030.skytether.substr"
-    "ait.RelR\005input\022H\n\tgroupings\030\003 \003(\0132*.skyt"
-    "ether.substrait.AggregateRel.GroupingR\tg"
-    "roupings\022E\n\010measures\030\004 \003(\0132).skytether.s"
-    "ubstrait.AggregateRel.MeasureR\010measures\022"
-    "`\n\022advanced_extension\030\n \001(\01321.skytether."
-    "substrait.extensions.AdvancedExtensionR\021"
-    "advancedExtension\032^\n\010Grouping\022R\n\024groupin"
-    "g_expressions\030\001 \003(\0132\037.skytether.substrai"
-    "t.ExpressionR\023groupingExpressions\032\204\001\n\007Me"
-    "asure\022@\n\007measure\030\001 \001(\0132&.skytether.subst"
-    "rait.AggregateFunctionR\007measure\0227\n\006filte"
-    "r\030\002 \001(\0132\037.skytether.substrait.Expression"
-    "R\006filter\"\216\t\n\034ConsistentPartitionWindowRe"
-    "l\0226\n\006common\030\001 \001(\0132\036.skytether.substrait."
-    "RelCommonR\006common\022.\n\005input\030\002 \001(\0132\030.skyte"
-    "ther.substrait.RelR\005input\022n\n\020window_func"
-    "tions\030\003 \003(\0132C.skytether.substrait.Consis"
-    "tentPartitionWindowRel.WindowRelFunction"
-    "R\017windowFunctions\022T\n\025partition_expressio"
-    "ns\030\004 \003(\0132\037.skytether.substrait.Expressio"
-    "nR\024partitionExpressions\0224\n\005sorts\030\005 \003(\0132\036"
-    ".skytether.substrait.SortFieldR\005sorts\022`\n"
-    "\022advanced_extension\030\n \001(\01321.skytether.su"
-    "bstrait.extensions.AdvancedExtensionR\021ad"
-    "vancedExtension\032\247\005\n\021WindowRelFunction\022-\n"
-    "\022function_reference\030\001 \001(\rR\021functionRefer"
-    "ence\022C\n\targuments\030\t \003(\0132%.skytether.subs"
-    "trait.FunctionArgumentR\targuments\022=\n\007opt"
-    "ions\030\013 \003(\0132#.skytether.substrait.Functio"
-    "nOptionR\007options\022:\n\013output_type\030\007 \001(\0132\031."
-    "skytether.substrait.TypeR\noutputType\022;\n\005"
-    "phase\030\006 \001(\0162%.skytether.substrait.Aggreg"
-    "ationPhaseR\005phase\022\\\n\ninvocation\030\n \001(\0162<."
-    "skytether.substrait.AggregateFunction.Ag"
-    "gregationInvocationR\ninvocation\022U\n\013lower"
-    "_bound\030\005 \001(\01324.skytether.substrait.Expre"
-    "ssion.WindowFunction.BoundR\nlowerBound\022U"
-    "\n\013upper_bound\030\004 \001(\01324.skytether.substrai"
-    "t.Expression.WindowFunction.BoundR\nupper"
-    "Bound\022Z\n\013bounds_type\030\014 \001(\01629.skytether.s"
-    "ubstrait.Expression.WindowFunction.Bound"
-    "sTypeR\nboundsType\"\211\002\n\007SortRel\0226\n\006common\030"
-    "\001 \001(\0132\036.skytether.substrait.RelCommonR\006c"
-    "ommon\022.\n\005input\030\002 \001(\0132\030.skytether.substra"
-    "it.RelR\005input\0224\n\005sorts\030\003 \003(\0132\036.skytether"
-    ".substrait.SortFieldR\005sorts\022`\n\022advanced_"
-    "extension\030\n \001(\01321.skytether.substrait.ex"
-    "tensions.AdvancedExtensionR\021advancedExte"
-    "nsion\"\224\002\n\tFilterRel\0226\n\006common\030\001 \001(\0132\036.sk"
-    "ytether.substrait.RelCommonR\006common\022.\n\005i"
-    "nput\030\002 \001(\0132\030.skytether.substrait.RelR\005in"
-    "put\022=\n\tcondition\030\003 \001(\0132\037.skytether.subst"
-    "rait.ExpressionR\tcondition\022`\n\022advanced_e"
+    "sion\032\202\001\n\020SavedComputation\022%\n\016computation"
+    "_id\030\001 \001(\005R\rcomputationId\022G\n\004type\030\002 \001(\01623"
+    ".skytether.substrait.RelCommon.Hint.Comp"
+    "utationTypeR\004type\032\226\001\n\021LoadedComputation\022"
+    "8\n\030computation_id_reference\030\001 \001(\005R\026compu"
+    "tationIdReference\022G\n\004type\030\002 \001(\01623.skytet"
+    "her.substrait.RelCommon.Hint.Computation"
+    "TypeR\004type\"\225\001\n\017ComputationType\022 \n\034COMPUT"
+    "ATION_TYPE_UNSPECIFIED\020\000\022\036\n\032COMPUTATION_"
+    "TYPE_HASHTABLE\020\001\022!\n\035COMPUTATION_TYPE_BLO"
+    "OM_FILTER\020\002\022\035\n\030COMPUTATION_TYPE_UNKNOWN\020"
+    "\217NB\013\n\temit_kind\"\333\023\n\007ReadRel\0226\n\006common\030\001 "
+    "\001(\0132\036.skytether.substrait.RelCommonR\006com"
+    "mon\022A\n\013base_schema\030\002 \001(\0132 .skytether.sub"
+    "strait.NamedStructR\nbaseSchema\0227\n\006filter"
+    "\030\003 \001(\0132\037.skytether.substrait.ExpressionR"
+    "\006filter\022M\n\022best_effort_filter\030\013 \001(\0132\037.sk"
+    "ytether.substrait.ExpressionR\020bestEffort"
+    "Filter\022N\n\nprojection\030\004 \001(\0132..skytether.s"
+    "ubstrait.Expression.MaskExpressionR\nproj"
+    "ection\022`\n\022advanced_extension\030\n \001(\01321.sky"
+    "tether.substrait.extensions.AdvancedExte"
+    "nsionR\021advancedExtension\022P\n\rvirtual_tabl"
+    "e\030\005 \001(\0132).skytether.substrait.ReadRel.Vi"
+    "rtualTableH\000R\014virtualTable\022J\n\013local_file"
+    "s\030\006 \001(\0132\'.skytether.substrait.ReadRel.Lo"
+    "calFilesH\000R\nlocalFiles\022J\n\013named_table\030\007 "
+    "\001(\0132\'.skytether.substrait.ReadRel.NamedT"
+    "ableH\000R\nnamedTable\022V\n\017extension_table\030\010 "
+    "\001(\0132+.skytether.substrait.ReadRel.Extens"
+    "ionTableH\000R\016extensionTable\032\204\001\n\nNamedTabl"
+    "e\022\024\n\005names\030\001 \003(\tR\005names\022`\n\022advanced_exte"
+    "nsion\030\n \001(\01321.skytether.substrait.extens"
+    "ions.AdvancedExtensionR\021advancedExtensio"
+    "n\032\253\001\n\014VirtualTable\022J\n\006values\030\001 \003(\0132..sky"
+    "tether.substrait.Expression.Literal.Stru"
+    "ctB\002\030\001R\006values\022O\n\013expressions\030\002 \003(\0132-.sk"
+    "ytether.substrait.Expression.Nested.Stru"
+    "ctR\013expressions\032>\n\016ExtensionTable\022,\n\006det"
+    "ail\030\001 \001(\0132\024.google.protobuf.AnyR\006detail\032"
+    "\326\n\n\nLocalFiles\022I\n\005items\030\001 \003(\01323.skytethe"
+    "r.substrait.ReadRel.LocalFiles.FileOrFil"
+    "esR\005items\022`\n\022advanced_extension\030\n \001(\01321."
+    "skytether.substrait.extensions.AdvancedE"
+    "xtensionR\021advancedExtension\032\232\t\n\013FileOrFi"
+    "les\022\033\n\010uri_path\030\001 \001(\tH\000R\007uriPath\022$\n\ruri_"
+    "path_glob\030\002 \001(\tH\000R\013uriPathGlob\022\033\n\010uri_fi"
+    "le\030\003 \001(\tH\000R\007uriFile\022\037\n\nuri_folder\030\004 \001(\tH"
+    "\000R\turiFolder\022\'\n\017partition_index\030\006 \001(\004R\016p"
+    "artitionIndex\022\024\n\005start\030\007 \001(\004R\005start\022\026\n\006l"
+    "ength\030\010 \001(\004R\006length\022b\n\007parquet\030\t \001(\0132F.s"
+    "kytether.substrait.ReadRel.LocalFiles.Fi"
+    "leOrFiles.ParquetReadOptionsH\001R\007parquet\022"
+    "\\\n\005arrow\030\n \001(\0132D.skytether.substrait.Rea"
+    "dRel.LocalFiles.FileOrFiles.ArrowReadOpt"
+    "ionsH\001R\005arrow\022V\n\003orc\030\013 \001(\0132B.skytether.s"
+    "ubstrait.ReadRel.LocalFiles.FileOrFiles."
+    "OrcReadOptionsH\001R\003orc\0224\n\textension\030\014 \001(\013"
+    "2\024.google.protobuf.AnyH\001R\textension\022Y\n\004d"
+    "wrf\030\r \001(\0132C.skytether.substrait.ReadRel."
+    "LocalFiles.FileOrFiles.DwrfReadOptionsH\001"
+    "R\004dwrf\022k\n\004text\030\016 \001(\0132U.skytether.substra"
+    "it.ReadRel.LocalFiles.FileOrFiles.Delimi"
+    "terSeparatedTextReadOptionsH\001R\004text\032\024\n\022P"
+    "arquetReadOptions\032\022\n\020ArrowReadOptions\032\020\n"
+    "\016OrcReadOptions\032\021\n\017DwrfReadOptions\032\241\002\n!D"
+    "elimiterSeparatedTextReadOptions\022\'\n\017fiel"
+    "d_delimiter\030\001 \001(\tR\016fieldDelimiter\022\"\n\rmax"
+    "_line_size\030\002 \001(\004R\013maxLineSize\022\024\n\005quote\030\003"
+    " \001(\tR\005quote\022/\n\024header_lines_to_skip\030\004 \001("
+    "\004R\021headerLinesToSkip\022\026\n\006escape\030\005 \001(\tR\006es"
+    "cape\0226\n\025value_treated_as_null\030\006 \001(\tH\000R\022v"
+    "alueTreatedAsNull\210\001\001B\030\n\026_value_treated_a"
+    "s_nullB\013\n\tpath_typeB\r\n\013file_formatJ\004\010\005\020\006"
+    "R\006formatB\013\n\tread_type\"\231\002\n\nProjectRel\0226\n\006"
+    "common\030\001 \001(\0132\036.skytether.substrait.RelCo"
+    "mmonR\006common\022.\n\005input\030\002 \001(\0132\030.skytether."
+    "substrait.RelR\005input\022A\n\013expressions\030\003 \003("
+    "\0132\037.skytether.substrait.ExpressionR\013expr"
+    "essions\022`\n\022advanced_extension\030\n \001(\01321.sk"
+    "ytether.substrait.extensions.AdvancedExt"
+    "ensionR\021advancedExtension\"\223\006\n\007JoinRel\0226\n"
+    "\006common\030\001 \001(\0132\036.skytether.substrait.RelC"
+    "ommonR\006common\022,\n\004left\030\002 \001(\0132\030.skytether."
+    "substrait.RelR\004left\022.\n\005right\030\003 \001(\0132\030.sky"
+    "tether.substrait.RelR\005right\022\?\n\nexpressio"
+    "n\030\004 \001(\0132\037.skytether.substrait.Expression"
+    "R\nexpression\022I\n\020post_join_filter\030\005 \001(\0132\037"
+    ".skytether.substrait.ExpressionR\016postJoi"
+    "nFilter\0229\n\004type\030\006 \001(\0162%.skytether.substr"
+    "ait.JoinRel.JoinTypeR\004type\022`\n\022advanced_e"
     "xtension\030\n \001(\01321.skytether.substrait.ext"
     "ensions.AdvancedExtensionR\021advancedExten"
-    "sion\"\322\003\n\006SetRel\0226\n\006common\030\001 \001(\0132\036.skytet"
-    "her.substrait.RelCommonR\006common\0220\n\006input"
-    "s\030\002 \003(\0132\030.skytether.substrait.RelR\006input"
-    "s\0221\n\002op\030\003 \001(\0162!.skytether.substrait.SetR"
-    "el.SetOpR\002op\022`\n\022advanced_extension\030\n \001(\013"
-    "21.skytether.substrait.extensions.Advanc"
-    "edExtensionR\021advancedExtension\"\310\001\n\005SetOp"
-    "\022\026\n\022SET_OP_UNSPECIFIED\020\000\022\030\n\024SET_OP_MINUS"
-    "_PRIMARY\020\001\022\031\n\025SET_OP_MINUS_MULTISET\020\002\022\037\n"
-    "\033SET_OP_INTERSECTION_PRIMARY\020\003\022 \n\034SET_OP"
-    "_INTERSECTION_MULTISET\020\004\022\031\n\025SET_OP_UNION"
-    "_DISTINCT\020\005\022\024\n\020SET_OP_UNION_ALL\020\006\"\252\001\n\022Ex"
-    "tensionSingleRel\0226\n\006common\030\001 \001(\0132\036.skyte"
-    "ther.substrait.RelCommonR\006common\022.\n\005inpu"
-    "t\030\002 \001(\0132\030.skytether.substrait.RelR\005input"
-    "\022,\n\006detail\030\003 \001(\0132\024.google.protobuf.AnyR\006"
-    "detail\"x\n\020ExtensionLeafRel\0226\n\006common\030\001 \001"
-    "(\0132\036.skytether.substrait.RelCommonR\006comm"
-    "on\022,\n\006detail\030\002 \001(\0132\024.google.protobuf.Any"
-    "R\006detail\"\253\001\n\021ExtensionMultiRel\0226\n\006common"
+    "sion\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFI"
+    "ED\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_O"
+    "UTER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_"
+    "RIGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\027\n\023JOIN"
+    "_TYPE_LEFT_ANTI\020\006\022\031\n\025JOIN_TYPE_LEFT_SING"
+    "LE\020\007\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\010\022\030\n\024JOIN_T"
+    "YPE_RIGHT_ANTI\020\t\022\032\n\026JOIN_TYPE_RIGHT_SING"
+    "LE\020\n\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TY"
+    "PE_RIGHT_MARK\020\014\"\202\002\n\010CrossRel\0226\n\006common\030\001"
+    " \001(\0132\036.skytether.substrait.RelCommonR\006co"
+    "mmon\022,\n\004left\030\002 \001(\0132\030.skytether.substrait"
+    ".RelR\004left\022.\n\005right\030\003 \001(\0132\030.skytether.su"
+    "bstrait.RelR\005right\022`\n\022advanced_extension"
+    "\030\n \001(\01321.skytether.substrait.extensions."
+    "AdvancedExtensionR\021advancedExtension\"\261\003\n"
+    "\010FetchRel\0226\n\006common\030\001 \001(\0132\036.skytether.su"
+    "bstrait.RelCommonR\006common\022.\n\005input\030\002 \001(\013"
+    "2\030.skytether.substrait.RelR\005input\022\034\n\006off"
+    "set\030\003 \001(\003B\002\030\001H\000R\006offset\022B\n\013offset_expr\030\005"
+    " \001(\0132\037.skytether.substrait.ExpressionH\000R"
+    "\noffsetExpr\022\032\n\005count\030\004 \001(\003B\002\030\001H\001R\005count\022"
+    "@\n\ncount_expr\030\006 \001(\0132\037.skytether.substrai"
+    "t.ExpressionH\001R\tcountExpr\022`\n\022advanced_ex"
+    "tension\030\n \001(\01321.skytether.substrait.exte"
+    "nsions.AdvancedExtensionR\021advancedExtens"
+    "ionB\r\n\013offset_modeB\014\n\ncount_mode\"\336\005\n\014Agg"
+    "regateRel\0226\n\006common\030\001 \001(\0132\036.skytether.su"
+    "bstrait.RelCommonR\006common\022.\n\005input\030\002 \001(\013"
+    "2\030.skytether.substrait.RelR\005input\022H\n\tgro"
+    "upings\030\003 \003(\0132*.skytether.substrait.Aggre"
+    "gateRel.GroupingR\tgroupings\022E\n\010measures\030"
+    "\004 \003(\0132).skytether.substrait.AggregateRel"
+    ".MeasureR\010measures\022R\n\024grouping_expressio"
+    "ns\030\005 \003(\0132\037.skytether.substrait.Expressio"
+    "nR\023groupingExpressions\022`\n\022advanced_exten"
+    "sion\030\n \001(\01321.skytether.substrait.extensi"
+    "ons.AdvancedExtensionR\021advancedExtension"
+    "\032\227\001\n\010Grouping\022V\n\024grouping_expressions\030\001 "
+    "\003(\0132\037.skytether.substrait.ExpressionB\002\030\001"
+    "R\023groupingExpressions\0223\n\025expression_refe"
+    "rences\030\002 \003(\rR\024expressionReferences\032\204\001\n\007M"
+    "easure\022@\n\007measure\030\001 \001(\0132&.skytether.subs"
+    "trait.AggregateFunctionR\007measure\0227\n\006filt"
+    "er\030\002 \001(\0132\037.skytether.substrait.Expressio"
+    "nR\006filter\"\216\t\n\034ConsistentPartitionWindowR"
+    "el\0226\n\006common\030\001 \001(\0132\036.skytether.substrait"
+    ".RelCommonR\006common\022.\n\005input\030\002 \001(\0132\030.skyt"
+    "ether.substrait.RelR\005input\022n\n\020window_fun"
+    "ctions\030\003 \003(\0132C.skytether.substrait.Consi"
+    "stentPartitionWindowRel.WindowRelFunctio"
+    "nR\017windowFunctions\022T\n\025partition_expressi"
+    "ons\030\004 \003(\0132\037.skytether.substrait.Expressi"
+    "onR\024partitionExpressions\0224\n\005sorts\030\005 \003(\0132"
+    "\036.skytether.substrait.SortFieldR\005sorts\022`"
+    "\n\022advanced_extension\030\n \001(\01321.skytether.s"
+    "ubstrait.extensions.AdvancedExtensionR\021a"
+    "dvancedExtension\032\247\005\n\021WindowRelFunction\022-"
+    "\n\022function_reference\030\001 \001(\rR\021functionRefe"
+    "rence\022C\n\targuments\030\t \003(\0132%.skytether.sub"
+    "strait.FunctionArgumentR\targuments\022=\n\007op"
+    "tions\030\013 \003(\0132#.skytether.substrait.Functi"
+    "onOptionR\007options\022:\n\013output_type\030\007 \001(\0132\031"
+    ".skytether.substrait.TypeR\noutputType\022;\n"
+    "\005phase\030\006 \001(\0162%.skytether.substrait.Aggre"
+    "gationPhaseR\005phase\022\\\n\ninvocation\030\n \001(\0162<"
+    ".skytether.substrait.AggregateFunction.A"
+    "ggregationInvocationR\ninvocation\022U\n\013lowe"
+    "r_bound\030\005 \001(\01324.skytether.substrait.Expr"
+    "ession.WindowFunction.BoundR\nlowerBound\022"
+    "U\n\013upper_bound\030\004 \001(\01324.skytether.substra"
+    "it.Expression.WindowFunction.BoundR\nuppe"
+    "rBound\022Z\n\013bounds_type\030\014 \001(\01629.skytether."
+    "substrait.Expression.WindowFunction.Boun"
+    "dsTypeR\nboundsType\"\211\002\n\007SortRel\0226\n\006common"
     "\030\001 \001(\0132\036.skytether.substrait.RelCommonR\006"
-    "common\0220\n\006inputs\030\002 \003(\0132\030.skytether.subst"
-    "rait.RelR\006inputs\022,\n\006detail\030\003 \001(\0132\024.googl"
-    "e.protobuf.AnyR\006detail\"\222\n\n\013ExchangeRel\0226"
-    "\n\006common\030\001 \001(\0132\036.skytether.substrait.Rel"
-    "CommonR\006common\022.\n\005input\030\002 \001(\0132\030.skytethe"
-    "r.substrait.RelR\005input\022\'\n\017partition_coun"
-    "t\030\003 \001(\005R\016partitionCount\022I\n\007targets\030\004 \003(\013"
-    "2/.skytether.substrait.ExchangeRel.Excha"
-    "ngeTargetR\007targets\022\\\n\021scatter_by_fields\030"
-    "\005 \001(\0132..skytether.substrait.ExchangeRel."
-    "ScatterFieldsH\000R\017scatterByFields\022^\n\rsing"
-    "le_target\030\006 \001(\01327.skytether.substrait.Ex"
-    "changeRel.SingleBucketExpressionH\000R\014sing"
-    "leTarget\022[\n\014multi_target\030\007 \001(\01326.skyteth"
-    "er.substrait.ExchangeRel.MultiBucketExpr"
-    "essionH\000R\013multiTarget\022N\n\013round_robin\030\010 \001"
-    "(\0132+.skytether.substrait.ExchangeRel.Rou"
-    "ndRobinH\000R\nroundRobin\022J\n\tbroadcast\030\t \001(\013"
-    "2*.skytether.substrait.ExchangeRel.Broad"
-    "castH\000R\tbroadcast\022`\n\022advanced_extension\030"
-    "\n \001(\01321.skytether.substrait.extensions.A"
-    "dvancedExtensionR\021advancedExtension\032W\n\rS"
-    "catterFields\022F\n\006fields\030\001 \003(\0132..skytether"
-    ".substrait.Expression.FieldReferenceR\006fi"
-    "elds\032Y\n\026SingleBucketExpression\022\?\n\nexpres"
+    "common\022.\n\005input\030\002 \001(\0132\030.skytether.substr"
+    "ait.RelR\005input\0224\n\005sorts\030\003 \003(\0132\036.skytethe"
+    "r.substrait.SortFieldR\005sorts\022`\n\022advanced"
+    "_extension\030\n \001(\01321.skytether.substrait.e"
+    "xtensions.AdvancedExtensionR\021advancedExt"
+    "ension\"\224\002\n\tFilterRel\0226\n\006common\030\001 \001(\0132\036.s"
+    "kytether.substrait.RelCommonR\006common\022.\n\005"
+    "input\030\002 \001(\0132\030.skytether.substrait.RelR\005i"
+    "nput\022=\n\tcondition\030\003 \001(\0132\037.skytether.subs"
+    "trait.ExpressionR\tcondition\022`\n\022advanced_"
+    "extension\030\n \001(\01321.skytether.substrait.ex"
+    "tensions.AdvancedExtensionR\021advancedExte"
+    "nsion\"\226\004\n\006SetRel\0226\n\006common\030\001 \001(\0132\036.skyte"
+    "ther.substrait.RelCommonR\006common\0220\n\006inpu"
+    "ts\030\002 \003(\0132\030.skytether.substrait.RelR\006inpu"
+    "ts\0221\n\002op\030\003 \001(\0162!.skytether.substrait.Set"
+    "Rel.SetOpR\002op\022`\n\022advanced_extension\030\n \001("
+    "\01321.skytether.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\"\214\002\n\005SetO"
+    "p\022\026\n\022SET_OP_UNSPECIFIED\020\000\022\030\n\024SET_OP_MINU"
+    "S_PRIMARY\020\001\022\034\n\030SET_OP_MINUS_PRIMARY_ALL\020"
+    "\007\022\031\n\025SET_OP_MINUS_MULTISET\020\002\022\037\n\033SET_OP_I"
+    "NTERSECTION_PRIMARY\020\003\022 \n\034SET_OP_INTERSEC"
+    "TION_MULTISET\020\004\022$\n SET_OP_INTERSECTION_M"
+    "ULTISET_ALL\020\010\022\031\n\025SET_OP_UNION_DISTINCT\020\005"
+    "\022\024\n\020SET_OP_UNION_ALL\020\006\"\252\001\n\022ExtensionSing"
+    "leRel\0226\n\006common\030\001 \001(\0132\036.skytether.substr"
+    "ait.RelCommonR\006common\022.\n\005input\030\002 \001(\0132\030.s"
+    "kytether.substrait.RelR\005input\022,\n\006detail\030"
+    "\003 \001(\0132\024.google.protobuf.AnyR\006detail\"x\n\020E"
+    "xtensionLeafRel\0226\n\006common\030\001 \001(\0132\036.skytet"
+    "her.substrait.RelCommonR\006common\022,\n\006detai"
+    "l\030\002 \001(\0132\024.google.protobuf.AnyR\006detail\"\253\001"
+    "\n\021ExtensionMultiRel\0226\n\006common\030\001 \001(\0132\036.sk"
+    "ytether.substrait.RelCommonR\006common\0220\n\006i"
+    "nputs\030\002 \003(\0132\030.skytether.substrait.RelR\006i"
+    "nputs\022,\n\006detail\030\003 \001(\0132\024.google.protobuf."
+    "AnyR\006detail\"\222\n\n\013ExchangeRel\0226\n\006common\030\001 "
+    "\001(\0132\036.skytether.substrait.RelCommonR\006com"
+    "mon\022.\n\005input\030\002 \001(\0132\030.skytether.substrait"
+    ".RelR\005input\022\'\n\017partition_count\030\003 \001(\005R\016pa"
+    "rtitionCount\022I\n\007targets\030\004 \003(\0132/.skytethe"
+    "r.substrait.ExchangeRel.ExchangeTargetR\007"
+    "targets\022\\\n\021scatter_by_fields\030\005 \001(\0132..sky"
+    "tether.substrait.ExchangeRel.ScatterFiel"
+    "dsH\000R\017scatterByFields\022^\n\rsingle_target\030\006"
+    " \001(\01327.skytether.substrait.ExchangeRel.S"
+    "ingleBucketExpressionH\000R\014singleTarget\022[\n"
+    "\014multi_target\030\007 \001(\01326.skytether.substrai"
+    "t.ExchangeRel.MultiBucketExpressionH\000R\013m"
+    "ultiTarget\022N\n\013round_robin\030\010 \001(\0132+.skytet"
+    "her.substrait.ExchangeRel.RoundRobinH\000R\n"
+    "roundRobin\022J\n\tbroadcast\030\t \001(\0132*.skytethe"
+    "r.substrait.ExchangeRel.BroadcastH\000R\tbro"
+    "adcast\022`\n\022advanced_extension\030\n \001(\01321.sky"
+    "tether.substrait.extensions.AdvancedExte"
+    "nsionR\021advancedExtension\032W\n\rScatterField"
+    "s\022F\n\006fields\030\001 \003(\0132..skytether.substrait."
+    "Expression.FieldReferenceR\006fields\032Y\n\026Sin"
+    "gleBucketExpression\022\?\n\nexpression\030\001 \001(\0132"
+    "\037.skytether.substrait.ExpressionR\nexpres"
+    "sion\032\212\001\n\025MultiBucketExpression\022\?\n\nexpres"
     "sion\030\001 \001(\0132\037.skytether.substrait.Express"
-    "ionR\nexpression\032\212\001\n\025MultiBucketExpressio"
-    "n\022\?\n\nexpression\030\001 \001(\0132\037.skytether.substr"
-    "ait.ExpressionR\nexpression\0220\n\024constraine"
-    "d_to_count\030\002 \001(\010R\022constrainedToCount\032\013\n\t"
-    "Broadcast\032\"\n\nRoundRobin\022\024\n\005exact\030\001 \001(\010R\005"
-    "exact\032\212\001\n\016ExchangeTarget\022!\n\014partition_id"
-    "\030\001 \003(\005R\013partitionId\022\022\n\003uri\030\002 \001(\tH\000R\003uri\022"
-    "2\n\010extended\030\003 \001(\0132\024.google.protobuf.AnyH"
-    "\000R\010extendedB\r\n\013target_typeB\017\n\rexchange_k"
-    "ind\"\320\003\n\tExpandRel\0226\n\006common\030\001 \001(\0132\036.skyt"
-    "ether.substrait.RelCommonR\006common\022.\n\005inp"
-    "ut\030\002 \001(\0132\030.skytether.substrait.RelR\005inpu"
-    "t\022B\n\006fields\030\004 \003(\0132*.skytether.substrait."
-    "ExpandRel.ExpandFieldR\006fields\032\303\001\n\013Expand"
-    "Field\022X\n\017switching_field\030\002 \001(\0132-.skyteth"
-    "er.substrait.ExpandRel.SwitchingFieldH\000R"
-    "\016switchingField\022L\n\020consistent_field\030\003 \001("
-    "\0132\037.skytether.substrait.ExpressionH\000R\017co"
-    "nsistentFieldB\014\n\nfield_type\032Q\n\016Switching"
-    "Field\022\?\n\nduplicates\030\001 \003(\0132\037.skytether.su"
-    "bstrait.ExpressionR\nduplicates\"O\n\007RelRoo"
-    "t\022.\n\005input\030\001 \001(\0132\030.skytether.substrait.R"
-    "elR\005input\022\024\n\005names\030\002 \003(\tR\005names\"\312\n\n\003Rel\022"
-    "2\n\004read\030\001 \001(\0132\034.skytether.substrait.Read"
-    "RelH\000R\004read\0228\n\006filter\030\002 \001(\0132\036.skytether."
-    "substrait.FilterRelH\000R\006filter\0225\n\005fetch\030\003"
-    " \001(\0132\035.skytether.substrait.FetchRelH\000R\005f"
-    "etch\022A\n\taggregate\030\004 \001(\0132!.skytether.subs"
-    "trait.AggregateRelH\000R\taggregate\0222\n\004sort\030"
-    "\005 \001(\0132\034.skytether.substrait.SortRelH\000R\004s"
-    "ort\0222\n\004join\030\006 \001(\0132\034.skytether.substrait."
-    "JoinRelH\000R\004join\022;\n\007project\030\007 \001(\0132\037.skyte"
-    "ther.substrait.ProjectRelH\000R\007project\022/\n\003"
-    "set\030\010 \001(\0132\033.skytether.substrait.SetRelH\000"
-    "R\003set\022T\n\020extension_single\030\t \001(\0132\'.skytet"
-    "her.substrait.ExtensionSingleRelH\000R\017exte"
-    "nsionSingle\022Q\n\017extension_multi\030\n \001(\0132&.s"
-    "kytether.substrait.ExtensionMultiRelH\000R\016"
-    "extensionMulti\022N\n\016extension_leaf\030\013 \001(\0132%"
-    ".skytether.substrait.ExtensionLeafRelH\000R"
-    "\rextensionLeaf\0225\n\005cross\030\014 \001(\0132\035.skytethe"
-    "r.substrait.CrossRelH\000R\005cross\022A\n\treferen"
-    "ce\030\025 \001(\0132!.skytether.substrait.Reference"
-    "RelH\000R\treference\0225\n\005write\030\023 \001(\0132\035.skytet"
-    "her.substrait.WriteRelH\000R\005write\022/\n\003ddl\030\024"
-    " \001(\0132\033.skytether.substrait.DdlRelH\000R\003ddl"
-    "\022\?\n\thash_join\030\r \001(\0132 .skytether.substrai"
-    "t.HashJoinRelH\000R\010hashJoin\022B\n\nmerge_join\030"
-    "\016 \001(\0132!.skytether.substrait.MergeJoinRel"
-    "H\000R\tmergeJoin\022R\n\020nested_loop_join\030\022 \001(\0132"
-    "&.skytether.substrait.NestedLoopJoinRelH"
-    "\000R\016nestedLoopJoin\022K\n\006window\030\021 \001(\01321.skyt"
-    "ether.substrait.ConsistentPartitionWindo"
-    "wRelH\000R\006window\022>\n\010exchange\030\017 \001(\0132 .skyte"
-    "ther.substrait.ExchangeRelH\000R\010exchange\0228"
-    "\n\006expand\030\020 \001(\0132\036.skytether.substrait.Exp"
-    "andRelH\000R\006expandB\n\n\010rel_type\"\212\001\n\020NamedOb"
-    "jectWrite\022\024\n\005names\030\001 \003(\tR\005names\022`\n\022advan"
-    "ced_extension\030\n \001(\01321.skytether.substrai"
-    "t.extensions.AdvancedExtensionR\021advanced"
-    "Extension\"\?\n\017ExtensionObject\022,\n\006detail\030\001"
-    " \001(\0132\024.google.protobuf.AnyR\006detail\"\242\006\n\006D"
-    "dlRel\022J\n\014named_object\030\001 \001(\0132%.skytether."
-    "substrait.NamedObjectWriteH\000R\013namedObjec"
-    "t\022Q\n\020extension_object\030\002 \001(\0132$.skytether."
-    "substrait.ExtensionObjectH\000R\017extensionOb"
-    "ject\022C\n\014table_schema\030\003 \001(\0132 .skytether.s"
-    "ubstrait.NamedStructR\013tableSchema\022U\n\016tab"
-    "le_defaults\030\004 \001(\0132..skytether.substrait."
-    "Expression.Literal.StructR\rtableDefaults"
-    "\022=\n\006object\030\005 \001(\0162%.skytether.substrait.D"
-    "dlRel.DdlObjectR\006object\0221\n\002op\030\006 \001(\0162!.sk"
-    "ytether.substrait.DdlRel.DdlOpR\002op\022A\n\017vi"
-    "ew_definition\030\007 \001(\0132\030.skytether.substrai"
-    "t.RelR\016viewDefinition\0226\n\006common\030\010 \001(\0132\036."
-    "skytether.substrait.RelCommonR\006common\"R\n"
-    "\tDdlObject\022\032\n\026DDL_OBJECT_UNSPECIFIED\020\000\022\024"
-    "\n\020DDL_OBJECT_TABLE\020\001\022\023\n\017DDL_OBJECT_VIEW\020"
-    "\002\"\215\001\n\005DdlOp\022\026\n\022DDL_OP_UNSPECIFIED\020\000\022\021\n\rD"
-    "DL_OP_CREATE\020\001\022\034\n\030DDL_OP_CREATE_OR_REPLA"
-    "CE\020\002\022\020\n\014DDL_OP_ALTER\020\003\022\017\n\013DDL_OP_DROP\020\004\022"
-    "\030\n\024DDL_OP_DROP_IF_EXIST\020\005B\014\n\nwrite_type\""
-    "\270\005\n\010WriteRel\022H\n\013named_table\030\001 \001(\0132%.skyt"
-    "ether.substrait.NamedObjectWriteH\000R\nname"
-    "dTable\022O\n\017extension_table\030\002 \001(\0132$.skytet"
-    "her.substrait.ExtensionObjectH\000R\016extensi"
-    "onTable\022C\n\014table_schema\030\003 \001(\0132 .skytethe"
-    "r.substrait.NamedStructR\013tableSchema\0225\n\002"
-    "op\030\004 \001(\0162%.skytether.substrait.WriteRel."
-    "WriteOpR\002op\022.\n\005input\030\005 \001(\0132\030.skytether.s"
-    "ubstrait.RelR\005input\022@\n\006output\030\006 \001(\0162(.sk"
-    "ytether.substrait.WriteRel.OutputModeR\006o"
-    "utput\0226\n\006common\030\007 \001(\0132\036.skytether.substr"
-    "ait.RelCommonR\006common\"u\n\007WriteOp\022\030\n\024WRIT"
-    "E_OP_UNSPECIFIED\020\000\022\023\n\017WRITE_OP_INSERT\020\001\022"
-    "\023\n\017WRITE_OP_DELETE\020\002\022\023\n\017WRITE_OP_UPDATE\020"
-    "\003\022\021\n\rWRITE_OP_CTAS\020\004\"f\n\nOutputMode\022\033\n\027OU"
-    "TPUT_MODE_UNSPECIFIED\020\000\022\031\n\025OUTPUT_MODE_N"
-    "O_OUTPUT\020\001\022 \n\034OUTPUT_MODE_MODIFIED_RECOR"
-    "DS\020\002B\014\n\nwrite_type\"\343\004\n\021ComparisonJoinKey"
-    "\022B\n\004left\030\001 \001(\0132..skytether.substrait.Exp"
-    "ression.FieldReferenceR\004left\022D\n\005right\030\002 "
-    "\001(\0132..skytether.substrait.Expression.Fie"
-    "ldReferenceR\005right\022U\n\ncomparison\030\003 \001(\01325"
-    ".skytether.substrait.ComparisonJoinKey.C"
-    "omparisonTypeR\ncomparison\032\263\001\n\016Comparison"
-    "Type\022U\n\006simple\030\001 \001(\0162;.skytether.substra"
-    "it.ComparisonJoinKey.SimpleComparisonTyp"
-    "eH\000R\006simple\022<\n\031custom_function_reference"
-    "\030\002 \001(\rH\000R\027customFunctionReferenceB\014\n\ninn"
-    "er_type\"\266\001\n\024SimpleComparisonType\022&\n\"SIMP"
-    "LE_COMPARISON_TYPE_UNSPECIFIED\020\000\022\035\n\031SIMP"
-    "LE_COMPARISON_TYPE_EQ\020\001\022/\n+SIMPLE_COMPAR"
-    "ISON_TYPE_IS_NOT_DISTINCT_FROM\020\002\022&\n\"SIMP"
-    "LE_COMPARISON_TYPE_MIGHT_EQUAL\020\003\"\272\007\n\013Has"
-    "hJoinRel\0226\n\006common\030\001 \001(\0132\036.skytether.sub"
-    "strait.RelCommonR\006common\022,\n\004left\030\002 \001(\0132\030"
-    ".skytether.substrait.RelR\004left\022.\n\005right\030"
-    "\003 \001(\0132\030.skytether.substrait.RelR\005right\022O"
-    "\n\tleft_keys\030\004 \003(\0132..skytether.substrait."
-    "Expression.FieldReferenceB\002\030\001R\010leftKeys\022"
-    "Q\n\nright_keys\030\005 \003(\0132..skytether.substrai"
-    "t.Expression.FieldReferenceB\002\030\001R\trightKe"
-    "ys\022:\n\004keys\030\010 \003(\0132&.skytether.substrait.C"
-    "omparisonJoinKeyR\004keys\022I\n\020post_join_filt"
-    "er\030\006 \001(\0132\037.skytether.substrait.Expressio"
-    "nR\016postJoinFilter\022=\n\004type\030\007 \001(\0162).skytet"
-    "her.substrait.HashJoinRel.JoinTypeR\004type"
-    "\022`\n\022advanced_extension\030\n \001(\01321.skytether"
-    ".substrait.extensions.AdvancedExtensionR"
-    "\021advancedExtension\"\310\002\n\010JoinType\022\031\n\025JOIN_"
-    "TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022"
-    "\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003"
-    "\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_"
-    "SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\006\022\027\n\023JOIN"
-    "_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TYPE_RIGHT_ANT"
-    "I\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\t\022\032\n\026JOIN_T"
-    "YPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_TYPE_LEFT_MAR"
-    "K\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020\014\"\274\007\n\014MergeJ"
-    "oinRel\0226\n\006common\030\001 \001(\0132\036.skytether.subst"
-    "rait.RelCommonR\006common\022,\n\004left\030\002 \001(\0132\030.s"
-    "kytether.substrait.RelR\004left\022.\n\005right\030\003 "
-    "\001(\0132\030.skytether.substrait.RelR\005right\022O\n\t"
-    "left_keys\030\004 \003(\0132..skytether.substrait.Ex"
-    "pression.FieldReferenceB\002\030\001R\010leftKeys\022Q\n"
-    "\nright_keys\030\005 \003(\0132..skytether.substrait."
-    "Expression.FieldReferenceB\002\030\001R\trightKeys"
-    "\022:\n\004keys\030\010 \003(\0132&.skytether.substrait.Com"
-    "parisonJoinKeyR\004keys\022I\n\020post_join_filter"
-    "\030\006 \001(\0132\037.skytether.substrait.ExpressionR"
-    "\016postJoinFilter\022>\n\004type\030\007 \001(\0162*.skytethe"
-    "r.substrait.MergeJoinRel.JoinTypeR\004type\022"
-    "`\n\022advanced_extension\030\n \001(\01321.skytether."
-    "substrait.extensions.AdvancedExtensionR\021"
-    "advancedExtension\"\310\002\n\010JoinType\022\031\n\025JOIN_T"
-    "YPE_UNSPECIFIED\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023"
-    "\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022"
-    "\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_S"
-    "EMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\006\022\027\n\023JOIN_"
-    "TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TYPE_RIGHT_ANTI"
-    "\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\t\022\032\n\026JOIN_TY"
-    "PE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_TYPE_LEFT_MARK"
-    "\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020\014\"\334\005\n\021NestedL"
-    "oopJoinRel\0226\n\006common\030\001 \001(\0132\036.skytether.s"
-    "ubstrait.RelCommonR\006common\022,\n\004left\030\002 \001(\013"
-    "2\030.skytether.substrait.RelR\004left\022.\n\005righ"
-    "t\030\003 \001(\0132\030.skytether.substrait.RelR\005right"
-    "\022\?\n\nexpression\030\004 \001(\0132\037.skytether.substra"
-    "it.ExpressionR\nexpression\022C\n\004type\030\005 \001(\0162"
-    "/.skytether.substrait.NestedLoopJoinRel."
+    "ionR\nexpression\0220\n\024constrained_to_count\030"
+    "\002 \001(\010R\022constrainedToCount\032\013\n\tBroadcast\032\""
+    "\n\nRoundRobin\022\024\n\005exact\030\001 \001(\010R\005exact\032\212\001\n\016E"
+    "xchangeTarget\022!\n\014partition_id\030\001 \003(\005R\013par"
+    "titionId\022\022\n\003uri\030\002 \001(\tH\000R\003uri\0222\n\010extended"
+    "\030\003 \001(\0132\024.google.protobuf.AnyH\000R\010extended"
+    "B\r\n\013target_typeB\017\n\rexchange_kind\"\320\003\n\tExp"
+    "andRel\0226\n\006common\030\001 \001(\0132\036.skytether.subst"
+    "rait.RelCommonR\006common\022.\n\005input\030\002 \001(\0132\030."
+    "skytether.substrait.RelR\005input\022B\n\006fields"
+    "\030\004 \003(\0132*.skytether.substrait.ExpandRel.E"
+    "xpandFieldR\006fields\032\303\001\n\013ExpandField\022X\n\017sw"
+    "itching_field\030\002 \001(\0132-.skytether.substrai"
+    "t.ExpandRel.SwitchingFieldH\000R\016switchingF"
+    "ield\022L\n\020consistent_field\030\003 \001(\0132\037.skyteth"
+    "er.substrait.ExpressionH\000R\017consistentFie"
+    "ldB\014\n\nfield_type\032Q\n\016SwitchingField\022\?\n\ndu"
+    "plicates\030\001 \003(\0132\037.skytether.substrait.Exp"
+    "ressionR\nduplicates\"O\n\007RelRoot\022.\n\005input\030"
+    "\001 \001(\0132\030.skytether.substrait.RelR\005input\022\024"
+    "\n\005names\030\002 \003(\tR\005names\"\204\013\n\003Rel\0222\n\004read\030\001 \001"
+    "(\0132\034.skytether.substrait.ReadRelH\000R\004read"
+    "\0228\n\006filter\030\002 \001(\0132\036.skytether.substrait.F"
+    "ilterRelH\000R\006filter\0225\n\005fetch\030\003 \001(\0132\035.skyt"
+    "ether.substrait.FetchRelH\000R\005fetch\022A\n\tagg"
+    "regate\030\004 \001(\0132!.skytether.substrait.Aggre"
+    "gateRelH\000R\taggregate\0222\n\004sort\030\005 \001(\0132\034.sky"
+    "tether.substrait.SortRelH\000R\004sort\0222\n\004join"
+    "\030\006 \001(\0132\034.skytether.substrait.JoinRelH\000R\004"
+    "join\022;\n\007project\030\007 \001(\0132\037.skytether.substr"
+    "ait.ProjectRelH\000R\007project\022/\n\003set\030\010 \001(\0132\033"
+    ".skytether.substrait.SetRelH\000R\003set\022T\n\020ex"
+    "tension_single\030\t \001(\0132\'.skytether.substra"
+    "it.ExtensionSingleRelH\000R\017extensionSingle"
+    "\022Q\n\017extension_multi\030\n \001(\0132&.skytether.su"
+    "bstrait.ExtensionMultiRelH\000R\016extensionMu"
+    "lti\022N\n\016extension_leaf\030\013 \001(\0132%.skytether."
+    "substrait.ExtensionLeafRelH\000R\rextensionL"
+    "eaf\0225\n\005cross\030\014 \001(\0132\035.skytether.substrait"
+    ".CrossRelH\000R\005cross\022A\n\treference\030\025 \001(\0132!."
+    "skytether.substrait.ReferenceRelH\000R\trefe"
+    "rence\0225\n\005write\030\023 \001(\0132\035.skytether.substra"
+    "it.WriteRelH\000R\005write\022/\n\003ddl\030\024 \001(\0132\033.skyt"
+    "ether.substrait.DdlRelH\000R\003ddl\0228\n\006update\030"
+    "\026 \001(\0132\036.skytether.substrait.UpdateRelH\000R"
+    "\006update\022\?\n\thash_join\030\r \001(\0132 .skytether.s"
+    "ubstrait.HashJoinRelH\000R\010hashJoin\022B\n\nmerg"
+    "e_join\030\016 \001(\0132!.skytether.substrait.Merge"
+    "JoinRelH\000R\tmergeJoin\022R\n\020nested_loop_join"
+    "\030\022 \001(\0132&.skytether.substrait.NestedLoopJ"
+    "oinRelH\000R\016nestedLoopJoin\022K\n\006window\030\021 \001(\013"
+    "21.skytether.substrait.ConsistentPartiti"
+    "onWindowRelH\000R\006window\022>\n\010exchange\030\017 \001(\0132"
+    " .skytether.substrait.ExchangeRelH\000R\010exc"
+    "hange\0228\n\006expand\030\020 \001(\0132\036.skytether.substr"
+    "ait.ExpandRelH\000R\006expandB\n\n\010rel_type\"\212\001\n\020"
+    "NamedObjectWrite\022\024\n\005names\030\001 \003(\tR\005names\022`"
+    "\n\022advanced_extension\030\n \001(\01321.skytether.s"
+    "ubstrait.extensions.AdvancedExtensionR\021a"
+    "dvancedExtension\"\?\n\017ExtensionObject\022,\n\006d"
+    "etail\030\001 \001(\0132\024.google.protobuf.AnyR\006detai"
+    "l\"\242\006\n\006DdlRel\022J\n\014named_object\030\001 \001(\0132%.sky"
+    "tether.substrait.NamedObjectWriteH\000R\013nam"
+    "edObject\022Q\n\020extension_object\030\002 \001(\0132$.sky"
+    "tether.substrait.ExtensionObjectH\000R\017exte"
+    "nsionObject\022C\n\014table_schema\030\003 \001(\0132 .skyt"
+    "ether.substrait.NamedStructR\013tableSchema"
+    "\022U\n\016table_defaults\030\004 \001(\0132..skytether.sub"
+    "strait.Expression.Literal.StructR\rtableD"
+    "efaults\022=\n\006object\030\005 \001(\0162%.skytether.subs"
+    "trait.DdlRel.DdlObjectR\006object\0221\n\002op\030\006 \001"
+    "(\0162!.skytether.substrait.DdlRel.DdlOpR\002o"
+    "p\022A\n\017view_definition\030\007 \001(\0132\030.skytether.s"
+    "ubstrait.RelR\016viewDefinition\0226\n\006common\030\010"
+    " \001(\0132\036.skytether.substrait.RelCommonR\006co"
+    "mmon\"R\n\tDdlObject\022\032\n\026DDL_OBJECT_UNSPECIF"
+    "IED\020\000\022\024\n\020DDL_OBJECT_TABLE\020\001\022\023\n\017DDL_OBJEC"
+    "T_VIEW\020\002\"\215\001\n\005DdlOp\022\026\n\022DDL_OP_UNSPECIFIED"
+    "\020\000\022\021\n\rDDL_OP_CREATE\020\001\022\034\n\030DDL_OP_CREATE_O"
+    "R_REPLACE\020\002\022\020\n\014DDL_OP_ALTER\020\003\022\017\n\013DDL_OP_"
+    "DROP\020\004\022\030\n\024DDL_OP_DROP_IF_EXIST\020\005B\014\n\nwrit"
+    "e_type\"\267\007\n\010WriteRel\022H\n\013named_table\030\001 \001(\013"
+    "2%.skytether.substrait.NamedObjectWriteH"
+    "\000R\nnamedTable\022O\n\017extension_table\030\002 \001(\0132$"
+    ".skytether.substrait.ExtensionObjectH\000R\016"
+    "extensionTable\022C\n\014table_schema\030\003 \001(\0132 .s"
+    "kytether.substrait.NamedStructR\013tableSch"
+    "ema\0225\n\002op\030\004 \001(\0162%.skytether.substrait.Wr"
+    "iteRel.WriteOpR\002op\022.\n\005input\030\005 \001(\0132\030.skyt"
+    "ether.substrait.RelR\005input\022I\n\013create_mod"
+    "e\030\010 \001(\0162(.skytether.substrait.WriteRel.C"
+    "reateModeR\ncreateMode\022@\n\006output\030\006 \001(\0162(."
+    "skytether.substrait.WriteRel.OutputModeR"
+    "\006output\0226\n\006common\030\007 \001(\0132\036.skytether.subs"
+    "trait.RelCommonR\006common\"u\n\007WriteOp\022\030\n\024WR"
+    "ITE_OP_UNSPECIFIED\020\000\022\023\n\017WRITE_OP_INSERT\020"
+    "\001\022\023\n\017WRITE_OP_DELETE\020\002\022\023\n\017WRITE_OP_UPDAT"
+    "E\020\003\022\021\n\rWRITE_OP_CTAS\020\004\"\261\001\n\nCreateMode\022\033\n"
+    "\027CREATE_MODE_UNSPECIFIED\020\000\022 \n\034CREATE_MOD"
+    "E_APPEND_IF_EXISTS\020\001\022!\n\035CREATE_MODE_REPL"
+    "ACE_IF_EXISTS\020\002\022 \n\034CREATE_MODE_IGNORE_IF"
+    "_EXISTS\020\003\022\037\n\033CREATE_MODE_ERROR_IF_EXISTS"
+    "\020\004\"f\n\nOutputMode\022\033\n\027OUTPUT_MODE_UNSPECIF"
+    "IED\020\000\022\031\n\025OUTPUT_MODE_NO_OUTPUT\020\001\022 \n\034OUTP"
+    "UT_MODE_MODIFIED_RECORDS\020\002B\014\n\nwrite_type"
+    "\"\306\003\n\tUpdateRel\022B\n\013named_table\030\001 \001(\0132\037.sk"
+    "ytether.substrait.NamedTableH\000R\nnamedTab"
+    "le\022C\n\014table_schema\030\002 \001(\0132 .skytether.sub"
+    "strait.NamedStructR\013tableSchema\022=\n\tcondi"
+    "tion\030\003 \001(\0132\037.skytether.substrait.Express"
+    "ionR\tcondition\022\\\n\017transformations\030\004 \003(\0132"
+    "2.skytether.substrait.UpdateRel.Transfor"
+    "mExpressionR\017transformations\032\203\001\n\023Transfo"
+    "rmExpression\022G\n\016transformation\030\001 \001(\0132\037.s"
+    "kytether.substrait.ExpressionR\016transform"
+    "ation\022#\n\rcolumn_target\030\002 \001(\005R\014columnTarg"
+    "etB\r\n\013update_type\"\204\001\n\nNamedTable\022\024\n\005name"
+    "s\030\001 \003(\tR\005names\022`\n\022advanced_extension\030\n \001"
+    "(\01321.skytether.substrait.extensions.Adva"
+    "ncedExtensionR\021advancedExtension\"\343\004\n\021Com"
+    "parisonJoinKey\022B\n\004left\030\001 \001(\0132..skytether"
+    ".substrait.Expression.FieldReferenceR\004le"
+    "ft\022D\n\005right\030\002 \001(\0132..skytether.substrait."
+    "Expression.FieldReferenceR\005right\022U\n\ncomp"
+    "arison\030\003 \001(\01325.skytether.substrait.Compa"
+    "risonJoinKey.ComparisonTypeR\ncomparison\032"
+    "\263\001\n\016ComparisonType\022U\n\006simple\030\001 \001(\0162;.sky"
+    "tether.substrait.ComparisonJoinKey.Simpl"
+    "eComparisonTypeH\000R\006simple\022<\n\031custom_func"
+    "tion_reference\030\002 \001(\rH\000R\027customFunctionRe"
+    "ferenceB\014\n\ninner_type\"\266\001\n\024SimpleComparis"
+    "onType\022&\n\"SIMPLE_COMPARISON_TYPE_UNSPECI"
+    "FIED\020\000\022\035\n\031SIMPLE_COMPARISON_TYPE_EQ\020\001\022/\n"
+    "+SIMPLE_COMPARISON_TYPE_IS_NOT_DISTINCT_"
+    "FROM\020\002\022&\n\"SIMPLE_COMPARISON_TYPE_MIGHT_E"
+    "QUAL\020\003\"\272\007\n\013HashJoinRel\0226\n\006common\030\001 \001(\0132\036"
+    ".skytether.substrait.RelCommonR\006common\022,"
+    "\n\004left\030\002 \001(\0132\030.skytether.substrait.RelR\004"
+    "left\022.\n\005right\030\003 \001(\0132\030.skytether.substrai"
+    "t.RelR\005right\022O\n\tleft_keys\030\004 \003(\0132..skytet"
+    "her.substrait.Expression.FieldReferenceB"
+    "\002\030\001R\010leftKeys\022Q\n\nright_keys\030\005 \003(\0132..skyt"
+    "ether.substrait.Expression.FieldReferenc"
+    "eB\002\030\001R\trightKeys\022:\n\004keys\030\010 \003(\0132&.skyteth"
+    "er.substrait.ComparisonJoinKeyR\004keys\022I\n\020"
+    "post_join_filter\030\006 \001(\0132\037.skytether.subst"
+    "rait.ExpressionR\016postJoinFilter\022=\n\004type\030"
+    "\007 \001(\0162).skytether.substrait.HashJoinRel."
     "JoinTypeR\004type\022`\n\022advanced_extension\030\n \001"
     "(\01321.skytether.substrait.extensions.Adva"
     "ncedExtensionR\021advancedExtension\"\310\002\n\010Joi"
@@ -5449,370 +5690,412 @@ const char descriptor_table_protodef_skytether_2fsubstrait_2falgebra_2eproto[] A
     "TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SING"
     "LE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN"
     "_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MAR"
-    "K\020\014\"\236\001\n\020FunctionArgument\022\024\n\004enum\030\001 \001(\tH\000"
-    "R\004enum\022/\n\004type\030\002 \001(\0132\031.skytether.substra"
-    "it.TypeH\000R\004type\0227\n\005value\030\003 \001(\0132\037.skyteth"
-    "er.substrait.ExpressionH\000R\005valueB\n\n\010arg_"
-    "type\"D\n\016FunctionOption\022\022\n\004name\030\001 \001(\tR\004na"
-    "me\022\036\n\npreference\030\002 \003(\tR\npreference\"\257c\n\nE"
-    "xpression\022C\n\007literal\030\001 \001(\0132\'.skytether.s"
-    "ubstrait.Expression.LiteralH\000R\007literal\022N"
-    "\n\tselection\030\002 \001(\0132..skytether.substrait."
-    "Expression.FieldReferenceH\000R\tselection\022Y"
-    "\n\017scalar_function\030\003 \001(\0132..skytether.subs"
-    "trait.Expression.ScalarFunctionH\000R\016scala"
-    "rFunction\022Y\n\017window_function\030\005 \001(\0132..sky"
-    "tether.substrait.Expression.WindowFuncti"
-    "onH\000R\016windowFunction\022A\n\007if_then\030\006 \001(\0132&."
-    "skytether.substrait.Expression.IfThenH\000R"
-    "\006ifThen\022_\n\021switch_expression\030\007 \001(\01320.sky"
-    "tether.substrait.Expression.SwitchExpres"
-    "sionH\000R\020switchExpression\022Z\n\020singular_or_"
-    "list\030\010 \001(\0132..skytether.substrait.Express"
-    "ion.SingularOrListH\000R\016singularOrList\022Q\n\r"
-    "multi_or_list\030\t \001(\0132+.skytether.substrai"
-    "t.Expression.MultiOrListH\000R\013multiOrList\022"
-    ":\n\004cast\030\013 \001(\0132$.skytether.substrait.Expr"
-    "ession.CastH\000R\004cast\022F\n\010subquery\030\014 \001(\0132(."
-    "skytether.substrait.Expression.SubqueryH"
-    "\000R\010subquery\022@\n\006nested\030\r \001(\0132&.skytether."
-    "substrait.Expression.NestedH\000R\006nested\022>\n"
-    "\004enum\030\n \001(\0132$.skytether.substrait.Expres"
-    "sion.EnumB\002\030\001H\000R\004enum\032\224\001\n\004Enum\022\036\n\tspecif"
-    "ied\030\001 \001(\tH\000R\tspecified\022N\n\013unspecified\030\002 "
-    "\001(\0132*.skytether.substrait.Expression.Enu"
-    "m.EmptyH\000R\013unspecified\032\013\n\005Empty:\002\030\001:\002\030\001B"
-    "\013\n\tenum_kind\032\212\030\n\007Literal\022\032\n\007boolean\030\001 \001("
-    "\010H\000R\007boolean\022\020\n\002i8\030\002 \001(\005H\000R\002i8\022\022\n\003i16\030\003 "
-    "\001(\005H\000R\003i16\022\022\n\003i32\030\005 \001(\005H\000R\003i32\022\022\n\003i64\030\007 "
-    "\001(\003H\000R\003i64\022\024\n\004fp32\030\n \001(\002H\000R\004fp32\022\024\n\004fp64"
-    "\030\013 \001(\001H\000R\004fp64\022\030\n\006string\030\014 \001(\tH\000R\006string"
-    "\022\030\n\006binary\030\r \001(\014H\000R\006binary\022\"\n\ttimestamp\030"
-    "\016 \001(\003B\002\030\001H\000R\ttimestamp\022\024\n\004date\030\020 \001(\005H\000R\004"
-    "date\022\024\n\004time\030\021 \001(\003H\000R\004time\022r\n\026interval_y"
-    "ear_to_month\030\023 \001(\0132;.skytether.substrait"
-    ".Expression.Literal.IntervalYearToMonthH"
-    "\000R\023intervalYearToMonth\022r\n\026interval_day_t"
-    "o_second\030\024 \001(\0132;.skytether.substrait.Exp"
-    "ression.Literal.IntervalDayToSecondH\000R\023i"
-    "ntervalDayToSecond\022g\n\021interval_compound\030"
-    "$ \001(\01328.skytether.substrait.Expression.L"
-    "iteral.IntervalCompoundH\000R\020intervalCompo"
-    "und\022\037\n\nfixed_char\030\025 \001(\tH\000R\tfixedChar\022L\n\010"
-    "var_char\030\026 \001(\0132/.skytether.substrait.Exp"
-    "ression.Literal.VarCharH\000R\007varChar\022#\n\014fi"
-    "xed_binary\030\027 \001(\014H\000R\013fixedBinary\022K\n\007decim"
-    "al\030\030 \001(\0132/.skytether.substrait.Expressio"
-    "n.Literal.DecimalH\000R\007decimal\022m\n\023precisio"
-    "n_timestamp\030\" \001(\0132:.skytether.substrait."
-    "Expression.Literal.PrecisionTimestampH\000R"
-    "\022precisionTimestamp\022r\n\026precision_timesta"
-    "mp_tz\030# \001(\0132:.skytether.substrait.Expres"
-    "sion.Literal.PrecisionTimestampH\000R\024preci"
-    "sionTimestampTz\022H\n\006struct\030\031 \001(\0132..skytet"
-    "her.substrait.Expression.Literal.StructH"
-    "\000R\006struct\022\?\n\003map\030\032 \001(\0132+.skytether.subst"
-    "rait.Expression.Literal.MapH\000R\003map\022\'\n\014ti"
-    "mestamp_tz\030\033 \001(\003B\002\030\001H\000R\013timestampTz\022\024\n\004u"
-    "uid\030\034 \001(\014H\000R\004uuid\022/\n\004null\030\035 \001(\0132\031.skytet"
-    "her.substrait.TypeH\000R\004null\022B\n\004list\030\036 \001(\013"
-    "2,.skytether.substrait.Expression.Litera"
-    "l.ListH\000R\004list\022\?\n\nempty_list\030\037 \001(\0132\036.sky"
-    "tether.substrait.Type.ListH\000R\temptyList\022"
-    "<\n\tempty_map\030  \001(\0132\035.skytether.substrait"
-    ".Type.MapH\000R\010emptyMap\022X\n\014user_defined\030! "
-    "\001(\01323.skytether.substrait.Expression.Lit"
-    "eral.UserDefinedH\000R\013userDefined\022\032\n\010nulla"
-    "ble\0302 \001(\010R\010nullable\0228\n\030type_variation_re"
-    "ference\0303 \001(\rR\026typeVariationReference\0327\n"
-    "\007VarChar\022\024\n\005value\030\001 \001(\tR\005value\022\026\n\006length"
-    "\030\002 \001(\rR\006length\032S\n\007Decimal\022\024\n\005value\030\001 \001(\014"
-    "R\005value\022\034\n\tprecision\030\002 \001(\005R\tprecision\022\024\n"
-    "\005scale\030\003 \001(\005R\005scale\032H\n\022PrecisionTimestam"
-    "p\022\034\n\tprecision\030\001 \001(\005R\tprecision\022\024\n\005value"
-    "\030\002 \001(\003R\005value\032\341\001\n\003Map\022S\n\nkey_values\030\001 \003("
-    "\01324.skytether.substrait.Expression.Liter"
-    "al.Map.KeyValueR\tkeyValues\032\204\001\n\010KeyValue\022"
-    "9\n\003key\030\001 \001(\0132\'.skytether.substrait.Expre"
-    "ssion.LiteralR\003key\022=\n\005value\030\002 \001(\0132\'.skyt"
-    "ether.substrait.Expression.LiteralR\005valu"
-    "e\032C\n\023IntervalYearToMonth\022\024\n\005years\030\001 \001(\005R"
-    "\005years\022\026\n\006months\030\002 \001(\005R\006months\032\277\001\n\023Inter"
-    "valDayToSecond\022\022\n\004days\030\001 \001(\005R\004days\022\030\n\007se"
-    "conds\030\002 \001(\005R\007seconds\022(\n\014microseconds\030\003 \001"
-    "(\005B\002\030\001H\000R\014microseconds\022\036\n\tprecision\030\004 \001("
-    "\005H\000R\tprecision\022\036\n\nsubseconds\030\005 \001(\003R\nsubs"
-    "econdsB\020\n\016precision_mode\032\366\001\n\020IntervalCom"
-    "pound\022p\n\026interval_year_to_month\030\001 \001(\0132;."
-    "skytether.substrait.Expression.Literal.I"
-    "ntervalYearToMonthR\023intervalYearToMonth\022"
-    "p\n\026interval_day_to_second\030\002 \001(\0132;.skytet"
-    "her.substrait.Expression.Literal.Interva"
-    "lDayToSecondR\023intervalDayToSecond\032I\n\006Str"
-    "uct\022\?\n\006fields\030\001 \003(\0132\'.skytether.substrai"
-    "t.Expression.LiteralR\006fields\032G\n\004List\022\?\n\006"
-    "values\030\001 \003(\0132\'.skytether.substrait.Expre"
-    "ssion.LiteralR\006values\032\201\002\n\013UserDefined\022%\n"
-    "\016type_reference\030\001 \001(\rR\rtypeReference\022L\n\017"
-    "type_parameters\030\003 \003(\0132#.skytether.substr"
-    "ait.Type.ParameterR\016typeParameters\022,\n\005va"
-    "lue\030\002 \001(\0132\024.google.protobuf.AnyH\000R\005value"
-    "\022H\n\006struct\030\004 \001(\0132..skytether.substrait.E"
-    "xpression.Literal.StructH\000R\006structB\005\n\003va"
-    "lB\016\n\014literal_type\032\217\005\n\006Nested\022\032\n\010nullable"
-    "\030\001 \001(\010R\010nullable\0228\n\030type_variation_refer"
-    "ence\030\002 \001(\rR\026typeVariationReference\022G\n\006st"
-    "ruct\030\003 \001(\0132-.skytether.substrait.Express"
-    "ion.Nested.StructH\000R\006struct\022A\n\004list\030\004 \001("
-    "\0132+.skytether.substrait.Expression.Neste"
-    "d.ListH\000R\004list\022>\n\003map\030\005 \001(\0132*.skytether."
-    "substrait.Expression.Nested.MapH\000R\003map\032\317"
-    "\001\n\003Map\022R\n\nkey_values\030\001 \003(\01323.skytether.s"
-    "ubstrait.Expression.Nested.Map.KeyValueR"
-    "\tkeyValues\032t\n\010KeyValue\0221\n\003key\030\001 \001(\0132\037.sk"
-    "ytether.substrait.ExpressionR\003key\0225\n\005val"
-    "ue\030\002 \001(\0132\037.skytether.substrait.Expressio"
-    "nR\005value\032A\n\006Struct\0227\n\006fields\030\001 \003(\0132\037.sky"
-    "tether.substrait.ExpressionR\006fields\032\?\n\004L"
-    "ist\0227\n\006values\030\001 \003(\0132\037.skytether.substrai"
-    "t.ExpressionR\006valuesB\r\n\013nested_type\032\270\002\n\016"
-    "ScalarFunction\022-\n\022function_reference\030\001 \001"
-    "(\rR\021functionReference\022C\n\targuments\030\004 \003(\013"
-    "2%.skytether.substrait.FunctionArgumentR"
-    "\targuments\022=\n\007options\030\005 \003(\0132#.skytether."
-    "substrait.FunctionOptionR\007options\022:\n\013out"
-    "put_type\030\003 \001(\0132\031.skytether.substrait.Typ"
-    "eR\noutputType\0227\n\004args\030\002 \003(\0132\037.skytether."
-    "substrait.ExpressionB\002\030\001R\004args\032\247\013\n\016Windo"
-    "wFunction\022-\n\022function_reference\030\001 \001(\rR\021f"
-    "unctionReference\022C\n\targuments\030\t \003(\0132%.sk"
-    "ytether.substrait.FunctionArgumentR\targu"
-    "ments\022=\n\007options\030\013 \003(\0132#.skytether.subst"
-    "rait.FunctionOptionR\007options\022:\n\013output_t"
-    "ype\030\007 \001(\0132\031.skytether.substrait.TypeR\nou"
-    "tputType\022;\n\005phase\030\006 \001(\0162%.skytether.subs"
-    "trait.AggregationPhaseR\005phase\0224\n\005sorts\030\003"
-    " \003(\0132\036.skytether.substrait.SortFieldR\005so"
-    "rts\022\\\n\ninvocation\030\n \001(\0162<.skytether.subs"
-    "trait.AggregateFunction.AggregationInvoc"
-    "ationR\ninvocation\022\?\n\npartitions\030\002 \003(\0132\037."
-    "skytether.substrait.ExpressionR\npartitio"
-    "ns\022Z\n\013bounds_type\030\014 \001(\01629.skytether.subs"
-    "trait.Expression.WindowFunction.BoundsTy"
-    "peR\nboundsType\022U\n\013lower_bound\030\005 \001(\01324.sk"
-    "ytether.substrait.Expression.WindowFunct"
-    "ion.BoundR\nlowerBound\022U\n\013upper_bound\030\004 \001"
-    "(\01324.skytether.substrait.Expression.Wind"
-    "owFunction.BoundR\nupperBound\0227\n\004args\030\010 \003"
-    "(\0132\037.skytether.substrait.ExpressionB\002\030\001R"
-    "\004args\032\370\003\n\005Bound\022^\n\tpreceding\030\001 \001(\0132>.sky"
-    "tether.substrait.Expression.WindowFuncti"
-    "on.Bound.PrecedingH\000R\tpreceding\022^\n\tfollo"
-    "wing\030\002 \001(\0132>.skytether.substrait.Express"
-    "ion.WindowFunction.Bound.FollowingH\000R\tfo"
-    "llowing\022b\n\013current_row\030\003 \001(\0132\?.skytether"
-    ".substrait.Expression.WindowFunction.Bou"
-    "nd.CurrentRowH\000R\ncurrentRow\022^\n\tunbounded"
-    "\030\004 \001(\0132>.skytether.substrait.Expression."
-    "WindowFunction.Bound.UnboundedH\000R\tunboun"
-    "ded\032#\n\tPreceding\022\026\n\006offset\030\001 \001(\003R\006offset"
-    "\032#\n\tFollowing\022\026\n\006offset\030\001 \001(\003R\006offset\032\014\n"
-    "\nCurrentRow\032\013\n\tUnboundedB\006\n\004kind\"V\n\nBoun"
-    "dsType\022\033\n\027BOUNDS_TYPE_UNSPECIFIED\020\000\022\024\n\020B"
-    "OUNDS_TYPE_ROWS\020\001\022\025\n\021BOUNDS_TYPE_RANGE\020\002"
-    "\032\362\001\n\006IfThen\022A\n\003ifs\030\001 \003(\0132/.skytether.sub"
-    "strait.Expression.IfThen.IfClauseR\003ifs\0223"
-    "\n\004else\030\002 \001(\0132\037.skytether.substrait.Expre"
-    "ssionR\004else\032p\n\010IfClause\022/\n\002if\030\001 \001(\0132\037.sk"
-    "ytether.substrait.ExpressionR\002if\0223\n\004then"
-    "\030\002 \001(\0132\037.skytether.substrait.ExpressionR"
-    "\004then\032\312\002\n\004Cast\022-\n\004type\030\001 \001(\0132\031.skytether"
-    ".substrait.TypeR\004type\0225\n\005input\030\002 \001(\0132\037.s"
-    "kytether.substrait.ExpressionR\005input\022_\n\020"
-    "failure_behavior\030\003 \001(\01624.skytether.subst"
-    "rait.Expression.Cast.FailureBehaviorR\017fa"
-    "ilureBehavior\"{\n\017FailureBehavior\022 \n\034FAIL"
-    "URE_BEHAVIOR_UNSPECIFIED\020\000\022 \n\034FAILURE_BE"
-    "HAVIOR_RETURN_NULL\020\001\022$\n FAILURE_BEHAVIOR"
-    "_THROW_EXCEPTION\020\002\032\303\002\n\020SwitchExpression\022"
-    "5\n\005match\030\003 \001(\0132\037.skytether.substrait.Exp"
-    "ressionR\005match\022J\n\003ifs\030\001 \003(\01328.skytether."
-    "substrait.Expression.SwitchExpression.If"
-    "ValueR\003ifs\0223\n\004else\030\002 \001(\0132\037.skytether.sub"
-    "strait.ExpressionR\004else\032w\n\007IfValue\0227\n\002if"
-    "\030\001 \001(\0132\'.skytether.substrait.Expression."
-    "LiteralR\002if\0223\n\004then\030\002 \001(\0132\037.skytether.su"
-    "bstrait.ExpressionR\004then\032\202\001\n\016SingularOrL"
-    "ist\0225\n\005value\030\001 \001(\0132\037.skytether.substrait"
-    ".ExpressionR\005value\0229\n\007options\030\002 \003(\0132\037.sk"
-    "ytether.substrait.ExpressionR\007options\032\325\001"
-    "\n\013MultiOrList\0225\n\005value\030\001 \003(\0132\037.skytether"
-    ".substrait.ExpressionR\005value\022L\n\007options\030"
-    "\002 \003(\01322.skytether.substrait.Expression.M"
-    "ultiOrList.RecordR\007options\032A\n\006Record\0227\n\006"
-    "fields\030\001 \003(\0132\037.skytether.substrait.Expre"
-    "ssionR\006fields\032\273\004\n\020EmbeddedFunction\022=\n\tar"
-    "guments\030\001 \003(\0132\037.skytether.substrait.Expr"
-    "essionR\targuments\022:\n\013output_type\030\002 \001(\0132\031"
-    ".skytether.substrait.TypeR\noutputType\022}\n"
-    "\026python_pickle_function\030\003 \001(\0132E.skytethe"
-    "r.substrait.Expression.EmbeddedFunction."
-    "PythonPickleFunctionH\000R\024pythonPickleFunc"
-    "tion\022z\n\025web_assembly_function\030\004 \001(\0132D.sk"
-    "ytether.substrait.Expression.EmbeddedFun"
-    "ction.WebAssemblyFunctionH\000R\023webAssembly"
-    "Function\032V\n\024PythonPickleFunction\022\032\n\010func"
-    "tion\030\001 \001(\014R\010function\022\"\n\014prerequisite\030\002 \003"
-    "(\tR\014prerequisite\032Q\n\023WebAssemblyFunction\022"
-    "\026\n\006script\030\001 \001(\014R\006script\022\"\n\014prerequisite\030"
-    "\002 \003(\tR\014prerequisiteB\006\n\004kind\032\257\005\n\020Referenc"
-    "eSegment\022R\n\007map_key\030\001 \001(\01327.skytether.su"
-    "bstrait.Expression.ReferenceSegment.MapK"
-    "eyH\000R\006mapKey\022a\n\014struct_field\030\002 \001(\0132<.sky"
-    "tether.substrait.Expression.ReferenceSeg"
-    "ment.StructFieldH\000R\013structField\022a\n\014list_"
-    "element\030\003 \001(\0132<.skytether.substrait.Expr"
-    "ession.ReferenceSegment.ListElementH\000R\013l"
-    "istElement\032\222\001\n\006MapKey\022@\n\007map_key\030\001 \001(\0132\'"
-    ".skytether.substrait.Expression.LiteralR"
-    "\006mapKey\022F\n\005child\030\002 \001(\01320.skytether.subst"
-    "rait.Expression.ReferenceSegmentR\005child\032"
-    "k\n\013StructField\022\024\n\005field\030\001 \001(\005R\005field\022F\n\005"
-    "child\030\002 \001(\01320.skytether.substrait.Expres"
-    "sion.ReferenceSegmentR\005child\032m\n\013ListElem"
-    "ent\022\026\n\006offset\030\001 \001(\005R\006offset\022F\n\005child\030\002 \001"
-    "(\01320.skytether.substrait.Expression.Refe"
-    "renceSegmentR\005childB\020\n\016reference_type\032\244\014"
-    "\n\016MaskExpression\022S\n\006select\030\001 \001(\0132;.skyte"
-    "ther.substrait.Expression.MaskExpression"
-    ".StructSelectR\006select\0228\n\030maintain_singul"
-    "ar_struct\030\002 \001(\010R\026maintainSingularStruct\032"
-    "\206\002\n\006Select\022U\n\006struct\030\001 \001(\0132;.skytether.s"
-    "ubstrait.Expression.MaskExpression.Struc"
-    "tSelectH\000R\006struct\022O\n\004list\030\002 \001(\01329.skytet"
-    "her.substrait.Expression.MaskExpression."
-    "ListSelectH\000R\004list\022L\n\003map\030\003 \001(\01328.skytet"
-    "her.substrait.Expression.MaskExpression."
-    "MapSelectH\000R\003mapB\006\n\004type\032l\n\014StructSelect"
-    "\022\\\n\014struct_items\030\001 \003(\01329.skytether.subst"
-    "rait.Expression.MaskExpression.StructIte"
-    "mR\013structItems\032o\n\nStructItem\022\024\n\005field\030\001 "
-    "\001(\005R\005field\022K\n\005child\030\002 \001(\01325.skytether.su"
-    "bstrait.Expression.MaskExpression.Select"
-    "R\005child\032\216\004\n\nListSelect\022f\n\tselection\030\001 \003("
-    "\0132H.skytether.substrait.Expression.MaskE"
-    "xpression.ListSelect.ListSelectItemR\tsel"
-    "ection\022K\n\005child\030\002 \001(\01325.skytether.substr"
-    "ait.Expression.MaskExpression.SelectR\005ch"
-    "ild\032\312\002\n\016ListSelectItem\022j\n\004item\030\001 \001(\0132T.s"
+    "K\020\014\"\274\007\n\014MergeJoinRel\0226\n\006common\030\001 \001(\0132\036.s"
+    "kytether.substrait.RelCommonR\006common\022,\n\004"
+    "left\030\002 \001(\0132\030.skytether.substrait.RelR\004le"
+    "ft\022.\n\005right\030\003 \001(\0132\030.skytether.substrait."
+    "RelR\005right\022O\n\tleft_keys\030\004 \003(\0132..skytethe"
+    "r.substrait.Expression.FieldReferenceB\002\030"
+    "\001R\010leftKeys\022Q\n\nright_keys\030\005 \003(\0132..skytet"
+    "her.substrait.Expression.FieldReferenceB"
+    "\002\030\001R\trightKeys\022:\n\004keys\030\010 \003(\0132&.skytether"
+    ".substrait.ComparisonJoinKeyR\004keys\022I\n\020po"
+    "st_join_filter\030\006 \001(\0132\037.skytether.substra"
+    "it.ExpressionR\016postJoinFilter\022>\n\004type\030\007 "
+    "\001(\0162*.skytether.substrait.MergeJoinRel.J"
+    "oinTypeR\004type\022`\n\022advanced_extension\030\n \001("
+    "\01321.skytether.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\"\310\002\n\010Join"
+    "Type\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_"
+    "TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOI"
+    "N_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JO"
+    "IN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_S"
+    "EMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_T"
+    "YPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGL"
+    "E\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_"
+    "TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK"
+    "\020\014\"\334\005\n\021NestedLoopJoinRel\0226\n\006common\030\001 \001(\013"
+    "2\036.skytether.substrait.RelCommonR\006common"
+    "\022,\n\004left\030\002 \001(\0132\030.skytether.substrait.Rel"
+    "R\004left\022.\n\005right\030\003 \001(\0132\030.skytether.substr"
+    "ait.RelR\005right\022\?\n\nexpression\030\004 \001(\0132\037.sky"
+    "tether.substrait.ExpressionR\nexpression\022"
+    "C\n\004type\030\005 \001(\0162/.skytether.substrait.Nest"
+    "edLoopJoinRel.JoinTypeR\004type\022`\n\022advanced"
+    "_extension\030\n \001(\01321.skytether.substrait.e"
+    "xtensions.AdvancedExtensionR\021advancedExt"
+    "ension\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECI"
+    "FIED\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE"
+    "_OUTER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYP"
+    "E_RIGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JO"
+    "IN_TYPE_RIGHT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_A"
+    "NTI\020\007\022\030\n\024JOIN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_"
+    "TYPE_LEFT_SINGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SI"
+    "NGLE\020\n\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_"
+    "TYPE_RIGHT_MARK\020\014\"\236\001\n\020FunctionArgument\022\024"
+    "\n\004enum\030\001 \001(\tH\000R\004enum\022/\n\004type\030\002 \001(\0132\031.sky"
+    "tether.substrait.TypeH\000R\004type\0227\n\005value\030\003"
+    " \001(\0132\037.skytether.substrait.ExpressionH\000R"
+    "\005valueB\n\n\010arg_type\"D\n\016FunctionOption\022\022\n\004"
+    "name\030\001 \001(\tR\004name\022\036\n\npreference\030\002 \003(\tR\npr"
+    "eference\"\257c\n\nExpression\022C\n\007literal\030\001 \001(\013"
+    "2\'.skytether.substrait.Expression.Litera"
+    "lH\000R\007literal\022N\n\tselection\030\002 \001(\0132..skytet"
+    "her.substrait.Expression.FieldReferenceH"
+    "\000R\tselection\022Y\n\017scalar_function\030\003 \001(\0132.."
+    "skytether.substrait.Expression.ScalarFun"
+    "ctionH\000R\016scalarFunction\022Y\n\017window_functi"
+    "on\030\005 \001(\0132..skytether.substrait.Expressio"
+    "n.WindowFunctionH\000R\016windowFunction\022A\n\007if"
+    "_then\030\006 \001(\0132&.skytether.substrait.Expres"
+    "sion.IfThenH\000R\006ifThen\022_\n\021switch_expressi"
+    "on\030\007 \001(\01320.skytether.substrait.Expressio"
+    "n.SwitchExpressionH\000R\020switchExpression\022Z"
+    "\n\020singular_or_list\030\010 \001(\0132..skytether.sub"
+    "strait.Expression.SingularOrListH\000R\016sing"
+    "ularOrList\022Q\n\rmulti_or_list\030\t \001(\0132+.skyt"
+    "ether.substrait.Expression.MultiOrListH\000"
+    "R\013multiOrList\022:\n\004cast\030\013 \001(\0132$.skytether."
+    "substrait.Expression.CastH\000R\004cast\022F\n\010sub"
+    "query\030\014 \001(\0132(.skytether.substrait.Expres"
+    "sion.SubqueryH\000R\010subquery\022@\n\006nested\030\r \001("
+    "\0132&.skytether.substrait.Expression.Neste"
+    "dH\000R\006nested\022>\n\004enum\030\n \001(\0132$.skytether.su"
+    "bstrait.Expression.EnumB\002\030\001H\000R\004enum\032\224\001\n\004"
+    "Enum\022\036\n\tspecified\030\001 \001(\tH\000R\tspecified\022N\n\013"
+    "unspecified\030\002 \001(\0132*.skytether.substrait."
+    "Expression.Enum.EmptyH\000R\013unspecified\032\013\n\005"
+    "Empty:\002\030\001:\002\030\001B\013\n\tenum_kind\032\212\030\n\007Literal\022\032"
+    "\n\007boolean\030\001 \001(\010H\000R\007boolean\022\020\n\002i8\030\002 \001(\005H\000"
+    "R\002i8\022\022\n\003i16\030\003 \001(\005H\000R\003i16\022\022\n\003i32\030\005 \001(\005H\000R"
+    "\003i32\022\022\n\003i64\030\007 \001(\003H\000R\003i64\022\024\n\004fp32\030\n \001(\002H\000"
+    "R\004fp32\022\024\n\004fp64\030\013 \001(\001H\000R\004fp64\022\030\n\006string\030\014"
+    " \001(\tH\000R\006string\022\030\n\006binary\030\r \001(\014H\000R\006binary"
+    "\022\"\n\ttimestamp\030\016 \001(\003B\002\030\001H\000R\ttimestamp\022\024\n\004"
+    "date\030\020 \001(\005H\000R\004date\022\024\n\004time\030\021 \001(\003H\000R\004time"
+    "\022r\n\026interval_year_to_month\030\023 \001(\0132;.skyte"
+    "ther.substrait.Expression.Literal.Interv"
+    "alYearToMonthH\000R\023intervalYearToMonth\022r\n\026"
+    "interval_day_to_second\030\024 \001(\0132;.skytether"
+    ".substrait.Expression.Literal.IntervalDa"
+    "yToSecondH\000R\023intervalDayToSecond\022g\n\021inte"
+    "rval_compound\030$ \001(\01328.skytether.substrai"
+    "t.Expression.Literal.IntervalCompoundH\000R"
+    "\020intervalCompound\022\037\n\nfixed_char\030\025 \001(\tH\000R"
+    "\tfixedChar\022L\n\010var_char\030\026 \001(\0132/.skytether"
+    ".substrait.Expression.Literal.VarCharH\000R"
+    "\007varChar\022#\n\014fixed_binary\030\027 \001(\014H\000R\013fixedB"
+    "inary\022K\n\007decimal\030\030 \001(\0132/.skytether.subst"
+    "rait.Expression.Literal.DecimalH\000R\007decim"
+    "al\022m\n\023precision_timestamp\030\" \001(\0132:.skytet"
+    "her.substrait.Expression.Literal.Precisi"
+    "onTimestampH\000R\022precisionTimestamp\022r\n\026pre"
+    "cision_timestamp_tz\030# \001(\0132:.skytether.su"
+    "bstrait.Expression.Literal.PrecisionTime"
+    "stampH\000R\024precisionTimestampTz\022H\n\006struct\030"
+    "\031 \001(\0132..skytether.substrait.Expression.L"
+    "iteral.StructH\000R\006struct\022\?\n\003map\030\032 \001(\0132+.s"
+    "kytether.substrait.Expression.Literal.Ma"
+    "pH\000R\003map\022\'\n\014timestamp_tz\030\033 \001(\003B\002\030\001H\000R\013ti"
+    "mestampTz\022\024\n\004uuid\030\034 \001(\014H\000R\004uuid\022/\n\004null\030"
+    "\035 \001(\0132\031.skytether.substrait.TypeH\000R\004null"
+    "\022B\n\004list\030\036 \001(\0132,.skytether.substrait.Exp"
+    "ression.Literal.ListH\000R\004list\022\?\n\nempty_li"
+    "st\030\037 \001(\0132\036.skytether.substrait.Type.List"
+    "H\000R\temptyList\022<\n\tempty_map\030  \001(\0132\035.skyte"
+    "ther.substrait.Type.MapH\000R\010emptyMap\022X\n\014u"
+    "ser_defined\030! \001(\01323.skytether.substrait."
+    "Expression.Literal.UserDefinedH\000R\013userDe"
+    "fined\022\032\n\010nullable\0302 \001(\010R\010nullable\0228\n\030typ"
+    "e_variation_reference\0303 \001(\rR\026typeVariati"
+    "onReference\0327\n\007VarChar\022\024\n\005value\030\001 \001(\tR\005v"
+    "alue\022\026\n\006length\030\002 \001(\rR\006length\032S\n\007Decimal\022"
+    "\024\n\005value\030\001 \001(\014R\005value\022\034\n\tprecision\030\002 \001(\005"
+    "R\tprecision\022\024\n\005scale\030\003 \001(\005R\005scale\032H\n\022Pre"
+    "cisionTimestamp\022\034\n\tprecision\030\001 \001(\005R\tprec"
+    "ision\022\024\n\005value\030\002 \001(\003R\005value\032\341\001\n\003Map\022S\n\nk"
+    "ey_values\030\001 \003(\01324.skytether.substrait.Ex"
+    "pression.Literal.Map.KeyValueR\tkeyValues"
+    "\032\204\001\n\010KeyValue\0229\n\003key\030\001 \001(\0132\'.skytether.s"
+    "ubstrait.Expression.LiteralR\003key\022=\n\005valu"
+    "e\030\002 \001(\0132\'.skytether.substrait.Expression"
+    ".LiteralR\005value\032C\n\023IntervalYearToMonth\022\024"
+    "\n\005years\030\001 \001(\005R\005years\022\026\n\006months\030\002 \001(\005R\006mo"
+    "nths\032\277\001\n\023IntervalDayToSecond\022\022\n\004days\030\001 \001"
+    "(\005R\004days\022\030\n\007seconds\030\002 \001(\005R\007seconds\022(\n\014mi"
+    "croseconds\030\003 \001(\005B\002\030\001H\000R\014microseconds\022\036\n\t"
+    "precision\030\004 \001(\005H\000R\tprecision\022\036\n\nsubsecon"
+    "ds\030\005 \001(\003R\nsubsecondsB\020\n\016precision_mode\032\366"
+    "\001\n\020IntervalCompound\022p\n\026interval_year_to_"
+    "month\030\001 \001(\0132;.skytether.substrait.Expres"
+    "sion.Literal.IntervalYearToMonthR\023interv"
+    "alYearToMonth\022p\n\026interval_day_to_second\030"
+    "\002 \001(\0132;.skytether.substrait.Expression.L"
+    "iteral.IntervalDayToSecondR\023intervalDayT"
+    "oSecond\032I\n\006Struct\022\?\n\006fields\030\001 \003(\0132\'.skyt"
+    "ether.substrait.Expression.LiteralR\006fiel"
+    "ds\032G\n\004List\022\?\n\006values\030\001 \003(\0132\'.skytether.s"
+    "ubstrait.Expression.LiteralR\006values\032\201\002\n\013"
+    "UserDefined\022%\n\016type_reference\030\001 \001(\rR\rtyp"
+    "eReference\022L\n\017type_parameters\030\003 \003(\0132#.sk"
+    "ytether.substrait.Type.ParameterR\016typePa"
+    "rameters\022,\n\005value\030\002 \001(\0132\024.google.protobu"
+    "f.AnyH\000R\005value\022H\n\006struct\030\004 \001(\0132..skyteth"
+    "er.substrait.Expression.Literal.StructH\000"
+    "R\006structB\005\n\003valB\016\n\014literal_type\032\217\005\n\006Nest"
+    "ed\022\032\n\010nullable\030\001 \001(\010R\010nullable\0228\n\030type_v"
+    "ariation_reference\030\002 \001(\rR\026typeVariationR"
+    "eference\022G\n\006struct\030\003 \001(\0132-.skytether.sub"
+    "strait.Expression.Nested.StructH\000R\006struc"
+    "t\022A\n\004list\030\004 \001(\0132+.skytether.substrait.Ex"
+    "pression.Nested.ListH\000R\004list\022>\n\003map\030\005 \001("
+    "\0132*.skytether.substrait.Expression.Neste"
+    "d.MapH\000R\003map\032\317\001\n\003Map\022R\n\nkey_values\030\001 \003(\013"
+    "23.skytether.substrait.Expression.Nested"
+    ".Map.KeyValueR\tkeyValues\032t\n\010KeyValue\0221\n\003"
+    "key\030\001 \001(\0132\037.skytether.substrait.Expressi"
+    "onR\003key\0225\n\005value\030\002 \001(\0132\037.skytether.subst"
+    "rait.ExpressionR\005value\032A\n\006Struct\0227\n\006fiel"
+    "ds\030\001 \003(\0132\037.skytether.substrait.Expressio"
+    "nR\006fields\032\?\n\004List\0227\n\006values\030\001 \003(\0132\037.skyt"
+    "ether.substrait.ExpressionR\006valuesB\r\n\013ne"
+    "sted_type\032\270\002\n\016ScalarFunction\022-\n\022function"
+    "_reference\030\001 \001(\rR\021functionReference\022C\n\ta"
+    "rguments\030\004 \003(\0132%.skytether.substrait.Fun"
+    "ctionArgumentR\targuments\022=\n\007options\030\005 \003("
+    "\0132#.skytether.substrait.FunctionOptionR\007"
+    "options\022:\n\013output_type\030\003 \001(\0132\031.skytether"
+    ".substrait.TypeR\noutputType\0227\n\004args\030\002 \003("
+    "\0132\037.skytether.substrait.ExpressionB\002\030\001R\004"
+    "args\032\247\013\n\016WindowFunction\022-\n\022function_refe"
+    "rence\030\001 \001(\rR\021functionReference\022C\n\targume"
+    "nts\030\t \003(\0132%.skytether.substrait.Function"
+    "ArgumentR\targuments\022=\n\007options\030\013 \003(\0132#.s"
+    "kytether.substrait.FunctionOptionR\007optio"
+    "ns\022:\n\013output_type\030\007 \001(\0132\031.skytether.subs"
+    "trait.TypeR\noutputType\022;\n\005phase\030\006 \001(\0162%."
+    "skytether.substrait.AggregationPhaseR\005ph"
+    "ase\0224\n\005sorts\030\003 \003(\0132\036.skytether.substrait"
+    ".SortFieldR\005sorts\022\\\n\ninvocation\030\n \001(\0162<."
+    "skytether.substrait.AggregateFunction.Ag"
+    "gregationInvocationR\ninvocation\022\?\n\nparti"
+    "tions\030\002 \003(\0132\037.skytether.substrait.Expres"
+    "sionR\npartitions\022Z\n\013bounds_type\030\014 \001(\01629."
+    "skytether.substrait.Expression.WindowFun"
+    "ction.BoundsTypeR\nboundsType\022U\n\013lower_bo"
+    "und\030\005 \001(\01324.skytether.substrait.Expressi"
+    "on.WindowFunction.BoundR\nlowerBound\022U\n\013u"
+    "pper_bound\030\004 \001(\01324.skytether.substrait.E"
+    "xpression.WindowFunction.BoundR\nupperBou"
+    "nd\0227\n\004args\030\010 \003(\0132\037.skytether.substrait.E"
+    "xpressionB\002\030\001R\004args\032\370\003\n\005Bound\022^\n\tprecedi"
+    "ng\030\001 \001(\0132>.skytether.substrait.Expressio"
+    "n.WindowFunction.Bound.PrecedingH\000R\tprec"
+    "eding\022^\n\tfollowing\030\002 \001(\0132>.skytether.sub"
+    "strait.Expression.WindowFunction.Bound.F"
+    "ollowingH\000R\tfollowing\022b\n\013current_row\030\003 \001"
+    "(\0132\?.skytether.substrait.Expression.Wind"
+    "owFunction.Bound.CurrentRowH\000R\ncurrentRo"
+    "w\022^\n\tunbounded\030\004 \001(\0132>.skytether.substra"
+    "it.Expression.WindowFunction.Bound.Unbou"
+    "ndedH\000R\tunbounded\032#\n\tPreceding\022\026\n\006offset"
+    "\030\001 \001(\003R\006offset\032#\n\tFollowing\022\026\n\006offset\030\001 "
+    "\001(\003R\006offset\032\014\n\nCurrentRow\032\013\n\tUnboundedB\006"
+    "\n\004kind\"V\n\nBoundsType\022\033\n\027BOUNDS_TYPE_UNSP"
+    "ECIFIED\020\000\022\024\n\020BOUNDS_TYPE_ROWS\020\001\022\025\n\021BOUND"
+    "S_TYPE_RANGE\020\002\032\362\001\n\006IfThen\022A\n\003ifs\030\001 \003(\0132/"
+    ".skytether.substrait.Expression.IfThen.I"
+    "fClauseR\003ifs\0223\n\004else\030\002 \001(\0132\037.skytether.s"
+    "ubstrait.ExpressionR\004else\032p\n\010IfClause\022/\n"
+    "\002if\030\001 \001(\0132\037.skytether.substrait.Expressi"
+    "onR\002if\0223\n\004then\030\002 \001(\0132\037.skytether.substra"
+    "it.ExpressionR\004then\032\312\002\n\004Cast\022-\n\004type\030\001 \001"
+    "(\0132\031.skytether.substrait.TypeR\004type\0225\n\005i"
+    "nput\030\002 \001(\0132\037.skytether.substrait.Express"
+    "ionR\005input\022_\n\020failure_behavior\030\003 \001(\01624.s"
+    "kytether.substrait.Expression.Cast.Failu"
+    "reBehaviorR\017failureBehavior\"{\n\017FailureBe"
+    "havior\022 \n\034FAILURE_BEHAVIOR_UNSPECIFIED\020\000"
+    "\022 \n\034FAILURE_BEHAVIOR_RETURN_NULL\020\001\022$\n FA"
+    "ILURE_BEHAVIOR_THROW_EXCEPTION\020\002\032\303\002\n\020Swi"
+    "tchExpression\0225\n\005match\030\003 \001(\0132\037.skytether"
+    ".substrait.ExpressionR\005match\022J\n\003ifs\030\001 \003("
+    "\01328.skytether.substrait.Expression.Switc"
+    "hExpression.IfValueR\003ifs\0223\n\004else\030\002 \001(\0132\037"
+    ".skytether.substrait.ExpressionR\004else\032w\n"
+    "\007IfValue\0227\n\002if\030\001 \001(\0132\'.skytether.substra"
+    "it.Expression.LiteralR\002if\0223\n\004then\030\002 \001(\0132"
+    "\037.skytether.substrait.ExpressionR\004then\032\202"
+    "\001\n\016SingularOrList\0225\n\005value\030\001 \001(\0132\037.skyte"
+    "ther.substrait.ExpressionR\005value\0229\n\007opti"
+    "ons\030\002 \003(\0132\037.skytether.substrait.Expressi"
+    "onR\007options\032\325\001\n\013MultiOrList\0225\n\005value\030\001 \003"
+    "(\0132\037.skytether.substrait.ExpressionR\005val"
+    "ue\022L\n\007options\030\002 \003(\01322.skytether.substrai"
+    "t.Expression.MultiOrList.RecordR\007options"
+    "\032A\n\006Record\0227\n\006fields\030\001 \003(\0132\037.skytether.s"
+    "ubstrait.ExpressionR\006fields\032\273\004\n\020Embedded"
+    "Function\022=\n\targuments\030\001 \003(\0132\037.skytether."
+    "substrait.ExpressionR\targuments\022:\n\013outpu"
+    "t_type\030\002 \001(\0132\031.skytether.substrait.TypeR"
+    "\noutputType\022}\n\026python_pickle_function\030\003 "
+    "\001(\0132E.skytether.substrait.Expression.Emb"
+    "eddedFunction.PythonPickleFunctionH\000R\024py"
+    "thonPickleFunction\022z\n\025web_assembly_funct"
+    "ion\030\004 \001(\0132D.skytether.substrait.Expressi"
+    "on.EmbeddedFunction.WebAssemblyFunctionH"
+    "\000R\023webAssemblyFunction\032V\n\024PythonPickleFu"
+    "nction\022\032\n\010function\030\001 \001(\014R\010function\022\"\n\014pr"
+    "erequisite\030\002 \003(\tR\014prerequisite\032Q\n\023WebAss"
+    "emblyFunction\022\026\n\006script\030\001 \001(\014R\006script\022\"\n"
+    "\014prerequisite\030\002 \003(\tR\014prerequisiteB\006\n\004kin"
+    "d\032\257\005\n\020ReferenceSegment\022R\n\007map_key\030\001 \001(\0132"
+    "7.skytether.substrait.Expression.Referen"
+    "ceSegment.MapKeyH\000R\006mapKey\022a\n\014struct_fie"
+    "ld\030\002 \001(\0132<.skytether.substrait.Expressio"
+    "n.ReferenceSegment.StructFieldH\000R\013struct"
+    "Field\022a\n\014list_element\030\003 \001(\0132<.skytether."
+    "substrait.Expression.ReferenceSegment.Li"
+    "stElementH\000R\013listElement\032\222\001\n\006MapKey\022@\n\007m"
+    "ap_key\030\001 \001(\0132\'.skytether.substrait.Expre"
+    "ssion.LiteralR\006mapKey\022F\n\005child\030\002 \001(\01320.s"
+    "kytether.substrait.Expression.ReferenceS"
+    "egmentR\005child\032k\n\013StructField\022\024\n\005field\030\001 "
+    "\001(\005R\005field\022F\n\005child\030\002 \001(\01320.skytether.su"
+    "bstrait.Expression.ReferenceSegmentR\005chi"
+    "ld\032m\n\013ListElement\022\026\n\006offset\030\001 \001(\005R\006offse"
+    "t\022F\n\005child\030\002 \001(\01320.skytether.substrait.E"
+    "xpression.ReferenceSegmentR\005childB\020\n\016ref"
+    "erence_type\032\244\014\n\016MaskExpression\022S\n\006select"
+    "\030\001 \001(\0132;.skytether.substrait.Expression."
+    "MaskExpression.StructSelectR\006select\0228\n\030m"
+    "aintain_singular_struct\030\002 \001(\010R\026maintainS"
+    "ingularStruct\032\206\002\n\006Select\022U\n\006struct\030\001 \001(\013"
+    "2;.skytether.substrait.Expression.MaskEx"
+    "pression.StructSelectH\000R\006struct\022O\n\004list\030"
+    "\002 \001(\01329.skytether.substrait.Expression.M"
+    "askExpression.ListSelectH\000R\004list\022L\n\003map\030"
+    "\003 \001(\01328.skytether.substrait.Expression.M"
+    "askExpression.MapSelectH\000R\003mapB\006\n\004type\032l"
+    "\n\014StructSelect\022\\\n\014struct_items\030\001 \003(\01329.s"
     "kytether.substrait.Expression.MaskExpres"
-    "sion.ListSelect.ListSelectItem.ListEleme"
-    "ntH\000R\004item\022j\n\005slice\030\002 \001(\0132R.skytether.su"
-    "bstrait.Expression.MaskExpression.ListSe"
-    "lect.ListSelectItem.ListSliceH\000R\005slice\032#"
-    "\n\013ListElement\022\024\n\005field\030\001 \001(\005R\005field\0323\n\tL"
-    "istSlice\022\024\n\005start\030\001 \001(\005R\005start\022\020\n\003end\030\002 "
-    "\001(\005R\003endB\006\n\004type\032\211\003\n\tMapSelect\022S\n\003key\030\001 "
-    "\001(\0132\?.skytether.substrait.Expression.Mas"
-    "kExpression.MapSelect.MapKeyH\000R\003key\022k\n\ne"
-    "xpression\030\002 \001(\0132I.skytether.substrait.Ex"
-    "pression.MaskExpression.MapSelect.MapKey"
-    "ExpressionH\000R\nexpression\022K\n\005child\030\003 \001(\0132"
+    "sion.StructItemR\013structItems\032o\n\nStructIt"
+    "em\022\024\n\005field\030\001 \001(\005R\005field\022K\n\005child\030\002 \001(\0132"
     "5.skytether.substrait.Expression.MaskExp"
-    "ression.SelectR\005child\032!\n\006MapKey\022\027\n\007map_k"
-    "ey\030\001 \001(\tR\006mapKey\032@\n\020MapKeyExpression\022,\n\022"
-    "map_key_expression\030\001 \001(\tR\020mapKeyExpressi"
-    "onB\010\n\006select\032\277\004\n\016FieldReference\022]\n\020direc"
-    "t_reference\030\001 \001(\01320.skytether.substrait."
-    "Expression.ReferenceSegmentH\000R\017directRef"
-    "erence\022[\n\020masked_reference\030\002 \001(\0132..skyte"
-    "ther.substrait.Expression.MaskExpression"
-    "H\000R\017maskedReference\022A\n\nexpression\030\003 \001(\0132"
-    "\037.skytether.substrait.ExpressionH\001R\nexpr"
-    "ession\022e\n\016root_reference\030\004 \001(\0132<.skyteth"
-    "er.substrait.Expression.FieldReference.R"
-    "ootReferenceH\001R\rrootReference\022h\n\017outer_r"
-    "eference\030\005 \001(\0132=.skytether.substrait.Exp"
-    "ression.FieldReference.OuterReferenceH\001R"
-    "\016outerReference\032\017\n\rRootReference\032-\n\016Oute"
-    "rReference\022\033\n\tsteps_out\030\001 \001(\rR\010stepsOutB"
-    "\020\n\016reference_typeB\013\n\troot_type\032\227\013\n\010Subqu"
-    "ery\022I\n\006scalar\030\001 \001(\0132/.skytether.substrai"
-    "t.Expression.Subquery.ScalarH\000R\006scalar\022Y"
-    "\n\014in_predicate\030\002 \001(\01324.skytether.substra"
-    "it.Expression.Subquery.InPredicateH\000R\013in"
-    "Predicate\022\\\n\rset_predicate\030\003 \001(\01325.skyte"
-    "ther.substrait.Expression.Subquery.SetPr"
-    "edicateH\000R\014setPredicate\022_\n\016set_compariso"
-    "n\030\004 \001(\01326.skytether.substrait.Expression"
-    ".Subquery.SetComparisonH\000R\rsetComparison"
-    "\0328\n\006Scalar\022.\n\005input\030\001 \001(\0132\030.skytether.su"
-    "bstrait.RelR\005input\032~\n\013InPredicate\0229\n\007nee"
-    "dles\030\001 \003(\0132\037.skytether.substrait.Express"
-    "ionR\007needles\0224\n\010haystack\030\002 \001(\0132\030.skyteth"
-    "er.substrait.RelR\010haystack\032\205\002\n\014SetPredic"
-    "ate\022d\n\014predicate_op\030\001 \001(\0162A.skytether.su"
-    "bstrait.Expression.Subquery.SetPredicate"
-    ".PredicateOpR\013predicateOp\0220\n\006tuples\030\002 \001("
-    "\0132\030.skytether.substrait.RelR\006tuples\"]\n\013P"
-    "redicateOp\022\034\n\030PREDICATE_OP_UNSPECIFIED\020\000"
-    "\022\027\n\023PREDICATE_OP_EXISTS\020\001\022\027\n\023PREDICATE_O"
-    "P_UNIQUE\020\002\032\322\004\n\rSetComparison\022e\n\014reductio"
-    "n_op\030\001 \001(\0162B.skytether.substrait.Express"
-    "ion.Subquery.SetComparison.ReductionOpR\013"
-    "reductionOp\022h\n\rcomparison_op\030\002 \001(\0162C.sky"
-    "tether.substrait.Expression.Subquery.Set"
-    "Comparison.ComparisonOpR\014comparisonOp\0223\n"
-    "\004left\030\003 \001(\0132\037.skytether.substrait.Expres"
-    "sionR\004left\022.\n\005right\030\004 \001(\0132\030.skytether.su"
-    "bstrait.RelR\005right\"\261\001\n\014ComparisonOp\022\035\n\031C"
-    "OMPARISON_OP_UNSPECIFIED\020\000\022\024\n\020COMPARISON"
-    "_OP_EQ\020\001\022\024\n\020COMPARISON_OP_NE\020\002\022\024\n\020COMPAR"
-    "ISON_OP_LT\020\003\022\024\n\020COMPARISON_OP_GT\020\004\022\024\n\020CO"
-    "MPARISON_OP_LE\020\005\022\024\n\020COMPARISON_OP_GE\020\006\"W"
-    "\n\013ReductionOp\022\034\n\030REDUCTION_OP_UNSPECIFIE"
-    "D\020\000\022\024\n\020REDUCTION_OP_ANY\020\001\022\024\n\020REDUCTION_O"
-    "P_ALL\020\002B\017\n\rsubquery_typeB\n\n\010rex_type\"\301\003\n"
-    "\tSortField\0223\n\004expr\030\001 \001(\0132\037.skytether.sub"
-    "strait.ExpressionR\004expr\022L\n\tdirection\030\002 \001"
-    "(\0162,.skytether.substrait.SortField.SortD"
-    "irectionH\000R\tdirection\022D\n\035comparison_func"
-    "tion_reference\030\003 \001(\rH\000R\033comparisonFuncti"
-    "onReference\"\335\001\n\rSortDirection\022\036\n\032SORT_DI"
-    "RECTION_UNSPECIFIED\020\000\022\"\n\036SORT_DIRECTION_"
-    "ASC_NULLS_FIRST\020\001\022!\n\035SORT_DIRECTION_ASC_"
-    "NULLS_LAST\020\002\022#\n\037SORT_DIRECTION_DESC_NULL"
-    "S_FIRST\020\003\022\"\n\036SORT_DIRECTION_DESC_NULLS_L"
-    "AST\020\004\022\034\n\030SORT_DIRECTION_CLUSTERED\020\005B\013\n\ts"
-    "ort_kind\"\223\005\n\021AggregateFunction\022-\n\022functi"
-    "on_reference\030\001 \001(\rR\021functionReference\022C\n"
-    "\targuments\030\007 \003(\0132%.skytether.substrait.F"
-    "unctionArgumentR\targuments\022=\n\007options\030\010 "
-    "\003(\0132#.skytether.substrait.FunctionOption"
-    "R\007options\022:\n\013output_type\030\005 \001(\0132\031.skyteth"
-    "er.substrait.TypeR\noutputType\022;\n\005phase\030\004"
-    " \001(\0162%.skytether.substrait.AggregationPh"
-    "aseR\005phase\0224\n\005sorts\030\003 \003(\0132\036.skytether.su"
-    "bstrait.SortFieldR\005sorts\022\\\n\ninvocation\030\006"
-    " \001(\0162<.skytether.substrait.AggregateFunc"
-    "tion.AggregationInvocationR\ninvocation\0227"
-    "\n\004args\030\002 \003(\0132\037.skytether.substrait.Expre"
-    "ssionB\002\030\001R\004args\"\204\001\n\025AggregationInvocatio"
-    "n\022&\n\"AGGREGATION_INVOCATION_UNSPECIFIED\020"
-    "\000\022\036\n\032AGGREGATION_INVOCATION_ALL\020\001\022#\n\037AGG"
-    "REGATION_INVOCATION_DISTINCT\020\002\"7\n\014Refere"
-    "nceRel\022\'\n\017subtree_ordinal\030\001 \001(\005R\016subtree"
-    "Ordinal*\357\001\n\020AggregationPhase\022!\n\035AGGREGAT"
-    "ION_PHASE_UNSPECIFIED\020\000\022-\n)AGGREGATION_P"
-    "HASE_INITIAL_TO_INTERMEDIATE\020\001\0222\n.AGGREG"
-    "ATION_PHASE_INTERMEDIATE_TO_INTERMEDIATE"
-    "\020\002\022\'\n#AGGREGATION_PHASE_INITIAL_TO_RESUL"
-    "T\020\003\022,\n(AGGREGATION_PHASE_INTERMEDIATE_TO"
-    "_RESULT\020\004B\224\001\n\027com.skytether.substraitB\014A"
-    "lgebraProtoP\001\242\002\003SSX\252\002\023Skytether.Substrai"
-    "t\312\002\023Skytether\\Substrait\342\002\037Skytether\\Subs"
-    "trait\\GPBMetadata\352\002\024Skytether::Substrait"
-    "b\006proto3"
+    "ression.SelectR\005child\032\216\004\n\nListSelect\022f\n\t"
+    "selection\030\001 \003(\0132H.skytether.substrait.Ex"
+    "pression.MaskExpression.ListSelect.ListS"
+    "electItemR\tselection\022K\n\005child\030\002 \001(\01325.sk"
+    "ytether.substrait.Expression.MaskExpress"
+    "ion.SelectR\005child\032\312\002\n\016ListSelectItem\022j\n\004"
+    "item\030\001 \001(\0132T.skytether.substrait.Express"
+    "ion.MaskExpression.ListSelect.ListSelect"
+    "Item.ListElementH\000R\004item\022j\n\005slice\030\002 \001(\0132"
+    "R.skytether.substrait.Expression.MaskExp"
+    "ression.ListSelect.ListSelectItem.ListSl"
+    "iceH\000R\005slice\032#\n\013ListElement\022\024\n\005field\030\001 \001"
+    "(\005R\005field\0323\n\tListSlice\022\024\n\005start\030\001 \001(\005R\005s"
+    "tart\022\020\n\003end\030\002 \001(\005R\003endB\006\n\004type\032\211\003\n\tMapSe"
+    "lect\022S\n\003key\030\001 \001(\0132\?.skytether.substrait."
+    "Expression.MaskExpression.MapSelect.MapK"
+    "eyH\000R\003key\022k\n\nexpression\030\002 \001(\0132I.skytethe"
+    "r.substrait.Expression.MaskExpression.Ma"
+    "pSelect.MapKeyExpressionH\000R\nexpression\022K"
+    "\n\005child\030\003 \001(\01325.skytether.substrait.Expr"
+    "ession.MaskExpression.SelectR\005child\032!\n\006M"
+    "apKey\022\027\n\007map_key\030\001 \001(\tR\006mapKey\032@\n\020MapKey"
+    "Expression\022,\n\022map_key_expression\030\001 \001(\tR\020"
+    "mapKeyExpressionB\010\n\006select\032\277\004\n\016FieldRefe"
+    "rence\022]\n\020direct_reference\030\001 \001(\01320.skytet"
+    "her.substrait.Expression.ReferenceSegmen"
+    "tH\000R\017directReference\022[\n\020masked_reference"
+    "\030\002 \001(\0132..skytether.substrait.Expression."
+    "MaskExpressionH\000R\017maskedReference\022A\n\nexp"
+    "ression\030\003 \001(\0132\037.skytether.substrait.Expr"
+    "essionH\001R\nexpression\022e\n\016root_reference\030\004"
+    " \001(\0132<.skytether.substrait.Expression.Fi"
+    "eldReference.RootReferenceH\001R\rrootRefere"
+    "nce\022h\n\017outer_reference\030\005 \001(\0132=.skytether"
+    ".substrait.Expression.FieldReference.Out"
+    "erReferenceH\001R\016outerReference\032\017\n\rRootRef"
+    "erence\032-\n\016OuterReference\022\033\n\tsteps_out\030\001 "
+    "\001(\rR\010stepsOutB\020\n\016reference_typeB\013\n\troot_"
+    "type\032\227\013\n\010Subquery\022I\n\006scalar\030\001 \001(\0132/.skyt"
+    "ether.substrait.Expression.Subquery.Scal"
+    "arH\000R\006scalar\022Y\n\014in_predicate\030\002 \001(\01324.sky"
+    "tether.substrait.Expression.Subquery.InP"
+    "redicateH\000R\013inPredicate\022\\\n\rset_predicate"
+    "\030\003 \001(\01325.skytether.substrait.Expression."
+    "Subquery.SetPredicateH\000R\014setPredicate\022_\n"
+    "\016set_comparison\030\004 \001(\01326.skytether.substr"
+    "ait.Expression.Subquery.SetComparisonH\000R"
+    "\rsetComparison\0328\n\006Scalar\022.\n\005input\030\001 \001(\0132"
+    "\030.skytether.substrait.RelR\005input\032~\n\013InPr"
+    "edicate\0229\n\007needles\030\001 \003(\0132\037.skytether.sub"
+    "strait.ExpressionR\007needles\0224\n\010haystack\030\002"
+    " \001(\0132\030.skytether.substrait.RelR\010haystack"
+    "\032\205\002\n\014SetPredicate\022d\n\014predicate_op\030\001 \001(\0162"
+    "A.skytether.substrait.Expression.Subquer"
+    "y.SetPredicate.PredicateOpR\013predicateOp\022"
+    "0\n\006tuples\030\002 \001(\0132\030.skytether.substrait.Re"
+    "lR\006tuples\"]\n\013PredicateOp\022\034\n\030PREDICATE_OP"
+    "_UNSPECIFIED\020\000\022\027\n\023PREDICATE_OP_EXISTS\020\001\022"
+    "\027\n\023PREDICATE_OP_UNIQUE\020\002\032\322\004\n\rSetComparis"
+    "on\022e\n\014reduction_op\030\001 \001(\0162B.skytether.sub"
+    "strait.Expression.Subquery.SetComparison"
+    ".ReductionOpR\013reductionOp\022h\n\rcomparison_"
+    "op\030\002 \001(\0162C.skytether.substrait.Expressio"
+    "n.Subquery.SetComparison.ComparisonOpR\014c"
+    "omparisonOp\0223\n\004left\030\003 \001(\0132\037.skytether.su"
+    "bstrait.ExpressionR\004left\022.\n\005right\030\004 \001(\0132"
+    "\030.skytether.substrait.RelR\005right\"\261\001\n\014Com"
+    "parisonOp\022\035\n\031COMPARISON_OP_UNSPECIFIED\020\000"
+    "\022\024\n\020COMPARISON_OP_EQ\020\001\022\024\n\020COMPARISON_OP_"
+    "NE\020\002\022\024\n\020COMPARISON_OP_LT\020\003\022\024\n\020COMPARISON"
+    "_OP_GT\020\004\022\024\n\020COMPARISON_OP_LE\020\005\022\024\n\020COMPAR"
+    "ISON_OP_GE\020\006\"W\n\013ReductionOp\022\034\n\030REDUCTION"
+    "_OP_UNSPECIFIED\020\000\022\024\n\020REDUCTION_OP_ANY\020\001\022"
+    "\024\n\020REDUCTION_OP_ALL\020\002B\017\n\rsubquery_typeB\n"
+    "\n\010rex_type\"\301\003\n\tSortField\0223\n\004expr\030\001 \001(\0132\037"
+    ".skytether.substrait.ExpressionR\004expr\022L\n"
+    "\tdirection\030\002 \001(\0162,.skytether.substrait.S"
+    "ortField.SortDirectionH\000R\tdirection\022D\n\035c"
+    "omparison_function_reference\030\003 \001(\rH\000R\033co"
+    "mparisonFunctionReference\"\335\001\n\rSortDirect"
+    "ion\022\036\n\032SORT_DIRECTION_UNSPECIFIED\020\000\022\"\n\036S"
+    "ORT_DIRECTION_ASC_NULLS_FIRST\020\001\022!\n\035SORT_"
+    "DIRECTION_ASC_NULLS_LAST\020\002\022#\n\037SORT_DIREC"
+    "TION_DESC_NULLS_FIRST\020\003\022\"\n\036SORT_DIRECTIO"
+    "N_DESC_NULLS_LAST\020\004\022\034\n\030SORT_DIRECTION_CL"
+    "USTERED\020\005B\013\n\tsort_kind\"\223\005\n\021AggregateFunc"
+    "tion\022-\n\022function_reference\030\001 \001(\rR\021functi"
+    "onReference\022C\n\targuments\030\007 \003(\0132%.skyteth"
+    "er.substrait.FunctionArgumentR\targuments"
+    "\022=\n\007options\030\010 \003(\0132#.skytether.substrait."
+    "FunctionOptionR\007options\022:\n\013output_type\030\005"
+    " \001(\0132\031.skytether.substrait.TypeR\noutputT"
+    "ype\022;\n\005phase\030\004 \001(\0162%.skytether.substrait"
+    ".AggregationPhaseR\005phase\0224\n\005sorts\030\003 \003(\0132"
+    "\036.skytether.substrait.SortFieldR\005sorts\022\\"
+    "\n\ninvocation\030\006 \001(\0162<.skytether.substrait"
+    ".AggregateFunction.AggregationInvocation"
+    "R\ninvocation\0227\n\004args\030\002 \003(\0132\037.skytether.s"
+    "ubstrait.ExpressionB\002\030\001R\004args\"\204\001\n\025Aggreg"
+    "ationInvocation\022&\n\"AGGREGATION_INVOCATIO"
+    "N_UNSPECIFIED\020\000\022\036\n\032AGGREGATION_INVOCATIO"
+    "N_ALL\020\001\022#\n\037AGGREGATION_INVOCATION_DISTIN"
+    "CT\020\002\"7\n\014ReferenceRel\022\'\n\017subtree_ordinal\030"
+    "\001 \001(\005R\016subtreeOrdinal*\357\001\n\020AggregationPha"
+    "se\022!\n\035AGGREGATION_PHASE_UNSPECIFIED\020\000\022-\n"
+    ")AGGREGATION_PHASE_INITIAL_TO_INTERMEDIA"
+    "TE\020\001\0222\n.AGGREGATION_PHASE_INTERMEDIATE_T"
+    "O_INTERMEDIATE\020\002\022\'\n#AGGREGATION_PHASE_IN"
+    "ITIAL_TO_RESULT\020\003\022,\n(AGGREGATION_PHASE_I"
+    "NTERMEDIATE_TO_RESULT\020\004B\224\001\n\027com.skytethe"
+    "r.substraitB\014AlgebraProtoP\001\242\002\003SSX\252\002\023Skyt"
+    "ether.Substrait\312\002\023Skytether\\Substrait\342\002\037"
+    "Skytether\\Substrait\\GPBMetadata\352\002\024Skytet"
+    "her::Substraitb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skytether_2fsubstrait_2falgebra_2eproto_deps[3] =
     {
@@ -5824,13 +6107,13 @@ static ::absl::once_flag descriptor_table_skytether_2fsubstrait_2falgebra_2eprot
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skytether_2fsubstrait_2falgebra_2eproto = {
     false,
     false,
-    31088,
+    33142,
     descriptor_table_protodef_skytether_2fsubstrait_2falgebra_2eproto,
     "skytether/substrait/algebra.proto",
     &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto_once,
     descriptor_table_skytether_2fsubstrait_2falgebra_2eproto_deps,
     3,
-    119,
+    124,
     schemas,
     file_default_instances,
     TableStruct_skytether_2fsubstrait_2falgebra_2eproto::offsets,
@@ -5839,9 +6122,31 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skytether_2fsu
 };
 namespace skytether {
 namespace substrait {
-const ::google::protobuf::EnumDescriptor* JoinRel_JoinType_descriptor() {
+const ::google::protobuf::EnumDescriptor* RelCommon_Hint_ComputationType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
   return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[0];
+}
+PROTOBUF_CONSTINIT const uint32_t RelCommon_Hint_ComputationType_internal_data_[] = {
+    196608u, 65536u, 9999u, };
+bool RelCommon_Hint_ComputationType_IsValid(int value) {
+  return ::_pbi::ValidateEnum(value, RelCommon_Hint_ComputationType_internal_data_);
+}
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::COMPUTATION_TYPE_UNSPECIFIED;
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::COMPUTATION_TYPE_HASHTABLE;
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::COMPUTATION_TYPE_BLOOM_FILTER;
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::COMPUTATION_TYPE_UNKNOWN;
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::ComputationType_MIN;
+constexpr RelCommon_Hint_ComputationType RelCommon_Hint::ComputationType_MAX;
+constexpr int RelCommon_Hint::ComputationType_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+const ::google::protobuf::EnumDescriptor* JoinRel_JoinType_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[1];
 }
 PROTOBUF_CONSTINIT const uint32_t JoinRel_JoinType_internal_data_[] = {
     851968u, 0u, };
@@ -5872,21 +6177,23 @@ constexpr int JoinRel::JoinType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* SetRel_SetOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[1];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[2];
 }
 PROTOBUF_CONSTINIT const uint32_t SetRel_SetOp_internal_data_[] = {
-    458752u, 0u, };
+    589824u, 0u, };
 bool SetRel_SetOp_IsValid(int value) {
-  return 0 <= value && value <= 6;
+  return 0 <= value && value <= 8;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 
 constexpr SetRel_SetOp SetRel::SET_OP_UNSPECIFIED;
 constexpr SetRel_SetOp SetRel::SET_OP_MINUS_PRIMARY;
+constexpr SetRel_SetOp SetRel::SET_OP_MINUS_PRIMARY_ALL;
 constexpr SetRel_SetOp SetRel::SET_OP_MINUS_MULTISET;
 constexpr SetRel_SetOp SetRel::SET_OP_INTERSECTION_PRIMARY;
 constexpr SetRel_SetOp SetRel::SET_OP_INTERSECTION_MULTISET;
+constexpr SetRel_SetOp SetRel::SET_OP_INTERSECTION_MULTISET_ALL;
 constexpr SetRel_SetOp SetRel::SET_OP_UNION_DISTINCT;
 constexpr SetRel_SetOp SetRel::SET_OP_UNION_ALL;
 constexpr SetRel_SetOp SetRel::SetOp_MIN;
@@ -5897,7 +6204,7 @@ constexpr int SetRel::SetOp_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* DdlRel_DdlObject_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[2];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[3];
 }
 PROTOBUF_CONSTINIT const uint32_t DdlRel_DdlObject_internal_data_[] = {
     196608u, 0u, };
@@ -5918,7 +6225,7 @@ constexpr int DdlRel::DdlObject_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* DdlRel_DdlOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[3];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[4];
 }
 PROTOBUF_CONSTINIT const uint32_t DdlRel_DdlOp_internal_data_[] = {
     393216u, 0u, };
@@ -5942,7 +6249,7 @@ constexpr int DdlRel::DdlOp_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* WriteRel_WriteOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[4];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[5];
 }
 PROTOBUF_CONSTINIT const uint32_t WriteRel_WriteOp_internal_data_[] = {
     327680u, 0u, };
@@ -5963,9 +6270,32 @@ constexpr int WriteRel::WriteOp_ARRAYSIZE;
 
 #endif  // (__cplusplus < 201703) &&
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+const ::google::protobuf::EnumDescriptor* WriteRel_CreateMode_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[6];
+}
+PROTOBUF_CONSTINIT const uint32_t WriteRel_CreateMode_internal_data_[] = {
+    327680u, 0u, };
+bool WriteRel_CreateMode_IsValid(int value) {
+  return 0 <= value && value <= 4;
+}
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr WriteRel_CreateMode WriteRel::CREATE_MODE_UNSPECIFIED;
+constexpr WriteRel_CreateMode WriteRel::CREATE_MODE_APPEND_IF_EXISTS;
+constexpr WriteRel_CreateMode WriteRel::CREATE_MODE_REPLACE_IF_EXISTS;
+constexpr WriteRel_CreateMode WriteRel::CREATE_MODE_IGNORE_IF_EXISTS;
+constexpr WriteRel_CreateMode WriteRel::CREATE_MODE_ERROR_IF_EXISTS;
+constexpr WriteRel_CreateMode WriteRel::CreateMode_MIN;
+constexpr WriteRel_CreateMode WriteRel::CreateMode_MAX;
+constexpr int WriteRel::CreateMode_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* WriteRel_OutputMode_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[5];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[7];
 }
 PROTOBUF_CONSTINIT const uint32_t WriteRel_OutputMode_internal_data_[] = {
     196608u, 0u, };
@@ -5986,7 +6316,7 @@ constexpr int WriteRel::OutputMode_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* ComparisonJoinKey_SimpleComparisonType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[6];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[8];
 }
 PROTOBUF_CONSTINIT const uint32_t ComparisonJoinKey_SimpleComparisonType_internal_data_[] = {
     262144u, 0u, };
@@ -6008,7 +6338,7 @@ constexpr int ComparisonJoinKey::SimpleComparisonType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* HashJoinRel_JoinType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[7];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[9];
 }
 PROTOBUF_CONSTINIT const uint32_t HashJoinRel_JoinType_internal_data_[] = {
     851968u, 0u, };
@@ -6039,7 +6369,7 @@ constexpr int HashJoinRel::JoinType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* MergeJoinRel_JoinType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[8];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[10];
 }
 PROTOBUF_CONSTINIT const uint32_t MergeJoinRel_JoinType_internal_data_[] = {
     851968u, 0u, };
@@ -6070,7 +6400,7 @@ constexpr int MergeJoinRel::JoinType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* NestedLoopJoinRel_JoinType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[9];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[11];
 }
 PROTOBUF_CONSTINIT const uint32_t NestedLoopJoinRel_JoinType_internal_data_[] = {
     851968u, 0u, };
@@ -6101,7 +6431,7 @@ constexpr int NestedLoopJoinRel::JoinType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* Expression_WindowFunction_BoundsType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[10];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[12];
 }
 PROTOBUF_CONSTINIT const uint32_t Expression_WindowFunction_BoundsType_internal_data_[] = {
     196608u, 0u, };
@@ -6122,7 +6452,7 @@ constexpr int Expression_WindowFunction::BoundsType_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* Expression_Cast_FailureBehavior_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[11];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[13];
 }
 PROTOBUF_CONSTINIT const uint32_t Expression_Cast_FailureBehavior_internal_data_[] = {
     196608u, 0u, };
@@ -6143,7 +6473,7 @@ constexpr int Expression_Cast::FailureBehavior_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* Expression_Subquery_SetPredicate_PredicateOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[12];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[14];
 }
 PROTOBUF_CONSTINIT const uint32_t Expression_Subquery_SetPredicate_PredicateOp_internal_data_[] = {
     196608u, 0u, };
@@ -6164,7 +6494,7 @@ constexpr int Expression_Subquery_SetPredicate::PredicateOp_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* Expression_Subquery_SetComparison_ComparisonOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[13];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[15];
 }
 PROTOBUF_CONSTINIT const uint32_t Expression_Subquery_SetComparison_ComparisonOp_internal_data_[] = {
     458752u, 0u, };
@@ -6189,7 +6519,7 @@ constexpr int Expression_Subquery_SetComparison::ComparisonOp_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* Expression_Subquery_SetComparison_ReductionOp_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[14];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[16];
 }
 PROTOBUF_CONSTINIT const uint32_t Expression_Subquery_SetComparison_ReductionOp_internal_data_[] = {
     196608u, 0u, };
@@ -6210,7 +6540,7 @@ constexpr int Expression_Subquery_SetComparison::ReductionOp_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* SortField_SortDirection_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[15];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[17];
 }
 PROTOBUF_CONSTINIT const uint32_t SortField_SortDirection_internal_data_[] = {
     393216u, 0u, };
@@ -6234,7 +6564,7 @@ constexpr int SortField::SortDirection_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* AggregateFunction_AggregationInvocation_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[16];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[18];
 }
 PROTOBUF_CONSTINIT const uint32_t AggregateFunction_AggregationInvocation_internal_data_[] = {
     196608u, 0u, };
@@ -6255,7 +6585,7 @@ constexpr int AggregateFunction::AggregationInvocation_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* AggregationPhase_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skytether_2fsubstrait_2falgebra_2eproto);
-  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[17];
+  return file_level_enum_descriptors_skytether_2fsubstrait_2falgebra_2eproto[19];
 }
 PROTOBUF_CONSTINIT const uint32_t AggregationPhase_internal_data_[] = {
     327680u, 0u, };
@@ -7144,6 +7474,472 @@ void RelCommon_Hint_RuntimeConstraint::InternalSwap(RelCommon_Hint_RuntimeConstr
 }
 // ===================================================================
 
+class RelCommon_Hint_SavedComputation::_Internal {
+ public:
+};
+
+RelCommon_Hint_SavedComputation::RelCommon_Hint_SavedComputation(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.substrait.RelCommon.Hint.SavedComputation)
+}
+RelCommon_Hint_SavedComputation::RelCommon_Hint_SavedComputation(
+    ::google::protobuf::Arena* arena, const RelCommon_Hint_SavedComputation& from)
+    : RelCommon_Hint_SavedComputation(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE RelCommon_Hint_SavedComputation::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void RelCommon_Hint_SavedComputation::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, computation_id_),
+           0,
+           offsetof(Impl_, type_) -
+               offsetof(Impl_, computation_id_) +
+               sizeof(Impl_::type_));
+}
+RelCommon_Hint_SavedComputation::~RelCommon_Hint_SavedComputation() {
+  // @@protoc_insertion_point(destructor:skytether.substrait.RelCommon.Hint.SavedComputation)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void RelCommon_Hint_SavedComputation::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    RelCommon_Hint_SavedComputation::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_RelCommon_Hint_SavedComputation_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &RelCommon_Hint_SavedComputation::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<RelCommon_Hint_SavedComputation>(),
+            ::google::protobuf::Message::GetNewImpl<RelCommon_Hint_SavedComputation>(),
+            ::google::protobuf::Message::GetClearImpl<RelCommon_Hint_SavedComputation>(), &RelCommon_Hint_SavedComputation::ByteSizeLong,
+                &RelCommon_Hint_SavedComputation::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_._cached_size_),
+            false,
+        },
+        &RelCommon_Hint_SavedComputation::kDescriptorMethods,
+        &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* RelCommon_Hint_SavedComputation::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> RelCommon_Hint_SavedComputation::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_SavedComputation>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RelCommon_Hint_SavedComputation, _impl_.type_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.type_)}},
+    // int32 computation_id = 1 [json_name = "computationId"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RelCommon_Hint_SavedComputation, _impl_.computation_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.computation_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 computation_id = 1 [json_name = "computationId"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.computation_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.type_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void RelCommon_Hint_SavedComputation::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.substrait.RelCommon.Hint.SavedComputation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.computation_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.type_) -
+      reinterpret_cast<char*>(&_impl_.computation_id_)) + sizeof(_impl_.type_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* RelCommon_Hint_SavedComputation::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const RelCommon_Hint_SavedComputation& this_ = static_cast<const RelCommon_Hint_SavedComputation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* RelCommon_Hint_SavedComputation::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const RelCommon_Hint_SavedComputation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.substrait.RelCommon.Hint.SavedComputation)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 computation_id = 1 [json_name = "computationId"];
+          if (this_._internal_computation_id() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_computation_id(), target);
+          }
+
+          // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+          if (this_._internal_type() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                2, this_._internal_type(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.substrait.RelCommon.Hint.SavedComputation)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t RelCommon_Hint_SavedComputation::ByteSizeLong(const MessageLite& base) {
+          const RelCommon_Hint_SavedComputation& this_ = static_cast<const RelCommon_Hint_SavedComputation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t RelCommon_Hint_SavedComputation::ByteSizeLong() const {
+          const RelCommon_Hint_SavedComputation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.substrait.RelCommon.Hint.SavedComputation)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 computation_id = 1 [json_name = "computationId"];
+            if (this_._internal_computation_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_computation_id());
+            }
+            // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+            if (this_._internal_type() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void RelCommon_Hint_SavedComputation::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<RelCommon_Hint_SavedComputation*>(&to_msg);
+  auto& from = static_cast<const RelCommon_Hint_SavedComputation&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.substrait.RelCommon.Hint.SavedComputation)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_computation_id() != 0) {
+    _this->_impl_.computation_id_ = from._impl_.computation_id_;
+  }
+  if (from._internal_type() != 0) {
+    _this->_impl_.type_ = from._impl_.type_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void RelCommon_Hint_SavedComputation::CopyFrom(const RelCommon_Hint_SavedComputation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.substrait.RelCommon.Hint.SavedComputation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void RelCommon_Hint_SavedComputation::InternalSwap(RelCommon_Hint_SavedComputation* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.type_)
+      + sizeof(RelCommon_Hint_SavedComputation::_impl_.type_)
+      - PROTOBUF_FIELD_OFFSET(RelCommon_Hint_SavedComputation, _impl_.computation_id_)>(
+          reinterpret_cast<char*>(&_impl_.computation_id_),
+          reinterpret_cast<char*>(&other->_impl_.computation_id_));
+}
+
+::google::protobuf::Metadata RelCommon_Hint_SavedComputation::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class RelCommon_Hint_LoadedComputation::_Internal {
+ public:
+};
+
+RelCommon_Hint_LoadedComputation::RelCommon_Hint_LoadedComputation(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.substrait.RelCommon.Hint.LoadedComputation)
+}
+RelCommon_Hint_LoadedComputation::RelCommon_Hint_LoadedComputation(
+    ::google::protobuf::Arena* arena, const RelCommon_Hint_LoadedComputation& from)
+    : RelCommon_Hint_LoadedComputation(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE RelCommon_Hint_LoadedComputation::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void RelCommon_Hint_LoadedComputation::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, computation_id_reference_),
+           0,
+           offsetof(Impl_, type_) -
+               offsetof(Impl_, computation_id_reference_) +
+               sizeof(Impl_::type_));
+}
+RelCommon_Hint_LoadedComputation::~RelCommon_Hint_LoadedComputation() {
+  // @@protoc_insertion_point(destructor:skytether.substrait.RelCommon.Hint.LoadedComputation)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void RelCommon_Hint_LoadedComputation::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    RelCommon_Hint_LoadedComputation::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_RelCommon_Hint_LoadedComputation_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &RelCommon_Hint_LoadedComputation::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<RelCommon_Hint_LoadedComputation>(),
+            ::google::protobuf::Message::GetNewImpl<RelCommon_Hint_LoadedComputation>(),
+            ::google::protobuf::Message::GetClearImpl<RelCommon_Hint_LoadedComputation>(), &RelCommon_Hint_LoadedComputation::ByteSizeLong,
+                &RelCommon_Hint_LoadedComputation::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_._cached_size_),
+            false,
+        },
+        &RelCommon_Hint_LoadedComputation::kDescriptorMethods,
+        &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* RelCommon_Hint_LoadedComputation::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> RelCommon_Hint_LoadedComputation::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_LoadedComputation>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RelCommon_Hint_LoadedComputation, _impl_.type_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.type_)}},
+    // int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RelCommon_Hint_LoadedComputation, _impl_.computation_id_reference_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.computation_id_reference_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.computation_id_reference_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.type_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void RelCommon_Hint_LoadedComputation::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.substrait.RelCommon.Hint.LoadedComputation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.computation_id_reference_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.type_) -
+      reinterpret_cast<char*>(&_impl_.computation_id_reference_)) + sizeof(_impl_.type_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* RelCommon_Hint_LoadedComputation::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const RelCommon_Hint_LoadedComputation& this_ = static_cast<const RelCommon_Hint_LoadedComputation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* RelCommon_Hint_LoadedComputation::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const RelCommon_Hint_LoadedComputation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.substrait.RelCommon.Hint.LoadedComputation)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+          if (this_._internal_computation_id_reference() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_computation_id_reference(), target);
+          }
+
+          // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+          if (this_._internal_type() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                2, this_._internal_type(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.substrait.RelCommon.Hint.LoadedComputation)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t RelCommon_Hint_LoadedComputation::ByteSizeLong(const MessageLite& base) {
+          const RelCommon_Hint_LoadedComputation& this_ = static_cast<const RelCommon_Hint_LoadedComputation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t RelCommon_Hint_LoadedComputation::ByteSizeLong() const {
+          const RelCommon_Hint_LoadedComputation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.substrait.RelCommon.Hint.LoadedComputation)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 computation_id_reference = 1 [json_name = "computationIdReference"];
+            if (this_._internal_computation_id_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_computation_id_reference());
+            }
+            // .skytether.substrait.RelCommon.Hint.ComputationType type = 2 [json_name = "type"];
+            if (this_._internal_type() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void RelCommon_Hint_LoadedComputation::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<RelCommon_Hint_LoadedComputation*>(&to_msg);
+  auto& from = static_cast<const RelCommon_Hint_LoadedComputation&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.substrait.RelCommon.Hint.LoadedComputation)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_computation_id_reference() != 0) {
+    _this->_impl_.computation_id_reference_ = from._impl_.computation_id_reference_;
+  }
+  if (from._internal_type() != 0) {
+    _this->_impl_.type_ = from._impl_.type_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void RelCommon_Hint_LoadedComputation::CopyFrom(const RelCommon_Hint_LoadedComputation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.substrait.RelCommon.Hint.LoadedComputation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void RelCommon_Hint_LoadedComputation::InternalSwap(RelCommon_Hint_LoadedComputation* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.type_)
+      + sizeof(RelCommon_Hint_LoadedComputation::_impl_.type_)
+      - PROTOBUF_FIELD_OFFSET(RelCommon_Hint_LoadedComputation, _impl_.computation_id_reference_)>(
+          reinterpret_cast<char*>(&_impl_.computation_id_reference_),
+          reinterpret_cast<char*>(&other->_impl_.computation_id_reference_));
+}
+
+::google::protobuf::Metadata RelCommon_Hint_LoadedComputation::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
 class RelCommon_Hint::_Internal {
  public:
   using HasBits =
@@ -7171,6 +7967,9 @@ inline PROTOBUF_NDEBUG_INLINE RelCommon_Hint::Impl_::Impl_(
     const Impl_& from, const ::skytether::substrait::RelCommon_Hint& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
+        output_names_{visibility, arena, from.output_names_},
+        saved_computations_{visibility, arena, from.saved_computations_},
+        loaded_computations_{visibility, arena, from.loaded_computations_},
         alias_(arena, from.alias_) {}
 
 RelCommon_Hint::RelCommon_Hint(
@@ -7203,6 +8002,9 @@ inline PROTOBUF_NDEBUG_INLINE RelCommon_Hint::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
+        output_names_{visibility, arena},
+        saved_computations_{visibility, arena},
+        loaded_computations_{visibility, arena},
         alias_(arena) {}
 
 inline void RelCommon_Hint::SharedCtor(::_pb::Arena* arena) {
@@ -7257,16 +8059,16 @@ const ::google::protobuf::MessageLite::ClassData* RelCommon_Hint::GetClassData()
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 3, 48, 2> RelCommon_Hint::_table_ = {
+const ::_pbi::TcParseTable<2, 7, 5, 60, 2> RelCommon_Hint::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_._has_bits_),
     0, // no _extensions_
-    10, 24,  // max_field_number, fast_idx_mask
+    12, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294966776,  // skipmap
+    4294963696,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    3,  // num_aux_entries
+    7,  // num_field_entries
+    5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -7275,7 +8077,9 @@ const ::_pbi::TcParseTable<2, 4, 3, 48, 2> RelCommon_Hint::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated string output_names = 4 [json_name = "outputNames"];
+    {::_pbi::TcParser::FastUR1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.output_names_)}},
     // .skytether.substrait.RelCommon.Hint.Stats stats = 1 [json_name = "stats"];
     {::_pbi::TcParser::FastMtS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.stats_)}},
@@ -7297,17 +8101,29 @@ const ::_pbi::TcParseTable<2, 4, 3, 48, 2> RelCommon_Hint::_table_ = {
     // string alias = 3 [json_name = "alias"];
     {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.alias_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // repeated string output_names = 4 [json_name = "outputNames"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.output_names_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kUtf8String | ::_fl::kRepSString)},
     // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
     {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 2,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skytether.substrait.RelCommon.Hint.SavedComputation saved_computations = 11 [json_name = "savedComputations"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.saved_computations_), -1, 3,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skytether.substrait.RelCommon.Hint.LoadedComputation loaded_computations = 12 [json_name = "loadedComputations"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.loaded_computations_), -1, 4,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_Stats>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_RuntimeConstraint>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::extensions::AdvancedExtension>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_SavedComputation>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon_Hint_LoadedComputation>()},
   }}, {{
-    "\42\0\0\5\0\0\0\0"
+    "\42\0\0\5\14\0\0\0"
     "skytether.substrait.RelCommon.Hint"
     "alias"
+    "output_names"
   }},
 };
 
@@ -7318,6 +8134,9 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.output_names_.Clear();
+  _impl_.saved_computations_.Clear();
+  _impl_.loaded_computations_.Clear();
   _impl_.alias_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
@@ -7376,11 +8195,41 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
             target = stream->WriteStringMaybeAliased(3, _s, target);
           }
 
+          // repeated string output_names = 4 [json_name = "outputNames"];
+          for (int i = 0, n = this_._internal_output_names_size(); i < n; ++i) {
+            const auto& s = this_._internal_output_names().Get(i);
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.substrait.RelCommon.Hint.output_names");
+            target = stream->WriteString(4, s, target);
+          }
+
           // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
           if (cached_has_bits & 0x00000004u) {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                 10, *this_._impl_.advanced_extension_, this_._impl_.advanced_extension_->GetCachedSize(), target,
                 stream);
+          }
+
+          // repeated .skytether.substrait.RelCommon.Hint.SavedComputation saved_computations = 11 [json_name = "savedComputations"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_saved_computations_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_saved_computations().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    11, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // repeated .skytether.substrait.RelCommon.Hint.LoadedComputation loaded_computations = 12 [json_name = "loadedComputations"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_loaded_computations_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_loaded_computations().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    12, repfield, repfield.GetCachedSize(),
+                    target, stream);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -7407,6 +8256,31 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated string output_names = 4 [json_name = "outputNames"];
+             {
+              total_size +=
+                  1 * ::google::protobuf::internal::FromIntSize(this_._internal_output_names().size());
+              for (int i = 0, n = this_._internal_output_names().size(); i < n; ++i) {
+                total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+                    this_._internal_output_names().Get(i));
+              }
+            }
+            // repeated .skytether.substrait.RelCommon.Hint.SavedComputation saved_computations = 11 [json_name = "savedComputations"];
+             {
+              total_size += 1UL * this_._internal_saved_computations_size();
+              for (const auto& msg : this_._internal_saved_computations()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+            // repeated .skytether.substrait.RelCommon.Hint.LoadedComputation loaded_computations = 12 [json_name = "loadedComputations"];
+             {
+              total_size += 1UL * this_._internal_loaded_computations_size();
+              for (const auto& msg : this_._internal_loaded_computations()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
            {
             // string alias = 3 [json_name = "alias"];
             if (!this_._internal_alias().empty()) {
@@ -7445,6 +8319,11 @@ void RelCommon_Hint::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_output_names()->MergeFrom(from._internal_output_names());
+  _this->_internal_mutable_saved_computations()->MergeFrom(
+      from._internal_saved_computations());
+  _this->_internal_mutable_loaded_computations()->MergeFrom(
+      from._internal_loaded_computations());
   if (!from._internal_alias().empty()) {
     _this->_internal_set_alias(from._internal_alias());
   }
@@ -7496,6 +8375,9 @@ void RelCommon_Hint::InternalSwap(RelCommon_Hint* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.output_names_.InternalSwap(&other->_impl_.output_names_);
+  _impl_.saved_computations_.InternalSwap(&other->_impl_.saved_computations_);
+  _impl_.loaded_computations_.InternalSwap(&other->_impl_.loaded_computations_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.alias_, &other->_impl_.alias_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.advanced_extension_)
@@ -8257,6 +9139,7 @@ inline PROTOBUF_NDEBUG_INLINE ReadRel_VirtualTable::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::skytether::substrait::ReadRel_VirtualTable& from_msg)
       : values_{visibility, arena, from.values_},
+        expressions_{visibility, arena, from.expressions_},
         _cached_size_{0} {}
 
 ReadRel_VirtualTable::ReadRel_VirtualTable(
@@ -8279,6 +9162,7 @@ inline PROTOBUF_NDEBUG_INLINE ReadRel_VirtualTable::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : values_{visibility, arena},
+        expressions_{visibility, arena},
         _cached_size_{0} {}
 
 inline void ReadRel_VirtualTable::SharedCtor(::_pb::Arena* arena) {
@@ -8323,16 +9207,16 @@ const ::google::protobuf::MessageLite::ClassData* ReadRel_VirtualTable::GetClass
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2> ReadRel_VirtualTable::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> ReadRel_VirtualTable::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    1,  // num_aux_entries
+    2,  // num_field_entries
+    2,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -8341,17 +9225,24 @@ const ::_pbi::TcParseTable<0, 1, 1, 0, 2> ReadRel_VirtualTable::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::ReadRel_VirtualTable>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
+    // repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 1, PROTOBUF_FIELD_OFFSET(ReadRel_VirtualTable, _impl_.expressions_)}},
+    // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
     {::_pbi::TcParser::FastMtR1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(ReadRel_VirtualTable, _impl_.values_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
+    // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
     {PROTOBUF_FIELD_OFFSET(ReadRel_VirtualTable, _impl_.values_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel_VirtualTable, _impl_.expressions_), 0, 1,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::Expression_Literal_Struct>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression_Nested_Struct>()},
   }}, {{
   }},
 };
@@ -8364,6 +9255,7 @@ PROTOBUF_NOINLINE void ReadRel_VirtualTable::Clear() {
   (void) cached_has_bits;
 
   _impl_.values_.Clear();
+  _impl_.expressions_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -8382,7 +9274,7 @@ PROTOBUF_NOINLINE void ReadRel_VirtualTable::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
+          // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
           for (unsigned i = 0, n = static_cast<unsigned>(
                                    this_._internal_values_size());
                i < n; i++) {
@@ -8390,6 +9282,17 @@ PROTOBUF_NOINLINE void ReadRel_VirtualTable::Clear() {
             target =
                 ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                     1, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_expressions_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_expressions().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    2, repfield, repfield.GetCachedSize(),
                     target, stream);
           }
 
@@ -8418,10 +9321,17 @@ PROTOBUF_NOINLINE void ReadRel_VirtualTable::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values"];
+            // repeated .skytether.substrait.Expression.Literal.Struct values = 1 [json_name = "values", deprecated = true];
              {
               total_size += 1UL * this_._internal_values_size();
               for (const auto& msg : this_._internal_values()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+            // repeated .skytether.substrait.Expression.Nested.Struct expressions = 2 [json_name = "expressions"];
+             {
+              total_size += 1UL * this_._internal_expressions_size();
+              for (const auto& msg : this_._internal_expressions()) {
                 total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
               }
             }
@@ -8440,6 +9350,8 @@ void ReadRel_VirtualTable::MergeImpl(::google::protobuf::MessageLite& to_msg, co
 
   _this->_internal_mutable_values()->MergeFrom(
       from._internal_values());
+  _this->_internal_mutable_expressions()->MergeFrom(
+      from._internal_expressions());
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -8455,6 +9367,7 @@ void ReadRel_VirtualTable::InternalSwap(ReadRel_VirtualTable* PROTOBUF_RESTRICT 
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.values_.InternalSwap(&other->_impl_.values_);
+  _impl_.expressions_.InternalSwap(&other->_impl_.expressions_);
 }
 
 ::google::protobuf::Metadata ReadRel_VirtualTable::GetMetadata() const {
@@ -12487,8 +13400,36 @@ class FetchRel::_Internal {
       decltype(std::declval<FetchRel>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(FetchRel, _impl_._has_bits_);
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::skytether::substrait::FetchRel, _impl_._oneof_case_);
 };
 
+void FetchRel::set_allocated_offset_expr(::skytether::substrait::Expression* offset_expr) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_offset_mode();
+  if (offset_expr) {
+    ::google::protobuf::Arena* submessage_arena = offset_expr->GetArena();
+    if (message_arena != submessage_arena) {
+      offset_expr = ::google::protobuf::internal::GetOwnedMessage(message_arena, offset_expr, submessage_arena);
+    }
+    set_has_offset_expr();
+    _impl_.offset_mode_.offset_expr_ = offset_expr;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.FetchRel.offset_expr)
+}
+void FetchRel::set_allocated_count_expr(::skytether::substrait::Expression* count_expr) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_count_mode();
+  if (count_expr) {
+    ::google::protobuf::Arena* submessage_arena = count_expr->GetArena();
+    if (message_arena != submessage_arena) {
+      count_expr = ::google::protobuf::internal::GetOwnedMessage(message_arena, count_expr, submessage_arena);
+    }
+    set_has_count_expr();
+    _impl_.count_mode_.count_expr_ = count_expr;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.FetchRel.count_expr)
+}
 void FetchRel::clear_advanced_extension() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.advanced_extension_ != nullptr) _impl_.advanced_extension_->Clear();
@@ -12507,7 +13448,10 @@ inline PROTOBUF_NDEBUG_INLINE FetchRel::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::skytether::substrait::FetchRel& from_msg)
       : _has_bits_{from._has_bits_},
-        _cached_size_{0} {}
+        _cached_size_{0},
+        offset_mode_{},
+        count_mode_{},
+        _oneof_case_{from._oneof_case_[0], from._oneof_case_[1]} {}
 
 FetchRel::FetchRel(
     ::google::protobuf::Arena* arena,
@@ -12532,29 +13476,45 @@ FetchRel::FetchRel(
   _impl_.advanced_extension_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::extensions::AdvancedExtension>(
                               arena, *from._impl_.advanced_extension_)
                         : nullptr;
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, offset_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, offset_),
-           offsetof(Impl_, count_) -
-               offsetof(Impl_, offset_) +
-               sizeof(Impl_::count_));
+  switch (offset_mode_case()) {
+    case OFFSET_MODE_NOT_SET:
+      break;
+      case kOffset:
+        _impl_.offset_mode_.offset_ = from._impl_.offset_mode_.offset_;
+        break;
+      case kOffsetExpr:
+        _impl_.offset_mode_.offset_expr_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.offset_mode_.offset_expr_);
+        break;
+  }
+  switch (count_mode_case()) {
+    case COUNT_MODE_NOT_SET:
+      break;
+      case kCount:
+        _impl_.count_mode_.count_ = from._impl_.count_mode_.count_;
+        break;
+      case kCountExpr:
+        _impl_.count_mode_.count_expr_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.count_mode_.count_expr_);
+        break;
+  }
 
   // @@protoc_insertion_point(copy_constructor:skytether.substrait.FetchRel)
 }
 inline PROTOBUF_NDEBUG_INLINE FetchRel::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
+      : _cached_size_{0},
+        offset_mode_{},
+        count_mode_{},
+        _oneof_case_{} {}
 
 inline void FetchRel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, common_),
            0,
-           offsetof(Impl_, count_) -
+           offsetof(Impl_, advanced_extension_) -
                offsetof(Impl_, common_) +
-               sizeof(Impl_::count_));
+               sizeof(Impl_::advanced_extension_));
 }
 FetchRel::~FetchRel() {
   // @@protoc_insertion_point(destructor:skytether.substrait.FetchRel)
@@ -12566,8 +13526,61 @@ inline void FetchRel::SharedDtor() {
   delete _impl_.common_;
   delete _impl_.input_;
   delete _impl_.advanced_extension_;
+  if (has_offset_mode()) {
+    clear_offset_mode();
+  }
+  if (has_count_mode()) {
+    clear_count_mode();
+  }
   _impl_.~Impl_();
 }
+
+void FetchRel::clear_offset_mode() {
+// @@protoc_insertion_point(one_of_clear_start:skytether.substrait.FetchRel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (offset_mode_case()) {
+    case kOffset: {
+      // No need to clear
+      break;
+    }
+    case kOffsetExpr: {
+      if (GetArena() == nullptr) {
+        delete _impl_.offset_mode_.offset_expr_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.offset_mode_.offset_expr_);
+      }
+      break;
+    }
+    case OFFSET_MODE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = OFFSET_MODE_NOT_SET;
+}
+
+void FetchRel::clear_count_mode() {
+// @@protoc_insertion_point(one_of_clear_start:skytether.substrait.FetchRel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (count_mode_case()) {
+    case kCount: {
+      // No need to clear
+      break;
+    }
+    case kCountExpr: {
+      if (GetArena() == nullptr) {
+        delete _impl_.count_mode_.count_expr_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.count_mode_.count_expr_);
+      }
+      break;
+    }
+    case COUNT_MODE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[1] = COUNT_MODE_NOT_SET;
+}
+
 
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -12598,16 +13611,16 @@ const ::google::protobuf::MessageLite::ClassData* FetchRel::GetClassData() const
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 5, 3, 0, 2> FetchRel::_table_ = {
+const ::_pbi::TcParseTable<1, 7, 5, 0, 2> FetchRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(FetchRel, _impl_._has_bits_),
     0, // no _extensions_
-    10, 24,  // max_field_number, fast_idx_mask
+    10, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294966768,  // skipmap
+    4294966720,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    5,  // num_field_entries
-    3,  // num_aux_entries
+    7,  // num_field_entries
+    5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -12616,18 +13629,12 @@ const ::_pbi::TcParseTable<2, 5, 3, 0, 2> FetchRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::FetchRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int64 count = 4 [json_name = "count"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FetchRel, _impl_.count_), 63>(),
-     {32, 63, 0, PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.count_)}},
-    // .skytether.substrait.RelCommon common = 1 [json_name = "common"];
-    {::_pbi::TcParser::FastMtS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.common_)}},
     // .skytether.substrait.Rel input = 2 [json_name = "input"];
     {::_pbi::TcParser::FastMtS1,
      {18, 1, 1, PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.input_)}},
-    // int64 offset = 3 [json_name = "offset"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FetchRel, _impl_.offset_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.offset_)}},
+    // .skytether.substrait.RelCommon common = 1 [json_name = "common"];
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.common_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -12637,18 +13644,26 @@ const ::_pbi::TcParseTable<2, 5, 3, 0, 2> FetchRel::_table_ = {
     // .skytether.substrait.Rel input = 2 [json_name = "input"];
     {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.input_), _Internal::kHasBitsOffset + 1, 1,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // int64 offset = 3 [json_name = "offset"];
-    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.offset_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
-    // int64 count = 4 [json_name = "count"];
-    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.count_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int64 offset = 3 [json_name = "offset", deprecated = true];
+    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.offset_mode_.offset_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kInt64)},
+    // int64 count = 4 [json_name = "count", deprecated = true];
+    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.count_mode_.count_), _Internal::kOneofCaseOffset + 4, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kInt64)},
+    // .skytether.substrait.Expression offset_expr = 5 [json_name = "offsetExpr"];
+    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.offset_mode_.offset_expr_), _Internal::kOneofCaseOffset + 0, 2,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skytether.substrait.Expression count_expr = 6 [json_name = "countExpr"];
+    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.count_mode_.count_expr_), _Internal::kOneofCaseOffset + 4, 3,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
-    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 2,
+    {PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 4,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::Rel>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::extensions::AdvancedExtension>()},
   }}, {{
   }},
@@ -12676,9 +13691,8 @@ PROTOBUF_NOINLINE void FetchRel::Clear() {
       _impl_.advanced_extension_->Clear();
     }
   }
-  ::memset(&_impl_.offset_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.count_) -
-      reinterpret_cast<char*>(&_impl_.offset_)) + sizeof(_impl_.count_));
+  clear_offset_mode();
+  clear_count_mode();
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -12713,18 +13727,32 @@ PROTOBUF_NOINLINE void FetchRel::Clear() {
                 stream);
           }
 
-          // int64 offset = 3 [json_name = "offset"];
-          if (this_._internal_offset() != 0) {
+          // int64 offset = 3 [json_name = "offset", deprecated = true];
+          if (this_.offset_mode_case() == kOffset) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt64ToArrayWithField<3>(
                     stream, this_._internal_offset(), target);
           }
 
-          // int64 count = 4 [json_name = "count"];
-          if (this_._internal_count() != 0) {
+          // int64 count = 4 [json_name = "count", deprecated = true];
+          if (this_.count_mode_case() == kCount) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt64ToArrayWithField<4>(
                     stream, this_._internal_count(), target);
+          }
+
+          // .skytether.substrait.Expression offset_expr = 5 [json_name = "offsetExpr"];
+          if (this_.offset_mode_case() == kOffsetExpr) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                5, *this_._impl_.offset_mode_.offset_expr_, this_._impl_.offset_mode_.offset_expr_->GetCachedSize(), target,
+                stream);
+          }
+
+          // .skytether.substrait.Expression count_expr = 6 [json_name = "countExpr"];
+          if (this_.count_mode_case() == kCountExpr) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                6, *this_._impl_.count_mode_.count_expr_, this_._impl_.count_mode_.count_expr_->GetCachedSize(), target,
+                stream);
           }
 
           // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
@@ -12776,16 +13804,38 @@ PROTOBUF_NOINLINE void FetchRel::Clear() {
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
             }
           }
-           {
-            // int64 offset = 3 [json_name = "offset"];
-            if (this_._internal_offset() != 0) {
+          switch (this_.offset_mode_case()) {
+            // int64 offset = 3 [json_name = "offset", deprecated = true];
+            case kOffset: {
               total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
                   this_._internal_offset());
+              break;
             }
-            // int64 count = 4 [json_name = "count"];
-            if (this_._internal_count() != 0) {
+            // .skytether.substrait.Expression offset_expr = 5 [json_name = "offsetExpr"];
+            case kOffsetExpr: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.offset_mode_.offset_expr_);
+              break;
+            }
+            case OFFSET_MODE_NOT_SET: {
+              break;
+            }
+          }
+          switch (this_.count_mode_case()) {
+            // int64 count = 4 [json_name = "count", deprecated = true];
+            case kCount: {
               total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
                   this_._internal_count());
+              break;
+            }
+            // .skytether.substrait.Expression count_expr = 6 [json_name = "countExpr"];
+            case kCountExpr: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.count_mode_.count_expr_);
+              break;
+            }
+            case COUNT_MODE_NOT_SET: {
+              break;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -12831,13 +13881,63 @@ void FetchRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
       }
     }
   }
-  if (from._internal_offset() != 0) {
-    _this->_impl_.offset_ = from._impl_.offset_;
-  }
-  if (from._internal_count() != 0) {
-    _this->_impl_.count_ = from._impl_.count_;
-  }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_offset_mode();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kOffset: {
+        _this->_impl_.offset_mode_.offset_ = from._impl_.offset_mode_.offset_;
+        break;
+      }
+      case kOffsetExpr: {
+        if (oneof_needs_init) {
+          _this->_impl_.offset_mode_.offset_expr_ =
+              ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.offset_mode_.offset_expr_);
+        } else {
+          _this->_impl_.offset_mode_.offset_expr_->MergeFrom(from._internal_offset_expr());
+        }
+        break;
+      }
+      case OFFSET_MODE_NOT_SET:
+        break;
+    }
+  }
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[1]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[1];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_count_mode();
+      }
+      _this->_impl_._oneof_case_[1] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kCount: {
+        _this->_impl_.count_mode_.count_ = from._impl_.count_mode_.count_;
+        break;
+      }
+      case kCountExpr: {
+        if (oneof_needs_init) {
+          _this->_impl_.count_mode_.count_expr_ =
+              ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.count_mode_.count_expr_);
+        } else {
+          _this->_impl_.count_mode_.count_expr_->MergeFrom(from._internal_count_expr());
+        }
+        break;
+      }
+      case COUNT_MODE_NOT_SET:
+        break;
+    }
+  }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -12854,11 +13954,15 @@ void FetchRel::InternalSwap(FetchRel* PROTOBUF_RESTRICT other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.count_)
-      + sizeof(FetchRel::_impl_.count_)
+      PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.advanced_extension_)
+      + sizeof(FetchRel::_impl_.advanced_extension_)
       - PROTOBUF_FIELD_OFFSET(FetchRel, _impl_.common_)>(
           reinterpret_cast<char*>(&_impl_.common_),
           reinterpret_cast<char*>(&other->_impl_.common_));
+  swap(_impl_.offset_mode_, other->_impl_.offset_mode_);
+  swap(_impl_.count_mode_, other->_impl_.count_mode_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+  swap(_impl_._oneof_case_[1], other->_impl_._oneof_case_[1]);
 }
 
 ::google::protobuf::Metadata FetchRel::GetMetadata() const {
@@ -12883,6 +13987,8 @@ inline PROTOBUF_NDEBUG_INLINE AggregateRel_Grouping::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::skytether::substrait::AggregateRel_Grouping& from_msg)
       : grouping_expressions_{visibility, arena, from.grouping_expressions_},
+        expression_references_{visibility, arena, from.expression_references_},
+        _expression_references_cached_byte_size_{0},
         _cached_size_{0} {}
 
 AggregateRel_Grouping::AggregateRel_Grouping(
@@ -12905,6 +14011,8 @@ inline PROTOBUF_NDEBUG_INLINE AggregateRel_Grouping::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : grouping_expressions_{visibility, arena},
+        expression_references_{visibility, arena},
+        _expression_references_cached_byte_size_{0},
         _cached_size_{0} {}
 
 inline void AggregateRel_Grouping::SharedCtor(::_pb::Arena* arena) {
@@ -12949,15 +14057,15 @@ const ::google::protobuf::MessageLite::ClassData* AggregateRel_Grouping::GetClas
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AggregateRel_Grouping::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> AggregateRel_Grouping::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -12967,15 +14075,21 @@ const ::_pbi::TcParseTable<0, 1, 1, 0, 2> AggregateRel_Grouping::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::AggregateRel_Grouping>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
+    // repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+    {::_pbi::TcParser::FastV32P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(AggregateRel_Grouping, _impl_.expression_references_)}},
+    // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
     {::_pbi::TcParser::FastMtR1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(AggregateRel_Grouping, _impl_.grouping_expressions_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
+    // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
     {PROTOBUF_FIELD_OFFSET(AggregateRel_Grouping, _impl_.grouping_expressions_), 0, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+    {PROTOBUF_FIELD_OFFSET(AggregateRel_Grouping, _impl_.expression_references_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
   }}, {{
@@ -12990,6 +14104,7 @@ PROTOBUF_NOINLINE void AggregateRel_Grouping::Clear() {
   (void) cached_has_bits;
 
   _impl_.grouping_expressions_.Clear();
+  _impl_.expression_references_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -13008,7 +14123,7 @@ PROTOBUF_NOINLINE void AggregateRel_Grouping::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
+          // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
           for (unsigned i = 0, n = static_cast<unsigned>(
                                    this_._internal_grouping_expressions_size());
                i < n; i++) {
@@ -13017,6 +14132,15 @@ PROTOBUF_NOINLINE void AggregateRel_Grouping::Clear() {
                 ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                     1, repfield, repfield.GetCachedSize(),
                     target, stream);
+          }
+
+          // repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+          {
+            int byte_size = this_._impl_._expression_references_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteUInt32Packed(
+                  2, this_._internal_expression_references(), byte_size, target);
+            }
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -13044,12 +14168,26 @@ PROTOBUF_NOINLINE void AggregateRel_Grouping::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions"];
+            // repeated .skytether.substrait.Expression grouping_expressions = 1 [json_name = "groupingExpressions", deprecated = true];
              {
               total_size += 1UL * this_._internal_grouping_expressions_size();
               for (const auto& msg : this_._internal_grouping_expressions()) {
                 total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
               }
+            }
+            // repeated uint32 expression_references = 2 [json_name = "expressionReferences"];
+             {
+              std::size_t data_size = ::_pbi::WireFormatLite::UInt32Size(
+                  this_._internal_expression_references())
+              ;
+              this_._impl_._expression_references_cached_byte_size_.Set(
+                  ::_pbi::ToCachedSize(data_size));
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size))
+              ;
+              total_size += tag_size + data_size;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -13066,6 +14204,7 @@ void AggregateRel_Grouping::MergeImpl(::google::protobuf::MessageLite& to_msg, c
 
   _this->_internal_mutable_grouping_expressions()->MergeFrom(
       from._internal_grouping_expressions());
+  _this->_internal_mutable_expression_references()->MergeFrom(from._internal_expression_references());
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -13081,6 +14220,7 @@ void AggregateRel_Grouping::InternalSwap(AggregateRel_Grouping* PROTOBUF_RESTRIC
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.grouping_expressions_.InternalSwap(&other->_impl_.grouping_expressions_);
+  _impl_.expression_references_.InternalSwap(&other->_impl_.expression_references_);
 }
 
 ::google::protobuf::Metadata AggregateRel_Grouping::GetMetadata() const {
@@ -13409,7 +14549,8 @@ inline PROTOBUF_NDEBUG_INLINE AggregateRel::Impl_::Impl_(
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         groupings_{visibility, arena, from.groupings_},
-        measures_{visibility, arena, from.measures_} {}
+        measures_{visibility, arena, from.measures_},
+        grouping_expressions_{visibility, arena, from.grouping_expressions_} {}
 
 AggregateRel::AggregateRel(
     ::google::protobuf::Arena* arena,
@@ -13442,7 +14583,8 @@ inline PROTOBUF_NDEBUG_INLINE AggregateRel::Impl_::Impl_(
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
         groupings_{visibility, arena},
-        measures_{visibility, arena} {}
+        measures_{visibility, arena},
+        grouping_expressions_{visibility, arena} {}
 
 inline void AggregateRel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -13495,16 +14637,16 @@ const ::google::protobuf::MessageLite::ClassData* AggregateRel::GetClassData() c
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 5, 5, 0, 2> AggregateRel::_table_ = {
+const ::_pbi::TcParseTable<3, 6, 6, 0, 2> AggregateRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_._has_bits_),
     0, // no _extensions_
-    10, 24,  // max_field_number, fast_idx_mask
+    10, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294966768,  // skipmap
+    4294966752,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    5,  // num_field_entries
-    5,  // num_aux_entries
+    6,  // num_field_entries
+    6,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -13513,9 +14655,7 @@ const ::_pbi::TcParseTable<2, 5, 5, 0, 2> AggregateRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::AggregateRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated .skytether.substrait.AggregateRel.Measure measures = 4 [json_name = "measures"];
-    {::_pbi::TcParser::FastMtR1,
-     {34, 63, 3, PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.measures_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // .skytether.substrait.RelCommon common = 1 [json_name = "common"];
     {::_pbi::TcParser::FastMtS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.common_)}},
@@ -13525,6 +14665,14 @@ const ::_pbi::TcParseTable<2, 5, 5, 0, 2> AggregateRel::_table_ = {
     // repeated .skytether.substrait.AggregateRel.Grouping groupings = 3 [json_name = "groupings"];
     {::_pbi::TcParser::FastMtR1,
      {26, 63, 2, PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.groupings_)}},
+    // repeated .skytether.substrait.AggregateRel.Measure measures = 4 [json_name = "measures"];
+    {::_pbi::TcParser::FastMtR1,
+     {34, 63, 3, PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.measures_)}},
+    // repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+    {::_pbi::TcParser::FastMtR1,
+     {42, 63, 4, PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.grouping_expressions_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
@@ -13540,14 +14688,18 @@ const ::_pbi::TcParseTable<2, 5, 5, 0, 2> AggregateRel::_table_ = {
     // repeated .skytether.substrait.AggregateRel.Measure measures = 4 [json_name = "measures"];
     {PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.measures_), -1, 3,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+    {PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.grouping_expressions_), -1, 4,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
     // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
-    {PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 4,
+    {PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 5,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::RelCommon>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::Rel>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::AggregateRel_Grouping>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::AggregateRel_Measure>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::extensions::AdvancedExtension>()},
   }}, {{
   }},
@@ -13562,6 +14714,7 @@ PROTOBUF_NOINLINE void AggregateRel::Clear() {
 
   _impl_.groupings_.Clear();
   _impl_.measures_.Clear();
+  _impl_.grouping_expressions_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
@@ -13633,6 +14786,17 @@ PROTOBUF_NOINLINE void AggregateRel::Clear() {
                     target, stream);
           }
 
+          // repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_grouping_expressions_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_grouping_expressions().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    5, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
           // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
           if (cached_has_bits & 0x00000004u) {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
@@ -13679,6 +14843,13 @@ PROTOBUF_NOINLINE void AggregateRel::Clear() {
                 total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
               }
             }
+            // repeated .skytether.substrait.Expression grouping_expressions = 5 [json_name = "groupingExpressions"];
+             {
+              total_size += 1UL * this_._internal_grouping_expressions_size();
+              for (const auto& msg : this_._internal_grouping_expressions()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
           }
           cached_has_bits = this_._impl_._has_bits_[0];
           if (cached_has_bits & 0x00000007u) {
@@ -13715,6 +14886,8 @@ void AggregateRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::go
       from._internal_groupings());
   _this->_internal_mutable_measures()->MergeFrom(
       from._internal_measures());
+  _this->_internal_mutable_grouping_expressions()->MergeFrom(
+      from._internal_grouping_expressions());
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
@@ -13763,6 +14936,7 @@ void AggregateRel::InternalSwap(AggregateRel* PROTOBUF_RESTRICT other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.groupings_.InternalSwap(&other->_impl_.groupings_);
   _impl_.measures_.InternalSwap(&other->_impl_.measures_);
+  _impl_.grouping_expressions_.InternalSwap(&other->_impl_.grouping_expressions_);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(AggregateRel, _impl_.advanced_extension_)
       + sizeof(AggregateRel::_impl_.advanced_extension_)
@@ -20235,6 +21409,19 @@ void Rel::set_allocated_ddl(::skytether::substrait::DdlRel* ddl) {
   }
   // @@protoc_insertion_point(field_set_allocated:skytether.substrait.Rel.ddl)
 }
+void Rel::set_allocated_update(::skytether::substrait::UpdateRel* update) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_rel_type();
+  if (update) {
+    ::google::protobuf::Arena* submessage_arena = update->GetArena();
+    if (message_arena != submessage_arena) {
+      update = ::google::protobuf::internal::GetOwnedMessage(message_arena, update, submessage_arena);
+    }
+    set_has_update();
+    _impl_.rel_type_.update_ = update;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.Rel.update)
+}
 void Rel::set_allocated_hash_join(::skytether::substrait::HashJoinRel* hash_join) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_rel_type();
@@ -20389,6 +21576,9 @@ Rel::Rel(
         break;
       case kDdl:
         _impl_.rel_type_.ddl_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::DdlRel>(arena, *from._impl_.rel_type_.ddl_);
+        break;
+      case kUpdate:
+        _impl_.rel_type_.update_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::UpdateRel>(arena, *from._impl_.rel_type_.update_);
         break;
       case kHashJoin:
         _impl_.rel_type_.hash_join_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::HashJoinRel>(arena, *from._impl_.rel_type_.hash_join_);
@@ -20559,6 +21749,14 @@ void Rel::clear_rel_type() {
       }
       break;
     }
+    case kUpdate: {
+      if (GetArena() == nullptr) {
+        delete _impl_.rel_type_.update_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.rel_type_.update_);
+      }
+      break;
+    }
     case kHashJoin: {
       if (GetArena() == nullptr) {
         delete _impl_.rel_type_.hash_join_;
@@ -20644,16 +21842,16 @@ const ::google::protobuf::MessageLite::ClassData* Rel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 21, 21, 0, 2> Rel::_table_ = {
+const ::_pbi::TcParseTable<0, 22, 22, 0, 2> Rel::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    21, 0,  // max_field_number, fast_idx_mask
+    22, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4292870144,  // skipmap
+    4290772992,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    21,  // num_field_entries
-    21,  // num_aux_entries
+    22,  // num_field_entries
+    22,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -20729,6 +21927,9 @@ const ::_pbi::TcParseTable<0, 21, 21, 0, 2> Rel::_table_ = {
     // .skytether.substrait.ReferenceRel reference = 21 [json_name = "reference"];
     {PROTOBUF_FIELD_OFFSET(Rel, _impl_.rel_type_.reference_), _Internal::kOneofCaseOffset + 0, 20,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skytether.substrait.UpdateRel update = 22 [json_name = "update"];
+    {PROTOBUF_FIELD_OFFSET(Rel, _impl_.rel_type_.update_), _Internal::kOneofCaseOffset + 0, 21,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::ReadRel>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::FilterRel>()},
@@ -20751,6 +21952,7 @@ const ::_pbi::TcParseTable<0, 21, 21, 0, 2> Rel::_table_ = {
     {::_pbi::TcParser::GetTable<::skytether::substrait::WriteRel>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::DdlRel>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::ReferenceRel>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::UpdateRel>()},
   }}, {{
   }},
 };
@@ -20908,6 +22110,12 @@ PROTOBUF_NOINLINE void Rel::Clear() {
                   stream);
               break;
             }
+            case kUpdate: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  22, *this_._impl_.rel_type_.update_, this_._impl_.rel_type_.update_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -21023,6 +22231,12 @@ PROTOBUF_NOINLINE void Rel::Clear() {
             case kDdl: {
               total_size += 2 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.rel_type_.ddl_);
+              break;
+            }
+            // .skytether.substrait.UpdateRel update = 22 [json_name = "update"];
+            case kUpdate: {
+              total_size += 2 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.rel_type_.update_);
               break;
             }
             // .skytether.substrait.HashJoinRel hash_join = 13 [json_name = "hashJoin"];
@@ -21221,6 +22435,15 @@ void Rel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::pro
               ::google::protobuf::Message::CopyConstruct<::skytether::substrait::DdlRel>(arena, *from._impl_.rel_type_.ddl_);
         } else {
           _this->_impl_.rel_type_.ddl_->MergeFrom(from._internal_ddl());
+        }
+        break;
+      }
+      case kUpdate: {
+        if (oneof_needs_init) {
+          _this->_impl_.rel_type_.update_ =
+              ::google::protobuf::Message::CopyConstruct<::skytether::substrait::UpdateRel>(arena, *from._impl_.rel_type_.update_);
+        } else {
+          _this->_impl_.rel_type_.update_->MergeFrom(from._internal_update());
         }
         break;
       }
@@ -22496,9 +23719,9 @@ WriteRel::WriteRel(
                offsetof(Impl_, op_),
            reinterpret_cast<const char *>(&from._impl_) +
                offsetof(Impl_, op_),
-           offsetof(Impl_, output_) -
+           offsetof(Impl_, create_mode_) -
                offsetof(Impl_, op_) +
-               sizeof(Impl_::output_));
+               sizeof(Impl_::create_mode_));
   switch (write_type_case()) {
     case WRITE_TYPE_NOT_SET:
       break;
@@ -22524,9 +23747,9 @@ inline void WriteRel::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, table_schema_),
            0,
-           offsetof(Impl_, output_) -
+           offsetof(Impl_, create_mode_) -
                offsetof(Impl_, table_schema_) +
-               sizeof(Impl_::output_));
+               sizeof(Impl_::create_mode_));
 }
 WriteRel::~WriteRel() {
   // @@protoc_insertion_point(destructor:skytether.substrait.WriteRel)
@@ -22601,15 +23824,15 @@ const ::google::protobuf::MessageLite::ClassData* WriteRel::GetClassData() const
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 7, 5, 0, 2> WriteRel::_table_ = {
+const ::_pbi::TcParseTable<3, 8, 5, 0, 2> WriteRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(WriteRel, _impl_._has_bits_),
     0, // no _extensions_
-    7, 56,  // max_field_number, fast_idx_mask
+    8, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967168,  // skipmap
+    4294967040,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    7,  // num_field_entries
+    8,  // num_field_entries
     5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -22619,7 +23842,9 @@ const ::_pbi::TcParseTable<3, 7, 5, 0, 2> WriteRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::substrait::WriteRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(WriteRel, _impl_.create_mode_), 63>(),
+     {64, 63, 0, PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.create_mode_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     // .skytether.substrait.NamedStruct table_schema = 3 [json_name = "tableSchema"];
@@ -22661,6 +23886,9 @@ const ::_pbi::TcParseTable<3, 7, 5, 0, 2> WriteRel::_table_ = {
     // .skytether.substrait.RelCommon common = 7 [json_name = "common"];
     {PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.common_), _Internal::kHasBitsOffset + 2, 4,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+    {PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.create_mode_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::NamedObjectWrite>()},
     {::_pbi::TcParser::GetTable<::skytether::substrait::ExtensionObject>()},
@@ -22694,8 +23922,8 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
     }
   }
   ::memset(&_impl_.op_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.output_) -
-      reinterpret_cast<char*>(&_impl_.op_)) + sizeof(_impl_.output_));
+      reinterpret_cast<char*>(&_impl_.create_mode_) -
+      reinterpret_cast<char*>(&_impl_.op_)) + sizeof(_impl_.create_mode_));
   clear_write_type();
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -22768,6 +23996,13 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
                 stream);
           }
 
+          // .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+          if (this_._internal_create_mode() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                8, this_._internal_create_mode(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -22820,6 +24055,11 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
             if (this_._internal_output() != 0) {
               total_size += 1 +
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_output());
+            }
+            // .skytether.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
+            if (this_._internal_create_mode() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_create_mode());
             }
           }
           switch (this_.write_type_case()) {
@@ -22888,6 +24128,9 @@ void WriteRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
   if (from._internal_output() != 0) {
     _this->_impl_.output_ = from._impl_.output_;
   }
+  if (from._internal_create_mode() != 0) {
+    _this->_impl_.create_mode_ = from._impl_.create_mode_;
+  }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
     const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
@@ -22938,8 +24181,8 @@ void WriteRel::InternalSwap(WriteRel* PROTOBUF_RESTRICT other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.output_)
-      + sizeof(WriteRel::_impl_.output_)
+      PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.create_mode_)
+      + sizeof(WriteRel::_impl_.create_mode_)
       - PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.table_schema_)>(
           reinterpret_cast<char*>(&_impl_.table_schema_),
           reinterpret_cast<char*>(&other->_impl_.table_schema_));
@@ -22948,6 +24191,997 @@ void WriteRel::InternalSwap(WriteRel* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata WriteRel::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class UpdateRel_TransformExpression::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<UpdateRel_TransformExpression>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_._has_bits_);
+};
+
+UpdateRel_TransformExpression::UpdateRel_TransformExpression(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.substrait.UpdateRel.TransformExpression)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateRel_TransformExpression::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skytether::substrait::UpdateRel_TransformExpression& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+UpdateRel_TransformExpression::UpdateRel_TransformExpression(
+    ::google::protobuf::Arena* arena,
+    const UpdateRel_TransformExpression& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  UpdateRel_TransformExpression* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.transformation_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(
+                              arena, *from._impl_.transformation_)
+                        : nullptr;
+  _impl_.column_target_ = from._impl_.column_target_;
+
+  // @@protoc_insertion_point(copy_constructor:skytether.substrait.UpdateRel.TransformExpression)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateRel_TransformExpression::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void UpdateRel_TransformExpression::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, transformation_),
+           0,
+           offsetof(Impl_, column_target_) -
+               offsetof(Impl_, transformation_) +
+               sizeof(Impl_::column_target_));
+}
+UpdateRel_TransformExpression::~UpdateRel_TransformExpression() {
+  // @@protoc_insertion_point(destructor:skytether.substrait.UpdateRel.TransformExpression)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void UpdateRel_TransformExpression::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  delete _impl_.transformation_;
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    UpdateRel_TransformExpression::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_UpdateRel_TransformExpression_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &UpdateRel_TransformExpression::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<UpdateRel_TransformExpression>(),
+            ::google::protobuf::Message::GetNewImpl<UpdateRel_TransformExpression>(),
+            ::google::protobuf::Message::GetClearImpl<UpdateRel_TransformExpression>(), &UpdateRel_TransformExpression::ByteSizeLong,
+                &UpdateRel_TransformExpression::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_._cached_size_),
+            false,
+        },
+        &UpdateRel_TransformExpression::kDescriptorMethods,
+        &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* UpdateRel_TransformExpression::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> UpdateRel_TransformExpression::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::substrait::UpdateRel_TransformExpression>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 column_target = 2 [json_name = "columnTarget"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UpdateRel_TransformExpression, _impl_.column_target_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.column_target_)}},
+    // .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.transformation_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.transformation_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 column_target = 2 [json_name = "columnTarget"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.column_target_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void UpdateRel_TransformExpression::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.substrait.UpdateRel.TransformExpression)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.transformation_ != nullptr);
+    _impl_.transformation_->Clear();
+  }
+  _impl_.column_target_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* UpdateRel_TransformExpression::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const UpdateRel_TransformExpression& this_ = static_cast<const UpdateRel_TransformExpression&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* UpdateRel_TransformExpression::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const UpdateRel_TransformExpression& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.substrait.UpdateRel.TransformExpression)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.transformation_, this_._impl_.transformation_->GetCachedSize(), target,
+                stream);
+          }
+
+          // int32 column_target = 2 [json_name = "columnTarget"];
+          if (this_._internal_column_target() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_column_target(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.substrait.UpdateRel.TransformExpression)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t UpdateRel_TransformExpression::ByteSizeLong(const MessageLite& base) {
+          const UpdateRel_TransformExpression& this_ = static_cast<const UpdateRel_TransformExpression&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t UpdateRel_TransformExpression::ByteSizeLong() const {
+          const UpdateRel_TransformExpression& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.substrait.UpdateRel.TransformExpression)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skytether.substrait.Expression transformation = 1 [json_name = "transformation"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.transformation_);
+            }
+          }
+           {
+            // int32 column_target = 2 [json_name = "columnTarget"];
+            if (this_._internal_column_target() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_column_target());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void UpdateRel_TransformExpression::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<UpdateRel_TransformExpression*>(&to_msg);
+  auto& from = static_cast<const UpdateRel_TransformExpression&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.substrait.UpdateRel.TransformExpression)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.transformation_ != nullptr);
+    if (_this->_impl_.transformation_ == nullptr) {
+      _this->_impl_.transformation_ =
+          ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.transformation_);
+    } else {
+      _this->_impl_.transformation_->MergeFrom(*from._impl_.transformation_);
+    }
+  }
+  if (from._internal_column_target() != 0) {
+    _this->_impl_.column_target_ = from._impl_.column_target_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateRel_TransformExpression::CopyFrom(const UpdateRel_TransformExpression& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.substrait.UpdateRel.TransformExpression)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void UpdateRel_TransformExpression::InternalSwap(UpdateRel_TransformExpression* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.column_target_)
+      + sizeof(UpdateRel_TransformExpression::_impl_.column_target_)
+      - PROTOBUF_FIELD_OFFSET(UpdateRel_TransformExpression, _impl_.transformation_)>(
+          reinterpret_cast<char*>(&_impl_.transformation_),
+          reinterpret_cast<char*>(&other->_impl_.transformation_));
+}
+
+::google::protobuf::Metadata UpdateRel_TransformExpression::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class UpdateRel::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<UpdateRel>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_._has_bits_);
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::skytether::substrait::UpdateRel, _impl_._oneof_case_);
+};
+
+void UpdateRel::set_allocated_named_table(::skytether::substrait::NamedTable* named_table) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_update_type();
+  if (named_table) {
+    ::google::protobuf::Arena* submessage_arena = named_table->GetArena();
+    if (message_arena != submessage_arena) {
+      named_table = ::google::protobuf::internal::GetOwnedMessage(message_arena, named_table, submessage_arena);
+    }
+    set_has_named_table();
+    _impl_.update_type_.named_table_ = named_table;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skytether.substrait.UpdateRel.named_table)
+}
+void UpdateRel::clear_table_schema() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.table_schema_ != nullptr) _impl_.table_schema_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+UpdateRel::UpdateRel(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.substrait.UpdateRel)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateRel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skytether::substrait::UpdateRel& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        transformations_{visibility, arena, from.transformations_},
+        update_type_{},
+        _oneof_case_{from._oneof_case_[0]} {}
+
+UpdateRel::UpdateRel(
+    ::google::protobuf::Arena* arena,
+    const UpdateRel& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  UpdateRel* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.table_schema_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::NamedStruct>(
+                              arena, *from._impl_.table_schema_)
+                        : nullptr;
+  _impl_.condition_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(
+                              arena, *from._impl_.condition_)
+                        : nullptr;
+  switch (update_type_case()) {
+    case UPDATE_TYPE_NOT_SET:
+      break;
+      case kNamedTable:
+        _impl_.update_type_.named_table_ = ::google::protobuf::Message::CopyConstruct<::skytether::substrait::NamedTable>(arena, *from._impl_.update_type_.named_table_);
+        break;
+  }
+
+  // @@protoc_insertion_point(copy_constructor:skytether.substrait.UpdateRel)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateRel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        transformations_{visibility, arena},
+        update_type_{},
+        _oneof_case_{} {}
+
+inline void UpdateRel::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, table_schema_),
+           0,
+           offsetof(Impl_, condition_) -
+               offsetof(Impl_, table_schema_) +
+               sizeof(Impl_::condition_));
+}
+UpdateRel::~UpdateRel() {
+  // @@protoc_insertion_point(destructor:skytether.substrait.UpdateRel)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void UpdateRel::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  delete _impl_.table_schema_;
+  delete _impl_.condition_;
+  if (has_update_type()) {
+    clear_update_type();
+  }
+  _impl_.~Impl_();
+}
+
+void UpdateRel::clear_update_type() {
+// @@protoc_insertion_point(one_of_clear_start:skytether.substrait.UpdateRel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (update_type_case()) {
+    case kNamedTable: {
+      if (GetArena() == nullptr) {
+        delete _impl_.update_type_.named_table_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.update_type_.named_table_);
+      }
+      break;
+    }
+    case UPDATE_TYPE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = UPDATE_TYPE_NOT_SET;
+}
+
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    UpdateRel::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_UpdateRel_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &UpdateRel::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<UpdateRel>(),
+            ::google::protobuf::Message::GetNewImpl<UpdateRel>(),
+            ::google::protobuf::Message::GetClearImpl<UpdateRel>(), &UpdateRel::ByteSizeLong,
+                &UpdateRel::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_._cached_size_),
+            false,
+        },
+        &UpdateRel::kDescriptorMethods,
+        &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* UpdateRel::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 4, 0, 2> UpdateRel::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_._has_bits_),
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    4,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::substrait::UpdateRel>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+    {::_pbi::TcParser::FastMtR1,
+     {34, 63, 3, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.transformations_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 1, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.table_schema_)}},
+    // .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+    {::_pbi::TcParser::FastMtS1,
+     {26, 1, 2, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.condition_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skytether.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.update_type_.named_table_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.table_schema_), _Internal::kHasBitsOffset + 0, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.condition_), _Internal::kHasBitsOffset + 1, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.transformations_), -1, 3,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skytether::substrait::NamedTable>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::NamedStruct>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Expression>()},
+    {::_pbi::TcParser::GetTable<::skytether::substrait::UpdateRel_TransformExpression>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void UpdateRel::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.substrait.UpdateRel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.transformations_.Clear();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.table_schema_ != nullptr);
+      _impl_.table_schema_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.condition_ != nullptr);
+      _impl_.condition_->Clear();
+    }
+  }
+  clear_update_type();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* UpdateRel::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const UpdateRel& this_ = static_cast<const UpdateRel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* UpdateRel::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const UpdateRel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.substrait.UpdateRel)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // .skytether.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
+          if (this_.update_type_case() == kNamedTable) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.update_type_.named_table_, this_._impl_.update_type_.named_table_->GetCachedSize(), target,
+                stream);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                2, *this_._impl_.table_schema_, this_._impl_.table_schema_->GetCachedSize(), target,
+                stream);
+          }
+
+          // .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+          if (cached_has_bits & 0x00000002u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                3, *this_._impl_.condition_, this_._impl_.condition_->GetCachedSize(), target,
+                stream);
+          }
+
+          // repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_transformations_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_transformations().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    4, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.substrait.UpdateRel)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t UpdateRel::ByteSizeLong(const MessageLite& base) {
+          const UpdateRel& this_ = static_cast<const UpdateRel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t UpdateRel::ByteSizeLong() const {
+          const UpdateRel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.substrait.UpdateRel)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .skytether.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
+             {
+              total_size += 1UL * this_._internal_transformations_size();
+              for (const auto& msg : this_._internal_transformations()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+          cached_has_bits = this_._impl_._has_bits_[0];
+          if (cached_has_bits & 0x00000003u) {
+            // .skytether.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.table_schema_);
+            }
+            // .skytether.substrait.Expression condition = 3 [json_name = "condition"];
+            if (cached_has_bits & 0x00000002u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.condition_);
+            }
+          }
+          switch (this_.update_type_case()) {
+            // .skytether.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
+            case kNamedTable: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.update_type_.named_table_);
+              break;
+            }
+            case UPDATE_TYPE_NOT_SET: {
+              break;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void UpdateRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<UpdateRel*>(&to_msg);
+  auto& from = static_cast<const UpdateRel&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.substrait.UpdateRel)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_transformations()->MergeFrom(
+      from._internal_transformations());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(from._impl_.table_schema_ != nullptr);
+      if (_this->_impl_.table_schema_ == nullptr) {
+        _this->_impl_.table_schema_ =
+            ::google::protobuf::Message::CopyConstruct<::skytether::substrait::NamedStruct>(arena, *from._impl_.table_schema_);
+      } else {
+        _this->_impl_.table_schema_->MergeFrom(*from._impl_.table_schema_);
+      }
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(from._impl_.condition_ != nullptr);
+      if (_this->_impl_.condition_ == nullptr) {
+        _this->_impl_.condition_ =
+            ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Expression>(arena, *from._impl_.condition_);
+      } else {
+        _this->_impl_.condition_->MergeFrom(*from._impl_.condition_);
+      }
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_update_type();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kNamedTable: {
+        if (oneof_needs_init) {
+          _this->_impl_.update_type_.named_table_ =
+              ::google::protobuf::Message::CopyConstruct<::skytether::substrait::NamedTable>(arena, *from._impl_.update_type_.named_table_);
+        } else {
+          _this->_impl_.update_type_.named_table_->MergeFrom(from._internal_named_table());
+        }
+        break;
+      }
+      case UPDATE_TYPE_NOT_SET:
+        break;
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateRel::CopyFrom(const UpdateRel& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.substrait.UpdateRel)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void UpdateRel::InternalSwap(UpdateRel* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.transformations_.InternalSwap(&other->_impl_.transformations_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.condition_)
+      + sizeof(UpdateRel::_impl_.condition_)
+      - PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.table_schema_)>(
+          reinterpret_cast<char*>(&_impl_.table_schema_),
+          reinterpret_cast<char*>(&other->_impl_.table_schema_));
+  swap(_impl_.update_type_, other->_impl_.update_type_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+}
+
+::google::protobuf::Metadata UpdateRel::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class NamedTable::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<NamedTable>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(NamedTable, _impl_._has_bits_);
+};
+
+void NamedTable::clear_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ != nullptr) _impl_.advanced_extension_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+NamedTable::NamedTable(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.substrait.NamedTable)
+}
+inline PROTOBUF_NDEBUG_INLINE NamedTable::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skytether::substrait::NamedTable& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        names_{visibility, arena, from.names_} {}
+
+NamedTable::NamedTable(
+    ::google::protobuf::Arena* arena,
+    const NamedTable& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  NamedTable* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.advanced_extension_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::extensions::AdvancedExtension>(
+                              arena, *from._impl_.advanced_extension_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:skytether.substrait.NamedTable)
+}
+inline PROTOBUF_NDEBUG_INLINE NamedTable::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        names_{visibility, arena} {}
+
+inline void NamedTable::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.advanced_extension_ = {};
+}
+NamedTable::~NamedTable() {
+  // @@protoc_insertion_point(destructor:skytether.substrait.NamedTable)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void NamedTable::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  delete _impl_.advanced_extension_;
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    NamedTable::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_NamedTable_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &NamedTable::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<NamedTable>(),
+            ::google::protobuf::Message::GetNewImpl<NamedTable>(),
+            ::google::protobuf::Message::GetClearImpl<NamedTable>(), &NamedTable::ByteSizeLong,
+                &NamedTable::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(NamedTable, _impl_._cached_size_),
+            false,
+        },
+        &NamedTable::kDescriptorMethods,
+        &descriptor_table_skytether_2fsubstrait_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* NamedTable::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 44, 2> NamedTable::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(NamedTable, _impl_._has_bits_),
+    0, // no _extensions_
+    10, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294966782,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::substrait::NamedTable>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+    {::_pbi::TcParser::FastMtS1,
+     {82, 0, 0, PROTOBUF_FIELD_OFFSET(NamedTable, _impl_.advanced_extension_)}},
+    // repeated string names = 1 [json_name = "names"];
+    {::_pbi::TcParser::FastUR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(NamedTable, _impl_.names_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated string names = 1 [json_name = "names"];
+    {PROTOBUF_FIELD_OFFSET(NamedTable, _impl_.names_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kUtf8String | ::_fl::kRepSString)},
+    // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+    {PROTOBUF_FIELD_OFFSET(NamedTable, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skytether::substrait::extensions::AdvancedExtension>()},
+  }}, {{
+    "\36\5\0\0\0\0\0\0"
+    "skytether.substrait.NamedTable"
+    "names"
+  }},
+};
+
+PROTOBUF_NOINLINE void NamedTable::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.substrait.NamedTable)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.names_.Clear();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.advanced_extension_ != nullptr);
+    _impl_.advanced_extension_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* NamedTable::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const NamedTable& this_ = static_cast<const NamedTable&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* NamedTable::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const NamedTable& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.substrait.NamedTable)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated string names = 1 [json_name = "names"];
+          for (int i = 0, n = this_._internal_names_size(); i < n; ++i) {
+            const auto& s = this_._internal_names().Get(i);
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skytether.substrait.NamedTable.names");
+            target = stream->WriteString(1, s, target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                10, *this_._impl_.advanced_extension_, this_._impl_.advanced_extension_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.substrait.NamedTable)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t NamedTable::ByteSizeLong(const MessageLite& base) {
+          const NamedTable& this_ = static_cast<const NamedTable&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t NamedTable::ByteSizeLong() const {
+          const NamedTable& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.substrait.NamedTable)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated string names = 1 [json_name = "names"];
+             {
+              total_size +=
+                  1 * ::google::protobuf::internal::FromIntSize(this_._internal_names().size());
+              for (int i = 0, n = this_._internal_names().size(); i < n; ++i) {
+                total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+                    this_._internal_names().Get(i));
+              }
+            }
+          }
+           {
+            // .skytether.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void NamedTable::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<NamedTable*>(&to_msg);
+  auto& from = static_cast<const NamedTable&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.substrait.NamedTable)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_names()->MergeFrom(from._internal_names());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.advanced_extension_ != nullptr);
+    if (_this->_impl_.advanced_extension_ == nullptr) {
+      _this->_impl_.advanced_extension_ =
+          ::google::protobuf::Message::CopyConstruct<::skytether::substrait::extensions::AdvancedExtension>(arena, *from._impl_.advanced_extension_);
+    } else {
+      _this->_impl_.advanced_extension_->MergeFrom(*from._impl_.advanced_extension_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void NamedTable::CopyFrom(const NamedTable& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.substrait.NamedTable)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void NamedTable::InternalSwap(NamedTable* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.names_.InternalSwap(&other->_impl_.names_);
+  swap(_impl_.advanced_extension_, other->_impl_.advanced_extension_);
+}
+
+::google::protobuf::Metadata NamedTable::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
