@@ -39,7 +39,8 @@
 namespace mohair_substrait {
 
   // mohair-protocol types (for query processing)
-  using skytether::mohair::PlanAnchor;
+  using skytether::mohair::SuperPlan;
+  using skytether::mohair::SubPlan;
   using skytether::mohair::ErrRel;
 
   // mohair-protocol types (for topology representation)
