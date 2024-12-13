@@ -55,9 +55,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr ExecutionStats::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : runtime_{0},
-        executed_{false},
-        _cached_size_{0} {}
+      : _cached_size_{0},
+        runtime_{0} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR ExecutionStats::ExecutionStats(::_pbi::ConstantInitialized)
@@ -206,13 +205,15 @@ struct SkyPartitionRelDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SkyPartitionRelDefaultTypeInternal _SkyPartitionRel_default_instance_;
 
-inline constexpr PlanAnchor::Impl_::Impl_(
+inline constexpr SuperPlan::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        anchor_rel_{nullptr} {}
+        merge_rel_{nullptr},
+        mergerel_reference_{0u},
+        superplan_reference_{0u} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR PlanAnchor::PlanAnchor(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR SuperPlan::SuperPlan(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -220,16 +221,42 @@ PROTOBUF_CONSTEXPR PlanAnchor::PlanAnchor(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct PlanAnchorDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PlanAnchorDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PlanAnchorDefaultTypeInternal() {}
+struct SuperPlanDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SuperPlanDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SuperPlanDefaultTypeInternal() {}
   union {
-    PlanAnchor _instance;
+    SuperPlan _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PlanAnchorDefaultTypeInternal _PlanAnchor_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SuperPlanDefaultTypeInternal _SuperPlan_default_instance_;
+
+inline constexpr SubPlan::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        split_rel_{nullptr},
+        subplan_reference_{0u} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SubPlan::SubPlan(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SubPlanDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SubPlanDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SubPlanDefaultTypeInternal() {}
+  union {
+    SubPlan _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SubPlanDefaultTypeInternal _SubPlan_default_instance_;
 }  // namespace mohair
 }  // namespace skytether
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skytether_2fmohair_2falgebra_2eproto[1];
@@ -238,7 +265,7 @@ static constexpr const ::_pb::ServiceDescriptor**
 const ::uint32_t
     TableStruct_skytether_2fmohair_2falgebra_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -246,8 +273,8 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _impl_.executed_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::ExecutionStats, _impl_.runtime_),
+        0,
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::SkyRel, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -315,27 +342,44 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skytether::mohair::QueryRel, _impl_.query_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::PlanAnchor, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::PlanAnchor, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SuperPlan, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SuperPlan, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::skytether::mohair::PlanAnchor, _impl_.anchor_rel_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SuperPlan, _impl_.merge_rel_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SuperPlan, _impl_.mergerel_reference_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SuperPlan, _impl_.superplan_reference_),
         0,
+        ~0u,
+        ~0u,
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SubPlan, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SubPlan, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SubPlan, _impl_.split_rel_),
+        PROTOBUF_FIELD_OFFSET(::skytether::mohair::SubPlan, _impl_.subplan_reference_),
+        0,
+        ~0u,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::skytether::mohair::ExecutionStats)},
+        {0, 9, -1, sizeof(::skytether::mohair::ExecutionStats)},
         {10, 21, -1, sizeof(::skytether::mohair::SkyRel)},
         {24, 36, -1, sizeof(::skytether::mohair::SkyPartitionRel)},
         {40, 53, -1, sizeof(::skytether::mohair::SkySliceRel)},
         {58, -1, -1, sizeof(::skytether::mohair::ErrRel)},
         {68, -1, -1, sizeof(::skytether::mohair::QueryRel)},
-        {77, 86, -1, sizeof(::skytether::mohair::PlanAnchor)},
+        {77, 88, -1, sizeof(::skytether::mohair::SuperPlan)},
+        {91, 101, -1, sizeof(::skytether::mohair::SubPlan)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skytether::mohair::_ExecutionStats_default_instance_._instance,
@@ -344,36 +388,42 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skytether::mohair::_SkySliceRel_default_instance_._instance,
     &::skytether::mohair::_ErrRel_default_instance_._instance,
     &::skytether::mohair::_QueryRel_default_instance_._instance,
-    &::skytether::mohair::_PlanAnchor_default_instance_._instance,
+    &::skytether::mohair::_SuperPlan_default_instance_._instance,
+    &::skytether::mohair::_SubPlan_default_instance_._instance,
 };
 const char descriptor_table_protodef_skytether_2fmohair_2falgebra_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\036skytether/mohair/algebra.proto\022\020skytet"
     "her.mohair\032\031google/protobuf/any.proto\032!s"
-    "kytether/substrait/algebra.proto\"F\n\016Exec"
-    "utionStats\022\032\n\010executed\030\001 \001(\010R\010executed\022\030"
-    "\n\007runtime\030\002 \001(\001R\007runtime\"~\n\006SkyRel\022\026\n\006do"
-    "main\030\001 \001(\tR\006domain\022\034\n\tpartition\030\002 \001(\tR\tp"
-    "artition\022>\n\texecstats\030\003 \001(\0132 .skytether."
-    "mohair.ExecutionStatsR\texecstats\"\237\001\n\017Sky"
-    "PartitionRel\022\026\n\006domain\030\001 \001(\tR\006domain\022\034\n\t"
-    "partition\030\002 \001(\tR\tpartition\022\026\n\006slices\030\003 \003"
-    "(\rR\006slices\022>\n\texecstats\030\004 \001(\0132 .skytethe"
-    "r.mohair.ExecutionStatsR\texecstats\"\266\001\n\013S"
-    "kySliceRel\022\033\n\tslice_key\030\001 \001(\tR\010sliceKey\022"
-    "\026\n\006domain\030\002 \001(\tR\006domain\022\034\n\tpartition\030\003 \001"
-    "(\tR\tpartition\022\024\n\005slice\030\004 \001(\rR\005slice\022>\n\te"
-    "xecstats\030\005 \001(\0132 .skytether.mohair.Execut"
-    "ionStatsR\texecstats\"\177\n\006ErrRel\022\027\n\007err_msg"
-    "\030\001 \001(\tR\006errMsg\022;\n\010err_code\030\002 \001(\0162 .skyte"
-    "ther.mohair.ErrRel.ErrTypeR\007errCode\"\037\n\007E"
-    "rrType\022\024\n\020INVALID_MSG_TYPE\020\000\" \n\010QueryRel"
-    "\022\024\n\005query\030\001 \001(\014R\005query\"E\n\nPlanAnchor\0227\n\n"
-    "anchor_rel\030\001 \001(\0132\030.skytether.substrait.R"
-    "elR\tanchorRelB\205\001\n\024com.skytether.mohairB\014"
-    "AlgebraProtoP\001\242\002\003SMX\252\002\020Skytether.Mohair\312"
-    "\002\020Skytether\\Mohair\342\002\034Skytether\\Mohair\\GP"
-    "BMetadata\352\002\021Skytether::Mohairb\006proto3"
+    "kytether/substrait/algebra.proto\";\n\016Exec"
+    "utionStats\022\035\n\007runtime\030\001 \001(\001H\000R\007runtime\210\001"
+    "\001B\n\n\010_runtime\"~\n\006SkyRel\022\026\n\006domain\030\001 \001(\tR"
+    "\006domain\022\034\n\tpartition\030\002 \001(\tR\tpartition\022>\n"
+    "\texecstats\030\003 \001(\0132 .skytether.mohair.Exec"
+    "utionStatsR\texecstats\"\237\001\n\017SkyPartitionRe"
+    "l\022\026\n\006domain\030\001 \001(\tR\006domain\022\034\n\tpartition\030\002"
+    " \001(\tR\tpartition\022\026\n\006slices\030\003 \003(\rR\006slices\022"
+    ">\n\texecstats\030\004 \001(\0132 .skytether.mohair.Ex"
+    "ecutionStatsR\texecstats\"\266\001\n\013SkySliceRel\022"
+    "\033\n\tslice_key\030\001 \001(\tR\010sliceKey\022\026\n\006domain\030\002"
+    " \001(\tR\006domain\022\034\n\tpartition\030\003 \001(\tR\tpartiti"
+    "on\022\024\n\005slice\030\004 \001(\rR\005slice\022>\n\texecstats\030\005 "
+    "\001(\0132 .skytether.mohair.ExecutionStatsR\te"
+    "xecstats\"\177\n\006ErrRel\022\027\n\007err_msg\030\001 \001(\tR\006err"
+    "Msg\022;\n\010err_code\030\002 \001(\0162 .skytether.mohair"
+    ".ErrRel.ErrTypeR\007errCode\"\037\n\007ErrType\022\024\n\020I"
+    "NVALID_MSG_TYPE\020\000\" \n\010QueryRel\022\024\n\005query\030\001"
+    " \001(\014R\005query\"\242\001\n\tSuperPlan\0225\n\tmerge_rel\030\001"
+    " \001(\0132\030.skytether.substrait.RelR\010mergeRel"
+    "\022-\n\022mergerel_reference\030\002 \001(\rR\021mergerelRe"
+    "ference\022/\n\023superplan_reference\030\003 \001(\rR\022su"
+    "perplanReference\"m\n\007SubPlan\0225\n\tsplit_rel"
+    "\030\001 \001(\0132\030.skytether.substrait.RelR\010splitR"
+    "el\022+\n\021subplan_reference\030\002 \001(\rR\020subplanRe"
+    "ferenceB\205\001\n\024com.skytether.mohairB\014Algebr"
+    "aProtoP\001\242\002\003SMX\252\002\020Skytether.Mohair\312\002\020Skyt"
+    "ether\\Mohair\342\002\034Skytether\\Mohair\\GPBMetad"
+    "ata\352\002\021Skytether::Mohairb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skytether_2fmohair_2falgebra_2eproto_deps[2] =
     {
@@ -384,13 +434,13 @@ static ::absl::once_flag descriptor_table_skytether_2fmohair_2falgebra_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skytether_2fmohair_2falgebra_2eproto = {
     false,
     false,
-    1037,
+    1231,
     descriptor_table_protodef_skytether_2fmohair_2falgebra_2eproto,
     "skytether/mohair/algebra.proto",
     &descriptor_table_skytether_2fmohair_2falgebra_2eproto_once,
     descriptor_table_skytether_2fmohair_2falgebra_2eproto_deps,
     2,
-    7,
+    8,
     schemas,
     file_default_instances,
     TableStruct_skytether_2fmohair_2falgebra_2eproto::offsets,
@@ -422,6 +472,10 @@ constexpr int ErrRel::ErrType_ARRAYSIZE;
 
 class ExecutionStats::_Internal {
  public:
+  using HasBits =
+      decltype(std::declval<ExecutionStats>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_._has_bits_);
 };
 
 ExecutionStats::ExecutionStats(::google::protobuf::Arena* arena)
@@ -445,12 +499,7 @@ inline PROTOBUF_NDEBUG_INLINE ExecutionStats::Impl_::Impl_(
 
 inline void ExecutionStats::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, runtime_),
-           0,
-           offsetof(Impl_, executed_) -
-               offsetof(Impl_, runtime_) +
-               sizeof(Impl_::executed_));
+  _impl_.runtime_ = {};
 }
 ExecutionStats::~ExecutionStats() {
   // @@protoc_insertion_point(destructor:skytether.mohair.ExecutionStats)
@@ -491,15 +540,15 @@ const ::google::protobuf::MessageLite::ClassData* ExecutionStats::GetClassData()
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ExecutionStats::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> ExecutionStats::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -509,21 +558,15 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ExecutionStats::_table_ = {
     ::_pbi::TcParser::GetTable<::skytether::mohair::ExecutionStats>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // double runtime = 2 [json_name = "runtime"];
+    // optional double runtime = 1 [json_name = "runtime"];
     {::_pbi::TcParser::FastF64S1,
-     {17, 63, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.runtime_)}},
-    // bool executed = 1 [json_name = "executed"];
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(ExecutionStats, _impl_.executed_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.executed_)}},
+     {9, 0, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.runtime_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // bool executed = 1 [json_name = "executed"];
-    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.executed_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
-    // double runtime = 2 [json_name = "runtime"];
-    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.runtime_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // optional double runtime = 1 [json_name = "runtime"];
+    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.runtime_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kDouble)},
   }},
   // no aux_entries
   {{
@@ -537,9 +580,8 @@ PROTOBUF_NOINLINE void ExecutionStats::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.runtime_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.executed_) -
-      reinterpret_cast<char*>(&_impl_.runtime_)) + sizeof(_impl_.executed_));
+  _impl_.runtime_ = 0;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -558,18 +600,12 @@ PROTOBUF_NOINLINE void ExecutionStats::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // bool executed = 1 [json_name = "executed"];
-          if (this_._internal_executed() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteBoolToArray(
-                1, this_._internal_executed(), target);
-          }
-
-          // double runtime = 2 [json_name = "runtime"];
-          if (::absl::bit_cast<::uint64_t>(this_._internal_runtime()) != 0) {
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional double runtime = 1 [json_name = "runtime"];
+          if (cached_has_bits & 0x00000001u) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteDoubleToArray(
-                2, this_._internal_runtime(), target);
+                1, this_._internal_runtime(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -595,15 +631,12 @@ PROTOBUF_NOINLINE void ExecutionStats::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // double runtime = 2 [json_name = "runtime"];
-            if (::absl::bit_cast<::uint64_t>(this_._internal_runtime()) != 0) {
+            // optional double runtime = 1 [json_name = "runtime"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
               total_size += 9;
-            }
-            // bool executed = 1 [json_name = "executed"];
-            if (this_._internal_executed() != 0) {
-              total_size += 2;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -618,12 +651,11 @@ void ExecutionStats::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (::absl::bit_cast<::uint64_t>(from._internal_runtime()) != 0) {
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     _this->_impl_.runtime_ = from._impl_.runtime_;
   }
-  if (from._internal_executed() != 0) {
-    _this->_impl_.executed_ = from._impl_.executed_;
-  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -638,12 +670,8 @@ void ExecutionStats::CopyFrom(const ExecutionStats& from) {
 void ExecutionStats::InternalSwap(ExecutionStats* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.executed_)
-      + sizeof(ExecutionStats::_impl_.executed_)
-      - PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.runtime_)>(
-          reinterpret_cast<char*>(&_impl_.runtime_),
-          reinterpret_cast<char*>(&other->_impl_.runtime_));
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+        swap(_impl_.runtime_, other->_impl_.runtime_);
 }
 
 ::google::protobuf::Metadata ExecutionStats::GetMetadata() const {
@@ -2141,138 +2169,163 @@ void QueryRel::InternalSwap(QueryRel* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class PlanAnchor::_Internal {
+class SuperPlan::_Internal {
  public:
   using HasBits =
-      decltype(std::declval<PlanAnchor>()._impl_._has_bits_);
+      decltype(std::declval<SuperPlan>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(PlanAnchor, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_._has_bits_);
 };
 
-void PlanAnchor::clear_anchor_rel() {
+void SuperPlan::clear_merge_rel() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.anchor_rel_ != nullptr) _impl_.anchor_rel_->Clear();
+  if (_impl_.merge_rel_ != nullptr) _impl_.merge_rel_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-PlanAnchor::PlanAnchor(::google::protobuf::Arena* arena)
+SuperPlan::SuperPlan(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:skytether.mohair.PlanAnchor)
+  // @@protoc_insertion_point(arena_constructor:skytether.mohair.SuperPlan)
 }
-inline PROTOBUF_NDEBUG_INLINE PlanAnchor::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE SuperPlan::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::skytether::mohair::PlanAnchor& from_msg)
+    const Impl_& from, const ::skytether::mohair::SuperPlan& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0} {}
 
-PlanAnchor::PlanAnchor(
+SuperPlan::SuperPlan(
     ::google::protobuf::Arena* arena,
-    const PlanAnchor& from)
+    const SuperPlan& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  PlanAnchor* const _this = this;
+  SuperPlan* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.anchor_rel_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(
-                              arena, *from._impl_.anchor_rel_)
+  _impl_.merge_rel_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(
+                              arena, *from._impl_.merge_rel_)
                         : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, mergerel_reference_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, mergerel_reference_),
+           offsetof(Impl_, superplan_reference_) -
+               offsetof(Impl_, mergerel_reference_) +
+               sizeof(Impl_::superplan_reference_));
 
-  // @@protoc_insertion_point(copy_constructor:skytether.mohair.PlanAnchor)
+  // @@protoc_insertion_point(copy_constructor:skytether.mohair.SuperPlan)
 }
-inline PROTOBUF_NDEBUG_INLINE PlanAnchor::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE SuperPlan::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void PlanAnchor::SharedCtor(::_pb::Arena* arena) {
+inline void SuperPlan::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.anchor_rel_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, merge_rel_),
+           0,
+           offsetof(Impl_, superplan_reference_) -
+               offsetof(Impl_, merge_rel_) +
+               sizeof(Impl_::superplan_reference_));
 }
-PlanAnchor::~PlanAnchor() {
-  // @@protoc_insertion_point(destructor:skytether.mohair.PlanAnchor)
+SuperPlan::~SuperPlan() {
+  // @@protoc_insertion_point(destructor:skytether.mohair.SuperPlan)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-inline void PlanAnchor::SharedDtor() {
+inline void SuperPlan::SharedDtor() {
   ABSL_DCHECK(GetArena() == nullptr);
-  delete _impl_.anchor_rel_;
+  delete _impl_.merge_rel_;
   _impl_.~Impl_();
 }
 
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
 const ::google::protobuf::MessageLite::ClassDataFull
-    PlanAnchor::_class_data_ = {
+    SuperPlan::_class_data_ = {
         ::google::protobuf::Message::ClassData{
-            &_PlanAnchor_default_instance_._instance,
+            &_SuperPlan_default_instance_._instance,
             &_table_.header,
             nullptr,  // OnDemandRegisterArenaDtor
             nullptr,  // IsInitialized
-            &PlanAnchor::MergeImpl,
+            &SuperPlan::MergeImpl,
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-            ::google::protobuf::Message::GetDeleteImpl<PlanAnchor>(),
-            ::google::protobuf::Message::GetNewImpl<PlanAnchor>(),
-            ::google::protobuf::Message::GetClearImpl<PlanAnchor>(), &PlanAnchor::ByteSizeLong,
-                &PlanAnchor::_InternalSerialize,
+            ::google::protobuf::Message::GetDeleteImpl<SuperPlan>(),
+            ::google::protobuf::Message::GetNewImpl<SuperPlan>(),
+            ::google::protobuf::Message::GetClearImpl<SuperPlan>(), &SuperPlan::ByteSizeLong,
+                &SuperPlan::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-            PROTOBUF_FIELD_OFFSET(PlanAnchor, _impl_._cached_size_),
+            PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_._cached_size_),
             false,
         },
-        &PlanAnchor::kDescriptorMethods,
+        &SuperPlan::kDescriptorMethods,
         &descriptor_table_skytether_2fmohair_2falgebra_2eproto,
         nullptr,  // tracker
 };
-const ::google::protobuf::MessageLite::ClassData* PlanAnchor::GetClassData() const {
+const ::google::protobuf::MessageLite::ClassData* SuperPlan::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2> PlanAnchor::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2> SuperPlan::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(PlanAnchor, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_._has_bits_),
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    3,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::skytether::mohair::PlanAnchor>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::skytether::mohair::SuperPlan>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // .skytether.substrait.Rel anchor_rel = 1 [json_name = "anchorRel"];
+    {::_pbi::TcParser::MiniParse, {}},
+    // .skytether.substrait.Rel merge_rel = 1 [json_name = "mergeRel"];
     {::_pbi::TcParser::FastMtS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(PlanAnchor, _impl_.anchor_rel_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.merge_rel_)}},
+    // uint32 mergerel_reference = 2 [json_name = "mergerelReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SuperPlan, _impl_.mergerel_reference_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.mergerel_reference_)}},
+    // uint32 superplan_reference = 3 [json_name = "superplanReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SuperPlan, _impl_.superplan_reference_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.superplan_reference_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // .skytether.substrait.Rel anchor_rel = 1 [json_name = "anchorRel"];
-    {PROTOBUF_FIELD_OFFSET(PlanAnchor, _impl_.anchor_rel_), _Internal::kHasBitsOffset + 0, 0,
+    // .skytether.substrait.Rel merge_rel = 1 [json_name = "mergeRel"];
+    {PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.merge_rel_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 mergerel_reference = 2 [json_name = "mergerelReference"];
+    {PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.mergerel_reference_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // uint32 superplan_reference = 3 [json_name = "superplanReference"];
+    {PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.superplan_reference_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skytether::substrait::Rel>()},
   }}, {{
   }},
 };
 
-PROTOBUF_NOINLINE void PlanAnchor::Clear() {
-// @@protoc_insertion_point(message_clear_start:skytether.mohair.PlanAnchor)
+PROTOBUF_NOINLINE void SuperPlan::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.mohair.SuperPlan)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -2280,34 +2333,51 @@ PROTOBUF_NOINLINE void PlanAnchor::Clear() {
 
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(_impl_.anchor_rel_ != nullptr);
-    _impl_.anchor_rel_->Clear();
+    ABSL_DCHECK(_impl_.merge_rel_ != nullptr);
+    _impl_.merge_rel_->Clear();
   }
+  ::memset(&_impl_.mergerel_reference_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.superplan_reference_) -
+      reinterpret_cast<char*>(&_impl_.mergerel_reference_)) + sizeof(_impl_.superplan_reference_));
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* PlanAnchor::_InternalSerialize(
+        ::uint8_t* SuperPlan::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const PlanAnchor& this_ = static_cast<const PlanAnchor&>(base);
+          const SuperPlan& this_ = static_cast<const SuperPlan&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* PlanAnchor::_InternalSerialize(
+        ::uint8_t* SuperPlan::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const PlanAnchor& this_ = *this;
+          const SuperPlan& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:skytether.mohair.PlanAnchor)
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.mohair.SuperPlan)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // .skytether.substrait.Rel anchor_rel = 1 [json_name = "anchorRel"];
+          // .skytether.substrait.Rel merge_rel = 1 [json_name = "mergeRel"];
           if (cached_has_bits & 0x00000001u) {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                1, *this_._impl_.anchor_rel_, this_._impl_.anchor_rel_->GetCachedSize(), target,
+                1, *this_._impl_.merge_rel_, this_._impl_.merge_rel_->GetCachedSize(), target,
                 stream);
+          }
+
+          // uint32 mergerel_reference = 2 [json_name = "mergerelReference"];
+          if (this_._internal_mergerel_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_mergerel_reference(), target);
+          }
+
+          // uint32 superplan_reference = 3 [json_name = "superplanReference"];
+          if (this_._internal_superplan_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                3, this_._internal_superplan_reference(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -2315,76 +2385,384 @@ PROTOBUF_NOINLINE void PlanAnchor::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:skytether.mohair.PlanAnchor)
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.mohair.SuperPlan)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t PlanAnchor::ByteSizeLong(const MessageLite& base) {
-          const PlanAnchor& this_ = static_cast<const PlanAnchor&>(base);
+        ::size_t SuperPlan::ByteSizeLong(const MessageLite& base) {
+          const SuperPlan& this_ = static_cast<const SuperPlan&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t PlanAnchor::ByteSizeLong() const {
-          const PlanAnchor& this_ = *this;
+        ::size_t SuperPlan::ByteSizeLong() const {
+          const SuperPlan& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:skytether.mohair.PlanAnchor)
+          // @@protoc_insertion_point(message_byte_size_start:skytether.mohair.SuperPlan)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // .skytether.substrait.Rel anchor_rel = 1 [json_name = "anchorRel"];
+            // .skytether.substrait.Rel merge_rel = 1 [json_name = "mergeRel"];
             cached_has_bits =
                 this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.anchor_rel_);
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.merge_rel_);
+            }
+          }
+           {
+            // uint32 mergerel_reference = 2 [json_name = "mergerelReference"];
+            if (this_._internal_mergerel_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_mergerel_reference());
+            }
+            // uint32 superplan_reference = 3 [json_name = "superplanReference"];
+            if (this_._internal_superplan_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_superplan_reference());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
 
-void PlanAnchor::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<PlanAnchor*>(&to_msg);
-  auto& from = static_cast<const PlanAnchor&>(from_msg);
+void SuperPlan::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SuperPlan*>(&to_msg);
+  auto& from = static_cast<const SuperPlan&>(from_msg);
   ::google::protobuf::Arena* arena = _this->GetArena();
-  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.mohair.PlanAnchor)
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.mohair.SuperPlan)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(from._impl_.anchor_rel_ != nullptr);
-    if (_this->_impl_.anchor_rel_ == nullptr) {
-      _this->_impl_.anchor_rel_ =
-          ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(arena, *from._impl_.anchor_rel_);
+    ABSL_DCHECK(from._impl_.merge_rel_ != nullptr);
+    if (_this->_impl_.merge_rel_ == nullptr) {
+      _this->_impl_.merge_rel_ =
+          ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(arena, *from._impl_.merge_rel_);
     } else {
-      _this->_impl_.anchor_rel_->MergeFrom(*from._impl_.anchor_rel_);
+      _this->_impl_.merge_rel_->MergeFrom(*from._impl_.merge_rel_);
     }
+  }
+  if (from._internal_mergerel_reference() != 0) {
+    _this->_impl_.mergerel_reference_ = from._impl_.mergerel_reference_;
+  }
+  if (from._internal_superplan_reference() != 0) {
+    _this->_impl_.superplan_reference_ = from._impl_.superplan_reference_;
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void PlanAnchor::CopyFrom(const PlanAnchor& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:skytether.mohair.PlanAnchor)
+void SuperPlan::CopyFrom(const SuperPlan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.mohair.SuperPlan)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void PlanAnchor::InternalSwap(PlanAnchor* PROTOBUF_RESTRICT other) {
+void SuperPlan::InternalSwap(SuperPlan* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.anchor_rel_, other->_impl_.anchor_rel_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.superplan_reference_)
+      + sizeof(SuperPlan::_impl_.superplan_reference_)
+      - PROTOBUF_FIELD_OFFSET(SuperPlan, _impl_.merge_rel_)>(
+          reinterpret_cast<char*>(&_impl_.merge_rel_),
+          reinterpret_cast<char*>(&other->_impl_.merge_rel_));
 }
 
-::google::protobuf::Metadata PlanAnchor::GetMetadata() const {
+::google::protobuf::Metadata SuperPlan::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SubPlan::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<SubPlan>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(SubPlan, _impl_._has_bits_);
+};
+
+void SubPlan::clear_split_rel() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.split_rel_ != nullptr) _impl_.split_rel_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+SubPlan::SubPlan(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skytether.mohair.SubPlan)
+}
+inline PROTOBUF_NDEBUG_INLINE SubPlan::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skytether::mohair::SubPlan& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+SubPlan::SubPlan(
+    ::google::protobuf::Arena* arena,
+    const SubPlan& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SubPlan* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.split_rel_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(
+                              arena, *from._impl_.split_rel_)
+                        : nullptr;
+  _impl_.subplan_reference_ = from._impl_.subplan_reference_;
+
+  // @@protoc_insertion_point(copy_constructor:skytether.mohair.SubPlan)
+}
+inline PROTOBUF_NDEBUG_INLINE SubPlan::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void SubPlan::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, split_rel_),
+           0,
+           offsetof(Impl_, subplan_reference_) -
+               offsetof(Impl_, split_rel_) +
+               sizeof(Impl_::subplan_reference_));
+}
+SubPlan::~SubPlan() {
+  // @@protoc_insertion_point(destructor:skytether.mohair.SubPlan)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void SubPlan::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  delete _impl_.split_rel_;
+  _impl_.~Impl_();
+}
+
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::MessageLite::ClassDataFull
+    SubPlan::_class_data_ = {
+        ::google::protobuf::Message::ClassData{
+            &_SubPlan_default_instance_._instance,
+            &_table_.header,
+            nullptr,  // OnDemandRegisterArenaDtor
+            nullptr,  // IsInitialized
+            &SubPlan::MergeImpl,
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+            ::google::protobuf::Message::GetDeleteImpl<SubPlan>(),
+            ::google::protobuf::Message::GetNewImpl<SubPlan>(),
+            ::google::protobuf::Message::GetClearImpl<SubPlan>(), &SubPlan::ByteSizeLong,
+                &SubPlan::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+            PROTOBUF_FIELD_OFFSET(SubPlan, _impl_._cached_size_),
+            false,
+        },
+        &SubPlan::kDescriptorMethods,
+        &descriptor_table_skytether_2fmohair_2falgebra_2eproto,
+        nullptr,  // tracker
+};
+const ::google::protobuf::MessageLite::ClassData* SubPlan::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> SubPlan::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SubPlan, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skytether::mohair::SubPlan>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // uint32 subplan_reference = 2 [json_name = "subplanReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SubPlan, _impl_.subplan_reference_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.subplan_reference_)}},
+    // .skytether.substrait.Rel split_rel = 1 [json_name = "splitRel"];
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.split_rel_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skytether.substrait.Rel split_rel = 1 [json_name = "splitRel"];
+    {PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.split_rel_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 subplan_reference = 2 [json_name = "subplanReference"];
+    {PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.subplan_reference_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skytether::substrait::Rel>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void SubPlan::Clear() {
+// @@protoc_insertion_point(message_clear_start:skytether.mohair.SubPlan)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.split_rel_ != nullptr);
+    _impl_.split_rel_->Clear();
+  }
+  _impl_.subplan_reference_ = 0u;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SubPlan::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SubPlan& this_ = static_cast<const SubPlan&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SubPlan::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SubPlan& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skytether.mohair.SubPlan)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skytether.substrait.Rel split_rel = 1 [json_name = "splitRel"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.split_rel_, this_._impl_.split_rel_->GetCachedSize(), target,
+                stream);
+          }
+
+          // uint32 subplan_reference = 2 [json_name = "subplanReference"];
+          if (this_._internal_subplan_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_subplan_reference(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skytether.mohair.SubPlan)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SubPlan::ByteSizeLong(const MessageLite& base) {
+          const SubPlan& this_ = static_cast<const SubPlan&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SubPlan::ByteSizeLong() const {
+          const SubPlan& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skytether.mohair.SubPlan)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skytether.substrait.Rel split_rel = 1 [json_name = "splitRel"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.split_rel_);
+            }
+          }
+           {
+            // uint32 subplan_reference = 2 [json_name = "subplanReference"];
+            if (this_._internal_subplan_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_subplan_reference());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SubPlan::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SubPlan*>(&to_msg);
+  auto& from = static_cast<const SubPlan&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skytether.mohair.SubPlan)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.split_rel_ != nullptr);
+    if (_this->_impl_.split_rel_ == nullptr) {
+      _this->_impl_.split_rel_ =
+          ::google::protobuf::Message::CopyConstruct<::skytether::substrait::Rel>(arena, *from._impl_.split_rel_);
+    } else {
+      _this->_impl_.split_rel_->MergeFrom(*from._impl_.split_rel_);
+    }
+  }
+  if (from._internal_subplan_reference() != 0) {
+    _this->_impl_.subplan_reference_ = from._impl_.subplan_reference_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SubPlan::CopyFrom(const SubPlan& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skytether.mohair.SubPlan)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SubPlan::InternalSwap(SubPlan* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.subplan_reference_)
+      + sizeof(SubPlan::_impl_.subplan_reference_)
+      - PROTOBUF_FIELD_OFFSET(SubPlan, _impl_.split_rel_)>(
+          reinterpret_cast<char*>(&_impl_.split_rel_),
+          reinterpret_cast<char*>(&other->_impl_.split_rel_));
+}
+
+::google::protobuf::Metadata SubPlan::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
