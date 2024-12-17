@@ -33,8 +33,6 @@
 // >> Namespaces
 namespace fs = std::filesystem;
 
-using skytether::SubstraitMessage;
-
 
 // ------------------------------
 // Structs and Classes
@@ -48,8 +46,8 @@ struct ToolInterface {
       return 1;
     }
 
-    auto query_plan = SubstraitMessage::FromFile(plan_fpath.string());
-    skytether::PrintSubstraitPlan(query_plan->payload.get());
+    auto query_plan = mohair::SubstraitMessage::FromFile(plan_fpath.string());
+    mohair::PrintSubstraitPlan(query_plan->payload.get());
     return 0;
   }
 };

@@ -26,7 +26,7 @@
 // Functions
 
 // >> Wrapper functions for protobuf framework functions
-namespace skytether {
+namespace mohair {
 
   // Types to wrap
   using google::protobuf::TextFormat;
@@ -53,9 +53,9 @@ namespace skytether {
   }
 
 
-} // namespace: skytether
+} // namespace: mohair
 
-namespace skytether {
+namespace mohair {
 
   //  >> Reader functions
   //! Returns a binary input stream for the given file path
@@ -159,13 +159,13 @@ namespace skytether {
   }
 
 
-} // namespace: skytether
+} // namespace: mohair
 
 
 // ------------------------------
 // Method implementations
 
-namespace skytether {
+namespace mohair {
 
   // >> Methods for SubstraitMessage
   std::string SubstraitMessage::Serialize() {
@@ -207,5 +207,5 @@ namespace skytether {
     return SubstraitMessage::FromFile(plan_fpath.data());
   }
 
-} // namespace: skytether
+} // namespace: mohair
 

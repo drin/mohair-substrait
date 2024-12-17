@@ -30,55 +30,56 @@ libabsl_dep = [
 # ------------------------------
 # Reference paths
 
-mohair_srcdir    = 'skyproto' / 'mohair'
-substrait_srcdir = 'skyproto' / 'substrait'
+mohair_hdrdir = 'mohair'
+
+proto_mohair_srcdir    = 'skyproto' / 'mohair'
+proto_substrait_srcdir = 'skyproto' / 'substrait'
 
 
 # ------------------------------
 # Headers and sources
 
 proto_headers = [
-   mohair_srcdir    / 'algebra.pb.h'
-  ,mohair_srcdir    / 'topology.pb.h'
-  ,substrait_srcdir / 'type.pb.h'
-  ,substrait_srcdir / 'function.pb.h'
-  ,substrait_srcdir / 'plan.pb.h'
-  ,substrait_srcdir / 'algebra.pb.h'
-  ,substrait_srcdir / 'capabilities.pb.h'
-  ,substrait_srcdir / 'parameterized_types.pb.h'
-  ,substrait_srcdir / 'type_expressions.pb.h'
-  ,substrait_srcdir / 'extended_expression.pb.h'
-  ,substrait_srcdir / 'extensions' / 'extensions.pb.h'
+   proto_mohair_srcdir    / 'algebra.pb.h'
+  ,proto_mohair_srcdir    / 'topology.pb.h'
+  ,proto_substrait_srcdir / 'type.pb.h'
+  ,proto_substrait_srcdir / 'function.pb.h'
+  ,proto_substrait_srcdir / 'plan.pb.h'
+  ,proto_substrait_srcdir / 'algebra.pb.h'
+  ,proto_substrait_srcdir / 'capabilities.pb.h'
+  ,proto_substrait_srcdir / 'parameterized_types.pb.h'
+  ,proto_substrait_srcdir / 'type_expressions.pb.h'
+  ,proto_substrait_srcdir / 'extended_expression.pb.h'
+  ,proto_substrait_srcdir / 'extensions' / 'extensions.pb.h'
 ]
 
 proto_sources = [
-   mohair_srcdir    / 'algebra.pb.cc'
-  ,mohair_srcdir    / 'topology.pb.cc'
-  ,substrait_srcdir / 'type.pb.cc'
-  ,substrait_srcdir / 'function.pb.cc'
-  ,substrait_srcdir / 'plan.pb.cc'
-  ,substrait_srcdir / 'algebra.pb.cc'
-  ,substrait_srcdir / 'capabilities.pb.cc'
-  ,substrait_srcdir / 'parameterized_types.pb.cc'
-  ,substrait_srcdir / 'type_expressions.pb.cc'
-  ,substrait_srcdir / 'extended_expression.pb.cc'
-  ,substrait_srcdir / 'extensions' / 'extensions.pb.cc'
+   proto_mohair_srcdir    / 'algebra.pb.cc'
+  ,proto_mohair_srcdir    / 'topology.pb.cc'
+  ,proto_substrait_srcdir / 'type.pb.cc'
+  ,proto_substrait_srcdir / 'function.pb.cc'
+  ,proto_substrait_srcdir / 'plan.pb.cc'
+  ,proto_substrait_srcdir / 'algebra.pb.cc'
+  ,proto_substrait_srcdir / 'capabilities.pb.cc'
+  ,proto_substrait_srcdir / 'parameterized_types.pb.cc'
+  ,proto_substrait_srcdir / 'type_expressions.pb.cc'
+  ,proto_substrait_srcdir / 'extended_expression.pb.cc'
+  ,proto_substrait_srcdir / 'extensions' / 'extensions.pb.cc'
 ]
 
 # >> Composed lists for convenience
-libmohair_headers = (
-    [
-       'mohair.hpp'
-      ,'apidep_standard.hpp'
-      ,'apidep_substrait.hpp'
-    ]
-  + proto_headers
-)
 
-libmohair_sources = (
-    [ 'mohair.cpp' ]
-  + proto_sources
-)
+libmohair_headers = [
+   'mohair.hpp'
+  ,mohair_hdrdir / 'apidep_standard.hpp'
+  ,mohair_hdrdir / 'apidep_substrait.hpp'
+  ,proto_headers
+]
+
+libmohair_sources = [
+   'mohair.cpp'
+  ,proto_sources
+]
 
 
 # ------------------------------

@@ -22,8 +22,8 @@
 
 
 // >> API dependencies
-#include "apidep_standard.hpp"         // C++ standard library
-#include "apidep_substrait.hpp"        // Substrait protocol types
+#include "mohair/apidep_standard.hpp"  // C++ standard library
+#include "mohair/apidep_substrait.hpp" // Substrait protocol types
 
 
 // >> Internal deps
@@ -36,7 +36,7 @@
 // ------------------------------
 // Aliases
 
-namespace skytether {
+namespace mohair {
 
   // mohair-protocol types (for query processing)
   using skyproto::mohair::SuperPlan;
@@ -54,13 +54,13 @@ namespace skytether {
   const std::string version_minor = MOHAIR_VERSION_MINOR;
   const std::string version_patch = MOHAIR_VERSION_PATCH;
 
-} // namespace: skytether
+} // namespace: mohair
 
 
 // ------------------------------
 // Functions
 
-namespace skytether {
+namespace mohair {
 
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
@@ -89,13 +89,13 @@ namespace skytether {
   // >> Helper functions
   int FindPlanRoot(Plan& substrait_plan);
 
-} // namespace: skytether
+} // namespace: mohair
 
 
 // ------------------------------
 // Classes and structs
 
-namespace skytether {
+namespace mohair {
 
   //! A base class representing a query plan sent as a message
   struct PlanMessage {
@@ -135,4 +135,4 @@ namespace skytether {
     static std::unique_ptr<PlanMessage> FromFile(std::string    plan_fpath);
   };
 
-} // namespace: skytether
+} // namespace: mohair
