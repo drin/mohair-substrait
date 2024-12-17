@@ -34,42 +34,7 @@
 #include <memory>
 #include <string>
 
-// >> Function support
-#include <functional>
-
-// >> Data structures
-#include <vector>
-
 // >> I/O support
 #include <iostream>
-#include <sstream>
 #include <fstream>
-#include <filesystem>
-
-
-// ------------------------------
-// Aliases (internalized to library namespace)
-
-// >> namespace aliases
-namespace fs = std::filesystem;
-
-
-// >> type aliases
-namespace mohair_substrait {
-
-  // pointer type aliases
-  using std::shared_ptr;
-  using std::unique_ptr;
-
-  // data type aliases
-  using std::string;
-
-  // data structure type aliases
-  using std::vector;
-
-  // I/O type aliases
-  using std::stringstream;
-  using std::fstream;
-
-} // namespace: mohair_substrait
 

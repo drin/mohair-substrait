@@ -30,8 +30,8 @@ libabsl_dep = [
 # ------------------------------
 # Reference paths
 
-mohair_srcdir    = 'skytether' / 'mohair'
-substrait_srcdir = 'skytether' / 'substrait'
+mohair_srcdir    = 'skyproto' / 'mohair'
+substrait_srcdir = 'skyproto' / 'substrait'
 
 
 # ------------------------------
@@ -66,41 +66,44 @@ proto_sources = [
 ]
 
 # >> Composed lists for convenience
-libmohair_substrait_headers = (
+libmohair_headers = (
     [
-       'mohair_substrait.hpp'
+       'mohair.hpp'
       ,'apidep_standard.hpp'
       ,'apidep_substrait.hpp'
     ]
   + proto_headers
 )
 
-libmohair_substrait_sources = (
-    [ 'mohair_substrait.cpp' ]
+libmohair_sources = (
+    [ 'mohair.cpp' ]
   + proto_sources
 )
 
 
 # ------------------------------
-# Include directories
-libmohair_substrait_inc = include_directories('.')
+# Build targets
 
+# >> Include targets
+libmohair_inc = [
+   config_inc
+  ,include_directories('.')
+]
 
-# ------------------------------
-# Build artifacts (libraries and dependencies)
-
-libmohair_substrait = library('mohair-substrait'
-  ,libmohair_substrait_sources
-  ,include_directories: libmohair_substrait_inc
+# >> Library targets
+libmohair = library('mohair'
+  ,libmohair_sources
+  ,include_directories: libmohair_inc
   ,dependencies       : [libcorefoundation_dep, libprotobuf_dep, libabsl_dep]
   ,pic                : true
   ,install            : true
 )
 
-libmohair_substrait_dep = declare_dependency(
-   include_directories: libmohair_substrait_inc
+# >> Dependency targets
+libmohair_dep = declare_dependency(
+   include_directories: libmohair_inc
   ,dependencies       : [libcorefoundation_dep, libprotobuf_dep, libabsl_dep]
-  ,link_with          : [libmohair_substrait]
+  ,link_with          : [libmohair]
 )
 
 
@@ -109,9 +112,5 @@ libmohair_substrait_dep = declare_dependency(
 
 # NOTE: preserve_path is useful here, and it avoids adding the `src/cpp` prefix because of
 # where this build file is located (prefix of the relative path is preserved).
-install_headers(
-   libmohair_substrait_headers
-  ,subdir       : 'mohair-substrait'
-  ,preserve_path: true
-)
+install_headers(libmohair_headers, subdir: 'skytether', preserve_path: true)
 

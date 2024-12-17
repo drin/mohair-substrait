@@ -27,58 +27,58 @@
 
 
 // >> Internal deps
-#include "mohair-substrait-config.hpp" // Library configuration
+#include "mohair-config.hpp" // Library configuration
 
-#include "skytether/mohair/algebra.pb.h"  // Mohair protocol types
-#include "skytether/mohair/topology.pb.h"
+#include "skyproto/mohair/algebra.pb.h"  // Mohair protocol types
+#include "skyproto/mohair/topology.pb.h"
 
 
 // ------------------------------
 // Aliases
 
-namespace mohair_substrait {
+namespace skytether {
 
   // mohair-protocol types (for query processing)
-  using skytether::mohair::SuperPlan;
-  using skytether::mohair::SubPlan;
-  using skytether::mohair::ErrRel;
+  using skyproto::mohair::SuperPlan;
+  using skyproto::mohair::SubPlan;
+  using skyproto::mohair::ErrRel;
 
   // mohair-protocol types (for topology representation)
-  using skytether::mohair::ServiceConfig;
-  using skytether::mohair::DeviceClass;
+  using skyproto::mohair::ServiceConfig;
+  using skyproto::mohair::DeviceClass;
 
 
   // global variables (within the library)
-  const string version       = MOHAIR_VERSION_STRING;
-  const string version_major = MOHAIR_VERSION_MAJOR;
-  const string version_minor = MOHAIR_VERSION_MINOR;
-  const string version_patch = MOHAIR_VERSION_PATCH;
+  const std::string version       = MOHAIR_VERSION_STRING;
+  const std::string version_major = MOHAIR_VERSION_MAJOR;
+  const std::string version_minor = MOHAIR_VERSION_MINOR;
+  const std::string version_patch = MOHAIR_VERSION_PATCH;
 
-} // namespace: mohair_substrait
+} // namespace: skytether
 
 
 // ------------------------------
 // Functions
 
-namespace mohair_substrait {
+namespace skytether {
 
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
-  bool StringifyPlan (const Message& msg    , string* text_result);
-  bool StringifyRel  (const Message& msg    , string* text_result);
-  bool SerializeJson (const string& msg_json, Message* msg_result);
-  bool JsonifyMessage(const Message& msg    , string* json_result);
+  bool StringifyPlan (const Message&     msg     , std::string* text_result);
+  bool StringifyRel  (const Message&     msg     , std::string* text_result);
+  bool SerializeJson (const std::string& msg_json, Message*     msg_result);
+  bool JsonifyMessage(const Message&     msg     , std::string* json_result);
 
   // >> Reader functions
   // helper functions
-  fstream InputStreamForFile(const char* in_fpath);
-  fstream OutputStreamForFile(const char* out_fpath);
-  bool    FileToString(const char* in_fpath, string& file_data);
+  std::fstream InputStreamForFile(const char* in_fpath);
+  std::fstream OutputStreamForFile(const char* out_fpath);
+  bool         FileToString(const char* in_fpath, std::string& file_data);
 
   // deserialization functions
-  unique_ptr<Plan> SubstraitPlanFromString(string& plan_msg);
-  unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath);
-  unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath);
+  std::unique_ptr<Plan> SubstraitPlanFromString(std::string& plan_msg);
+  std::unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath);
+  std::unique_ptr<Plan> SubstraitPlanFromFile(std::string& plan_fpath);
 
 
   // >> Debug functions
@@ -89,26 +89,26 @@ namespace mohair_substrait {
   // >> Helper functions
   int FindPlanRoot(Plan& substrait_plan);
 
-} // namespace: mohair_substrait
+} // namespace: skytether
 
 
 // ------------------------------
 // Classes and structs
 
-namespace mohair_substrait {
+namespace skytether {
 
   //! A base class representing a query plan sent as a message
   struct PlanMessage {
     // attributes
-    unique_ptr<Plan> payload;
+    std::unique_ptr<Plan> payload;
     int              root_relndx { -1 }; // initialized to -1 as a sentinel
     PlanRel*         root_relation;
 
     // destructors and constructors
     virtual ~PlanMessage() = default;
 
-    PlanMessage(unique_ptr<Plan>&& msg): payload(std::move(msg)) {}
-    PlanMessage(unique_ptr<Plan>&& msg, int root_relndx)
+    PlanMessage(std::unique_ptr<Plan>&& msg): payload(std::move(msg)) {}
+    PlanMessage(std::unique_ptr<Plan>&& msg, int root_relndx)
       : payload(std::move(msg)), root_relndx(root_relndx) {
       this->root_relation = this->payload->mutable_relations(root_relndx);
     }
@@ -121,18 +121,18 @@ namespace mohair_substrait {
     // destructors and constructors
     virtual ~SubstraitMessage() = default;
 
-    SubstraitMessage(unique_ptr<Plan>&& msg): PlanMessage(std::move(msg)) {}
-    SubstraitMessage(unique_ptr<Plan>&& msg, int root_relndx)
+    SubstraitMessage(std::unique_ptr<Plan>&& msg): PlanMessage(std::move(msg)) {}
+    SubstraitMessage(std::unique_ptr<Plan>&& msg, int root_relndx)
       : PlanMessage(std::move(msg), root_relndx) {}
 
     // methods
-    virtual string Serialize();
-    virtual bool   SerializeToFile(const char *out_fpath);
+    virtual std::string Serialize();
+    virtual bool        SerializeToFile(const char *out_fpath);
 
     // static methods
-    static unique_ptr<PlanMessage> FromString(string& plan_str);
-    static unique_ptr<PlanMessage> FromFile(const char* plan_fpath);
-    static unique_ptr<PlanMessage> FromFile(string plan_fpath);
+    static std::unique_ptr<PlanMessage> FromString(std::string& plan_str);
+    static std::unique_ptr<PlanMessage> FromFile(const char*    plan_fpath);
+    static std::unique_ptr<PlanMessage> FromFile(std::string    plan_fpath);
   };
 
-} // namespace: mohair_substrait
+} // namespace: skytether
