@@ -19,14 +19,14 @@
 // ------------------------------
 // Dependencies
 
-#include "mohair_substrait.hpp"
+#include "mohair.hpp"
 
 
 // ------------------------------
 // Functions
 
 // >> Wrapper functions for protobuf framework functions
-namespace mohair_substrait {
+namespace skytether {
 
   // Types to wrap
   using google::protobuf::TextFormat;
@@ -36,40 +36,40 @@ namespace mohair_substrait {
   using google::protobuf::util::MessageToJsonString;
 
   // Wrapper implementation for `TextFormat::PrintToString`
-  bool StringifyMessage(const Message& msg, string* text_result) {
+  bool StringifyMessage(const Message& msg, std::string* text_result) {
     return TextFormat::PrintToString(msg, text_result);
   }
 
   // TODO: decide if I should return a status object that has an error message
   // Wrapper implementation for `JsonStringToMessage`
-  bool SerializeJson(const string& msg_json, Message* msg_result) {
+  bool SerializeJson(const std::string& msg_json, Message* msg_result) {
     absl::Status status = JsonStringToMessage(msg_json, msg_result);
     return status.ok();
   }
 
-  bool JsonifyMessage(const Message& msg, string* json_result) {
+  bool JsonifyMessage(const Message& msg, std::string* json_result) {
     absl::Status status = MessageToJsonString(msg, json_result);
     return status.ok();
   }
 
 
-} // namespace: mohair_substrait
+} // namespace: skytether
 
-namespace mohair_substrait {
+namespace skytether {
 
   //  >> Reader functions
   //! Returns a binary input stream for the given file path
-  fstream InputStreamForFile(const char* in_fpath) {
-    return fstream { in_fpath, std::ios::in | std::ios::binary };
+  std::fstream InputStreamForFile(const char* in_fpath) {
+    return std::fstream { in_fpath, std::ios::in | std::ios::binary };
   }
 
   //! Returns a binary output stream for the given file path
-  fstream OutputStreamForFile(const char* out_fpath) {
-    return fstream { out_fpath, std::ios::out | std::ios::trunc | std::ios::binary };
+  std::fstream OutputStreamForFile(const char* out_fpath) {
+    return std::fstream { out_fpath, std::ios::out | std::ios::trunc | std::ios::binary };
   }
 
   //! Reads data from the given file path into an output string as binary
-  bool FileToString(const char* in_fpath, string& file_data) {
+  bool FileToString(const char* in_fpath, std::string& file_data) {
     // create an IO stream for the file
     auto file_stream = InputStreamForFile(in_fpath);
     if (!file_stream) {
@@ -81,7 +81,6 @@ namespace mohair_substrait {
     file_stream.seekg(0, std::ios_base::end);
     auto size = file_stream.tellg();
     file_stream.seekg(0);
-    std::cout << "File size: [" << std::to_string(size) << "]" << std::endl;
 
     // Resize the output and read the file data into it
     file_data.resize(size);
@@ -94,7 +93,7 @@ namespace mohair_substrait {
 
 
   // >> Conversion functions (into/out of substrait plans)
-  unique_ptr<Plan> SubstraitPlanFromString(string &plan_msg) {
+  std::unique_ptr<Plan> SubstraitPlanFromString(std::string &plan_msg) {
     auto substrait_plan = std::make_unique<Plan>();
     substrait_plan->ParseFromString(plan_msg);
 
@@ -105,8 +104,8 @@ namespace mohair_substrait {
     return substrait_plan;
   }
 
-  unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath) {
-    fstream plan_fstream = InputStreamForFile(plan_fpath);
+  std::unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath) {
+    std::fstream plan_fstream = InputStreamForFile(plan_fpath);
 
     auto substrait_plan = std::make_unique<Plan>();
     if (substrait_plan->ParseFromIstream(&plan_fstream)) { return substrait_plan; }
@@ -115,23 +114,20 @@ namespace mohair_substrait {
     return nullptr;
   }
 
-  unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath) {
+  std::unique_ptr<Plan> SubstraitPlanFromFile(std::string& plan_fpath) {
     return SubstraitPlanFromFile(plan_fpath.data());
   }
 
 
   // >> Debug functions
   void PrintProtoMessage(const Message& msg) {
-    string msg_text;
+    std::string msg_text;
 
     bool status_stringify { StringifyMessage(msg, &msg_text) };
     if (not status_stringify) {
       std::cerr << "Unable to print message" << std::endl;
       return;
     }
-
-    std::cout << "Proto message:" << std::endl
-              << msg_text         << std::endl;
   }
 
   void  PrintSubstraitRel(Rel  *rel_msg ) { PrintProtoMessage(*rel_msg);  }
@@ -163,17 +159,17 @@ namespace mohair_substrait {
   }
 
 
-} // namespace: mohair_substrait
+} // namespace: skytether
 
 
 // ------------------------------
 // Method implementations
 
-namespace mohair_substrait {
+namespace skytether {
 
   // >> Methods for SubstraitMessage
-  string SubstraitMessage::Serialize() {
-    string msg_serialized;
+  std::string SubstraitMessage::Serialize() {
+    std::string msg_serialized;
 
     if (not this->payload->SerializeToString(&msg_serialized)) {
       std::cerr << "Error when serializing substrait message." << std::endl;
@@ -197,19 +193,19 @@ namespace mohair_substrait {
     return true;
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromString(string& plan_str) {
+  std::unique_ptr<PlanMessage> SubstraitMessage::FromString(std::string& plan_str) {
     auto query_plan = SubstraitPlanFromString(plan_str);
     return std::make_unique<SubstraitMessage>(std::move(query_plan));
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
+  std::unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
     auto query_plan = SubstraitPlanFromFile(plan_fpath);
     return std::make_unique<SubstraitMessage>(std::move(query_plan));
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromFile(string plan_fpath) {
+  std::unique_ptr<PlanMessage> SubstraitMessage::FromFile(std::string plan_fpath) {
     return SubstraitMessage::FromFile(plan_fpath.data());
   }
 
-} // namespace: mohair_substrait
+} // namespace: skytether
 

@@ -24,7 +24,7 @@
 #include <filesystem>
 
 // >> Internal
-#include "mohair_substrait.hpp"
+#include "mohair.hpp"
 
 
 // ------------------------------
@@ -33,7 +33,7 @@
 // >> Namespaces
 namespace fs = std::filesystem;
 
-using mohair_substrait::SubstraitMessage;
+using skytether::SubstraitMessage;
 
 
 // ------------------------------
@@ -49,7 +49,7 @@ struct ToolInterface {
     }
 
     auto query_plan = SubstraitMessage::FromFile(plan_fpath.string());
-    mohair_substrait::PrintSubstraitPlan(query_plan->payload.get());
+    skytether::PrintSubstraitPlan(query_plan->payload.get());
     return 0;
   }
 };

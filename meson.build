@@ -2,7 +2,7 @@
 # Project Definition
 
 # >> project info
-project('libmohair-substrait'
+project('libmohair'
   ,'cpp'
   ,version         : '1.1.2'
   ,meson_version   : '>=1.6.0'
@@ -33,19 +33,22 @@ cpp_tooldir = cpp_srcdir / 'toolbox'
 
 
 # ------------------------------
-# Build definitions
+# Build targets
 
-# >> Write configuration data
-# write `mohair-substrait-config.hpp` for target libmohair_substrait
+# >> Configuration data and header for project
 mohair_cfgfile = configure_file(
-   input        : cpp_srcdir / 'mohair-substrait-config.hpp.in'
-  ,output       : 'mohair-substrait-config.hpp'
+   input        : cpp_srcdir / 'mohair-config.hpp.in'
+  ,output       : 'mohair-config.hpp'
   ,configuration: mohair_cfgdata
-  ,install_dir  : get_option('includedir') / 'mohair-substrait'
+  ,install_dir  : get_option('includedir') / 'skytether'
 )
 
-# >> Invoke build from subdirectories
-# create target 'libmohair_substrait' (and related targets)
+
+# >> Include targets
+config_inc = include_directories('.')
+
+
+# >> Targets from subdirectories
 subdir(cpp_srcdir)
 
 
@@ -54,19 +57,7 @@ subdir(cpp_srcdir)
 
 # pkg-config
 module_pkgcfg = import('pkgconfig')
-module_pkgcfg.generate(libmohair_substrait, subdirs: 'mohair-substrait')
-
-# cmake (NOTE: this is mostly a placeholder)
-module_cmake = import('cmake')
-module_cmake.write_basic_package_version_file(
-   name   : 'MohairSubstrait'
-  ,version: meson.project_version()
-)
-module_cmake.configure_package_config_file(
-   name         : 'MohairSubstrait'
-  ,input        : 'MohairSubstraitConfig.cmake.in'
-  ,configuration: mohair_cfgdata
-)
+module_pkgcfg.generate(libmohair, subdirs: 'skytether')
 
 
 # ------------------------------
@@ -77,7 +68,7 @@ readsubstrait_sources = [ cpp_tooldir  / 'read-substrait.cpp' ]
 
 readsubstrait_bin = executable('read-substrait'
   ,readsubstrait_sources
-  ,dependencies : [ libmohair_substrait_dep ]
+  ,dependencies : [ libmohair_dep ]
   ,install      : true
 )
 
