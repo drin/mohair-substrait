@@ -128,6 +128,8 @@ namespace mohair {
       std::cerr << "Unable to print message" << std::endl;
       return;
     }
+
+    std::cout << msg_text << std::endl;
   }
 
   void  PrintSubstraitRel(Rel  *rel_msg ) { PrintProtoMessage(*rel_msg);  }
