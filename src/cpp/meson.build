@@ -39,6 +39,11 @@ proto_substrait_srcdir = 'skyproto' / 'substrait'
 # ------------------------------
 # Headers and sources
 
+query_headers = [
+   mohair_hdrdir / 'operators.hpp'
+  ,mohair_hdrdir / 'plans.hpp'
+]
+
 proto_headers = [
    proto_mohair_srcdir    / 'algebra.pb.h'
   ,proto_mohair_srcdir    / 'topology.pb.h'
@@ -51,6 +56,12 @@ proto_headers = [
   ,proto_substrait_srcdir / 'type_expressions.pb.h'
   ,proto_substrait_srcdir / 'extended_expression.pb.h'
   ,proto_substrait_srcdir / 'extensions' / 'extensions.pb.h'
+]
+
+
+query_sources = [
+   mohair_hdrdir / 'operators.cpp'
+  ,mohair_hdrdir / 'plans.cpp'
 ]
 
 proto_sources = [
@@ -71,14 +82,16 @@ proto_sources = [
 
 libmohair_headers = [
    'mohair.hpp'
+  ,proto_headers
   ,mohair_hdrdir / 'apidep_standard.hpp'
   ,mohair_hdrdir / 'apidep_substrait.hpp'
-  ,proto_headers
+  ,query_headers
 ]
 
 libmohair_sources = [
    'mohair.cpp'
   ,proto_sources
+  ,query_sources
 ]
 
 

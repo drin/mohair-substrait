@@ -33,8 +33,24 @@
 // >> Memory and data type support
 #include <memory>
 #include <string>
+#include <vector>
 
 // >> I/O support
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
+
+// ------------------------------
+// Type aliases
+
+namespace mohair {
+
+  using std::unique_ptr;
+  using std::string;
+  using std::stringstream;
+
+  using std::array;
+  using std::vector;
+
+} // namespace: mohair
