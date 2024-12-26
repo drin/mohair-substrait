@@ -25,6 +25,7 @@
 
 // >> Internal
 #include "mohair.hpp"
+#include "mohair/plans.hpp"
 
 
 // ------------------------------
@@ -33,12 +34,22 @@
 // >> Namespaces
 namespace fs = std::filesystem;
 
+// standard types
+using std::unique_ptr;
+using std::string;
+
+// query processing types
+using mohair::PlanMessage;
+using mohair::SystemPlan;
+
 
 // ------------------------------
 // Structs and Classes
 
 struct ToolInterface {
   fs::path plan_fpath;
+  bool     show_plan      { true  };
+  bool     show_pipelines { false };
 
   int Start() {
     if (plan_fpath.empty()) {
@@ -46,8 +57,19 @@ struct ToolInterface {
       return 1;
     }
 
-    auto query_plan = mohair::SubstraitMessage::FromFile(plan_fpath.string());
-    mohair::PrintSubstraitPlan(query_plan->payload.get());
+    unique_ptr<PlanMessage> plan_msg = mohair::SubstraitMessage::FromFile(
+      plan_fpath.string()
+    );
+
+    if (show_plan) {
+      mohair::PrintSubstraitPlan(plan_msg->payload.get());
+    }
+
+    else {
+      unique_ptr<SystemPlan> sys_plan = mohair::MohairPlanFrom(*plan_msg);
+      sys_plan->PrintPipelines();
+    }
+
     return 0;
   }
 };
@@ -60,6 +82,7 @@ int PrintHelp() {
     std::cout << "read-substrait"
               << " [-h] [-b] [-s]"
               << " -f <path-to-substrait-file>"
+              << " -p [ plan | pipelines ]"
               << std::endl
     ;
 
@@ -75,7 +98,7 @@ int main(int argc, char **argv) {
 
   // Parse each argument and internalize the provided option
   constexpr char  is_done_parsing = -1;
-  const     char* opt_template    = "f:hbs";
+  const     char* opt_template    = "f:hbsp:";
 
   char parsed_opt;
   while ((parsed_opt = (char) getopt(argc, argv, opt_template)) != is_done_parsing) {
@@ -85,6 +108,27 @@ int main(int argc, char **argv) {
 
       case 'f': {
         my_cli.plan_fpath = fs::absolute(optarg).string();
+        break;
+      }
+
+      case 'p': {
+        string print_mode { optarg };
+
+        if (print_mode == "plan") {
+          my_cli.show_plan      = true;
+          my_cli.show_pipelines = false;
+        }
+
+        else if (print_mode == "pipelines") {
+          my_cli.show_plan      = false;
+          my_cli.show_pipelines = true;
+        }
+
+        else {
+          std::cerr << "Invalid print mode: [" << print_mode << "]" << std::endl;
+          return 1;
+        }
+
         break;
       }
 
