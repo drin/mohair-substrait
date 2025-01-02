@@ -66,7 +66,7 @@ struct ToolInterface {
     }
 
     else {
-      unique_ptr<SystemPlan> sys_plan = mohair::MohairPlanFrom(*plan_msg);
+      unique_ptr<SystemPlan> sys_plan = mohair::SystemPlanFrom(std::move(plan_msg));
       sys_plan->PrintPipelines();
     }
 

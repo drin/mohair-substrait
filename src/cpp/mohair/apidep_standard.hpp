@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 // >> I/O support
 #include <iostream>
@@ -52,5 +53,6 @@ namespace mohair {
 
   using std::array;
   using std::vector;
+  using std::unordered_map;
 
 } // namespace: mohair

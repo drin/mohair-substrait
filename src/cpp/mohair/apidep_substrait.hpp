@@ -55,6 +55,7 @@ namespace mohair {
 
   // Relation level
   using skyproto::substrait::Rel;
+  using skyproto::substrait::RelRoot;
 
   // Leaf types
   using skyproto::substrait::ReadRel;
@@ -79,6 +80,9 @@ namespace mohair {
   using skyproto::substrait::CrossRel;
   using skyproto::substrait::HashJoinRel;
   using skyproto::substrait::MergeJoinRel;
+
+  // N-ary types (streaming)
+  using skyproto::substrait::SetRel;
 
 } // namespace: mohair
 

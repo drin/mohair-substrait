@@ -21,6 +21,8 @@
 
 #include "mohair/plans.hpp"
 
+#include <stdexcept>
+
 
 // ------------------------------
 // Functions
@@ -180,6 +182,26 @@ namespace mohair {
     }
   }
 
+  //! Create mapping of function anchors in the query plan
+  void SystemPlan::RegisterExtensionFunctions() {
+    for (auto &plan_ext : plan_msg->payload->extensions()) {
+      if (!plan_ext.has_extension_function()) { continue; }
+
+      const auto anchor_id  = plan_ext.extension_function().function_anchor();
+      fn_anchors[anchor_id] = plan_ext.extension_function().name();
+    }
+  }
+
+  string SystemPlan::ExtensionFunctionForAnchor(uint64_t anchor_id) {
+    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
+      throw std::out_of_range(
+        "Extension function anchor not registered: " + std::to_string(anchor_id)
+      );
+    }
+
+    return fn_anchors[anchor_id];
+  }
+
   // Traversal functions for finding candidate plan splits
   PipelineStage* FindTallJoinLeaf(SystemPlan* sys_plan);
   PipelineStage* FindLongPipelineLeaf(SystemPlan* sys_plan);
@@ -260,27 +282,37 @@ namespace mohair {
 
   // >> Translation functions
 
-  //! Returns a `SystemPlan` that wraps the given `PlanMessage`.
+  //! Constructs a `SystemPlan` that wraps the given `PlanMessage`.
   //  This is an interface to creating a graph (query plan) of mohair operators.
-  unique_ptr<SystemPlan> MohairPlanFrom(PlanMessage& plan_msg) {
+  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg) {
     // walk the top level relations until we find the root (should only be one)
-    int root_ndx = FindPlanRoot(*(plan_msg.payload));
+    int root_ndx = FindPlanRoot(*(plan_msg->payload));
 
     // set the plan root if not already set
-    if (plan_msg.root_relndx < 0) {
-      plan_msg.root_relndx   = root_ndx;
-      plan_msg.root_relation = plan_msg.payload->mutable_relations(root_ndx);
+    if (plan_msg->root_relndx < 0) {
+      plan_msg->root_relndx   = root_ndx;
+      plan_msg->root_relation = plan_msg->payload->mutable_relations(root_ndx);
     }
 
     // translate from the top level `Rel` to mohair operators
+    Rel* substrait_rootrel { plan_msg->root_relation->mutable_root()->mutable_input() };
     auto mohair_plan = std::make_unique<SystemPlan>(
-      MohairFrom(plan_msg.root_relation->mutable_root()->mutable_input())
+       std::move(plan_msg), MohairFrom(substrait_rootrel)
     );
+
+    // then, walk the function anchors so we can associate anchor IDs and function names
+    mohair_plan->RegisterExtensionFunctions();
 
     // then, walk the plan to build pipelines and discover characteristics
     mohair_plan->BuildPipelines();
 
     return mohair_plan;
+  }
+
+  //! Constructs a `SystemPlan` for the `PlanMessage` deserialized from `serialized_msg`.
+  //  This is an interface to creating a graph (query plan) of mohair operators.
+  unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg) {
+    return SystemPlanFrom(SubstraitMessage::FromString(serialized_msg));
   }
 
 } // namespace: mohair
