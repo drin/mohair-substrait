@@ -36,7 +36,7 @@ namespace mohair {
   size_t MohairOp::GetOpArity() { return 0;     }
 
   unique_ptr<MohairOp>* MohairOp::GetOpInputs() { return nullptr; }
-  void MohairOp::SimplifyMessage(Rel* rel) { return; }
+  void MohairOp::SimplifyMessage([[maybe_unused]] Rel* rel) { return; }
 
   // >> ToString implementations for each op type
   // leaf ops
