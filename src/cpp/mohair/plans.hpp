@@ -109,24 +109,34 @@ namespace mohair {
 
   // >> Query plans
 
-  //! A system plan is the query plan managed by the cooperative decomposition system.
+  //! A query plan managed by the cooperative decomposition system.
   struct SystemPlan {
-    unique_ptr<MohairOp> plan_root;
-    size_t               breadth;
-    size_t               depth;
+    unique_ptr<PlanMessage>         plan_msg;
+    unique_ptr<MohairOp>            plan_root;
+    size_t                          breadth;
+    size_t                          depth;
 
-    StageVector          pipeline_stages;
-    vector<OpPipeline*>  origin_pipelines;
+    StageVector                     pipeline_stages;
+    vector<OpPipeline*>             origin_pipelines;
+
+    unordered_map<uint64_t, string> fn_anchors;
 
     virtual ~SystemPlan() {}
 
-    SystemPlan(unique_ptr<MohairOp>&& op): plan_root(std::move(op)) {}
+    SystemPlan(unique_ptr<PlanMessage>&& plan, unique_ptr<MohairOp>&& op)
+      : plan_msg(std::move(plan)), plan_root(std::move(op)) {}
 
     PipelineStage& CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
 
     //! Builds pipelines from plan operators and discovers plan characteristics
     void BuildPipelines();
     void PrintPipelines();
+
+    //! Create mapping of function anchors in the query plan
+    void RegisterExtensionFunctions();
+
+    //! Access the function name associated with the given anchor
+    string ExtensionFunctionForAnchor(uint64_t anchor_id);
   };
 
   // >> Cooperative Query Decomposition
@@ -170,7 +180,9 @@ namespace mohair {
 
   // >> Translation Functions
   unique_ptr<MohairOp>   MohairFrom(Rel *rel_msg);
-  unique_ptr<SystemPlan> MohairPlanFrom(PlanMessage& substrait_plan);
+  unique_ptr<SystemPlan> SystemPlanFrom(const string&             serialized_msg);
+  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg);
+
   unique_ptr<SuperPlan>  SuperPlanFrom(MohairOp* mohair_op);
 
   /*

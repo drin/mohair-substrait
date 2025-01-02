@@ -76,7 +76,7 @@ namespace mohair {
   bool         FileToString(const char* in_fpath, string& file_data);
 
   // deserialization functions
-  unique_ptr<Plan> SubstraitPlanFromString(string& plan_msg);
+  unique_ptr<Plan> SubstraitPlanFromString(const string& plan_msg);
   unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath);
   unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath);
 
@@ -130,9 +130,9 @@ namespace mohair {
     virtual bool   SerializeToFile(const char *out_fpath);
 
     // static methods
-    static unique_ptr<PlanMessage> FromString(string&   plan_str);
-    static unique_ptr<PlanMessage> FromFile(const char* plan_fpath);
-    static unique_ptr<PlanMessage> FromFile(string      plan_fpath);
+    static unique_ptr<PlanMessage> FromString(const string& plan_str);
+    static unique_ptr<PlanMessage> FromFile(const char*     plan_fpath);
+    static unique_ptr<PlanMessage> FromFile(string          plan_fpath);
   };
 
 } // namespace: mohair

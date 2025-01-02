@@ -93,8 +93,8 @@ namespace mohair {
 
 
   // >> Conversion functions (into/out of substrait plans)
-  std::unique_ptr<Plan> SubstraitPlanFromString(string &plan_msg) {
-    auto substrait_plan = std::make_unique<Plan>();
+  unique_ptr<Plan> SubstraitPlanFromString(const string &plan_msg) {
+    unique_ptr<Plan> substrait_plan { std::make_unique<Plan>() };
     substrait_plan->ParseFromString(plan_msg);
 
     #if MOHAIR_DEBUG
@@ -195,17 +195,15 @@ namespace mohair {
     return true;
   }
 
-  std::unique_ptr<PlanMessage> SubstraitMessage::FromString(string& plan_str) {
-    auto query_plan = SubstraitPlanFromString(plan_str);
-    return std::make_unique<SubstraitMessage>(std::move(query_plan));
+  unique_ptr<PlanMessage> SubstraitMessage::FromString(const string& plan_str) {
+    return std::make_unique<SubstraitMessage>(SubstraitPlanFromString(plan_str));
   }
 
-  std::unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
-    auto query_plan = SubstraitPlanFromFile(plan_fpath);
-    return std::make_unique<SubstraitMessage>(std::move(query_plan));
+  unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
+    return std::make_unique<SubstraitMessage>(SubstraitPlanFromFile(plan_fpath));
   }
 
-  std::unique_ptr<PlanMessage> SubstraitMessage::FromFile(string plan_fpath) {
+  unique_ptr<PlanMessage> SubstraitMessage::FromFile(string plan_fpath) {
     return SubstraitMessage::FromFile(plan_fpath.data());
   }
 
