@@ -126,6 +126,15 @@ namespace mohair {
     SystemPlan(unique_ptr<PlanMessage>&& plan, unique_ptr<MohairOp>&& op)
       : plan_msg(std::move(plan)), plan_root(std::move(op)) {}
 
+    // >> Accessors
+    //! Access the function name associated with the given anchor
+    string         FnNameForAnchor(uint64_t anchor_id);
+    const RelRoot& RootRelation() const;
+
+    // >> Convenience methods
+
+    //! Create a PipelineStage (ending with `sink`) and associate it with the downstream
+    //  PipelineStage (where output of the new stage will flow to).
     PipelineStage& CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
 
     //! Builds pipelines from plan operators and discovers plan characteristics
@@ -134,9 +143,6 @@ namespace mohair {
 
     //! Create mapping of function anchors in the query plan
     void RegisterExtensionFunctions();
-
-    //! Access the function name associated with the given anchor
-    string ExtensionFunctionForAnchor(uint64_t anchor_id);
   };
 
   // >> Cooperative Query Decomposition
@@ -168,6 +174,9 @@ namespace mohair {
     //! Finds a candidate split given a decision algorithm
     static unique_ptr<PlanSplit>
     FindSplit(SystemPlan* sys_plan, DecomposeAlg method = DecomposeAlg::LongPipelineLeaf);
+
+    vector<unique_ptr<PlanMessage>>
+    SubplansFor(PlanMessage* plan_msg);
   };
 
 } // namespace: mohair

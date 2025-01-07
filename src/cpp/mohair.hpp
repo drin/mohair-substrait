@@ -21,15 +21,17 @@
 #pragma once
 
 
-// >> API dependencies
+// >> Internal headers
+
+// Library configuration
+#include "mohair-config.hpp"
+
+// API dependencies
 #include "mohair/apidep_standard.hpp"  // C++ standard library
 #include "mohair/apidep_substrait.hpp" // Substrait protocol types
 
-
-// >> Internal deps
-#include "mohair-config.hpp" // Library configuration
-
-#include "skyproto/mohair/algebra.pb.h"  // Mohair protocol types
+// Substrait extensions
+#include "skyproto/mohair/algebra.pb.h"
 #include "skyproto/mohair/topology.pb.h"
 
 
@@ -38,21 +40,27 @@
 
 namespace mohair {
 
-  // mohair-protocol types (for query processing)
-  using skyproto::mohair::SuperPlan;
-  using skyproto::mohair::SubPlan;
-  using skyproto::mohair::ErrRel;
-
-  // mohair-protocol types (for topology representation)
-  using skyproto::mohair::ServiceConfig;
-  using skyproto::mohair::DeviceClass;
-
-
-  // global variables (within the library)
+  // >> Global variables (library internal)
   const string version       = MOHAIR_VERSION_STRING;
   const string version_major = MOHAIR_VERSION_MAJOR;
   const string version_minor = MOHAIR_VERSION_MINOR;
   const string version_patch = MOHAIR_VERSION_PATCH;
+
+  // >> Mohair types
+  // Plan level
+  using skyproto::mohair::SuperPlan;
+  using skyproto::mohair::SubPlan;
+
+  // Operator level
+  using skyproto::mohair::ErrRel;
+
+  using skyproto::mohair::SkyRel;
+  using skyproto::mohair::SkyPartitionRel;
+  using skyproto::mohair::SkySliceRel;
+
+  // Topology level
+  using skyproto::mohair::ServiceConfig;
+  using skyproto::mohair::DeviceClass;
 
 } // namespace: mohair
 

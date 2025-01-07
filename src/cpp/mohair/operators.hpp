@@ -20,9 +20,9 @@
 // Dependencies
 #pragma once
 
+// >> Standard headers
 #include <array>
 
-#include "mohair.hpp"
 #include "mohair/plans.hpp"
 
 
