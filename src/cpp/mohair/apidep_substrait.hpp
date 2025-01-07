@@ -36,8 +36,6 @@
 #include "skyproto/substrait/algebra.pb.h"
 #include "skyproto/substrait/extensions/extensions.pb.h"
 
-#include "skyproto/mohair/algebra.pb.h"
-
 
 // ------------------------------
 // Aliases
@@ -60,11 +58,6 @@ namespace mohair {
   // Leaf types
   using skyproto::substrait::ReadRel;
   using skyproto::substrait::ExtensionLeafRel;
-
-  // Custom leaf types
-  using skyproto::mohair::SkyRel;
-  using skyproto::mohair::SkyPartitionRel;
-  using skyproto::mohair::SkySliceRel;
 
   // Unary types (streaming)
   using skyproto::substrait::ProjectRel;

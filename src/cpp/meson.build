@@ -28,71 +28,19 @@ libabsl_dep = [
 
 
 # ------------------------------
-# Reference paths
-
-mohair_hdrdir = 'mohair'
-
-proto_mohair_srcdir    = 'skyproto' / 'mohair'
-proto_substrait_srcdir = 'skyproto' / 'substrait'
-
-
-# ------------------------------
 # Headers and sources
 
-query_headers = [
-   mohair_hdrdir / 'operators.hpp'
-  ,mohair_hdrdir / 'plans.hpp'
-]
+# >> From top-level directory
+base_header = files('mohair.hpp')
 
-proto_headers = [
-   proto_mohair_srcdir    / 'algebra.pb.h'
-  ,proto_mohair_srcdir    / 'topology.pb.h'
-  ,proto_substrait_srcdir / 'type.pb.h'
-  ,proto_substrait_srcdir / 'function.pb.h'
-  ,proto_substrait_srcdir / 'plan.pb.h'
-  ,proto_substrait_srcdir / 'algebra.pb.h'
-  ,proto_substrait_srcdir / 'capabilities.pb.h'
-  ,proto_substrait_srcdir / 'parameterized_types.pb.h'
-  ,proto_substrait_srcdir / 'type_expressions.pb.h'
-  ,proto_substrait_srcdir / 'extended_expression.pb.h'
-  ,proto_substrait_srcdir / 'extensions' / 'extensions.pb.h'
-]
+libmohair_headers = [ base_header  ]
+libmohair_sources = [ 'mohair.cpp' ]
 
 
-query_sources = [
-   mohair_hdrdir / 'operators.cpp'
-  ,mohair_hdrdir / 'plans.cpp'
-]
 
-proto_sources = [
-   proto_mohair_srcdir    / 'algebra.pb.cc'
-  ,proto_mohair_srcdir    / 'topology.pb.cc'
-  ,proto_substrait_srcdir / 'type.pb.cc'
-  ,proto_substrait_srcdir / 'function.pb.cc'
-  ,proto_substrait_srcdir / 'plan.pb.cc'
-  ,proto_substrait_srcdir / 'algebra.pb.cc'
-  ,proto_substrait_srcdir / 'capabilities.pb.cc'
-  ,proto_substrait_srcdir / 'parameterized_types.pb.cc'
-  ,proto_substrait_srcdir / 'type_expressions.pb.cc'
-  ,proto_substrait_srcdir / 'extended_expression.pb.cc'
-  ,proto_substrait_srcdir / 'extensions' / 'extensions.pb.cc'
-]
-
-# >> Composed lists for convenience
-
-libmohair_headers = [
-   'mohair.hpp'
-  ,proto_headers
-  ,mohair_hdrdir / 'apidep_standard.hpp'
-  ,mohair_hdrdir / 'apidep_substrait.hpp'
-  ,query_headers
-]
-
-libmohair_sources = [
-   'mohair.cpp'
-  ,proto_sources
-  ,query_sources
-]
+# >> From subdirectories
+subdir('skyproto')
+subdir('mohair')
 
 
 # ------------------------------
@@ -126,5 +74,5 @@ libmohair_dep = declare_dependency(
 
 # NOTE: preserve_path is useful here, and it avoids adding the `src/cpp` prefix because of
 # where this build file is located (prefix of the relative path is preserved).
-install_headers(libmohair_headers, subdir: 'skytether', preserve_path: true)
+install_headers(base_header, subdir: 'skytether', preserve_path: true)
 

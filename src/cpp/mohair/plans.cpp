@@ -19,9 +19,16 @@
 // ------------------------------
 // Dependencies
 
+#include <stdexcept>
+
 #include "mohair/plans.hpp"
 
-#include <stdexcept>
+
+// ------------------------------
+// Type Aliases
+
+//  >> Protobuf framework types
+using AnyMessage = google::protobuf::Any;
 
 
 // ------------------------------
@@ -88,8 +95,20 @@ namespace mohair {
 
   // >> Implementations for `SystemPlan` methods
 
-  //! Create a pipeline stage with a given sink and a reference to the downstream pipeline
-  //  stage (where output of the new stage will flow to).
+  string SystemPlan::FnNameForAnchor(uint64_t anchor_id) {
+    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
+      throw std::out_of_range(
+        "Extension function anchor not registered: " + std::to_string(anchor_id)
+      );
+    }
+
+    return fn_anchors[anchor_id];
+  }
+
+  const RelRoot& SystemPlan::RootRelation() const {
+    return plan_msg->payload->relations(0).root();
+  }
+
   PipelineStage&
   SystemPlan::CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width) {
     auto new_stage = (
@@ -192,16 +211,6 @@ namespace mohair {
     }
   }
 
-  string SystemPlan::ExtensionFunctionForAnchor(uint64_t anchor_id) {
-    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
-      throw std::out_of_range(
-        "Extension function anchor not registered: " + std::to_string(anchor_id)
-      );
-    }
-
-    return fn_anchors[anchor_id];
-  }
-
   // Traversal functions for finding candidate plan splits
   PipelineStage* FindTallJoinLeaf(SystemPlan* sys_plan);
   PipelineStage* FindLongPipelineLeaf(SystemPlan* sys_plan);
@@ -223,6 +232,62 @@ namespace mohair {
         return nullptr;
       }
     }
+  }
+
+  /**
+   * 
+   *
+   * For each subplan, the general process is to:
+   *  1. create a copy of the original substrait message
+   *  2. replace the original root rel with the root rel of the sub-plan
+   *  3. set an anchor (rel in super-plan), which identifies the sink for the sub-plan.
+   * 
+   * The order of 2 and 3 is unimportant (we already have references to both in
+   * PlanSplit). Step 2 is what will allow the next consumer to only see the sub-plan.
+   * Step 3 will allow us to make merging of the pushback plan trivial (we will be able to
+   * use operator equality).
+   */
+  //! Create a substrait message for each subplan of derived from a PlanSplit.
+  vector<unique_ptr<PlanMessage>>
+  PlanSplit::SubplansFor(PlanMessage* plan_msg) {
+    // Get the anchor op and initialize some variables
+    MohairOp* anchor_op     = this->merge_rel;
+    size_t    count_inputs  = anchor_op->GetOpArity();
+
+    // Create a superplan message that we'll reuse for each subplan message
+    unique_ptr<SuperPlan> superplan_msg { SuperPlanFrom(anchor_op) };
+
+    // Initialize the list of messages to return
+    vector<unique_ptr<PlanMessage>> subplan_msgs;
+    subplan_msgs.reserve(count_inputs);
+
+    // Create a substrait message for each input to the anchor
+    unique_ptr<MohairOp>* anchor_inputs = anchor_op->GetOpInputs();
+    for (size_t input_ndx = 0; input_ndx < count_inputs; ++input_ndx) {
+      MohairOp* input_op        = anchor_inputs[input_ndx].get();
+      Rel*      subplan_rootrel = input_op->substrait_rel;
+
+      // Create a copy of the original substrait message that we can modify
+      auto subplan_msg = std::make_unique<Plan>();
+      subplan_msg->CopyFrom(*(plan_msg->payload));
+
+      // Set the `SuperPlan` message and replace the super-plan root
+      auto subplan_oldroot = subplan_msg->mutable_relations(plan_msg->root_relndx)->mutable_root();
+      auto subplan_planext = subplan_msg->mutable_advanced_extensions();
+
+      // Pack the anchor message into an `Any` message as an "optimization"
+      AnyMessage* optimization_msg = subplan_planext->add_optimization();
+      optimization_msg->PackFrom(*(superplan_msg));
+
+      subplan_oldroot->mutable_input()->CopyFrom(*subplan_rootrel);
+
+      // Add a `SubstraitMessage` that wraps the `Plan` message
+      subplan_msgs.push_back(
+        std::make_unique<SubstraitMessage>(std::move(subplan_msg), plan_msg->root_relndx)
+      );
+    }
+
+    return subplan_msgs;
   }
 
   //! Finds a `PlanSplit` matching a PipelineStage with a join as a sink and with at least
