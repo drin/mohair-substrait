@@ -66,6 +66,17 @@ namespace mohair {
 
 
 // ------------------------------
+// Variables
+
+namespace mohair {
+
+  // >> Static variables
+  static uint32_t UUIDGenerator { 1 };
+
+} // namespace: mohair
+
+
+// ------------------------------
 // Functions
 
 namespace mohair {
@@ -96,6 +107,27 @@ namespace mohair {
 
   // >> Helper functions
   int FindPlanRoot(Plan& substrait_plan);
+
+  //! Move the operator from `src_rel` to `dst_rel`
+  void MoveRelOp(Rel* src_rel, Rel* dst_rel);
+
+  //! Move an operator into a PlanRel and create a ReferenceRel to it
+  PlanRel* MoveOpToReference(Plan* plan, Rel* op);
+
+  //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
+  uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel);
+
+  //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
+  uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel);
+
+  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
+  unique_ptr<Rel> CopyRel(Rel* src_rel);
+
+  //! Create a MessageDifferencer for rel op (e.g. `ProjectRel`) that is non-recursive
+  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel);
+
+  //! Get vector of each input `Rel` to the given `Rel`
+  vector<Rel*> GetInputRels(Rel* output_rel);
 
 } // namespace: mohair
 
@@ -138,9 +170,10 @@ namespace mohair {
     virtual bool   SerializeToFile(const char *out_fpath);
 
     // static methods
-    static unique_ptr<PlanMessage> FromString(const string& plan_str);
-    static unique_ptr<PlanMessage> FromFile(const char*     plan_fpath);
-    static unique_ptr<PlanMessage> FromFile(string          plan_fpath);
+    static unique_ptr<PlanMessage> FromPlan(unique_ptr<Plan>&& plan);
+    static unique_ptr<PlanMessage> FromString(const string&    plan_str);
+    static unique_ptr<PlanMessage> FromFile(const char*        plan_fpath);
+    static unique_ptr<PlanMessage> FromFile(string             plan_fpath);
   };
 
 } // namespace: mohair

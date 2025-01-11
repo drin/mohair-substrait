@@ -52,6 +52,338 @@ namespace mohair {
     return status.ok();
   }
 
+  //! Move a RelOp (e.g. ProjectRel) from the src Rel to the dest Rel
+  void MoveRelOp(Rel* src_rel, Rel* dst_rel) {
+    switch (src_rel->rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject: {
+        dst_rel->set_allocated_project(src_rel->release_project());
+        break;
+      }
+
+      case Rel::RelTypeCase::kFilter: {
+        dst_rel->set_allocated_filter(src_rel->release_filter());
+        break;
+      }
+
+      case Rel::RelTypeCase::kFetch: {
+        dst_rel->set_allocated_fetch(src_rel->release_fetch());
+        break;
+      }
+
+      case Rel::RelTypeCase::kSort: {
+        dst_rel->set_allocated_sort(src_rel->release_sort());
+        break;
+      }
+
+      case Rel::RelTypeCase::kAggregate: {
+        dst_rel->set_allocated_aggregate(src_rel->release_aggregate());
+        break;
+      }
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin: {
+        dst_rel->set_allocated_join(src_rel->release_join());
+        break;
+      }
+
+      case Rel::RelTypeCase::kCross: {
+        dst_rel->set_allocated_cross(src_rel->release_cross());
+        break;
+      }
+
+      case Rel::RelTypeCase::kHashJoin: {
+        dst_rel->set_allocated_hash_join(src_rel->release_hash_join());
+        break;
+      }
+
+      case Rel::RelTypeCase::kMergeJoin: {
+        dst_rel->set_allocated_merge_join(src_rel->release_merge_join());
+        break;
+      }
+
+      // Leaf operators (no-op)
+      case Rel::RelTypeCase::kRead: {
+        dst_rel->set_allocated_read(src_rel->release_read());
+        break;
+      }
+
+      case Rel::RelTypeCase::kExtensionLeaf: {
+        dst_rel->set_allocated_extension_leaf(src_rel->release_extension_leaf());
+        break;
+      }
+
+      // Unimplemented operators
+      default: {
+        throw std::runtime_error("Cannot inline anchor rel: unimplemented type");
+      }
+    }
+  }
+
+  //! Move an operator into a PlanRel and create a ReferenceRel to it
+  PlanRel* MoveOpToReference(Plan* plan, Rel* op) {
+    // UUIDGenerator is static
+    uint32_t anchor_id = ++UUIDGenerator;
+
+    // Create a place to move the operator to
+    unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
+
+    int32_t  next_relndx = plan->relations_size();
+    PlanRel* new_anchor  = plan->add_relations();
+    new_anchor->set_allocated_rel(anchor_rel.release());
+    new_anchor->set_subtree_anchor(anchor_id);
+
+    // Create a reference to replace the operator with
+    unique_ptr<ReferenceRel> ref_rel { std::make_unique<ReferenceRel>() };
+    ref_rel->set_subtree_ordinal(next_relndx);
+    ref_rel->set_subtree_reference(anchor_id);
+
+    // Move the operator into the anchor
+    MoveRelOp(op, new_anchor->mutable_rel());
+
+    // Insert the ReferenceRel
+    op->set_allocated_reference(ref_rel.release());
+
+    return new_anchor;
+  }
+
+  //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
+  //  NOTE: returns 0 on failure (UUIDGenerator starts at 1)
+  uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel) {
+    int32_t  anchor_relndx = ref_rel->reference().subtree_ordinal();
+    uint32_t anchor_id     = ref_rel->reference().subtree_reference();
+    PlanRel* anchor_rel    = plan->mutable_relations(anchor_relndx);
+
+    // Do some validation
+    if (not anchor_rel->has_rel())                 { return 0; }
+    if (not ref_rel->has_reference())              { return 0; }
+    if (anchor_id != anchor_rel->subtree_anchor()) { return 0; }
+
+    // Replace the ReferenceRel
+    MoveRelOp(anchor_rel->mutable_rel(), ref_rel);
+
+    auto plan_rels = plan->mutable_relations();
+    plan_rels->erase(plan_rels->begin() + anchor_relndx);
+    return anchor_id;
+  }
+
+  //! Create a ReferenceRel pointing to `PlanRel` and hang it on parent_rel
+  uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel) {
+    uint32_t anchor_id { ++UUIDGenerator };
+
+    // Set the anchor ID
+    anchor_rel->set_subtree_anchor(anchor_id);
+
+    // Create a ReferenceRel and point it to the anchor
+    unique_ptr<ReferenceRel> ref_rel { std::make_unique<ReferenceRel>() };
+    ref_rel->set_subtree_reference(anchor_id);
+
+    // Insert the ReferenceRel into Rel
+    parent_rel->set_allocated_reference(ref_rel.release());
+
+    // Return the anchor ID in case it's useful
+    return anchor_id;
+  }
+
+  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
+  unique_ptr<Rel> CopyRel(Rel* src_rel) {
+    unique_ptr<Rel> rel_copy { std::make_unique<Rel>(*src_rel) };
+
+    switch(src_rel->rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject: {
+        rel_copy->mutable_project()->clear_input();
+        break;
+      }
+
+      case Rel::RelTypeCase::kFilter: {
+        rel_copy->mutable_filter()->clear_input();
+        break;
+      }
+
+      case Rel::RelTypeCase::kFetch: {
+        rel_copy->mutable_fetch()->clear_input();
+        break;
+      }
+
+      case Rel::RelTypeCase::kSort: {
+        rel_copy->mutable_sort()->clear_input();
+        break;
+      }
+
+      case Rel::RelTypeCase::kAggregate: {
+        rel_copy->mutable_aggregate()->clear_input();
+        break;
+      }
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin: {
+        rel_copy->mutable_join()->clear_left();
+        rel_copy->mutable_join()->clear_right();
+        break;
+      }
+
+      case Rel::RelTypeCase::kCross: {
+        rel_copy->mutable_cross()->clear_left();
+        rel_copy->mutable_cross()->clear_right();
+        break;
+      }
+
+      case Rel::RelTypeCase::kHashJoin: {
+        rel_copy->mutable_hash_join()->clear_left();
+        rel_copy->mutable_hash_join()->clear_right();
+        break;
+      }
+
+      case Rel::RelTypeCase::kMergeJoin: {
+        rel_copy->mutable_merge_join()->clear_left();
+        rel_copy->mutable_merge_join()->clear_right();
+        break;
+      }
+
+      // Leaf operators (no-op)
+      case Rel::RelTypeCase::kRead:
+      case Rel::RelTypeCase::kExtensionLeaf: {
+        break;
+      }
+
+      // Unimplemented operators
+      default: {
+        std::cerr << "Simplification unimplemented for operator." << std::endl;
+        return nullptr;
+      }
+    }
+
+    return rel_copy;
+  }
+
+
+  //! Create a MessageDifferencer for rel op (e.g. `ProjectRel`) that is non-recursive
+  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel) {
+    auto differ = std::make_unique<MessageDifferencer>();
+
+    switch (src_rel->rel_type_case()) {
+      case Rel::RelTypeCase::kProject: {
+        differ->IgnoreField(ProjectRel::descriptor()->FindFieldByName("input"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kFilter: {
+        differ->IgnoreField(FilterRel::descriptor()->FindFieldByName("input"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kFetch: {
+        differ->IgnoreField(FetchRel::descriptor()->FindFieldByName("input"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kSort: {
+        differ->IgnoreField(SortRel::descriptor()->FindFieldByName("input"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kAggregate: {
+        differ->IgnoreField(AggregateRel::descriptor()->FindFieldByName("input"));
+        break;
+      }
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin: {
+        differ->IgnoreField(JoinRel::descriptor()->FindFieldByName("left"));
+        differ->IgnoreField(JoinRel::descriptor()->FindFieldByName("right"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kCross: {
+        differ->IgnoreField(CrossRel::descriptor()->FindFieldByName("left"));
+        differ->IgnoreField(CrossRel::descriptor()->FindFieldByName("right"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kHashJoin: {
+        differ->IgnoreField(HashJoinRel::descriptor()->FindFieldByName("left"));
+        differ->IgnoreField(HashJoinRel::descriptor()->FindFieldByName("right"));
+        break;
+      }
+
+      case Rel::RelTypeCase::kMergeJoin: {
+        differ->IgnoreField(MergeJoinRel::descriptor()->FindFieldByName("left"));
+        differ->IgnoreField(MergeJoinRel::descriptor()->FindFieldByName("right"));
+        break;
+      }
+
+      // Leaf operators (no-op)
+      case Rel::RelTypeCase::kRead:
+      case Rel::RelTypeCase::kExtensionLeaf: {
+        break;
+      }
+
+      // Unimplemented operators
+      default: {
+        std::cerr << "Simplification unimplemented for operator." << std::endl;
+        return nullptr;
+      }
+    }
+
+    return differ;
+  }
+
+
+  vector<Rel*> GetInputRels(Rel* output_rel) {
+    switch (output_rel->rel_type_case()) {
+      // Unary operators
+      case Rel::RelTypeCase::kProject:
+        return { output_rel->mutable_project()->mutable_input()   };
+
+      case Rel::RelTypeCase::kFilter:
+        return { output_rel->mutable_filter()->mutable_input()    };
+
+      case Rel::RelTypeCase::kFetch:
+        return { output_rel->mutable_fetch()->mutable_input()     };
+
+      case Rel::RelTypeCase::kSort:
+        return { output_rel->mutable_sort()->mutable_input()      };
+
+      case Rel::RelTypeCase::kAggregate:
+        return { output_rel->mutable_aggregate()->mutable_input() };
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin:
+        return {
+           output_rel->mutable_join()->mutable_left()
+          ,output_rel->mutable_join()->mutable_right()
+        };
+
+      case Rel::RelTypeCase::kCross:
+        return {
+           output_rel->mutable_cross()->mutable_left()
+          ,output_rel->mutable_cross()->mutable_right()
+        };
+
+      case Rel::RelTypeCase::kHashJoin:
+        return {
+           output_rel->mutable_hash_join()->mutable_left()
+          ,output_rel->mutable_hash_join()->mutable_right()
+        };
+
+      case Rel::RelTypeCase::kMergeJoin:
+        return {
+           output_rel->mutable_merge_join()->mutable_left()
+          ,output_rel->mutable_merge_join()->mutable_right()
+        };
+
+      // Leaf operators (no-op)
+      case Rel::RelTypeCase::kRead:
+      case Rel::RelTypeCase::kExtensionLeaf:
+        return vector<Rel*>(0);
+
+      // Unimplemented operators
+      default: {
+        throw std::runtime_error("Cannot get inputs for unimplemented RelType");
+      }
+    }
+  }
 
 } // namespace: mohair
 
@@ -195,12 +527,24 @@ namespace mohair {
     return true;
   }
 
+  unique_ptr<PlanMessage> SubstraitMessage::FromPlan(unique_ptr<Plan>&& plan) {
+    int root_relndx { FindPlanRoot(*plan) };
+
+    return std::make_unique<SubstraitMessage>(std::move(plan), root_relndx);
+  }
+
   unique_ptr<PlanMessage> SubstraitMessage::FromString(const string& plan_str) {
-    return std::make_unique<SubstraitMessage>(SubstraitPlanFromString(plan_str));
+    unique_ptr<Plan> substrait_plan { SubstraitPlanFromString(plan_str) };
+    int              root_relndx    { FindPlanRoot(*substrait_plan)     };
+
+    return std::make_unique<SubstraitMessage>(std::move(substrait_plan), root_relndx);
   }
 
   unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
-    return std::make_unique<SubstraitMessage>(SubstraitPlanFromFile(plan_fpath));
+    unique_ptr<Plan> substrait_plan { SubstraitPlanFromFile(plan_fpath) };
+    int              root_relndx    { FindPlanRoot(*substrait_plan)     };
+
+    return std::make_unique<SubstraitMessage>(std::move(substrait_plan), root_relndx);
   }
 
   unique_ptr<PlanMessage> SubstraitMessage::FromFile(string plan_fpath) {

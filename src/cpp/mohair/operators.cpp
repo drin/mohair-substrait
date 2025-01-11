@@ -19,7 +19,232 @@
 // ------------------------------
 // Dependencies
 
+#include <stdexcept>
+
 #include "mohair/operators.hpp"
+
+
+// ------------------------------
+// Functions
+
+namespace mohair {
+  // >> Forward declarations
+  string SourceNameFromExtensionLeaf(SkyRel*          extrel_op);
+  string SourceNameFromExtensionLeaf(SkyPartitionRel* extrel_op);
+  string SourceNameFromExtensionLeaf(SkySliceRel*     extrel_op);
+
+  // >> Reusable function kernels (templated)
+  //! Templated translation function for unary relational operators.
+  //  `UnaryRelMsg` is the specific substrait message,
+  //  `MohairRel`   is the equivalent query operator in mohair 
+  template <typename UnaryRelMsg, typename MohairRel>
+  unique_ptr<MohairOp> FromUnaryOpMsg(Rel *rel_msg, UnaryRelMsg *rel_op) {
+    // recurse on input relation
+    unique_ptr<MohairOp> op_input = MohairFrom(rel_op->mutable_input());
+
+    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(op_input));
+  }
+
+  //! Templated translation function for binary relational operators.
+  //  `BinaryRelMsg` is the specific substrait message,
+  //  `MohairRel`    is the equivalent query operator in mohair 
+  template <typename BinaryRelMsg, typename MohairRel>
+  unique_ptr<MohairOp> FromBinaryOpMsg(Rel *rel_msg, BinaryRelMsg *rel_op) {
+    // recurse on input relations
+    unique_ptr<MohairOp> left_input  = MohairFrom(rel_op->mutable_left() );
+    unique_ptr<MohairOp> right_input = MohairFrom(rel_op->mutable_right());
+
+    return std::make_unique<MohairRel>(
+      rel_op, rel_msg, std::move(left_input), std::move(right_input)
+    );
+  }
+
+  //! Templated translation function for leaf relational operators (no inputs).
+  //  `SourceRelMsg` is the specific substrait message,
+  //  `MohairRel`    is the equivalent query operator in mohair 
+  template <typename SourceRelMsg, typename MohairRel>
+  unique_ptr<MohairOp> FromSourceOpMsg(Rel *rel_msg, SourceRelMsg *rel_op, string tname) {
+    return std::make_unique<MohairRel>(rel_op, rel_msg, tname);
+  }
+
+  //! Templated translation function for leaf relational operators (no inputs).
+  //  `SourceRelMsg` is the specific substrait message,
+  //  `MohairRel`    is the equivalent query operator in mohair 
+  template <typename ExtensionMsgType, typename MohairRel>
+  unique_ptr<MohairOp> FromExtensionLeafMsg(Rel *rel_msg, ExtensionLeafRel *rel_op) {
+    auto extrel_op = std::make_unique<ExtensionMsgType>();
+    rel_op->detail().UnpackTo(extrel_op.get());
+
+    string src_name = SourceNameFromExtensionLeaf(extrel_op.get());
+
+    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(extrel_op), src_name);
+  }
+
+  //! Templated helper function for moving a `Rel` to be a reference rel
+  template <typename RelType>
+  ReferenceRel* MoveToRefRel(int32_t refrel_pos, PlanRel* plan_refrel, RelType* rel_op) {
+    // UUIDGenerator is static
+    uint32_t anchor_id = ++UUIDGenerator;
+
+    // Move the ProjectRel into the PlanRel
+    unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
+    anchor_rel->set_allocated_project(rel_op);
+
+    plan_refrel->set_subtree_anchor(anchor_id);
+    plan_refrel->set_allocated_rel(anchor_rel.release());
+
+    // Replace the input to `substrait_rel` with a `ReferenceRel`
+    unique_ptr<ReferenceRel> ref_rel { std::make_unique<ReferenceRel>() };
+    ref_rel->set_subtree_ordinal(refrel_pos);
+    ref_rel->set_subtree_reference(anchor_id);
+
+    return ref_rel.release();
+  }
+
+
+  // >> Reusable function kernels (not templated)
+  //! Replace a ReferenceRel with its anchor Rel.
+  // NOTE: mergerel should still point to both parts that need to be rejoined
+  void InlineRefRel(PlanMessage* plan_msg, MohairOp* mergerel) {
+    Rel*          ref_rel    = mergerel->substrait_rel;
+    ReferenceRel* ref_op     = ref_rel->release_reference();
+    int32_t       refrel_pos = ref_op->subtree_ordinal();
+    uint32_t      anchor_id  = ref_op->subtree_reference();
+
+    auto     plan_relations = plan_msg->payload->mutable_relations();
+    PlanRel* anchor_planrel = plan_relations->Mutable(refrel_pos);
+    Rel*     anchor_rel     = anchor_planrel->mutable_rel();
+    if (anchor_id != anchor_planrel->subtree_anchor()) {
+      std::cerr << "Unable to inline anchor Rel; mismatching anchor ID" << std::endl;
+      return;
+    }
+
+    switch (ref_rel->rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject: {
+        ref_rel->set_allocated_project(anchor_rel->release_project());
+        break;
+      }
+
+      case Rel::RelTypeCase::kFilter: {
+        ref_rel->set_allocated_filter(anchor_rel->release_filter());
+        break;
+      }
+
+      case Rel::RelTypeCase::kFetch: {
+        ref_rel->set_allocated_fetch(anchor_rel->release_fetch());
+        break;
+      }
+
+      case Rel::RelTypeCase::kSort: {
+        ref_rel->set_allocated_sort(anchor_rel->release_sort());
+        break;
+      }
+
+      case Rel::RelTypeCase::kAggregate: {
+        ref_rel->set_allocated_aggregate(anchor_rel->release_aggregate());
+        break;
+      }
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin: {
+        ref_rel->set_allocated_join(anchor_rel->release_join());
+        break;
+      }
+
+      case Rel::RelTypeCase::kCross: {
+        ref_rel->set_allocated_cross(anchor_rel->release_cross());
+        break;
+      }
+
+      case Rel::RelTypeCase::kHashJoin: {
+        ref_rel->set_allocated_hash_join(anchor_rel->release_hash_join());
+        break;
+      }
+
+      case Rel::RelTypeCase::kMergeJoin: {
+        ref_rel->set_allocated_merge_join(anchor_rel->release_merge_join());
+        break;
+      }
+
+      // Leaf operators (no-op)
+      case Rel::RelTypeCase::kRead:
+      case Rel::RelTypeCase::kExtensionLeaf: {
+        throw std::logic_error("Unexpected leaf operator as anchor Rel");
+      }
+
+      // Unimplemented operators
+      default: {
+        throw std::runtime_error("Cannot inline anchor rel: unimplemented type");
+      }
+    }
+
+    plan_relations->erase(plan_relations->begin() + refrel_pos);
+  }
+
+  //! Extracts the source name from a `ReadRel` operator (e.g. table name)
+  string SourceNameFromReadRel(ReadRel *rel_op) {
+    switch (rel_op->read_type_case()) {
+      case ReadRel::ReadTypeCase::kNamedTable: {
+        auto& catalog_name = rel_op->named_table();
+
+        // Grab the parts of the table name, but ibis only encodes 1.
+        std::stringstream tname_stream;
+        tname_stream << catalog_name.names(0);
+        for (int tname_ndx = 1; tname_ndx < catalog_name.names_size(); ++tname_ndx) {
+          tname_stream << "." << catalog_name.names(tname_ndx);
+        }
+
+        return tname_stream.str();
+      }
+
+      case ReadRel::ReadTypeCase::kLocalFiles: {
+        auto& src_files = rel_op->local_files();
+
+        // On success, return a copy of the file path
+        if (src_files.items_size() == 1) {
+          auto& src_file = src_files.items(0);
+
+          if (src_file.has_uri_path() and src_file.has_arrow()) {
+            return string { src_files.items(0).uri_path() };
+          }
+        }
+
+        std::cerr << "Error: Mohair expects a single URI path to an Arrow file." << std::endl;
+        break;
+      }
+
+      // all other cases can get a default name for now
+      case ReadRel::ReadTypeCase::kVirtualTable:
+      case ReadRel::ReadTypeCase::kExtensionTable:
+      default:
+          std::cerr << "Error: Mohair only supports 'NamedTable' or 'LocalFiles'"
+                    << std::endl
+          ;
+
+          break;
+    }
+
+    // Return empty string when unsuccessful
+    return string {};
+  }
+
+  //! Extracts the source name from a custom operator used in `ExtensionLeaf`
+  string SourceNameFromExtensionLeaf(SkyRel *extrel_op) {
+    return string { extrel_op->domain() + "-" + extrel_op->partition() };
+  }
+
+  //! Extracts the source name from a custom operator used in `ExtensionLeaf`
+  string SourceNameFromExtensionLeaf(SkyPartitionRel *extrel_op) {
+    return string { extrel_op->domain() + "-" + extrel_op->partition() };
+  }
+
+  //! Extracts the source name from a custom operator used in `ExtensionLeaf`
+  string SourceNameFromExtensionLeaf(SkySliceRel *extrel_op) {
+    return string { extrel_op->domain() + "-" + extrel_op->partition() };
+  }
+
+} // namespace: mohair
 
 
 // ------------------------------
@@ -36,7 +261,18 @@ namespace mohair {
   size_t MohairOp::GetOpArity() { return 0;     }
 
   unique_ptr<MohairOp>* MohairOp::GetOpInputs() { return nullptr; }
-  void MohairOp::SimplifyMessage([[maybe_unused]] Rel* rel) { return; }
+
+  unique_ptr<Rel> MohairOp::CopySubstraitRel() {
+    return CopyRel(this->substrait_rel);
+  }
+
+  void MohairOp::MoveFromPlanRel(PlanMessage* plan_msg) {
+    MoveReferenceToOp(plan_msg->payload.get(), this->substrait_rel);
+  }
+
+  void MohairOp::MoveOpToRel(Rel* dst_rel) {
+    return MoveRelOp(this->substrait_rel, dst_rel);
+  }
 
   // >> ToString implementations for each op type
   // leaf ops
@@ -87,34 +323,6 @@ namespace mohair {
   unique_ptr<MohairOp>* OpHashJoin::GetOpInputs()  { return op_inputs.data(); }
   unique_ptr<MohairOp>* OpMergeJoin::GetOpInputs() { return op_inputs.data(); }
 
-  // >> Methods to "simplify" a Rel message (clear inputs based on RelType)
-  void OpProj::SimplifyMessage(Rel* rel)  { rel->mutable_project()->clear_input();   }
-  void OpSel::SimplifyMessage(Rel* rel)   { rel->mutable_filter()->clear_input();    }
-  void OpLimit::SimplifyMessage(Rel* rel) { rel->mutable_fetch()->clear_input();     }
-
-  void OpSort::SimplifyMessage(Rel* rel)  { rel->mutable_sort()->clear_input();      }
-  void OpAggr::SimplifyMessage(Rel* rel)  { rel->mutable_aggregate()->clear_input(); }
-
-  void OpJoin::SimplifyMessage(Rel* rel) {
-    rel->mutable_join()->clear_left();
-    rel->mutable_join()->clear_right();
-  }
-
-  void OpCrossJoin::SimplifyMessage(Rel* rel) {
-    rel->mutable_cross()->clear_left();
-    rel->mutable_cross()->clear_right();
-  }
-
-  void OpHashJoin::SimplifyMessage(Rel* rel) {
-    rel->mutable_hash_join()->clear_left();
-    rel->mutable_hash_join()->clear_right();
-  }
-
-  void OpMergeJoin::SimplifyMessage(Rel* rel) {
-    rel->mutable_merge_join()->clear_left();
-    rel->mutable_merge_join()->clear_right();
-  }
-
 } // namespace: mohair
 
 
@@ -124,16 +332,11 @@ namespace mohair {
 namespace mohair {
 
   // >> Translation to Substrait (Mohair -> Substrait)
+
   unique_ptr<SuperPlan> SuperPlanFrom(MohairOp* mohair_op) {
-    // copy the Rel message so we can modify it
-    auto simplified_rel = std::make_unique<Rel>(*(mohair_op->substrait_rel));
-
-    // simplify the message by clearing its inputs (trim the tree)
-    mohair_op->SimplifyMessage(simplified_rel.get());
-
-    // construct the SuperPlan message and return it
-    auto superplan_msg = std::make_unique<SuperPlan>();
-    superplan_msg->set_allocated_merge_rel(simplified_rel.release());
+    unique_ptr<Rel>       rel_copy      { mohair_op->CopySubstraitRel() };
+    unique_ptr<SuperPlan> superplan_msg { std::make_unique<SuperPlan>() };
+    superplan_msg->set_allocated_merge_rel(rel_copy.release());
 
     return superplan_msg;
   }
@@ -141,60 +344,7 @@ namespace mohair {
 
   // >> Translation to Mohair (Substrait -> Mohair)
 
-  // Function prototypes for helper functions (they are implemented at the bottom)
-  string SourceNameFromReadRel(ReadRel *rel_op);
-
-  string SourceNameFromExtensionLeaf(SkyRel*          extrel_op);
-  string SourceNameFromExtensionLeaf(SkyPartitionRel* extrel_op);
-  string SourceNameFromExtensionLeaf(SkySliceRel*     extrel_op);
-
-  //! Templated translation function for unary relational operators.
-  //  `UnaryRelMsg` is the specific substrait message,
-  //  `MohairRel`   is the equivalent query operator in mohair 
-  template <typename UnaryRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromUnaryOpMsg(Rel *rel_msg, UnaryRelMsg *rel_op) {
-    // recurse on input relation
-    unique_ptr<MohairOp> op_input = MohairFrom(rel_op->mutable_input());
-
-    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(op_input));
-  }
-
-  //! Templated translation function for binary relational operators.
-  //  `BinaryRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename BinaryRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromBinaryOpMsg(Rel *rel_msg, BinaryRelMsg *rel_op) {
-    // recurse on input relations
-    unique_ptr<MohairOp> left_input  = MohairFrom(rel_op->mutable_left() );
-    unique_ptr<MohairOp> right_input = MohairFrom(rel_op->mutable_right());
-
-    return std::make_unique<MohairRel>(
-      rel_op, rel_msg, std::move(left_input), std::move(right_input)
-    );
-  }
-
-  //! Templated translation function for leaf relational operators (no inputs).
-  //  `SourceRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename SourceRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromSourceOpMsg(Rel *rel_msg, SourceRelMsg *rel_op, string tname) {
-    return std::make_unique<MohairRel>(rel_op, rel_msg, tname);
-  }
-
-  //! Templated translation function for leaf relational operators (no inputs).
-  //  `SourceRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename ExtensionMsgType, typename MohairRel>
-  unique_ptr<MohairOp> FromExtensionLeafMsg(Rel *rel_msg, ExtensionLeafRel *rel_op) {
-    auto extrel_op = std::make_unique<ExtensionMsgType>();
-    rel_op->detail().UnpackTo(extrel_op.get());
-
-    string src_name = SourceNameFromExtensionLeaf(extrel_op.get());
-
-    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(extrel_op), src_name);
-  }
-
-  //! "Internalizes" a substrait `Rel` message by wrapping it in an appropriate `MohairOp`
+  //! Wraps substrait `Rel` messages in `MohairOp` instances
   unique_ptr<MohairOp> MohairFrom(Rel *rel_msg) {
     switch(rel_msg->rel_type_case()) {
       // Unary streaming operators
@@ -273,75 +423,6 @@ namespace mohair {
         return std::make_unique<OpErr>(rel_msg, "ParseError: operator not yet supported");
       }
     }
-  }
-
-
-  // >> Implementations for helper functions
-  // NOTE: we put these down here just to make it easier to look at translation logic
-  //       separately from extraction of individual attributes
-
-  //! Given a substrait operator, `ReadRel`, extracts a "table name".
-  //  This is useful for "tagging" a pipeline with what sources it needs to access, so we
-  //  can quickly identify candidate pipelines when splitting queries.
-  string SourceNameFromReadRel(ReadRel *rel_op) {
-    switch (rel_op->read_type_case()) {
-      case ReadRel::ReadTypeCase::kNamedTable: {
-        auto& catalog_name = rel_op->named_table();
-
-        // Grab the parts of the table name, but ibis only encodes 1.
-        std::stringstream tname_stream;
-        tname_stream << catalog_name.names(0);
-        for (int tname_ndx = 1; tname_ndx < catalog_name.names_size(); ++tname_ndx) {
-          tname_stream << "." << catalog_name.names(tname_ndx);
-        }
-
-        return tname_stream.str();
-      }
-
-      case ReadRel::ReadTypeCase::kLocalFiles: {
-        auto& src_files = rel_op->local_files();
-
-        // On success, return a copy of the file path
-        if (src_files.items_size() == 1) {
-          auto& src_file = src_files.items(0);
-
-          if (src_file.has_uri_path() and src_file.has_arrow()) {
-            return string { src_files.items(0).uri_path() };
-          }
-        }
-
-        std::cerr << "Error: Mohair expects a single URI path to an Arrow file." << std::endl;
-        break;
-      }
-
-      // all other cases can get a default name for now
-      case ReadRel::ReadTypeCase::kVirtualTable:
-      case ReadRel::ReadTypeCase::kExtensionTable:
-      default:
-          std::cerr << "Error: Mohair only supports 'NamedTable' or 'LocalFiles'"
-                    << std::endl
-          ;
-
-          break;
-    }
-
-    // Return empty string when unsuccessful
-    return string {};
-  }
-
-  //! Overloaded function that extracts a "table name" from the given extension operator.
-  string SourceNameFromExtensionLeaf(SkyRel *extrel_op) {
-    return string { extrel_op->domain() + "-" + extrel_op->partition() };
-  }
-
-  //! Overloaded function that extracts a "table name" from the given extension operator.
-  string SourceNameFromExtensionLeaf(SkyPartitionRel *extrel_op) {
-    return string { extrel_op->domain() + "-" + extrel_op->partition() };
-  }
-
-  //! Overloaded function that extracts a "table name" from the given extension operator.
-  string SourceNameFromExtensionLeaf(SkySliceRel *extrel_op) {
-    return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
 } // namespace: mohair

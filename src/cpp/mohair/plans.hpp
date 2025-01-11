@@ -48,9 +48,17 @@ namespace mohair {
     virtual bool   IsOrigin();
     virtual size_t GetOpArity();
 
+    //! Get input operators (child operators) as a C-style array
     virtual unique_ptr<MohairOp>* GetOpInputs();
 
-    virtual void SimplifyMessage(Rel* rel);
+    //! Return a simplified copy of the `substrait_rel` attribute.
+    virtual unique_ptr<Rel> CopySubstraitRel();
+
+    //! Replace a ReferenceRel with its anchor Rel
+    virtual void MoveFromPlanRel(PlanMessage* plan_msg);
+
+    //! Move a Rel op (e.g. ProjectRel) from source `Rel` to destination `Rel`
+    virtual void MoveOpToRel(Rel* dst_rel);
   };
 
   struct SourceOp : public MohairOp {
@@ -139,10 +147,12 @@ namespace mohair {
 
     //! Builds pipelines from plan operators and discovers plan characteristics
     void BuildPipelines();
-    void PrintPipelines();
 
     //! Create mapping of function anchors in the query plan
     void RegisterExtensionFunctions();
+
+    //! Print pipelines stringified to stdout
+    void PrintPipelines();
   };
 
   // >> Cooperative Query Decomposition
@@ -160,23 +170,46 @@ namespace mohair {
    * anchor is a leaf in the super-plan and a parent of each sub-plan root.
    */
   struct PlanSplit {
-    PipelineStage* stage;
-    MohairOp*      merge_rel;
+    Plan*             super_plan;
+    PipelineStage*    stage;
+    size_t            stage_ndx;
+    MohairOp*         superplan_mergerel;
+    vector<MohairOp*> subplan_rootrels;
 
     //! Constructs a plan split from the given pipeline stage.
     //  If the stage has many pipelines, the anchor is the stage's sink.
     //  Otherwise, the anchor is the sink's downstream operator (where output flows to).
-    PlanSplit(PipelineStage* split_stage): stage(split_stage) {
-      if (split_stage->width > 1) { merge_rel = split_stage->sink; }
-      else { merge_rel = split_stage->pipelines[0]->next; }
+    PlanSplit(Plan* plan, PipelineStage* split_stage, size_t ndx)
+      : super_plan(plan), stage(split_stage), stage_ndx(ndx) {
+      // Stage sink is a join, so each pipeline will be a subplan
+      if (split_stage->width > 1) {
+        superplan_mergerel = split_stage->sink;
+
+        subplan_rootrels.reserve(split_stage->width);
+        for (size_t pipe_ndx = 0; pipe_ndx < split_stage->width; ++pipe_ndx) {
+          const auto& stage_pipe = *(split_stage->pipelines[pipe_ndx]);
+          const auto& pipe_ops   = stage_pipe.pipe_ops;
+
+          if (not pipe_ops.empty()) { subplan_rootrels.push_back(pipe_ops[0]);       }
+          else                      { subplan_rootrels.push_back(stage_pipe.source); }
+        }
+      }
+
+      // Stage sink is not a join, so we only have a single subplan (rooted at the sink)
+      else {
+        superplan_mergerel = split_stage->pipelines[0]->next;
+        subplan_rootrels.reserve(1);
+        subplan_rootrels.push_back(split_stage->sink);
+      }
     }
 
     //! Finds a candidate split given a decision algorithm
     static unique_ptr<PlanSplit>
     FindSplit(SystemPlan* sys_plan, DecomposeAlg method = DecomposeAlg::LongPipelineLeaf);
 
-    vector<unique_ptr<PlanMessage>>
-    SubplansFor(PlanMessage* plan_msg);
+    vector<unique_ptr<PlanMessage>> ExtractSubplans();
+
+    bool MergeSubplan(PlanMessage* subplan_msg);
   };
 
 } // namespace: mohair
@@ -188,15 +221,16 @@ namespace mohair {
 namespace mohair {
 
   // >> Translation Functions
+  //! Walks the operator tree starting at `rel_msg` and returns a `MohairOp` tree
   unique_ptr<MohairOp>   MohairFrom(Rel *rel_msg);
-  unique_ptr<SystemPlan> SystemPlanFrom(const string&             serialized_msg);
+
+  //! Constructs a `SystemPlan` from the given deserialized substrait `Plan`
   unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg);
 
-  unique_ptr<SuperPlan>  SuperPlanFrom(MohairOp* mohair_op);
+  //! Constructs a `SystemPlan` from the given serialized substrait `Plan`
+  unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg);
 
-  /*
-   * vector<unique_ptr<PlanMessage>>
-   * SubplansFromSplit(PlanMessage* plan_msg, PlanSplit& split);
-   */
+  //! Constructs a `SuperPlan` message for the given operator
+  unique_ptr<SuperPlan>  SuperPlanFrom(MohairOp* mohair_op);
 
 } // namespace: mohair

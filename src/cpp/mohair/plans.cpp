@@ -36,6 +36,107 @@ using AnyMessage = google::protobuf::Any;
 
 namespace mohair {
 
+  // >> Convenience functions
+  Rel* FindMatchingRefRel(Rel* anchor_rel, uint32_t subplan_anchorid) {
+    // Gather input rels
+    constexpr size_t count_inputrels { 2 };
+    vector<Rel*>     reference_rels;
+    reference_rels.reserve(count_inputrels);
+
+    switch (anchor_rel->rel_type_case()) {
+      case Rel::RelTypeCase::kProject: {
+        Rel* input_rel = anchor_rel->mutable_project()->mutable_input();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kFilter: {
+        Rel* input_rel = anchor_rel->mutable_filter()->mutable_input();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kFetch: {
+        Rel* input_rel = anchor_rel->mutable_fetch()->mutable_input();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+
+      case Rel::RelTypeCase::kSort: {
+        Rel* input_rel = anchor_rel->mutable_sort()->mutable_input();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kAggregate: {
+        Rel* input_rel = anchor_rel->mutable_aggregate()->mutable_input();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+
+      case Rel::RelTypeCase::kJoin: {
+        Rel* input_rel = anchor_rel->mutable_join()->mutable_left();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        input_rel = anchor_rel->mutable_join()->mutable_right();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kCross: {
+        Rel* input_rel = anchor_rel->mutable_cross()->mutable_left();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        input_rel = anchor_rel->mutable_join()->mutable_right();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kHashJoin: {
+        Rel* input_rel = anchor_rel->mutable_hash_join()->mutable_left();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        input_rel = anchor_rel->mutable_join()->mutable_right();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      case Rel::RelTypeCase::kMergeJoin: {
+        Rel* input_rel = anchor_rel->mutable_merge_join()->mutable_left();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        input_rel = anchor_rel->mutable_join()->mutable_right();
+        if (input_rel->has_reference()) { reference_rels.push_back(input_rel); }
+
+        break;
+      }
+
+      default: {
+        return nullptr;
+      }
+    }
+
+    // Find and return matching ReferenceRel
+    for (size_t rel_ndx = 0; rel_ndx < reference_rels.size(); ++rel_ndx) {
+      const ReferenceRel& ref_rel = reference_rels[rel_ndx]->reference();
+      if (ref_rel.subtree_reference() == subplan_anchorid) {
+        return reference_rels[rel_ndx];
+      }
+    }
+  }
+
+
+
   // >> Implementations for `OpPipeline` methods
 
   const string OpPipeline::ToString(string prefix) {
@@ -182,11 +283,11 @@ namespace mohair {
     PipelineStage& final_stage = CreatePipelineStage(plan_root.get(), nullptr, count_inputs);
 
     for (size_t child_ndx = 0; child_ndx < count_inputs; ++child_ndx) {
-      OpPipeline& final_pipe = final_stage.CreatePipeline(nullptr);
+      OpPipeline& stage_pipe = final_stage.CreatePipeline(nullptr);
 
       // Recurse through the input operator
       MohairOp* child_op = (plan_root->GetOpInputs()[child_ndx]).get();
-      BuildPipelineWithOp(this, final_stage, final_pipe, child_op);
+      BuildPipelineWithOp(this, final_stage, stage_pipe, child_op);
     }
   }
 
@@ -212,19 +313,29 @@ namespace mohair {
   }
 
   // Traversal functions for finding candidate plan splits
-  PipelineStage* FindTallJoinLeaf(SystemPlan* sys_plan);
-  PipelineStage* FindLongPipelineLeaf(SystemPlan* sys_plan);
+  size_t FindTallJoinLeaf(SystemPlan* sys_plan);
+  size_t FindLongPipelineLeaf(SystemPlan* sys_plan);
+  size_t FindWideJoin(SystemPlan* sys_plan);
 
   //! Finds a candidate `PlanSplit` given a decomposition algorithm (metric)
   unique_ptr<PlanSplit> PlanSplit::FindSplit(SystemPlan* sys_plan, DecomposeAlg method) {
+    size_t stage_ndx = 0;
+
     switch (method) {
       case TallJoinLeaf: {
-        return std::make_unique<PlanSplit>(FindTallJoinLeaf(sys_plan));
+        stage_ndx = FindTallJoinLeaf(sys_plan);
+        break;
       }
 
       // LongPipelineLeaf is currently default algorithm
       case LongPipelineLeaf: {
-        return std::make_unique<PlanSplit>(FindLongPipelineLeaf(sys_plan));
+        stage_ndx = FindLongPipelineLeaf(sys_plan);
+        break;
+      }
+
+      case WideJoinHead: {
+        stage_ndx = FindWideJoin(sys_plan);
+        break;
       }
 
       default: {
@@ -232,11 +343,14 @@ namespace mohair {
         return nullptr;
       }
     }
+
+    PipelineStage* split_stage = sys_plan->pipeline_stages[stage_ndx].get();
+    return std::make_unique<PlanSplit>(
+      sys_plan->plan_msg->payload.get(), split_stage, stage_ndx
+    );
   }
 
   /**
-   * 
-   *
    * For each subplan, the general process is to:
    *  1. create a copy of the original substrait message
    *  2. replace the original root rel with the root rel of the sub-plan
@@ -247,54 +361,123 @@ namespace mohair {
    * Step 3 will allow us to make merging of the pushback plan trivial (we will be able to
    * use operator equality).
    */
-  //! Create a substrait message for each subplan of derived from a PlanSplit.
-  vector<unique_ptr<PlanMessage>>
-  PlanSplit::SubplansFor(PlanMessage* plan_msg) {
-    // Get the anchor op and initialize some variables
-    MohairOp* anchor_op     = this->merge_rel;
-    size_t    count_inputs  = anchor_op->GetOpArity();
+  //! Create a substrait message for each subplan derived from a PlanSplit.
+  vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
+    // >> Copy the anchor rel, then the super plan for each resulting subplan message
+    unique_ptr<SuperPlan> refrel_superplan { SuperPlanFrom(superplan_mergerel) };
 
-    // Create a superplan message that we'll reuse for each subplan message
-    unique_ptr<SuperPlan> superplan_msg { SuperPlanFrom(anchor_op) };
-
-    // Initialize the list of messages to return
     vector<unique_ptr<PlanMessage>> subplan_msgs;
-    subplan_msgs.reserve(count_inputs);
-
-    // Create a substrait message for each input to the anchor
-    unique_ptr<MohairOp>* anchor_inputs = anchor_op->GetOpInputs();
-    for (size_t input_ndx = 0; input_ndx < count_inputs; ++input_ndx) {
-      MohairOp* input_op        = anchor_inputs[input_ndx].get();
-      Rel*      subplan_rootrel = input_op->substrait_rel;
-
-      // Create a copy of the original substrait message that we can modify
-      auto subplan_msg = std::make_unique<Plan>();
-      subplan_msg->CopyFrom(*(plan_msg->payload));
-
-      // Set the `SuperPlan` message and replace the super-plan root
-      auto subplan_oldroot = subplan_msg->mutable_relations(plan_msg->root_relndx)->mutable_root();
-      auto subplan_planext = subplan_msg->mutable_advanced_extensions();
-
-      // Pack the anchor message into an `Any` message as an "optimization"
-      AnyMessage* optimization_msg = subplan_planext->add_optimization();
-      optimization_msg->PackFrom(*(superplan_msg));
-
-      subplan_oldroot->mutable_input()->CopyFrom(*subplan_rootrel);
-
-      // Add a `SubstraitMessage` that wraps the `Plan` message
+    subplan_msgs.reserve(subplan_rootrels.size());
+    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
       subplan_msgs.push_back(
-        std::make_unique<SubstraitMessage>(std::move(subplan_msg), plan_msg->root_relndx)
+        SubstraitMessage::FromPlan(std::make_unique<Plan>(*super_plan))
       );
+    }
+
+    // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
+    PlanRel* superplan_anchor = MoveOpToReference(
+      super_plan, superplan_mergerel->substrait_rel
+    );
+
+    // update our `SuperPlan` message to refer to the anchor of the merge Rel
+    refrel_superplan->set_mergerel_reference(superplan_anchor->subtree_anchor());
+
+    // Then, modify subplan messages and insert reference rels into the superplan message
+    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
+      // Pack the `SuperPlan` message so we can match pushback plans to the merge rel
+      Plan* subplan = subplan_msgs[subplan_ndx]->payload.get();
+
+      AdvancedExtension* subplan_planext  = subplan->mutable_advanced_extensions();
+      AnyMessage*        optimization_msg = subplan_planext->add_optimization();
+      optimization_msg->PackFrom(*(refrel_superplan));
+
+      // Move the op tree from the superplan to the subplan
+      PlanRel* subplan_planroot = subplan_msgs[subplan_ndx]->root_relation;
+
+      Rel* old_rootrel = subplan_rootrels[subplan_ndx]->substrait_rel;
+      Rel* new_rootrel = subplan_planroot->mutable_root()->mutable_input();
+      MoveRelOp(old_rootrel, new_rootrel);
+
+      // Create a reference to the subplan root from the superplan
+      CreateReferenceRel(old_rootrel, subplan_planroot);
     }
 
     return subplan_msgs;
   }
 
+  //! Create a substrait message for each subplan derived from a PlanSplit.
+  bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
+    // >> Recover (and validate) links between the superplan and subplan
+    // Search in subplan message for a `SuperPlan` reference
+    SuperPlan refrel_superplan;
+    bool      has_superplan_ref { false };
+    const auto& subplan_planext = subplan_msg->payload->advanced_extensions();
+    for (const auto& optimization_msg : subplan_planext.optimization()) {
+      if (not optimization_msg.Is<SuperPlan>()) { continue; }
+
+      optimization_msg.UnpackTo(&refrel_superplan);
+      has_superplan_ref = true;
+    }
+
+    if (not has_superplan_ref) {
+      std::cerr << "Failed to find reference [subplan -> superplan]" << std::endl;
+      return false;
+    }
+
+    // Search superplan relations (in reverse) for a `ReferenceRel` pointing to subplan
+    PlanRel* superplan_anchor { nullptr };
+    Rel*     refrel_subplan   { nullptr };
+
+    uint32_t subplan_anchorid { subplan_msg->root_relation->subtree_anchor() };
+    auto     superplan_rels = super_plan->mutable_relations();
+    auto     mergerel_itr   = superplan_rels->end();
+    for (--mergerel_itr; mergerel_itr != superplan_rels->begin(); --mergerel_itr) {
+      if (mergerel_itr->has_root()) { continue; }
+
+      // This checks the inputs to mergerel_itr for a matching `ReferenceRel`
+      refrel_subplan = FindMatchingRefRel(mergerel_itr->mutable_rel(), subplan_anchorid);
+
+      if (refrel_subplan != nullptr) {
+        superplan_anchor = &(*mergerel_itr);
+
+        if (refrel_superplan.mergerel_reference() != superplan_anchor->subtree_anchor()) {
+          std::cerr << "Expected SuperPlan anchor ID to match. Actual: ["
+                    << refrel_superplan.mergerel_reference() << " != "
+                    << superplan_anchor->subtree_anchor()    << "]"
+                    << std::endl
+          ;
+          return false;
+        }
+      }
+    }
+
+    if (superplan_anchor == nullptr) {
+      std::cerr << "Failed to find reference [superplan -> subplan]" << std::endl;
+      return false;
+    }
+
+    // >> Do the merging
+    Rel* subplan_rootrel = subplan_msg->root_relation->mutable_root()->mutable_input();
+    MoveRelOp(subplan_rootrel, refrel_subplan);
+
+    // If any input to the anchor rel is a reference, we're done
+    const vector<Rel*>& anchor_inputs = GetInputRels(superplan_anchor->mutable_rel());
+    for (const Rel* input_rel : anchor_inputs) {
+      if (input_rel->has_reference()) { return true; }
+    }
+
+    // Otherwise, we can move the anchor back (undo the reference)
+    std::cout << "Anchor has had all subplans merged" << std::endl;
+    MoveReferenceToOp(super_plan, superplan_mergerel->substrait_rel);
+
+    return true;
+  }
+
   //! Finds a `PlanSplit` matching a PipelineStage with a join as a sink and with at least
   //  one pipeline that has an origin operator (reads from a source relation)
-  PipelineStage* FindTallJoinLeaf(SystemPlan* sys_plan) {
-    PipelineStage* candidate   = nullptr;
-    size_t         peak_height = 0;
+  size_t FindTallJoinLeaf(SystemPlan* sys_plan) {
+    size_t candidate_ndx = 0;
+    size_t peak_height   = 0;
 
     // An element in PlanVec may be null if we previously moved it
     size_t back_ndx = sys_plan->pipeline_stages.size();
@@ -306,19 +489,19 @@ namespace mohair {
 
       if (   stage->pipelines[0]->source->IsOrigin()
           or stage->pipelines[1]->source->IsOrigin()) {
-        peak_height = stage->length;
-        candidate   = stage;
+        peak_height   = stage->length;
+        candidate_ndx = stage_ndx;
       }
     }
 
-    return candidate;
+    return candidate_ndx;
   }
 
   //! Finds a `PlanSplit` matching a PipelineStage with only 1 origin relation and having
   //  the most operators in the lineage (any number of stages without joins)
-  PipelineStage* FindLongPipelineLeaf(SystemPlan* sys_plan) {
-    PipelineStage* candidate   = nullptr;
-    size_t         peak_height = 0;
+  size_t FindLongPipelineLeaf(SystemPlan* sys_plan) {
+    size_t candidate_ndx = 0;
+    size_t peak_height   = 0;
 
     // An element in PlanVec may be null if we previously moved it
     size_t back_ndx = sys_plan->pipeline_stages.size();
@@ -336,12 +519,28 @@ namespace mohair {
       }
 
       if (total_stagelen > peak_height) {
-        peak_height = total_stagelen;
-        candidate   = current_stage;
+        peak_height   = total_stagelen;
+        candidate_ndx = stage_ndx;
       }
     }
 
-    return candidate;
+    return candidate_ndx;
+  }
+
+  //! Finds the Join operator with the most width (origin names)
+  size_t FindWideJoin(SystemPlan* sys_plan) {
+    size_t candidate_ndx = 0;
+    size_t count_origins = sys_plan->pipeline_stages[0]->origin_names.size();
+
+    // We stop when we find a narrower pipeline stage
+    for (size_t stage_ndx = 1; stage_ndx < sys_plan->pipeline_stages.size(); ++stage_ndx) {
+      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+
+      if (stage->origin_names.size() < count_origins) { break; }
+      candidate_ndx = stage_ndx;
+    }
+
+    return candidate_ndx;
   }
 
 
