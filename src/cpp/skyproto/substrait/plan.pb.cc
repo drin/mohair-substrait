@@ -86,7 +86,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr PlanRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : rel_type_{},
+      : subtree_anchor_{0u},
+        rel_type_{},
         _cached_size_{0},
         _oneof_case_{} {}
 
@@ -158,6 +159,7 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::PlanRel, _impl_.subtree_anchor_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::PlanRel, _impl_.rel_type_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _internal_metadata_),
@@ -207,9 +209,9 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::skyproto::substrait::PlanRel)},
-        {11, 25, -1, sizeof(::skyproto::substrait::Plan)},
-        {31, 40, -1, sizeof(::skyproto::substrait::PlanVersion)},
-        {41, -1, -1, sizeof(::skyproto::substrait::Version)},
+        {12, 26, -1, sizeof(::skyproto::substrait::Plan)},
+        {32, 41, -1, sizeof(::skyproto::substrait::PlanVersion)},
+        {42, -1, -1, sizeof(::skyproto::substrait::Version)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_PlanRel_default_instance_._instance,
@@ -222,9 +224,10 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto[] ABSL_
     "\n\035skyproto/substrait/plan.proto\022\022skyprot"
     "o.substrait\032 skyproto/substrait/algebra."
     "proto\032.skyproto/substrait/extensions/ext"
-    "ensions.proto\"u\n\007PlanRel\022+\n\003rel\030\001 \001(\0132\027."
-    "skyproto.substrait.RelH\000R\003rel\0221\n\004root\030\002 "
-    "\001(\0132\033.skyproto.substrait.RelRootH\000R\004root"
+    "ensions.proto\"\234\001\n\007PlanRel\022+\n\003rel\030\001 \001(\0132\027"
+    ".skyproto.substrait.RelH\000R\003rel\0221\n\004root\030\002"
+    " \001(\0132\033.skyproto.substrait.RelRootH\000R\004roo"
+    "t\022%\n\016subtree_anchor\030\003 \001(\rR\rsubtreeAnchor"
     "B\n\n\010rel_type\"\276\003\n\004Plan\0225\n\007version\030\006 \001(\0132\033"
     ".skyproto.substrait.VersionR\007version\022X\n\016"
     "extension_uris\030\001 \003(\01321.skyproto.substrai"
@@ -257,7 +260,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_on
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2fplan_2eproto = {
     false,
     false,
-    1094,
+    1134,
     descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto,
     "skyproto/substrait/plan.proto",
     &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_once,
@@ -357,6 +360,7 @@ PlanRel::PlanRel(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.subtree_anchor_ = from._impl_.subtree_anchor_;
   switch (rel_type_case()) {
     case REL_TYPE_NOT_SET:
       break;
@@ -379,6 +383,7 @@ inline PROTOBUF_NDEBUG_INLINE PlanRel::Impl_::Impl_(
 
 inline void PlanRel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.subtree_anchor_ = {};
 }
 PlanRel::~PlanRel() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.PlanRel)
@@ -450,15 +455,15 @@ const ::google::protobuf::MessageLite::ClassData* PlanRel::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 2, 2, 0, 2> PlanRel::_table_ = {
+const ::_pbi::TcParseTable<0, 3, 2, 0, 2> PlanRel::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    2, 0,  // max_field_number, fast_idx_mask
+    3, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     2,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -468,7 +473,9 @@ const ::_pbi::TcParseTable<0, 2, 2, 0, 2> PlanRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skyproto::substrait::PlanRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PlanRel, _impl_.subtree_anchor_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(PlanRel, _impl_.subtree_anchor_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -478,6 +485,9 @@ const ::_pbi::TcParseTable<0, 2, 2, 0, 2> PlanRel::_table_ = {
     // .skyproto.substrait.RelRoot root = 2 [json_name = "root"];
     {PROTOBUF_FIELD_OFFSET(PlanRel, _impl_.rel_type_.root_), _Internal::kOneofCaseOffset + 0, 1,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+    {PROTOBUF_FIELD_OFFSET(PlanRel, _impl_.subtree_anchor_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Rel>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelRoot>()},
@@ -492,6 +502,7 @@ PROTOBUF_NOINLINE void PlanRel::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.subtree_anchor_ = 0u;
   clear_rel_type();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -527,6 +538,13 @@ PROTOBUF_NOINLINE void PlanRel::Clear() {
             default:
               break;
           }
+          // uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+          if (this_._internal_subtree_anchor() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                3, this_._internal_subtree_anchor(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -550,6 +568,13 @@ PROTOBUF_NOINLINE void PlanRel::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+           {
+            // uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+            if (this_._internal_subtree_anchor() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_subtree_anchor());
+            }
+          }
           switch (this_.rel_type_case()) {
             // .skyproto.substrait.Rel rel = 1 [json_name = "rel"];
             case kRel: {
@@ -580,6 +605,9 @@ void PlanRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_subtree_anchor() != 0) {
+    _this->_impl_.subtree_anchor_ = from._impl_.subtree_anchor_;
+  }
   if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
     const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
     const bool oneof_needs_init = oneof_to_case != oneof_from_case;
@@ -627,6 +655,7 @@ void PlanRel::CopyFrom(const PlanRel& from) {
 void PlanRel::InternalSwap(PlanRel* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.subtree_anchor_, other->_impl_.subtree_anchor_);
   swap(_impl_.rel_type_, other->_impl_.rel_type_);
   swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
 }

@@ -2063,8 +2063,10 @@ class ReferenceRel final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kSubtreeOrdinalFieldNumber = 1,
+    kSubtreeReferenceFieldNumber = 2,
   };
-  // int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+  // optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+  bool has_subtree_ordinal() const;
   void clear_subtree_ordinal() ;
   ::int32_t subtree_ordinal() const;
   void set_subtree_ordinal(::int32_t value);
@@ -2074,12 +2076,22 @@ class ReferenceRel final : public ::google::protobuf::Message
   void _internal_set_subtree_ordinal(::int32_t value);
 
   public:
+  // uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+  void clear_subtree_reference() ;
+  ::uint32_t subtree_reference() const;
+  void set_subtree_reference(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_subtree_reference() const;
+  void _internal_set_subtree_reference(::uint32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:skyproto.substrait.ReferenceRel)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -2100,8 +2112,10 @@ class ReferenceRel final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const ReferenceRel& from_msg);
-    ::int32_t subtree_ordinal_;
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t subtree_ordinal_;
+    ::uint32_t subtree_reference_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -60442,10 +60456,15 @@ AggregateFunction::_internal_mutable_args() {
 
 // ReferenceRel
 
-// int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+// optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+inline bool ReferenceRel::has_subtree_ordinal() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
 inline void ReferenceRel::clear_subtree_ordinal() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.subtree_ordinal_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline ::int32_t ReferenceRel::subtree_ordinal() const {
   // @@protoc_insertion_point(field_get:skyproto.substrait.ReferenceRel.subtree_ordinal)
@@ -60453,6 +60472,7 @@ inline ::int32_t ReferenceRel::subtree_ordinal() const {
 }
 inline void ReferenceRel::set_subtree_ordinal(::int32_t value) {
   _internal_set_subtree_ordinal(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:skyproto.substrait.ReferenceRel.subtree_ordinal)
 }
 inline ::int32_t ReferenceRel::_internal_subtree_ordinal() const {
@@ -60462,6 +60482,28 @@ inline ::int32_t ReferenceRel::_internal_subtree_ordinal() const {
 inline void ReferenceRel::_internal_set_subtree_ordinal(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.subtree_ordinal_ = value;
+}
+
+// uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+inline void ReferenceRel::clear_subtree_reference() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.subtree_reference_ = 0u;
+}
+inline ::uint32_t ReferenceRel::subtree_reference() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReferenceRel.subtree_reference)
+  return _internal_subtree_reference();
+}
+inline void ReferenceRel::set_subtree_reference(::uint32_t value) {
+  _internal_set_subtree_reference(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ReferenceRel.subtree_reference)
+}
+inline ::uint32_t ReferenceRel::_internal_subtree_reference() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.subtree_reference_;
+}
+inline void ReferenceRel::_internal_set_subtree_reference(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.subtree_reference_ = value;
 }
 
 #ifdef __GNUC__

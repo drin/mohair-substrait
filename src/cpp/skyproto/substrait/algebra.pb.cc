@@ -124,8 +124,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr ReferenceRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : subtree_ordinal_{0},
-        _cached_size_{0} {}
+      : _cached_size_{0},
+        subtree_ordinal_{0},
+        subtree_reference_{0u} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR ReferenceRel::ReferenceRel(::_pbi::ConstantInitialized)
@@ -5001,7 +5002,7 @@ const ::uint32_t
         ~0u,
         ~0u,
         ~0u,
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReferenceRel, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReferenceRel, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -5010,6 +5011,9 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReferenceRel, _impl_.subtree_ordinal_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReferenceRel, _impl_.subtree_reference_),
+        0,
+        ~0u,
 };
 
 static const ::_pbi::MigrationSchema
@@ -5137,7 +5141,7 @@ static const ::_pbi::MigrationSchema
         {1624, -1, -1, sizeof(::skyproto::substrait::Expression)},
         {1645, 1657, -1, sizeof(::skyproto::substrait::SortField)},
         {1660, 1676, -1, sizeof(::skyproto::substrait::AggregateFunction)},
-        {1684, -1, -1, sizeof(::skyproto::substrait::ReferenceRel)},
+        {1684, 1694, -1, sizeof(::skyproto::substrait::ReferenceRel)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_RelCommon_Direct_default_instance_._instance,
@@ -6076,18 +6080,20 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto[] AB
     "ionInvocation\022&\n\"AGGREGATION_INVOCATION_"
     "UNSPECIFIED\020\000\022\036\n\032AGGREGATION_INVOCATION_"
     "ALL\020\001\022#\n\037AGGREGATION_INVOCATION_DISTINCT"
-    "\020\002\"7\n\014ReferenceRel\022\'\n\017subtree_ordinal\030\001 "
-    "\001(\005R\016subtreeOrdinal*\357\001\n\020AggregationPhase"
-    "\022!\n\035AGGREGATION_PHASE_UNSPECIFIED\020\000\022-\n)A"
-    "GGREGATION_PHASE_INITIAL_TO_INTERMEDIATE"
-    "\020\001\0222\n.AGGREGATION_PHASE_INTERMEDIATE_TO_"
-    "INTERMEDIATE\020\002\022\'\n#AGGREGATION_PHASE_INIT"
-    "IAL_TO_RESULT\020\003\022,\n(AGGREGATION_PHASE_INT"
-    "ERMEDIATE_TO_RESULT\020\004B\217\001\n\026com.skyproto.s"
-    "ubstraitB\014AlgebraProtoP\001\242\002\003SSX\252\002\022Skyprot"
-    "o.Substrait\312\002\022Skyproto\\Substrait\342\002\036Skypr"
-    "oto\\Substrait\\GPBMetadata\352\002\023Skyproto::Su"
-    "bstraitb\006proto3"
+    "\020\002\"}\n\014ReferenceRel\022,\n\017subtree_ordinal\030\001 "
+    "\001(\005H\000R\016subtreeOrdinal\210\001\001\022+\n\021subtree_refe"
+    "rence\030\002 \001(\rR\020subtreeReferenceB\022\n\020_subtre"
+    "e_ordinal*\357\001\n\020AggregationPhase\022!\n\035AGGREG"
+    "ATION_PHASE_UNSPECIFIED\020\000\022-\n)AGGREGATION"
+    "_PHASE_INITIAL_TO_INTERMEDIATE\020\001\0222\n.AGGR"
+    "EGATION_PHASE_INTERMEDIATE_TO_INTERMEDIA"
+    "TE\020\002\022\'\n#AGGREGATION_PHASE_INITIAL_TO_RES"
+    "ULT\020\003\022,\n(AGGREGATION_PHASE_INTERMEDIATE_"
+    "TO_RESULT\020\004B\217\001\n\026com.skyproto.substraitB\014"
+    "AlgebraProtoP\001\242\002\003SSX\252\002\022Skyproto.Substrai"
+    "t\312\002\022Skyproto\\Substrait\342\002\036Skyproto\\Substr"
+    "ait\\GPBMetadata\352\002\023Skyproto::Substraitb\006p"
+    "roto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_deps[3] =
     {
@@ -6099,7 +6105,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto = {
     false,
     false,
-    32815,
+    32885,
     descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto,
     "skyproto/substrait/algebra.proto",
     &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_once,
@@ -47833,6 +47839,10 @@ void AggregateFunction::InternalSwap(AggregateFunction* PROTOBUF_RESTRICT other)
 
 class ReferenceRel::_Internal {
  public:
+  using HasBits =
+      decltype(std::declval<ReferenceRel>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_._has_bits_);
 };
 
 ReferenceRel::ReferenceRel(::google::protobuf::Arena* arena)
@@ -47856,7 +47866,12 @@ inline PROTOBUF_NDEBUG_INLINE ReferenceRel::Impl_::Impl_(
 
 inline void ReferenceRel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.subtree_ordinal_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, subtree_ordinal_),
+           0,
+           offsetof(Impl_, subtree_reference_) -
+               offsetof(Impl_, subtree_ordinal_) +
+               sizeof(Impl_::subtree_reference_));
 }
 ReferenceRel::~ReferenceRel() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.ReferenceRel)
@@ -47897,15 +47912,15 @@ const ::google::protobuf::MessageLite::ClassData* ReferenceRel::GetClassData() c
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> ReferenceRel::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ReferenceRel::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_._has_bits_),
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -47915,15 +47930,21 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> ReferenceRel::_table_ = {
     ::_pbi::TcParser::GetTable<::skyproto::substrait::ReferenceRel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ReferenceRel, _impl_.subtree_ordinal_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_ordinal_)}},
+    // uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ReferenceRel, _impl_.subtree_reference_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_reference_)}},
+    // optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ReferenceRel, _impl_.subtree_ordinal_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_ordinal_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
-    {PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_ordinal_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+    {PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_ordinal_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+    {PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_reference_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
   }},
   // no aux_entries
   {{
@@ -47938,6 +47959,8 @@ PROTOBUF_NOINLINE void ReferenceRel::Clear() {
   (void) cached_has_bits;
 
   _impl_.subtree_ordinal_ = 0;
+  _impl_.subtree_reference_ = 0u;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -47956,11 +47979,19 @@ PROTOBUF_NOINLINE void ReferenceRel::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
-          if (this_._internal_subtree_ordinal() != 0) {
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+          if (cached_has_bits & 0x00000001u) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<1>(
                     stream, this_._internal_subtree_ordinal(), target);
+          }
+
+          // uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+          if (this_._internal_subtree_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_subtree_reference(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -47986,11 +48017,21 @@ PROTOBUF_NOINLINE void ReferenceRel::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
-            if (this_._internal_subtree_ordinal() != 0) {
+            // optional int32 subtree_ordinal = 1 [json_name = "subtreeOrdinal"];
+            cached_has_bits =
+                this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_subtree_ordinal());
+            }
+          }
+           {
+            // uint32 subtree_reference = 2 [json_name = "subtreeReference"];
+            if (this_._internal_subtree_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_subtree_reference());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -48005,9 +48046,14 @@ void ReferenceRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::go
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_subtree_ordinal() != 0) {
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     _this->_impl_.subtree_ordinal_ = from._impl_.subtree_ordinal_;
   }
+  if (from._internal_subtree_reference() != 0) {
+    _this->_impl_.subtree_reference_ = from._impl_.subtree_reference_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -48022,7 +48068,13 @@ void ReferenceRel::CopyFrom(const ReferenceRel& from) {
 void ReferenceRel::InternalSwap(ReferenceRel* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.subtree_ordinal_, other->_impl_.subtree_ordinal_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_reference_)
+      + sizeof(ReferenceRel::_impl_.subtree_reference_)
+      - PROTOBUF_FIELD_OFFSET(ReferenceRel, _impl_.subtree_ordinal_)>(
+          reinterpret_cast<char*>(&_impl_.subtree_ordinal_),
+          reinterpret_cast<char*>(&other->_impl_.subtree_ordinal_));
 }
 
 ::google::protobuf::Metadata ReferenceRel::GetMetadata() const {
