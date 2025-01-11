@@ -668,9 +668,20 @@ class PlanRel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kSubtreeAnchorFieldNumber = 3,
     kRelFieldNumber = 1,
     kRootFieldNumber = 2,
   };
+  // uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+  void clear_subtree_anchor() ;
+  ::uint32_t subtree_anchor() const;
+  void set_subtree_anchor(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_subtree_anchor() const;
+  void _internal_set_subtree_anchor(::uint32_t value);
+
+  public:
   // .skyproto.substrait.Rel rel = 1 [json_name = "rel"];
   bool has_rel() const;
   private:
@@ -720,7 +731,7 @@ class PlanRel final : public ::google::protobuf::Message
   inline void clear_has_rel_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 2, 2,
+      0, 3, 2,
       0, 2>
       _table_;
 
@@ -741,6 +752,7 @@ class PlanRel final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const PlanRel& from_msg);
+    ::uint32_t subtree_anchor_;
     union RelTypeUnion {
       constexpr RelTypeUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -1197,6 +1209,28 @@ inline ::skyproto::substrait::RelRoot* PlanRel::mutable_root() ABSL_ATTRIBUTE_LI
   ::skyproto::substrait::RelRoot* _msg = _internal_mutable_root();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.PlanRel.root)
   return _msg;
+}
+
+// uint32 subtree_anchor = 3 [json_name = "subtreeAnchor"];
+inline void PlanRel::clear_subtree_anchor() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.subtree_anchor_ = 0u;
+}
+inline ::uint32_t PlanRel::subtree_anchor() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.PlanRel.subtree_anchor)
+  return _internal_subtree_anchor();
+}
+inline void PlanRel::set_subtree_anchor(::uint32_t value) {
+  _internal_set_subtree_anchor(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.PlanRel.subtree_anchor)
+}
+inline ::uint32_t PlanRel::_internal_subtree_anchor() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.subtree_anchor_;
+}
+inline void PlanRel::_internal_set_subtree_anchor(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.subtree_anchor_ = value;
 }
 
 inline bool PlanRel::has_rel_type() const {
