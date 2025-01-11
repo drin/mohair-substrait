@@ -30,6 +30,7 @@
 // >> Protobuf framework deps
 #include "google/protobuf/text_format.h"
 #include "google/protobuf/util/json_util.h"
+#include "google/protobuf/util/message_differencer.h"
 
 // >> Generated protobuf deps for substrait
 #include "skyproto/substrait/plan.pb.h"
@@ -45,6 +46,7 @@ namespace mohair {
 
   // >> Protobuf types
   using google::protobuf::Message;
+  using google::protobuf::util::MessageDifferencer;
 
   // >> Substrait types
   // Plan level
@@ -54,10 +56,12 @@ namespace mohair {
   // Relation level
   using skyproto::substrait::Rel;
   using skyproto::substrait::RelRoot;
+  using skyproto::substrait::extensions::AdvancedExtension;
 
   // Leaf types
   using skyproto::substrait::ReadRel;
   using skyproto::substrait::ExtensionLeafRel;
+  using skyproto::substrait::ReferenceRel;
 
   // Unary types (streaming)
   using skyproto::substrait::ProjectRel;
