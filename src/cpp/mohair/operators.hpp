@@ -116,8 +116,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpSel : public MohairOp {
@@ -131,8 +129,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpLimit : public MohairOp {
@@ -146,8 +142,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   // >> Unary operators (sinks)
@@ -162,8 +156,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpAggr : public SinkOp {
@@ -177,8 +169,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   // >> Binary operators (sinks)
@@ -193,8 +183,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpCrossJoin : public SinkOp {
@@ -208,8 +196,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpHashJoin : public SinkOp {
@@ -223,8 +209,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
   struct OpMergeJoin : public SinkOp {
@@ -238,8 +222,6 @@ namespace mohair {
     size_t       GetOpArity() override;
 
     unique_ptr<MohairOp>* GetOpInputs() override;
-
-    void SimplifyMessage(Rel* rel) override;
   };
 
 } // namespace: mohair

@@ -72,6 +72,15 @@ readsubstrait_bin = executable('read-substrait'
   ,install      : true
 )
 
+# >> Interface to cooperative query decomposition for substrait files
+decompose_sources = [ cpp_tooldir  / 'decompose-substrait.cpp' ]
+
+readsubstrait_bin = executable('decompose-substrait'
+  ,decompose_sources
+  ,dependencies : [ libmohair_dep ]
+  ,install      : true
+)
+
 
 # ------------------------------
 # Build tests
