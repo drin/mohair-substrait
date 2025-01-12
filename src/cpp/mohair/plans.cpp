@@ -185,7 +185,7 @@ namespace mohair {
 
   //! Create a pipeline flowing to the same sink and with a pointer to the sink's
   //  downstream operator (where output flows to); this operator is considered when
-  //  splitting the plan. 
+  //  splitting the plan.
   OpPipeline& PipelineStage::CreatePipeline(MohairOp* sink_next) {
     auto new_pipeline = (
       pipelines.emplace_back(std::make_unique<OpPipeline>(sink, sink_next))
@@ -315,13 +315,13 @@ namespace mohair {
   }
 
   // Traversal functions for finding candidate plan splits
-  size_t FindTallJoinLeaf(SystemPlan* sys_plan);
-  size_t FindLongPipelineLeaf(SystemPlan* sys_plan);
-  size_t FindWideJoin(SystemPlan* sys_plan);
+  optional<size_t> FindTallJoinLeaf(SystemPlan* sys_plan);
+  optional<size_t> FindLongPipelineLeaf(SystemPlan* sys_plan);
+  optional<size_t> FindWideJoin(SystemPlan* sys_plan);
 
   //! Finds a candidate `PlanSplit` given a decomposition algorithm (metric)
   unique_ptr<PlanSplit> PlanSplit::FindSplit(SystemPlan* sys_plan, DecomposeAlg method) {
-    size_t stage_ndx = 0;
+    optional<size_t> stage_ndx { std::nullopt };
 
     switch (method) {
       case TallJoinLeaf: {
@@ -346,68 +346,23 @@ namespace mohair {
       }
     }
 
-    PipelineStage* split_stage = sys_plan->pipeline_stages[stage_ndx].get();
+    PipelineStage* split_stage { nullptr };
+    if (stage_ndx.has_value()) {
+      split_stage = sys_plan->pipeline_stages[stage_ndx.value()].get();
+    }
+
     return std::make_unique<PlanSplit>(
-      sys_plan->plan_msg->payload.get(), split_stage, stage_ndx
+       sys_plan
+      ,sys_plan->plan_msg->payload.get()
+      ,split_stage
+      ,stage_ndx.value_or(0)
     );
   }
 
-  /**
-   * For each subplan, the general process is to:
-   *  1. create a copy of the original substrait message
-   *  2. replace the original root rel with the root rel of the sub-plan
-   *  3. set an anchor (rel in super-plan), which identifies the sink for the sub-plan.
-   * 
-   * The order of 2 and 3 is unimportant (we already have references to both in
-   * PlanSplit). Step 2 is what will allow the next consumer to only see the sub-plan.
-   * Step 3 will allow us to make merging of the pushback plan trivial (we will be able to
-   * use operator equality).
-   */
-  //! Create a substrait message for each subplan derived from a PlanSplit.
-  vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
-    // >> Copy the anchor rel, then the super plan for each resulting subplan message
-    unique_ptr<SuperPlan> refrel_superplan { SuperPlanFrom(superplan_mergerel) };
+  //! Returns true if this instance can split the given `SystemPlan`
+  bool PlanSplit::CanSplit() { return this->stage != nullptr; }
 
-    vector<unique_ptr<PlanMessage>> subplan_msgs;
-    subplan_msgs.reserve(subplan_rootrels.size());
-    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
-      subplan_msgs.push_back(
-        SubstraitMessage::FromPlan(std::make_unique<Plan>(*super_plan))
-      );
-    }
-
-    // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
-    PlanRel* superplan_anchor = MoveOpToReference(
-      super_plan, superplan_mergerel->substrait_rel
-    );
-
-    // update our `SuperPlan` message to refer to the anchor of the merge Rel
-    refrel_superplan->set_mergerel_reference(superplan_anchor->subtree_anchor());
-
-    // Then, modify subplan messages and insert reference rels into the superplan message
-    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
-      // Pack the `SuperPlan` message so we can match pushback plans to the merge rel
-      Plan* subplan = subplan_msgs[subplan_ndx]->payload.get();
-
-      AdvancedExtension* subplan_planext  = subplan->mutable_advanced_extensions();
-      AnyMessage*        optimization_msg = subplan_planext->add_optimization();
-      optimization_msg->PackFrom(*(refrel_superplan));
-
-      // Move the op tree from the superplan to the subplan
-      PlanRel* subplan_planroot = subplan_msgs[subplan_ndx]->root_relation;
-
-      Rel* old_rootrel = subplan_rootrels[subplan_ndx]->substrait_rel;
-      Rel* new_rootrel = subplan_planroot->mutable_root()->mutable_input();
-      MoveRelOp(old_rootrel, new_rootrel);
-
-      // Create a reference to the subplan root from the superplan
-      CreateReferenceRel(old_rootrel, subplan_planroot);
-    }
-
-    return subplan_msgs;
-  }
-
-  //! Create a substrait message for each subplan derived from a PlanSplit.
+  //! Merge the given `PlanMessage` into this instance's superplan.
   bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
     // >> Recover (and validate) links between the superplan and subplan
     // Search in subplan message for a `SuperPlan` reference
@@ -455,12 +410,26 @@ namespace mohair {
 
     if (superplan_anchor == nullptr) {
       std::cerr << "Failed to find reference [superplan -> subplan]" << std::endl;
+      PrintSubstraitPlan(subplan_msg->payload.get());
       return false;
     }
 
     // >> Do the merging
+
+    // Move the root of the subplan
     Rel* subplan_rootrel = subplan_msg->root_relation->mutable_root()->mutable_input();
     MoveRelOp(subplan_rootrel, refrel_subplan);
+
+    // Move the remaining subtrees
+    auto subplan_rels = subplan_msg->payload->mutable_relations();
+    for (auto rel_itr = subplan_rels->begin(); rel_itr != subplan_rels->end(); ++rel_itr) {
+        // Skip the root relation as we've already moved it
+        if (rel_itr->has_root()) { continue; }
+
+        // Add each remaining relation to the superplan
+        PlanRel* new_rel = super_plan->add_relations();
+        *new_rel = *rel_itr;
+    }
 
     // If any input to the anchor rel is a reference, we're done
     const vector<Rel*>& anchor_inputs = GetInputRels(superplan_anchor->mutable_rel());
@@ -475,18 +444,58 @@ namespace mohair {
     return true;
   }
 
+  //! Create a list of substrait messages given this instance's split information.
+  vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
+    // This happens when the plan could not be split and we missed it
+    MOHAIR_ASSERT("Split failed but we kept going anyway", superplan_mergerel != nullptr);
+
+    // Initialize subplan messages from the superplan (ensures we propagate all context)
+    vector<unique_ptr<PlanMessage>> subplan_msgs;
+    subplan_msgs.reserve(subplan_rootrels.size());
+
+    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
+      auto plan_copy = std::make_unique<Plan>();
+      plan_copy->CopyFrom(*super_plan);
+
+      subplan_msgs.push_back(SubstraitMessage::FromPlan(std::move(plan_copy)));
+    }
+
+    // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
+    PlanRel* superplan_anchor = MoveOpToReference(super_plan, superplan_mergerel->substrait_rel);
+    unique_ptr<SuperPlan> refrel_superplan = CreateSuperPlanRel(superplan_anchor);
+
+    // Then, modify subplan messages and insert reference rels into the superplan message
+    for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
+      // Move the op tree from the superplan to the subplan
+      PlanRel* subplan_planroot = subplan_msgs[subplan_ndx]->root_relation;
+      Rel*     new_rootrel      = subplan_planroot->mutable_root()->mutable_input();
+      Rel*     old_rootrel      = subplan_rootrels[subplan_ndx]->substrait_rel;
+
+      MoveRelOp(old_rootrel, new_rootrel);
+      CreateReferenceRel(old_rootrel, subplan_planroot);
+
+      // Pack the `SuperPlan` message so we can match pushback plans to the merge rel
+      Plan* subplan = subplan_msgs[subplan_ndx]->payload.get();
+
+      AdvancedExtension* subplan_planext  = subplan->mutable_advanced_extensions();
+      AnyMessage*        optimization_msg = subplan_planext->add_optimization();
+      optimization_msg->PackFrom(*(refrel_superplan));
+    }
+
+    return subplan_msgs;
+  }
+
   //! Finds a `PlanSplit` matching a PipelineStage with a join as a sink and with at least
   //  one pipeline that has an origin operator (reads from a source relation)
-  size_t FindTallJoinLeaf(SystemPlan* sys_plan) {
-    size_t candidate_ndx = 0;
-    size_t peak_height   = 0;
+  optional<size_t> FindTallJoinLeaf(SystemPlan* sys_plan) {
+    optional<size_t> candidate_ndx { std::nullopt };
+    size_t           peak_height   { 0 };
 
-    // An element in PlanVec may be null if we previously moved it
     size_t back_ndx = sys_plan->pipeline_stages.size();
     for (size_t stage_ndx = back_ndx; stage_ndx >= 0; --stage_ndx) {
       PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
 
-      if (stage->width == 1)            { continue; }
+      if (stage->width != 2)            { continue; }
       if (stage->length <= peak_height) { continue; }
 
       if (   stage->pipelines[0]->source->IsOrigin()
@@ -501,18 +510,16 @@ namespace mohair {
 
   //! Finds a `PlanSplit` matching a PipelineStage with only 1 origin relation and having
   //  the most operators in the lineage (any number of stages without joins)
-  size_t FindLongPipelineLeaf(SystemPlan* sys_plan) {
-    size_t candidate_ndx = 0;
-    size_t peak_height   = 0;
+  optional<size_t> FindLongPipelineLeaf(SystemPlan* sys_plan) {
+    optional<size_t> candidate_ndx { std::nullopt };
+    size_t           peak_height   { 0 };
 
-    // An element in PlanVec may be null if we previously moved it
     size_t back_ndx = sys_plan->pipeline_stages.size();
     for (size_t stage_ndx = back_ndx; stage_ndx >= 0; --stage_ndx) {
       PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
 
       if (stage->origin_names.size() > 1) { continue; }
 
-      // NOTE: theoretically can recompute a lot; but unlikely in practice
       size_t         total_stagelen = 0;
       PipelineStage* current_stage  = stage;
       while (current_stage != nullptr and current_stage->origin_names.size() == 1) {
@@ -521,7 +528,7 @@ namespace mohair {
       }
 
       if (total_stagelen > peak_height) {
-        peak_height   = total_stagelen;
+        peak_height = total_stagelen;
         candidate_ndx = stage_ndx;
       }
     }
@@ -530,15 +537,19 @@ namespace mohair {
   }
 
   //! Finds the Join operator with the most width (origin names)
-  size_t FindWideJoin(SystemPlan* sys_plan) {
-    size_t candidate_ndx = 0;
-    size_t count_origins = sys_plan->pipeline_stages[0]->origin_names.size();
+  optional<size_t> FindWideJoin(SystemPlan* sys_plan) {
+    if (sys_plan->pipeline_stages.empty()) { return std::nullopt; }
 
-    // We stop when we find a narrower pipeline stage
-    for (size_t stage_ndx = 1; stage_ndx < sys_plan->pipeline_stages.size(); ++stage_ndx) {
+    optional<size_t> candidate_ndx { std::nullopt };
+    size_t count_origins = 0;
+
+    for (size_t stage_ndx = 0; stage_ndx < sys_plan->pipeline_stages.size(); ++stage_ndx) {
       PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
 
-      if (stage->origin_names.size() < count_origins) { break; }
+      if (stage->width != 2)                          { continue; }
+      if (stage->origin_names.size() < count_origins) { continue; }
+
+      count_origins = stage->origin_names.size();
       candidate_ndx = stage_ndx;
     }
 
