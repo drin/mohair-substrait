@@ -50,6 +50,12 @@ int ValidateArgs(int argc, char **argv) {
     return 1;
   }
 
+  // Check if the file exists
+  if (!fs::exists(argv[1])) {
+    std::cerr << "Unable to find plan file: " << argv[1] << std::endl;
+    return 2;
+  }
+
   return 0;
 }
 

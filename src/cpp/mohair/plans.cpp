@@ -133,6 +133,8 @@ namespace mohair {
         return reference_rels[rel_ndx];
       }
     }
+
+    return nullptr;
   }
 
 
