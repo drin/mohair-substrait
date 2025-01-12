@@ -32,6 +32,7 @@
 
 // >> Memory and data type support
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -48,6 +49,7 @@
 namespace mohair {
 
   using std::unique_ptr;
+  using std::optional;
   using std::string;
   using std::stringstream;
 
