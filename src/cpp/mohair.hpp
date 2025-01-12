@@ -36,6 +36,13 @@
 
 
 // ------------------------------
+// Macros
+
+# define MOHAIR_ASSERT(assert_msg, assert_expr)  { \
+    assert(assert_expr && assert_msg);             \
+  }
+
+// ------------------------------
 // Aliases
 
 namespace mohair {
@@ -75,7 +82,7 @@ namespace mohair {
 namespace mohair {
 
   // >> Static variables
-  static uint32_t UUIDGenerator { 1 };
+  static uint32_t UUIDGenerator { 0 };
 
 } // namespace: mohair
 
@@ -123,6 +130,9 @@ namespace mohair {
 
   //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
   uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel);
+
+  //! Create a SuperPlan reference to the given PlanRel
+  unique_ptr<SuperPlan> CreateSuperPlanRel(PlanRel* anchor_rel);
 
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
   unique_ptr<Rel> CopyRel(Rel* src_rel);
