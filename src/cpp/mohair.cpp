@@ -102,7 +102,12 @@ namespace mohair {
         break;
       }
 
-      // Leaf operators (no-op)
+      // Leaf operators
+      case Rel::RelTypeCase::kReference: {
+        dst_rel->set_allocated_reference(src_rel->release_reference());
+        break;
+      }
+
       case Rel::RelTypeCase::kRead: {
         dst_rel->set_allocated_read(src_rel->release_read());
         break;
@@ -185,6 +190,21 @@ namespace mohair {
     return anchor_id;
   }
 
+  //! Create a SuperPlan reference to the given PlanRel
+  unique_ptr<SuperPlan> CreateSuperPlanRel(PlanRel* anchor_rel) {
+    Rel* merge_rel;
+    if (anchor_rel->has_rel()) { merge_rel = anchor_rel->mutable_rel();                   }
+    else                       { merge_rel = anchor_rel->mutable_root()->mutable_input(); }
+
+    unique_ptr<Rel>       rel_copy      { CopyRel(merge_rel) };
+    unique_ptr<SuperPlan> superplan_msg { std::make_unique<SuperPlan>() };
+
+    superplan_msg->set_allocated_merge_rel(rel_copy.release());
+    superplan_msg->set_mergerel_reference(anchor_rel->subtree_anchor());
+
+    return superplan_msg;
+  }
+
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
   unique_ptr<Rel> CopyRel(Rel* src_rel) {
     unique_ptr<Rel> rel_copy { std::make_unique<Rel>(*src_rel) };
@@ -242,6 +262,7 @@ namespace mohair {
       }
 
       // Leaf operators (no-op)
+      case Rel::RelTypeCase::kReference:
       case Rel::RelTypeCase::kRead:
       case Rel::RelTypeCase::kExtensionLeaf: {
         break;
@@ -314,6 +335,7 @@ namespace mohair {
       }
 
       // Leaf operators (no-op)
+      case Rel::RelTypeCase::kReference:
       case Rel::RelTypeCase::kRead:
       case Rel::RelTypeCase::kExtensionLeaf: {
         break;
@@ -374,6 +396,7 @@ namespace mohair {
         };
 
       // Leaf operators (no-op)
+      case Rel::RelTypeCase::kReference:
       case Rel::RelTypeCase::kRead:
       case Rel::RelTypeCase::kExtensionLeaf:
         return vector<Rel*>(0);
