@@ -170,6 +170,7 @@ namespace mohair {
    * anchor is a leaf in the super-plan and a parent of each sub-plan root.
    */
   struct PlanSplit {
+    SystemPlan*       sys_plan;
     Plan*             super_plan;
     PipelineStage*    stage;
     size_t            stage_ndx;
@@ -179,27 +180,30 @@ namespace mohair {
     //! Constructs a plan split from the given pipeline stage.
     //  If the stage has many pipelines, the anchor is the stage's sink.
     //  Otherwise, the anchor is the sink's downstream operator (where output flows to).
-    PlanSplit(Plan* plan, PipelineStage* split_stage, size_t ndx)
-      : super_plan(plan), stage(split_stage), stage_ndx(ndx) {
-      // Stage sink is a join, so each pipeline will be a subplan
-      if (split_stage->width > 1) {
-        superplan_mergerel = split_stage->sink;
-
-        subplan_rootrels.reserve(split_stage->width);
-        for (size_t pipe_ndx = 0; pipe_ndx < split_stage->width; ++pipe_ndx) {
-          const auto& stage_pipe = *(split_stage->pipelines[pipe_ndx]);
-          const auto& pipe_ops   = stage_pipe.pipe_ops;
-
-          if (not pipe_ops.empty()) { subplan_rootrels.push_back(pipe_ops[0]);       }
-          else                      { subplan_rootrels.push_back(stage_pipe.source); }
-        }
+    PlanSplit(SystemPlan* plan, Plan* superplan, PipelineStage* split_stage, size_t ndx)
+      : sys_plan(plan), super_plan(superplan), stage(split_stage), stage_ndx(ndx) {
+      // The whole plan will be propagated
+      if (split_stage == nullptr) {
+        superplan_mergerel = sys_plan->plan_root.get();
       }
 
-      // Stage sink is not a join, so we only have a single subplan (rooted at the sink)
+      // We propagate subplans
       else {
-        superplan_mergerel = split_stage->pipelines[0]->next;
-        subplan_rootrels.reserve(1);
-        subplan_rootrels.push_back(split_stage->sink);
+        // Assume stage sink is the merge relation, unless it's unary
+        // IDEA: if sink is join, then it reduces memory pressure to make it the merge relation
+        //       otherwise, it reduces data movement across the network to push it down
+        superplan_mergerel = split_stage->sink;
+        if (split_stage->width == 1) {
+          superplan_mergerel = split_stage->pipelines[0]->next;
+        }
+
+        size_t count_inputs = superplan_mergerel->GetOpArity();
+        subplan_rootrels.reserve(count_inputs);
+        for (size_t input_ndx = 0; input_ndx < count_inputs; ++input_ndx) {
+          subplan_rootrels.push_back(
+            superplan_mergerel->GetOpInputs()[input_ndx].get()
+          );
+        }
       }
     }
 
@@ -207,9 +211,10 @@ namespace mohair {
     static unique_ptr<PlanSplit>
     FindSplit(SystemPlan* sys_plan, DecomposeAlg method = DecomposeAlg::LongPipelineLeaf);
 
-    vector<unique_ptr<PlanMessage>> ExtractSubplans();
-
+    bool CanSplit();
     bool MergeSubplan(PlanMessage* subplan_msg);
+
+    vector<unique_ptr<PlanMessage>> ExtractSubplans();
   };
 
 } // namespace: mohair
