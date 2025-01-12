@@ -52,11 +52,15 @@ namespace mohair {
   using skyproto::mohair::SubPlan;
 
   // Operator level
+  using skyproto::mohair::QueryRel;
   using skyproto::mohair::ErrRel;
 
   using skyproto::mohair::SkyRel;
   using skyproto::mohair::SkyPartitionRel;
   using skyproto::mohair::SkySliceRel;
+
+  using skyproto::mohair::SkyResultRel;
+  using skyproto::mohair::SkyLakeRel;
 
   // Topology level
   using skyproto::mohair::ServiceConfig;
