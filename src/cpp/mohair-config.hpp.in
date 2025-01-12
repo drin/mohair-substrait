@@ -20,6 +20,9 @@
 // Dependencies
 #pragma once
 
+#pragma GCC diagnostic ignored "-Wgcc-compat"
+#undef ABSL_INTERNAL_ENABLE_FORMAT_CHECKER
+
 
 // ------------------------------
 // Macros

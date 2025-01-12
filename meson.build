@@ -36,7 +36,7 @@ cpp_tooldir = cpp_srcdir / 'toolbox'
 # Build targets
 
 # >> Configuration data and header for project
-mohair_cfgfile = configure_file(
+configure_file(
    input        : cpp_srcdir / 'mohair-config.hpp.in'
   ,output       : 'mohair-config.hpp'
   ,configuration: mohair_cfgdata
@@ -75,7 +75,7 @@ readsubstrait_bin = executable('read-substrait'
 # >> Interface to cooperative query decomposition for substrait files
 decompose_sources = [ cpp_tooldir  / 'decompose-substrait.cpp' ]
 
-readsubstrait_bin = executable('decompose-substrait'
+executable('decompose-substrait'
   ,decompose_sources
   ,dependencies : [ libmohair_dep ]
   ,install      : true
