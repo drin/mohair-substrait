@@ -62,14 +62,6 @@ namespace mohair {
   //! Templated translation function for leaf relational operators (no inputs).
   //  `SourceRelMsg` is the specific substrait message,
   //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename SourceRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromSourceOpMsg(Rel *rel_msg, SourceRelMsg *rel_op, string tname) {
-    return std::make_unique<MohairRel>(rel_op, rel_msg, tname);
-  }
-
-  //! Templated translation function for leaf relational operators (no inputs).
-  //  `SourceRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
   template <typename ExtensionMsgType, typename MohairRel>
   unique_ptr<MohairOp> FromExtensionLeafMsg(Rel *rel_msg, ExtensionLeafRel *rel_op) {
     auto extrel_op = std::make_unique<ExtensionMsgType>();
@@ -168,6 +160,7 @@ namespace mohair {
       }
 
       // Leaf operators (no-op)
+      case Rel::RelTypeCase::kReference:
       case Rel::RelTypeCase::kRead:
       case Rel::RelTypeCase::kExtensionLeaf: {
         throw std::logic_error("Unexpected leaf operator as anchor Rel");
@@ -276,7 +269,8 @@ namespace mohair {
 
   // >> ToString implementations for each op type
   // leaf ops
-  const string OpErr::ToString() { return u8"Err()"; }
+  const string OpErr::ToString()       { return u8"Err()"; }
+  const string OpReference::ToString() { return u8"Ref(" + std::to_string(rel_op->subtree_reference()) + ")"; }
 
   const string OpRead::ToString()          { return u8"Read("             + table_name + u8")"; }
   const string OpSkyRead::ToString()       { return u8"SkyRead("          + table_name + u8")"; }
@@ -387,10 +381,16 @@ namespace mohair {
       }
 
       // Leaf operators
+      case Rel::RelTypeCase::kReference: {
+        ReferenceRel* rel_op = rel_msg->mutable_reference();
+
+        return std::make_unique<OpReference>(rel_op, rel_msg);
+      }
+
       case Rel::RelTypeCase::kRead: {
         ReadRel* rel_op = rel_msg->mutable_read();
 
-        return FromSourceOpMsg<ReadRel, OpRead>(rel_msg, rel_op, SourceNameFromReadRel(rel_op));
+        return std::make_unique<OpRead>(rel_op, rel_msg, SourceNameFromReadRel(rel_op));
       }
 
       case Rel::RelTypeCase::kExtensionLeaf: {
