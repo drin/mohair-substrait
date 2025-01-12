@@ -55,10 +55,19 @@ namespace mohair {
     const string ToString() override;
   };
 
+  struct OpReference : MohairOp {
+    ReferenceRel* rel_op;
+
+    OpReference(ReferenceRel* op, Rel* rel)
+      : MohairOp(rel), rel_op(op) {}
+
+    const string ToString() override;
+  };
+
   struct OpRead : SourceOp {
     ReadRel* rel_op;
 
-    OpRead(ReadRel* op, Rel* rel, string& tname)
+    OpRead(ReadRel* op, Rel* rel, string tname)
       : SourceOp(rel, tname), rel_op(op) {}
 
     const string ToString() override;
