@@ -134,6 +134,9 @@ namespace mohair {
   //! Create a SuperPlan reference to the given PlanRel
   unique_ptr<SuperPlan> CreateSuperPlanRel(PlanRel* anchor_rel);
 
+  //! Create a SkyResultRel that describes how to read a remote materialized result
+  unique_ptr<SkyResultRel> CreateResultRel(PlanRel* view_plan);
+
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
   unique_ptr<Rel> CopyRel(Rel* src_rel);
 

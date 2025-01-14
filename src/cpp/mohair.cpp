@@ -52,6 +52,36 @@ namespace mohair {
     return status.ok();
   }
 
+
+  //! Helper function to traverse a plan and gather its final schema
+  void ResolveResultSchema(Rel* view_op) {
+    switch (view_op->rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject: { break; }
+      case Rel::RelTypeCase::kFilter: { break; }
+      case Rel::RelTypeCase::kFetch: { break; }
+      case Rel::RelTypeCase::kSort: { break; }
+      case Rel::RelTypeCase::kAggregate: { break; }
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin: { break; }
+      case Rel::RelTypeCase::kCross: { break; }
+      case Rel::RelTypeCase::kHashJoin: { break; }
+      case Rel::RelTypeCase::kMergeJoin: { break; }
+
+      // Leaf operators
+      case Rel::RelTypeCase::kReference: { break; }
+
+      case Rel::RelTypeCase::kRead: { break; }
+      case Rel::RelTypeCase::kExtensionLeaf: { break; }
+
+      // Unimplemented operators
+      default: {
+        throw std::runtime_error("Cannot inline anchor rel: unimplemented type");
+      }
+    }
+  }
+
   //! Move a RelOp (e.g. ProjectRel) from the src Rel to the dest Rel
   void MoveRelOp(Rel* src_rel, Rel* dst_rel) {
     switch (src_rel->rel_type_case()) {
@@ -203,6 +233,18 @@ namespace mohair {
     superplan_msg->set_mergerel_reference(anchor_rel->subtree_anchor());
 
     return superplan_msg;
+  }
+
+  //! Create a SkyResultRel that describes how to read a remote materialized result
+  unique_ptr<SkyResultRel> CreateResultRel(PlanRel* view_plan) {
+    unique_ptr<SkyResultRel> result_rel { std::make_unique<SkyResultRel>() };
+
+    // TODO: to determine schema, we need to walk the plan; port code from mohair/duckdb
+    //       to parse the function extension yamls
+    // context_id and service_location can be populated by caller
+    // We should set aliases in RelCommon if they're set in view_plan
+
+    return result_rel;
   }
 
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
