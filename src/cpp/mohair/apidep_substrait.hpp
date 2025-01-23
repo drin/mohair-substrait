@@ -55,6 +55,7 @@ namespace mohair {
 
   // Relation level
   using skyproto::substrait::Rel;
+  using skyproto::substrait::RelCommon;
   using skyproto::substrait::RelRoot;
   using skyproto::substrait::extensions::AdvancedExtension;
 
@@ -80,6 +81,9 @@ namespace mohair {
 
   // N-ary types (streaming)
   using skyproto::substrait::SetRel;
+
+  using SubstraitSchema = skyproto::substrait::NamedStruct;
+  using SubstraitType   = skyproto::substrait::Type;
 
 } // namespace: mohair
 

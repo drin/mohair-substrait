@@ -457,7 +457,7 @@ namespace mohair {
       auto plan_copy = std::make_unique<Plan>();
       plan_copy->CopyFrom(*super_plan);
 
-      subplan_msgs.push_back(SubstraitMessage::FromPlan(std::move(plan_copy)));
+      subplan_msgs.push_back(PlanMessage::FromPlan(std::move(plan_copy)));
     }
 
     // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
@@ -589,7 +589,7 @@ namespace mohair {
   //! Constructs a `SystemPlan` for the `PlanMessage` deserialized from `serialized_msg`.
   //  This is an interface to creating a graph (query plan) of mohair operators.
   unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg) {
-    return SystemPlanFrom(SubstraitMessage::FromString(serialized_msg));
+    return SystemPlanFrom(PlanMessage::FromString(serialized_msg));
   }
 
 } // namespace: mohair

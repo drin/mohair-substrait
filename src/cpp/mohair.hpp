@@ -169,18 +169,6 @@ namespace mohair {
       : payload(std::move(msg)), root_relndx(root_relndx) {
       this->root_relation = this->payload->mutable_relations(root_relndx);
     }
-  };
-
-
-  //! Derived class of `PlanMessage` that uses substrait
-  struct SubstraitMessage : PlanMessage {
-
-    // destructors and constructors
-    virtual ~SubstraitMessage() = default;
-
-    SubstraitMessage(unique_ptr<Plan>&& msg): PlanMessage(std::move(msg)) {}
-    SubstraitMessage(unique_ptr<Plan>&& msg, int root_relndx)
-      : PlanMessage(std::move(msg), root_relndx) {}
 
     // methods
     virtual string Serialize();
