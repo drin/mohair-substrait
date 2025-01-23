@@ -566,8 +566,8 @@ namespace mohair {
 
 namespace mohair {
 
-  // >> Methods for SubstraitMessage
-  string SubstraitMessage::Serialize() {
+  // >> Methods for PlanMessage
+  string PlanMessage::Serialize() {
     string msg_serialized;
 
     if (not this->payload->SerializeToString(&msg_serialized)) {
@@ -577,7 +577,7 @@ namespace mohair {
     return msg_serialized;
   }
 
-  bool SubstraitMessage::SerializeToFile(const char *out_fpath) {
+  bool PlanMessage::SerializeToFile(const char *out_fpath) {
     auto file_stream = OutputStreamForFile(out_fpath);
     if (!file_stream) {
       std::cerr << "Failed to open IO stream for serialization" << std::endl;
@@ -592,28 +592,28 @@ namespace mohair {
     return true;
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromPlan(unique_ptr<Plan>&& plan) {
+  unique_ptr<PlanMessage> PlanMessage::FromPlan(unique_ptr<Plan>&& plan) {
     int root_relndx { FindPlanRoot(*plan) };
 
-    return std::make_unique<SubstraitMessage>(std::move(plan), root_relndx);
+    return std::make_unique<PlanMessage>(std::move(plan), root_relndx);
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromString(const string& plan_str) {
+  unique_ptr<PlanMessage> PlanMessage::FromString(const string& plan_str) {
     unique_ptr<Plan> substrait_plan { SubstraitPlanFromString(plan_str) };
     int              root_relndx    { FindPlanRoot(*substrait_plan)     };
 
-    return std::make_unique<SubstraitMessage>(std::move(substrait_plan), root_relndx);
+    return std::make_unique<PlanMessage>(std::move(substrait_plan), root_relndx);
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromFile(const char* plan_fpath) {
+  unique_ptr<PlanMessage> PlanMessage::FromFile(const char* plan_fpath) {
     unique_ptr<Plan> substrait_plan { SubstraitPlanFromFile(plan_fpath) };
     int              root_relndx    { FindPlanRoot(*substrait_plan)     };
 
-    return std::make_unique<SubstraitMessage>(std::move(substrait_plan), root_relndx);
+    return std::make_unique<PlanMessage>(std::move(substrait_plan), root_relndx);
   }
 
-  unique_ptr<PlanMessage> SubstraitMessage::FromFile(string plan_fpath) {
-    return SubstraitMessage::FromFile(plan_fpath.data());
+  unique_ptr<PlanMessage> PlanMessage::FromFile(string plan_fpath) {
+    return PlanMessage::FromFile(plan_fpath.data());
   }
 
 } // namespace: mohair

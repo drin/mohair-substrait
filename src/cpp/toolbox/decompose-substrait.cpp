@@ -35,7 +35,6 @@ using std::string;
 using std::vector;
 
 using mohair::PlanMessage;
-using mohair::SubstraitMessage;
 using mohair::SystemPlan;
 using mohair::PipelineStage;
 using mohair::Plan;
@@ -54,8 +53,6 @@ constexpr int SUCCESS = 0;
 constexpr int ERROR_INVALID_ARGS = 1;
 constexpr int ERROR_INVALID_PLAN = 2;
 constexpr int ERROR_FILE_READ    = 3;
-constexpr int ERROR_PLAN_READ    = 4;
-constexpr int ERROR_PLAN_SPLIT   = 5;
 constexpr int ERROR_PLAN_PROCESS = 6;
 
 // ------------------------------
@@ -291,7 +288,7 @@ ProcessPlanAsService(const string& query_name, unique_ptr<PlanMessage> plan_msg,
       return nullptr;
     }
 
-    unique_ptr<PlanMessage> pushback_msg = SubstraitMessage::FromPlan(
+    unique_ptr<PlanMessage> pushback_msg = PlanMessage::FromPlan(
       std::move(received_pushback)
     );
 
@@ -330,7 +327,7 @@ int main(int argc, char **argv) {
   string substrait_fname { fs::path(substrait_fpath).stem() };
 
   // Read the example substrait from a file
-  unique_ptr<PlanMessage> substrait_msg { SubstraitMessage::FromFile(substrait_fpath) };
+  unique_ptr<PlanMessage> substrait_msg { PlanMessage::FromFile(substrait_fpath) };
   if (substrait_msg->payload == nullptr) {
     std::cerr << "Failed to read substrait plan from file" << std::endl;
     return ERROR_FILE_READ;

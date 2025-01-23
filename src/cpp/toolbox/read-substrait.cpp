@@ -57,7 +57,7 @@ struct ToolInterface {
       return 1;
     }
 
-    unique_ptr<PlanMessage> plan_msg = mohair::SubstraitMessage::FromFile(
+    unique_ptr<PlanMessage> plan_msg = mohair::PlanMessage::FromFile(
       plan_fpath.string()
     );
 
