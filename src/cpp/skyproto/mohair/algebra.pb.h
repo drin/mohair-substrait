@@ -1586,14 +1586,14 @@ class SkyLakeRel final : public ::google::protobuf::Message
   ::skyproto::mohair::ExecutionStats* _internal_mutable_execstats();
 
   public:
-  // uint32 context_id = 1 [json_name = "contextId"];
+  // uint64 context_id = 1 [json_name = "contextId"];
   void clear_context_id() ;
-  ::uint32_t context_id() const;
-  void set_context_id(::uint32_t value);
+  ::uint64_t context_id() const;
+  void set_context_id(::uint64_t value);
 
   private:
-  ::uint32_t _internal_context_id() const;
-  void _internal_set_context_id(::uint32_t value);
+  ::uint64_t _internal_context_id() const;
+  void _internal_set_context_id(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:skyproto.mohair.SkyLakeRel)
@@ -1625,7 +1625,7 @@ class SkyLakeRel final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::mohair::ExecutionStats* execstats_;
-    ::uint32_t context_id_;
+    ::uint64_t context_id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1774,12 +1774,28 @@ class SkyResultRel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kResultNameFieldNumber = 1,
     kServiceLocationFieldNumber = 2,
     kCommonFieldNumber = 3,
     kSchemaFieldNumber = 4,
     kExecstatsFieldNumber = 5,
-    kContextIdFieldNumber = 1,
   };
+  // string result_name = 1 [json_name = "resultName"];
+  void clear_result_name() ;
+  const std::string& result_name() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_result_name(Arg_&& arg, Args_... args);
+  std::string* mutable_result_name();
+  PROTOBUF_NODISCARD std::string* release_result_name();
+  void set_allocated_result_name(std::string* value);
+
+  private:
+  const std::string& _internal_result_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_result_name(
+      const std::string& value);
+  std::string* _internal_mutable_result_name();
+
+  public:
   // string service_location = 2 [json_name = "serviceLocation"];
   void clear_service_location() ;
   const std::string& service_location() const;
@@ -1841,23 +1857,13 @@ class SkyResultRel final : public ::google::protobuf::Message
   ::skyproto::mohair::ExecutionStats* _internal_mutable_execstats();
 
   public:
-  // uint32 context_id = 1 [json_name = "contextId"];
-  void clear_context_id() ;
-  ::uint32_t context_id() const;
-  void set_context_id(::uint32_t value);
-
-  private:
-  ::uint32_t _internal_context_id() const;
-  void _internal_set_context_id(::uint32_t value);
-
-  public:
   // @@protoc_insertion_point(class_scope:skyproto.mohair.SkyResultRel)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       3, 5, 3,
-      53, 2>
+      64, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -1879,11 +1885,11 @@ class SkyResultRel final : public ::google::protobuf::Message
                           const SkyResultRel& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr result_name_;
     ::google::protobuf::internal::ArenaStringPtr service_location_;
     ::skyproto::substrait::RelCommon* common_;
     ::skyproto::substrait::NamedStruct* schema_;
     ::skyproto::mohair::ExecutionStats* execstats_;
-    ::uint32_t context_id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -3177,26 +3183,54 @@ inline void SkySliceRel::_internal_set_slice(::uint32_t value) {
 
 // SkyResultRel
 
-// uint32 context_id = 1 [json_name = "contextId"];
-inline void SkyResultRel::clear_context_id() {
+// string result_name = 1 [json_name = "resultName"];
+inline void SkyResultRel::clear_result_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.context_id_ = 0u;
+  _impl_.result_name_.ClearToEmpty();
 }
-inline ::uint32_t SkyResultRel::context_id() const {
-  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyResultRel.context_id)
-  return _internal_context_id();
+inline const std::string& SkyResultRel::result_name() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyResultRel.result_name)
+  return _internal_result_name();
 }
-inline void SkyResultRel::set_context_id(::uint32_t value) {
-  _internal_set_context_id(value);
-  // @@protoc_insertion_point(field_set:skyproto.mohair.SkyResultRel.context_id)
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SkyResultRel::set_result_name(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.result_name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.mohair.SkyResultRel.result_name)
 }
-inline ::uint32_t SkyResultRel::_internal_context_id() const {
+inline std::string* SkyResultRel::mutable_result_name() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_result_name();
+  // @@protoc_insertion_point(field_mutable:skyproto.mohair.SkyResultRel.result_name)
+  return _s;
+}
+inline const std::string& SkyResultRel::_internal_result_name() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.context_id_;
+  return _impl_.result_name_.Get();
 }
-inline void SkyResultRel::_internal_set_context_id(::uint32_t value) {
+inline void SkyResultRel::_internal_set_result_name(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.context_id_ = value;
+  _impl_.result_name_.Set(value, GetArena());
+}
+inline std::string* SkyResultRel::_internal_mutable_result_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.result_name_.Mutable( GetArena());
+}
+inline std::string* SkyResultRel::release_result_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.mohair.SkyResultRel.result_name)
+  return _impl_.result_name_.Release();
+}
+inline void SkyResultRel::set_allocated_result_name(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.result_name_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.result_name_.IsDefault()) {
+          _impl_.result_name_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.result_name)
 }
 
 // string service_location = 2 [json_name = "serviceLocation"];
@@ -3531,24 +3565,24 @@ inline void SkyResultRel::set_allocated_execstats(::skyproto::mohair::ExecutionS
 
 // SkyLakeRel
 
-// uint32 context_id = 1 [json_name = "contextId"];
+// uint64 context_id = 1 [json_name = "contextId"];
 inline void SkyLakeRel::clear_context_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.context_id_ = 0u;
+  _impl_.context_id_ = ::uint64_t{0u};
 }
-inline ::uint32_t SkyLakeRel::context_id() const {
+inline ::uint64_t SkyLakeRel::context_id() const {
   // @@protoc_insertion_point(field_get:skyproto.mohair.SkyLakeRel.context_id)
   return _internal_context_id();
 }
-inline void SkyLakeRel::set_context_id(::uint32_t value) {
+inline void SkyLakeRel::set_context_id(::uint64_t value) {
   _internal_set_context_id(value);
   // @@protoc_insertion_point(field_set:skyproto.mohair.SkyLakeRel.context_id)
 }
-inline ::uint32_t SkyLakeRel::_internal_context_id() const {
+inline ::uint64_t SkyLakeRel::_internal_context_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.context_id_;
 }
-inline void SkyLakeRel::_internal_set_context_id(::uint32_t value) {
+inline void SkyLakeRel::_internal_set_context_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.context_id_ = value;
 }
