@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,34 +26,27 @@
 // Library configuration
 #include "mohair-config.hpp"
 
-// API dependencies
-#include "mohair/apidep_standard.hpp"  // C++ standard library
-#include "mohair/apidep_substrait.hpp" // Substrait protocol types
+// Required dependencies
+#include "mohair/adapters/adapter_standard.hpp"  // C++ standard library
+#include "mohair/adapters/adapter_protobuf.hpp"  // Protobuf framework
 
-// Substrait extensions
+#include "mohair/adapters/helpers/helper_prototypes.hpp"
+
+// Mohair extensions (protobuf)
 #include "skyproto/mohair/algebra.pb.h"
 #include "skyproto/mohair/topology.pb.h"
 
-
-// ------------------------------
-// Macros
-
-# define MOHAIR_ASSERT(assert_msg, assert_expr)  { \
-    assert(assert_expr && assert_msg);             \
-  }
 
 // ------------------------------
 // Aliases
 
 namespace mohair {
 
-  // >> Global variables (library internal)
-  const string version       = MOHAIR_VERSION_STRING;
-  const string version_major = MOHAIR_VERSION_MAJOR;
-  const string version_minor = MOHAIR_VERSION_MINOR;
-  const string version_patch = MOHAIR_VERSION_PATCH;
-
   // >> Mohair types
+  // Topology level
+  using skyproto::mohair::ServiceConfig;
+  using skyproto::mohair::DeviceClass;
+
   // Plan level
   using skyproto::mohair::SuperPlan;
   using skyproto::mohair::SubPlan;
@@ -69,10 +62,6 @@ namespace mohair {
   using skyproto::mohair::SkyResultRel;
   using skyproto::mohair::SkyLakeRel;
 
-  // Topology level
-  using skyproto::mohair::ServiceConfig;
-  using skyproto::mohair::DeviceClass;
-
 } // namespace: mohair
 
 
@@ -82,7 +71,7 @@ namespace mohair {
 namespace mohair {
 
   // >> Static variables
-  static uint32_t UUIDGenerator { 0 };
+  static constexpr uint32_t AnchorIDGenerator { 0 };
 
 } // namespace: mohair
 
@@ -92,105 +81,128 @@ namespace mohair {
 
 namespace mohair {
 
-  // TODO: hide `Message` to be internal linkage only
-  // >> Wrapper functions for protobuf framework
-  bool StringifyPlan (const Message& msg     , string*  text_result);
-  bool StringifyRel  (const Message& msg     , string*  text_result);
-  bool SerializeJson (const string&  msg_json, Message* msg_result);
-  bool JsonifyMessage(const Message& msg     , string*  json_result);
-
-  // >> Reader functions
-  // helper functions
-  std::fstream InputStreamForFile(const char* in_fpath);
-  std::fstream OutputStreamForFile(const char* out_fpath);
-  bool         FileToString(const char* in_fpath, string& file_data);
-
-  // deserialization functions
-  unique_ptr<Plan> SubstraitPlanFromString(const string& plan_msg);
-  unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath);
-  unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath);
-
-
-  // >> Debug functions
-  void PrintSubstraitPlan(Plan *plan_msg);
-  void PrintSubstraitRel(Rel   *rel_msg);
-
-
-  // >> Helper functions
-  int FindPlanRoot(Plan& substrait_plan);
-
-  //! Move the operator from `src_rel` to `dst_rel`
-  void MoveRelOp(Rel* src_rel, Rel* dst_rel);
-
-  //! Move an operator into a PlanRel and create a ReferenceRel to it
-  PlanRel* MoveOpToReference(Plan* plan, Rel* op);
-
-  //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
-  uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel);
-
-  //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
-  uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel);
-
-  //! Create a SuperPlan reference to the given PlanRel
-  unique_ptr<SuperPlan> CreateSuperPlanRel(PlanRel* anchor_rel);
-
-  //! Create a SkyResultRel that describes how to read a remote materialized result
-  unique_ptr<SkyResultRel> CreateResultRel(PlanRel* view_plan);
-
-  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
-  unique_ptr<Rel> CopyRel(Rel* src_rel);
-
-  //! Create a MessageDifferencer for rel op (e.g. `ProjectRel`) that is non-recursive
-  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel);
-
-  //! Get vector of each input `Rel` to the given `Rel`
-  vector<Rel*> GetInputRels(Rel* output_rel);
+  //! Finds the root of the plan and returns it and its index
+  std::tuple<PlanRel*, int> FindPlanRoot(Plan& substrait_plan);
 
 } // namespace: mohair
 
 
 // ------------------------------
-// Classes and structs
+// Classes
 
 namespace mohair {
 
-  //! A base class representing a query plan sent as a message
-  struct PlanMessage {
-    // attributes
-    unique_ptr<Plan> payload;
-    int              root_relndx { -1 }; // initialized to -1 as a sentinel
-    PlanRel*         root_relation;
+  //! An adapter class for substrait plans
+  struct SubstraitPlan {
+    unique_ptr<Plan> plan;
+    PlanRel*         root_rel;
+    int              root_relndx;
 
-    // destructors and constructors
-    virtual ~PlanMessage() = default;
+    // >> Destructors and constructors
+    virtual ~SubstraitPlan() = default;
 
-    PlanMessage(unique_ptr<Plan>&& msg): payload(std::move(msg)) {}
-    PlanMessage(unique_ptr<Plan>&& msg, int root_relndx)
-      : payload(std::move(msg)), root_relndx(root_relndx) {
-      this->root_relation = this->payload->mutable_relations(root_relndx);
+    SubstraitPlan(unique_ptr<Plan>&& msg, int rel_ndx)
+      : plan(std::move(msg)), root_relndx(rel_ndx) {
+      this->root_rel = this->plan->mutable_relations(root_relndx);
+    }
+
+    // >> Methods
+    virtual void Print();
+    virtual bool ToString(string* out_str);
+
+    virtual bool SerializeToString(string* out_data);
+    virtual bool SerializeToString(string& out_data);
+
+    virtual bool SerializeToFile(const char* out_fpath);
+    virtual bool SerializeToFile(const string& out_fpath);
+
+    // >> Static methods
+    //! Constructs a SubstraitPlan from existing Plan
+    static unique_ptr<SubstraitPlan> FromPlan(unique_ptr<Plan>&& plan);
+
+    //! Constructs a SubstraitPlan from a serialized Plan
+    static unique_ptr<SubstraitPlan> FromMsg(const string& plan_str);
+
+    //! Constructs a SubstraitPlan from a file containing a serialized Plan
+    static unique_ptr<SubstraitPlan> FromFile(const char* plan_fpath);
+
+    //! Constructs a SubstraitPlan from a file containing a serialized Plan
+    static unique_ptr<SubstraitPlan> FromFile(const string& plan_fpath);
+
+  };
+
+  //! Forward type for a container holding pointers to an operator and its inputs
+  struct OpTreeItr;
+
+
+  //! Adapter for substrait operators for (hopefully) performant access
+  template <typename RelType>
+  struct RelOp : SubstraitOp {
+    Rel*                rel;
+    RelType*            rel_op;
+    unique_ptr<RelType> op_data;
+
+    virtual ~RelOp() = default;
+
+    RelOp(Rel* srel, RelType* sop)
+      : rel(srel), rel_op(sop) {}
+
+    RelOp(Rel* srel, unique_ptr<RelType>&& sop)
+      : rel(srel), op_data(std::move(sop)) { rel_op = op_data.get(); }
+
+    constexpr bool IsSink()   const override { return is_sink<RelType>::value;   }
+    constexpr bool IsOrigin() const override { return is_origin<RelType>::value; }
+
+    OpTreeItr       InputRels() override { return GetInputs(rel, rel_op);        }
+    unique_ptr<Rel> CopyRel()   override { return CopySubstraitRel(rel, rel_op); }
+
+    void         Print()    override { PrintMessage(*rel_op);      }
+    const string ViewStr()  override { return StringifyOp(rel_op); }
+
+    string ToString() override {
+      string op_str;
+      if (StringifyMessage(*rel_op, &op_str)) { return op_str; }
+
+      return string {};
+    }
+
+    bool operator==()(const RelOp& left, const RelOp& right) {
+      MessageDifferencer* differ = GetComparator(left.rel_op);
+      return differ->Compare(*(left.rel_op), *(right.rel_op));
     }
   };
 
+  using RelOpVariant = std::variant< RelOp<ProjectRel>
+                                    ,RelOp<FilterRel>
+                                    ,RelOp<FetchRel>
+                                    ,RelOp<SortRel>
+                                    ,RelOp<AggregateRel>
+                                    ,RelOp<JoinRel>
+                                    ,RelOp<CrossRel>
+                                    ,RelOp<HashJoinRel>
+                                    ,RelOp<MergeJoinRel>
+                                    ,RelOp<ReferenceRel>
+                                    ,RelOp<ExtensionLeafRel>
+                                    ,RelOp<ReadRel>>;
 
-  //! Derived class of `PlanMessage` that uses substrait
-  struct SubstraitMessage : PlanMessage {
+  //! A simple interface to an operator's inputs
+  struct OpTreeItr {
+    RelOpVariant         parent_op;
+    vector<RelOpVariant> input_ops;
 
-    // destructors and constructors
-    virtual ~SubstraitMessage() = default;
+    OpTreeItr(RelOpVariant rel, vector<RelOpVariant> inputs)
+      : parent_op(rel), input_ops(inputs) {}
 
-    SubstraitMessage(unique_ptr<Plan>&& msg): PlanMessage(std::move(msg)) {}
-    SubstraitMessage(unique_ptr<Plan>&& msg, int root_relndx)
-      : PlanMessage(std::move(msg), root_relndx) {}
+    size_t size() const { return input_ops.size(); }
 
-    // methods
-    virtual string Serialize();
-    virtual bool   SerializeToFile(const char *out_fpath);
+    RelOpVariant parent()               const { return parent_op;        }
+    RelOpVariant operator[](size_t ndx) const { return input_ops[ndx];   }
 
-    // static methods
-    static unique_ptr<PlanMessage> FromPlan(unique_ptr<Plan>&& plan);
-    static unique_ptr<PlanMessage> FromString(const string&    plan_str);
-    static unique_ptr<PlanMessage> FromFile(const char*        plan_fpath);
-    static unique_ptr<PlanMessage> FromFile(string             plan_fpath);
+    vector<RelOpVariant>::iterator begin() { return input_ops.begin(); }
+    vector<RelOpVariant>::iterator end()   { return input_ops.end();   }
+
+    vector<RelOpVariant>::const_iterator cbegin() const { return input_ops.begin(); }
+    vector<RelOpVariant>::const_iterator cend()   const { return input_ops.end();   }
   };
 
 } // namespace: mohair

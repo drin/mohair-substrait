@@ -21,6 +21,7 @@
 
 #include <stdexcept>
 
+#include "mohair.hpp"
 #include "mohair/operators.hpp"
 
 
@@ -28,155 +29,37 @@
 // Functions
 
 namespace mohair {
-  // >> Forward declarations
-  string SourceNameFromExtensionLeaf(SkyRel*          extrel_op);
-  string SourceNameFromExtensionLeaf(SkyPartitionRel* extrel_op);
-  string SourceNameFromExtensionLeaf(SkySliceRel*     extrel_op);
 
-  // >> Reusable function kernels (templated)
-  //! Templated translation function for unary relational operators.
-  //  `UnaryRelMsg` is the specific substrait message,
-  //  `MohairRel`   is the equivalent query operator in mohair 
-  template <typename UnaryRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromUnaryOpMsg(Rel *rel_msg, UnaryRelMsg *rel_op) {
-    // recurse on input relation
-    unique_ptr<MohairOp> op_input = MohairFrom(rel_op->mutable_input());
+  //! Use the rel type to determine if it is a sink rel
+  bool IsSinkRel(Rel* rel) {
+    switch (rel->rel_type_case()) {
+      case Rel::RelTypeCase::kSort:
+      case Rel::RelTypeCase::kAggregate:
+      case Rel::RelTypeCase::kJoin:
+      case Rel::RelTypeCase::kCross:
+      case Rel::RelTypeCase::kMergeJoin:
+      case Rel::RelTypeCase::kHashJoin:
+        return true;
 
-    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(op_input));
-  }
-
-  //! Templated translation function for binary relational operators.
-  //  `BinaryRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename BinaryRelMsg, typename MohairRel>
-  unique_ptr<MohairOp> FromBinaryOpMsg(Rel *rel_msg, BinaryRelMsg *rel_op) {
-    // recurse on input relations
-    unique_ptr<MohairOp> left_input  = MohairFrom(rel_op->mutable_left() );
-    unique_ptr<MohairOp> right_input = MohairFrom(rel_op->mutable_right());
-
-    return std::make_unique<MohairRel>(
-      rel_op, rel_msg, std::move(left_input), std::move(right_input)
-    );
-  }
-
-  //! Templated translation function for leaf relational operators (no inputs).
-  //  `SourceRelMsg` is the specific substrait message,
-  //  `MohairRel`    is the equivalent query operator in mohair 
-  template <typename ExtensionMsgType, typename MohairRel>
-  unique_ptr<MohairOp> FromExtensionLeafMsg(Rel *rel_msg, ExtensionLeafRel *rel_op) {
-    auto extrel_op = std::make_unique<ExtensionMsgType>();
-    rel_op->detail().UnpackTo(extrel_op.get());
-
-    string src_name = SourceNameFromExtensionLeaf(extrel_op.get());
-
-    return std::make_unique<MohairRel>(rel_op, rel_msg, std::move(extrel_op), src_name);
-  }
-
-  //! Templated helper function for moving a `Rel` to be a reference rel
-  template <typename RelType>
-  ReferenceRel* MoveToRefRel(int32_t refrel_pos, PlanRel* plan_refrel, RelType* rel_op) {
-    // UUIDGenerator is static
-    uint32_t anchor_id = ++UUIDGenerator;
-
-    // Move the ProjectRel into the PlanRel
-    unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
-    anchor_rel->set_allocated_project(rel_op);
-
-    plan_refrel->set_subtree_anchor(anchor_id);
-    plan_refrel->set_allocated_rel(anchor_rel.release());
-
-    // Replace the input to `substrait_rel` with a `ReferenceRel`
-    unique_ptr<ReferenceRel> ref_rel { std::make_unique<ReferenceRel>() };
-    ref_rel->set_subtree_ordinal(refrel_pos);
-    ref_rel->set_subtree_reference(anchor_id);
-
-    return ref_rel.release();
-  }
-
-
-  // >> Reusable function kernels (not templated)
-  //! Replace a ReferenceRel with its anchor Rel.
-  // NOTE: mergerel should still point to both parts that need to be rejoined
-  void InlineRefRel(PlanMessage* plan_msg, MohairOp* mergerel) {
-    Rel*          ref_rel    = mergerel->substrait_rel;
-    ReferenceRel* ref_op     = ref_rel->release_reference();
-    int32_t       refrel_pos = ref_op->subtree_ordinal();
-    uint32_t      anchor_id  = ref_op->subtree_reference();
-
-    auto     plan_relations = plan_msg->payload->mutable_relations();
-    PlanRel* anchor_planrel = plan_relations->Mutable(refrel_pos);
-    Rel*     anchor_rel     = anchor_planrel->mutable_rel();
-    if (anchor_id != anchor_planrel->subtree_anchor()) {
-      std::cerr << "Unable to inline anchor Rel; mismatching anchor ID" << std::endl;
-      return;
+      default:
+        return false;
     }
+  }
 
-    switch (ref_rel->rel_type_case()) {
-      // unary operators
-      case Rel::RelTypeCase::kProject: {
-        ref_rel->set_allocated_project(anchor_rel->release_project());
-        break;
-      }
-
-      case Rel::RelTypeCase::kFilter: {
-        ref_rel->set_allocated_filter(anchor_rel->release_filter());
-        break;
-      }
-
-      case Rel::RelTypeCase::kFetch: {
-        ref_rel->set_allocated_fetch(anchor_rel->release_fetch());
-        break;
-      }
-
-      case Rel::RelTypeCase::kSort: {
-        ref_rel->set_allocated_sort(anchor_rel->release_sort());
-        break;
-      }
-
-      case Rel::RelTypeCase::kAggregate: {
-        ref_rel->set_allocated_aggregate(anchor_rel->release_aggregate());
-        break;
-      }
-
-      // binary operators
-      case Rel::RelTypeCase::kJoin: {
-        ref_rel->set_allocated_join(anchor_rel->release_join());
-        break;
-      }
-
-      case Rel::RelTypeCase::kCross: {
-        ref_rel->set_allocated_cross(anchor_rel->release_cross());
-        break;
-      }
-
-      case Rel::RelTypeCase::kHashJoin: {
-        ref_rel->set_allocated_hash_join(anchor_rel->release_hash_join());
-        break;
-      }
-
-      case Rel::RelTypeCase::kMergeJoin: {
-        ref_rel->set_allocated_merge_join(anchor_rel->release_merge_join());
-        break;
-      }
-
-      // Leaf operators (no-op)
-      case Rel::RelTypeCase::kReference:
+  //! Use the rel type to determine if it is an origin rel
+  bool IsOriginRel(Rel* rel) {
+    switch (rel->rel_type_case()) {
       case Rel::RelTypeCase::kRead:
-      case Rel::RelTypeCase::kExtensionLeaf: {
-        throw std::logic_error("Unexpected leaf operator as anchor Rel");
-      }
+      case Rel::RelTypeCase::kExtensionLeaf:
+        return true;
 
-      // Unimplemented operators
-      default: {
-        throw std::runtime_error("Cannot inline anchor rel: unimplemented type");
-      }
+      default:
+        return false;
     }
-
-    plan_relations->erase(plan_relations->begin() + refrel_pos);
   }
 
   //! Extracts the source name from a `ReadRel` operator (e.g. table name)
-  string SourceNameFromReadRel(ReadRel *rel_op) {
+  string GetSourceName(ReadRel* rel_op) {
     switch (rel_op->read_type_case()) {
       case ReadRel::ReadTypeCase::kNamedTable: {
         auto& catalog_name = rel_op->named_table();
@@ -223,207 +106,307 @@ namespace mohair {
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtensionLeaf(SkyRel *extrel_op) {
+  string GetSourceName(SkyRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtensionLeaf(SkyPartitionRel *extrel_op) {
+  string GetSourceName(SkyPartitionRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtensionLeaf(SkySliceRel *extrel_op) {
+  string GetSourceName(SkySliceRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
-} // namespace: mohair
 
+  // >> Functions to help instantiate `RelOp`
 
-// ------------------------------
-// Operator class implementations
+  //! Instantiates a `RelOp` from the "details" of an `ExtensionLeafRel`
+  template <typename RelType>
+  RelOp<RelType> DispatchToCustomRel(Rel* rel, ExtensionLeafRel* rel_op) {
+    if (not rel_op->has_extension()) { return RelOp<ExtensionLeafRel>(rel, nullptr); }
 
-namespace mohair {
+    if (ext_detailt.Is<SkyRel>()) {
+      unique_ptr<SkyRel> rel_ext;
+      rel_op->detail().UnpackTo(rel_ext.get());
 
-  // >> Implementations for the base class
-  const string MohairOp::ToString() { return "MohairOp";       }
-  const string MohairOp::ViewStr()  { return this->ToString(); }
-
-  bool   MohairOp::IsSink()     { return false; }
-  bool   MohairOp::IsOrigin()   { return false; }
-  size_t MohairOp::GetOpArity() { return 0;     }
-
-  unique_ptr<MohairOp>* MohairOp::GetOpInputs() { return nullptr; }
-
-  unique_ptr<Rel> MohairOp::CopySubstraitRel() {
-    return CopyRel(this->substrait_rel);
-  }
-
-  void MohairOp::MoveFromPlanRel(PlanMessage* plan_msg) {
-    MoveReferenceToOp(plan_msg->payload.get(), this->substrait_rel);
-  }
-
-  void MohairOp::MoveOpToRel(Rel* dst_rel) {
-    return MoveRelOp(this->substrait_rel, dst_rel);
-  }
-
-  // >> ToString implementations for each op type
-  // leaf ops
-  const string OpErr::ToString()       { return u8"Err()"; }
-  const string OpReference::ToString() { return u8"Ref(" + std::to_string(rel_op->subtree_reference()) + ")"; }
-
-  const string OpRead::ToString()          { return u8"Read("             + table_name + u8")"; }
-  const string OpSkyRead::ToString()       { return u8"SkyRead("          + table_name + u8")"; }
-  const string OpPartitionRead::ToString() { return u8"SkyPartitionRead(" + table_name + u8")"; }
-  const string OpSliceRead::ToString()     { return u8"SkySliceRead("     + table_name + u8")"; }
-
-  // streaming ops
-  const string OpProj::ToString()  { return u8"Π()";   }
-  const string OpSel::ToString()   { return u8"σ()";   }
-  const string OpLimit::ToString() { return u8"Lim()"; }
-
-  // sink ops
-  const string OpSort::ToString()      { return u8"Sort()"; }
-  const string OpAggr::ToString()      { return u8"Aggr()"; }
-
-  const string OpCrossJoin::ToString() { return u8"×()"; }
-  const string OpJoin::ToString()      { return u8"⋈()"; }
-  const string OpHashJoin::ToString()  { return u8"⋈→()"; }
-  const string OpMergeJoin::ToString() { return u8"⋈⊕()"; }
-
-  // >> Accessor methods for the number inputs into an operator
-  size_t OpProj::GetOpArity()  { return 1; }
-  size_t OpSel::GetOpArity()   { return 1; }
-  size_t OpLimit::GetOpArity() { return 1; }
-
-  size_t OpSort::GetOpArity()  { return 1; }
-  size_t OpAggr::GetOpArity()  { return 1; }
-
-  size_t OpJoin::GetOpArity()      { return 2; }
-  size_t OpCrossJoin::GetOpArity() { return 2; }
-  size_t OpHashJoin::GetOpArity()  { return 2; }
-  size_t OpMergeJoin::GetOpArity() { return 2; }
-
-  // >> Accessor methods for an operator's children (input operators)
-  unique_ptr<MohairOp>* OpProj::GetOpInputs()  { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpSel::GetOpInputs()   { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpLimit::GetOpInputs() { return op_inputs.data(); }
-
-  unique_ptr<MohairOp>* OpSort::GetOpInputs()  { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpAggr::GetOpInputs()  { return op_inputs.data(); }
-
-  unique_ptr<MohairOp>* OpJoin::GetOpInputs()      { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpCrossJoin::GetOpInputs() { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpHashJoin::GetOpInputs()  { return op_inputs.data(); }
-  unique_ptr<MohairOp>* OpMergeJoin::GetOpInputs() { return op_inputs.data(); }
-
-} // namespace: mohair
-
-
-// ------------------------------
-// Translation functions (Substrait <-> Mohair)
-
-namespace mohair {
-
-  // >> Translation to Substrait (Mohair -> Substrait)
-
-  unique_ptr<SuperPlan> SuperPlanFrom(MohairOp* mohair_op) {
-    unique_ptr<Rel>       rel_copy      { mohair_op->CopySubstraitRel() };
-    unique_ptr<SuperPlan> superplan_msg { std::make_unique<SuperPlan>() };
-    superplan_msg->set_allocated_merge_rel(rel_copy.release());
-
-    return superplan_msg;
-  }
-
-
-  // >> Translation to Mohair (Substrait -> Mohair)
-
-  //! Wraps substrait `Rel` messages in `MohairOp` instances
-  unique_ptr<MohairOp> MohairFrom(Rel *rel_msg) {
-    switch(rel_msg->rel_type_case()) {
-      // Unary streaming operators
-      case Rel::RelTypeCase::kProject: {
-        return FromUnaryOpMsg<ProjectRel, OpProj>(rel_msg, rel_msg->mutable_project());
-      }
-
-      case Rel::RelTypeCase::kFilter: {
-        return FromUnaryOpMsg<FilterRel, OpSel>(rel_msg, rel_msg->mutable_filter());
-      }
-
-      case Rel::RelTypeCase::kFetch: {
-        return FromUnaryOpMsg<FetchRel, OpLimit>(rel_msg, rel_msg->mutable_fetch());
-      }
-
-      // Unary sink operators
-      case Rel::RelTypeCase::kSort: {
-        return FromUnaryOpMsg<SortRel, OpSort>(rel_msg, rel_msg->mutable_sort());
-      }
-
-      case Rel::RelTypeCase::kAggregate: {
-        return FromUnaryOpMsg<AggregateRel, OpAggr>(rel_msg, rel_msg->mutable_aggregate());
-      }
-
-      // Binary sink operators
-      case Rel::RelTypeCase::kJoin: {
-        return FromBinaryOpMsg<JoinRel, OpJoin>(rel_msg, rel_msg->mutable_join());
-      }
-
-      case Rel::RelTypeCase::kCross: {
-        return FromBinaryOpMsg<CrossRel, OpCrossJoin>(rel_msg, rel_msg->mutable_cross());
-      }
-
-      case Rel::RelTypeCase::kHashJoin: {
-        return FromBinaryOpMsg<HashJoinRel, OpHashJoin>(rel_msg, rel_msg->mutable_hash_join());
-      }
-
-      case Rel::RelTypeCase::kMergeJoin: {
-        return FromBinaryOpMsg<MergeJoinRel, OpMergeJoin>(rel_msg, rel_msg->mutable_merge_join());
-      }
-
-      // Leaf operators
-      case Rel::RelTypeCase::kReference: {
-        ReferenceRel* rel_op = rel_msg->mutable_reference();
-
-        return std::make_unique<OpReference>(rel_op, rel_msg);
-      }
-
-      case Rel::RelTypeCase::kRead: {
-        ReadRel* rel_op = rel_msg->mutable_read();
-
-        return std::make_unique<OpRead>(rel_op, rel_msg, SourceNameFromReadRel(rel_op));
-      }
-
-      case Rel::RelTypeCase::kExtensionLeaf: {
-        ExtensionLeafRel* extleaf_rel = rel_msg->mutable_extension_leaf();
-
-        // ExtensionLeafRel must have `detail` attribute populated with a message
-        if (not extleaf_rel->has_detail()) {
-          return std::make_unique<OpErr>(rel_msg, "ExtensionLeafRel is missing data");
-        }
-
-        // Check for known extension types
-        if (extleaf_rel->detail().Is<SkyRel>()) {
-          return FromExtensionLeafMsg<SkyRel, OpSkyRead>(rel_msg, extleaf_rel);
-        }
-
-        else if (extleaf_rel->detail().Is<SkyPartitionRel>()) {
-          return FromExtensionLeafMsg<SkyPartitionRel, OpPartitionRead>(rel_msg, extleaf_rel);
-        }
-
-        else if (extleaf_rel->detail().Is<SkySliceRel>()) {
-          return FromExtensionLeafMsg<SkySliceRel, OpSliceRead>(rel_msg, extleaf_rel);
-        }
-
-        // Otherwise, fail
-        return std::make_unique<OpErr>(rel_msg, "Unknown message type in ExtensionLeafRel");
-      }
-
-      // Catch all error
-      default: {
-        return std::make_unique<OpErr>(rel_msg, "ParseError: operator not yet supported");
-      }
+      return RelOp<SkyRel>(rel, std::move(rel_ext));
     }
+
+    else if (ext_detailt.Is<SkySliceRel>()) {
+      unique_ptr<SkySliceRel> rel_ext;
+      rel_op->detail().UnpackTo(rel_ext.get());
+
+      return RelOp<SkySliceRel>(rel, std::move(rel_ext));
+    }
+
+    else if (ext_detailt.Is<SkyPartitionRel>()) {
+      unique_ptr<SkyPartitionRel> rel_ext;
+      rel_op->detail().UnpackTo(rel_ext.get());
+
+      return RelOp<SkyPartitionRel>(rel, std::move(rel_ext));
+    }
+
+    return RelOp<ExtensionLeafRel>(rel, nullptr);
+  }
+
+  //! Instantiates a `RelOp` based on the operator type of `Rel`
+  template <typename RelType>
+  bool RelOpForSubstraitRel(Rel* rel, RelOpVariant* out_relop) {
+    if (rel == nullptr) {
+      MohairLogMsg("Cannot handle dispatch for null operator");
+      return false;
+    }
+
+    switch (rel->rel_type_case()) {
+      case Rel::RelTypeCase::kProject:
+        *out_relop = RelOp(rel, rel->mutable_project());
+        break;
+
+      case Rel::RelTypeCase::kFilter:
+        *out_relop = RelOp(rel, rel->mutable_filter());
+        break;
+
+      case Rel::RelTypeCase::kFetch:
+        *out_relop = RelOp(rel, rel->mutable_fetch());
+        break;
+
+      case Rel::RelTypeCase::kSort:
+        *out_relop = RelOp(rel, rel->mutable_sort());
+        break;
+
+      case Rel::RelTypeCase::kAggregate:
+        *out_relop = RelOp(rel, rel->mutable_aggregate());
+        break;
+
+      case Rel::RelTypeCase::kJoin:
+        *out_relop = RelOp(rel, rel->mutable_join());
+        break;
+
+      case Rel::RelTypeCase::kCross:
+        *out_relop = RelOp(rel, rel->mutable_cross());
+        break;
+
+      case Rel::RelTypeCase::kHashJoin:
+        *out_relop = RelOp(rel, rel->mutable_hash_join());
+        break;
+
+      case Rel::RelTypeCase::kMergeJoin:
+        *out_relop = RelOp(rel, rel->mutable_merge_join());
+        break;
+
+      case Rel::RelTypeCase::kReference:
+        *out_relop = RelOp(rel, rel->mutable_reference());
+        break;
+
+      case Rel::RelTypeCase::kRead:
+        *out_relop = RelOp(rel, rel->mutable_read());
+        break;
+
+      case Rel::RelTypeCase::kExtensionLeaf:
+        *out_relop = DispatchToCustomRel(rel, rel->mutable_extension_leaf());
+        break;
+
+      default:
+        MohairLogMsg("Cannot handle dispatch for operator type: " << rel->rel_type_case());
+        return false;
+    }
+
+    return true;
+  }
+
+  //! Walks a substrait plan to construct easier access to each operator
+  OpTreeItr WalkSubstraitPlan(SubstraitPlan* plan) {
+    Rel* plan_root  = plan->root_rel->mutable_root()->mutable_input();
+    auto op_variant = RelOpForSubstraitRel(plan_root).value_or(
+  }
+
+}
+
+
+// ------------------------------
+// Implementations of specialized functions
+
+namespace mohair {
+
+  // >> Implementations for CopySubstraitRel
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, ProjectRel* rel_type) {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    ProjectRel&     proj_copy = *(rel_copy->mutable_project());
+
+    proj_copy.mutable_common()->CopyFrom(rel_type->common());
+    proj_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    proj_copy.mutable_expressions()->CopyFrom(rel_type->expressions());
+
+    return rel_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, FilterRel* rel_type) {
+    unique_ptr<Rel> rel_copy    { std::make_unique<Rel>() };
+    FilterRel&      filter_copy = *(rel_copy->mutable_filter());
+
+    filter_copy.mutable_common()->CopyFrom(rel_type->common());
+    filter_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    filter_copy.mutable_condition()->CopyFrom(rel_type->condition());
+
+    return filter_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, FetchRel* rel_type) {
+    unique_ptr<Rel> rel_copy   { std::make_unique<Rel>() };
+    FetchRel&       fetch_copy = *(rel_copy->mutable_fetch());
+
+    fetch_copy.mutable_common()->CopyFrom(rel_type->common());
+    fetch_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    if (rel_type->has_offset_expr()) {
+      fetch_copy.mutable_offset_expr()->CopyFrom(rel_type->offset_expr());
+    }
+    else { fetch_copy.set_offset(rel_type->offset()); }
+
+    if (rel_type->has_count_expr()) {
+      fetch_copy.mutable_count_expr()->CopyFrom(rel_type->count_expr());
+    }
+    else { fetch_copy.set_count(rel_type->count()); }
+
+    return fetch_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, SortRel* rel_type) {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    SortRel&        sort_copy = *(rel_copy->mutable_sort());
+
+    sort_copy.mutable_common()->CopyFrom(rel_type->common());
+    sort_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    sort_copy.mutable_sorts()->CopyFrom(rel_type->sorts());
+
+    return sort_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, AggregateRel* rel_type) {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    AggregateRel&   agg_copy = *(rel_copy->mutable_aggregate());
+
+    agg_copy.mutable_common()->CopyFrom(rel_type->common());
+    agg_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    agg_copy.mutable_groupings()->CopyFrom(rel_type->groupings());
+    agg_copy.mutable_measures()->CopyFrom(rel_type->measures());
+    agg_copy.mutable_grouping_expressions()->CopyFrom(rel_type->grouping_expressions());
+
+    return agg_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, JoinRel* rel_type) {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    JoinRel&        join_copy = *(rel_copy->mutable_join());
+
+    join_copy.mutable_common()->CopyFrom(rel_type->common());
+    join_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    join_copy.mutable_expression()->CopyFrom(rel_type->expression());
+    join_copy.mutable_post_join_filter()->CopyFrom(rel_type->post_join_filter());
+    join_copy.set_type(rel_type->type());
+
+    return join_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, CrossRel* rel_type) {
+    unique_ptr<Rel> rel_copy   { std::make_unique<Rel>() };
+    CrossRel&       cross_copy = *(rel_copy->mutable_cross());
+
+    cross_copy.mutable_common()->CopyFrom(rel_type->common());
+    cross_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    return cross_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, HashJoinRel* rel_type) {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    HashJoinRel&    hash_copy = *(rel_copy->mutable_hash_join());
+
+    hash_copy.mutable_common()->CopyFrom(rel_type->common());
+    hash_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    hash_copy.set_post_join_filter(rel_type->post_join_filter());
+    hash_copy.set_type(rel_type->type());
+
+    if (rel_type->has_left_keys()) {
+      hash_copy.mutable_left_keys()->CopyFrom(rel_type->left_keys());
+    }
+
+    if (rel_type->has_right_keys()) {
+      hash_copy.mutable_right_keys()->CopyFrom(rel_type->right_keys());
+    }
+
+    if (rel_type->has_keys()) { hash_copy.mutable_keys()->CopyFrom(rel_type->keys()); }
+
+
+    return hash_copy;
+  }
+
+  unique_ptr<Rel> CopySubstraitRel(Rel* src_rel, MergeJoinRel* rel_type) {
+    unique_ptr<Rel> rel_copy   { std::make_unique<Rel>() };
+    MergeJoinRel&   merge_copy = *(rel_copy->mutable_merge_join());
+
+    merge_copy.mutable_common()->CopyFrom(rel_type->common());
+    merge_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    merge_copy.set_post_join_filter(rel_type->post_join_filter());
+    merge_copy.set_type(rel_type->type());
+
+    if (rel_type->has_left_keys()) {
+      merge_copy.mutable_left_keys()->CopyFrom(rel_type->left_keys());
+    }
+
+    if (rel_type->has_right_keys()) {
+      merge_copy.mutable_right_keys()->CopyFrom(rel_type->right_keys());
+    }
+
+    if (rel_type->has_keys()) { merge_copy.mutable_keys()->CopyFrom(rel_type->keys()); }
+
+    return merge_copy;
+  }
+
+
+  // >> Implementations for StringifyOp
+  const string StringifyOp(ProjectRel*   rel_op) { return u8"Π()";    }
+  const string StringifyOp(FilterRel*    rel_op) { return u8"σ()";    }
+  const string StringifyOp(FetchRel*     rel_op) { return u8"Lim()";  }
+  const string StringifyOp(SortRel*      rel_op) { return u8"Sort()"; }
+  const string StringifyOp(AggregateRel* rel_op) { return u8"Aggr()"; }
+  const string StringifyOp(JoinRel*      rel_op) { return u8"⋈()";    }
+  const string StringifyOp(CrossJoinRel* rel_op) { return u8"×()";    }
+  const string StringifyOp(HashJoinRel*  rel_op) { return u8"⋈→()";   }
+  const string StringifyOp(MergeJoinRel* rel_op) { return u8"⋈⊕()";   }
+
+  const string StringifyOp(ExtensionLeafRel* rel_op) {
+    return u8"ExtensionLeaf()";
+  }
+
+  const string StringifyOp(ReferenceRel* rel_op) {
+    return u8"Ref(" + rel_op->subtree_reference() + ")";
+  }
+
+  const string StringifyOp(ReadRel* rel_op) {
+    return u8"Read(" + GetSourceName(rel_op) + u8")";
+  }
+
+  const string StringifyOp(SkyRel* rel_op) {
+    return u8"SkyRead(" + GetSourceName(rel_op) + u8")";
+  }
+
+  const string StringifyOp(SkyPartitionRel* rel_op) {
+    return u8"SkyPartitionRead(" + GetSourceName(rel_op) + u8")";
+  }
+
+  const string StringifyOp(SkySliceRel* rel_op) {
+    return u8"SkySliceRead(" + GetSourceName(rel_op) + u8")";
   }
 
 } // namespace: mohair
-

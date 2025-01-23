@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,9 +21,32 @@
 #pragma once
 
 // >> Standard headers
-#include <array>
 
+#include "mohair/apidep_substrait.hpp"
+#include "mohair/adapters/adapter_standard.hpp"
+
+#include "mohair/operator_traits.hpp"
+#include "mohair/op_specializations.hpp" // Specialized helpers for `RelOp`
 #include "mohair/plans.hpp"
+
+
+
+// ------------------------------
+// Functions
+
+namespace mohair {
+
+  // Functions for doing things directly on substrait types without `RelOp`
+  bool IsSinkRel(Rel::RelTypeCase   rel_type);
+  bool IsOriginRel(Rel::RelTypeCase rel_type);
+
+  string GetSourceName(ReadRel*          rel_op);
+  string GetSourceName(ExtensionLeafRel* rel_op);
+  string GetSourceName(SkyRel*           extrel_op);
+  string GetSourceName(SkyPartitionRel*  extrel_op);
+  string GetSourceName(SkySliceRel*      extrel_op);
+
+} // namespace: mohair
 
 
 // ------------------------------
@@ -31,207 +54,34 @@
 
 namespace mohair {
 
-  // >> Convenience aliases and types
-  template <size_t input_arity>
-  using InputArity = array<unique_ptr<MohairOp>, input_arity>;
+  // >> Structural helpers
 
-  using LeafInputType   = InputArity<0>;
-  using UnaryInputType  = InputArity<1>;
-  using BinaryInputType = InputArity<2>;
+  //    |> Move operators around the substrait plan
 
-  // >> Base classes
-  struct SinkOp : public MohairOp {
-    SinkOp(Rel* rel): MohairOp(rel) {}
+  //! Moves an operator in the plan from `src_rel` to `dst_rel`
+  void MoveRelOp(Rel* src_rel, Rel* dst_rel);
 
-    bool IsSink() override { return true; }
-  };
+  //! Promotes an operator to a PlanRel and creates a ReferenceRel that references it
+  PlanRel* MoveOpToReference(Plan* plan, Rel* op);
 
-  // >> Leaf operators
-  struct OpErr : MohairOp {
-    string err_msg;
+  //! Demotes a PlanRel to an operator by swapping it with its ReferenceRel
+  //  NOTE: this should only be done if it is only referenced by a single ReferenceRel
+  uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel);
 
-    OpErr(Rel *rel, const char *msg): MohairOp(rel), err_msg(msg) {}
 
-    const string ToString() override;
-  };
+  //    |> Create new operators
 
-  struct OpReference : MohairOp {
-    ReferenceRel* rel_op;
+  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
+  unique_ptr<Rel> CopyRel(Rel* src_rel);
 
-    OpReference(ReferenceRel* op, Rel* rel)
-      : MohairOp(rel), rel_op(op) {}
+  //! Creates a ReferenceRel that points to the given PlanRel.
+  uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel);
 
-    const string ToString() override;
-  };
 
-  struct OpRead : SourceOp {
-    ReadRel* rel_op;
+  //    |> Comparison mechanisms
 
-    OpRead(ReadRel* op, Rel* rel, string tname)
-      : SourceOp(rel, tname), rel_op(op) {}
-
-    const string ToString() override;
-  };
-
-  //! An operator that represents an extension operator holding a `mohair::SkyRel`.
-  struct OpSkyRead : SourceOp {
-    ExtensionLeafRel*  rel_op;
-    unique_ptr<SkyRel> sky_rel;
-
-    OpSkyRead( ExtensionLeafRel*    op
-              ,Rel*                 rel
-              ,unique_ptr<SkyRel>&& unpacked_rel
-              ,string&              tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
-
-    const string ToString() override;
-  };
-
-  struct OpPartitionRead : SourceOp {
-    ExtensionLeafRel*           rel_op;
-    unique_ptr<SkyPartitionRel> sky_rel;
-
-    OpPartitionRead( ExtensionLeafRel*             op
-                    ,Rel*                          rel
-                    ,unique_ptr<SkyPartitionRel>&& unpacked_rel
-                    ,string&                       tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
-
-    const string ToString() override;
-  };
-
-  struct OpSliceRead : SourceOp {
-    ExtensionLeafRel*       rel_op;
-    unique_ptr<SkySliceRel> sky_rel;
-
-    OpSliceRead( ExtensionLeafRel*         op
-                ,Rel*                      rel
-                ,unique_ptr<SkySliceRel>&& unpacked_rel
-                ,string&                   tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
-
-    const string ToString() override;
-  };
-
-  // >> Unary operators (stream-able)
-  struct OpProj : public MohairOp {
-    ProjectRel*    rel_op;
-    UnaryInputType op_inputs;
-
-    OpProj(ProjectRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpSel : public MohairOp {
-    FilterRel*     rel_op;
-    UnaryInputType op_inputs;
-
-    OpSel(FilterRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpLimit : public MohairOp {
-    FetchRel*      rel_op;
-    UnaryInputType op_inputs;
-
-    OpLimit(FetchRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  // >> Unary operators (sinks)
-  struct OpSort : public SinkOp {
-    SortRel*       rel_op;
-    UnaryInputType op_inputs;
-
-    OpSort(SortRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpAggr : public SinkOp {
-    AggregateRel*  rel_op;
-    UnaryInputType op_inputs;
-
-    OpAggr(AggregateRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  // >> Binary operators (sinks)
-  struct OpJoin : public SinkOp {
-    JoinRel*        rel_op;
-    BinaryInputType op_inputs;
-
-    OpJoin(JoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpCrossJoin : public SinkOp {
-    CrossRel*       rel_op;
-    BinaryInputType op_inputs;
-
-    OpCrossJoin(CrossRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpHashJoin : public SinkOp {
-    HashJoinRel*    rel_op;
-    BinaryInputType op_inputs;
-
-    OpHashJoin(HashJoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpMergeJoin : public SinkOp {
-    MergeJoinRel*   rel_op;
-    BinaryInputType op_inputs;
-
-    OpMergeJoin(MergeJoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
+  //! Create a MessageDifferencer for operators that does not recurse on inputs
+  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel);
 
 } // namespace: mohair
 

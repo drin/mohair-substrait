@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,18 +19,20 @@
 // ------------------------------
 // Overview
 //
-// Substrait is a specification of how to represent a query plan. This implementation uses
-// protobuf definitions provided by substrait.
+// An adapter layer for the Substrait specification, which attempts to
+// standardize how to represent query plans.
 
 
 // ------------------------------
 // Dependencies
 #pragma once
 
+// >> Configuration
+#include "mohair-config.hpp"
+
 // >> Protobuf framework deps
-#include "google/protobuf/text_format.h"
-#include "google/protobuf/util/json_util.h"
-#include "google/protobuf/util/message_differencer.h"
+#include "mohair/apidep_standard.hpp"
+#include "mohair/apidep_protobuf.hpp"
 
 // >> Generated protobuf deps for substrait
 #include "skyproto/substrait/plan.pb.h"
@@ -41,22 +43,26 @@
 // ------------------------------
 // Aliases
 
-// >> type aliases
 namespace mohair {
 
-  // >> Protobuf types
-  using google::protobuf::Message;
-  using google::protobuf::util::MessageDifferencer;
+  // >> Standard types
+  using FunctionAnchorMap = unordered_map<uint64_t, string>;
 
   // >> Substrait types
+  // Data types and Metadata
+  using SubstraitSchema = skyproto::substrait::NamedStruct;
+  using SubstraitType   = skyproto::substrait::Type;
+
+  using skyproto::substrait::extensions::AdvancedExtension;
+
   // Plan level
   using skyproto::substrait::Plan;
   using skyproto::substrait::PlanRel;
+  using skyproto::substrait::RelRoot;
 
   // Relation level
   using skyproto::substrait::Rel;
-  using skyproto::substrait::RelRoot;
-  using skyproto::substrait::extensions::AdvancedExtension;
+  using skyproto::substrait::RelCommon;
 
   // Leaf types
   using skyproto::substrait::ReadRel;

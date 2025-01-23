@@ -39,7 +39,7 @@ using std::unique_ptr;
 using std::string;
 
 // query processing types
-using mohair::PlanMessage;
+using mohair::SubstraitPlan;
 using mohair::SystemPlan;
 
 
@@ -57,16 +57,11 @@ struct ToolInterface {
       return 1;
     }
 
-    unique_ptr<PlanMessage> plan_msg = mohair::SubstraitMessage::FromFile(
-      plan_fpath.string()
-    );
+    auto plan = SubstraitPlan::FromFile(plan_fpath.string());
 
-    if (show_plan) {
-      mohair::PrintSubstraitPlan(plan_msg->payload.get());
-    }
-
+    if (show_plan) { plan->Print(); }
     else {
-      unique_ptr<SystemPlan> sys_plan = mohair::SystemPlanFrom(std::move(plan_msg));
+      unique_ptr<SystemPlan> sys_plan = mohair::SystemPlanFrom(std::move(plan));
       sys_plan->PrintPipelines();
     }
 

@@ -25,16 +25,23 @@
 
 
 // ------------------------------
-// Type Aliases
-
-//  >> Protobuf framework types
-using AnyMessage = google::protobuf::Any;
-
-
-// ------------------------------
 // Functions
 
 namespace mohair {
+
+  //! Finds the root of the plan and returns it and its index
+  std::tuple<PlanRel*, int> FindPlanRoot(Plan& substrait_plan) {
+    if (substrait_plan.relations().empty()) { return std::make_tuple(nullptr, 0); }
+
+    auto plan_rels = substrait_plan.mutable_relations();
+    auto rel_itr   = plan_rels->begin();
+    int  rel_ndx   = 0;
+    for (; rel_itr != plan_rels->end() and not rel_itr->has_root(); ++rel_itr) {
+      ++rel_ndx;
+    }
+
+    return std::make_tuple(&(*rel_itr), rel_ndx);
+  }
 
   // >> Convenience functions
   Rel* FindMatchingRefRel(Rel* anchor_rel, uint32_t subplan_anchorid) {
@@ -198,18 +205,27 @@ namespace mohair {
 
   // >> Implementations for `SystemPlan` methods
 
+  const RelRoot& SystemPlan::RootRelation() const {
+    return plan_msg->payload->relations(0).root();
+  }
+
   string SystemPlan::FnNameForAnchor(uint64_t anchor_id) {
-    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
+    const auto& anchor_entry = fn_anchors.find(anchor_id);
+    if (anchor_entry == fn_anchors.end()) {
       throw std::out_of_range(
         "Extension function anchor not registered: " + std::to_string(anchor_id)
       );
     }
 
-    return fn_anchors[anchor_id];
+    return anchor_entry->second;
   }
 
-  const RelRoot& SystemPlan::RootRelation() const {
-    return plan_msg->payload->relations(0).root();
+  bool SystemPlan::AddFnAnchor(uint64_t anchor_id, const string& fn_name) {
+    const auto& anchor_entry = fn_anchors.find(anchor_id);
+    if (anchor_entry == fn_anchors.end()) { return false; }
+
+    fn_anchors[anchor_id] = fn_name;
+    return true;
   }
 
   PipelineStage&
@@ -309,8 +325,16 @@ namespace mohair {
     for (auto &plan_ext : plan_msg->payload->extensions()) {
       if (!plan_ext.has_extension_function()) { continue; }
 
-      const auto anchor_id  = plan_ext.extension_function().function_anchor();
-      fn_anchors[anchor_id] = plan_ext.extension_function().name();
+      const auto    anchor_id = plan_ext.extension_function().function_anchor();
+      const string& fn_name   = plan_ext.extension_function().name();
+
+      const auto& fn_entry = fn_anchors.find(anchor_id);
+      if (fn_entry != fn_anchors.end()) {
+        std::cerr << "Already registered function [" << fn_name << "]" << std::endl;
+        continue;
+      }
+
+      fn_anchors[anchor_id] = fn_name;
     }
   }
 
@@ -362,8 +386,8 @@ namespace mohair {
   //! Returns true if this instance can split the given `SystemPlan`
   bool PlanSplit::CanSplit() { return this->stage != nullptr; }
 
-  //! Merge the given `PlanMessage` into this instance's superplan.
-  bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
+  //! Merge the given `SubstraitPlan` into this instance's superplan.
+  bool PlanSplit::MergeSubplan(SubstraitPlan* subplan_msg) {
     // >> Recover (and validate) links between the superplan and subplan
     // Search in subplan message for a `SuperPlan` reference
     SuperPlan refrel_superplan;
@@ -409,7 +433,10 @@ namespace mohair {
     }
 
     if (superplan_anchor == nullptr) {
-      std::cerr << "Failed to find reference [superplan -> subplan]" << std::endl;
+      std::cerr << "Failed to find reference [superplan -> subplan]" << std::endl
+                << "\tCould not find subplan anchor: " << std::to_string(subplan_anchorid)
+                << std::endl
+      ;
       PrintSubstraitPlan(subplan_msg->payload.get());
       return false;
     }
@@ -438,26 +465,26 @@ namespace mohair {
     }
 
     // Otherwise, we can move the anchor back (undo the reference)
-    std::cout << "Anchor has had all subplans merged" << std::endl;
+    MohairDebugMsg("Anchor has had all subplans merged");
     MoveReferenceToOp(super_plan, superplan_mergerel->substrait_rel);
 
     return true;
   }
 
   //! Create a list of substrait messages given this instance's split information.
-  vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
+  vector<unique_ptr<SubstraitPlan>> PlanSplit::ExtractSubplans() {
     // This happens when the plan could not be split and we missed it
     MOHAIR_ASSERT("Split failed but we kept going anyway", superplan_mergerel != nullptr);
 
     // Initialize subplan messages from the superplan (ensures we propagate all context)
-    vector<unique_ptr<PlanMessage>> subplan_msgs;
+    vector<unique_ptr<SubstraitPlan>> subplan_msgs;
     subplan_msgs.reserve(subplan_rootrels.size());
 
     for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
       auto plan_copy = std::make_unique<Plan>();
       plan_copy->CopyFrom(*super_plan);
 
-      subplan_msgs.push_back(SubstraitMessage::FromPlan(std::move(plan_copy)));
+      subplan_msgs.push_back(SubstraitPlan::FromPlan(std::move(plan_copy)));
     }
 
     // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
@@ -559,37 +586,33 @@ namespace mohair {
 
   // >> Translation functions
 
-  //! Constructs a `SystemPlan` that wraps the given `PlanMessage`.
-  //  This is an interface to creating a graph (query plan) of mohair operators.
-  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg) {
-    // walk the top level relations until we find the root (should only be one)
-    int root_ndx = FindPlanRoot(*(plan_msg->payload));
-
-    // set the plan root if not already set
-    if (plan_msg->root_relndx < 0) {
-      plan_msg->root_relndx   = root_ndx;
-      plan_msg->root_relation = plan_msg->payload->mutable_relations(root_ndx);
-    }
-
-    // translate from the top level `Rel` to mohair operators
-    Rel* substrait_rootrel { plan_msg->root_relation->mutable_root()->mutable_input() };
-    auto mohair_plan = std::make_unique<SystemPlan>(
-       std::move(plan_msg), MohairFrom(substrait_rootrel)
-    );
+  //! Constructs a `SystemPlan` from the already constructed substrait plan
+  unique_ptr<SystemPlan> SystemPlan::FromSubstrait(unique_ptr<SubstraitPlan>&& plan) {
+    Rel* root_op { plan->root_rel->mutable_root()->mutable_input() };
+    auto sys_plan = std::make_unique<SystemPlan>(std::move(plan), MohairFrom(root_op));
 
     // then, walk the function anchors so we can associate anchor IDs and function names
-    mohair_plan->RegisterExtensionFunctions();
+    sys_plan->RegisterExtensionFunctions();
 
     // then, walk the plan to build pipelines and discover characteristics
-    mohair_plan->BuildPipelines();
+    sys_plan->BuildPipelines();
 
-    return mohair_plan;
+    return sys_plan;
   }
 
-  //! Constructs a `SystemPlan` for the `PlanMessage` deserialized from `serialized_msg`.
+  //! Constructs a `SystemPlan` for the `SubstraitPlan` deserialized from `serialized_msg`.
   //  This is an interface to creating a graph (query plan) of mohair operators.
   unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg) {
-    return SystemPlanFrom(SubstraitMessage::FromString(serialized_msg));
+    return SystemPlanFrom(SubstraitPlan::FromString(serialized_msg));
   }
+
+} // namespace: mohair
+
+
+// ------------------------------
+// Class implementations
+
+namespace mohair {
+
 
 } // namespace: mohair

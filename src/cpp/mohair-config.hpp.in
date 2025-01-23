@@ -25,7 +25,7 @@
 
 
 // ------------------------------
-// Macros
+// Variables configured by build system
 
 #define MOHAIR_VERSION_STRING "@VERSION_STR@"
 #define MOHAIR_VERSION_MAJOR  "@VERSION_MAJOR@"
@@ -34,3 +34,38 @@
 
 #define MOHAIR_DEBUG @BUILD_IS_DEBUG@
 
+
+// ------------------------------
+// Macros
+
+# define MOHAIR_ASSERT(assert_msg, assert_expr)  { \
+    assert(assert_expr && assert_msg);             \
+  }
+
+#if MOHAIR_DEBUG
+  #define MohairDebugMsg(msg_str)              \
+          do {                                 \
+            std::cerr << msg_str << std::endl; \
+          } while (0);
+
+  #define MohairDebugBlock(statement)  \
+          do { statement; } while (0); \
+
+#else
+  #define MohairDebugMsg(msg_str)     {}
+  #define MohairDebugBlock(statement) {}
+
+#endif
+
+// ------------------------------
+// Variables
+
+namespace mohair {
+
+  // >> Global library variables
+  static constexpr const char* version       = MOHAIR_VERSION_STRING;
+  static constexpr const char* version_major = MOHAIR_VERSION_MAJOR;
+  static constexpr const char* version_minor = MOHAIR_VERSION_MINOR;
+  static constexpr const char* version_patch = MOHAIR_VERSION_PATCH;
+
+} // namespace: mohair

@@ -46,3 +46,22 @@ install_headers(protocol_headers
   ,subdir       : 'skytether' / 'skyproto'
   ,preserve_path: true
 )
+
+# ------------------------------
+# Archived
+
+# We don't need this implementation yet, but we'll keep it in pocket for the future.
+# extensions_dir = 'extensions'
+# extension_headers = files(
+#   extensions_dir / 'functions.hpp'
+# )
+# libmohair_headers += [extension_headers, protocol_headers]
+# libmohair_sources += files(
+#    extensions_dir     / 'functions.cpp'
+#   ,extensions_dir     / 'functions_generated.cpp'
+# )
+# 
+# install_headers(extension_headers
+#   ,subdir       : 'skytether' / 'skyproto'
+#   ,preserve_path: true
+# )
