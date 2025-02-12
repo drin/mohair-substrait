@@ -35,14 +35,17 @@ namespace mohair {
 
   // >> Query operators
   struct MohairOp {
-    Rel* substrait_rel;
+    Rel*                        substrait_rel;
+    unique_ptr<SubstraitSchema> schema;
 
     virtual ~MohairOp() = default;
 
-    MohairOp(Rel* rel): substrait_rel(rel) {}
+    MohairOp(Rel* rel, unique_ptr<SubstraitSchema>&& input_schema)
+      : substrait_rel(rel), schema(std::move(input_schema)) {}
 
     virtual const string ToString();
     virtual const string ViewStr();
+    virtual const string GetName();
 
     virtual bool   IsSink();
     virtual bool   IsOrigin();
@@ -53,20 +56,16 @@ namespace mohair {
 
     //! Return a simplified copy of the `substrait_rel` attribute.
     virtual unique_ptr<Rel> CopySubstraitRel();
-
-    //! Replace a ReferenceRel with its anchor Rel
-    virtual void MoveFromPlanRel(PlanMessage* plan_msg);
-
-    //! Move a Rel op (e.g. ProjectRel) from source `Rel` to destination `Rel`
-    virtual void MoveOpToRel(Rel* dst_rel);
   };
 
   struct SourceOp : public MohairOp {
     string table_name;
 
-    SourceOp(Rel* rel, string tname): MohairOp(rel), table_name(tname) {}
+    SourceOp(Rel* rel, string tname, unique_ptr<SubstraitSchema>&& input_schema)
+      : MohairOp(rel, std::move(input_schema)), table_name(tname) {}
 
-    bool IsOrigin() override { return true; }
+    const string GetName() override  { return table_name; }
+    bool         IsOrigin() override { return true;       }
   };
 
   // >> Operator Pipelines
@@ -227,7 +226,8 @@ namespace mohair {
 
   // >> Translation Functions
   //! Walks the operator tree starting at `rel_msg` and returns a `MohairOp` tree
-  unique_ptr<MohairOp>   MohairFrom(Rel *rel_msg);
+  unique_ptr<MohairOp> MohairFrom(Plan* plan_msg);
+  unique_ptr<MohairOp> MohairFrom(Plan* plan_msg, Rel* rel_msg);
 
   //! Constructs a `SystemPlan` from the given deserialized substrait `Plan`
   unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg);

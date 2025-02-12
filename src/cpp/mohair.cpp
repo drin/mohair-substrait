@@ -235,18 +235,6 @@ namespace mohair {
     return superplan_msg;
   }
 
-  //! Create a SkyResultRel that describes how to read a remote materialized result
-  unique_ptr<SkyResultRel> CreateResultRel(PlanRel* view_plan) {
-    unique_ptr<SkyResultRel> result_rel { std::make_unique<SkyResultRel>() };
-
-    // TODO: to determine schema, we need to walk the plan; port code from mohair/duckdb
-    //       to parse the function extension yamls
-    // context_id and service_location can be populated by caller
-    // We should set aliases in RelCommon if they're set in view_plan
-
-    return result_rel;
-  }
-
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
   unique_ptr<Rel> CopyRel(Rel* src_rel) {
     unique_ptr<Rel> rel_copy { std::make_unique<Rel>(*src_rel) };
@@ -529,8 +517,11 @@ namespace mohair {
     std::cout << msg_text << std::endl;
   }
 
-  void  PrintSubstraitRel(Rel  *rel_msg ) { PrintProtoMessage(*rel_msg);  }
-  void PrintSubstraitPlan(Plan *plan_msg) { PrintProtoMessage(*plan_msg); }
+  void  PrintSubstraitRel(const Rel&  rel_msg ) { PrintProtoMessage(rel_msg);  }
+  void PrintSubstraitPlan(const Plan& plan_msg) { PrintProtoMessage(plan_msg); }
+
+  void  PrintSubstraitRel(const Rel*  rel_msg ) { PrintProtoMessage(*rel_msg);  }
+  void PrintSubstraitPlan(const Plan* plan_msg) { PrintProtoMessage(*plan_msg); }
 
 
   // >> Helper functions
@@ -557,6 +548,60 @@ namespace mohair {
     return root_ndx;
   }
 
+  RelCommon* GetRelCommon(Rel* rel) {
+    switch (rel->rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject:       return rel->mutable_project()->mutable_common();
+      case Rel::RelTypeCase::kFilter:        return rel->mutable_filter()->mutable_common();
+      case Rel::RelTypeCase::kFetch:         return rel->mutable_fetch()->mutable_common();
+      case Rel::RelTypeCase::kSort:          return rel->mutable_sort()->mutable_common();
+      case Rel::RelTypeCase::kAggregate:     return rel->mutable_aggregate()->mutable_common();
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin:          return rel->mutable_join()->mutable_common();
+      case Rel::RelTypeCase::kCross:         return rel->mutable_cross()->mutable_common();
+      case Rel::RelTypeCase::kHashJoin:      return rel->mutable_hash_join()->mutable_common();
+      case Rel::RelTypeCase::kMergeJoin:     return rel->mutable_merge_join()->mutable_common();
+
+      // Leaf operators
+      case Rel::RelTypeCase::kRead:          return rel->mutable_read()->mutable_common();
+      case Rel::RelTypeCase::kExtensionLeaf: return rel->mutable_extension_leaf()->mutable_common();
+
+      // Unimplemented operators
+      case Rel::RelTypeCase::kReference:
+        throw std::runtime_error("ReferenceRel does not have a common field");
+
+      default: throw std::runtime_error("GetRelCommon not yet implemented for type");
+    }
+  }
+
+  const RelCommon& GetRelCommon(const Rel& rel) {
+    switch (rel.rel_type_case()) {
+      // unary operators
+      case Rel::RelTypeCase::kProject:       return rel.project().common();
+      case Rel::RelTypeCase::kFilter:        return rel.filter().common();
+      case Rel::RelTypeCase::kFetch:         return rel.fetch().common();
+      case Rel::RelTypeCase::kSort:          return rel.sort().common();
+      case Rel::RelTypeCase::kAggregate:     return rel.aggregate().common();
+
+      // binary operators
+      case Rel::RelTypeCase::kJoin:          return rel.join().common();
+      case Rel::RelTypeCase::kCross:         return rel.cross().common();
+      case Rel::RelTypeCase::kHashJoin:      return rel.hash_join().common();
+      case Rel::RelTypeCase::kMergeJoin:     return rel.merge_join().common();
+
+      // Leaf operators
+      case Rel::RelTypeCase::kRead:          return rel.read().common();
+      case Rel::RelTypeCase::kExtensionLeaf: return rel.extension_leaf().common();
+
+      // Unimplemented operators
+      case Rel::RelTypeCase::kReference:
+        throw std::runtime_error("ReferenceRel does not have a common field");
+
+      default: throw std::runtime_error("GetRelCommon not yet implemented for type");
+    }
+  }
+
 
 } // namespace: mohair
 
@@ -580,7 +625,9 @@ namespace mohair {
   bool PlanMessage::SerializeToFile(const char *out_fpath) {
     auto file_stream = OutputStreamForFile(out_fpath);
     if (!file_stream) {
-      std::cerr << "Failed to open IO stream for serialization" << std::endl;
+      std::cerr << "Failed to open IO stream for serialization:" << std::endl
+                << "\t" << out_fpath                             << std::endl
+      ;
       return false;
     }
 

@@ -34,4 +34,3 @@
 
 // Internal query processing
 #include "mohair/plans.hpp"
-#include "mohair/operators.hpp"
