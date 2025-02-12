@@ -457,6 +457,13 @@ namespace mohair {
       auto plan_copy = std::make_unique<Plan>();
       plan_copy->CopyFrom(*super_plan);
 
+      // It is required that we clear the output names in the subplan messages;
+      // otherwise, we will always project the wrong columns from subplans
+      int root_ndx = FindPlanRoot(*plan_copy);
+      if (not plan_copy->relations(root_ndx).root().names().empty()) {
+        plan_copy->mutable_relations(root_ndx)->mutable_root()->clear_names();
+      }
+
       subplan_msgs.push_back(PlanMessage::FromPlan(std::move(plan_copy)));
     }
 
@@ -479,7 +486,7 @@ namespace mohair {
 
       AdvancedExtension* subplan_planext  = subplan->mutable_advanced_extensions();
       AnyMessage*        optimization_msg = subplan_planext->add_optimization();
-      optimization_msg->PackFrom(*(refrel_superplan));
+      optimization_msg->PackFrom(*refrel_superplan);
     }
 
     return subplan_msgs;
@@ -563,7 +570,8 @@ namespace mohair {
   //  This is an interface to creating a graph (query plan) of mohair operators.
   unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg) {
     // walk the top level relations until we find the root (should only be one)
-    int root_ndx = FindPlanRoot(*(plan_msg->payload));
+    Plan* substrait_plan { plan_msg->payload.get() };
+    int   root_ndx = FindPlanRoot(*substrait_plan);
 
     // set the plan root if not already set
     if (plan_msg->root_relndx < 0) {
@@ -572,9 +580,8 @@ namespace mohair {
     }
 
     // translate from the top level `Rel` to mohair operators
-    Rel* substrait_rootrel { plan_msg->root_relation->mutable_root()->mutable_input() };
     auto mohair_plan = std::make_unique<SystemPlan>(
-       std::move(plan_msg), MohairFrom(substrait_rootrel)
+       std::move(plan_msg), MohairFrom(substrait_plan)
     );
 
     // then, walk the function anchors so we can associate anchor IDs and function names

@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,42 +20,17 @@
 // Dependencies
 #pragma once
 
-
-// ------------------------------
-// Overview
-//
-// Dependencies from standard library that are common throughout this library.
+#include "mohair.hpp"
+#include "mohair/plans.hpp"
 
 
 // ------------------------------
-// Dependencies
-
-// >> Memory and data type support
-#include <stdexcept>
-#include <memory>
-#include <string>
-#include <optional>
-#include <vector>
-#include <unordered_map>
-
-// >> I/O support
-#include <iostream>
-#include <sstream>
-#include <fstream>
-
-
-// ------------------------------
-// Type aliases
+// Functions
 
 namespace mohair {
 
-  using std::unique_ptr;
-  using std::optional;
-  using std::string;
-  using std::stringstream;
-
-  using std::array;
-  using std::vector;
-  using std::unordered_map;
+  unique_ptr<SubstraitSchema>
+  SchemaFromEmit( const RelCommon&              rel_common
+                 ,unique_ptr<SubstraitSchema>&& input_schema);
 
 } // namespace: mohair

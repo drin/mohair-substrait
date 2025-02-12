@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,44 +18,19 @@
 
 // ------------------------------
 // Dependencies
-#pragma once
+
+#include "mohair/analysis/join_rel.hpp"
 
 
 // ------------------------------
-// Overview
-//
-// Dependencies from standard library that are common throughout this library.
-
-
-// ------------------------------
-// Dependencies
-
-// >> Memory and data type support
-#include <stdexcept>
-#include <memory>
-#include <string>
-#include <optional>
-#include <vector>
-#include <unordered_map>
-
-// >> I/O support
-#include <iostream>
-#include <sstream>
-#include <fstream>
-
-
-// ------------------------------
-// Type aliases
+// Functions
 
 namespace mohair {
 
-  using std::unique_ptr;
-  using std::optional;
-  using std::string;
-  using std::stringstream;
-
-  using std::array;
-  using std::vector;
-  using std::unordered_map;
+  unique_ptr<SubstraitSchema>
+  SchemaFromJoinRel(const JoinRel& rel_op, unique_ptr<SubstraitSchema>&& input_schema) {
+    if (not rel_op.has_common()) { return input_schema; }
+    return SchemaFromEmit(rel_op.common(), std::move(input_schema));
+  }
 
 } // namespace: mohair

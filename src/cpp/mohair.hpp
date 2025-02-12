@@ -112,12 +112,21 @@ namespace mohair {
 
 
   // >> Debug functions
-  void PrintSubstraitPlan(Plan *plan_msg);
-  void PrintSubstraitRel(Rel   *rel_msg);
+  void PrintSubstraitPlan(const Plan& plan_msg);
+  void PrintSubstraitRel(const Rel&   rel_msg);
+
+  void PrintSubstraitPlan(const Plan *plan_msg);
+  void PrintSubstraitRel(const Rel   *rel_msg);
 
 
   // >> Helper functions
+
+  //! Find the index of the plan's root operator in the list of op trees
   int FindPlanRoot(Plan& substrait_plan);
+
+  //! Get the common op structure from the given Rel
+  RelCommon*       GetRelCommon(Rel*       rel);
+  const RelCommon& GetRelCommon(const Rel& rel);
 
   //! Move the operator from `src_rel` to `dst_rel`
   void MoveRelOp(Rel* src_rel, Rel* dst_rel);

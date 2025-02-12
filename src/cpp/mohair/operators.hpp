@@ -23,7 +23,10 @@
 // >> Standard headers
 #include <array>
 
+#include "mohair.hpp"
 #include "mohair/plans.hpp"
+
+#include "mohair/analysis/schema_resolution.hpp"
 
 
 // ------------------------------
@@ -35,13 +38,14 @@ namespace mohair {
   template <size_t input_arity>
   using InputArity = array<unique_ptr<MohairOp>, input_arity>;
 
-  using LeafInputType   = InputArity<0>;
   using UnaryInputType  = InputArity<1>;
   using BinaryInputType = InputArity<2>;
 
+
   // >> Base classes
   struct SinkOp : public MohairOp {
-    SinkOp(Rel* rel): MohairOp(rel) {}
+    SinkOp(Rel* rel, unique_ptr<SubstraitSchema>&& input_schema)
+      : MohairOp(rel, std::move(input_schema)) {}
 
     bool IsSink() override { return true; }
   };
@@ -50,16 +54,22 @@ namespace mohair {
   struct OpErr : MohairOp {
     string err_msg;
 
-    OpErr(Rel *rel, const char *msg): MohairOp(rel), err_msg(msg) {}
+    OpErr(Rel *rel, const char *msg): MohairOp(rel, nullptr), err_msg(msg) {}
 
     const string ToString() override;
   };
 
   struct OpReference : MohairOp {
-    ReferenceRel* rel_op;
+    ReferenceRel*        rel_op;
+    unique_ptr<MohairOp> subplan_root;
 
-    OpReference(ReferenceRel* op, Rel* rel)
-      : MohairOp(rel), rel_op(op) {}
+    OpReference( ReferenceRel*                 op
+                ,Rel*                          rel
+                ,unique_ptr<MohairOp>&&        ref_subplan
+                ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  MohairOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,subplan_root(std::move(ref_subplan)) {}
 
     const string ToString() override;
   };
@@ -67,8 +77,11 @@ namespace mohair {
   struct OpRead : SourceOp {
     ReadRel* rel_op;
 
-    OpRead(ReadRel* op, Rel* rel, string tname)
-      : SourceOp(rel, tname), rel_op(op) {}
+    OpRead( ReadRel*                      op
+           ,Rel*                          rel
+           ,string                        tname
+           ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SourceOp(rel, tname, std::move(input_schema)), rel_op(op) {}
 
     const string ToString() override;
   };
@@ -78,11 +91,14 @@ namespace mohair {
     ExtensionLeafRel*  rel_op;
     unique_ptr<SkyRel> sky_rel;
 
-    OpSkyRead( ExtensionLeafRel*    op
-              ,Rel*                 rel
-              ,unique_ptr<SkyRel>&& unpacked_rel
-              ,string&              tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
+    OpSkyRead( ExtensionLeafRel*             op
+              ,Rel*                          rel
+              ,unique_ptr<SkyRel>&&          unpacked_rel
+              ,string                        tname
+              ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SourceOp(rel, tname, std::move(input_schema))
+        ,rel_op(op)
+        ,sky_rel(std::move(unpacked_rel)) {}
 
     const string ToString() override;
   };
@@ -94,8 +110,11 @@ namespace mohair {
     OpPartitionRead( ExtensionLeafRel*             op
                     ,Rel*                          rel
                     ,unique_ptr<SkyPartitionRel>&& unpacked_rel
-                    ,string&                       tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
+                    ,string                        tname
+                    ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SourceOp(rel, tname, std::move(input_schema))
+        ,rel_op(op)
+        ,sky_rel(std::move(unpacked_rel)) {}
 
     const string ToString() override;
   };
@@ -104,11 +123,14 @@ namespace mohair {
     ExtensionLeafRel*       rel_op;
     unique_ptr<SkySliceRel> sky_rel;
 
-    OpSliceRead( ExtensionLeafRel*         op
-                ,Rel*                      rel
-                ,unique_ptr<SkySliceRel>&& unpacked_rel
-                ,string&                   tname)
-      : SourceOp(rel, tname), rel_op(op), sky_rel(std::move(unpacked_rel)) {}
+    OpSliceRead( ExtensionLeafRel*             op
+                ,Rel*                          rel
+                ,unique_ptr<SkySliceRel>&&     unpacked_rel
+                ,string                        tname
+                ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SourceOp(rel, tname, std::move(input_schema))
+        ,rel_op(op)
+        ,sky_rel(std::move(unpacked_rel)) {}
 
     const string ToString() override;
   };
@@ -118,8 +140,13 @@ namespace mohair {
     ProjectRel*    rel_op;
     UnaryInputType op_inputs;
 
-    OpProj(ProjectRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
+    OpProj( ProjectRel*                   op
+           ,Rel*                          rel
+           ,unique_ptr<MohairOp>&&        input_op
+           ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  MohairOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(input_op) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -131,8 +158,14 @@ namespace mohair {
     FilterRel*     rel_op;
     UnaryInputType op_inputs;
 
-    OpSel(FilterRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
+    OpSel( FilterRel*                    op
+          ,Rel*                          rel
+          ,unique_ptr<MohairOp>&&        input_op
+          ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  MohairOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(input_op) }) {}
+
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -144,8 +177,13 @@ namespace mohair {
     FetchRel*      rel_op;
     UnaryInputType op_inputs;
 
-    OpLimit(FetchRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : MohairOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
+    OpLimit( FetchRel*                     op
+            ,Rel*                          rel
+            ,unique_ptr<MohairOp>&&        input_op
+            ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  MohairOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(input_op) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -158,8 +196,13 @@ namespace mohair {
     SortRel*       rel_op;
     UnaryInputType op_inputs;
 
-    OpSort(SortRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
+    OpSort( SortRel*                      op
+           ,Rel*                          rel
+           ,unique_ptr<MohairOp>&&        input_op
+           ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(input_op) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -171,8 +214,13 @@ namespace mohair {
     AggregateRel*  rel_op;
     UnaryInputType op_inputs;
 
-    OpAggr(AggregateRel *op, Rel *rel, unique_ptr<MohairOp>&& input_op)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(input_op) }) {}
+    OpAggr( AggregateRel*                 op
+           ,Rel*                          rel
+           ,unique_ptr<MohairOp>&&        input_op
+           ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(input_op) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -185,8 +233,14 @@ namespace mohair {
     JoinRel*        rel_op;
     BinaryInputType op_inputs;
 
-    OpJoin(JoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
+    OpJoin( JoinRel*                      op
+           ,Rel*                          rel
+           ,unique_ptr<MohairOp>&&        left
+           ,unique_ptr<MohairOp>&&        right
+           ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(left), std::move(right) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -198,8 +252,14 @@ namespace mohair {
     CrossRel*       rel_op;
     BinaryInputType op_inputs;
 
-    OpCrossJoin(CrossRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
+    OpCrossJoin( CrossRel*                     op
+                ,Rel*                          rel
+                ,unique_ptr<MohairOp>&&        left
+                ,unique_ptr<MohairOp>&&        right
+                ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(left), std::move(right) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -211,8 +271,14 @@ namespace mohair {
     HashJoinRel*    rel_op;
     BinaryInputType op_inputs;
 
-    OpHashJoin(HashJoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
+    OpHashJoin( HashJoinRel*                  op
+               ,Rel*                          rel
+               ,unique_ptr<MohairOp>&&        left
+               ,unique_ptr<MohairOp>&&        right
+               ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(left), std::move(right) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;
@@ -224,8 +290,14 @@ namespace mohair {
     MergeJoinRel*   rel_op;
     BinaryInputType op_inputs;
 
-    OpMergeJoin(MergeJoinRel *op, Rel *rel, unique_ptr<MohairOp>&& left, unique_ptr<MohairOp>&& right)
-      : SinkOp(rel), rel_op(op), op_inputs({ std::move(left), std::move(right) }) {}
+    OpMergeJoin( MergeJoinRel*                 op
+                ,Rel*                          rel
+                ,unique_ptr<MohairOp>&&        left
+                ,unique_ptr<MohairOp>&&        right
+                ,unique_ptr<SubstraitSchema>&& input_schema)
+      :  SinkOp(rel, std::move(input_schema))
+        ,rel_op(op)
+        ,op_inputs({ std::move(left), std::move(right) }) {}
 
     const string ToString()   override;
     size_t       GetOpArity() override;

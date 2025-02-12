@@ -45,10 +45,18 @@
 namespace mohair {
 
   // >> Protobuf types
+  using google::protobuf::RepeatedPtrField;
   using google::protobuf::Message;
   using google::protobuf::util::MessageDifferencer;
 
   // >> Substrait types
+  // Type representation
+  using SubstraitType   = skyproto::substrait::Type;
+  using SubstraitSchema = skyproto::substrait::NamedStruct;
+
+  // Expression representation
+  using SubstraitExpr   = skyproto::substrait::Expression;
+
   // Plan level
   using skyproto::substrait::Plan;
   using skyproto::substrait::PlanRel;
@@ -81,9 +89,6 @@ namespace mohair {
 
   // N-ary types (streaming)
   using skyproto::substrait::SetRel;
-
-  using SubstraitSchema = skyproto::substrait::NamedStruct;
-  using SubstraitType   = skyproto::substrait::Type;
 
 } // namespace: mohair
 

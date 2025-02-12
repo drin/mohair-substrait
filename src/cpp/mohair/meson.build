@@ -16,6 +16,10 @@ libmohair_sources += files(
 )
 
 
+# >> From subdirectories
+subdir('analysis')
+
+
 # ------------------------------
 # Installation
 
