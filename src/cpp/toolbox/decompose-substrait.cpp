@@ -19,6 +19,10 @@
 // ------------------------------
 // Dependencies
 
+// >> Standard libs
+#include <filesystem>
+
+// >> Internal
 #include "mohair.hpp"
 #include "mohair/plans.hpp"
 
