@@ -73,6 +73,9 @@ namespace mohair {
   using skyproto::mohair::ServiceConfig;
   using skyproto::mohair::DeviceClass;
 
+  // Decomposition options
+  using skyproto::mohair::DecomposeAlg;
+
 } // namespace: mohair
 
 

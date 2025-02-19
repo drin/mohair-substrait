@@ -145,6 +145,42 @@ inline bool MemoryType_Parse(absl::string_view name, MemoryType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<MemoryType>(
       MemoryType_descriptor(), name, value);
 }
+enum DecomposeAlg : int {
+  None = 0,
+  LongPipelineLeaf = 1,
+  LongPipelineHead = 2,
+  TallJoinLeaf = 3,
+  WideJoinHead = 4,
+  DecomposeAlg_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  DecomposeAlg_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool DecomposeAlg_IsValid(int value);
+extern const uint32_t DecomposeAlg_internal_data_[];
+constexpr DecomposeAlg DecomposeAlg_MIN = static_cast<DecomposeAlg>(0);
+constexpr DecomposeAlg DecomposeAlg_MAX = static_cast<DecomposeAlg>(4);
+constexpr int DecomposeAlg_ARRAYSIZE = 4 + 1;
+const ::google::protobuf::EnumDescriptor*
+DecomposeAlg_descriptor();
+template <typename T>
+const std::string& DecomposeAlg_Name(T value) {
+  static_assert(std::is_same<T, DecomposeAlg>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to DecomposeAlg_Name().");
+  return DecomposeAlg_Name(static_cast<DecomposeAlg>(value));
+}
+template <>
+inline const std::string& DecomposeAlg_Name(DecomposeAlg value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<DecomposeAlg_descriptor,
+                                                 0, 4>(
+      static_cast<int>(value));
+}
+inline bool DecomposeAlg_Parse(absl::string_view name, DecomposeAlg* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DecomposeAlg>(
+      DecomposeAlg_descriptor(), name, value);
+}
 
 // ===================================================================
 
@@ -743,6 +779,7 @@ class ServiceConfig final : public ::google::protobuf::Message
     kServiceMemFieldNumber = 5,
     kIsActiveFieldNumber = 1,
     kPlatformClassFieldNumber = 3,
+    kDecomposeAlgFieldNumber = 7,
   };
   // repeated .skyproto.mohair.ServiceConfig downstream_services = 4 [json_name = "downstreamServices"];
   int downstream_services_size() const;
@@ -829,12 +866,23 @@ class ServiceConfig final : public ::google::protobuf::Message
   void _internal_set_platform_class(::skyproto::mohair::DeviceClass value);
 
   public:
+  // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+  bool has_decompose_alg() const;
+  void clear_decompose_alg() ;
+  ::skyproto::mohair::DecomposeAlg decompose_alg() const;
+  void set_decompose_alg(::skyproto::mohair::DecomposeAlg value);
+
+  private:
+  ::skyproto::mohair::DecomposeAlg _internal_decompose_alg() const;
+  void _internal_set_decompose_alg(::skyproto::mohair::DecomposeAlg value);
+
+  public:
   // @@protoc_insertion_point(class_scope:skyproto.mohair.ServiceConfig)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 6, 3,
+      3, 7, 3,
       54, 2>
       _table_;
 
@@ -860,6 +908,7 @@ class ServiceConfig final : public ::google::protobuf::Message
     ::skyproto::mohair::MemoryResources* service_mem_;
     bool is_active_;
     int platform_class_;
+    int decompose_alg_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1349,6 +1398,34 @@ ServiceConfig::_internal_mutable_service_compute() {
   return &_impl_.service_compute_;
 }
 
+// optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+inline bool ServiceConfig::has_decompose_alg() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void ServiceConfig::clear_decompose_alg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.decompose_alg_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::skyproto::mohair::DecomposeAlg ServiceConfig::decompose_alg() const {
+  // @@protoc_insertion_point(field_get:skyproto.mohair.ServiceConfig.decompose_alg)
+  return _internal_decompose_alg();
+}
+inline void ServiceConfig::set_decompose_alg(::skyproto::mohair::DecomposeAlg value) {
+  _internal_set_decompose_alg(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:skyproto.mohair.ServiceConfig.decompose_alg)
+}
+inline ::skyproto::mohair::DecomposeAlg ServiceConfig::_internal_decompose_alg() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skyproto::mohair::DecomposeAlg>(_impl_.decompose_alg_);
+}
+inline void ServiceConfig::_internal_set_decompose_alg(::skyproto::mohair::DecomposeAlg value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.decompose_alg_ = value;
+}
+
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif  // __GNUC__
@@ -1372,6 +1449,12 @@ struct is_proto_enum<::skyproto::mohair::MemoryType> : std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor<::skyproto::mohair::MemoryType>() {
   return ::skyproto::mohair::MemoryType_descriptor();
+}
+template <>
+struct is_proto_enum<::skyproto::mohair::DecomposeAlg> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::skyproto::mohair::DecomposeAlg>() {
+  return ::skyproto::mohair::DecomposeAlg_descriptor();
 }
 
 }  // namespace protobuf

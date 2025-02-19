@@ -50,6 +50,7 @@ namespace mohair {
     }
 
     // If the operator emits "selectively", attributes are explicitly propagated
+    int  attr_ndx    = 0;
     auto emit_schema = std::make_unique<SubstraitSchema>();
     for (int32_t emit_ndx : rel_common.emit().output_mapping()) {
       SubstraitType* emit_type = emit_schema->mutable_struct_()->add_types();
@@ -57,10 +58,16 @@ namespace mohair {
       // We propagate attributes by index based on the `output_mapping` field
       emit_type->CopyFrom(input_schema->struct_().types(emit_ndx));
 
-      // Propagate the attribute name if it has one
-      if (emit_ndx < input_schema->names_size()) {
+      // Push an alias into the output schema
+      if (attr_ndx < rel_common.hint().output_names_size()) {
+        emit_schema->add_names(rel_common.hint().output_names(attr_ndx));
+      }
+      // Otherwise, propagate the attribute name if it has one
+      else if (emit_ndx < input_schema->names_size()) {
         emit_schema->add_names(input_schema->names(emit_ndx));
       }
+
+      ++attr_ndx;
     }
 
     return emit_schema;

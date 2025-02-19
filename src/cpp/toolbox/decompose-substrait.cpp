@@ -208,7 +208,8 @@ ProcessPlanAsService(const string& query_name, unique_ptr<PlanMessage> plan_msg,
   // >> Otherwise, we'll split and propagate and then return
   // Find a split point
   unique_ptr<PlanSplit> service_split {
-    PlanSplit::FindSplit(sys_plan.get(), DecomposeAlg::WideJoinHead)
+    // PlanSplit::FindSplit(sys_plan.get(), DecomposeAlg::WideJoinHead)
+    PlanSplit::FindSplit(sys_plan.get())
   };
 
   // If there's no split we can do, function as a pass-through
