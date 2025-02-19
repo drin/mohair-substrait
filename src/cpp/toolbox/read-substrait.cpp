@@ -57,6 +57,11 @@ struct ToolInterface {
       return 1;
     }
 
+    else if (not fs::exists(plan_fpath)) {
+      std::cerr << "Could not find file [" << plan_fpath << "]" << std::endl;
+      return 2;
+    }
+
     unique_ptr<PlanMessage> plan_msg = mohair::PlanMessage::FromFile(
       plan_fpath.string()
     );

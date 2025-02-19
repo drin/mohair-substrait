@@ -320,22 +320,26 @@ namespace mohair {
   optional<size_t> FindWideJoin(SystemPlan* sys_plan);
 
   //! Finds a candidate `PlanSplit` given a decomposition algorithm (metric)
-  unique_ptr<PlanSplit> PlanSplit::FindSplit(SystemPlan* sys_plan, DecomposeAlg method) {
+  unique_ptr<PlanSplit>
+  PlanSplit::FindSplit(SystemPlan* sys_plan, const DecomposeAlg& method) {
     optional<size_t> stage_ndx { std::nullopt };
 
     switch (method) {
-      case TallJoinLeaf: {
+      // Do not find a split candidate if no algorithm is specified
+      case DecomposeAlg::None: break;
+
+      case DecomposeAlg::TallJoinLeaf: {
         stage_ndx = FindTallJoinLeaf(sys_plan);
         break;
       }
 
       // LongPipelineLeaf is currently default algorithm
-      case LongPipelineLeaf: {
+      case DecomposeAlg::LongPipelineLeaf: {
         stage_ndx = FindLongPipelineLeaf(sys_plan);
         break;
       }
 
-      case WideJoinHead: {
+      case DecomposeAlg::WideJoinHead: {
         stage_ndx = FindWideJoin(sys_plan);
         break;
       }

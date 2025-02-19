@@ -91,7 +91,8 @@ inline constexpr ServiceConfig::Impl_::Impl_(
             ::_pbi::ConstantInitialized()),
         service_mem_{nullptr},
         is_active_{false},
-        platform_class_{static_cast< ::skyproto::mohair::DeviceClass >(0)} {}
+        platform_class_{static_cast< ::skyproto::mohair::DeviceClass >(0)},
+        decompose_alg_{static_cast< ::skyproto::mohair::DecomposeAlg >(0)} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR ServiceConfig::ServiceConfig(::_pbi::ConstantInitialized)
@@ -114,7 +115,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ServiceConfigDefaultTypeInternal _ServiceConfig_default_instance_;
 }  // namespace mohair
 }  // namespace skyproto
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[2];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[3];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_skyproto_2fmohair_2ftopology_2eproto = nullptr;
 const ::uint32_t
@@ -160,19 +161,21 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.downstream_services_),
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_mem_),
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_compute_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.decompose_alg_),
         ~0u,
         ~0u,
         ~0u,
         ~0u,
         0,
         ~0u,
+        1,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::skyproto::mohair::ComputeResources)},
         {10, 22, -1, sizeof(::skyproto::mohair::MemoryResources)},
-        {26, 40, -1, sizeof(::skyproto::mohair::ServiceConfig)},
+        {26, 41, -1, sizeof(::skyproto::mohair::ServiceConfig)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::mohair::_ComputeResources_default_instance_._instance,
@@ -191,7 +194,7 @@ const char descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto[] ABSL
     "yType\210\001\001\022*\n\016count_channels\030\003 \001(\rH\001R\rcoun"
     "tChannels\210\001\001\022$\n\013memory_freq\030\004 \001(\rH\002R\nmem"
     "oryFreq\210\001\001B\016\n\014_memory_typeB\021\n\017_count_cha"
-    "nnelsB\016\n\014_memory_freq\"\221\003\n\rServiceConfig\022"
+    "nnelsB\016\n\014_memory_freq\"\354\003\n\rServiceConfig\022"
     "\033\n\tis_active\030\001 \001(\010R\010isActive\022)\n\020service_"
     "location\030\002 \001(\tR\017serviceLocation\022C\n\016platf"
     "orm_class\030\003 \001(\0162\034.skyproto.mohair.Device"
@@ -201,17 +204,22 @@ const char descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto[] ABSL
     "(\0132 .skyproto.mohair.MemoryResourcesH\000R\n"
     "serviceMem\210\001\001\022J\n\017service_compute\030\006 \003(\0132!"
     ".skyproto.mohair.ComputeResourcesR\016servi"
-    "ceComputeB\016\n\014_service_mem*\202\001\n\013DeviceClas"
-    "s\022\027\n\023DEVICE_CLASS_SERVER\020\000\022\026\n\022DEVICE_CLA"
-    "SS_DRIVE\020\001\022\024\n\020DEVICE_CLASS_SOC\020\002\022\026\n\022DEVI"
-    "CE_CLASS_ARRAY\020\003\022\024\n\020DEVICE_CLASS_DPU\020\004*v"
-    "\n\nMemoryType\022\023\n\017MEMORY_TYPE_DDR\020\000\022\024\n\020MEM"
-    "ORY_TYPE_GDDR\020\001\022\023\n\017MEMORY_TYPE_NVM\020\002\022\023\n\017"
-    "MEMORY_TYPE_CXL\020\003\022\023\n\017MEMORY_TYPE_CAM\020\004B\201"
-    "\001\n\023com.skyproto.mohairB\rTopologyProtoP\001\242"
-    "\002\003SMX\252\002\017Skyproto.Mohair\312\002\017Skyproto\\Mohai"
-    "r\342\002\033Skyproto\\Mohair\\GPBMetadata\352\002\020Skypro"
-    "to::Mohairb\006proto3"
+    "ceCompute\022G\n\rdecompose_alg\030\007 \001(\0162\035.skypr"
+    "oto.mohair.DecomposeAlgH\001R\014decomposeAlg\210"
+    "\001\001B\016\n\014_service_memB\020\n\016_decompose_alg*\202\001\n"
+    "\013DeviceClass\022\027\n\023DEVICE_CLASS_SERVER\020\000\022\026\n"
+    "\022DEVICE_CLASS_DRIVE\020\001\022\024\n\020DEVICE_CLASS_SO"
+    "C\020\002\022\026\n\022DEVICE_CLASS_ARRAY\020\003\022\024\n\020DEVICE_CL"
+    "ASS_DPU\020\004*v\n\nMemoryType\022\023\n\017MEMORY_TYPE_D"
+    "DR\020\000\022\024\n\020MEMORY_TYPE_GDDR\020\001\022\023\n\017MEMORY_TYP"
+    "E_NVM\020\002\022\023\n\017MEMORY_TYPE_CXL\020\003\022\023\n\017MEMORY_T"
+    "YPE_CAM\020\004*h\n\014DecomposeAlg\022\010\n\004None\020\000\022\024\n\020L"
+    "ongPipelineLeaf\020\001\022\024\n\020LongPipelineHead\020\002\022"
+    "\020\n\014TallJoinLeaf\020\003\022\020\n\014WideJoinHead\020\004B\201\001\n\023"
+    "com.skyproto.mohairB\rTopologyProtoP\001\242\002\003S"
+    "MX\252\002\017Skyproto.Mohair\312\002\017Skyproto\\Mohair\342\002"
+    "\033Skyproto\\Mohair\\GPBMetadata\352\002\020Skyproto:"
+    ":Mohairb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fmohair_2ftopology_2eproto_deps[1] =
     {
@@ -221,7 +229,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fmohair_2ftopology_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fmohair_2ftopology_2eproto = {
     false,
     false,
-    1218,
+    1415,
     descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto,
     "skyproto/mohair/topology.proto",
     &descriptor_table_skyproto_2fmohair_2ftopology_2eproto_once,
@@ -252,6 +260,15 @@ const ::google::protobuf::EnumDescriptor* MemoryType_descriptor() {
 PROTOBUF_CONSTINIT const uint32_t MemoryType_internal_data_[] = {
     327680u, 0u, };
 bool MemoryType_IsValid(int value) {
+  return 0 <= value && value <= 4;
+}
+const ::google::protobuf::EnumDescriptor* DecomposeAlg_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skyproto_2fmohair_2ftopology_2eproto);
+  return file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[2];
+}
+PROTOBUF_CONSTINIT const uint32_t DecomposeAlg_internal_data_[] = {
+    327680u, 0u, };
+bool DecomposeAlg_IsValid(int value) {
   return 0 <= value && value <= 4;
 }
 // ===================================================================
@@ -869,9 +886,9 @@ ServiceConfig::ServiceConfig(
                offsetof(Impl_, is_active_),
            reinterpret_cast<const char *>(&from._impl_) +
                offsetof(Impl_, is_active_),
-           offsetof(Impl_, platform_class_) -
+           offsetof(Impl_, decompose_alg_) -
                offsetof(Impl_, is_active_) +
-               sizeof(Impl_::platform_class_));
+               sizeof(Impl_::decompose_alg_));
 
   // @@protoc_insertion_point(copy_constructor:skyproto.mohair.ServiceConfig)
 }
@@ -888,9 +905,9 @@ inline void ServiceConfig::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, service_mem_),
            0,
-           offsetof(Impl_, platform_class_) -
+           offsetof(Impl_, decompose_alg_) -
                offsetof(Impl_, service_mem_) +
-               sizeof(Impl_::platform_class_));
+               sizeof(Impl_::decompose_alg_));
 }
 ServiceConfig::~ServiceConfig() {
   // @@protoc_insertion_point(destructor:skyproto.mohair.ServiceConfig)
@@ -957,15 +974,15 @@ const ::google::protobuf::internal::ClassData* ServiceConfig::GetClassData() con
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 6, 3, 54, 2> ServiceConfig::_table_ = {
+const ::_pbi::TcParseTable<3, 7, 3, 54, 2> ServiceConfig::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_._has_bits_),
     0, // no _extensions_
-    6, 56,  // max_field_number, fast_idx_mask
+    7, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967232,  // skipmap
+    4294967168,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    6,  // num_field_entries
+    7,  // num_field_entries
     3,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -994,7 +1011,9 @@ const ::_pbi::TcParseTable<3, 6, 3, 54, 2> ServiceConfig::_table_ = {
     // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
     {::_pbi::TcParser::FastMtR1,
      {50, 63, 2, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_compute_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServiceConfig, _impl_.decompose_alg_), 1>(),
+     {56, 1, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -1016,6 +1035,9 @@ const ::_pbi::TcParseTable<3, 6, 3, 54, 2> ServiceConfig::_table_ = {
     // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
     {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_compute_), -1, 2,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::mohair::ServiceConfig>()},
     {::_pbi::TcParser::GetTable<::skyproto::mohair::MemoryResources>()},
@@ -1045,6 +1067,7 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
   ::memset(&_impl_.is_active_, 0, static_cast<::size_t>(
       reinterpret_cast<char*>(&_impl_.platform_class_) -
       reinterpret_cast<char*>(&_impl_.is_active_)) + sizeof(_impl_.platform_class_));
+  _impl_.decompose_alg_ = 0;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -1116,6 +1139,13 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
                     target, stream);
           }
 
+          // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+          if (cached_has_bits & 0x00000002u) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                7, this_._internal_decompose_alg(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1182,6 +1212,13 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_platform_class());
             }
           }
+           {
+            // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+            if (cached_has_bits & 0x00000002u) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_decompose_alg());
+            }
+          }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
@@ -1218,6 +1255,9 @@ void ServiceConfig::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::g
   if (from._internal_platform_class() != 0) {
     _this->_impl_.platform_class_ = from._impl_.platform_class_;
   }
+  if (cached_has_bits & 0x00000002u) {
+    _this->_impl_.decompose_alg_ = from._impl_.decompose_alg_;
+  }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1240,8 +1280,8 @@ void ServiceConfig::InternalSwap(ServiceConfig* PROTOBUF_RESTRICT other) {
   _impl_.service_compute_.InternalSwap(&other->_impl_.service_compute_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.service_location_, &other->_impl_.service_location_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.platform_class_)
-      + sizeof(ServiceConfig::_impl_.platform_class_)
+      PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_)
+      + sizeof(ServiceConfig::_impl_.decompose_alg_)
       - PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_mem_)>(
           reinterpret_cast<char*>(&_impl_.service_mem_),
           reinterpret_cast<char*>(&other->_impl_.service_mem_));

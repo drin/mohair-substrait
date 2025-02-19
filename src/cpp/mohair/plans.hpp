@@ -155,12 +155,6 @@ namespace mohair {
   };
 
   // >> Cooperative Query Decomposition
-  enum DecomposeAlg {
-     LongPipelineLeaf // Leaf pipeline breaker with longest pipeline
-    ,LongPipelineHead // Internal pipeline breaker with longest pipeline
-    ,TallJoinLeaf     // Leaf join operation with tallest plan height
-    ,WideJoinHead     // Internal join operation with largest plan width
-  };
 
   /**
    * A class that points to a super-plan and an anchor operator.
@@ -208,7 +202,7 @@ namespace mohair {
 
     //! Finds a candidate split given a decision algorithm
     static unique_ptr<PlanSplit>
-    FindSplit(SystemPlan* sys_plan, DecomposeAlg method = DecomposeAlg::LongPipelineLeaf);
+    FindSplit(SystemPlan* sys_plan, const DecomposeAlg& method = DecomposeAlg::None);
 
     bool CanSplit();
     bool MergeSubplan(PlanMessage* subplan_msg);
