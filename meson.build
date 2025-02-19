@@ -4,7 +4,7 @@
 # >> project info
 project('libmohair'
   ,'cpp'
-  ,version         : '3.0.1'
+  ,version         : '3.0.2'
   ,meson_version   : '>=1.6.0'
   ,license         : 'Apache-2.0'
   ,license_files   : 'LICENSE'
