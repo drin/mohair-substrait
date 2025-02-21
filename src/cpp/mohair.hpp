@@ -52,7 +52,7 @@
 
   #define MohairLogTimestamps(phase_name) {                                      \
     auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
-    *(LogHandle()) << "["                                                        \
+    *(MohairLogger()) << "["                                                     \
                               << StringifyTS(ts_start_##phase_name) << ":µs"     \
                       << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
                       << ", " << ts_diff                            << ":µs"     \
@@ -68,7 +68,7 @@
 
 #else
   #define MohairLogTimestamps(ts_name, log_msg) {}
-  #define MohairLogPerf(phase_name, code_block) {}
+  #define MohairLogPerf(phase_name, code_block) code_block
   #define MohairStartTS(phase_name)             {}
   #define MohairStopTS(phase_name)              {}
 
@@ -131,15 +131,14 @@ namespace mohair {
 
 namespace mohair {
 
-  SteadyTS CurrentTimestamp();
-
+  //! Stringify a steady clock timestamp as microseconds
   string StringifyTS(const SteadyTS& ts);
 
-  string
-  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
+  //! Stringify the difference between two timestamps as microseconds
+  string StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
 
   //! A function that returns a singleton file handle for a log file.
-  std::fstream* LogHandle();
+  std::fstream* MohairLogger();
 
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
