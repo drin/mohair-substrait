@@ -45,6 +45,7 @@
 
 // >> Performance and timing support
 #include <chrono>
+#include <iomanip>
 
 // ------------------------------
 // Type aliases
