@@ -77,7 +77,7 @@ namespace mohair {
     return ss.str();
   }
 
-  std::fstream* LogHandle() {
+  std::fstream* MohairLogger() {
     static bool         is_initialized { false };
     static std::fstream log_handle;
 
