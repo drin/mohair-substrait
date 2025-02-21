@@ -23,9 +23,8 @@
 
 
 // ------------------------------
-// Functions
+// Aliases
 
-// >> Wrapper functions for protobuf framework functions
 namespace mohair {
 
   // Types to wrap
@@ -35,9 +34,79 @@ namespace mohair {
   using google::protobuf::util::JsonStringToMessage;
   using google::protobuf::util::MessageToJsonString;
 
+} // namespace: mohair
+
+
+// ------------------------------
+// Functions
+
+// >> Wrapper functions for protobuf framework functions
+namespace mohair {
+
+  string StringifyTS(const SteadyTS& ts) {
+    auto ts_ms = std::chrono::duration_cast<std::chrono::microseconds>(
+      ts.time_since_epoch()
+    );
+
+    return std::to_string(ts_ms.count());
+  }
+
+  string
+  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
+    auto start_ms = std::chrono::duration_cast<std::chrono::microseconds>(
+      ts_start.time_since_epoch()
+    );
+
+    auto stop_ms = std::chrono::duration_cast<std::chrono::microseconds>(
+      ts_stop.time_since_epoch()
+    );
+
+    return std::to_string(stop_ms.count() - start_ms.count());
+  }
+
+  string PathForInstantiatedLog() {
+    const string path_prefix { "mohair." };
+    const string path_suffix { ".log"    };
+
+    auto     ts_logstart = system_clock::to_time_t(system_clock::now());
+    std::tm* local_ts    = std::localtime(&ts_logstart);
+
+    stringstream ss;
+    ss << path_prefix << std::put_time(local_ts, "%Y%m%d%H%M%S") << path_suffix;
+
+    return ss.str();
+  }
+
+  std::fstream* LogHandle() {
+    static bool         is_initialized { false };
+    static std::fstream log_handle;
+
+    if (not is_initialized) {
+      string log_fpath = PathForInstantiatedLog();
+      log_handle       = OutputStreamForFile(log_fpath.data());
+
+      auto ts_init = steady_clock::now();
+      log_handle << "[" << StringifyTS(ts_init) << ":µs] "
+                 << "|> log handle initialized" << std::endl
+      ;
+
+      is_initialized = true;
+    }
+
+    return &log_handle;
+  }
+
   // Wrapper implementation for `TextFormat::PrintToString`
   bool StringifyMessage(const Message& msg, string* text_result) {
     return TextFormat::PrintToString(msg, text_result);
+  }
+
+  bool StringifyPlan(const Plan& plan_msg, string* text_result) {
+    return StringifyMessage(plan_msg, text_result);
+  }
+
+  bool StringifyRel(const Rel& rel_msg, string* text_result) {
+    return StringifyMessage(rel_msg, text_result);
   }
 
   // TODO: decide if I should return a status object that has an error message
