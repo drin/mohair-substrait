@@ -44,6 +44,10 @@
 
 
 #if MOHAIR_DEBUG
+  #define MohairInitLogger(logger_name) {                                      \
+    *(mohair::MohairLogger(logger_name)) << "Logger initialized" << std::endl; \
+  }
+
   #define MohairStartTS(phase_name) \
     SteadyTS ts_start_##phase_name = steady_clock::now();
 
@@ -52,7 +56,7 @@
 
   #define MohairLogTimestamps(phase_name) {                                      \
     auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
-    *(MohairLogger()) << "["                                                     \
+    *(mohair::MohairLogger()) << "["                                             \
                               << StringifyTS(ts_start_##phase_name) << ":µs"     \
                       << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
                       << ", " << ts_diff                            << ":µs"     \
@@ -138,6 +142,7 @@ namespace mohair {
   string StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
 
   //! A function that returns a singleton file handle for a log file.
+  std::fstream* MohairLogger(string logger_name);
   std::fstream* MohairLogger();
 
   // TODO: hide `Message` to be internal linkage only

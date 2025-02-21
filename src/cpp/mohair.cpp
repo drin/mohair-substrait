@@ -64,9 +64,9 @@ namespace mohair {
     return std::to_string(stop_ms.count() - start_ms.count());
   }
 
-  string PathForInstantiatedLog() {
-    const string path_prefix { "mohair." };
-    const string path_suffix { ".log"    };
+  string PathForInstantiatedLog(const string& logger_name) {
+    const string path_prefix { "mohair." + logger_name + "." };
+    const string path_suffix { ".log"                        };
 
     auto     ts_logstart = system_clock::to_time_t(system_clock::now());
     std::tm* local_ts    = std::localtime(&ts_logstart);
@@ -78,16 +78,21 @@ namespace mohair {
   }
 
   std::fstream* MohairLogger() {
+    static string empty_name;
+    return MohairLogger(empty_name);
+  }
+
+  std::fstream* MohairLogger(string logger_name) {
     static bool         is_initialized { false };
     static std::fstream log_handle;
 
     if (not is_initialized) {
-      string log_fpath = PathForInstantiatedLog();
+      string log_fpath = PathForInstantiatedLog(logger_name);
       log_handle       = OutputStreamForFile(log_fpath.data());
 
       auto ts_init = steady_clock::now();
       log_handle << "[" << StringifyTS(ts_init) << ":µs] "
-                 << "|> log handle initialized" << std::endl
+                 << "|> initial timestamp"      << std::endl
       ;
 
       is_initialized = true;

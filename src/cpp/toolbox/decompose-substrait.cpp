@@ -331,6 +331,10 @@ int main(int argc, char **argv) {
   string substrait_fpath { argv[1] };
   string substrait_fname { fs::path(substrait_fpath).stem() };
 
+  // Initialize the logger
+  string logger_name { "test-decomposer" };
+  MohairInitLogger(logger_name);
+
   // Read the example substrait from a file
   unique_ptr<PlanMessage> substrait_msg { PlanMessage::FromFile(substrait_fpath) };
   if (substrait_msg->payload == nullptr) {
