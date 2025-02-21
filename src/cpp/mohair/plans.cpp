@@ -322,6 +322,7 @@ namespace mohair {
   //! Finds a candidate `PlanSplit` given a decomposition algorithm (metric)
   unique_ptr<PlanSplit>
   PlanSplit::FindSplit(SystemPlan* sys_plan, const DecomposeAlg& method) {
+    MohairStartTS(FindPlanSplit);
     optional<size_t> stage_ndx { std::nullopt };
 
     switch (method) {
@@ -355,6 +356,9 @@ namespace mohair {
       split_stage = sys_plan->pipeline_stages[stage_ndx.value()].get();
     }
 
+    MohairStopTS(FindPlanSplit);
+    MohairLogTimestamps(FindPlanSplit);
+
     return std::make_unique<PlanSplit>(
        sys_plan
       ,sys_plan->plan_msg->payload.get()
@@ -368,6 +372,8 @@ namespace mohair {
 
   //! Merge the given `PlanMessage` into this instance's superplan.
   bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
+    MohairStartTS(MergePlanSplit);
+
     // >> Recover (and validate) links between the superplan and subplan
     // Search in subplan message for a `SuperPlan` reference
     SuperPlan refrel_superplan;
@@ -438,18 +444,28 @@ namespace mohair {
     // If any input to the anchor rel is a reference, we're done
     const vector<Rel*>& anchor_inputs = GetInputRels(superplan_anchor->mutable_rel());
     for (const Rel* input_rel : anchor_inputs) {
-      if (input_rel->has_reference()) { return true; }
+      if (input_rel->has_reference()) {
+        MohairStopTS(MergePlanSplit);
+        MohairLogTimestamps(MergePlanSplit);
+
+        return true;
+      }
     }
 
     // Otherwise, we can move the anchor back (undo the reference)
     std::cout << "Anchor has had all subplans merged" << std::endl;
     MoveReferenceToOp(super_plan, superplan_mergerel->substrait_rel);
 
+    MohairStopTS(MergePlanSplit);
+    MohairLogTimestamps(MergePlanSplit);
+
     return true;
   }
 
   //! Create a list of substrait messages given this instance's split information.
   vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
+    MohairStartTS(ExtractPlanSplit);
+
     // This happens when the plan could not be split and we missed it
     MOHAIR_ASSERT("Split failed but we kept going anyway", superplan_mergerel != nullptr);
 
@@ -492,6 +508,9 @@ namespace mohair {
       AnyMessage*        optimization_msg = subplan_planext->add_optimization();
       optimization_msg->PackFrom(*refrel_superplan);
     }
+
+    MohairStopTS(ExtractPlanSplit);
+    MohairLogTimestamps(ExtractPlanSplit);
 
     return subplan_msgs;
   }
@@ -583,16 +602,27 @@ namespace mohair {
       plan_msg->root_relation = plan_msg->payload->mutable_relations(root_ndx);
     }
 
-    // translate from the top level `Rel` to mohair operators
-    auto mohair_plan = std::make_unique<SystemPlan>(
-       std::move(plan_msg), MohairFrom(substrait_plan)
+    // Parse system plan
+    unique_ptr<SystemPlan> mohair_plan;
+    MohairLogPerf(ParseSysPlan,
+      {
+        // translate from the top level `Rel` to mohair operators
+        mohair_plan = std::make_unique<SystemPlan>(
+          std::move(plan_msg), MohairFrom(substrait_plan)
+        );
+
+        // then, walk the function anchors so we can associate anchor IDs and function names
+        mohair_plan->RegisterExtensionFunctions();
+      }
     );
 
-    // then, walk the function anchors so we can associate anchor IDs and function names
-    mohair_plan->RegisterExtensionFunctions();
-
-    // then, walk the plan to build pipelines and discover characteristics
-    mohair_plan->BuildPipelines();
+    // Construct pipelines
+    MohairLogPerf(ConstructPipelines,
+      {
+        // then, walk the plan to build pipelines and discover characteristics
+        mohair_plan->BuildPipelines();
+      }
+    );
 
     return mohair_plan;
   }

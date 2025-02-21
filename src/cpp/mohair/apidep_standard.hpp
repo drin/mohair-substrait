@@ -43,6 +43,8 @@
 #include <sstream>
 #include <fstream>
 
+// >> Performance and timing support
+#include <chrono>
 
 // ------------------------------
 // Type aliases
@@ -57,5 +59,8 @@ namespace mohair {
   using std::array;
   using std::vector;
   using std::unordered_map;
+
+  using std::chrono::system_clock;
+  using std::chrono::steady_clock;
 
 } // namespace: mohair

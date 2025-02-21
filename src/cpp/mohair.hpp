@@ -38,20 +38,50 @@
 // ------------------------------
 // Macros
 
-# define MOHAIR_ASSERT(assert_msg, assert_expr)  { \
-    assert(assert_expr && assert_msg);             \
+#define MOHAIR_ASSERT(assert_msg, assert_expr) { \
+    assert(assert_expr && assert_msg);           \
   }
+
+
+#if MOHAIR_DEBUG
+  #define MohairStartTS(phase_name) \
+    SteadyTS ts_start_##phase_name = steady_clock::now();
+
+  #define MohairStopTS(phase_name) \
+    SteadyTS ts_stop_##phase_name = steady_clock::now();
+
+  #define MohairLogTimestamps(phase_name) {                                      \
+    auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
+    *(LogHandle()) << "["                                                        \
+                              << StringifyTS(ts_start_##phase_name) << ":µs"     \
+                      << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
+                      << ", " << ts_diff                            << ":µs"     \
+                   << "] |> " << #phase_name << std::endl                        \
+    ;                                                                            \
+  }
+
+  #define MohairLogPerf(phase_name, code_block) \
+    MohairStartTS(phase_name)                   \
+    code_block                                  \
+    MohairStopTS(phase_name)                    \
+    MohairLogTimestamps(phase_name)
+
+#else
+  #define MohairLogTimestamps(ts_name, log_msg) {}
+  #define MohairLogPerf(phase_name, code_block) {}
+  #define MohairStartTS(phase_name)             {}
+  #define MohairStopTS(phase_name)              {}
+
+#endif
+
 
 // ------------------------------
 // Aliases
 
 namespace mohair {
 
-  // >> Global variables (library internal)
-  const string version       = MOHAIR_VERSION_STRING;
-  const string version_major = MOHAIR_VERSION_MAJOR;
-  const string version_minor = MOHAIR_VERSION_MINOR;
-  const string version_patch = MOHAIR_VERSION_PATCH;
+  // >> Standard types
+  using SteadyTS = steady_clock::time_point;
 
   // >> Mohair types
   // Plan level
@@ -80,9 +110,15 @@ namespace mohair {
 
 
 // ------------------------------
-// Variables
+// Global variables
 
 namespace mohair {
+
+  // >> Macro-backed Global variables (library internal)
+  const string version         = MOHAIR_VERSION_STRING;
+  const string version_major   = MOHAIR_VERSION_MAJOR;
+  const string version_minor   = MOHAIR_VERSION_MINOR;
+  const string version_patch   = MOHAIR_VERSION_PATCH;
 
   // >> Static variables
   static uint32_t UUIDGenerator { 0 };
@@ -95,11 +131,21 @@ namespace mohair {
 
 namespace mohair {
 
+  SteadyTS CurrentTimestamp();
+
+  string StringifyTS(const SteadyTS& ts);
+
+  string
+  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
+
+  //! A function that returns a singleton file handle for a log file.
+  std::fstream* LogHandle();
+
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
-  bool StringifyPlan (const Message& msg     , string*  text_result);
-  bool StringifyRel  (const Message& msg     , string*  text_result);
-  bool SerializeJson (const string&  msg_json, Message* msg_result);
+  bool StringifyPlan (const Plan&    plan_msg, string*  text_result);
+  bool StringifyRel  (const Rel&     rel_msg , string*  text_result);
+  bool SerializeJson (const string&  msg_json, Message* msg_result );
   bool JsonifyMessage(const Message& msg     , string*  json_result);
 
   // >> Reader functions
