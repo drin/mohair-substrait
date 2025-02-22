@@ -43,33 +43,34 @@
   }
 
 
+#define MohairInitLogger(logger_name) {                                      \
+  *(mohair::MohairLogger(logger_name)) << "Logger initialized" << std::endl; \
+}
+
+#define MohairStartTS(phase_name) \
+  SteadyTS ts_start_##phase_name = steady_clock::now();
+
+#define MohairStopTS(phase_name) \
+  SteadyTS ts_stop_##phase_name = steady_clock::now();
+
+#define MohairLogTimestamps(phase_name) {                                      \
+  auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
+  *(mohair::MohairLogger()) << "["                                             \
+                            << StringifyTS(ts_start_##phase_name) << ":µs"     \
+                    << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
+                    << ", " << ts_diff                            << ":µs"     \
+                 << "] |> " << #phase_name << std::endl                        \
+  ;                                                                            \
+}
+
+#define MohairLogPerf(phase_name, code_block) \
+  MohairStartTS(phase_name)                   \
+  code_block                                  \
+  MohairStopTS(phase_name)                    \
+  MohairLogTimestamps(phase_name)
+
+/* NOTE: for now we should always have performance logging
 #if MOHAIR_DEBUG
-  #define MohairInitLogger(logger_name) {                                      \
-    *(mohair::MohairLogger(logger_name)) << "Logger initialized" << std::endl; \
-  }
-
-  #define MohairStartTS(phase_name) \
-    SteadyTS ts_start_##phase_name = steady_clock::now();
-
-  #define MohairStopTS(phase_name) \
-    SteadyTS ts_stop_##phase_name = steady_clock::now();
-
-  #define MohairLogTimestamps(phase_name) {                                      \
-    auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
-    *(mohair::MohairLogger()) << "["                                             \
-                              << StringifyTS(ts_start_##phase_name) << ":µs"     \
-                      << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
-                      << ", " << ts_diff                            << ":µs"     \
-                   << "] |> " << #phase_name << std::endl                        \
-    ;                                                                            \
-  }
-
-  #define MohairLogPerf(phase_name, code_block) \
-    MohairStartTS(phase_name)                   \
-    code_block                                  \
-    MohairStopTS(phase_name)                    \
-    MohairLogTimestamps(phase_name)
-
 #else
   #define MohairLogTimestamps(ts_name, log_msg) {}
   #define MohairLogPerf(phase_name, code_block) code_block
@@ -77,6 +78,7 @@
   #define MohairStopTS(phase_name)              {}
 
 #endif
+*/
 
 
 // ------------------------------
