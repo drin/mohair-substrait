@@ -31,6 +31,7 @@ namespace mohair {
   string SourceNameFromExtLeaf(SkyRel*          extrel_op);
   string SourceNameFromExtLeaf(SkyPartitionRel* extrel_op);
   string SourceNameFromExtLeaf(SkySliceRel*     extrel_op);
+  string SourceNameFromExtLeaf(SkyResultRel*    extrel_op);
 
   // >> Reusable function kernels (templated)
   //! Templated translation function for unary relational operators.
@@ -284,18 +285,23 @@ namespace mohair {
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtLeaf(SkyRel *extrel_op) {
+  string SourceNameFromExtLeaf(SkyRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtLeaf(SkyPartitionRel *extrel_op) {
+  string SourceNameFromExtLeaf(SkyPartitionRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
   }
 
   //! Extracts the source name from a custom operator used in `ExtensionLeaf`
-  string SourceNameFromExtLeaf(SkySliceRel *extrel_op) {
+  string SourceNameFromExtLeaf(SkySliceRel* extrel_op) {
     return string { extrel_op->domain() + "-" + extrel_op->partition() };
+  }
+
+  //! Extracts the source name from a custom operator used in `ExtensionLeaf`
+  string SourceNameFromExtLeaf(SkyResultRel* extrel_op) {
+    return string { extrel_op->result_name() };
   }
 
 
@@ -331,6 +337,7 @@ namespace mohair {
   const string OpSkyRead::ToString()       { return u8"SkyRead("          + table_name + u8")"; }
   const string OpPartitionRead::ToString() { return u8"SkyPartitionRead(" + table_name + u8")"; }
   const string OpSliceRead::ToString()     { return u8"SkySliceRead("     + table_name + u8")"; }
+  const string OpViewRead::ToString()      { return u8"SkyResultRead("    + table_name + u8")"; }
 
   // streaming ops
   const string OpProj::ToString()  { return u8"Π()";   }
@@ -521,6 +528,17 @@ namespace mohair {
         else if (extleaf_rel->detail().Is<SkySliceRel>()) {
           return FromExtensionLeafMsg<SkySliceRel, OpSliceRead>(rel_msg, extleaf_rel);
         }
+
+        else if (extleaf_rel->detail().Is<SkyResultRel>()) {
+          return FromExtensionLeafMsg<SkyResultRel, OpViewRead>(rel_msg, extleaf_rel);
+        }
+
+        // TODO: we don't need this yet
+        /*
+        else if (extleaf_rel->detail().Is<SkyLakeRel>()) {
+          return FromExtensionLeafMsg<SkyLakeRel, OpViewRead>(rel_msg, extleaf_rel);
+        }
+        */
 
         // Otherwise, fail
         return std::make_unique<OpErr>(

@@ -259,13 +259,14 @@ namespace mohair {
   //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
   //  NOTE: returns 0 on failure (UUIDGenerator starts at 1)
   uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel) {
+    if (not ref_rel->has_reference()) { return 0; }
+
     int32_t  anchor_relndx = ref_rel->reference().subtree_ordinal();
     uint32_t anchor_id     = ref_rel->reference().subtree_reference();
     PlanRel* anchor_rel    = plan->mutable_relations(anchor_relndx);
 
     // Do some validation
     if (not anchor_rel->has_rel())                 { return 0; }
-    if (not ref_rel->has_reference())              { return 0; }
     if (anchor_id != anchor_rel->subtree_anchor()) { return 0; }
 
     // Replace the ReferenceRel
