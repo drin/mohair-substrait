@@ -135,6 +135,22 @@ namespace mohair {
     const string ToString() override;
   };
 
+  struct OpViewRead : SourceOp {
+    ExtensionLeafRel*        rel_op;
+    unique_ptr<SkyResultRel> sky_rel;
+
+    OpViewRead( ExtensionLeafRel*              op
+               ,Rel*                           rel
+               ,unique_ptr<SkyResultRel>&&     unpacked_rel
+               ,string                         tname
+               ,unique_ptr<SubstraitSchema>&&  input_schema)
+      :  SourceOp(rel, tname, std::move(input_schema))
+        ,rel_op(op)
+        ,sky_rel(std::move(unpacked_rel)) {}
+
+    const string ToString() override;
+  };
+
   // >> Unary operators (stream-able)
   struct OpProj : public MohairOp {
     ProjectRel*    rel_op;

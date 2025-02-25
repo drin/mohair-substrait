@@ -186,7 +186,7 @@ namespace mohair {
         // IDEA: if sink is join, then it reduces memory pressure to make it the merge relation
         //       otherwise, it reduces data movement across the network to push it down
         superplan_mergerel = split_stage->sink;
-        if (split_stage->width == 1) {
+        if (split_stage->width == 1 and split_stage->pipelines[0]->next != nullptr) {
           superplan_mergerel = split_stage->pipelines[0]->next;
         }
 
@@ -207,6 +207,7 @@ namespace mohair {
     bool CanSplit();
     bool MergeSubplan(PlanMessage* subplan_msg);
 
+    unique_ptr<PlanMessage>         ExtractExecSubplan();
     vector<unique_ptr<PlanMessage>> ExtractSubplans();
   };
 

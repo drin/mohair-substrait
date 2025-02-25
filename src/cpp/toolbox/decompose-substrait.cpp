@@ -75,7 +75,12 @@ enum PlanType {
 // Functions
 
 // >> Prototypes
-string FilenameForPlan(const string& basename, PlanType plan_type, size_t srv_ndx, size_t msg_ndx = 0);
+unique_ptr<Plan>
+ProcessPlanAsService( const string&           query_name
+                     ,unique_ptr<PlanMessage> plan_msg
+                     ,bool                    use_eagersplit
+                     ,int                     count_splits);
+
 
 // >> Implementations
 int ValidateArgs(int argc, char **argv) {
@@ -94,12 +99,12 @@ int ValidateArgs(int argc, char **argv) {
 }
 
 
-int WritePlan(const string& plan_fname, Plan* plan) {
+int WritePlan(Plan& plan, const string& plan_fname) {
   std::cout << "\tWriting plan to file [" << plan_fname << "]" << std::endl;
 
   auto output_stream = mohair::OutputStreamForFile(plan_fname.data());
   if (not output_stream) { return 14; }
-  if (not plan->SerializeToOstream(&output_stream)) {
+  if (not plan.SerializeToOstream(&output_stream)) {
     std::cerr << "\tFailed to write plan to file" << std::endl;
     return 15;
   }
@@ -107,213 +112,277 @@ int WritePlan(const string& plan_fname, Plan* plan) {
   return 0;
 }
 
-string FilenameForPlan(const string& basename, PlanType plan_type, size_t srv_ndx, size_t msg_ndx) {
-  string suffix { ".substrait" };
+int WritePushdownPlan(Plan& pushdown_plan, string& plan_name) {
+  string pushdown_fname { "resources/pushdown/" + plan_name + "pushdown.substrait" };
 
-  switch (plan_type) {
-    case PlanType::SuperPlan: {
-      string dirname   { "resources/superplans/" };
-      string plan_name { basename + "-super." + std::to_string(srv_ndx) };
-
-      return dirname + plan_name + suffix;
-    }
-
-    case PlanType::SubPlan: {
-      string dirname   { "resources/subplans/" };
-      string plan_name {
-          basename + "-sub."
-        + std::to_string(srv_ndx) + "."
-        + std::to_string(msg_ndx)
-      };
-      return dirname + plan_name + suffix;
-    }
-
-    case PlanType::Merged: {
-      string dirname   { "resources/merged/" };
-      string plan_name {
-          basename + "-merged."
-        + std::to_string(srv_ndx) + "."
-        + std::to_string(msg_ndx)
-      };
-
-      return dirname + plan_name + suffix;
-    }
-
-    case PlanType::Pushdown: {
-      string dirname   { "resources/pushdown/" };
-      string plan_name { basename + "-pushdown." + std::to_string(srv_ndx) };
-
-      return dirname + plan_name + suffix;
-    }
-
-    case PlanType::Pushback: {
-      string dirname   { "resources/pushback/" };
-      string plan_name {
-          basename + "-pushback."
-        + std::to_string(srv_ndx) + "."
-        + std::to_string(msg_ndx)
-      };
-
-      return dirname + plan_name + suffix;
-    }
-
-    default:
-      std::cerr << "Invalid plan type" << std::endl;
-      return "";
-  }
+  return WritePlan(pushdown_plan, pushdown_fname);
 }
 
+int WriteSuperPlan(Plan& super_plan, string& plan_name) {
+  string super_fname { "resources/superplans/" + plan_name + "super.substrait" };
 
-unique_ptr<Plan>
-ProcessPlanAsService(const string& query_name, unique_ptr<PlanMessage> plan_msg, int count_splits) {
-  if (plan_msg == nullptr) {
+  return WritePlan(super_plan, super_fname);
+}
+
+int WriteSubPlan(Plan& sub_plan, string& plan_name) {
+  string sub_fname { "resources/subplans/" + plan_name + "sub.substrait" };
+
+  return WritePlan(sub_plan, sub_fname);
+}
+
+int WritePushbackPlan(Plan& pushback_plan, string& plan_name) {
+  string pushback_fname { "resources/pushback/" + plan_name + "pushback.substrait" };
+
+  return WritePlan(pushback_plan, pushback_fname);
+}
+
+int WriteMergedPlan(Plan& merged_plan, string& plan_name) {
+  string merged_fname { "resources/merged/" + plan_name + "merged.substrait" };
+
+  return WritePlan(merged_plan, merged_fname);
+}
+
+int WriteExecutionPlan(Plan& exec_plan, string& plan_name) {
+  string execution_fname { "resources/execution/" + plan_name + "execution.substrait" };
+
+  return WritePlan(exec_plan, execution_fname);
+}
+
+// NOTE: hardcoded to assume the first PlanRel is a root
+string GetPlanID(Plan& plan) {
+  if (not plan.relations(0).has_root()) { return string { "" }; }
+
+  return string { "-" + std::to_string(plan.relations(0).subtree_anchor()) };
+}
+
+const mohair::SubstraitSchema&
+SchemaFromRel(const mohair::Rel& src_rel) {
+  const mohair::RelCommon& src_common = mohair::GetRelCommon(src_rel);
+
+  if (not src_common.hint().has_output_schema()) {
+    throw std::runtime_error("Expected Rel to have output schema");
+  }
+
+  return src_common.hint().output_schema();
+}
+
+void
+SetResultRel(Plan* pushback_plan) {
+  if (not pushback_plan->mutable_relations(0)->has_root()) {
+    std::cerr << "First PlanRel is not a root?" << std::endl;
+    throw std::runtime_error("Expected first PlanRel to be a root");
+  }
+
+  mohair::Rel* root_rel = pushback_plan->mutable_relations(0)
+                                       ->mutable_root()
+                                       ->mutable_input();
+
+  mohair::SkyResultRel result_op;
+  *(result_op.mutable_result_name()) = string { "test-name" };
+  result_op.mutable_schema()->CopyFrom(SchemaFromRel(*root_rel));
+
+  mohair::Rel result_rel;
+  result_rel.set_allocated_extension_leaf(new mohair::ExtensionLeafRel);
+  result_rel.mutable_extension_leaf()->mutable_detail()->PackFrom(result_op);
+  mohair::MoveRelOp(&result_rel, root_rel);
+}
+
+void
+SetResultRel(mohair::Rel* merge_rel, const mohair::Rel& exec_rootrel) {
+  mohair::SkyResultRel result_op;
+  *(result_op.mutable_result_name()) = string { "test-name" };
+  result_op.mutable_schema()->CopyFrom(SchemaFromRel(exec_rootrel));
+
+  mohair::Rel result_rel;
+  result_rel.set_allocated_extension_leaf(new mohair::ExtensionLeafRel);
+  result_rel.mutable_extension_leaf()->mutable_detail()->PackFrom(result_op);
+  mohair::MoveRelOp(&result_rel, merge_rel);
+}
+
+unique_ptr<SystemPlan>
+ParseQueryPlan(unique_ptr<PlanMessage>&& received_plan) {
+  if (received_plan == nullptr) {
     std::cerr << "Received null plan message" << std::endl;
     return nullptr;
   }
 
-  // Convert substrait to a plan we understand
-  unique_ptr<SystemPlan> sys_plan { mohair::SystemPlanFrom(std::move(plan_msg)) };
-
+  unique_ptr<SystemPlan> sys_plan { mohair::SystemPlanFrom(std::move(received_plan)) };
   if (sys_plan == nullptr) {
     std::cerr << "Failed to construct system plan" << std::endl;
     return nullptr;
   }
 
-  Plan* service_plan = sys_plan->plan_msg->payload.get();
+  return sys_plan;
+}
 
-  // Currently, plan is what we received as a pushdown
-  string root_anchorid { "" };
-  if (service_plan->mutable_relations(0)->has_root()) {
-    root_anchorid = string {
-        "-"
-      + std::to_string(
-          service_plan->mutable_relations(0)->subtree_anchor()
-        )
-    };
-  }
-
-  string pushdown_fname = FilenameForPlan(
-    query_name + root_anchorid, PlanType::Pushdown, count_splits
-  );
-  if (WritePlan(pushdown_fname, service_plan) != 0) { return nullptr; }
-
-  std::cout << "[" << count_splits << "] Pipelines" << std::endl;
-  sys_plan->PrintPipelines();
-
-  // >> If we're a leaf, just return our pushback message
-  if (count_splits == 0) {
-    auto pushback_msg = std::make_unique<Plan>();
-    pushback_msg->CopyFrom(*service_plan);
-
-    return pushback_msg;
-  }
-
-
-  // >> Otherwise, we'll split and propagate and then return
-  // Find a split point
-  unique_ptr<PlanSplit> service_split {
-    // PlanSplit::FindSplit(sys_plan.get(), DecomposeAlg::WideJoinHead)
-    PlanSplit::FindSplit(sys_plan.get())
-  };
-
-  // If there's no split we can do, function as a pass-through
-  if (not service_split->CanSplit()) {
-    return ProcessPlanAsService(
-      query_name, std::move(sys_plan->plan_msg), count_splits - 1
-    );
-  }
-
-  // Make the split
-  vector<unique_ptr<PlanMessage>> subplan_msgs = service_split->ExtractSubplans();
+void DecomposePlanEager( unique_ptr<PlanSplit> eager_split
+                        ,string&               plan_name
+                        ,const string&         query_name
+                        ,bool                  use_eagersplit
+                        ,int                   count_splits) {
+  vector<unique_ptr<PlanMessage>> subplan_msgs = eager_split->ExtractSubplans();
 
   // Write the superplan (superplan of the original pushdown)
-  int mergerel_ndx = service_split->super_plan->relations_size() - 1;
-  uint32_t mergerel_anchorid = service_split->super_plan->mutable_relations(mergerel_ndx)->subtree_anchor();
-  string superplan_fname = FilenameForPlan(
-     query_name + "-" + std::to_string(mergerel_anchorid)
-    ,PlanType::SuperPlan
-    ,count_splits
-  );
-  WritePlan(superplan_fname, service_split->super_plan);
+  Plan&    super_plan        = *(eager_split->super_plan);
+  int      mergerel_ndx      = super_plan.relations_size() - 1;
+  uint32_t mergerel_anchorid = super_plan.relations(mergerel_ndx).subtree_anchor();
 
-  for (size_t subplan_ndx = 0; subplan_ndx < subplan_msgs.size(); ++subplan_ndx) {
-    PlanMessage* subplan_msg  = subplan_msgs[subplan_ndx].get();
-    uint32_t subplan_anchorid = (
-      subplan_msg->payload->mutable_relations(0)
-                          ->subtree_anchor()
+  string splan_name { plan_name + "anchor-" + std::to_string(mergerel_anchorid) + "." };
+  WriteSuperPlan(super_plan,  splan_name);
+
+  for (size_t sub_ndx = 0; sub_ndx < subplan_msgs.size(); ++sub_ndx) {
+    Plan&    subplan      = *(subplan_msgs[sub_ndx]->payload);
+    uint32_t sub_anchorid = subplan.relations(0).subtree_anchor();
+
+    string subplan_name { plan_name + "anchor-" + std::to_string(sub_anchorid) + "." };
+    WriteSubPlan(subplan, subplan_name);
+
+    // Delegate subplan to downstream service
+    unique_ptr<Plan> pushback_plan = ProcessPlanAsService(
+       query_name, std::move(subplan_msgs[sub_ndx]), use_eagersplit, count_splits
     );
 
-    // Now, the service_plan is the result of merging with subplan [subplan_ndx]
-    string subplan_fname = FilenameForPlan(
-       query_name + "-" + std::to_string(subplan_anchorid)
-      ,PlanType::SubPlan
-      ,count_splits
-      ,subplan_ndx
-    );
-    WritePlan(subplan_fname, subplan_msg->payload.get());
-
-    if (subplan_msg->payload->mutable_relations(0)->mutable_root()->mutable_input()->has_aggregate()) {
-      auto aggregate_rel = subplan_msg->payload->mutable_relations(0)->mutable_root()->mutable_input()->mutable_aggregate();
-      if (aggregate_rel->mutable_input()->has_reference()) {
-        std::cout << "Check processing of this subplan" << std::endl;
-        // PrintSubstraitPlan(subplan_msg->payload.get());
-
-        mohair::AdvancedExtension* subplan_planext  = subplan_msg->payload->mutable_advanced_extensions();
-        auto optimizations = subplan_planext->mutable_optimization();
-        for (auto itr = optimizations->begin(); itr != optimizations->end(); ++itr) {
-          mohair::SuperPlan tmp_superplan {};
-          if (not itr->Is<mohair::SuperPlan>()) { continue; }
-
-          itr->UnpackTo(&tmp_superplan);
-          // std::cout << "SuperPlan: " << tmp_superplan.DebugString() << std::endl;
-        }
-      }
+    if (pushback_plan == nullptr) {
+      std::cerr << "Error: Received empty pushback" << std::endl;
+      throw std::runtime_error("Eager split received empty pushback");
     }
 
-    auto subplan_copy = std::make_unique<Plan>();
-    subplan_copy->CopyFrom(*subplan_msg->payload);
+    unique_ptr<PlanMessage> pushback_msg = PlanMessage::FromPlan(std::move(pushback_plan));
 
-    // Recurse to downstream service
-    unique_ptr<Plan> received_pushback = ProcessPlanAsService(
-       query_name
-      ,std::make_unique<PlanMessage>(std::move(subplan_copy))
-      ,count_splits - 1
+    // >> Merge the pushback and write the result
+    eager_split->MergeSubplan(pushback_msg.get());
+    WriteMergedPlan(*(eager_split->super_plan), splan_name);
+  }
+}
+
+unique_ptr<Plan> DecomposePlanLazy(SystemPlan& sys_plan, string& plan_name) {
+  unique_ptr<PlanSplit> lazy_split {
+    PlanSplit::FindSplit(&sys_plan, DecomposeAlg::LongPipelineLeaf)
+  };
+
+  if (not lazy_split->CanSplit()) {
+    Plan& parsed_plan   = *(sys_plan.plan_msg->payload);
+    auto  pushback_plan = std::make_unique<Plan>();
+    pushback_plan->CopyFrom(parsed_plan);
+
+    WriteExecutionPlan(parsed_plan, plan_name);
+    SetResultRel(pushback_plan.get());
+    WritePushbackPlan(*pushback_plan, plan_name);
+    return pushback_plan;
+  }
+
+  // NOTE: lazy  splitting means subplan  == candidate execution plan
+  // NOTE: eager splitting means pushback == candidate execution plan
+  // NOTE: ExtractSubplans modifies sys_plan by moving the execution portion to a subtree
+  // TODO: probably true, but if the anchor operator is a join, a lazy split can choose
+  //       a join input. That is technically 1 subplan if the other join input is
+  //       "unavailable".
+  // NOTE: define "data availability" as whether there is a local relation that can be
+  //       matched. define "data consistency" as being sure that available data is
+  //       consistent with the data source (all places it is persisted downstream).
+  //       for our initial paper, we consider "being in a partition" means failure
+  //       should happen ("strong consistency" therefore data is unavailable).
+  unique_ptr<PlanMessage> exec_subplan = lazy_split->ExtractExecSubplan();
+  WriteExecutionPlan(*(exec_subplan->payload), plan_name);
+
+  // TODO: only necessary if lazy_split does not modify sys_plan (which it should)
+  // pushback_plan->CopyFrom(*(lazy_split->super_plan));
+  Plan* super_plan        = lazy_split->super_plan;
+  int   mergerel_ndx      = super_plan->relations_size() - 1;
+  mohair::Rel* merge_rel  = super_plan->mutable_relations(mergerel_ndx)->mutable_rel();
+  mohair::Rel* anchor_rel = lazy_split->superplan_mergerel->substrait_rel;
+
+  SetResultRel(merge_rel, exec_subplan->root_relation->root().input());
+  mohair::MoveReferenceToOp(super_plan, anchor_rel);
+  WritePushbackPlan(*(sys_plan.plan_msg->payload), plan_name);
+
+  return std::move(sys_plan.plan_msg->payload);
+}
+
+
+unique_ptr<Plan>
+ProcessPlanAsService( const string&           query_name
+                     ,unique_ptr<PlanMessage> plan_msg
+                     ,bool                    use_eagersplit
+                     ,int                     count_splits) {
+  // Parse phase
+  unique_ptr<SystemPlan> sys_plan = ParseQueryPlan(std::move(plan_msg));
+  if (sys_plan == nullptr) { return nullptr; }
+
+  Plan&  substrait_plan = *(sys_plan->plan_msg->payload);
+  string plan_name {
+    query_name + GetPlanID(substrait_plan) + "." + std::to_string(count_splits) + "."
+  };
+
+  // Decomposition phase
+  std::cout << "Decomposing plan [stage: " << count_splits << "]" << std::endl;
+  if (WritePushdownPlan(substrait_plan, plan_name) != 0) { return nullptr; }
+
+  // Base case for delegation
+  if (count_splits == 0) {
+    if (not use_eagersplit) { return DecomposePlanLazy(*sys_plan, plan_name); }
+
+    auto pushback_plan = std::make_unique<Plan>();
+    pushback_plan->CopyFrom(substrait_plan);
+
+    // The whole plan is "executed" and the pushback is just the ResultRel
+    WriteExecutionPlan(*pushback_plan, plan_name);
+    SetResultRel(pushback_plan.get());
+    WritePushbackPlan(*pushback_plan, plan_name);
+    return pushback_plan;
+  }
+
+  // Check if we're doing a lazy split (simpler logic)
+  if (not use_eagersplit) {
+    // Delegate whole plan
+    unique_ptr<Plan> pushback_plan = ProcessPlanAsService(
+       query_name, std::move(sys_plan->plan_msg), use_eagersplit, count_splits - 1
     );
 
-    if (received_pushback == nullptr) {
-      std::cout << "Received empty pushback" << std::endl;
-      /*
-      std::cout << "-- Super Plan --" << std::endl;
-      PrintSubstraitPlan(service_plan);
-
-      std::cout << "-- Subplan --" << std::endl;
-      PrintSubstraitPlan(subplan_msg->payload.get());
-      */
-
+    if (pushback_plan == nullptr) {
+      std::cerr << "Error: Received empty pushback" << std::endl;
       return nullptr;
     }
 
-    unique_ptr<PlanMessage> pushback_msg = PlanMessage::FromPlan(
-      std::move(received_pushback)
+    // Parse pushback so that we can do lazy splitting
+    unique_ptr<SystemPlan> lazy_sysplan = ParseQueryPlan(
+      PlanMessage::FromPlan(std::move(pushback_plan))
     );
 
-    // >> Merge the pushback and write the result
-    service_split->MergeSubplan(pushback_msg.get());
+    if (lazy_sysplan == nullptr) { return nullptr; }
 
-    // Now, the service_plan is the result of merging with subplan [subplan_ndx]
-    string mergeplan_fname = FilenameForPlan(
-       query_name + root_anchorid
-      ,PlanType::Merged
-      ,service_split->stage_ndx
-      ,subplan_ndx
-    );
-    WritePlan(mergeplan_fname, service_plan);
+    // Do lazy splitting, "execution," then return the pushback
+    return DecomposePlanLazy(*lazy_sysplan, plan_name);
   }
 
-  // Now, we respond with our updated PlanMessage
-  auto pushback_plan = std::make_unique<Plan>();
-  pushback_plan->CopyFrom(*service_plan);
+  // Otherwise, do eager split
+  unique_ptr<PlanSplit> eager_split {
+    PlanSplit::FindSplit(sys_plan.get(), DecomposeAlg::WideJoinHead)
+  };
 
+  // If there's no split we can do, function as a pass-through
+  if (not eager_split->CanSplit()) {
+    return ProcessPlanAsService(
+      query_name, std::move(sys_plan->plan_msg), use_eagersplit, count_splits - 1
+    );
+  }
+
+  DecomposePlanEager(
+     std::move(eager_split)
+    ,plan_name
+    ,query_name
+    ,use_eagersplit
+    ,count_splits - 1
+  );
+
+  // >> Execution phase
+  auto pushback_plan = std::make_unique<Plan>();
+  pushback_plan->CopyFrom(substrait_plan);
+
+  // The whole plan is "executed" and the pushback is just the ResultRel
+  WriteExecutionPlan(*pushback_plan, plan_name);
+  SetResultRel(pushback_plan.get());
+  WritePushbackPlan(*pushback_plan, plan_name);
   return pushback_plan;
 }
 
@@ -348,14 +417,32 @@ int main(int argc, char **argv) {
   auto request_copy = std::make_unique<Plan>();
   request_copy->CopyFrom(*(substrait_msg->payload));
 
-  unique_ptr<Plan> pushback_plan = ProcessPlanAsService(
-     substrait_fname
+  // Exercise query splitting using eager and lazy strategies
+  // NOTE: this test code is naive and so the whole chain is either eager or lazy
+  unique_ptr<Plan> eager_pushback = ProcessPlanAsService(
+     substrait_fname + "-eager"
     ,std::make_unique<PlanMessage>(std::move(request_copy))
+    ,true
     ,2
   );
 
-  if (pushback_plan == nullptr) {
-    std::cerr << "Failed to process plan" << std::endl;
+  if (eager_pushback == nullptr) {
+    std::cerr << "Failed to process plan with eager splits" << std::endl;
+    return ERROR_PLAN_PROCESS;
+  }
+
+  // Initialize a new request to test lazy splitting
+  request_copy = std::make_unique<Plan>();
+  request_copy->CopyFrom(*(substrait_msg->payload));
+  unique_ptr<Plan> lazy_pushback = ProcessPlanAsService(
+     substrait_fname + "-lazy"
+    ,std::make_unique<PlanMessage>(std::move(request_copy))
+    ,false
+    ,2
+  );
+
+  if (lazy_pushback == nullptr) {
+    std::cerr << "Failed to process plan with lazy splits" << std::endl;
     return ERROR_PLAN_PROCESS;
   }
 

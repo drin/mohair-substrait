@@ -462,6 +462,55 @@ namespace mohair {
     return true;
   }
 
+  //! Create a single substrait message from this split and the given stage
+  unique_ptr<PlanMessage> PlanSplit::ExtractExecSubplan() {
+    MohairStartTS(ExtractPlanSplitExec);
+
+    // This happens when the plan could not be split and we missed it
+    MOHAIR_ASSERT("Split failed but we kept going anyway", superplan_mergerel != nullptr);
+
+    // Initialize execution subplan from the superplan (ensures we propagate all context)
+    // TODO: make this copy more efficient
+    auto exec_plan = std::make_unique<Plan>();
+    exec_plan->CopyFrom(*super_plan);
+
+    // Clear output names in the execution subplan, or it'll confuse the engine
+    const PlanRel& exec_root = exec_plan->relations(0);
+    if (not exec_root.has_root()) {
+      throw std::runtime_error("ExecSubplan's first PlanRel is not a root");
+    }
+    if (not exec_root.root().names().empty()) {
+      exec_plan->mutable_relations(0)->mutable_root()->clear_names();
+    }
+
+    // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
+    PlanRel* superplan_anchor = MoveOpToReference(super_plan, superplan_mergerel->substrait_rel);
+    unique_ptr<SuperPlan> refrel_superplan = CreateSuperPlanRel(superplan_anchor);
+
+    // Then, create the execution subplan message to contain the subplan
+    unique_ptr<PlanMessage> exec_subplan { PlanMessage::FromPlan(std::move(exec_plan)) };
+
+    // Move the op tree from the superplan to the subplan
+    PlanRel* subplan_planroot = exec_subplan->root_relation;
+    Rel*     new_rootrel      = subplan_planroot->mutable_root()->mutable_input();
+    Rel*     old_rootrel      = superplan_anchor->mutable_rel();
+
+    MoveRelOp(old_rootrel, new_rootrel);
+    CreateReferenceRel(old_rootrel, subplan_planroot);
+
+    // Pack the `SuperPlan` message so we can match pushback plans to the merge rel
+    Plan* subplan = exec_subplan->payload.get();
+
+    AdvancedExtension* subplan_planext  = subplan->mutable_advanced_extensions();
+    AnyMessage*        optimization_msg = subplan_planext->add_optimization();
+    optimization_msg->PackFrom(*refrel_superplan);
+
+    MohairStopTS(ExtractPlanSplitExec);
+    MohairLogTimestamps(ExtractPlanSplitExec);
+
+    return exec_subplan;
+  }
+
   //! Create a list of substrait messages given this instance's split information.
   vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
     MohairStartTS(ExtractPlanSplit);
@@ -521,8 +570,9 @@ namespace mohair {
     optional<size_t> candidate_ndx { std::nullopt };
     size_t           peak_height   { 0 };
 
-    size_t back_ndx = sys_plan->pipeline_stages.size();
-    for (size_t stage_ndx = back_ndx; stage_ndx >= 0; --stage_ndx) {
+    // NOTE: done when stage_ndx underflows to max value
+    size_t back_ndx  = sys_plan->pipeline_stages.size();
+    for (size_t stage_ndx = back_ndx - 1; stage_ndx < back_ndx; --stage_ndx) {
       PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
 
       if (stage->width != 2)            { continue; }
@@ -544,8 +594,9 @@ namespace mohair {
     optional<size_t> candidate_ndx { std::nullopt };
     size_t           peak_height   { 0 };
 
-    size_t back_ndx = sys_plan->pipeline_stages.size();
-    for (size_t stage_ndx = back_ndx; stage_ndx >= 0; --stage_ndx) {
+    // NOTE: done when stage_ndx underflows to max value
+    size_t back_ndx  = sys_plan->pipeline_stages.size();
+    for (size_t stage_ndx = back_ndx - 1; stage_ndx < back_ndx; --stage_ndx) {
       PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
 
       if (stage->origin_names.size() > 1) { continue; }
