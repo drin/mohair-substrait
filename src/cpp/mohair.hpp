@@ -179,6 +179,9 @@ namespace mohair {
   //! Find the index of the plan's root operator in the list of op trees
   int FindPlanRoot(Plan& substrait_plan);
 
+  //! Return the PlanRel from substrait_plan containing the root subtree
+  PlanRel* GetPlanRoot(Plan* substrait_plan);
+
   //! Get the common op structure from the given Rel
   RelCommon*       GetRelCommon(Rel*       rel);
   const RelCommon& GetRelCommon(const Rel& rel);
@@ -199,7 +202,7 @@ namespace mohair {
   unique_ptr<SuperPlan> CreateSuperPlanRel(PlanRel* anchor_rel);
 
   //! Create a SkyResultRel that describes how to read a remote materialized result
-  unique_ptr<SkyResultRel> CreateResultRel(PlanRel* view_plan);
+  unique_ptr<SkyResultRel> CreateResultRelForPlan(Plan* view_plan);
 
   //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
   unique_ptr<Rel> CopyRel(Rel* src_rel);

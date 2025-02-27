@@ -205,6 +205,7 @@ namespace mohair {
     FindSplit(SystemPlan* sys_plan, const DecomposeAlg& method = DecomposeAlg::None);
 
     bool CanSplit();
+    bool MergeResultRel(Rel* result_rel);
     bool MergeSubplan(PlanMessage* subplan_msg);
 
     unique_ptr<PlanMessage>         ExtractExecSubplan();

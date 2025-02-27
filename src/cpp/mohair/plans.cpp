@@ -370,6 +370,39 @@ namespace mohair {
   //! Returns true if this instance can split the given `SystemPlan`
   bool PlanSplit::CanSplit() { return this->stage != nullptr; }
 
+  //! Merge the given `SkyResultRel` into this instance's superplan.
+  //  We use this instead of MergeSubplan if we don't need to merge a whole plan.
+  bool PlanSplit::MergeResultRel(Rel* result_rel) {
+    // This should only be valid if:
+    // - we have a single merge rel
+    // - inputs to the merge rel has no references
+    if (super_plan->relations_size() != 2) {
+      std::cerr << "PlanSplit cannot merge result if it does not have only one anchor"
+                << std::endl
+      ;
+      return false;
+    }
+
+    int  mergerel_ndx = super_plan->relations_size() - 1;
+    Rel* merge_rel    = super_plan->mutable_relations(mergerel_ndx)->mutable_rel();
+
+    const vector<Rel*>& anchor_inputs = GetInputRels(merge_rel);
+    for (const Rel* input_rel : anchor_inputs) {
+      if (input_rel->has_reference()) {
+        std::cerr << "PlanSplit cannot merge result if it has unresolved references"
+                  << std::endl
+        ;
+        return false;
+      }
+    }
+
+    // Replace the merge rel and move the merge rel back into the root subtree
+    MoveRelOp(result_rel, merge_rel);
+    MoveReferenceToOp(super_plan, superplan_mergerel->substrait_rel);
+
+    return true;
+  }
+
   //! Merge the given `PlanMessage` into this instance's superplan.
   bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
     MohairStartTS(MergePlanSplit);
@@ -438,7 +471,7 @@ namespace mohair {
 
         // Add each remaining relation to the superplan
         PlanRel* new_rel = super_plan->add_relations();
-        *new_rel = *rel_itr;
+        new_rel->CopyFrom(*rel_itr);
     }
 
     // If any input to the anchor rel is a reference, we're done
