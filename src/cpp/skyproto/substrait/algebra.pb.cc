@@ -1521,7 +1521,6 @@ inline constexpr Expression_ReferenceSegment_ListElement::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         child_{nullptr},
-        element_type_{nullptr},
         offset_{0} {}
 
 template <typename>
@@ -1548,8 +1547,7 @@ inline constexpr Expression_ReferenceSegment_MapKey::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         map_key_{nullptr},
-        child_{nullptr},
-        value_type_{nullptr} {}
+        child_{nullptr} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR Expression_ReferenceSegment_MapKey::Expression_ReferenceSegment_MapKey(::_pbi::ConstantInitialized)
@@ -1575,7 +1573,6 @@ inline constexpr Expression_ReferenceSegment_StructField::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         child_{nullptr},
-        field_type_{nullptr},
         field_{0} {}
 
 template <typename>
@@ -3068,7 +3065,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr Rel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : rel_type_{},
+      : has_splitoverride_{false},
+        rel_type_{},
         _cached_size_{0},
         _oneof_case_{} {}
 
@@ -3992,6 +3990,7 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Rel, _impl_.has_splitoverride_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Rel, _impl_.rel_type_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedObjectWrite, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedObjectWrite, _internal_metadata_),
@@ -4695,10 +4694,8 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_MapKey, _impl_.map_key_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_MapKey, _impl_.value_type_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_MapKey, _impl_.child_),
         0,
-        2,
         1,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_StructField, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_StructField, _internal_metadata_),
@@ -4709,10 +4706,8 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_StructField, _impl_.field_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_StructField, _impl_.field_type_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_StructField, _impl_.child_),
         ~0u,
-        1,
         0,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_ListElement, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_ListElement, _internal_metadata_),
@@ -4723,10 +4718,8 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_ListElement, _impl_.offset_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_ListElement, _impl_.element_type_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment_ListElement, _impl_.child_),
         ~0u,
-        1,
         0,
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_ReferenceSegment, _internal_metadata_),
@@ -5077,84 +5070,84 @@ static const ::_pbi::MigrationSchema
         {613, 624, -1, sizeof(::skyproto::substrait::ExpandRel)},
         {627, 637, -1, sizeof(::skyproto::substrait::RelRoot)},
         {639, -1, -1, sizeof(::skyproto::substrait::Rel)},
-        {670, 680, -1, sizeof(::skyproto::substrait::NamedObjectWrite)},
-        {682, 691, -1, sizeof(::skyproto::substrait::ExtensionObject)},
-        {692, 709, -1, sizeof(::skyproto::substrait::DdlRel)},
-        {717, 734, -1, sizeof(::skyproto::substrait::WriteRel)},
-        {742, 752, -1, sizeof(::skyproto::substrait::UpdateRel_TransformExpression)},
-        {754, 767, -1, sizeof(::skyproto::substrait::UpdateRel)},
-        {771, 781, -1, sizeof(::skyproto::substrait::NamedTable)},
-        {783, -1, -1, sizeof(::skyproto::substrait::ComparisonJoinKey_ComparisonType)},
-        {794, 805, -1, sizeof(::skyproto::substrait::ComparisonJoinKey)},
-        {808, 825, -1, sizeof(::skyproto::substrait::HashJoinRel)},
-        {834, 851, -1, sizeof(::skyproto::substrait::MergeJoinRel)},
-        {860, 874, -1, sizeof(::skyproto::substrait::NestedLoopJoinRel)},
-        {880, -1, -1, sizeof(::skyproto::substrait::FunctionArgument)},
-        {892, -1, -1, sizeof(::skyproto::substrait::FunctionOption)},
-        {902, -1, -1, sizeof(::skyproto::substrait::Expression_Enum_Empty)},
-        {910, -1, -1, sizeof(::skyproto::substrait::Expression_Enum)},
-        {921, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_VarChar)},
-        {931, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Decimal)},
-        {942, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_PrecisionTimestamp)},
-        {952, 962, -1, sizeof(::skyproto::substrait::Expression_Literal_Map_KeyValue)},
-        {964, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Map)},
-        {973, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalYearToMonth)},
-        {983, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalDayToSecond)},
-        {997, 1007, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalCompound)},
-        {1009, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Struct)},
-        {1018, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_List)},
-        {1027, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_UserDefined)},
-        {1040, -1, -1, sizeof(::skyproto::substrait::Expression_Literal)},
-        {1081, 1091, -1, sizeof(::skyproto::substrait::Expression_Nested_Map_KeyValue)},
-        {1093, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Map)},
-        {1102, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Struct)},
-        {1111, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_List)},
-        {1120, -1, -1, sizeof(::skyproto::substrait::Expression_Nested)},
-        {1134, 1147, -1, sizeof(::skyproto::substrait::Expression_ScalarFunction)},
-        {1152, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Preceding)},
-        {1161, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Following)},
-        {1170, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_CurrentRow)},
-        {1178, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Unbounded)},
-        {1186, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound)},
-        {1199, 1219, -1, sizeof(::skyproto::substrait::Expression_WindowFunction)},
-        {1231, 1241, -1, sizeof(::skyproto::substrait::Expression_IfThen_IfClause)},
-        {1243, 1253, -1, sizeof(::skyproto::substrait::Expression_IfThen)},
-        {1255, 1266, -1, sizeof(::skyproto::substrait::Expression_Cast)},
-        {1269, 1279, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression_IfValue)},
-        {1281, 1292, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression)},
-        {1295, 1305, -1, sizeof(::skyproto::substrait::Expression_SingularOrList)},
-        {1307, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList_Record)},
-        {1316, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList)},
-        {1326, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
-        {1336, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
-        {1346, 1359, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction)},
-        {1363, 1374, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_MapKey)},
-        {1377, 1388, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_StructField)},
-        {1391, 1402, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_ListElement)},
-        {1405, -1, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment)},
-        {1417, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_Select)},
-        {1429, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructSelect)},
-        {1438, 1448, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructItem)},
-        {1450, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
-        {1459, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
-        {1469, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
-        {1480, 1490, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect)},
-        {1492, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKey)},
-        {1501, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
-        {1510, 1522, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect)},
-        {1525, 1535, -1, sizeof(::skyproto::substrait::Expression_MaskExpression)},
-        {1537, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_RootReference)},
-        {1545, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_OuterReference)},
-        {1554, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference)},
-        {1569, 1578, -1, sizeof(::skyproto::substrait::Expression_Subquery_Scalar)},
-        {1579, 1589, -1, sizeof(::skyproto::substrait::Expression_Subquery_InPredicate)},
-        {1591, 1601, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetPredicate)},
-        {1603, 1615, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetComparison)},
-        {1619, -1, -1, sizeof(::skyproto::substrait::Expression_Subquery)},
-        {1632, -1, -1, sizeof(::skyproto::substrait::Expression)},
-        {1653, 1665, -1, sizeof(::skyproto::substrait::SortField)},
-        {1668, 1684, -1, sizeof(::skyproto::substrait::AggregateFunction)},
-        {1692, 1702, -1, sizeof(::skyproto::substrait::ReferenceRel)},
+        {671, 681, -1, sizeof(::skyproto::substrait::NamedObjectWrite)},
+        {683, 692, -1, sizeof(::skyproto::substrait::ExtensionObject)},
+        {693, 710, -1, sizeof(::skyproto::substrait::DdlRel)},
+        {718, 735, -1, sizeof(::skyproto::substrait::WriteRel)},
+        {743, 753, -1, sizeof(::skyproto::substrait::UpdateRel_TransformExpression)},
+        {755, 768, -1, sizeof(::skyproto::substrait::UpdateRel)},
+        {772, 782, -1, sizeof(::skyproto::substrait::NamedTable)},
+        {784, -1, -1, sizeof(::skyproto::substrait::ComparisonJoinKey_ComparisonType)},
+        {795, 806, -1, sizeof(::skyproto::substrait::ComparisonJoinKey)},
+        {809, 826, -1, sizeof(::skyproto::substrait::HashJoinRel)},
+        {835, 852, -1, sizeof(::skyproto::substrait::MergeJoinRel)},
+        {861, 875, -1, sizeof(::skyproto::substrait::NestedLoopJoinRel)},
+        {881, -1, -1, sizeof(::skyproto::substrait::FunctionArgument)},
+        {893, -1, -1, sizeof(::skyproto::substrait::FunctionOption)},
+        {903, -1, -1, sizeof(::skyproto::substrait::Expression_Enum_Empty)},
+        {911, -1, -1, sizeof(::skyproto::substrait::Expression_Enum)},
+        {922, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_VarChar)},
+        {932, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Decimal)},
+        {943, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_PrecisionTimestamp)},
+        {953, 963, -1, sizeof(::skyproto::substrait::Expression_Literal_Map_KeyValue)},
+        {965, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Map)},
+        {974, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalYearToMonth)},
+        {984, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalDayToSecond)},
+        {998, 1008, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalCompound)},
+        {1010, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Struct)},
+        {1019, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_List)},
+        {1028, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_UserDefined)},
+        {1041, -1, -1, sizeof(::skyproto::substrait::Expression_Literal)},
+        {1082, 1092, -1, sizeof(::skyproto::substrait::Expression_Nested_Map_KeyValue)},
+        {1094, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Map)},
+        {1103, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Struct)},
+        {1112, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_List)},
+        {1121, -1, -1, sizeof(::skyproto::substrait::Expression_Nested)},
+        {1135, 1148, -1, sizeof(::skyproto::substrait::Expression_ScalarFunction)},
+        {1153, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Preceding)},
+        {1162, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Following)},
+        {1171, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_CurrentRow)},
+        {1179, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Unbounded)},
+        {1187, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound)},
+        {1200, 1220, -1, sizeof(::skyproto::substrait::Expression_WindowFunction)},
+        {1232, 1242, -1, sizeof(::skyproto::substrait::Expression_IfThen_IfClause)},
+        {1244, 1254, -1, sizeof(::skyproto::substrait::Expression_IfThen)},
+        {1256, 1267, -1, sizeof(::skyproto::substrait::Expression_Cast)},
+        {1270, 1280, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression_IfValue)},
+        {1282, 1293, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression)},
+        {1296, 1306, -1, sizeof(::skyproto::substrait::Expression_SingularOrList)},
+        {1308, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList_Record)},
+        {1317, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList)},
+        {1327, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
+        {1337, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
+        {1347, 1360, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction)},
+        {1364, 1374, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_MapKey)},
+        {1376, 1386, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_StructField)},
+        {1388, 1398, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_ListElement)},
+        {1400, -1, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment)},
+        {1412, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_Select)},
+        {1424, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructSelect)},
+        {1433, 1443, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructItem)},
+        {1445, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
+        {1454, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
+        {1464, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
+        {1475, 1485, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect)},
+        {1487, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKey)},
+        {1496, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
+        {1505, 1517, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect)},
+        {1520, 1530, -1, sizeof(::skyproto::substrait::Expression_MaskExpression)},
+        {1532, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_RootReference)},
+        {1540, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_OuterReference)},
+        {1549, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference)},
+        {1564, 1573, -1, sizeof(::skyproto::substrait::Expression_Subquery_Scalar)},
+        {1574, 1584, -1, sizeof(::skyproto::substrait::Expression_Subquery_InPredicate)},
+        {1586, 1596, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetPredicate)},
+        {1598, 1610, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetComparison)},
+        {1614, -1, -1, sizeof(::skyproto::substrait::Expression_Subquery)},
+        {1627, -1, -1, sizeof(::skyproto::substrait::Expression)},
+        {1648, 1660, -1, sizeof(::skyproto::substrait::SortField)},
+        {1663, 1679, -1, sizeof(::skyproto::substrait::AggregateFunction)},
+        {1687, 1697, -1, sizeof(::skyproto::substrait::ReferenceRel)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_RelCommon_Direct_default_instance_._instance,
@@ -5567,7 +5560,7 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto[] AB
     "witchingField\022>\n\nduplicates\030\001 \003(\0132\036.skyp"
     "roto.substrait.ExpressionR\nduplicates\"N\n"
     "\007RelRoot\022-\n\005input\030\001 \001(\0132\027.skyproto.subst"
-    "rait.RelR\005input\022\024\n\005names\030\002 \003(\tR\005names\"\356\n"
+    "rait.RelR\005input\022\024\n\005names\030\002 \003(\tR\005names\"\233\013"
     "\n\003Rel\0221\n\004read\030\001 \001(\0132\033.skyproto.substrait"
     ".ReadRelH\000R\004read\0227\n\006filter\030\002 \001(\0132\035.skypr"
     "oto.substrait.FilterRelH\000R\006filter\0224\n\005fet"
@@ -5602,519 +5595,514 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto[] AB
     "indowRelH\000R\006window\022=\n\010exchange\030\017 \001(\0132\037.s"
     "kyproto.substrait.ExchangeRelH\000R\010exchang"
     "e\0227\n\006expand\030\020 \001(\0132\035.skyproto.substrait.E"
-    "xpandRelH\000R\006expandB\n\n\010rel_type\"\211\001\n\020Named"
-    "ObjectWrite\022\024\n\005names\030\001 \003(\tR\005names\022_\n\022adv"
-    "anced_extension\030\n \001(\01320.skyproto.substra"
-    "it.extensions.AdvancedExtensionR\021advance"
-    "dExtension\"\?\n\017ExtensionObject\022,\n\006detail\030"
-    "\001 \001(\0132\024.google.protobuf.AnyR\006detail\"\232\006\n\006"
-    "DdlRel\022I\n\014named_object\030\001 \001(\0132$.skyproto."
-    "substrait.NamedObjectWriteH\000R\013namedObjec"
-    "t\022P\n\020extension_object\030\002 \001(\0132#.skyproto.s"
-    "ubstrait.ExtensionObjectH\000R\017extensionObj"
-    "ect\022B\n\014table_schema\030\003 \001(\0132\037.skyproto.sub"
-    "strait.NamedStructR\013tableSchema\022T\n\016table"
-    "_defaults\030\004 \001(\0132-.skyproto.substrait.Exp"
-    "ression.Literal.StructR\rtableDefaults\022<\n"
-    "\006object\030\005 \001(\0162$.skyproto.substrait.DdlRe"
-    "l.DdlObjectR\006object\0220\n\002op\030\006 \001(\0162 .skypro"
-    "to.substrait.DdlRel.DdlOpR\002op\022@\n\017view_de"
-    "finition\030\007 \001(\0132\027.skyproto.substrait.RelR"
-    "\016viewDefinition\0225\n\006common\030\010 \001(\0132\035.skypro"
-    "to.substrait.RelCommonR\006common\"R\n\tDdlObj"
-    "ect\022\032\n\026DDL_OBJECT_UNSPECIFIED\020\000\022\024\n\020DDL_O"
-    "BJECT_TABLE\020\001\022\023\n\017DDL_OBJECT_VIEW\020\002\"\215\001\n\005D"
-    "dlOp\022\026\n\022DDL_OP_UNSPECIFIED\020\000\022\021\n\rDDL_OP_C"
-    "REATE\020\001\022\034\n\030DDL_OP_CREATE_OR_REPLACE\020\002\022\020\n"
-    "\014DDL_OP_ALTER\020\003\022\017\n\013DDL_OP_DROP\020\004\022\030\n\024DDL_"
-    "OP_DROP_IF_EXIST\020\005B\014\n\nwrite_type\"\257\007\n\010Wri"
-    "teRel\022G\n\013named_table\030\001 \001(\0132$.skyproto.su"
-    "bstrait.NamedObjectWriteH\000R\nnamedTable\022N"
-    "\n\017extension_table\030\002 \001(\0132#.skyproto.subst"
-    "rait.ExtensionObjectH\000R\016extensionTable\022B"
-    "\n\014table_schema\030\003 \001(\0132\037.skyproto.substrai"
-    "t.NamedStructR\013tableSchema\0224\n\002op\030\004 \001(\0162$"
-    ".skyproto.substrait.WriteRel.WriteOpR\002op"
-    "\022-\n\005input\030\005 \001(\0132\027.skyproto.substrait.Rel"
-    "R\005input\022H\n\013create_mode\030\010 \001(\0162\'.skyproto."
-    "substrait.WriteRel.CreateModeR\ncreateMod"
-    "e\022\?\n\006output\030\006 \001(\0162\'.skyproto.substrait.W"
-    "riteRel.OutputModeR\006output\0225\n\006common\030\007 \001"
-    "(\0132\035.skyproto.substrait.RelCommonR\006commo"
-    "n\"u\n\007WriteOp\022\030\n\024WRITE_OP_UNSPECIFIED\020\000\022\023"
-    "\n\017WRITE_OP_INSERT\020\001\022\023\n\017WRITE_OP_DELETE\020\002"
-    "\022\023\n\017WRITE_OP_UPDATE\020\003\022\021\n\rWRITE_OP_CTAS\020\004"
-    "\"\261\001\n\nCreateMode\022\033\n\027CREATE_MODE_UNSPECIFI"
-    "ED\020\000\022 \n\034CREATE_MODE_APPEND_IF_EXISTS\020\001\022!"
-    "\n\035CREATE_MODE_REPLACE_IF_EXISTS\020\002\022 \n\034CRE"
-    "ATE_MODE_IGNORE_IF_EXISTS\020\003\022\037\n\033CREATE_MO"
-    "DE_ERROR_IF_EXISTS\020\004\"f\n\nOutputMode\022\033\n\027OU"
-    "TPUT_MODE_UNSPECIFIED\020\000\022\031\n\025OUTPUT_MODE_N"
-    "O_OUTPUT\020\001\022 \n\034OUTPUT_MODE_MODIFIED_RECOR"
-    "DS\020\002B\014\n\nwrite_type\"\301\003\n\tUpdateRel\022A\n\013name"
-    "d_table\030\001 \001(\0132\036.skyproto.substrait.Named"
-    "TableH\000R\nnamedTable\022B\n\014table_schema\030\002 \001("
-    "\0132\037.skyproto.substrait.NamedStructR\013tabl"
-    "eSchema\022<\n\tcondition\030\003 \001(\0132\036.skyproto.su"
-    "bstrait.ExpressionR\tcondition\022[\n\017transfo"
-    "rmations\030\004 \003(\01321.skyproto.substrait.Upda"
-    "teRel.TransformExpressionR\017transformatio"
-    "ns\032\202\001\n\023TransformExpression\022F\n\016transforma"
-    "tion\030\001 \001(\0132\036.skyproto.substrait.Expressi"
-    "onR\016transformation\022#\n\rcolumn_target\030\002 \001("
-    "\005R\014columnTargetB\r\n\013update_type\"\203\001\n\nNamed"
-    "Table\022\024\n\005names\030\001 \003(\tR\005names\022_\n\022advanced_"
-    "extension\030\n \001(\01320.skyproto.substrait.ext"
-    "ensions.AdvancedExtensionR\021advancedExten"
-    "sion\"\337\004\n\021ComparisonJoinKey\022A\n\004left\030\001 \001(\013"
-    "2-.skyproto.substrait.Expression.FieldRe"
-    "ferenceR\004left\022C\n\005right\030\002 \001(\0132-.skyproto."
-    "substrait.Expression.FieldReferenceR\005rig"
-    "ht\022T\n\ncomparison\030\003 \001(\01324.skyproto.substr"
-    "ait.ComparisonJoinKey.ComparisonTypeR\nco"
-    "mparison\032\262\001\n\016ComparisonType\022T\n\006simple\030\001 "
-    "\001(\0162:.skyproto.substrait.ComparisonJoinK"
-    "ey.SimpleComparisonTypeH\000R\006simple\022<\n\031cus"
-    "tom_function_reference\030\002 \001(\rH\000R\027customFu"
-    "nctionReferenceB\014\n\ninner_type\"\266\001\n\024Simple"
-    "ComparisonType\022&\n\"SIMPLE_COMPARISON_TYPE"
-    "_UNSPECIFIED\020\000\022\035\n\031SIMPLE_COMPARISON_TYPE"
-    "_EQ\020\001\022/\n+SIMPLE_COMPARISON_TYPE_IS_NOT_D"
-    "ISTINCT_FROM\020\002\022&\n\"SIMPLE_COMPARISON_TYPE"
-    "_MIGHT_EQUAL\020\003\"\261\007\n\013HashJoinRel\0225\n\006common"
-    "\030\001 \001(\0132\035.skyproto.substrait.RelCommonR\006c"
-    "ommon\022+\n\004left\030\002 \001(\0132\027.skyproto.substrait"
-    ".RelR\004left\022-\n\005right\030\003 \001(\0132\027.skyproto.sub"
-    "strait.RelR\005right\022N\n\tleft_keys\030\004 \003(\0132-.s"
-    "kyproto.substrait.Expression.FieldRefere"
-    "nceB\002\030\001R\010leftKeys\022P\n\nright_keys\030\005 \003(\0132-."
-    "skyproto.substrait.Expression.FieldRefer"
-    "enceB\002\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%.skyp"
-    "roto.substrait.ComparisonJoinKeyR\004keys\022H"
-    "\n\020post_join_filter\030\006 \001(\0132\036.skyproto.subs"
-    "trait.ExpressionR\016postJoinFilter\022<\n\004type"
-    "\030\007 \001(\0162(.skyproto.substrait.HashJoinRel."
-    "JoinTypeR\004type\022_\n\022advanced_extension\030\n \001"
-    "(\01320.skyproto.substrait.extensions.Advan"
-    "cedExtensionR\021advancedExtension\"\310\002\n\010Join"
-    "Type\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_"
-    "TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOI"
-    "N_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JO"
-    "IN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_S"
-    "EMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_T"
-    "YPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGL"
-    "E\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_"
-    "TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK"
-    "\020\014\"\263\007\n\014MergeJoinRel\0225\n\006common\030\001 \001(\0132\035.sk"
+    "xpandRelH\000R\006expand\022+\n\021has_splitoverride\030"
+    "\037 \001(\010R\020hasSplitoverrideB\n\n\010rel_type\"\211\001\n\020"
+    "NamedObjectWrite\022\024\n\005names\030\001 \003(\tR\005names\022_"
+    "\n\022advanced_extension\030\n \001(\01320.skyproto.su"
+    "bstrait.extensions.AdvancedExtensionR\021ad"
+    "vancedExtension\"\?\n\017ExtensionObject\022,\n\006de"
+    "tail\030\001 \001(\0132\024.google.protobuf.AnyR\006detail"
+    "\"\232\006\n\006DdlRel\022I\n\014named_object\030\001 \001(\0132$.skyp"
+    "roto.substrait.NamedObjectWriteH\000R\013named"
+    "Object\022P\n\020extension_object\030\002 \001(\0132#.skypr"
+    "oto.substrait.ExtensionObjectH\000R\017extensi"
+    "onObject\022B\n\014table_schema\030\003 \001(\0132\037.skyprot"
+    "o.substrait.NamedStructR\013tableSchema\022T\n\016"
+    "table_defaults\030\004 \001(\0132-.skyproto.substrai"
+    "t.Expression.Literal.StructR\rtableDefaul"
+    "ts\022<\n\006object\030\005 \001(\0162$.skyproto.substrait."
+    "DdlRel.DdlObjectR\006object\0220\n\002op\030\006 \001(\0162 .s"
+    "kyproto.substrait.DdlRel.DdlOpR\002op\022@\n\017vi"
+    "ew_definition\030\007 \001(\0132\027.skyproto.substrait"
+    ".RelR\016viewDefinition\0225\n\006common\030\010 \001(\0132\035.s"
+    "kyproto.substrait.RelCommonR\006common\"R\n\tD"
+    "dlObject\022\032\n\026DDL_OBJECT_UNSPECIFIED\020\000\022\024\n\020"
+    "DDL_OBJECT_TABLE\020\001\022\023\n\017DDL_OBJECT_VIEW\020\002\""
+    "\215\001\n\005DdlOp\022\026\n\022DDL_OP_UNSPECIFIED\020\000\022\021\n\rDDL"
+    "_OP_CREATE\020\001\022\034\n\030DDL_OP_CREATE_OR_REPLACE"
+    "\020\002\022\020\n\014DDL_OP_ALTER\020\003\022\017\n\013DDL_OP_DROP\020\004\022\030\n"
+    "\024DDL_OP_DROP_IF_EXIST\020\005B\014\n\nwrite_type\"\257\007"
+    "\n\010WriteRel\022G\n\013named_table\030\001 \001(\0132$.skypro"
+    "to.substrait.NamedObjectWriteH\000R\nnamedTa"
+    "ble\022N\n\017extension_table\030\002 \001(\0132#.skyproto."
+    "substrait.ExtensionObjectH\000R\016extensionTa"
+    "ble\022B\n\014table_schema\030\003 \001(\0132\037.skyproto.sub"
+    "strait.NamedStructR\013tableSchema\0224\n\002op\030\004 "
+    "\001(\0162$.skyproto.substrait.WriteRel.WriteO"
+    "pR\002op\022-\n\005input\030\005 \001(\0132\027.skyproto.substrai"
+    "t.RelR\005input\022H\n\013create_mode\030\010 \001(\0162\'.skyp"
+    "roto.substrait.WriteRel.CreateModeR\ncrea"
+    "teMode\022\?\n\006output\030\006 \001(\0162\'.skyproto.substr"
+    "ait.WriteRel.OutputModeR\006output\0225\n\006commo"
+    "n\030\007 \001(\0132\035.skyproto.substrait.RelCommonR\006"
+    "common\"u\n\007WriteOp\022\030\n\024WRITE_OP_UNSPECIFIE"
+    "D\020\000\022\023\n\017WRITE_OP_INSERT\020\001\022\023\n\017WRITE_OP_DEL"
+    "ETE\020\002\022\023\n\017WRITE_OP_UPDATE\020\003\022\021\n\rWRITE_OP_C"
+    "TAS\020\004\"\261\001\n\nCreateMode\022\033\n\027CREATE_MODE_UNSP"
+    "ECIFIED\020\000\022 \n\034CREATE_MODE_APPEND_IF_EXIST"
+    "S\020\001\022!\n\035CREATE_MODE_REPLACE_IF_EXISTS\020\002\022 "
+    "\n\034CREATE_MODE_IGNORE_IF_EXISTS\020\003\022\037\n\033CREA"
+    "TE_MODE_ERROR_IF_EXISTS\020\004\"f\n\nOutputMode\022"
+    "\033\n\027OUTPUT_MODE_UNSPECIFIED\020\000\022\031\n\025OUTPUT_M"
+    "ODE_NO_OUTPUT\020\001\022 \n\034OUTPUT_MODE_MODIFIED_"
+    "RECORDS\020\002B\014\n\nwrite_type\"\301\003\n\tUpdateRel\022A\n"
+    "\013named_table\030\001 \001(\0132\036.skyproto.substrait."
+    "NamedTableH\000R\nnamedTable\022B\n\014table_schema"
+    "\030\002 \001(\0132\037.skyproto.substrait.NamedStructR"
+    "\013tableSchema\022<\n\tcondition\030\003 \001(\0132\036.skypro"
+    "to.substrait.ExpressionR\tcondition\022[\n\017tr"
+    "ansformations\030\004 \003(\01321.skyproto.substrait"
+    ".UpdateRel.TransformExpressionR\017transfor"
+    "mations\032\202\001\n\023TransformExpression\022F\n\016trans"
+    "formation\030\001 \001(\0132\036.skyproto.substrait.Exp"
+    "ressionR\016transformation\022#\n\rcolumn_target"
+    "\030\002 \001(\005R\014columnTargetB\r\n\013update_type\"\203\001\n\n"
+    "NamedTable\022\024\n\005names\030\001 \003(\tR\005names\022_\n\022adva"
+    "nced_extension\030\n \001(\01320.skyproto.substrai"
+    "t.extensions.AdvancedExtensionR\021advanced"
+    "Extension\"\337\004\n\021ComparisonJoinKey\022A\n\004left\030"
+    "\001 \001(\0132-.skyproto.substrait.Expression.Fi"
+    "eldReferenceR\004left\022C\n\005right\030\002 \001(\0132-.skyp"
+    "roto.substrait.Expression.FieldReference"
+    "R\005right\022T\n\ncomparison\030\003 \001(\01324.skyproto.s"
+    "ubstrait.ComparisonJoinKey.ComparisonTyp"
+    "eR\ncomparison\032\262\001\n\016ComparisonType\022T\n\006simp"
+    "le\030\001 \001(\0162:.skyproto.substrait.Comparison"
+    "JoinKey.SimpleComparisonTypeH\000R\006simple\022<"
+    "\n\031custom_function_reference\030\002 \001(\rH\000R\027cus"
+    "tomFunctionReferenceB\014\n\ninner_type\"\266\001\n\024S"
+    "impleComparisonType\022&\n\"SIMPLE_COMPARISON"
+    "_TYPE_UNSPECIFIED\020\000\022\035\n\031SIMPLE_COMPARISON"
+    "_TYPE_EQ\020\001\022/\n+SIMPLE_COMPARISON_TYPE_IS_"
+    "NOT_DISTINCT_FROM\020\002\022&\n\"SIMPLE_COMPARISON"
+    "_TYPE_MIGHT_EQUAL\020\003\"\261\007\n\013HashJoinRel\0225\n\006c"
+    "ommon\030\001 \001(\0132\035.skyproto.substrait.RelComm"
+    "onR\006common\022+\n\004left\030\002 \001(\0132\027.skyproto.subs"
+    "trait.RelR\004left\022-\n\005right\030\003 \001(\0132\027.skyprot"
+    "o.substrait.RelR\005right\022N\n\tleft_keys\030\004 \003("
+    "\0132-.skyproto.substrait.Expression.FieldR"
+    "eferenceB\002\030\001R\010leftKeys\022P\n\nright_keys\030\005 \003"
+    "(\0132-.skyproto.substrait.Expression.Field"
+    "ReferenceB\002\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%"
+    ".skyproto.substrait.ComparisonJoinKeyR\004k"
+    "eys\022H\n\020post_join_filter\030\006 \001(\0132\036.skyproto"
+    ".substrait.ExpressionR\016postJoinFilter\022<\n"
+    "\004type\030\007 \001(\0162(.skyproto.substrait.HashJoi"
+    "nRel.JoinTypeR\004type\022_\n\022advanced_extensio"
+    "n\030\n \001(\01320.skyproto.substrait.extensions."
+    "AdvancedExtensionR\021advancedExtension\"\310\002\n"
+    "\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017"
+    "JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022"
+    "\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022"
+    "\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RI"
+    "GHT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024J"
+    "OIN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_"
+    "SINGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023"
+    "JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT"
+    "_MARK\020\014\"\263\007\n\014MergeJoinRel\0225\n\006common\030\001 \001(\013"
+    "2\035.skyproto.substrait.RelCommonR\006common\022"
+    "+\n\004left\030\002 \001(\0132\027.skyproto.substrait.RelR\004"
+    "left\022-\n\005right\030\003 \001(\0132\027.skyproto.substrait"
+    ".RelR\005right\022N\n\tleft_keys\030\004 \003(\0132-.skyprot"
+    "o.substrait.Expression.FieldReferenceB\002\030"
+    "\001R\010leftKeys\022P\n\nright_keys\030\005 \003(\0132-.skypro"
+    "to.substrait.Expression.FieldReferenceB\002"
+    "\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%.skyproto.s"
+    "ubstrait.ComparisonJoinKeyR\004keys\022H\n\020post"
+    "_join_filter\030\006 \001(\0132\036.skyproto.substrait."
+    "ExpressionR\016postJoinFilter\022=\n\004type\030\007 \001(\016"
+    "2).skyproto.substrait.MergeJoinRel.JoinT"
+    "ypeR\004type\022_\n\022advanced_extension\030\n \001(\01320."
+    "skyproto.substrait.extensions.AdvancedEx"
+    "tensionR\021advancedExtension\"\310\002\n\010JoinType\022"
+    "\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_TYPE_"
+    "INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN_TYP"
+    "E_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOIN_TY"
+    "PE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\006"
+    "\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TYPE_R"
+    "IGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\t\022\032"
+    "\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_TYPE_"
+    "LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020\014\"\326\005"
+    "\n\021NestedLoopJoinRel\0225\n\006common\030\001 \001(\0132\035.sk"
     "yproto.substrait.RelCommonR\006common\022+\n\004le"
     "ft\030\002 \001(\0132\027.skyproto.substrait.RelR\004left\022"
     "-\n\005right\030\003 \001(\0132\027.skyproto.substrait.RelR"
-    "\005right\022N\n\tleft_keys\030\004 \003(\0132-.skyproto.sub"
-    "strait.Expression.FieldReferenceB\002\030\001R\010le"
-    "ftKeys\022P\n\nright_keys\030\005 \003(\0132-.skyproto.su"
-    "bstrait.Expression.FieldReferenceB\002\030\001R\tr"
-    "ightKeys\0229\n\004keys\030\010 \003(\0132%.skyproto.substr"
-    "ait.ComparisonJoinKeyR\004keys\022H\n\020post_join"
-    "_filter\030\006 \001(\0132\036.skyproto.substrait.Expre"
-    "ssionR\016postJoinFilter\022=\n\004type\030\007 \001(\0162).sk"
-    "yproto.substrait.MergeJoinRel.JoinTypeR\004"
-    "type\022_\n\022advanced_extension\030\n \001(\01320.skypr"
-    "oto.substrait.extensions.AdvancedExtensi"
-    "onR\021advancedExtension\"\310\002\n\010JoinType\022\031\n\025JO"
-    "IN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_TYPE_INNER"
-    "\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN_TYPE_LEF"
-    "T\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOIN_TYPE_LE"
-    "FT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\006\022\027\n\023J"
-    "OIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TYPE_RIGHT_"
-    "ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\t\022\032\n\026JOI"
-    "N_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_TYPE_LEFT_"
-    "MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020\014\"\326\005\n\021Nes"
-    "tedLoopJoinRel\0225\n\006common\030\001 \001(\0132\035.skyprot"
-    "o.substrait.RelCommonR\006common\022+\n\004left\030\002 "
-    "\001(\0132\027.skyproto.substrait.RelR\004left\022-\n\005ri"
-    "ght\030\003 \001(\0132\027.skyproto.substrait.RelR\005righ"
-    "t\022>\n\nexpression\030\004 \001(\0132\036.skyproto.substra"
-    "it.ExpressionR\nexpression\022B\n\004type\030\005 \001(\0162"
-    "..skyproto.substrait.NestedLoopJoinRel.J"
-    "oinTypeR\004type\022_\n\022advanced_extension\030\n \001("
-    "\01320.skyproto.substrait.extensions.Advanc"
-    "edExtensionR\021advancedExtension\"\310\002\n\010JoinT"
-    "ype\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_T"
-    "YPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN"
-    "_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOI"
-    "N_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SE"
-    "MI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TY"
-    "PE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE"
-    "\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_T"
-    "YPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020"
-    "\014\"\234\001\n\020FunctionArgument\022\024\n\004enum\030\001 \001(\tH\000R\004"
-    "enum\022.\n\004type\030\002 \001(\0132\030.skyproto.substrait."
-    "TypeH\000R\004type\0226\n\005value\030\003 \001(\0132\036.skyproto.s"
-    "ubstrait.ExpressionH\000R\005valueB\n\n\010arg_type"
-    "\"D\n\016FunctionOption\022\022\n\004name\030\001 \001(\tR\004name\022\036"
-    "\n\npreference\030\002 \003(\tR\npreference\"\244d\n\nExpre"
-    "ssion\022B\n\007literal\030\001 \001(\0132&.skyproto.substr"
-    "ait.Expression.LiteralH\000R\007literal\022M\n\tsel"
-    "ection\030\002 \001(\0132-.skyproto.substrait.Expres"
-    "sion.FieldReferenceH\000R\tselection\022X\n\017scal"
-    "ar_function\030\003 \001(\0132-.skyproto.substrait.E"
-    "xpression.ScalarFunctionH\000R\016scalarFuncti"
-    "on\022X\n\017window_function\030\005 \001(\0132-.skyproto.s"
-    "ubstrait.Expression.WindowFunctionH\000R\016wi"
-    "ndowFunction\022@\n\007if_then\030\006 \001(\0132%.skyproto"
-    ".substrait.Expression.IfThenH\000R\006ifThen\022^"
-    "\n\021switch_expression\030\007 \001(\0132/.skyproto.sub"
-    "strait.Expression.SwitchExpressionH\000R\020sw"
-    "itchExpression\022Y\n\020singular_or_list\030\010 \001(\013"
-    "2-.skyproto.substrait.Expression.Singula"
-    "rOrListH\000R\016singularOrList\022P\n\rmulti_or_li"
-    "st\030\t \001(\0132*.skyproto.substrait.Expression"
-    ".MultiOrListH\000R\013multiOrList\0229\n\004cast\030\013 \001("
-    "\0132#.skyproto.substrait.Expression.CastH\000"
-    "R\004cast\022E\n\010subquery\030\014 \001(\0132\'.skyproto.subs"
-    "trait.Expression.SubqueryH\000R\010subquery\022\?\n"
-    "\006nested\030\r \001(\0132%.skyproto.substrait.Expre"
-    "ssion.NestedH\000R\006nested\022=\n\004enum\030\n \001(\0132#.s"
-    "kyproto.substrait.Expression.EnumB\002\030\001H\000R"
-    "\004enum\032\223\001\n\004Enum\022\036\n\tspecified\030\001 \001(\tH\000R\tspe"
-    "cified\022M\n\013unspecified\030\002 \001(\0132).skyproto.s"
-    "ubstrait.Expression.Enum.EmptyH\000R\013unspec"
-    "ified\032\013\n\005Empty:\002\030\001:\002\030\001B\013\n\tenum_kind\032\363\027\n\007"
-    "Literal\022\032\n\007boolean\030\001 \001(\010H\000R\007boolean\022\020\n\002i"
-    "8\030\002 \001(\005H\000R\002i8\022\022\n\003i16\030\003 \001(\005H\000R\003i16\022\022\n\003i32"
-    "\030\005 \001(\005H\000R\003i32\022\022\n\003i64\030\007 \001(\003H\000R\003i64\022\024\n\004fp3"
-    "2\030\n \001(\002H\000R\004fp32\022\024\n\004fp64\030\013 \001(\001H\000R\004fp64\022\030\n"
-    "\006string\030\014 \001(\tH\000R\006string\022\030\n\006binary\030\r \001(\014H"
-    "\000R\006binary\022\"\n\ttimestamp\030\016 \001(\003B\002\030\001H\000R\ttime"
-    "stamp\022\024\n\004date\030\020 \001(\005H\000R\004date\022\024\n\004time\030\021 \001("
-    "\003H\000R\004time\022q\n\026interval_year_to_month\030\023 \001("
+    "\005right\022>\n\nexpression\030\004 \001(\0132\036.skyproto.su"
+    "bstrait.ExpressionR\nexpression\022B\n\004type\030\005"
+    " \001(\0162..skyproto.substrait.NestedLoopJoin"
+    "Rel.JoinTypeR\004type\022_\n\022advanced_extension"
+    "\030\n \001(\01320.skyproto.substrait.extensions.A"
+    "dvancedExtensionR\021advancedExtension\"\310\002\n\010"
+    "JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017J"
+    "OIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n"
+    "\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027"
+    "\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIG"
+    "HT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JO"
+    "IN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_S"
+    "INGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023J"
+    "OIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_"
+    "MARK\020\014\"\234\001\n\020FunctionArgument\022\024\n\004enum\030\001 \001("
+    "\tH\000R\004enum\022.\n\004type\030\002 \001(\0132\030.skyproto.subst"
+    "rait.TypeH\000R\004type\0226\n\005value\030\003 \001(\0132\036.skypr"
+    "oto.substrait.ExpressionH\000R\005valueB\n\n\010arg"
+    "_type\"D\n\016FunctionOption\022\022\n\004name\030\001 \001(\tR\004n"
+    "ame\022\036\n\npreference\030\002 \003(\tR\npreference\"\265b\n\n"
+    "Expression\022B\n\007literal\030\001 \001(\0132&.skyproto.s"
+    "ubstrait.Expression.LiteralH\000R\007literal\022M"
+    "\n\tselection\030\002 \001(\0132-.skyproto.substrait.E"
+    "xpression.FieldReferenceH\000R\tselection\022X\n"
+    "\017scalar_function\030\003 \001(\0132-.skyproto.substr"
+    "ait.Expression.ScalarFunctionH\000R\016scalarF"
+    "unction\022X\n\017window_function\030\005 \001(\0132-.skypr"
+    "oto.substrait.Expression.WindowFunctionH"
+    "\000R\016windowFunction\022@\n\007if_then\030\006 \001(\0132%.sky"
+    "proto.substrait.Expression.IfThenH\000R\006ifT"
+    "hen\022^\n\021switch_expression\030\007 \001(\0132/.skyprot"
+    "o.substrait.Expression.SwitchExpressionH"
+    "\000R\020switchExpression\022Y\n\020singular_or_list\030"
+    "\010 \001(\0132-.skyproto.substrait.Expression.Si"
+    "ngularOrListH\000R\016singularOrList\022P\n\rmulti_"
+    "or_list\030\t \001(\0132*.skyproto.substrait.Expre"
+    "ssion.MultiOrListH\000R\013multiOrList\0229\n\004cast"
+    "\030\013 \001(\0132#.skyproto.substrait.Expression.C"
+    "astH\000R\004cast\022E\n\010subquery\030\014 \001(\0132\'.skyproto"
+    ".substrait.Expression.SubqueryH\000R\010subque"
+    "ry\022\?\n\006nested\030\r \001(\0132%.skyproto.substrait."
+    "Expression.NestedH\000R\006nested\022=\n\004enum\030\n \001("
+    "\0132#.skyproto.substrait.Expression.EnumB\002"
+    "\030\001H\000R\004enum\032\223\001\n\004Enum\022\036\n\tspecified\030\001 \001(\tH\000"
+    "R\tspecified\022M\n\013unspecified\030\002 \001(\0132).skypr"
+    "oto.substrait.Expression.Enum.EmptyH\000R\013u"
+    "nspecified\032\013\n\005Empty:\002\030\001:\002\030\001B\013\n\tenum_kind"
+    "\032\363\027\n\007Literal\022\032\n\007boolean\030\001 \001(\010H\000R\007boolean"
+    "\022\020\n\002i8\030\002 \001(\005H\000R\002i8\022\022\n\003i16\030\003 \001(\005H\000R\003i16\022\022"
+    "\n\003i32\030\005 \001(\005H\000R\003i32\022\022\n\003i64\030\007 \001(\003H\000R\003i64\022\024"
+    "\n\004fp32\030\n \001(\002H\000R\004fp32\022\024\n\004fp64\030\013 \001(\001H\000R\004fp"
+    "64\022\030\n\006string\030\014 \001(\tH\000R\006string\022\030\n\006binary\030\r"
+    " \001(\014H\000R\006binary\022\"\n\ttimestamp\030\016 \001(\003B\002\030\001H\000R"
+    "\ttimestamp\022\024\n\004date\030\020 \001(\005H\000R\004date\022\024\n\004time"
+    "\030\021 \001(\003H\000R\004time\022q\n\026interval_year_to_month"
+    "\030\023 \001(\0132:.skyproto.substrait.Expression.L"
+    "iteral.IntervalYearToMonthH\000R\023intervalYe"
+    "arToMonth\022q\n\026interval_day_to_second\030\024 \001("
     "\0132:.skyproto.substrait.Expression.Litera"
-    "l.IntervalYearToMonthH\000R\023intervalYearToM"
-    "onth\022q\n\026interval_day_to_second\030\024 \001(\0132:.s"
-    "kyproto.substrait.Expression.Literal.Int"
-    "ervalDayToSecondH\000R\023intervalDayToSecond\022"
-    "f\n\021interval_compound\030$ \001(\01327.skyproto.su"
-    "bstrait.Expression.Literal.IntervalCompo"
-    "undH\000R\020intervalCompound\022\037\n\nfixed_char\030\025 "
-    "\001(\tH\000R\tfixedChar\022K\n\010var_char\030\026 \001(\0132..sky"
-    "proto.substrait.Expression.Literal.VarCh"
-    "arH\000R\007varChar\022#\n\014fixed_binary\030\027 \001(\014H\000R\013f"
-    "ixedBinary\022J\n\007decimal\030\030 \001(\0132..skyproto.s"
-    "ubstrait.Expression.Literal.DecimalH\000R\007d"
-    "ecimal\022l\n\023precision_timestamp\030\" \001(\01329.sk"
-    "yproto.substrait.Expression.Literal.Prec"
-    "isionTimestampH\000R\022precisionTimestamp\022q\n\026"
-    "precision_timestamp_tz\030# \001(\01329.skyproto."
-    "substrait.Expression.Literal.PrecisionTi"
-    "mestampH\000R\024precisionTimestampTz\022G\n\006struc"
-    "t\030\031 \001(\0132-.skyproto.substrait.Expression."
-    "Literal.StructH\000R\006struct\022>\n\003map\030\032 \001(\0132*."
-    "skyproto.substrait.Expression.Literal.Ma"
-    "pH\000R\003map\022\'\n\014timestamp_tz\030\033 \001(\003B\002\030\001H\000R\013ti"
-    "mestampTz\022\024\n\004uuid\030\034 \001(\014H\000R\004uuid\022.\n\004null\030"
-    "\035 \001(\0132\030.skyproto.substrait.TypeH\000R\004null\022"
-    "A\n\004list\030\036 \001(\0132+.skyproto.substrait.Expre"
-    "ssion.Literal.ListH\000R\004list\022>\n\nempty_list"
-    "\030\037 \001(\0132\035.skyproto.substrait.Type.ListH\000R"
-    "\temptyList\022;\n\tempty_map\030  \001(\0132\034.skyproto"
-    ".substrait.Type.MapH\000R\010emptyMap\022W\n\014user_"
-    "defined\030! \001(\01322.skyproto.substrait.Expre"
-    "ssion.Literal.UserDefinedH\000R\013userDefined"
-    "\022\032\n\010nullable\0302 \001(\010R\010nullable\0228\n\030type_var"
-    "iation_reference\0303 \001(\rR\026typeVariationRef"
-    "erence\0327\n\007VarChar\022\024\n\005value\030\001 \001(\tR\005value\022"
-    "\026\n\006length\030\002 \001(\rR\006length\032S\n\007Decimal\022\024\n\005va"
-    "lue\030\001 \001(\014R\005value\022\034\n\tprecision\030\002 \001(\005R\tpre"
-    "cision\022\024\n\005scale\030\003 \001(\005R\005scale\032H\n\022Precisio"
-    "nTimestamp\022\034\n\tprecision\030\001 \001(\005R\tprecision"
-    "\022\024\n\005value\030\002 \001(\003R\005value\032\336\001\n\003Map\022R\n\nkey_va"
-    "lues\030\001 \003(\01323.skyproto.substrait.Expressi"
-    "on.Literal.Map.KeyValueR\tkeyValues\032\202\001\n\010K"
-    "eyValue\0228\n\003key\030\001 \001(\0132&.skyproto.substrai"
-    "t.Expression.LiteralR\003key\022<\n\005value\030\002 \001(\013"
-    "2&.skyproto.substrait.Expression.Literal"
-    "R\005value\032C\n\023IntervalYearToMonth\022\024\n\005years\030"
-    "\001 \001(\005R\005years\022\026\n\006months\030\002 \001(\005R\006months\032\277\001\n"
-    "\023IntervalDayToSecond\022\022\n\004days\030\001 \001(\005R\004days"
-    "\022\030\n\007seconds\030\002 \001(\005R\007seconds\022(\n\014microsecon"
-    "ds\030\003 \001(\005B\002\030\001H\000R\014microseconds\022\036\n\tprecisio"
-    "n\030\004 \001(\005H\000R\tprecision\022\036\n\nsubseconds\030\005 \001(\003"
-    "R\nsubsecondsB\020\n\016precision_mode\032\364\001\n\020Inter"
-    "valCompound\022o\n\026interval_year_to_month\030\001 "
-    "\001(\0132:.skyproto.substrait.Expression.Lite"
-    "ral.IntervalYearToMonthR\023intervalYearToM"
-    "onth\022o\n\026interval_day_to_second\030\002 \001(\0132:.s"
-    "kyproto.substrait.Expression.Literal.Int"
-    "ervalDayToSecondR\023intervalDayToSecond\032H\n"
-    "\006Struct\022>\n\006fields\030\001 \003(\0132&.skyproto.subst"
-    "rait.Expression.LiteralR\006fields\032F\n\004List\022"
-    ">\n\006values\030\001 \003(\0132&.skyproto.substrait.Exp"
-    "ression.LiteralR\006values\032\377\001\n\013UserDefined\022"
-    "%\n\016type_reference\030\001 \001(\rR\rtypeReference\022K"
-    "\n\017type_parameters\030\003 \003(\0132\".skyproto.subst"
-    "rait.Type.ParameterR\016typeParameters\022,\n\005v"
-    "alue\030\002 \001(\0132\024.google.protobuf.AnyH\000R\005valu"
-    "e\022G\n\006struct\030\004 \001(\0132-.skyproto.substrait.E"
-    "xpression.Literal.StructH\000R\006structB\005\n\003va"
-    "lB\016\n\014literal_type\032\207\005\n\006Nested\022\032\n\010nullable"
-    "\030\001 \001(\010R\010nullable\0228\n\030type_variation_refer"
-    "ence\030\002 \001(\rR\026typeVariationReference\022F\n\006st"
-    "ruct\030\003 \001(\0132,.skyproto.substrait.Expressi"
-    "on.Nested.StructH\000R\006struct\022@\n\004list\030\004 \001(\013"
-    "2*.skyproto.substrait.Expression.Nested."
-    "ListH\000R\004list\022=\n\003map\030\005 \001(\0132).skyproto.sub"
-    "strait.Expression.Nested.MapH\000R\003map\032\314\001\n\003"
-    "Map\022Q\n\nkey_values\030\001 \003(\01322.skyproto.subst"
-    "rait.Expression.Nested.Map.KeyValueR\tkey"
-    "Values\032r\n\010KeyValue\0220\n\003key\030\001 \001(\0132\036.skypro"
-    "to.substrait.ExpressionR\003key\0224\n\005value\030\002 "
-    "\001(\0132\036.skyproto.substrait.ExpressionR\005val"
-    "ue\032@\n\006Struct\0226\n\006fields\030\001 \003(\0132\036.skyproto."
-    "substrait.ExpressionR\006fields\032>\n\004List\0226\n\006"
-    "values\030\001 \003(\0132\036.skyproto.substrait.Expres"
-    "sionR\006valuesB\r\n\013nested_type\032\264\002\n\016ScalarFu"
-    "nction\022-\n\022function_reference\030\001 \001(\rR\021func"
-    "tionReference\022B\n\targuments\030\004 \003(\0132$.skypr"
-    "oto.substrait.FunctionArgumentR\targument"
-    "s\022<\n\007options\030\005 \003(\0132\".skyproto.substrait."
-    "FunctionOptionR\007options\0229\n\013output_type\030\003"
-    " \001(\0132\030.skyproto.substrait.TypeR\noutputTy"
-    "pe\0226\n\004args\030\002 \003(\0132\036.skyproto.substrait.Ex"
-    "pressionB\002\030\001R\004args\032\230\013\n\016WindowFunction\022-\n"
-    "\022function_reference\030\001 \001(\rR\021functionRefer"
-    "ence\022B\n\targuments\030\t \003(\0132$.skyproto.subst"
-    "rait.FunctionArgumentR\targuments\022<\n\007opti"
-    "ons\030\013 \003(\0132\".skyproto.substrait.FunctionO"
-    "ptionR\007options\0229\n\013output_type\030\007 \001(\0132\030.sk"
-    "yproto.substrait.TypeR\noutputType\022:\n\005pha"
-    "se\030\006 \001(\0162$.skyproto.substrait.Aggregatio"
-    "nPhaseR\005phase\0223\n\005sorts\030\003 \003(\0132\035.skyproto."
-    "substrait.SortFieldR\005sorts\022[\n\ninvocation"
-    "\030\n \001(\0162;.skyproto.substrait.AggregateFun"
-    "ction.AggregationInvocationR\ninvocation\022"
-    ">\n\npartitions\030\002 \003(\0132\036.skyproto.substrait"
-    ".ExpressionR\npartitions\022Y\n\013bounds_type\030\014"
-    " \001(\01628.skyproto.substrait.Expression.Win"
-    "dowFunction.BoundsTypeR\nboundsType\022T\n\013lo"
-    "wer_bound\030\005 \001(\01323.skyproto.substrait.Exp"
-    "ression.WindowFunction.BoundR\nlowerBound"
-    "\022T\n\013upper_bound\030\004 \001(\01323.skyproto.substra"
-    "it.Expression.WindowFunction.BoundR\nuppe"
-    "rBound\0226\n\004args\030\010 \003(\0132\036.skyproto.substrai"
-    "t.ExpressionB\002\030\001R\004args\032\364\003\n\005Bound\022]\n\tprec"
-    "eding\030\001 \001(\0132=.skyproto.substrait.Express"
-    "ion.WindowFunction.Bound.PrecedingH\000R\tpr"
-    "eceding\022]\n\tfollowing\030\002 \001(\0132=.skyproto.su"
-    "bstrait.Expression.WindowFunction.Bound."
-    "FollowingH\000R\tfollowing\022a\n\013current_row\030\003 "
-    "\001(\0132>.skyproto.substrait.Expression.Wind"
-    "owFunction.Bound.CurrentRowH\000R\ncurrentRo"
-    "w\022]\n\tunbounded\030\004 \001(\0132=.skyproto.substrai"
-    "t.Expression.WindowFunction.Bound.Unboun"
-    "dedH\000R\tunbounded\032#\n\tPreceding\022\026\n\006offset\030"
-    "\001 \001(\003R\006offset\032#\n\tFollowing\022\026\n\006offset\030\001 \001"
-    "(\003R\006offset\032\014\n\nCurrentRow\032\013\n\tUnboundedB\006\n"
-    "\004kind\"V\n\nBoundsType\022\033\n\027BOUNDS_TYPE_UNSPE"
-    "CIFIED\020\000\022\024\n\020BOUNDS_TYPE_ROWS\020\001\022\025\n\021BOUNDS"
-    "_TYPE_RANGE\020\002\032\356\001\n\006IfThen\022@\n\003ifs\030\001 \003(\0132.."
-    "skyproto.substrait.Expression.IfThen.IfC"
-    "lauseR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyproto.subs"
-    "trait.ExpressionR\004else\032n\n\010IfClause\022.\n\002if"
-    "\030\001 \001(\0132\036.skyproto.substrait.ExpressionR\002"
-    "if\0222\n\004then\030\002 \001(\0132\036.skyproto.substrait.Ex"
-    "pressionR\004then\032\307\002\n\004Cast\022,\n\004type\030\001 \001(\0132\030."
-    "skyproto.substrait.TypeR\004type\0224\n\005input\030\002"
-    " \001(\0132\036.skyproto.substrait.ExpressionR\005in"
-    "put\022^\n\020failure_behavior\030\003 \001(\01623.skyproto"
-    ".substrait.Expression.Cast.FailureBehavi"
-    "orR\017failureBehavior\"{\n\017FailureBehavior\022 "
-    "\n\034FAILURE_BEHAVIOR_UNSPECIFIED\020\000\022 \n\034FAIL"
-    "URE_BEHAVIOR_RETURN_NULL\020\001\022$\n FAILURE_BE"
-    "HAVIOR_THROW_EXCEPTION\020\002\032\276\002\n\020SwitchExpre"
-    "ssion\0224\n\005match\030\003 \001(\0132\036.skyproto.substrai"
-    "t.ExpressionR\005match\022I\n\003ifs\030\001 \003(\01327.skypr"
-    "oto.substrait.Expression.SwitchExpressio"
-    "n.IfValueR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyproto."
-    "substrait.ExpressionR\004else\032u\n\007IfValue\0226\n"
-    "\002if\030\001 \001(\0132&.skyproto.substrait.Expressio"
-    "n.LiteralR\002if\0222\n\004then\030\002 \001(\0132\036.skyproto.s"
-    "ubstrait.ExpressionR\004then\032\200\001\n\016SingularOr"
-    "List\0224\n\005value\030\001 \001(\0132\036.skyproto.substrait"
-    ".ExpressionR\005value\0228\n\007options\030\002 \003(\0132\036.sk"
-    "yproto.substrait.ExpressionR\007options\032\322\001\n"
-    "\013MultiOrList\0224\n\005value\030\001 \003(\0132\036.skyproto.s"
-    "ubstrait.ExpressionR\005value\022K\n\007options\030\002 "
-    "\003(\01321.skyproto.substrait.Expression.Mult"
-    "iOrList.RecordR\007options\032@\n\006Record\0226\n\006fie"
-    "lds\030\001 \003(\0132\036.skyproto.substrait.Expressio"
-    "nR\006fields\032\267\004\n\020EmbeddedFunction\022<\n\targume"
-    "nts\030\001 \003(\0132\036.skyproto.substrait.Expressio"
-    "nR\targuments\0229\n\013output_type\030\002 \001(\0132\030.skyp"
-    "roto.substrait.TypeR\noutputType\022|\n\026pytho"
-    "n_pickle_function\030\003 \001(\0132D.skyproto.subst"
-    "rait.Expression.EmbeddedFunction.PythonP"
-    "ickleFunctionH\000R\024pythonPickleFunction\022y\n"
-    "\025web_assembly_function\030\004 \001(\0132C.skyproto."
-    "substrait.Expression.EmbeddedFunction.We"
-    "bAssemblyFunctionH\000R\023webAssemblyFunction"
-    "\032V\n\024PythonPickleFunction\022\032\n\010function\030\001 \001"
-    "(\014R\010function\022\"\n\014prerequisite\030\002 \003(\tR\014prer"
-    "equisite\032Q\n\023WebAssemblyFunction\022\026\n\006scrip"
-    "t\030\001 \001(\014R\006script\022\"\n\014prerequisite\030\002 \003(\tR\014p"
-    "rerequisiteB\006\n\004kind\032\227\007\n\020ReferenceSegment"
-    "\022Q\n\007map_key\030\001 \001(\01326.skyproto.substrait.E"
-    "xpression.ReferenceSegment.MapKeyH\000R\006map"
-    "Key\022`\n\014struct_field\030\002 \001(\0132;.skyproto.sub"
-    "strait.Expression.ReferenceSegment.Struc"
-    "tFieldH\000R\013structField\022`\n\014list_element\030\003 "
-    "\001(\0132;.skyproto.substrait.Expression.Refe"
-    "renceSegment.ListElementH\000R\013listElement\032"
-    "\335\001\n\006MapKey\022\?\n\007map_key\030\001 \001(\0132&.skyproto.s"
-    "ubstrait.Expression.LiteralR\006mapKey\022<\n\nv"
-    "alue_type\030\003 \001(\0132\030.skyproto.substrait.Typ"
-    "eH\000R\tvalueType\210\001\001\022E\n\005child\030\002 \001(\0132/.skypr"
-    "oto.substrait.Expression.ReferenceSegmen"
-    "tR\005childB\r\n\013_value_type\032\267\001\n\013StructField\022"
-    "\024\n\005field\030\001 \001(\005R\005field\022<\n\nfield_type\030\003 \001("
-    "\0132\030.skyproto.substrait.TypeH\000R\tfieldType"
-    "\210\001\001\022E\n\005child\030\002 \001(\0132/.skyproto.substrait."
-    "Expression.ReferenceSegmentR\005childB\r\n\013_f"
-    "ield_type\032\277\001\n\013ListElement\022\026\n\006offset\030\001 \001("
-    "\005R\006offset\022@\n\014element_type\030\003 \001(\0132\030.skypro"
-    "to.substrait.TypeH\000R\013elementType\210\001\001\022E\n\005c"
-    "hild\030\002 \001(\0132/.skyproto.substrait.Expressi"
-    "on.ReferenceSegmentR\005childB\017\n\r_element_t"
-    "ypeB\020\n\016reference_type\032\227\014\n\016MaskExpression"
-    "\022R\n\006select\030\001 \001(\0132:.skyproto.substrait.Ex"
-    "pression.MaskExpression.StructSelectR\006se"
-    "lect\0228\n\030maintain_singular_struct\030\002 \001(\010R\026"
-    "maintainSingularStruct\032\203\002\n\006Select\022T\n\006str"
-    "uct\030\001 \001(\0132:.skyproto.substrait.Expressio"
-    "n.MaskExpression.StructSelectH\000R\006struct\022"
-    "N\n\004list\030\002 \001(\01328.skyproto.substrait.Expre"
-    "ssion.MaskExpression.ListSelectH\000R\004list\022"
-    "K\n\003map\030\003 \001(\01327.skyproto.substrait.Expres"
-    "sion.MaskExpression.MapSelectH\000R\003mapB\006\n\004"
-    "type\032k\n\014StructSelect\022[\n\014struct_items\030\001 \003"
-    "(\01328.skyproto.substrait.Expression.MaskE"
-    "xpression.StructItemR\013structItems\032n\n\nStr"
-    "uctItem\022\024\n\005field\030\001 \001(\005R\005field\022J\n\005child\030\002"
+    "l.IntervalDayToSecondH\000R\023intervalDayToSe"
+    "cond\022f\n\021interval_compound\030$ \001(\01327.skypro"
+    "to.substrait.Expression.Literal.Interval"
+    "CompoundH\000R\020intervalCompound\022\037\n\nfixed_ch"
+    "ar\030\025 \001(\tH\000R\tfixedChar\022K\n\010var_char\030\026 \001(\0132"
+    "..skyproto.substrait.Expression.Literal."
+    "VarCharH\000R\007varChar\022#\n\014fixed_binary\030\027 \001(\014"
+    "H\000R\013fixedBinary\022J\n\007decimal\030\030 \001(\0132..skypr"
+    "oto.substrait.Expression.Literal.Decimal"
+    "H\000R\007decimal\022l\n\023precision_timestamp\030\" \001(\013"
+    "29.skyproto.substrait.Expression.Literal"
+    ".PrecisionTimestampH\000R\022precisionTimestam"
+    "p\022q\n\026precision_timestamp_tz\030# \001(\01329.skyp"
+    "roto.substrait.Expression.Literal.Precis"
+    "ionTimestampH\000R\024precisionTimestampTz\022G\n\006"
+    "struct\030\031 \001(\0132-.skyproto.substrait.Expres"
+    "sion.Literal.StructH\000R\006struct\022>\n\003map\030\032 \001"
+    "(\0132*.skyproto.substrait.Expression.Liter"
+    "al.MapH\000R\003map\022\'\n\014timestamp_tz\030\033 \001(\003B\002\030\001H"
+    "\000R\013timestampTz\022\024\n\004uuid\030\034 \001(\014H\000R\004uuid\022.\n\004"
+    "null\030\035 \001(\0132\030.skyproto.substrait.TypeH\000R\004"
+    "null\022A\n\004list\030\036 \001(\0132+.skyproto.substrait."
+    "Expression.Literal.ListH\000R\004list\022>\n\nempty"
+    "_list\030\037 \001(\0132\035.skyproto.substrait.Type.Li"
+    "stH\000R\temptyList\022;\n\tempty_map\030  \001(\0132\034.sky"
+    "proto.substrait.Type.MapH\000R\010emptyMap\022W\n\014"
+    "user_defined\030! \001(\01322.skyproto.substrait."
+    "Expression.Literal.UserDefinedH\000R\013userDe"
+    "fined\022\032\n\010nullable\0302 \001(\010R\010nullable\0228\n\030typ"
+    "e_variation_reference\0303 \001(\rR\026typeVariati"
+    "onReference\0327\n\007VarChar\022\024\n\005value\030\001 \001(\tR\005v"
+    "alue\022\026\n\006length\030\002 \001(\rR\006length\032S\n\007Decimal\022"
+    "\024\n\005value\030\001 \001(\014R\005value\022\034\n\tprecision\030\002 \001(\005"
+    "R\tprecision\022\024\n\005scale\030\003 \001(\005R\005scale\032H\n\022Pre"
+    "cisionTimestamp\022\034\n\tprecision\030\001 \001(\005R\tprec"
+    "ision\022\024\n\005value\030\002 \001(\003R\005value\032\336\001\n\003Map\022R\n\nk"
+    "ey_values\030\001 \003(\01323.skyproto.substrait.Exp"
+    "ression.Literal.Map.KeyValueR\tkeyValues\032"
+    "\202\001\n\010KeyValue\0228\n\003key\030\001 \001(\0132&.skyproto.sub"
+    "strait.Expression.LiteralR\003key\022<\n\005value\030"
+    "\002 \001(\0132&.skyproto.substrait.Expression.Li"
+    "teralR\005value\032C\n\023IntervalYearToMonth\022\024\n\005y"
+    "ears\030\001 \001(\005R\005years\022\026\n\006months\030\002 \001(\005R\006month"
+    "s\032\277\001\n\023IntervalDayToSecond\022\022\n\004days\030\001 \001(\005R"
+    "\004days\022\030\n\007seconds\030\002 \001(\005R\007seconds\022(\n\014micro"
+    "seconds\030\003 \001(\005B\002\030\001H\000R\014microseconds\022\036\n\tpre"
+    "cision\030\004 \001(\005H\000R\tprecision\022\036\n\nsubseconds\030"
+    "\005 \001(\003R\nsubsecondsB\020\n\016precision_mode\032\364\001\n\020"
+    "IntervalCompound\022o\n\026interval_year_to_mon"
+    "th\030\001 \001(\0132:.skyproto.substrait.Expression"
+    ".Literal.IntervalYearToMonthR\023intervalYe"
+    "arToMonth\022o\n\026interval_day_to_second\030\002 \001("
+    "\0132:.skyproto.substrait.Expression.Litera"
+    "l.IntervalDayToSecondR\023intervalDayToSeco"
+    "nd\032H\n\006Struct\022>\n\006fields\030\001 \003(\0132&.skyproto."
+    "substrait.Expression.LiteralR\006fields\032F\n\004"
+    "List\022>\n\006values\030\001 \003(\0132&.skyproto.substrai"
+    "t.Expression.LiteralR\006values\032\377\001\n\013UserDef"
+    "ined\022%\n\016type_reference\030\001 \001(\rR\rtypeRefere"
+    "nce\022K\n\017type_parameters\030\003 \003(\0132\".skyproto."
+    "substrait.Type.ParameterR\016typeParameters"
+    "\022,\n\005value\030\002 \001(\0132\024.google.protobuf.AnyH\000R"
+    "\005value\022G\n\006struct\030\004 \001(\0132-.skyproto.substr"
+    "ait.Expression.Literal.StructH\000R\006structB"
+    "\005\n\003valB\016\n\014literal_type\032\207\005\n\006Nested\022\032\n\010nul"
+    "lable\030\001 \001(\010R\010nullable\0228\n\030type_variation_"
+    "reference\030\002 \001(\rR\026typeVariationReference\022"
+    "F\n\006struct\030\003 \001(\0132,.skyproto.substrait.Exp"
+    "ression.Nested.StructH\000R\006struct\022@\n\004list\030"
+    "\004 \001(\0132*.skyproto.substrait.Expression.Ne"
+    "sted.ListH\000R\004list\022=\n\003map\030\005 \001(\0132).skyprot"
+    "o.substrait.Expression.Nested.MapH\000R\003map"
+    "\032\314\001\n\003Map\022Q\n\nkey_values\030\001 \003(\01322.skyproto."
+    "substrait.Expression.Nested.Map.KeyValue"
+    "R\tkeyValues\032r\n\010KeyValue\0220\n\003key\030\001 \001(\0132\036.s"
+    "kyproto.substrait.ExpressionR\003key\0224\n\005val"
+    "ue\030\002 \001(\0132\036.skyproto.substrait.Expression"
+    "R\005value\032@\n\006Struct\0226\n\006fields\030\001 \003(\0132\036.skyp"
+    "roto.substrait.ExpressionR\006fields\032>\n\004Lis"
+    "t\0226\n\006values\030\001 \003(\0132\036.skyproto.substrait.E"
+    "xpressionR\006valuesB\r\n\013nested_type\032\264\002\n\016Sca"
+    "larFunction\022-\n\022function_reference\030\001 \001(\rR"
+    "\021functionReference\022B\n\targuments\030\004 \003(\0132$."
+    "skyproto.substrait.FunctionArgumentR\targ"
+    "uments\022<\n\007options\030\005 \003(\0132\".skyproto.subst"
+    "rait.FunctionOptionR\007options\0229\n\013output_t"
+    "ype\030\003 \001(\0132\030.skyproto.substrait.TypeR\nout"
+    "putType\0226\n\004args\030\002 \003(\0132\036.skyproto.substra"
+    "it.ExpressionB\002\030\001R\004args\032\230\013\n\016WindowFuncti"
+    "on\022-\n\022function_reference\030\001 \001(\rR\021function"
+    "Reference\022B\n\targuments\030\t \003(\0132$.skyproto."
+    "substrait.FunctionArgumentR\targuments\022<\n"
+    "\007options\030\013 \003(\0132\".skyproto.substrait.Func"
+    "tionOptionR\007options\0229\n\013output_type\030\007 \001(\013"
+    "2\030.skyproto.substrait.TypeR\noutputType\022:"
+    "\n\005phase\030\006 \001(\0162$.skyproto.substrait.Aggre"
+    "gationPhaseR\005phase\0223\n\005sorts\030\003 \003(\0132\035.skyp"
+    "roto.substrait.SortFieldR\005sorts\022[\n\ninvoc"
+    "ation\030\n \001(\0162;.skyproto.substrait.Aggrega"
+    "teFunction.AggregationInvocationR\ninvoca"
+    "tion\022>\n\npartitions\030\002 \003(\0132\036.skyproto.subs"
+    "trait.ExpressionR\npartitions\022Y\n\013bounds_t"
+    "ype\030\014 \001(\01628.skyproto.substrait.Expressio"
+    "n.WindowFunction.BoundsTypeR\nboundsType\022"
+    "T\n\013lower_bound\030\005 \001(\01323.skyproto.substrai"
+    "t.Expression.WindowFunction.BoundR\nlower"
+    "Bound\022T\n\013upper_bound\030\004 \001(\01323.skyproto.su"
+    "bstrait.Expression.WindowFunction.BoundR"
+    "\nupperBound\0226\n\004args\030\010 \003(\0132\036.skyproto.sub"
+    "strait.ExpressionB\002\030\001R\004args\032\364\003\n\005Bound\022]\n"
+    "\tpreceding\030\001 \001(\0132=.skyproto.substrait.Ex"
+    "pression.WindowFunction.Bound.PrecedingH"
+    "\000R\tpreceding\022]\n\tfollowing\030\002 \001(\0132=.skypro"
+    "to.substrait.Expression.WindowFunction.B"
+    "ound.FollowingH\000R\tfollowing\022a\n\013current_r"
+    "ow\030\003 \001(\0132>.skyproto.substrait.Expression"
+    ".WindowFunction.Bound.CurrentRowH\000R\ncurr"
+    "entRow\022]\n\tunbounded\030\004 \001(\0132=.skyproto.sub"
+    "strait.Expression.WindowFunction.Bound.U"
+    "nboundedH\000R\tunbounded\032#\n\tPreceding\022\026\n\006of"
+    "fset\030\001 \001(\003R\006offset\032#\n\tFollowing\022\026\n\006offse"
+    "t\030\001 \001(\003R\006offset\032\014\n\nCurrentRow\032\013\n\tUnbound"
+    "edB\006\n\004kind\"V\n\nBoundsType\022\033\n\027BOUNDS_TYPE_"
+    "UNSPECIFIED\020\000\022\024\n\020BOUNDS_TYPE_ROWS\020\001\022\025\n\021B"
+    "OUNDS_TYPE_RANGE\020\002\032\356\001\n\006IfThen\022@\n\003ifs\030\001 \003"
+    "(\0132..skyproto.substrait.Expression.IfThe"
+    "n.IfClauseR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyproto"
+    ".substrait.ExpressionR\004else\032n\n\010IfClause\022"
+    ".\n\002if\030\001 \001(\0132\036.skyproto.substrait.Express"
+    "ionR\002if\0222\n\004then\030\002 \001(\0132\036.skyproto.substra"
+    "it.ExpressionR\004then\032\307\002\n\004Cast\022,\n\004type\030\001 \001"
+    "(\0132\030.skyproto.substrait.TypeR\004type\0224\n\005in"
+    "put\030\002 \001(\0132\036.skyproto.substrait.Expressio"
+    "nR\005input\022^\n\020failure_behavior\030\003 \001(\01623.sky"
+    "proto.substrait.Expression.Cast.FailureB"
+    "ehaviorR\017failureBehavior\"{\n\017FailureBehav"
+    "ior\022 \n\034FAILURE_BEHAVIOR_UNSPECIFIED\020\000\022 \n"
+    "\034FAILURE_BEHAVIOR_RETURN_NULL\020\001\022$\n FAILU"
+    "RE_BEHAVIOR_THROW_EXCEPTION\020\002\032\276\002\n\020Switch"
+    "Expression\0224\n\005match\030\003 \001(\0132\036.skyproto.sub"
+    "strait.ExpressionR\005match\022I\n\003ifs\030\001 \003(\01327."
+    "skyproto.substrait.Expression.SwitchExpr"
+    "ession.IfValueR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyp"
+    "roto.substrait.ExpressionR\004else\032u\n\007IfVal"
+    "ue\0226\n\002if\030\001 \001(\0132&.skyproto.substrait.Expr"
+    "ession.LiteralR\002if\0222\n\004then\030\002 \001(\0132\036.skypr"
+    "oto.substrait.ExpressionR\004then\032\200\001\n\016Singu"
+    "larOrList\0224\n\005value\030\001 \001(\0132\036.skyproto.subs"
+    "trait.ExpressionR\005value\0228\n\007options\030\002 \003(\013"
+    "2\036.skyproto.substrait.ExpressionR\007option"
+    "s\032\322\001\n\013MultiOrList\0224\n\005value\030\001 \003(\0132\036.skypr"
+    "oto.substrait.ExpressionR\005value\022K\n\007optio"
+    "ns\030\002 \003(\01321.skyproto.substrait.Expression"
+    ".MultiOrList.RecordR\007options\032@\n\006Record\0226"
+    "\n\006fields\030\001 \003(\0132\036.skyproto.substrait.Expr"
+    "essionR\006fields\032\267\004\n\020EmbeddedFunction\022<\n\ta"
+    "rguments\030\001 \003(\0132\036.skyproto.substrait.Expr"
+    "essionR\targuments\0229\n\013output_type\030\002 \001(\0132\030"
+    ".skyproto.substrait.TypeR\noutputType\022|\n\026"
+    "python_pickle_function\030\003 \001(\0132D.skyproto."
+    "substrait.Expression.EmbeddedFunction.Py"
+    "thonPickleFunctionH\000R\024pythonPickleFuncti"
+    "on\022y\n\025web_assembly_function\030\004 \001(\0132C.skyp"
+    "roto.substrait.Expression.EmbeddedFuncti"
+    "on.WebAssemblyFunctionH\000R\023webAssemblyFun"
+    "ction\032V\n\024PythonPickleFunction\022\032\n\010functio"
+    "n\030\001 \001(\014R\010function\022\"\n\014prerequisite\030\002 \003(\tR"
+    "\014prerequisite\032Q\n\023WebAssemblyFunction\022\026\n\006"
+    "script\030\001 \001(\014R\006script\022\"\n\014prerequisite\030\002 \003"
+    "(\tR\014prerequisiteB\006\n\004kind\032\250\005\n\020ReferenceSe"
+    "gment\022Q\n\007map_key\030\001 \001(\01326.skyproto.substr"
+    "ait.Expression.ReferenceSegment.MapKeyH\000"
+    "R\006mapKey\022`\n\014struct_field\030\002 \001(\0132;.skyprot"
+    "o.substrait.Expression.ReferenceSegment."
+    "StructFieldH\000R\013structField\022`\n\014list_eleme"
+    "nt\030\003 \001(\0132;.skyproto.substrait.Expression"
+    ".ReferenceSegment.ListElementH\000R\013listEle"
+    "ment\032\220\001\n\006MapKey\022\?\n\007map_key\030\001 \001(\0132&.skypr"
+    "oto.substrait.Expression.LiteralR\006mapKey"
+    "\022E\n\005child\030\002 \001(\0132/.skyproto.substrait.Exp"
+    "ression.ReferenceSegmentR\005child\032j\n\013Struc"
+    "tField\022\024\n\005field\030\001 \001(\005R\005field\022E\n\005child\030\002 "
+    "\001(\0132/.skyproto.substrait.Expression.Refe"
+    "renceSegmentR\005child\032l\n\013ListElement\022\026\n\006of"
+    "fset\030\001 \001(\005R\006offset\022E\n\005child\030\002 \001(\0132/.skyp"
+    "roto.substrait.Expression.ReferenceSegme"
+    "ntR\005childB\020\n\016reference_type\032\227\014\n\016MaskExpr"
+    "ession\022R\n\006select\030\001 \001(\0132:.skyproto.substr"
+    "ait.Expression.MaskExpression.StructSele"
+    "ctR\006select\0228\n\030maintain_singular_struct\030\002"
+    " \001(\010R\026maintainSingularStruct\032\203\002\n\006Select\022"
+    "T\n\006struct\030\001 \001(\0132:.skyproto.substrait.Exp"
+    "ression.MaskExpression.StructSelectH\000R\006s"
+    "truct\022N\n\004list\030\002 \001(\01328.skyproto.substrait"
+    ".Expression.MaskExpression.ListSelectH\000R"
+    "\004list\022K\n\003map\030\003 \001(\01327.skyproto.substrait."
+    "Expression.MaskExpression.MapSelectH\000R\003m"
+    "apB\006\n\004type\032k\n\014StructSelect\022[\n\014struct_ite"
+    "ms\030\001 \003(\01328.skyproto.substrait.Expression"
+    ".MaskExpression.StructItemR\013structItems\032"
+    "n\n\nStructItem\022\024\n\005field\030\001 \001(\005R\005field\022J\n\005c"
+    "hild\030\002 \001(\01324.skyproto.substrait.Expressi"
+    "on.MaskExpression.SelectR\005child\032\212\004\n\nList"
+    "Select\022e\n\tselection\030\001 \003(\0132G.skyproto.sub"
+    "strait.Expression.MaskExpression.ListSel"
+    "ect.ListSelectItemR\tselection\022J\n\005child\030\002"
     " \001(\01324.skyproto.substrait.Expression.Mas"
-    "kExpression.SelectR\005child\032\212\004\n\nListSelect"
-    "\022e\n\tselection\030\001 \003(\0132G.skyproto.substrait"
-    ".Expression.MaskExpression.ListSelect.Li"
-    "stSelectItemR\tselection\022J\n\005child\030\002 \001(\01324"
-    ".skyproto.substrait.Expression.MaskExpre"
-    "ssion.SelectR\005child\032\310\002\n\016ListSelectItem\022i"
-    "\n\004item\030\001 \001(\0132S.skyproto.substrait.Expres"
-    "sion.MaskExpression.ListSelect.ListSelec"
-    "tItem.ListElementH\000R\004item\022i\n\005slice\030\002 \001(\013"
-    "2Q.skyproto.substrait.Expression.MaskExp"
-    "ression.ListSelect.ListSelectItem.ListSl"
-    "iceH\000R\005slice\032#\n\013ListElement\022\024\n\005field\030\001 \001"
-    "(\005R\005field\0323\n\tListSlice\022\024\n\005start\030\001 \001(\005R\005s"
-    "tart\022\020\n\003end\030\002 \001(\005R\003endB\006\n\004type\032\206\003\n\tMapSe"
-    "lect\022R\n\003key\030\001 \001(\0132>.skyproto.substrait.E"
-    "xpression.MaskExpression.MapSelect.MapKe"
-    "yH\000R\003key\022j\n\nexpression\030\002 \001(\0132H.skyproto."
-    "substrait.Expression.MaskExpression.MapS"
-    "elect.MapKeyExpressionH\000R\nexpression\022J\n\005"
-    "child\030\003 \001(\01324.skyproto.substrait.Express"
-    "ion.MaskExpression.SelectR\005child\032!\n\006MapK"
-    "ey\022\027\n\007map_key\030\001 \001(\tR\006mapKey\032@\n\020MapKeyExp"
-    "ression\022,\n\022map_key_expression\030\001 \001(\tR\020map"
-    "KeyExpressionB\010\n\006select\032\272\004\n\016FieldReferen"
-    "ce\022\\\n\020direct_reference\030\001 \001(\0132/.skyproto."
-    "substrait.Expression.ReferenceSegmentH\000R"
-    "\017directReference\022Z\n\020masked_reference\030\002 \001"
-    "(\0132-.skyproto.substrait.Expression.MaskE"
-    "xpressionH\000R\017maskedReference\022@\n\nexpressi"
-    "on\030\003 \001(\0132\036.skyproto.substrait.Expression"
-    "H\001R\nexpression\022d\n\016root_reference\030\004 \001(\0132;"
-    ".skyproto.substrait.Expression.FieldRefe"
-    "rence.RootReferenceH\001R\rrootReference\022g\n\017"
-    "outer_reference\030\005 \001(\0132<.skyproto.substra"
-    "it.Expression.FieldReference.OuterRefere"
-    "nceH\001R\016outerReference\032\017\n\rRootReference\032-"
-    "\n\016OuterReference\022\033\n\tsteps_out\030\001 \001(\rR\010ste"
-    "psOutB\020\n\016reference_typeB\013\n\troot_type\032\212\013\n"
-    "\010Subquery\022H\n\006scalar\030\001 \001(\0132..skyproto.sub"
-    "strait.Expression.Subquery.ScalarH\000R\006sca"
-    "lar\022X\n\014in_predicate\030\002 \001(\01323.skyproto.sub"
-    "strait.Expression.Subquery.InPredicateH\000"
-    "R\013inPredicate\022[\n\rset_predicate\030\003 \001(\01324.s"
+    "kExpression.SelectR\005child\032\310\002\n\016ListSelect"
+    "Item\022i\n\004item\030\001 \001(\0132S.skyproto.substrait."
+    "Expression.MaskExpression.ListSelect.Lis"
+    "tSelectItem.ListElementH\000R\004item\022i\n\005slice"
+    "\030\002 \001(\0132Q.skyproto.substrait.Expression.M"
+    "askExpression.ListSelect.ListSelectItem."
+    "ListSliceH\000R\005slice\032#\n\013ListElement\022\024\n\005fie"
+    "ld\030\001 \001(\005R\005field\0323\n\tListSlice\022\024\n\005start\030\001 "
+    "\001(\005R\005start\022\020\n\003end\030\002 \001(\005R\003endB\006\n\004type\032\206\003\n"
+    "\tMapSelect\022R\n\003key\030\001 \001(\0132>.skyproto.subst"
+    "rait.Expression.MaskExpression.MapSelect"
+    ".MapKeyH\000R\003key\022j\n\nexpression\030\002 \001(\0132H.sky"
+    "proto.substrait.Expression.MaskExpressio"
+    "n.MapSelect.MapKeyExpressionH\000R\nexpressi"
+    "on\022J\n\005child\030\003 \001(\01324.skyproto.substrait.E"
+    "xpression.MaskExpression.SelectR\005child\032!"
+    "\n\006MapKey\022\027\n\007map_key\030\001 \001(\tR\006mapKey\032@\n\020Map"
+    "KeyExpression\022,\n\022map_key_expression\030\001 \001("
+    "\tR\020mapKeyExpressionB\010\n\006select\032\272\004\n\016FieldR"
+    "eference\022\\\n\020direct_reference\030\001 \001(\0132/.sky"
+    "proto.substrait.Expression.ReferenceSegm"
+    "entH\000R\017directReference\022Z\n\020masked_referen"
+    "ce\030\002 \001(\0132-.skyproto.substrait.Expression"
+    ".MaskExpressionH\000R\017maskedReference\022@\n\nex"
+    "pression\030\003 \001(\0132\036.skyproto.substrait.Expr"
+    "essionH\001R\nexpression\022d\n\016root_reference\030\004"
+    " \001(\0132;.skyproto.substrait.Expression.Fie"
+    "ldReference.RootReferenceH\001R\rrootReferen"
+    "ce\022g\n\017outer_reference\030\005 \001(\0132<.skyproto.s"
+    "ubstrait.Expression.FieldReference.Outer"
+    "ReferenceH\001R\016outerReference\032\017\n\rRootRefer"
+    "ence\032-\n\016OuterReference\022\033\n\tsteps_out\030\001 \001("
+    "\rR\010stepsOutB\020\n\016reference_typeB\013\n\troot_ty"
+    "pe\032\212\013\n\010Subquery\022H\n\006scalar\030\001 \001(\0132..skypro"
+    "to.substrait.Expression.Subquery.ScalarH"
+    "\000R\006scalar\022X\n\014in_predicate\030\002 \001(\01323.skypro"
+    "to.substrait.Expression.Subquery.InPredi"
+    "cateH\000R\013inPredicate\022[\n\rset_predicate\030\003 \001"
+    "(\01324.skyproto.substrait.Expression.Subqu"
+    "ery.SetPredicateH\000R\014setPredicate\022^\n\016set_"
+    "comparison\030\004 \001(\01325.skyproto.substrait.Ex"
+    "pression.Subquery.SetComparisonH\000R\rsetCo"
+    "mparison\0327\n\006Scalar\022-\n\005input\030\001 \001(\0132\027.skyp"
+    "roto.substrait.RelR\005input\032|\n\013InPredicate"
+    "\0228\n\007needles\030\001 \003(\0132\036.skyproto.substrait.E"
+    "xpressionR\007needles\0223\n\010haystack\030\002 \001(\0132\027.s"
+    "kyproto.substrait.RelR\010haystack\032\203\002\n\014SetP"
+    "redicate\022c\n\014predicate_op\030\001 \001(\0162@.skyprot"
+    "o.substrait.Expression.Subquery.SetPredi"
+    "cate.PredicateOpR\013predicateOp\022/\n\006tuples\030"
+    "\002 \001(\0132\027.skyproto.substrait.RelR\006tuples\"]"
+    "\n\013PredicateOp\022\034\n\030PREDICATE_OP_UNSPECIFIE"
+    "D\020\000\022\027\n\023PREDICATE_OP_EXISTS\020\001\022\027\n\023PREDICAT"
+    "E_OP_UNIQUE\020\002\032\316\004\n\rSetComparison\022d\n\014reduc"
+    "tion_op\030\001 \001(\0162A.skyproto.substrait.Expre"
+    "ssion.Subquery.SetComparison.ReductionOp"
+    "R\013reductionOp\022g\n\rcomparison_op\030\002 \001(\0162B.s"
     "kyproto.substrait.Expression.Subquery.Se"
-    "tPredicateH\000R\014setPredicate\022^\n\016set_compar"
-    "ison\030\004 \001(\01325.skyproto.substrait.Expressi"
-    "on.Subquery.SetComparisonH\000R\rsetComparis"
-    "on\0327\n\006Scalar\022-\n\005input\030\001 \001(\0132\027.skyproto.s"
-    "ubstrait.RelR\005input\032|\n\013InPredicate\0228\n\007ne"
-    "edles\030\001 \003(\0132\036.skyproto.substrait.Express"
-    "ionR\007needles\0223\n\010haystack\030\002 \001(\0132\027.skyprot"
-    "o.substrait.RelR\010haystack\032\203\002\n\014SetPredica"
-    "te\022c\n\014predicate_op\030\001 \001(\0162@.skyproto.subs"
-    "trait.Expression.Subquery.SetPredicate.P"
-    "redicateOpR\013predicateOp\022/\n\006tuples\030\002 \001(\0132"
-    "\027.skyproto.substrait.RelR\006tuples\"]\n\013Pred"
-    "icateOp\022\034\n\030PREDICATE_OP_UNSPECIFIED\020\000\022\027\n"
-    "\023PREDICATE_OP_EXISTS\020\001\022\027\n\023PREDICATE_OP_U"
-    "NIQUE\020\002\032\316\004\n\rSetComparison\022d\n\014reduction_o"
-    "p\030\001 \001(\0162A.skyproto.substrait.Expression."
-    "Subquery.SetComparison.ReductionOpR\013redu"
-    "ctionOp\022g\n\rcomparison_op\030\002 \001(\0162B.skyprot"
-    "o.substrait.Expression.Subquery.SetCompa"
-    "rison.ComparisonOpR\014comparisonOp\0222\n\004left"
-    "\030\003 \001(\0132\036.skyproto.substrait.ExpressionR\004"
-    "left\022-\n\005right\030\004 \001(\0132\027.skyproto.substrait"
-    ".RelR\005right\"\261\001\n\014ComparisonOp\022\035\n\031COMPARIS"
-    "ON_OP_UNSPECIFIED\020\000\022\024\n\020COMPARISON_OP_EQ\020"
-    "\001\022\024\n\020COMPARISON_OP_NE\020\002\022\024\n\020COMPARISON_OP"
-    "_LT\020\003\022\024\n\020COMPARISON_OP_GT\020\004\022\024\n\020COMPARISO"
-    "N_OP_LE\020\005\022\024\n\020COMPARISON_OP_GE\020\006\"W\n\013Reduc"
-    "tionOp\022\034\n\030REDUCTION_OP_UNSPECIFIED\020\000\022\024\n\020"
-    "REDUCTION_OP_ANY\020\001\022\024\n\020REDUCTION_OP_ALL\020\002"
-    "B\017\n\rsubquery_typeB\n\n\010rex_type\"\277\003\n\tSortFi"
-    "eld\0222\n\004expr\030\001 \001(\0132\036.skyproto.substrait.E"
-    "xpressionR\004expr\022K\n\tdirection\030\002 \001(\0162+.sky"
-    "proto.substrait.SortField.SortDirectionH"
-    "\000R\tdirection\022D\n\035comparison_function_refe"
-    "rence\030\003 \001(\rH\000R\033comparisonFunctionReferen"
-    "ce\"\335\001\n\rSortDirection\022\036\n\032SORT_DIRECTION_U"
-    "NSPECIFIED\020\000\022\"\n\036SORT_DIRECTION_ASC_NULLS"
-    "_FIRST\020\001\022!\n\035SORT_DIRECTION_ASC_NULLS_LAS"
-    "T\020\002\022#\n\037SORT_DIRECTION_DESC_NULLS_FIRST\020\003"
-    "\022\"\n\036SORT_DIRECTION_DESC_NULLS_LAST\020\004\022\034\n\030"
-    "SORT_DIRECTION_CLUSTERED\020\005B\013\n\tsort_kind\""
-    "\214\005\n\021AggregateFunction\022-\n\022function_refere"
-    "nce\030\001 \001(\rR\021functionReference\022B\n\targument"
-    "s\030\007 \003(\0132$.skyproto.substrait.FunctionArg"
-    "umentR\targuments\022<\n\007options\030\010 \003(\0132\".skyp"
-    "roto.substrait.FunctionOptionR\007options\0229"
-    "\n\013output_type\030\005 \001(\0132\030.skyproto.substrait"
-    ".TypeR\noutputType\022:\n\005phase\030\004 \001(\0162$.skypr"
-    "oto.substrait.AggregationPhaseR\005phase\0223\n"
-    "\005sorts\030\003 \003(\0132\035.skyproto.substrait.SortFi"
-    "eldR\005sorts\022[\n\ninvocation\030\006 \001(\0162;.skyprot"
-    "o.substrait.AggregateFunction.Aggregatio"
-    "nInvocationR\ninvocation\0226\n\004args\030\002 \003(\0132\036."
-    "skyproto.substrait.ExpressionB\002\030\001R\004args\""
-    "\204\001\n\025AggregationInvocation\022&\n\"AGGREGATION"
-    "_INVOCATION_UNSPECIFIED\020\000\022\036\n\032AGGREGATION"
-    "_INVOCATION_ALL\020\001\022#\n\037AGGREGATION_INVOCAT"
-    "ION_DISTINCT\020\002\"}\n\014ReferenceRel\022,\n\017subtre"
-    "e_ordinal\030\001 \001(\005H\000R\016subtreeOrdinal\210\001\001\022+\n\021"
-    "subtree_reference\030\002 \001(\rR\020subtreeReferenc"
-    "eB\022\n\020_subtree_ordinal*\357\001\n\020AggregationPha"
-    "se\022!\n\035AGGREGATION_PHASE_UNSPECIFIED\020\000\022-\n"
-    ")AGGREGATION_PHASE_INITIAL_TO_INTERMEDIA"
-    "TE\020\001\0222\n.AGGREGATION_PHASE_INTERMEDIATE_T"
-    "O_INTERMEDIATE\020\002\022\'\n#AGGREGATION_PHASE_IN"
-    "ITIAL_TO_RESULT\020\003\022,\n(AGGREGATION_PHASE_I"
-    "NTERMEDIATE_TO_RESULT\020\004B\217\001\n\026com.skyproto"
-    ".substraitB\014AlgebraProtoP\001\242\002\003SSX\252\002\022Skypr"
-    "oto.Substrait\312\002\022Skyproto\\Substrait\342\002\036Sky"
-    "proto\\Substrait\\GPBMetadata\352\002\023Skyproto::"
-    "Substraitb\006proto3"
+    "tComparison.ComparisonOpR\014comparisonOp\0222"
+    "\n\004left\030\003 \001(\0132\036.skyproto.substrait.Expres"
+    "sionR\004left\022-\n\005right\030\004 \001(\0132\027.skyproto.sub"
+    "strait.RelR\005right\"\261\001\n\014ComparisonOp\022\035\n\031CO"
+    "MPARISON_OP_UNSPECIFIED\020\000\022\024\n\020COMPARISON_"
+    "OP_EQ\020\001\022\024\n\020COMPARISON_OP_NE\020\002\022\024\n\020COMPARI"
+    "SON_OP_LT\020\003\022\024\n\020COMPARISON_OP_GT\020\004\022\024\n\020COM"
+    "PARISON_OP_LE\020\005\022\024\n\020COMPARISON_OP_GE\020\006\"W\n"
+    "\013ReductionOp\022\034\n\030REDUCTION_OP_UNSPECIFIED"
+    "\020\000\022\024\n\020REDUCTION_OP_ANY\020\001\022\024\n\020REDUCTION_OP"
+    "_ALL\020\002B\017\n\rsubquery_typeB\n\n\010rex_type\"\277\003\n\t"
+    "SortField\0222\n\004expr\030\001 \001(\0132\036.skyproto.subst"
+    "rait.ExpressionR\004expr\022K\n\tdirection\030\002 \001(\016"
+    "2+.skyproto.substrait.SortField.SortDire"
+    "ctionH\000R\tdirection\022D\n\035comparison_functio"
+    "n_reference\030\003 \001(\rH\000R\033comparisonFunctionR"
+    "eference\"\335\001\n\rSortDirection\022\036\n\032SORT_DIREC"
+    "TION_UNSPECIFIED\020\000\022\"\n\036SORT_DIRECTION_ASC"
+    "_NULLS_FIRST\020\001\022!\n\035SORT_DIRECTION_ASC_NUL"
+    "LS_LAST\020\002\022#\n\037SORT_DIRECTION_DESC_NULLS_F"
+    "IRST\020\003\022\"\n\036SORT_DIRECTION_DESC_NULLS_LAST"
+    "\020\004\022\034\n\030SORT_DIRECTION_CLUSTERED\020\005B\013\n\tsort"
+    "_kind\"\214\005\n\021AggregateFunction\022-\n\022function_"
+    "reference\030\001 \001(\rR\021functionReference\022B\n\tar"
+    "guments\030\007 \003(\0132$.skyproto.substrait.Funct"
+    "ionArgumentR\targuments\022<\n\007options\030\010 \003(\0132"
+    "\".skyproto.substrait.FunctionOptionR\007opt"
+    "ions\0229\n\013output_type\030\005 \001(\0132\030.skyproto.sub"
+    "strait.TypeR\noutputType\022:\n\005phase\030\004 \001(\0162$"
+    ".skyproto.substrait.AggregationPhaseR\005ph"
+    "ase\0223\n\005sorts\030\003 \003(\0132\035.skyproto.substrait."
+    "SortFieldR\005sorts\022[\n\ninvocation\030\006 \001(\0162;.s"
+    "kyproto.substrait.AggregateFunction.Aggr"
+    "egationInvocationR\ninvocation\0226\n\004args\030\002 "
+    "\003(\0132\036.skyproto.substrait.ExpressionB\002\030\001R"
+    "\004args\"\204\001\n\025AggregationInvocation\022&\n\"AGGRE"
+    "GATION_INVOCATION_UNSPECIFIED\020\000\022\036\n\032AGGRE"
+    "GATION_INVOCATION_ALL\020\001\022#\n\037AGGREGATION_I"
+    "NVOCATION_DISTINCT\020\002\"}\n\014ReferenceRel\022,\n\017"
+    "subtree_ordinal\030\001 \001(\005H\000R\016subtreeOrdinal\210"
+    "\001\001\022+\n\021subtree_reference\030\002 \001(\rR\020subtreeRe"
+    "ferenceB\022\n\020_subtree_ordinal*\357\001\n\020Aggregat"
+    "ionPhase\022!\n\035AGGREGATION_PHASE_UNSPECIFIE"
+    "D\020\000\022-\n)AGGREGATION_PHASE_INITIAL_TO_INTE"
+    "RMEDIATE\020\001\0222\n.AGGREGATION_PHASE_INTERMED"
+    "IATE_TO_INTERMEDIATE\020\002\022\'\n#AGGREGATION_PH"
+    "ASE_INITIAL_TO_RESULT\020\003\022,\n(AGGREGATION_P"
+    "HASE_INTERMEDIATE_TO_RESULT\020\004B\217\001\n\026com.sk"
+    "yproto.substraitB\014AlgebraProtoP\001\242\002\003SSX\252\002"
+    "\022Skyproto.Substrait\312\002\022Skyproto\\Substrait"
+    "\342\002\036Skyproto\\Substrait\\GPBMetadata\352\002\023Skyp"
+    "roto::Substraitb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_deps[3] =
     {
@@ -6126,7 +6114,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto = {
     false,
     false,
-    33217,
+    33023,
     descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto,
     "skyproto/substrait/algebra.proto",
     &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_once,
@@ -22194,6 +22182,7 @@ Rel::Rel(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.has_splitoverride_ = from._impl_.has_splitoverride_;
   switch (rel_type_case()) {
     case REL_TYPE_NOT_SET:
       break;
@@ -22276,6 +22265,7 @@ inline PROTOBUF_NDEBUG_INLINE Rel::Impl_::Impl_(
 
 inline void Rel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.has_splitoverride_ = {};
 }
 Rel::~Rel() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.Rel)
@@ -22515,15 +22505,15 @@ const ::google::protobuf::internal::ClassData* Rel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 22, 22, 0, 2> Rel::_table_ = {
+const ::_pbi::TcParseTable<0, 23, 22, 0, 2> Rel::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    22, 0,  // max_field_number, fast_idx_mask
+    31, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4290772992,  // skipmap
+    3217031168,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    22,  // num_field_entries
+    23,  // num_field_entries
     22,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -22533,7 +22523,9 @@ const ::_pbi::TcParseTable<0, 22, 22, 0, 2> Rel::_table_ = {
     ::_pbi::TcParser::GetTable<::skyproto::substrait::Rel>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+    {::_pbi::TcParser::FastV8S2,
+     {504, 63, 0, PROTOBUF_FIELD_OFFSET(Rel, _impl_.has_splitoverride_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -22603,6 +22595,9 @@ const ::_pbi::TcParseTable<0, 22, 22, 0, 2> Rel::_table_ = {
     // .skyproto.substrait.UpdateRel update = 22 [json_name = "update"];
     {PROTOBUF_FIELD_OFFSET(Rel, _impl_.rel_type_.update_), _Internal::kOneofCaseOffset + 0, 21,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+    {PROTOBUF_FIELD_OFFSET(Rel, _impl_.has_splitoverride_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::FilterRel>()},
@@ -22637,6 +22632,7 @@ PROTOBUF_NOINLINE void Rel::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.has_splitoverride_ = false;
   clear_rel_type();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -22792,6 +22788,13 @@ PROTOBUF_NOINLINE void Rel::Clear() {
             default:
               break;
           }
+          // bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+          if (this_._internal_has_splitoverride() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                31, this_._internal_has_splitoverride(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -22815,6 +22818,12 @@ PROTOBUF_NOINLINE void Rel::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+           {
+            // bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+            if (this_._internal_has_splitoverride() != 0) {
+              total_size += 3;
+            }
+          }
           switch (this_.rel_type_case()) {
             // .skyproto.substrait.ReadRel read = 1 [json_name = "read"];
             case kRead: {
@@ -22965,6 +22974,9 @@ void Rel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::pro
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_has_splitoverride() != 0) {
+    _this->_impl_.has_splitoverride_ = from._impl_.has_splitoverride_;
+  }
   if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
     const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
     const bool oneof_needs_init = oneof_to_case != oneof_from_case;
@@ -23192,6 +23204,7 @@ void Rel::CopyFrom(const Rel& from) {
 void Rel::InternalSwap(Rel* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.has_splitoverride_, other->_impl_.has_splitoverride_);
   swap(_impl_.rel_type_, other->_impl_.rel_type_);
   swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
 }
@@ -40891,11 +40904,6 @@ class Expression_ReferenceSegment_MapKey::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_._has_bits_);
 };
 
-void Expression_ReferenceSegment_MapKey::clear_value_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.value_type_ != nullptr) _impl_.value_type_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
 Expression_ReferenceSegment_MapKey::Expression_ReferenceSegment_MapKey(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -40931,9 +40939,6 @@ Expression_ReferenceSegment_MapKey::Expression_ReferenceSegment_MapKey(
   _impl_.child_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(
                               arena, *from._impl_.child_)
                         : nullptr;
-  _impl_.value_type_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(
-                              arena, *from._impl_.value_type_)
-                        : nullptr;
 
   // @@protoc_insertion_point(copy_constructor:skyproto.substrait.Expression.ReferenceSegment.MapKey)
 }
@@ -40947,9 +40952,9 @@ inline void Expression_ReferenceSegment_MapKey::SharedCtor(::_pb::Arena* arena) 
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, map_key_),
            0,
-           offsetof(Impl_, value_type_) -
+           offsetof(Impl_, child_) -
                offsetof(Impl_, map_key_) +
-               sizeof(Impl_::value_type_));
+               sizeof(Impl_::child_));
 }
 Expression_ReferenceSegment_MapKey::~Expression_ReferenceSegment_MapKey() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.Expression.ReferenceSegment.MapKey)
@@ -40961,7 +40966,6 @@ inline void Expression_ReferenceSegment_MapKey::SharedDtor(MessageLite& self) {
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.map_key_;
   delete this_._impl_.child_;
-  delete this_._impl_.value_type_;
   this_._impl_.~Impl_();
 }
 
@@ -41001,16 +41005,16 @@ const ::google::protobuf::internal::ClassData* Expression_ReferenceSegment_MapKe
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 3, 0, 2> Expression_ReferenceSegment_MapKey::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> Expression_ReferenceSegment_MapKey::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    3,  // num_aux_entries
+    2,  // num_field_entries
+    2,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -41019,16 +41023,12 @@ const ::_pbi::TcParseTable<2, 3, 3, 0, 2> Expression_ReferenceSegment_MapKey::_t
     ::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment_MapKey>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // .skyproto.substrait.Expression.Literal map_key = 1 [json_name = "mapKey"];
-    {::_pbi::TcParser::FastMtS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.map_key_)}},
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {::_pbi::TcParser::FastMtS1,
      {18, 1, 1, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.child_)}},
-    // optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
+    // .skyproto.substrait.Expression.Literal map_key = 1 [json_name = "mapKey"];
     {::_pbi::TcParser::FastMtS1,
-     {26, 2, 2, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.value_type_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.map_key_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -41038,13 +41038,9 @@ const ::_pbi::TcParseTable<2, 3, 3, 0, 2> Expression_ReferenceSegment_MapKey::_t
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.child_), _Internal::kHasBitsOffset + 1, 1,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
-    {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.value_type_), _Internal::kHasBitsOffset + 2, 2,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment>()},
-    {::_pbi::TcParser::GetTable<::skyproto::substrait::Type>()},
   }}, {{
   }},
 };
@@ -41057,7 +41053,7 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_MapKey::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.map_key_ != nullptr);
       _impl_.map_key_->Clear();
@@ -41065,10 +41061,6 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_MapKey::Clear() {
     if (cached_has_bits & 0x00000002u) {
       ABSL_DCHECK(_impl_.child_ != nullptr);
       _impl_.child_->Clear();
-    }
-    if (cached_has_bits & 0x00000004u) {
-      ABSL_DCHECK(_impl_.value_type_ != nullptr);
-      _impl_.value_type_->Clear();
     }
   }
   _impl_._has_bits_.Clear();
@@ -41105,13 +41097,6 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_MapKey::Clear() {
                 stream);
           }
 
-          // optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
-          if (cached_has_bits & 0x00000004u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                3, *this_._impl_.value_type_, this_._impl_.value_type_->GetCachedSize(), target,
-                stream);
-          }
-
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -41137,7 +41122,7 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_MapKey::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
           cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000007u) {
+          if (cached_has_bits & 0x00000003u) {
             // .skyproto.substrait.Expression.Literal map_key = 1 [json_name = "mapKey"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
@@ -41147,11 +41132,6 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_MapKey::Clear() {
             if (cached_has_bits & 0x00000002u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.child_);
-            }
-            // optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
-            if (cached_has_bits & 0x00000004u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_type_);
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -41168,7 +41148,7 @@ void Expression_ReferenceSegment_MapKey::MergeImpl(::google::protobuf::MessageLi
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(from._impl_.map_key_ != nullptr);
       if (_this->_impl_.map_key_ == nullptr) {
@@ -41185,15 +41165,6 @@ void Expression_ReferenceSegment_MapKey::MergeImpl(::google::protobuf::MessageLi
             ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(arena, *from._impl_.child_);
       } else {
         _this->_impl_.child_->MergeFrom(*from._impl_.child_);
-      }
-    }
-    if (cached_has_bits & 0x00000004u) {
-      ABSL_DCHECK(from._impl_.value_type_ != nullptr);
-      if (_this->_impl_.value_type_ == nullptr) {
-        _this->_impl_.value_type_ =
-            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(arena, *from._impl_.value_type_);
-      } else {
-        _this->_impl_.value_type_->MergeFrom(*from._impl_.value_type_);
       }
     }
   }
@@ -41214,8 +41185,8 @@ void Expression_ReferenceSegment_MapKey::InternalSwap(Expression_ReferenceSegmen
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.value_type_)
-      + sizeof(Expression_ReferenceSegment_MapKey::_impl_.value_type_)
+      PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.child_)
+      + sizeof(Expression_ReferenceSegment_MapKey::_impl_.child_)
       - PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_MapKey, _impl_.map_key_)>(
           reinterpret_cast<char*>(&_impl_.map_key_),
           reinterpret_cast<char*>(&other->_impl_.map_key_));
@@ -41234,11 +41205,6 @@ class Expression_ReferenceSegment_StructField::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_._has_bits_);
 };
 
-void Expression_ReferenceSegment_StructField::clear_field_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.field_type_ != nullptr) _impl_.field_type_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
 Expression_ReferenceSegment_StructField::Expression_ReferenceSegment_StructField(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -41271,9 +41237,6 @@ Expression_ReferenceSegment_StructField::Expression_ReferenceSegment_StructField
   _impl_.child_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(
                               arena, *from._impl_.child_)
                         : nullptr;
-  _impl_.field_type_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(
-                              arena, *from._impl_.field_type_)
-                        : nullptr;
   _impl_.field_ = from._impl_.field_;
 
   // @@protoc_insertion_point(copy_constructor:skyproto.substrait.Expression.ReferenceSegment.StructField)
@@ -41301,7 +41264,6 @@ inline void Expression_ReferenceSegment_StructField::SharedDtor(MessageLite& sel
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.child_;
-  delete this_._impl_.field_type_;
   this_._impl_.~Impl_();
 }
 
@@ -41341,16 +41303,16 @@ const ::google::protobuf::internal::ClassData* Expression_ReferenceSegment_Struc
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_StructField::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> Expression_ReferenceSegment_StructField::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    2,  // num_aux_entries
+    2,  // num_field_entries
+    1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -41359,16 +41321,12 @@ const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_StructFiel
     ::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment_StructField>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // int32 field = 1 [json_name = "field"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Expression_ReferenceSegment_StructField, _impl_.field_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.field_)}},
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {::_pbi::TcParser::FastMtS1,
      {18, 0, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.child_)}},
-    // optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-    {::_pbi::TcParser::FastMtS1,
-     {26, 1, 1, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.field_type_)}},
+    // int32 field = 1 [json_name = "field"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Expression_ReferenceSegment_StructField, _impl_.field_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.field_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -41378,12 +41336,8 @@ const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_StructFiel
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.child_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-    {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_StructField, _impl_.field_type_), _Internal::kHasBitsOffset + 1, 1,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment>()},
-    {::_pbi::TcParser::GetTable<::skyproto::substrait::Type>()},
   }}, {{
   }},
 };
@@ -41396,15 +41350,9 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_StructField::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(_impl_.child_ != nullptr);
-      _impl_.child_->Clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(_impl_.field_type_ != nullptr);
-      _impl_.field_type_->Clear();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.child_ != nullptr);
+    _impl_.child_->Clear();
   }
   _impl_.field_ = 0;
   _impl_._has_bits_.Clear();
@@ -41441,13 +41389,6 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_StructField::Clear() {
                 stream);
           }
 
-          // optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-          if (cached_has_bits & 0x00000002u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                3, *this_._impl_.field_type_, this_._impl_.field_type_->GetCachedSize(), target,
-                stream);
-          }
-
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -41472,17 +41413,12 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_StructField::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
+           {
             // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
+            cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.child_);
-            }
-            // optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.field_type_);
             }
           }
            {
@@ -41506,24 +41442,13 @@ void Expression_ReferenceSegment_StructField::MergeImpl(::google::protobuf::Mess
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(from._impl_.child_ != nullptr);
-      if (_this->_impl_.child_ == nullptr) {
-        _this->_impl_.child_ =
-            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(arena, *from._impl_.child_);
-      } else {
-        _this->_impl_.child_->MergeFrom(*from._impl_.child_);
-      }
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(from._impl_.field_type_ != nullptr);
-      if (_this->_impl_.field_type_ == nullptr) {
-        _this->_impl_.field_type_ =
-            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(arena, *from._impl_.field_type_);
-      } else {
-        _this->_impl_.field_type_->MergeFrom(*from._impl_.field_type_);
-      }
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.child_ != nullptr);
+    if (_this->_impl_.child_ == nullptr) {
+      _this->_impl_.child_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(arena, *from._impl_.child_);
+    } else {
+      _this->_impl_.child_->MergeFrom(*from._impl_.child_);
     }
   }
   if (from._internal_field() != 0) {
@@ -41566,11 +41491,6 @@ class Expression_ReferenceSegment_ListElement::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_._has_bits_);
 };
 
-void Expression_ReferenceSegment_ListElement::clear_element_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.element_type_ != nullptr) _impl_.element_type_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
 Expression_ReferenceSegment_ListElement::Expression_ReferenceSegment_ListElement(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -41603,9 +41523,6 @@ Expression_ReferenceSegment_ListElement::Expression_ReferenceSegment_ListElement
   _impl_.child_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(
                               arena, *from._impl_.child_)
                         : nullptr;
-  _impl_.element_type_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(
-                              arena, *from._impl_.element_type_)
-                        : nullptr;
   _impl_.offset_ = from._impl_.offset_;
 
   // @@protoc_insertion_point(copy_constructor:skyproto.substrait.Expression.ReferenceSegment.ListElement)
@@ -41633,7 +41550,6 @@ inline void Expression_ReferenceSegment_ListElement::SharedDtor(MessageLite& sel
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.child_;
-  delete this_._impl_.element_type_;
   this_._impl_.~Impl_();
 }
 
@@ -41673,16 +41589,16 @@ const ::google::protobuf::internal::ClassData* Expression_ReferenceSegment_ListE
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_ListElement::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> Expression_ReferenceSegment_ListElement::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    2,  // num_aux_entries
+    2,  // num_field_entries
+    1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -41691,16 +41607,12 @@ const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_ListElemen
     ::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment_ListElement>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // int32 offset = 1 [json_name = "offset"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Expression_ReferenceSegment_ListElement, _impl_.offset_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.offset_)}},
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {::_pbi::TcParser::FastMtS1,
      {18, 0, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.child_)}},
-    // optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-    {::_pbi::TcParser::FastMtS1,
-     {26, 1, 1, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.element_type_)}},
+    // int32 offset = 1 [json_name = "offset"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Expression_ReferenceSegment_ListElement, _impl_.offset_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.offset_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -41710,12 +41622,8 @@ const ::_pbi::TcParseTable<2, 3, 2, 0, 2> Expression_ReferenceSegment_ListElemen
     // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
     {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.child_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-    {PROTOBUF_FIELD_OFFSET(Expression_ReferenceSegment_ListElement, _impl_.element_type_), _Internal::kHasBitsOffset + 1, 1,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_ReferenceSegment>()},
-    {::_pbi::TcParser::GetTable<::skyproto::substrait::Type>()},
   }}, {{
   }},
 };
@@ -41728,15 +41636,9 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_ListElement::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(_impl_.child_ != nullptr);
-      _impl_.child_->Clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(_impl_.element_type_ != nullptr);
-      _impl_.element_type_->Clear();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.child_ != nullptr);
+    _impl_.child_->Clear();
   }
   _impl_.offset_ = 0;
   _impl_._has_bits_.Clear();
@@ -41773,13 +41675,6 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_ListElement::Clear() {
                 stream);
           }
 
-          // optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-          if (cached_has_bits & 0x00000002u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                3, *this_._impl_.element_type_, this_._impl_.element_type_->GetCachedSize(), target,
-                stream);
-          }
-
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -41804,17 +41699,12 @@ PROTOBUF_NOINLINE void Expression_ReferenceSegment_ListElement::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
+           {
             // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
+            cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.child_);
-            }
-            // optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.element_type_);
             }
           }
            {
@@ -41838,24 +41728,13 @@ void Expression_ReferenceSegment_ListElement::MergeImpl(::google::protobuf::Mess
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(from._impl_.child_ != nullptr);
-      if (_this->_impl_.child_ == nullptr) {
-        _this->_impl_.child_ =
-            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(arena, *from._impl_.child_);
-      } else {
-        _this->_impl_.child_->MergeFrom(*from._impl_.child_);
-      }
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(from._impl_.element_type_ != nullptr);
-      if (_this->_impl_.element_type_ == nullptr) {
-        _this->_impl_.element_type_ =
-            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(arena, *from._impl_.element_type_);
-      } else {
-        _this->_impl_.element_type_->MergeFrom(*from._impl_.element_type_);
-      }
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.child_ != nullptr);
+    if (_this->_impl_.child_ == nullptr) {
+      _this->_impl_.child_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_ReferenceSegment>(arena, *from._impl_.child_);
+    } else {
+      _this->_impl_.child_->MergeFrom(*from._impl_.child_);
     }
   }
   if (from._internal_offset() != 0) {

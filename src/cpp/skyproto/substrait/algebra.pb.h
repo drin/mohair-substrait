@@ -14388,7 +14388,6 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
   // accessors -------------------------------------------------------
   enum : int {
     kChildFieldNumber = 2,
-    kElementTypeFieldNumber = 3,
     kOffsetFieldNumber = 1,
   };
   // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
@@ -14406,21 +14405,6 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
   ::skyproto::substrait::Expression_ReferenceSegment* _internal_mutable_child();
 
   public:
-  // optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-  bool has_element_type() const;
-  void clear_element_type() ;
-  const ::skyproto::substrait::Type& element_type() const;
-  PROTOBUF_NODISCARD ::skyproto::substrait::Type* release_element_type();
-  ::skyproto::substrait::Type* mutable_element_type();
-  void set_allocated_element_type(::skyproto::substrait::Type* value);
-  void unsafe_arena_set_allocated_element_type(::skyproto::substrait::Type* value);
-  ::skyproto::substrait::Type* unsafe_arena_release_element_type();
-
-  private:
-  const ::skyproto::substrait::Type& _internal_element_type() const;
-  ::skyproto::substrait::Type* _internal_mutable_element_type();
-
-  public:
   // int32 offset = 1 [json_name = "offset"];
   void clear_offset() ;
   ::int32_t offset() const;
@@ -14436,7 +14420,7 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 2,
+      1, 2, 1,
       0, 2>
       _table_;
 
@@ -14457,7 +14441,6 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::substrait::Expression_ReferenceSegment* child_;
-    ::skyproto::substrait::Type* element_type_;
     ::int32_t offset_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -14614,7 +14597,6 @@ class Expression_ReferenceSegment_MapKey final : public ::google::protobuf::Mess
   enum : int {
     kMapKeyFieldNumber = 1,
     kChildFieldNumber = 2,
-    kValueTypeFieldNumber = 3,
   };
   // .skyproto.substrait.Expression.Literal map_key = 1 [json_name = "mapKey"];
   bool has_map_key() const;
@@ -14646,27 +14628,12 @@ class Expression_ReferenceSegment_MapKey final : public ::google::protobuf::Mess
   ::skyproto::substrait::Expression_ReferenceSegment* _internal_mutable_child();
 
   public:
-  // optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
-  bool has_value_type() const;
-  void clear_value_type() ;
-  const ::skyproto::substrait::Type& value_type() const;
-  PROTOBUF_NODISCARD ::skyproto::substrait::Type* release_value_type();
-  ::skyproto::substrait::Type* mutable_value_type();
-  void set_allocated_value_type(::skyproto::substrait::Type* value);
-  void unsafe_arena_set_allocated_value_type(::skyproto::substrait::Type* value);
-  ::skyproto::substrait::Type* unsafe_arena_release_value_type();
-
-  private:
-  const ::skyproto::substrait::Type& _internal_value_type() const;
-  ::skyproto::substrait::Type* _internal_mutable_value_type();
-
-  public:
   // @@protoc_insertion_point(class_scope:skyproto.substrait.Expression.ReferenceSegment.MapKey)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 3,
+      1, 2, 2,
       0, 2>
       _table_;
 
@@ -14688,7 +14655,6 @@ class Expression_ReferenceSegment_MapKey final : public ::google::protobuf::Mess
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::substrait::Expression_Literal* map_key_;
     ::skyproto::substrait::Expression_ReferenceSegment* child_;
-    ::skyproto::substrait::Type* value_type_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -14843,7 +14809,6 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
   // accessors -------------------------------------------------------
   enum : int {
     kChildFieldNumber = 2,
-    kFieldTypeFieldNumber = 3,
     kFieldFieldNumber = 1,
   };
   // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
@@ -14861,21 +14826,6 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
   ::skyproto::substrait::Expression_ReferenceSegment* _internal_mutable_child();
 
   public:
-  // optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-  bool has_field_type() const;
-  void clear_field_type() ;
-  const ::skyproto::substrait::Type& field_type() const;
-  PROTOBUF_NODISCARD ::skyproto::substrait::Type* release_field_type();
-  ::skyproto::substrait::Type* mutable_field_type();
-  void set_allocated_field_type(::skyproto::substrait::Type* value);
-  void unsafe_arena_set_allocated_field_type(::skyproto::substrait::Type* value);
-  ::skyproto::substrait::Type* unsafe_arena_release_field_type();
-
-  private:
-  const ::skyproto::substrait::Type& _internal_field_type() const;
-  ::skyproto::substrait::Type* _internal_mutable_field_type();
-
-  public:
   // int32 field = 1 [json_name = "field"];
   void clear_field() ;
   ::int32_t field() const;
@@ -14891,7 +14841,7 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 2,
+      1, 2, 1,
       0, 2>
       _table_;
 
@@ -14912,7 +14862,6 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::substrait::Expression_ReferenceSegment* child_;
-    ::skyproto::substrait::Type* field_type_;
     ::int32_t field_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -28985,6 +28934,7 @@ class Rel final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kHasSplitoverrideFieldNumber = 31,
     kReadFieldNumber = 1,
     kFilterFieldNumber = 2,
     kFetchFieldNumber = 3,
@@ -29008,6 +28958,16 @@ class Rel final : public ::google::protobuf::Message
     kExchangeFieldNumber = 15,
     kExpandFieldNumber = 16,
   };
+  // bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+  void clear_has_splitoverride() ;
+  bool has_splitoverride() const;
+  void set_has_splitoverride(bool value);
+
+  private:
+  bool _internal_has_splitoverride() const;
+  void _internal_set_has_splitoverride(bool value);
+
+  public:
   // .skyproto.substrait.ReadRel read = 1 [json_name = "read"];
   bool has_read() const;
   private:
@@ -29457,7 +29417,7 @@ class Rel final : public ::google::protobuf::Message
   inline void clear_has_rel_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 22, 22,
+      0, 23, 22,
       0, 2>
       _table_;
 
@@ -29475,6 +29435,7 @@ class Rel final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const Rel& from_msg);
+    bool has_splitoverride_;
     union RelTypeUnion {
       constexpr RelTypeUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -44384,6 +44345,28 @@ inline ::skyproto::substrait::ExpandRel* Rel::mutable_expand() ABSL_ATTRIBUTE_LI
   return _msg;
 }
 
+// bool has_splitoverride = 31 [json_name = "hasSplitoverride"];
+inline void Rel::clear_has_splitoverride() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.has_splitoverride_ = false;
+}
+inline bool Rel::has_splitoverride() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Rel.has_splitoverride)
+  return _internal_has_splitoverride();
+}
+inline void Rel::set_has_splitoverride(bool value) {
+  _internal_set_has_splitoverride(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Rel.has_splitoverride)
+}
+inline bool Rel::_internal_has_splitoverride() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.has_splitoverride_;
+}
+inline void Rel::_internal_set_has_splitoverride(bool value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.has_splitoverride_ = value;
+}
+
 inline bool Rel::has_rel_type() const {
   return rel_type_case() != REL_TYPE_NOT_SET;
 }
@@ -56055,97 +56038,6 @@ inline void Expression_ReferenceSegment_MapKey::set_allocated_map_key(::skyproto
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.ReferenceSegment.MapKey.map_key)
 }
 
-// optional .skyproto.substrait.Type value_type = 3 [json_name = "valueType"];
-inline bool Expression_ReferenceSegment_MapKey::has_value_type() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.value_type_ != nullptr);
-  return value;
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_MapKey::_internal_value_type() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::skyproto::substrait::Type* p = _impl_.value_type_;
-  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::Type&>(::skyproto::substrait::_Type_default_instance_);
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_MapKey::value_type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.ReferenceSegment.MapKey.value_type)
-  return _internal_value_type();
-}
-inline void Expression_ReferenceSegment_MapKey::unsafe_arena_set_allocated_value_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_type_);
-  }
-  _impl_.value_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Expression.ReferenceSegment.MapKey.value_type)
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_MapKey::release_value_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  ::skyproto::substrait::Type* released = _impl_.value_type_;
-  _impl_.value_type_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_MapKey::unsafe_arena_release_value_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.substrait.Expression.ReferenceSegment.MapKey.value_type)
-
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  ::skyproto::substrait::Type* temp = _impl_.value_type_;
-  _impl_.value_type_ = nullptr;
-  return temp;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_MapKey::_internal_mutable_value_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.value_type_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Type>(GetArena());
-    _impl_.value_type_ = reinterpret_cast<::skyproto::substrait::Type*>(p);
-  }
-  return _impl_.value_type_;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_MapKey::mutable_value_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  ::skyproto::substrait::Type* _msg = _internal_mutable_value_type();
-  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.ReferenceSegment.MapKey.value_type)
-  return _msg;
-}
-inline void Expression_ReferenceSegment_MapKey::set_allocated_value_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_type_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-
-  _impl_.value_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.ReferenceSegment.MapKey.value_type)
-}
-
 // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
 inline bool Expression_ReferenceSegment_MapKey::has_child() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
@@ -56268,97 +56160,6 @@ inline void Expression_ReferenceSegment_StructField::_internal_set_field(::int32
   _impl_.field_ = value;
 }
 
-// optional .skyproto.substrait.Type field_type = 3 [json_name = "fieldType"];
-inline bool Expression_ReferenceSegment_StructField::has_field_type() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.field_type_ != nullptr);
-  return value;
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_StructField::_internal_field_type() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::skyproto::substrait::Type* p = _impl_.field_type_;
-  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::Type&>(::skyproto::substrait::_Type_default_instance_);
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_StructField::field_type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.ReferenceSegment.StructField.field_type)
-  return _internal_field_type();
-}
-inline void Expression_ReferenceSegment_StructField::unsafe_arena_set_allocated_field_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.field_type_);
-  }
-  _impl_.field_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Expression.ReferenceSegment.StructField.field_type)
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_StructField::release_field_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  ::skyproto::substrait::Type* released = _impl_.field_type_;
-  _impl_.field_type_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_StructField::unsafe_arena_release_field_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.substrait.Expression.ReferenceSegment.StructField.field_type)
-
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  ::skyproto::substrait::Type* temp = _impl_.field_type_;
-  _impl_.field_type_ = nullptr;
-  return temp;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_StructField::_internal_mutable_field_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.field_type_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Type>(GetArena());
-    _impl_.field_type_ = reinterpret_cast<::skyproto::substrait::Type*>(p);
-  }
-  return _impl_.field_type_;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_StructField::mutable_field_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  ::skyproto::substrait::Type* _msg = _internal_mutable_field_type();
-  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.ReferenceSegment.StructField.field_type)
-  return _msg;
-}
-inline void Expression_ReferenceSegment_StructField::set_allocated_field_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.field_type_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-
-  _impl_.field_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.ReferenceSegment.StructField.field_type)
-}
-
 // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];
 inline bool Expression_ReferenceSegment_StructField::has_child() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
@@ -56479,97 +56280,6 @@ inline ::int32_t Expression_ReferenceSegment_ListElement::_internal_offset() con
 inline void Expression_ReferenceSegment_ListElement::_internal_set_offset(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.offset_ = value;
-}
-
-// optional .skyproto.substrait.Type element_type = 3 [json_name = "elementType"];
-inline bool Expression_ReferenceSegment_ListElement::has_element_type() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.element_type_ != nullptr);
-  return value;
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_ListElement::_internal_element_type() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::skyproto::substrait::Type* p = _impl_.element_type_;
-  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::Type&>(::skyproto::substrait::_Type_default_instance_);
-}
-inline const ::skyproto::substrait::Type& Expression_ReferenceSegment_ListElement::element_type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.ReferenceSegment.ListElement.element_type)
-  return _internal_element_type();
-}
-inline void Expression_ReferenceSegment_ListElement::unsafe_arena_set_allocated_element_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.element_type_);
-  }
-  _impl_.element_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Expression.ReferenceSegment.ListElement.element_type)
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_ListElement::release_element_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  ::skyproto::substrait::Type* released = _impl_.element_type_;
-  _impl_.element_type_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_ListElement::unsafe_arena_release_element_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.substrait.Expression.ReferenceSegment.ListElement.element_type)
-
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  ::skyproto::substrait::Type* temp = _impl_.element_type_;
-  _impl_.element_type_ = nullptr;
-  return temp;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_ListElement::_internal_mutable_element_type() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.element_type_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Type>(GetArena());
-    _impl_.element_type_ = reinterpret_cast<::skyproto::substrait::Type*>(p);
-  }
-  return _impl_.element_type_;
-}
-inline ::skyproto::substrait::Type* Expression_ReferenceSegment_ListElement::mutable_element_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  ::skyproto::substrait::Type* _msg = _internal_mutable_element_type();
-  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.ReferenceSegment.ListElement.element_type)
-  return _msg;
-}
-inline void Expression_ReferenceSegment_ListElement::set_allocated_element_type(::skyproto::substrait::Type* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.element_type_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-
-  _impl_.element_type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
-  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.ReferenceSegment.ListElement.element_type)
 }
 
 // .skyproto.substrait.Expression.ReferenceSegment child = 2 [json_name = "child"];

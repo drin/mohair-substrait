@@ -213,13 +213,13 @@ const char descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto[] ABSL
     "ASS_DPU\020\004*v\n\nMemoryType\022\023\n\017MEMORY_TYPE_D"
     "DR\020\000\022\024\n\020MEMORY_TYPE_GDDR\020\001\022\023\n\017MEMORY_TYP"
     "E_NVM\020\002\022\023\n\017MEMORY_TYPE_CXL\020\003\022\023\n\017MEMORY_T"
-    "YPE_CAM\020\004*h\n\014DecomposeAlg\022\010\n\004None\020\000\022\024\n\020L"
+    "YPE_CAM\020\004*s\n\014DecomposeAlg\022\010\n\004None\020\000\022\024\n\020L"
     "ongPipelineLeaf\020\001\022\024\n\020LongPipelineHead\020\002\022"
-    "\020\n\014TallJoinLeaf\020\003\022\020\n\014WideJoinHead\020\004B\201\001\n\023"
-    "com.skyproto.mohairB\rTopologyProtoP\001\242\002\003S"
-    "MX\252\002\017Skyproto.Mohair\312\002\017Skyproto\\Mohair\342\002"
-    "\033Skyproto\\Mohair\\GPBMetadata\352\002\020Skyproto:"
-    ":Mohairb\006proto3"
+    "\020\n\014TallJoinLeaf\020\003\022\020\n\014WideJoinHead\020\004\022\t\n\005E"
+    "ager\020\005B\201\001\n\023com.skyproto.mohairB\rTopology"
+    "ProtoP\001\242\002\003SMX\252\002\017Skyproto.Mohair\312\002\017Skypro"
+    "to\\Mohair\342\002\033Skyproto\\Mohair\\GPBMetadata\352"
+    "\002\020Skyproto::Mohairb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fmohair_2ftopology_2eproto_deps[1] =
     {
@@ -229,7 +229,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fmohair_2ftopology_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fmohair_2ftopology_2eproto = {
     false,
     false,
-    1415,
+    1426,
     descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto,
     "skyproto/mohair/topology.proto",
     &descriptor_table_skyproto_2fmohair_2ftopology_2eproto_once,
@@ -267,9 +267,9 @@ const ::google::protobuf::EnumDescriptor* DecomposeAlg_descriptor() {
   return file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[2];
 }
 PROTOBUF_CONSTINIT const uint32_t DecomposeAlg_internal_data_[] = {
-    327680u, 0u, };
+    393216u, 0u, };
 bool DecomposeAlg_IsValid(int value) {
-  return 0 <= value && value <= 4;
+  return 0 <= value && value <= 5;
 }
 // ===================================================================
 

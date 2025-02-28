@@ -151,6 +151,7 @@ enum DecomposeAlg : int {
   LongPipelineHead = 2,
   TallJoinLeaf = 3,
   WideJoinHead = 4,
+  Eager = 5,
   DecomposeAlg_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   DecomposeAlg_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -160,8 +161,8 @@ enum DecomposeAlg : int {
 bool DecomposeAlg_IsValid(int value);
 extern const uint32_t DecomposeAlg_internal_data_[];
 constexpr DecomposeAlg DecomposeAlg_MIN = static_cast<DecomposeAlg>(0);
-constexpr DecomposeAlg DecomposeAlg_MAX = static_cast<DecomposeAlg>(4);
-constexpr int DecomposeAlg_ARRAYSIZE = 4 + 1;
+constexpr DecomposeAlg DecomposeAlg_MAX = static_cast<DecomposeAlg>(5);
+constexpr int DecomposeAlg_ARRAYSIZE = 5 + 1;
 const ::google::protobuf::EnumDescriptor*
 DecomposeAlg_descriptor();
 template <typename T>
@@ -174,7 +175,7 @@ const std::string& DecomposeAlg_Name(T value) {
 template <>
 inline const std::string& DecomposeAlg_Name(DecomposeAlg value) {
   return ::google::protobuf::internal::NameOfDenseEnum<DecomposeAlg_descriptor,
-                                                 0, 4>(
+                                                 0, 5>(
       static_cast<int>(value));
 }
 inline bool DecomposeAlg_Parse(absl::string_view name, DecomposeAlg* value) {

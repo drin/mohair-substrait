@@ -315,6 +315,7 @@ namespace mohair {
   }
 
   // Traversal functions for finding candidate plan splits
+  optional<size_t> FindSplitOverride(SystemPlan* sys_plan);
   optional<size_t> FindTallJoinLeaf(SystemPlan* sys_plan);
   optional<size_t> FindLongPipelineLeaf(SystemPlan* sys_plan);
   optional<size_t> FindWideJoin(SystemPlan* sys_plan);
@@ -327,7 +328,12 @@ namespace mohair {
 
     switch (method) {
       // Do not find a split candidate if no algorithm is specified
-      case DecomposeAlg::None: break;
+      case DecomposeAlg::None:
+      case DecomposeAlg::Eager: {
+        optional<size_t> override_ndx = FindSplitOverride(sys_plan);
+        if (override_ndx.has_value()) { stage_ndx = override_ndx.value(); }
+        break;
+      }
 
       case DecomposeAlg::TallJoinLeaf: {
         stage_ndx = FindTallJoinLeaf(sys_plan);
@@ -595,6 +601,25 @@ namespace mohair {
     MohairLogTimestamps(ExtractPlanSplit);
 
     return subplan_msgs;
+  }
+
+  //! Finds the first pipeline stage of SystemPlan with a split annotation.
+  //  This function returns the index of the stage as a split and clears the split
+  //  annotation. This allows subsequent calls to find later splits.
+  optional<size_t> FindSplitOverride(SystemPlan* sys_plan) {
+    optional<size_t> override_ndx { std::nullopt };
+
+    size_t count_stages { sys_plan->pipeline_stages.size() };
+    for (size_t stage_ndx = 0; stage_ndx < count_stages; ++stage_ndx) {
+      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+
+      if (stage->sink->substrait_rel->has_splitoverride()) {
+        override_ndx = stage_ndx;
+        break;
+      }
+    }
+
+    return override_ndx;
   }
 
   //! Finds a `PlanSplit` matching a PipelineStage with a join as a sink and with at least
