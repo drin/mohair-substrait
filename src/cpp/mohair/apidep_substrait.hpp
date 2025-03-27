@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,59 +36,4 @@
 #include "skyproto/substrait/plan.pb.h"
 #include "skyproto/substrait/algebra.pb.h"
 #include "skyproto/substrait/extensions/extensions.pb.h"
-
-
-// ------------------------------
-// Aliases
-
-// >> type aliases
-namespace mohair {
-
-  // >> Protobuf types
-  using google::protobuf::RepeatedPtrField;
-  using google::protobuf::Message;
-  using google::protobuf::util::MessageDifferencer;
-
-  // >> Substrait types
-  // Type representation
-  using SubstraitType   = skyproto::substrait::Type;
-  using SubstraitSchema = skyproto::substrait::NamedStruct;
-
-  // Expression representation
-  using SubstraitExpr   = skyproto::substrait::Expression;
-
-  // Plan level
-  using skyproto::substrait::Plan;
-  using skyproto::substrait::PlanRel;
-
-  // Relation level
-  using skyproto::substrait::Rel;
-  using skyproto::substrait::RelCommon;
-  using skyproto::substrait::RelRoot;
-  using skyproto::substrait::extensions::AdvancedExtension;
-
-  // Leaf types
-  using skyproto::substrait::ReadRel;
-  using skyproto::substrait::ExtensionLeafRel;
-  using skyproto::substrait::ReferenceRel;
-
-  // Unary types (streaming)
-  using skyproto::substrait::ProjectRel;
-  using skyproto::substrait::FilterRel;
-  using skyproto::substrait::FetchRel;
-
-  // Unary types (sink)
-  using skyproto::substrait::SortRel;
-  using skyproto::substrait::AggregateRel;
-
-  // Binary types (sink)
-  using skyproto::substrait::JoinRel;
-  using skyproto::substrait::CrossRel;
-  using skyproto::substrait::HashJoinRel;
-  using skyproto::substrait::MergeJoinRel;
-
-  // N-ary types (streaming)
-  using skyproto::substrait::SetRel;
-
-} // namespace: mohair
 

@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@
 #include "mohair-config.hpp"
 
 // API dependencies
-#include "mohair/apidep_standard.hpp"  // C++ standard library
-#include "mohair/apidep_substrait.hpp" // Substrait protocol types
+#include "mohair/apidep_standard.hpp"   // C++ standard library
+#include "mohair/adapter_substrait.hpp" // Substrait protocol types
 
 // Substrait extensions
 #include "skyproto/mohair/algebra.pb.h"
@@ -43,8 +43,11 @@
   }
 
 
-#define MohairInitLogger(logger_name) {                                      \
-  *(mohair::MohairLogger(logger_name)) << "Logger initialized" << std::endl; \
+#define MohairInitLogger(logger_name) {   \
+  MOHAIR_ASSERT(                          \
+     "Failed to initialize logger"        \
+    ,MohairLogger(logger_name) != nullptr \
+  );                                      \
 }
 
 #define MohairStartTS(phase_name) \
@@ -55,11 +58,11 @@
 
 #define MohairLogTimestamps(phase_name) {                                      \
   auto ts_diff = StringifyTSDiff(ts_start_##phase_name, ts_stop_##phase_name); \
-  *(mohair::MohairLogger()) << "["                                             \
-                            << StringifyTS(ts_start_##phase_name) << ":µs"     \
-                    << ", " << StringifyTS(ts_stop_##phase_name)  << ":µs"     \
-                    << ", " << ts_diff                            << ":µs"     \
-                 << "] |> " << #phase_name << std::endl                        \
+  *(mohair::MohairLogger()) << #phase_name                                     \
+                            << " " << StringifyTS(ts_start_##phase_name)       \
+                            << " " << StringifyTS(ts_stop_##phase_name)        \
+                            << " " << ts_diff                                  \
+                            << std::endl                                       \
   ;                                                                            \
 }
 
@@ -69,25 +72,11 @@
   MohairStopTS(phase_name)                    \
   MohairLogTimestamps(phase_name)
 
-/* NOTE: for now we should always have performance logging
-#if MOHAIR_DEBUG
-#else
-  #define MohairLogTimestamps(ts_name, log_msg) {}
-  #define MohairLogPerf(phase_name, code_block) code_block
-  #define MohairStartTS(phase_name)             {}
-  #define MohairStopTS(phase_name)              {}
-
-#endif
-*/
-
 
 // ------------------------------
 // Aliases
 
 namespace mohair {
-
-  // >> Standard types
-  using SteadyTS = steady_clock::time_point;
 
   // >> Mohair types
   // Plan level

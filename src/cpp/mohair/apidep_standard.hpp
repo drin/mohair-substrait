@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,11 +17,6 @@
 
 
 // ------------------------------
-// Dependencies
-#pragma once
-
-
-// ------------------------------
 // Overview
 //
 // Dependencies from standard library that are common throughout this library.
@@ -29,11 +24,13 @@
 
 // ------------------------------
 // Dependencies
+#pragma once
 
 // >> Memory and data type support
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <string_view>
 #include <optional>
 #include <vector>
 #include <unordered_map>
@@ -47,21 +44,35 @@
 #include <chrono>
 #include <iomanip>
 
+
 // ------------------------------
-// Type aliases
+// Aliases
 
 namespace mohair {
 
+  // >> Namespaces
+  using namespace std::literals;
+
+  // >> Memory types
   using std::unique_ptr;
+
+  // >> Data types
   using std::optional;
   using std::string;
-  using std::stringstream;
+  using std::string_view;
 
+  // >> Data structures and Interfaces
   using std::array;
   using std::vector;
   using std::unordered_map;
 
+  using std::stringstream;
+
+  // >> Types for timing
   using std::chrono::system_clock;
   using std::chrono::steady_clock;
 
+  using SteadyTS = steady_clock::time_point;
+
 } // namespace: mohair
+
