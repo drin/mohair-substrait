@@ -32,6 +32,18 @@
 
 namespace mohair {
 
+  //! Implementation that returns a string representation for this operator
+  template <>
+  string_view
+  SubstraitOpImpl<ReadRel>::SubstraitStringify() const { return op_str; }
+
+  //! A convenience function that sets source_name and updates op_str
+  template <>
+  void SubstraitOpImpl<ReadRel>::SetSourceName(string name) {
+    source_name = name;
+    op_str      = "Read("sv + source_name + ")"sv;
+  }
+
   //! Replace the internal Rel with new_srel and return pointer to the old Rel
   template <>
   Rel* SubstraitOpImpl<ReadRel>::MoveToRel(Rel* new_srel) {

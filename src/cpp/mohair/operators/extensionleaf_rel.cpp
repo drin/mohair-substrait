@@ -32,6 +32,18 @@
 
 namespace mohair {
 
+  //! Implementation that returns a string representation for this operator
+  template <>
+  string_view
+  SubstraitOpImpl<ExtensionLeafRel>::SubstraitStringify() const { return op_str; }
+
+  //! A convenience function that sets source_name and updates op_str
+  template <>
+  void SubstraitOpImpl<ExtensionLeafRel>::SetSourceName(string name) {
+    source_name = name;
+    op_str      = "ExtLeaf("sv + source_name + ")"sv;
+  }
+
   //! Copy the internal Rel and RelOp without recursing into inputs
   template <>
   unique_ptr<Rel> SubstraitOpImpl<ExtensionLeafRel>::CopyRelOp() const {

@@ -42,7 +42,7 @@ namespace mohair {
     SubstraitOp*         source;
     vector<SubstraitOp*> pipe_ops;
 
-    OpPipeline(Substrait* dest, SubstraitOp* dest_next)
+    OpPipeline(SubstraitOp* dest, SubstraitOp* dest_next)
       : sink(dest), next(dest_next), source(nullptr) {}
 
     const string ToString(string prefix);

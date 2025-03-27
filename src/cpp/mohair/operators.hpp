@@ -185,6 +185,7 @@ namespace mohair {
     ReadRel*                    rel_op;
     unique_ptr<SubstraitSchema> schema;
     string                      source_name;
+    string                      op_str;
 
     // Destructors and Constructors
     SubstraitOpImpl(Rel* srel, ReadRel* srel_op): rel(srel), rel_op(srel_op) {}
@@ -195,11 +196,7 @@ namespace mohair {
     optional<bool>   IsOrigin()  const override;
     optional<bool>   IsStream()  const override;
     optional<size_t> GetArity()  const override;
-
-    // TODO: figure out how to do this
-    string_view Stringify() const override {
-      return "Read("sv + source_name + ")"sv;
-    }
+    string_view      Stringify() const override;
 
     unique_ptr<Rel>     CopyRelOp()     const override;
     MessageDifferencer* GetComparator() const override;
@@ -209,6 +206,8 @@ namespace mohair {
     void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& pipe_stage) override;
 
     // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    void SetSourceName(string name);
+
     Rel* MoveToRel(Rel* new_srel);
   };
 
@@ -223,6 +222,7 @@ namespace mohair {
     ExtensionLeafRel*           rel_op;
     unique_ptr<SubstraitSchema> schema;
     string                      source_name;
+    string                      op_str;
 
     // Destructors and Constructors
     SubstraitOpImpl(Rel* srel, ExtensionLeafRel* srel_op): rel(srel), rel_op(srel_op) {}
@@ -233,10 +233,7 @@ namespace mohair {
     optional<bool>   IsOrigin()  const override;
     optional<bool>   IsStream()  const override;
     optional<size_t> GetArity()  const override;
-
-    string_view Stringify() const override {
-      return "ExtLeaf("sv + source_name + ")"sv;
-    }
+    string_view      Stringify() const override;
 
     unique_ptr<Rel>     CopyRelOp()     const override;
     MessageDifferencer* GetComparator() const override;
@@ -246,6 +243,8 @@ namespace mohair {
     void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& final_stage) override;
 
     // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    void SetSourceName(string name);
+
     Rel* MoveToRel(Rel* new_srel);
   };
 
