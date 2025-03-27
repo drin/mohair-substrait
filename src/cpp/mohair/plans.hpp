@@ -31,62 +31,39 @@ namespace mohair {
   // >> Type forwards
   struct OpPipeline;
   struct PipelineStage;
-  struct SystemPlan;
-
-  // >> Query operators
-  struct MohairOp {
-    Rel*                        substrait_rel;
-    unique_ptr<SubstraitSchema> schema;
-
-    virtual ~MohairOp() = default;
-
-    MohairOp(Rel* rel, unique_ptr<SubstraitSchema>&& input_schema)
-      : substrait_rel(rel), schema(std::move(input_schema)) {}
-
-    virtual const string ToString();
-    virtual const string ViewStr();
-    virtual const string GetName();
-
-    virtual bool   IsSink();
-    virtual bool   IsOrigin();
-    virtual size_t GetOpArity();
-
-    //! Get input operators (child operators) as a C-style array
-    virtual unique_ptr<MohairOp>* GetOpInputs();
-
-    //! Return a simplified copy of the `substrait_rel` attribute.
-    virtual unique_ptr<Rel> CopySubstraitRel();
-  };
-
-  struct SourceOp : public MohairOp {
-    string table_name;
-
-    SourceOp(Rel* rel, string tname, unique_ptr<SubstraitSchema>&& input_schema)
-      : MohairOp(rel, std::move(input_schema)), table_name(tname) {}
-
-    const string GetName() override  { return table_name; }
-    bool         IsOrigin() override { return true;       }
-  };
 
   // >> Operator Pipelines
-
-  // Type forwards
-  struct OpPipeline;
-  struct PipelineStage;
-
   using PipelineVector = vector<unique_ptr<OpPipeline>>;
   using StageVector    = vector<unique_ptr<PipelineStage>>;
 
-  // NOTE: deciding what stage to put a pipeline into can be: early/late materialization
+  struct OpPipeline {
+    SubstraitOp*         sink;
+    SubstraitOp*         next;
+    SubstraitOp*         source;
+    vector<SubstraitOp*> pipe_ops;
+
+    OpPipeline(Substrait* dest, SubstraitOp* dest_next)
+      : sink(dest), next(dest_next), source(nullptr) {}
+
+    const string ToString(string prefix);
+    const string ViewStr() { return this->ToString(""); }
+
+    size_t Size();
+    void   AddOp(SubstraitOp* pipe_op);
+    void   SetSource(SubstraitOp* src);
+
+    SubstraitOp* GetSourceNext();
+  };
+
   struct PipelineStage {
-    MohairOp*      sink;
+    SubstraitOp*   sink;
     PipelineStage* next;
     PipelineVector pipelines;
     vector<string> origin_names;
     size_t         length;
     size_t         width;
 
-    PipelineStage(MohairOp* dest, PipelineStage* next_stage, size_t stage_width)
+    PipelineStage(SubstraitOp* dest, PipelineStage* next_stage, size_t stage_width)
       : sink(dest), next(next_stage), length(0), width(stage_width) {
       pipelines.reserve(stage_width);
     }
@@ -94,67 +71,51 @@ namespace mohair {
     const string ToString(string prefix);
     const string ViewStr() { return this->ToString(""); }
 
-    OpPipeline&  CreatePipeline(MohairOp* sink_next);
+    OpPipeline& CreatePipeline(SubstraitOp* sink_next);
   };
 
-  struct OpPipeline {
-    MohairOp*         sink;
-    MohairOp*         next;
-    MohairOp*         source;
-    vector<MohairOp*> pipe_ops;
-
-    OpPipeline(MohairOp* dest, MohairOp* dest_next)
-      : sink(dest), next(dest_next), source(nullptr) {}
-
-    const string ToString(string prefix);
-    const string ViewStr() { return this->ToString(""); }
-
-    size_t       Size();
-    void         AddOp(MohairOp* pipe_op);
-    void         SetSource(MohairOp* src);
-  };
 
   // >> Query plans
-
   //! A query plan managed by the cooperative decomposition system.
-  struct SystemPlan {
-    unique_ptr<PlanMessage>         plan_msg;
-    unique_ptr<MohairOp>            plan_root;
-    size_t                          breadth;
-    size_t                          depth;
+  struct PlanPipeline {
+    SubstraitPlan*      plan;
+    size_t              breadth;
+    size_t              depth;
+    StageVector         stages;
+    vector<OpPipeline*> origin_pipelines;
 
-    StageVector                     pipeline_stages;
-    vector<OpPipeline*>             origin_pipelines;
-
-    unordered_map<uint64_t, string> fn_anchors;
-
-    virtual ~SystemPlan() {}
-
-    SystemPlan(unique_ptr<PlanMessage>&& plan, unique_ptr<MohairOp>&& op)
-      : plan_msg(std::move(plan)), plan_root(std::move(op)) {}
-
-    // >> Accessors
-    //! Access the function name associated with the given anchor
-    string         FnNameForAnchor(uint64_t anchor_id);
-    const RelRoot& RootRelation() const;
-
-    // >> Convenience methods
+    PlanPipeline(SubstraitPlan* src_plan): plan(src_plan) {}
 
     //! Create a PipelineStage (ending with `sink`) and associate it with the downstream
     //  PipelineStage (where output of the new stage will flow to).
-    PipelineStage& CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
-
-    //! Builds pipelines from plan operators and discovers plan characteristics
-    void BuildPipelines();
-
-    //! Create mapping of function anchors in the query plan
-    void RegisterExtensionFunctions();
+    PipelineStage& CreatePipelineStage(SubstraitOp* sink, PipelineStage* next, size_t width);
 
     //! Print pipelines stringified to stdout
     void PrintPipelines();
+
+    //! Builds pipelines from plan operators and discovers plan characteristics
+    static PlanPipeline Build(SubstraitPlan* src_plan);
   };
 
+
   // >> Cooperative Query Decomposition
+  // TODO: a subplan UUID should be derived from a plan UUID
+  struct SplitAnchor {
+    SubstraitPlan* plan;
+    int32_t        anchor_relndx;
+    size_t         merge_relndx;
+    SubstraitOp*   anchor_op;
+    bool           is_merged;
+
+    SplitAnchor(SubstraitPlan* splan, int32_t ndx_arel, size_t ndx_mrel, SubstraitOp* sop)
+      :  plan(splan)
+        ,anchor_relndx(ndx_arel)
+        ,merge_relndx(ndx_mrel)
+        ,anchor_op(sop)
+        ,is_merged(false) {}
+
+    void MergeSubplan();
+  };
 
   /**
    * A class that points to a super-plan and an anchor operator.
@@ -167,8 +128,8 @@ namespace mohair {
     Plan*             super_plan;
     PipelineStage*    stage;
     size_t            stage_ndx;
-    MohairOp*         superplan_mergerel;
-    vector<MohairOp*> subplan_rootrels;
+    SubstraitOp*         superplan_mergerel;
+    vector<SubstraitOp*> subplan_rootrels;
 
     //! Constructs a plan split from the given pipeline stage.
     //  If the stage has many pipelines, the anchor is the stage's sink.
@@ -206,10 +167,10 @@ namespace mohair {
 
     bool CanSplit();
     bool MergeResultRel(Rel* result_rel);
-    bool MergeSubplan(PlanMessage* subplan_msg);
+    bool MergeSubplan(SubstraitPlan* subplan_msg);
 
-    unique_ptr<PlanMessage>         ExtractExecSubplan();
-    vector<unique_ptr<PlanMessage>> ExtractSubplans();
+    unique_ptr<SubstraitPlan>         ExtractExecSubplan();
+    vector<unique_ptr<SubstraitPlan>> ExtractSubplans();
   };
 
 } // namespace: mohair
@@ -221,17 +182,17 @@ namespace mohair {
 namespace mohair {
 
   // >> Translation Functions
-  //! Walks the operator tree starting at `rel_msg` and returns a `MohairOp` tree
-  unique_ptr<MohairOp> MohairFrom(Plan* plan_msg);
-  unique_ptr<MohairOp> MohairFrom(Plan* plan_msg, Rel* rel_msg);
+  //! Walks the operator tree starting at `rel_msg` and returns a `SubstraitOp` tree
+  unique_ptr<SubstraitOp> ParseSubstraitPlan(Plan* plan_msg);
+  unique_ptr<SubstraitOp> ParseSubstraitPlan(Plan* plan_msg, Rel* rel_msg);
 
   //! Constructs a `SystemPlan` from the given deserialized substrait `Plan`
-  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg);
+  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<SubstraitPlan>&& plan_msg);
 
   //! Constructs a `SystemPlan` from the given serialized substrait `Plan`
   unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg);
 
   //! Constructs a `SuperPlan` message for the given operator
-  unique_ptr<SuperPlan>  SuperPlanFrom(MohairOp* mohair_op);
+  unique_ptr<SuperPlan>  SuperPlanFrom(SubstraitOp* mohair_op);
 
 } // namespace: mohair

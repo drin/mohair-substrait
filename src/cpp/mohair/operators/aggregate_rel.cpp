@@ -54,21 +54,68 @@
 
 // ------------------------------
 // Dependencies
-#pragma once
 
-#include "mohair.hpp"
-
-#include "mohair/analysis/expressions.hpp"
-#include "mohair/analysis/rel_common.hpp"
+#include "mohair/operators.hpp"
 
 
 // ------------------------------
 // Functions
 
+// >> Implementations for SubstraitOpImpl<AggregateRel>
+
 namespace mohair {
 
-  unique_ptr<SubstraitSchema>
-  SchemaFromAggregateRel( const AggregateRel&           rel_op
-                         ,unique_ptr<SubstraitSchema>&& input_schema);
+  //! Copy the internal Rel and RelOp without recursing into inputs
+  template <>
+  unique_ptr<Rel> SubstraitOpImpl<AggregateRel>::CopyRelOp() {
+    unique_ptr<Rel> rel_copy  { std::make_unique<Rel>() };
+    AggregateRel&   aggr_copy = *(rel_copy->mutable_aggregate());
+
+    aggr_copy.mutable_common()->CopyFrom(rel_type->common());
+    aggr_copy.mutable_advanced_extension()->CopyFrom(rel_type->advanced_extension());
+
+    aggr_copy.mutable_groupings()->CopyFrom(rel_type->groupings());
+    aggr_copy.mutable_measures()->CopyFrom(rel_type->measures());
+    aggr_copy.mutable_grouping_expressions()->CopyFrom(rel_type->grouping_expressions());
+
+    return rel_copy;
+  }
+
+  //! A visitor function to build plan pipelines with this operator as the final sink
+  template <>
+  void
+  SubstraitOpImpl<AggregateRel>::AddToPipeline( PlanPipeline&  plan_pipe
+                                               ,PipelineStage& pipe_stage
+                                               ,OpPipeline&    pipeline) {
+    // Use this operator as the source of the specified pipeline
+    pipeline.SetSource(this);
+
+    // Create a pipeline stage with this operator as a sink
+    PipelineStage& upstream_stage = plan_pipe->CreatePipelineStage(this, &pipe_stage, 1);
+
+    // Create a pipeline for the input operator
+    OpPipeline& upstream_pipe = upstream_stage.CreatePipeline(pipeline.GetSourceNext());
+    input_ops[0]->AddToPipeline(plan_pipe, upstream_stage, upstream_pipe);
+
+    // When a pipeline is fully built, see if it's the longest for the stage
+    if (upstream_pipe.Size() > upstream_stage.length) {
+      upstream_stage.length = upstream_pipe.Size();
+    }
+  }
+
+  //! Replace the internal Rel with new_srel and return pointer to the old Rel
+  template <>
+  Rel* SubstraitOpImpl<AggregateRel>::MoveToRel(Rel* new_srel) {
+    // Cache the pointer to the old rel
+    Rel* old_srel = rel;
+    
+    // Move rel_op into the new rel and refresh rel_op (in case its invalidated)
+    new_srel->set_allocated_aggregate(old_srel->release_aggregate());
+    rel    = new_srel;
+    rel_op = new_srel->mutable_aggregate();
+
+    // Return pointer to the old rel
+    return old_srel;
+  }
 
 } // namespace: mohair

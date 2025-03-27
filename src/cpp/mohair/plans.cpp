@@ -160,6 +160,11 @@ namespace mohair {
   void   OpPipeline::AddOp(MohairOp* pipe_op) { pipe_ops.push_back(pipe_op); }
   void   OpPipeline::SetSource(MohairOp* src) { source = src;                }
 
+  SubstraitOp* OpPipeline::GetSourceNext() {
+    if (not pipe_ops.empty()) { return pipe_ops.back(); }
+    return nullptr;
+  }
+
 
   // >> Implementations for `PipelineStage` methods
   //!
@@ -186,37 +191,21 @@ namespace mohair {
   //! Create a pipeline flowing to the same sink and with a pointer to the sink's
   //  downstream operator (where output flows to); this operator is considered when
   //  splitting the plan.
-  OpPipeline& PipelineStage::CreatePipeline(MohairOp* sink_next) {
-    auto new_pipeline = (
-      pipelines.emplace_back(std::make_unique<OpPipeline>(sink, sink_next))
-               .get()
+  OpPipeline& PipelineStage::CreatePipeline(SubstraitOp* sink_next) {
+    auto& new_pipeline = pipelines.emplace_back(
+      std::make_unique<OpPipeline>(sink, sink_next)
     );
 
-    return *new_pipeline;
+    return *(new_pipeline.get());
   }
 
 
-  // >> Implementations for `SystemPlan` methods
-
-  string SystemPlan::FnNameForAnchor(uint64_t anchor_id) {
-    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
-      throw std::out_of_range(
-        "Extension function anchor not registered: " + std::to_string(anchor_id)
-      );
-    }
-
-    return fn_anchors[anchor_id];
-  }
-
-  const RelRoot& SystemPlan::RootRelation() const {
-    return plan_msg->payload->relations(0).root();
-  }
-
+  // >> Implementations for `PlanPipeline` methods
   PipelineStage&
-  SystemPlan::CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width) {
+  PlanPipeline::CreatePipelineStage(SubstraitOp* sink, PipelineStage* next, size_t width) {
     auto new_stage = (
-      pipeline_stages.emplace_back(std::make_unique<PipelineStage>(sink, next, width))
-                     .get()
+      stages.emplace_back(std::make_unique<PipelineStage>(sink, next, width))
+            .get()
     );
 
     return *new_stage;
@@ -226,7 +215,7 @@ namespace mohair {
   void BuildPipelineWithOp( SystemPlan*    plan
                            ,PipelineStage& current_stage
                            ,OpPipeline&    current_pipe
-                           ,MohairOp*      current_op) {
+                           ,SubstraitOp*   current_op) {
     while (not current_op->IsSink() and not current_op->IsOrigin()) {
       current_pipe.AddOp(current_op);
       current_op = (current_op->GetOpInputs()[0]).get();
@@ -241,13 +230,10 @@ namespace mohair {
 
       SourceOp* origin_src = dynamic_cast<SourceOp*>(current_op);
 
-      PipelineStage* tmp_stage = &current_stage;
-
-      tmp_stage->origin_names.push_back(origin_src->table_name);
-
-      while (tmp_stage->next != nullptr) {
-        tmp_stage = tmp_stage->next;
-        tmp_stage->origin_names.push_back(origin_src->table_name);
+      current_stage.origin_names.push_back(origin_src->table_name);
+      while (current_stage.next != nullptr) {
+        current_stage = *(current_stage->next);
+        current_stage.origin_names.push_back(origin_src->table_name);
       }
 
       return;
@@ -277,40 +263,23 @@ namespace mohair {
   }
 
   //! Creates all pipelines for the plan
-  void SystemPlan::BuildPipelines() {
-    size_t count_inputs = plan_root->GetOpArity();
+  void PlanPipeline PlanPipeline::Build(SubstraitPlan* src_plan) {
+    PlanPipeline plan_pipes { src_plan };
+    SubstraitOp* plan_root  = src_plan->plan_root.get();
 
-    // Base case: Create a pipeline stage with the root operator as a sink.
-    // NOTE: this base case is special to substrait (any operator can be a root operator)
-    PipelineStage& final_stage = CreatePipelineStage(plan_root.get(), nullptr, count_inputs);
+    // Create a pipeline stage with the root operator as a sink.
+    size_t         count_inputs = plan_root->GetOpArity().value();
+    PipelineStage& final_stage  = CreatePipelineStage(plan_root, nullptr, count_inputs);
 
-    for (size_t child_ndx = 0; child_ndx < count_inputs; ++child_ndx) {
-      OpPipeline& stage_pipe = final_stage.CreatePipeline(nullptr);
-
-      // Recurse through the input operator
-      MohairOp* child_op = (plan_root->GetOpInputs()[child_ndx]).get();
-      BuildPipelineWithOp(this, final_stage, stage_pipe, child_op);
-    }
+    plan_root->BuildPipelines(*this, final_stage);
   }
 
-  void SystemPlan::PrintPipelines() {
-    std::cout << "System Plan [" << pipeline_stages.size() << " Pipeline Stages]"
-              << std::endl
-    ;
+  void PlanPipeline::PrintPipelines() {
+    std::cout << "Plan Pipeline [" << stages.size() << " Stages]" << std::endl;
 
-    for (size_t stage_ndx = 0; stage_ndx < pipeline_stages.size(); ++stage_ndx) {
+    for (size_t stage_ndx = 0; stage_ndx < stages.size(); ++stage_ndx) {
       std::cout << "[stage | " << std::to_string(stage_ndx) << "]:" << std::endl;
-      std::cout << pipeline_stages[stage_ndx]->ToString("  ")       << std::endl;
-    }
-  }
-
-  //! Create mapping of function anchors in the query plan
-  void SystemPlan::RegisterExtensionFunctions() {
-    for (auto &plan_ext : plan_msg->payload->extensions()) {
-      if (!plan_ext.has_extension_function()) { continue; }
-
-      const auto anchor_id  = plan_ext.extension_function().function_anchor();
-      fn_anchors[anchor_id] = plan_ext.extension_function().name();
+      std::cout << stages[stage_ndx]->ToString("  ")       << std::endl;
     }
   }
 
@@ -359,7 +328,7 @@ namespace mohair {
 
     PipelineStage* split_stage { nullptr };
     if (stage_ndx.has_value()) {
-      split_stage = sys_plan->pipeline_stages[stage_ndx.value()].get();
+      split_stage = sys_plan->stages[stage_ndx.value()].get();
     }
 
     MohairStopTS(FindPlanSplit);
@@ -409,8 +378,8 @@ namespace mohair {
     return true;
   }
 
-  //! Merge the given `PlanMessage` into this instance's superplan.
-  bool PlanSplit::MergeSubplan(PlanMessage* subplan_msg) {
+  //! Merge the given `SubstraitPlan` into this instance's superplan.
+  bool PlanSplit::MergeSubplan(SubstraitPlan* subplan_msg) {
     MohairStartTS(MergePlanSplit);
 
     // >> Recover (and validate) links between the superplan and subplan
@@ -502,7 +471,7 @@ namespace mohair {
   }
 
   //! Create a single substrait message from this split and the given stage
-  unique_ptr<PlanMessage> PlanSplit::ExtractExecSubplan() {
+  unique_ptr<SubstraitPlan> PlanSplit::ExtractExecSubplan() {
     MohairStartTS(ExtractPlanSplitExec);
 
     // This happens when the plan could not be split and we missed it
@@ -527,7 +496,7 @@ namespace mohair {
     unique_ptr<SuperPlan> refrel_superplan = CreateSuperPlanRel(superplan_anchor);
 
     // Then, create the execution subplan message to contain the subplan
-    unique_ptr<PlanMessage> exec_subplan { PlanMessage::FromPlan(std::move(exec_plan)) };
+    unique_ptr<SubstraitPlan> exec_subplan { SubstraitPlan::FromPlan(std::move(exec_plan)) };
 
     // Move the op tree from the superplan to the subplan
     PlanRel* subplan_planroot = exec_subplan->root_relation;
@@ -551,14 +520,14 @@ namespace mohair {
   }
 
   //! Create a list of substrait messages given this instance's split information.
-  vector<unique_ptr<PlanMessage>> PlanSplit::ExtractSubplans() {
+  vector<unique_ptr<SubstraitPlan>> PlanSplit::ExtractSubplans() {
     MohairStartTS(ExtractPlanSplit);
 
     // This happens when the plan could not be split and we missed it
     MOHAIR_ASSERT("Split failed but we kept going anyway", superplan_mergerel != nullptr);
 
     // Initialize subplan messages from the superplan (ensures we propagate all context)
-    vector<unique_ptr<PlanMessage>> subplan_msgs;
+    vector<unique_ptr<SubstraitPlan>> subplan_msgs;
     subplan_msgs.reserve(subplan_rootrels.size());
 
     for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
@@ -572,7 +541,7 @@ namespace mohair {
         plan_copy->mutable_relations(root_ndx)->mutable_root()->clear_names();
       }
 
-      subplan_msgs.push_back(PlanMessage::FromPlan(std::move(plan_copy)));
+      subplan_msgs.push_back(SubstraitPlan::FromPlan(std::move(plan_copy)));
     }
 
     // Move the op to an anchor (PlanRel) for future merging (modifies the anchor rel)
@@ -609,9 +578,9 @@ namespace mohair {
   optional<size_t> FindSplitOverride(SystemPlan* sys_plan) {
     optional<size_t> override_ndx { std::nullopt };
 
-    size_t count_stages { sys_plan->pipeline_stages.size() };
+    size_t count_stages { sys_plan->stages.size() };
     for (size_t stage_ndx = 0; stage_ndx < count_stages; ++stage_ndx) {
-      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+      PipelineStage* stage = (sys_plan->stages[stage_ndx]).get();
 
       if (stage->sink->substrait_rel->has_splitoverride()) {
         override_ndx = stage_ndx;
@@ -629,9 +598,9 @@ namespace mohair {
     size_t           peak_height   { 0 };
 
     // NOTE: done when stage_ndx underflows to max value
-    size_t back_ndx  = sys_plan->pipeline_stages.size();
+    size_t back_ndx  = sys_plan->stages.size();
     for (size_t stage_ndx = back_ndx - 1; stage_ndx < back_ndx; --stage_ndx) {
-      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+      PipelineStage* stage = (sys_plan->stages[stage_ndx]).get();
 
       if (stage->width != 2)            { continue; }
       if (stage->length <= peak_height) { continue; }
@@ -653,9 +622,9 @@ namespace mohair {
     size_t           peak_height   { 0 };
 
     // NOTE: done when stage_ndx underflows to max value
-    size_t back_ndx  = sys_plan->pipeline_stages.size();
+    size_t back_ndx  = sys_plan->stages.size();
     for (size_t stage_ndx = back_ndx - 1; stage_ndx < back_ndx; --stage_ndx) {
-      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+      PipelineStage* stage = (sys_plan->stages[stage_ndx]).get();
 
       if (stage->origin_names.size() > 1) { continue; }
 
@@ -677,13 +646,13 @@ namespace mohair {
 
   //! Finds the Join operator with the most width (origin names)
   optional<size_t> FindWideJoin(SystemPlan* sys_plan) {
-    if (sys_plan->pipeline_stages.empty()) { return std::nullopt; }
+    if (sys_plan->stages.empty()) { return std::nullopt; }
 
     optional<size_t> candidate_ndx { std::nullopt };
     size_t count_origins = 0;
 
-    for (size_t stage_ndx = 0; stage_ndx < sys_plan->pipeline_stages.size(); ++stage_ndx) {
-      PipelineStage* stage = (sys_plan->pipeline_stages[stage_ndx]).get();
+    for (size_t stage_ndx = 0; stage_ndx < sys_plan->stages.size(); ++stage_ndx) {
+      PipelineStage* stage = (sys_plan->stages[stage_ndx]).get();
 
       if (stage->width != 2)                          { continue; }
       if (stage->origin_names.size() < count_origins) { continue; }
@@ -698,9 +667,9 @@ namespace mohair {
 
   // >> Translation functions
 
-  //! Constructs a `SystemPlan` that wraps the given `PlanMessage`.
+  //! Constructs a `SystemPlan` that wraps the given `SubstraitPlan`.
   //  This is an interface to creating a graph (query plan) of mohair operators.
-  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<PlanMessage>&& plan_msg) {
+  unique_ptr<SystemPlan> SystemPlanFrom(unique_ptr<SubstraitPlan>&& plan_msg) {
     // walk the top level relations until we find the root (should only be one)
     Plan* substrait_plan { plan_msg->payload.get() };
     int   root_ndx = FindPlanRoot(*substrait_plan);
@@ -736,10 +705,211 @@ namespace mohair {
     return mohair_plan;
   }
 
-  //! Constructs a `SystemPlan` for the `PlanMessage` deserialized from `serialized_msg`.
+  //! Constructs a `SystemPlan` for the `SubstraitPlan` deserialized from `serialized_msg`.
   //  This is an interface to creating a graph (query plan) of mohair operators.
   unique_ptr<SystemPlan> SystemPlanFrom(const string& serialized_msg) {
-    return SystemPlanFrom(PlanMessage::FromString(serialized_msg));
+    return SystemPlanFrom(SubstraitPlan::FromString(serialized_msg));
+  }
+
+} // namespace: mohair
+
+
+// ------------------------------
+// Method implementations
+
+namespace mohair {
+
+  // >> Implementations for SplitAnchor
+
+  //! Merges the referenced subplan anchor back into its original location (merge rel)
+  void SplitAnchor::MergeSubplan() {
+    // Avoid accidentally merging multiple times
+    if (is_merged) { return; }
+
+    // Grab pointers using our indices
+    Rel*     merge_rel      = plan->super_mergerels[merge_relndx];
+    PlanRel* subplan_anchor = plan->mutable_relations(anchor_relndx);
+
+    // Validate the merge rel references the subplan anchor
+    uint32_t anchor_id = subplan_anchor.subtree_anchor();
+    MOHAIR_ASSERT(
+       "SplitAnchor is invalid: merge rel and subplan anchor do not match"
+      ,anchor_id != merge_rel->reference().subtree_reference()
+    );
+
+    // Move the anchor operator back into its original location
+    Rel* anchor_rel = anchor_op->MoveToRel(merge_rel);
+    MOHAIR_ASSERT(
+       "Expected anchor rel to match input into subplan anchor"
+      ,anchor_rel != subplan_anchor->mutable_rel()
+    );
+
+    // Remove the subplan anchor (should now be empty)
+    auto plan_rootrels = plan->mutable_relations();
+    plan_rootrels->erase(plan_rootrels->begin() + anchor_relndx);
+
+    // Untrack the merge rel (should now contain the anchor operator)
+    plan->super_mergerels.erase(plan->super_mergerels.begin() + merge_relndx);
+
+    is_merged = true;
+  }
+
+  // >> API for sending the SubstraitPlan to storage or the network
+  //! Serialize the contained Plan message to binary and write to the specified file
+  bool SubstraitPlan::SerializeToFile(const char* out_fpath) {
+    std::fstream out_fstream { OutputStreamForFile(out_fpath); }
+    if (not out_fstream.is_open()) {
+      std::cerr << "Failed to open output file: " << out_fpath << std::endl;
+      return false;
+    }
+
+    if (not this->plan->SerializeToOstream(&out_fstream)) {
+      std::cerr << "Failed to serialize to output file: " << out_fpath << std::endl;
+      return false;
+    }
+
+    return true;
+  }
+
+  bool SubstraitPlan::SerializeToFile(const string& out_fpath) {
+    return this->SerializeToFile(out_fpath.data());
+  }
+
+  //! Serialize the contained Plan message to binary and store in the given string
+  bool SubstraitPlan::SerializeToString(string* out_str) {
+    if (not this->plan->SerializeToString(out_str)) {
+      std::cerr << "Failed to serialize Plan message." << std::endl;
+      return false;
+    }
+
+    return true;
+  }
+
+  bool SubstraitPlan::SerializeToString(string& out_str) {
+    return this->SerializeToString(&out_str);
+  }
+
+
+  // >> API for inspecting the contained substrait plan
+  //! Returns the serialized binary of the contained Plan message or an empty string
+  string SubstraitPlan::Serialize() {
+    string msg_serialized;
+    if (this->SerializeToString(&msg_serialized)) { return msg_serialized; }
+
+    return string {};
+  }
+
+  //! Returns the stringification of the contained Plan message or an empty string
+  string SubstraitPlan::StringifyPlan() {
+    std::optional<string> plan_str = StringifyMessage(*(this->plan));
+    if (plan_str.has_value()) { return plan_str.value(); }
+
+    return string {};
+  }
+
+  //! Prints the stringification of the contained Plan message
+  void SubstraitPlan::PrintPlan() { PrintMessage(*(this->plan)); }
+
+  //! Access the function name associated with the given anchor
+  string SubstraitPlan::NameForFnAnchor(uint64_t anchor_id) {
+    if (fn_anchors.find(anchor_id) == fn_anchors.end()) {
+      throw std::out_of_range(
+        "Unregistered function anchor: " + std::to_string(anchor_id)
+      );
+    }
+
+    return fn_anchors[anchor_id];
+  }
+
+  // >> API for modifying the contained substrait plan
+  //! Create mapping of function anchors in the query plan
+  void SubstraitPlan::RegisterExtensionFunctions() {
+    for (const auto& plan_ext : plan->extensions()) {
+      if (!plan_ext.has_extension_function()) { continue; }
+
+      const auto anchor_id  = plan_ext.extension_function().function_anchor();
+      fn_anchors[anchor_id] = plan_ext.extension_function().name();
+    }
+  }
+
+
+  //! Copies result aliases from RelRoot then clears them
+  void SubstraitPlan::PushdownResultAliases() {
+    RelRoot* root = root_rel->mutable_root();
+
+    if      (root->names().empty()) { return; }
+    else if (plan_root == nullptr)  { return; }
+
+    plan_root->SetAliases(root->names());
+    root->clear_names();
+  }
+
+
+  //! Move an operator into a PlanRel and create a ReferenceRel to it
+  SplitAnchor SubstraitPlan::AnchorForSplit(SubstraitOp* anchor_op) {
+    // Create PlanRel for subplan anchor, then move the anchor operator
+    int32_t  anchor_relndx  = plan->relations_size();
+    PlanRel* subplan_anchor = plan->add_relations();
+    Rel*     merge_rel      = anchor_op->MoveToRel(subplan_anchor->mutable_rel());
+
+    // Set the anchor and reference IDs
+    uint32_t anchor_id = ++UUIDGenerator;
+    subplan_anchor->set_subtree_anchor(anchor_id);
+    merge_rel->mutable_reference()->set_subtree_reference(anchor_id);
+
+    // Track the merge rel for convenience
+    size_t merge_relndx = super_mergerels.size();
+    super_mergerels.push_back(merge_rel);
+
+    // sanity check the subplan anchor
+    MOHAIR_ASSERT(
+      "Unexpected anchor ID for subplan anchor"
+      ,anchor_id == plan->relations(anchor_relndx).subtree_anchor()
+    );
+
+    return SplitAnchor { this, anchor_relndx, merge_relndx, anchor_op };
+  }
+
+
+  // >> API for construction of SubstraitPlan (Static methods)
+  //! Constructs a SubstraitPlan from a deserialized Plan
+  unique_ptr<SubstraitPlan> SubstraitPlan::FromPlan(unique_ptr<Plan> plan) {
+    if (plan == nullptr) { return nullptr; }
+
+    int    root_relndx { -1 };
+    size_t count_roots {  0 };
+
+    // Find the PlanRel that has a RelRoot and validate there is only 1
+    for (int rel_ndx = 0; rel_ndx < substrait_plan.relations_size(); ++rel_ndx) {
+      if (not substrait_plan.relations(rel_ndx).has_root()) { continue; }
+
+      root_relndx = rel_ndx;
+      ++count_roots;
+    }
+
+    if (count_roots != 1) {
+      std::cerr << "Invalid Plan: "
+                << "found [" << count_roots << "] root PlanRels"
+                << std::endl
+      ;
+      return nullptr;
+    }
+
+    return std::make_unique<SubstraitPlan>(std::move(plan), root_relndx);
+  }
+
+  //! Constructs a SubstraitPlan from a serialized Plan
+  unique_ptr<SubstraitPlan> SubstraitPlan::FromMessage(const string& plan_msg) {
+    return this->FromPlan(ParsePlanMessage(plan_str));
+  }
+
+  //! Constructs a SubstraitPlan from a file containing a serialized Plan
+  unique_ptr<SubstraitPlan> SubstraitPlan::FromFile(const char* plan_fpath) {
+    return this->FromPlan(ParsePlanFile(plan_fpath));
+  }
+
+  unique_ptr<SubstraitPlan> SubstraitPlan::FromFile(const string& plan_fpath) {
+    return SubstraitPlan::FromFile(plan_fpath.data());
   }
 
 } // namespace: mohair

@@ -21,7 +21,7 @@
 #pragma once
 
 #include "mohair/apidep_standard.hpp"
-#include "mohair/apidep_substrait.hpp"
+#include "mohair/adapter_substrait.hpp"
 
 
 // ------------------------------

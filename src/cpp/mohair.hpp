@@ -136,32 +136,11 @@ namespace mohair {
   std::fstream* MohairLogger(string logger_name);
   std::fstream* MohairLogger();
 
-  // TODO: hide `Message` to be internal linkage only
-  // >> Wrapper functions for protobuf framework
-  bool StringifyPlan (const Plan&    plan_msg, string*  text_result);
-  bool StringifyRel  (const Rel&     rel_msg , string*  text_result);
-  bool SerializeJson (const string&  msg_json, Message* msg_result );
-  bool JsonifyMessage(const Message& msg     , string*  json_result);
-
   // >> Reader functions
   // helper functions
   std::fstream InputStreamForFile(const char* in_fpath);
   std::fstream OutputStreamForFile(const char* out_fpath);
   bool         FileToString(const char* in_fpath, string& file_data);
-
-  // deserialization functions
-  unique_ptr<Plan> SubstraitPlanFromString(const string& plan_msg);
-  unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath);
-  unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath);
-
-
-  // >> Debug functions
-  void PrintSubstraitPlan(const Plan& plan_msg);
-  void PrintSubstraitRel(const Rel&   rel_msg);
-
-  void PrintSubstraitPlan(const Plan *plan_msg);
-  void PrintSubstraitRel(const Rel   *rel_msg);
-
 
   // >> Helper functions
 
@@ -193,15 +172,6 @@ namespace mohair {
   //! Create a SkyResultRel that describes how to read a remote materialized result
   unique_ptr<SkyResultRel> CreateResultRelForPlan(Plan* view_plan);
 
-  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
-  unique_ptr<Rel> CopyRel(Rel* src_rel);
-
-  //! Create a MessageDifferencer for rel op (e.g. `ProjectRel`) that is non-recursive
-  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel);
-
-  //! Get vector of each input `Rel` to the given `Rel`
-  vector<Rel*> GetInputRels(Rel* output_rel);
-
 } // namespace: mohair
 
 
@@ -210,31 +180,55 @@ namespace mohair {
 
 namespace mohair {
 
-  //! A base class representing a query plan sent as a message
-  struct PlanMessage {
-    // attributes
-    unique_ptr<Plan> payload;
-    int              root_relndx { -1 }; // initialized to -1 as a sentinel
-    PlanRel*         root_relation;
+  // >> Forward declarations
+  struct SubstraitOp;
+  struct SplitAnchor;
 
-    // destructors and constructors
-    virtual ~PlanMessage() = default;
+  //! A base class representing a query plan represented with substrait
+  //  TODO: need some UUID for a plan, preferably based on its pipeline IDs
+  struct SubstraitPlan {
+    unique_ptr<Plan>                plan;
+    unique_ptr<SubstraitOp>         plan_root;
+    int                             root_relndx;
 
-    PlanMessage(unique_ptr<Plan>&& msg): payload(std::move(msg)) {}
-    PlanMessage(unique_ptr<Plan>&& msg, int root_relndx)
-      : payload(std::move(msg)), root_relndx(root_relndx) {
-      this->root_relation = this->payload->mutable_relations(root_relndx);
-    }
+    vector<Rel*>                    super_mergerels;
+    unordered_map<uint64_t, string> fn_anchors;
 
-    // methods
-    virtual string Serialize();
-    virtual bool   SerializeToFile(const char *out_fpath);
+    // >> Destructors and constructors
+    SubstraitPlan(unique_ptr<Plan>&& plan_msg, int rel_ndx)
+      : plan(std::move(plan_msg)), plan_root(nullptr), root_relndx(rel_ndx) {}
 
-    // static methods
-    static unique_ptr<PlanMessage> FromPlan(unique_ptr<Plan>&& plan);
-    static unique_ptr<PlanMessage> FromString(const string&    plan_str);
-    static unique_ptr<PlanMessage> FromFile(const char*        plan_fpath);
-    static unique_ptr<PlanMessage> FromFile(string             plan_fpath);
+    // >> API for sending the SubstraitPlan to storage or the network
+    bool   SerializeToFile(const char*   out_fpath);
+    bool   SerializeToFile(const string& out_fpath);
+    bool   SerializeToString(string* out_str);
+    bool   SerializeToString(string& out_str);
+    string Serialize();
+
+    // >> API for inspecting the contained substrait plan
+    string StringifyPlan();
+    void   PrintPlan();
+
+    string NameForFnAnchor(uint64_t anchor_id);
+
+    // >> API for modifying the contained substrait plan
+    //! Create mapping of function anchors in the query plan
+    void RegisterExtensionFunctions();
+
+    //! Copies result aliases from RelRoot then clears them
+    void ParseOperators();
+
+    //! Copies result aliases from RelRoot then clears them
+    void PushdownResultAliases();
+
+    //! Move given operator into a subtree PlanRel and replace it with a ReferenceRel
+    SplitAnchor AnchorForSplit(SubstraitOp* anchor_op);
+
+    // >> API for construction of SubstraitPlan (Static methods)
+    static unique_ptr<SubstraitPlan> FromPlan   (unique_ptr<Plan>&& plan);
+    static unique_ptr<SubstraitPlan> FromMessage(const string&      plan_msg);
+    static unique_ptr<SubstraitPlan> FromFile   (const char*        plan_fpath);
+    static unique_ptr<SubstraitPlan> FromFile   (const string&      plan_fpath);
   };
 
 } // namespace: mohair

@@ -100,30 +100,32 @@ namespace mohair {
     return &log_handle;
   }
 
+
+  // >> Wrapper functions for protobuf framework functions
+
   // Wrapper implementation for `TextFormat::PrintToString`
   bool StringifyMessage(const Message& msg, string* text_result) {
     return TextFormat::PrintToString(msg, text_result);
   }
 
-  bool StringifyPlan(const Plan& plan_msg, string* text_result) {
-    return StringifyMessage(plan_msg, text_result);
+  std::optional<string> StringifyMessage(const Message& msg) {
+    string msg_text;
+
+    if (StringifyMessage(msg, &msg_text)) { return msg_text; }
+
+    std::cerr << "Failed to stringify protobuf message" << std::endl;
+    return std::nullopt;
   }
 
-  bool StringifyRel(const Rel& rel_msg, string* text_result) {
-    return StringifyMessage(rel_msg, text_result);
+  void PrintMessage(const Message& msg) {
+    string msg_text;
+
+    if (StringifyMessage(msg, &msg_text)) { std::cout << msg_text << std::endl; }
+
+    std::cerr << "Failed to stringify protobuf message" << std::endl;
   }
 
-  // TODO: decide if I should return a status object that has an error message
-  // Wrapper implementation for `JsonStringToMessage`
-  bool SerializeJson(const string& msg_json, Message* msg_result) {
-    absl::Status status = JsonStringToMessage(msg_json, msg_result);
-    return status.ok();
-  }
-
-  bool JsonifyMessage(const Message& msg, string* json_result) {
-    absl::Status status = MessageToJsonString(msg, json_result);
-    return status.ok();
-  }
+  void PrintMessage(const Message* msg) { PrintMessage(*msg); }
 
 
   //! Helper function to traverse a plan and gather its final schema
@@ -228,33 +230,6 @@ namespace mohair {
     }
   }
 
-  //! Move an operator into a PlanRel and create a ReferenceRel to it
-  PlanRel* MoveOpToReference(Plan* plan, Rel* op) {
-    // UUIDGenerator is static
-    uint32_t anchor_id = ++UUIDGenerator;
-
-    // Create a place to move the operator to
-    unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
-
-    int32_t  next_relndx = plan->relations_size();
-    PlanRel* new_anchor  = plan->add_relations();
-    new_anchor->set_allocated_rel(anchor_rel.release());
-    new_anchor->set_subtree_anchor(anchor_id);
-
-    // Create a reference to replace the operator with
-    unique_ptr<ReferenceRel> ref_rel { std::make_unique<ReferenceRel>() };
-    ref_rel->set_subtree_ordinal(next_relndx);
-    ref_rel->set_subtree_reference(anchor_id);
-
-    // Move the operator into the anchor
-    MoveRelOp(op, new_anchor->mutable_rel());
-
-    // Insert the ReferenceRel
-    op->set_allocated_reference(ref_rel.release());
-
-    return new_anchor;
-  }
-
   //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
   //  NOTE: returns 0 on failure (UUIDGenerator starts at 1)
   uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel) {
@@ -328,209 +303,6 @@ namespace mohair {
     return result_op;
   }
 
-  //! Copy the Rel but then clear its input (e.g. input to ProjectRel)
-  unique_ptr<Rel> CopyRel(Rel* src_rel) {
-    unique_ptr<Rel> rel_copy { std::make_unique<Rel>(*src_rel) };
-
-    switch(src_rel->rel_type_case()) {
-      // unary operators
-      case Rel::RelTypeCase::kProject: {
-        rel_copy->mutable_project()->clear_input();
-        break;
-      }
-
-      case Rel::RelTypeCase::kFilter: {
-        rel_copy->mutable_filter()->clear_input();
-        break;
-      }
-
-      case Rel::RelTypeCase::kFetch: {
-        rel_copy->mutable_fetch()->clear_input();
-        break;
-      }
-
-      case Rel::RelTypeCase::kSort: {
-        rel_copy->mutable_sort()->clear_input();
-        break;
-      }
-
-      case Rel::RelTypeCase::kAggregate: {
-        rel_copy->mutable_aggregate()->clear_input();
-        break;
-      }
-
-      // binary operators
-      case Rel::RelTypeCase::kJoin: {
-        rel_copy->mutable_join()->clear_left();
-        rel_copy->mutable_join()->clear_right();
-        break;
-      }
-
-      case Rel::RelTypeCase::kCross: {
-        rel_copy->mutable_cross()->clear_left();
-        rel_copy->mutable_cross()->clear_right();
-        break;
-      }
-
-      case Rel::RelTypeCase::kHashJoin: {
-        rel_copy->mutable_hash_join()->clear_left();
-        rel_copy->mutable_hash_join()->clear_right();
-        break;
-      }
-
-      case Rel::RelTypeCase::kMergeJoin: {
-        rel_copy->mutable_merge_join()->clear_left();
-        rel_copy->mutable_merge_join()->clear_right();
-        break;
-      }
-
-      // Leaf operators (no-op)
-      case Rel::RelTypeCase::kReference:
-      case Rel::RelTypeCase::kRead:
-      case Rel::RelTypeCase::kExtensionLeaf: {
-        break;
-      }
-
-      // Unimplemented operators
-      default: {
-        std::cerr << "Simplification unimplemented for operator." << std::endl;
-        return nullptr;
-      }
-    }
-
-    return rel_copy;
-  }
-
-
-  //! Create a MessageDifferencer for rel op (e.g. `ProjectRel`) that is non-recursive
-  unique_ptr<MessageDifferencer> DifferencerForRel(Rel* src_rel) {
-    auto differ = std::make_unique<MessageDifferencer>();
-
-    switch (src_rel->rel_type_case()) {
-      case Rel::RelTypeCase::kProject: {
-        differ->IgnoreField(ProjectRel::descriptor()->FindFieldByName("input"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kFilter: {
-        differ->IgnoreField(FilterRel::descriptor()->FindFieldByName("input"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kFetch: {
-        differ->IgnoreField(FetchRel::descriptor()->FindFieldByName("input"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kSort: {
-        differ->IgnoreField(SortRel::descriptor()->FindFieldByName("input"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kAggregate: {
-        differ->IgnoreField(AggregateRel::descriptor()->FindFieldByName("input"));
-        break;
-      }
-
-      // binary operators
-      case Rel::RelTypeCase::kJoin: {
-        differ->IgnoreField(JoinRel::descriptor()->FindFieldByName("left"));
-        differ->IgnoreField(JoinRel::descriptor()->FindFieldByName("right"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kCross: {
-        differ->IgnoreField(CrossRel::descriptor()->FindFieldByName("left"));
-        differ->IgnoreField(CrossRel::descriptor()->FindFieldByName("right"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kHashJoin: {
-        differ->IgnoreField(HashJoinRel::descriptor()->FindFieldByName("left"));
-        differ->IgnoreField(HashJoinRel::descriptor()->FindFieldByName("right"));
-        break;
-      }
-
-      case Rel::RelTypeCase::kMergeJoin: {
-        differ->IgnoreField(MergeJoinRel::descriptor()->FindFieldByName("left"));
-        differ->IgnoreField(MergeJoinRel::descriptor()->FindFieldByName("right"));
-        break;
-      }
-
-      // Leaf operators (no-op)
-      case Rel::RelTypeCase::kReference:
-      case Rel::RelTypeCase::kRead:
-      case Rel::RelTypeCase::kExtensionLeaf: {
-        break;
-      }
-
-      // Unimplemented operators
-      default: {
-        std::cerr << "Simplification unimplemented for operator." << std::endl;
-        return nullptr;
-      }
-    }
-
-    return differ;
-  }
-
-
-  vector<Rel*> GetInputRels(Rel* output_rel) {
-    switch (output_rel->rel_type_case()) {
-      // Unary operators
-      case Rel::RelTypeCase::kProject:
-        return { output_rel->mutable_project()->mutable_input()   };
-
-      case Rel::RelTypeCase::kFilter:
-        return { output_rel->mutable_filter()->mutable_input()    };
-
-      case Rel::RelTypeCase::kFetch:
-        return { output_rel->mutable_fetch()->mutable_input()     };
-
-      case Rel::RelTypeCase::kSort:
-        return { output_rel->mutable_sort()->mutable_input()      };
-
-      case Rel::RelTypeCase::kAggregate:
-        return { output_rel->mutable_aggregate()->mutable_input() };
-
-      // binary operators
-      case Rel::RelTypeCase::kJoin:
-        return {
-           output_rel->mutable_join()->mutable_left()
-          ,output_rel->mutable_join()->mutable_right()
-        };
-
-      case Rel::RelTypeCase::kCross:
-        return {
-           output_rel->mutable_cross()->mutable_left()
-          ,output_rel->mutable_cross()->mutable_right()
-        };
-
-      case Rel::RelTypeCase::kHashJoin:
-        return {
-           output_rel->mutable_hash_join()->mutable_left()
-          ,output_rel->mutable_hash_join()->mutable_right()
-        };
-
-      case Rel::RelTypeCase::kMergeJoin:
-        return {
-           output_rel->mutable_merge_join()->mutable_left()
-          ,output_rel->mutable_merge_join()->mutable_right()
-        };
-
-      // Leaf operators (no-op)
-      case Rel::RelTypeCase::kReference:
-      case Rel::RelTypeCase::kRead:
-      case Rel::RelTypeCase::kExtensionLeaf:
-        return vector<Rel*>(0);
-
-      // Unimplemented operators
-      default: {
-        throw std::runtime_error("Cannot get inputs for unimplemented RelType");
-      }
-    }
-  }
-
 } // namespace: mohair
 
 namespace mohair {
@@ -571,76 +343,33 @@ namespace mohair {
 
 
   // >> Conversion functions (into/out of substrait plans)
-  unique_ptr<Plan> SubstraitPlanFromString(const string &plan_msg) {
-    unique_ptr<Plan> substrait_plan { std::make_unique<Plan>() };
-    substrait_plan->ParseFromString(plan_msg);
+  unique_ptr<Plan> ParsePlanMessage(const string &plan_msg) {
+    unique_ptr<Plan> plan { std::make_unique<Plan>() };
+    plan->ParseFromString(plan_msg);
 
     #if MOHAIR_DEBUG
-      substrait_plan->PrintDebugString();
+      plan->PrintDebugString();
     #endif
 
-    return substrait_plan;
+    return plan;
   }
 
-  std::unique_ptr<Plan> SubstraitPlanFromFile(const char* plan_fpath) {
+  std::unique_ptr<Plan> ParsePlanFile(const char* plan_fpath) {
     std::fstream plan_fstream = InputStreamForFile(plan_fpath);
+    if (not plan_fstream.is_open()) {
+      std::cerr << "Failed to open input file: " << plan_fpath << std::endl;
+      return nullptr;
+    }
 
     auto substrait_plan = std::make_unique<Plan>();
     if (substrait_plan->ParseFromIstream(&plan_fstream)) { return substrait_plan; }
 
-    std::cerr << "Failed to parse substrait plan" << std::endl;
+    std::cerr << "Failed to parse plan from file: " << plan_fpath << std::endl;
     return nullptr;
   }
 
-  std::unique_ptr<Plan> SubstraitPlanFromFile(string& plan_fpath) {
-    return SubstraitPlanFromFile(plan_fpath.data());
-  }
-
-
-  // >> Debug functions
-  void PrintProtoMessage(const Message& msg) {
-    string msg_text;
-
-    bool status_stringify { StringifyMessage(msg, &msg_text) };
-    if (not status_stringify) {
-      std::cerr << "Unable to print message" << std::endl;
-      return;
-    }
-
-    std::cout << msg_text << std::endl;
-  }
-
-  void  PrintSubstraitRel(const Rel&  rel_msg ) { PrintProtoMessage(rel_msg);  }
-  void PrintSubstraitPlan(const Plan& plan_msg) { PrintProtoMessage(plan_msg); }
-
-  void  PrintSubstraitRel(const Rel*  rel_msg ) { PrintProtoMessage(*rel_msg);  }
-  void PrintSubstraitPlan(const Plan* plan_msg) { PrintProtoMessage(*plan_msg); }
-
 
   // >> Helper functions
-  int FindPlanRoot(Plan& substrait_plan) {
-    int root_count = 0;
-    int root_ndx   = -1;
-
-    for (int ndx = 0; ndx < substrait_plan.relations_size(); ++ndx) {
-      PlanRel plan_root { substrait_plan.relations(ndx) };
-
-      // Don't break after we find a RelRoot; validate there is only 1
-      // We expect there to be a reasonably small number of RelRoot
-      if (plan_root.rel_type_case() == PlanRel::RelTypeCase::kRoot) {
-        ++root_count;
-        root_ndx = ndx;
-      }
-    }
-
-    if (root_count != 1) {
-      std::cerr << "Found [" << std::to_string(root_count) << "] RootRels" << std::endl;
-      return -1;
-    }
-
-    return root_ndx;
-  }
-
   PlanRel* GetPlanRoot(Plan* substrait_plan) {
     for (int rel_ndx = 0; rel_ndx < substrait_plan->relations_size(); ++rel_ndx) {
       PlanRel* plan_subtree = substrait_plan->mutable_relations(rel_ndx);
@@ -702,67 +431,6 @@ namespace mohair {
 
       default: throw std::runtime_error("GetRelCommon not yet implemented for type");
     }
-  }
-
-
-} // namespace: mohair
-
-
-// ------------------------------
-// Method implementations
-
-namespace mohair {
-
-  // >> Methods for PlanMessage
-  string PlanMessage::Serialize() {
-    string msg_serialized;
-
-    if (not this->payload->SerializeToString(&msg_serialized)) {
-      std::cerr << "Error when serializing substrait message." << std::endl;
-    }
-
-    return msg_serialized;
-  }
-
-  bool PlanMessage::SerializeToFile(const char *out_fpath) {
-    auto file_stream = OutputStreamForFile(out_fpath);
-    if (!file_stream) {
-      std::cerr << "Failed to open IO stream for serialization:" << std::endl
-                << "\t" << out_fpath                             << std::endl
-      ;
-      return false;
-    }
-
-    if (not this->payload->SerializeToOstream(&file_stream)) {
-      std::cerr << "Unable to substrait message to file" << std::endl;
-      return false;
-    }
-
-    return true;
-  }
-
-  unique_ptr<PlanMessage> PlanMessage::FromPlan(unique_ptr<Plan>&& plan) {
-    int root_relndx { FindPlanRoot(*plan) };
-
-    return std::make_unique<PlanMessage>(std::move(plan), root_relndx);
-  }
-
-  unique_ptr<PlanMessage> PlanMessage::FromString(const string& plan_str) {
-    unique_ptr<Plan> substrait_plan { SubstraitPlanFromString(plan_str) };
-    int              root_relndx    { FindPlanRoot(*substrait_plan)     };
-
-    return std::make_unique<PlanMessage>(std::move(substrait_plan), root_relndx);
-  }
-
-  unique_ptr<PlanMessage> PlanMessage::FromFile(const char* plan_fpath) {
-    unique_ptr<Plan> substrait_plan { SubstraitPlanFromFile(plan_fpath) };
-    int              root_relndx    { FindPlanRoot(*substrait_plan)     };
-
-    return std::make_unique<PlanMessage>(std::move(substrait_plan), root_relndx);
-  }
-
-  unique_ptr<PlanMessage> PlanMessage::FromFile(string plan_fpath) {
-    return PlanMessage::FromFile(plan_fpath.data());
   }
 
 } // namespace: mohair

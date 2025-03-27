@@ -21,7 +21,6 @@
 #pragma once
 
 #include "mohair.hpp"
-#include "mohair/plans.hpp"
 
 #include "mohair/analysis/expressions.hpp"
 #include "mohair/analysis/rel_common.hpp"

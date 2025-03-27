@@ -5,6 +5,7 @@ core_headers = files(
    'api.hpp'
   ,'apidep_standard.hpp'
   ,'apidep_substrait.hpp'
+  ,'adapter_substrait.hpp'
   ,'plans.hpp'
   ,'operators.hpp'
 )
@@ -18,6 +19,7 @@ libmohair_sources += files(
 
 # >> From subdirectories
 subdir('analysis')
+subdir('operators')
 
 
 # ------------------------------

@@ -1,7 +1,7 @@
 // ------------------------------
 // License
 //
-// Copyright 2024 Aldrin Montana
+// Copyright 2024-2025 Aldrin Montana
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,9 +24,35 @@
 #include <array>
 
 #include "mohair.hpp"
-#include "mohair/plans.hpp"
 
+#include "mohair/operators/op_traits.hpp"
 #include "mohair/analysis/schema_resolution.hpp"
+
+
+// ------------------------------
+// Templated functions
+
+namespace mohair {
+
+  // >> Templated functions to construct non-recursive message comparators
+  template <typename RelType>
+  unique_ptr<MessageDifferencer> UnaryRelComparator() {
+    auto msg_differ = std::make_unique<MessageDifferencer>();
+    msg_differ->IgnoreField(RelType::descriptor()->FindFieldByName("input"));
+
+    return msg_differ;
+  }
+
+  template <typename RelType>
+  unique_ptr<MessageDifferencer> BinaryRelComparator() {
+    auto msg_differ = std::make_unique<MessageDifferencer>();
+    msg_differ->IgnoreField(RelType::descriptor()->FindFieldByName("left"));
+    msg_differ->IgnoreField(RelType::descriptor()->FindFieldByName("right"));
+
+    return msg_differ;
+  }
+
+} // namespace: mohair
 
 
 // ------------------------------
@@ -34,291 +60,193 @@
 
 namespace mohair {
 
-  // >> Convenience aliases and types
-  template <size_t input_arity>
-  using InputArity = array<unique_ptr<MohairOp>, input_arity>;
+  // >> Forward declarations
+  struct PlanPipeline;
+  struct PipelineStage;
+  struct OpPipeline;
 
-  using UnaryInputType  = InputArity<1>;
-  using BinaryInputType = InputArity<2>;
+  //! A type-erased base class representing a query operator
+  struct SubstraitOp {
+    virtual ~SubstraitOp() = default;
 
+    // API for inspecting the Rel and the op it represents
+    virtual optional<bool>   IsSink()    const { return std::nullopt; }
+    virtual optional<bool>   IsSource()  const { return std::nullopt; }
+    virtual optional<bool>   IsOrigin()  const { return std::nullopt; }
+    virtual optional<bool>   IsStream()  const { return std::nullopt; }
+    virtual optional<size_t> GetArity()  const { return std::nullopt; }
+    virtual string_view      Stringify() const { return ""sv;         }
 
-  // >> Base classes
-  struct SinkOp : public MohairOp {
-    SinkOp(Rel* rel, unique_ptr<SubstraitSchema>&& input_schema)
-      : MohairOp(rel, std::move(input_schema)) {}
+    // API for comparison and manipulation
+    virtual unique_ptr<Rel>     CopyRelOp()        const { return nullptr; }
+    virtual MessageDifferencer* GetComparator()    const { return nullptr; }
 
-    bool IsSink() override { return true; }
+    virtual bool
+    SetAliases([[maybe_unused]] const RepeatedPtrField<string>& aliases) {
+      return false;
+    }
+
+    // API for visits
+    virtual void
+    BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& pipe_stage);
+
+    // Static functions
+    static unique_ptr<SubstraitOp> FromRel(Rel* rel);
   };
 
-  // >> Leaf operators
-  struct OpErr : MohairOp {
-    string err_msg;
+  // TODO:
+  // - need to accommodate table name (needed for pipeline and pipeline name)
+  // - need to accommodate extension rels and the deserialized payload (the actual op)
 
-    OpErr(Rel *rel, const char *msg): MohairOp(rel, nullptr), err_msg(msg) {}
+  //! Implementation for SubstraitOp that specializes for each substrait Rel type
+  template <typename RelType>
+  struct SubstraitOpImpl : public SubstraitOp {
+    using OpTraits     = RelTraits<RelType>;
+    using InputArray   = array<unique_ptr<SubstraitOp>, OpTraits::Arity>;
+    using ResultSchema = unique_ptr<SubstraitSchema>;
 
-    const string ToString() override;
+    // Member attributes
+    Rel*         rel;
+    RelType*     rel_op;
+    InputArray   input_ops;
+    ResultSchema schema;
+
+    // Destructors and Constructors
+    SubstraitOpImpl(Rel* srel, RelType* srel_op): rel(srel), rel_op(srel_op) {}
+
+    // Public API (via SubstraitOp)
+    optional<bool>   IsSink()   const override;
+    optional<bool>   IsSource() const override;
+    optional<bool>   IsOrigin() const override;
+    optional<bool>   IsStream() const override;
+
+    optional<size_t> GetArity()  const override;
+    string_view      Stringify() const override;
+
+    unique_ptr<Rel>     CopyRelOp()        const override;
+    MessageDifferencer* GetComparator()    const override;
+
+    bool SetAliases(const RepeatedPtrField<string>& aliases) override;
+
+    void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& pipe_stage) override;
+
+    // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    bool BindLogicalSchema();
+
+    void AddToPipeline(
+       PlanPipeline&  plan_pipe
+      ,PipelineStage& pipe_stage
+      ,OpPipeline&    pipeline
+    );
+
+    Rel* MoveToRel(Rel* new_srel);
   };
 
-  struct OpReference : MohairOp {
-    ReferenceRel*        rel_op;
-    unique_ptr<MohairOp> subplan_root;
+  //! Implementation for SubstraitOp that specializes for ReferenceRel
+  template <>
+  struct SubstraitOpImpl<ReferenceRel> : public SubstraitOp {
+    using OpTraits = RelTraits<ReferenceRel>;
 
-    OpReference( ReferenceRel*                 op
-                ,Rel*                          rel
-                ,unique_ptr<MohairOp>&&        ref_subplan
-                ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  MohairOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,subplan_root(std::move(ref_subplan)) {}
+    // Member attributes
+    Rel*                        rel;
+    ReferenceRel*               rel_op;
+    unique_ptr<SubstraitSchema> schema;
+    unique_ptr<SubstraitOp>     subplan_root;
 
-    const string ToString() override;
+    // Destructors and Constructors
+    SubstraitOpImpl(Rel* srel, ReferenceRel* srel_op): rel(srel), rel_op(srel_op) {}
+
+    // Public API (via SubstraitOp)
+    optional<bool>   IsSink()    const override;
+    optional<bool>   IsSource()  const override;
+    optional<bool>   IsOrigin()  const override;
+    optional<bool>   IsStream()  const override;
+    optional<size_t> GetArity()  const override;
+    string_view      Stringify() const override;
+
+    unique_ptr<Rel>     CopyRelOp()     const override;
+    MessageDifferencer* GetComparator() const override;
+
+    bool SetAliases(const RepeatedPtrField<string>& aliases) override;
+
+    void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& pipe_stage) override;
+
+    // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    Rel* MoveToRel(Rel* new_srel);
   };
 
-  struct OpRead : SourceOp {
-    ReadRel* rel_op;
+  //! Implementation for SubstraitOp that specializes for ReadRel
+  template <>
+  struct SubstraitOpImpl<ReadRel> : public SubstraitOp {
+    using OpTraits = RelTraits<ReadRel>;
 
-    OpRead( ReadRel*                      op
-           ,Rel*                          rel
-           ,string                        tname
-           ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SourceOp(rel, tname, std::move(input_schema)), rel_op(op) {}
+    // Member attributes
+    Rel*                        rel;
+    ReadRel*                    rel_op;
+    unique_ptr<SubstraitSchema> schema;
+    string                      source_name;
 
-    const string ToString() override;
+    // Destructors and Constructors
+    SubstraitOpImpl(Rel* srel, ReadRel* srel_op): rel(srel), rel_op(srel_op) {}
+
+    // Public API (via SubstraitOp)
+    optional<bool>   IsSink()    const override;
+    optional<bool>   IsSource()  const override;
+    optional<bool>   IsOrigin()  const override;
+    optional<bool>   IsStream()  const override;
+    optional<size_t> GetArity()  const override;
+
+    // TODO: figure out how to do this
+    string_view Stringify() const override {
+      return "Read("sv + source_name + ")"sv;
+    }
+
+    unique_ptr<Rel>     CopyRelOp()     const override;
+    MessageDifferencer* GetComparator() const override;
+
+    bool SetAliases(const RepeatedPtrField<string>& aliases) override;
+
+    void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& pipe_stage) override;
+
+    // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    Rel* MoveToRel(Rel* new_srel);
   };
 
-  //! An operator that represents an extension operator holding a `mohair::SkyRel`.
-  struct OpSkyRead : SourceOp {
-    ExtensionLeafRel*  rel_op;
-    unique_ptr<SkyRel> sky_rel;
+  //! Implementation for SubstraitOp that specializes for a custom leaf operator
+  //  TODO: need to support the actual extension payload (maybe another type-erased type)
+  template <>
+  struct SubstraitOpImpl<ExtensionLeafRel> : public SubstraitOp {
+    using OpTraits = RelTraits<ExtensionLeafRel>;
 
-    OpSkyRead( ExtensionLeafRel*             op
-              ,Rel*                          rel
-              ,unique_ptr<SkyRel>&&          unpacked_rel
-              ,string                        tname
-              ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SourceOp(rel, tname, std::move(input_schema))
-        ,rel_op(op)
-        ,sky_rel(std::move(unpacked_rel)) {}
-
-    const string ToString() override;
-  };
-
-  struct OpPartitionRead : SourceOp {
+    // Member attributes
+    Rel*                        rel;
     ExtensionLeafRel*           rel_op;
-    unique_ptr<SkyPartitionRel> sky_rel;
+    unique_ptr<SubstraitSchema> schema;
+    string                      source_name;
 
-    OpPartitionRead( ExtensionLeafRel*             op
-                    ,Rel*                          rel
-                    ,unique_ptr<SkyPartitionRel>&& unpacked_rel
-                    ,string                        tname
-                    ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SourceOp(rel, tname, std::move(input_schema))
-        ,rel_op(op)
-        ,sky_rel(std::move(unpacked_rel)) {}
+    // Destructors and Constructors
+    SubstraitOpImpl(Rel* srel, ExtensionLeafRel* srel_op): rel(srel), rel_op(srel_op) {}
 
-    const string ToString() override;
-  };
+    // Public API (via SubstraitOp)
+    optional<bool>   IsSink()    const override;
+    optional<bool>   IsSource()  const override;
+    optional<bool>   IsOrigin()  const override;
+    optional<bool>   IsStream()  const override;
+    optional<size_t> GetArity()  const override;
 
-  struct OpSliceRead : SourceOp {
-    ExtensionLeafRel*       rel_op;
-    unique_ptr<SkySliceRel> sky_rel;
+    string_view Stringify() const override {
+      return "ExtLeaf("sv + source_name + ")"sv;
+    }
 
-    OpSliceRead( ExtensionLeafRel*             op
-                ,Rel*                          rel
-                ,unique_ptr<SkySliceRel>&&     unpacked_rel
-                ,string                        tname
-                ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SourceOp(rel, tname, std::move(input_schema))
-        ,rel_op(op)
-        ,sky_rel(std::move(unpacked_rel)) {}
+    unique_ptr<Rel>     CopyRelOp()     const override;
+    MessageDifferencer* GetComparator() const override;
 
-    const string ToString() override;
-  };
+    bool SetAliases(const RepeatedPtrField<string>& aliases) override;
 
-  struct OpViewRead : SourceOp {
-    ExtensionLeafRel*        rel_op;
-    unique_ptr<SkyResultRel> sky_rel;
+    void BuildPipelines(PlanPipeline& plan_pipe, PipelineStage& final_stage) override;
 
-    OpViewRead( ExtensionLeafRel*              op
-               ,Rel*                           rel
-               ,unique_ptr<SkyResultRel>&&     unpacked_rel
-               ,string                         tname
-               ,unique_ptr<SubstraitSchema>&&  input_schema)
-      :  SourceOp(rel, tname, std::move(input_schema))
-        ,rel_op(op)
-        ,sky_rel(std::move(unpacked_rel)) {}
-
-    const string ToString() override;
-  };
-
-  // >> Unary operators (stream-able)
-  struct OpProj : public MohairOp {
-    ProjectRel*    rel_op;
-    UnaryInputType op_inputs;
-
-    OpProj( ProjectRel*                   op
-           ,Rel*                          rel
-           ,unique_ptr<MohairOp>&&        input_op
-           ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  MohairOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpSel : public MohairOp {
-    FilterRel*     rel_op;
-    UnaryInputType op_inputs;
-
-    OpSel( FilterRel*                    op
-          ,Rel*                          rel
-          ,unique_ptr<MohairOp>&&        input_op
-          ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  MohairOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(input_op) }) {}
-
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpLimit : public MohairOp {
-    FetchRel*      rel_op;
-    UnaryInputType op_inputs;
-
-    OpLimit( FetchRel*                     op
-            ,Rel*                          rel
-            ,unique_ptr<MohairOp>&&        input_op
-            ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  MohairOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  // >> Unary operators (sinks)
-  struct OpSort : public SinkOp {
-    SortRel*       rel_op;
-    UnaryInputType op_inputs;
-
-    OpSort( SortRel*                      op
-           ,Rel*                          rel
-           ,unique_ptr<MohairOp>&&        input_op
-           ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpAggr : public SinkOp {
-    AggregateRel*  rel_op;
-    UnaryInputType op_inputs;
-
-    OpAggr( AggregateRel*                 op
-           ,Rel*                          rel
-           ,unique_ptr<MohairOp>&&        input_op
-           ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(input_op) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  // >> Binary operators (sinks)
-  struct OpJoin : public SinkOp {
-    JoinRel*        rel_op;
-    BinaryInputType op_inputs;
-
-    OpJoin( JoinRel*                      op
-           ,Rel*                          rel
-           ,unique_ptr<MohairOp>&&        left
-           ,unique_ptr<MohairOp>&&        right
-           ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpCrossJoin : public SinkOp {
-    CrossRel*       rel_op;
-    BinaryInputType op_inputs;
-
-    OpCrossJoin( CrossRel*                     op
-                ,Rel*                          rel
-                ,unique_ptr<MohairOp>&&        left
-                ,unique_ptr<MohairOp>&&        right
-                ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpHashJoin : public SinkOp {
-    HashJoinRel*    rel_op;
-    BinaryInputType op_inputs;
-
-    OpHashJoin( HashJoinRel*                  op
-               ,Rel*                          rel
-               ,unique_ptr<MohairOp>&&        left
-               ,unique_ptr<MohairOp>&&        right
-               ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
-  };
-
-  struct OpMergeJoin : public SinkOp {
-    MergeJoinRel*   rel_op;
-    BinaryInputType op_inputs;
-
-    OpMergeJoin( MergeJoinRel*                 op
-                ,Rel*                          rel
-                ,unique_ptr<MohairOp>&&        left
-                ,unique_ptr<MohairOp>&&        right
-                ,unique_ptr<SubstraitSchema>&& input_schema)
-      :  SinkOp(rel, std::move(input_schema))
-        ,rel_op(op)
-        ,op_inputs({ std::move(left), std::move(right) }) {}
-
-    const string ToString()   override;
-    size_t       GetOpArity() override;
-
-    unique_ptr<MohairOp>* GetOpInputs() override;
+    // Internal API (can only be called directly on SubstraitOpImpl<RelType>)
+    Rel* MoveToRel(Rel* new_srel);
   };
 
 } // namespace: mohair
