@@ -40,8 +40,9 @@ namespace mohair {
 // ------------------------------
 // Functions
 
-// >> Wrapper functions for protobuf framework functions
 namespace mohair {
+
+  // >> Convenience functions for time logging
 
   string StringifyTS(const SteadyTS& ts) {
     auto ts_ms = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -78,8 +79,8 @@ namespace mohair {
   }
 
   std::fstream* MohairLogger() {
-    static string empty_name;
-    return MohairLogger(empty_name);
+    static string default_name { "default" };
+    return MohairLogger(default_name);
   }
 
   std::fstream* MohairLogger(string logger_name) {
@@ -91,9 +92,7 @@ namespace mohair {
       log_handle       = OutputStreamForFile(log_fpath.data());
 
       auto ts_init = steady_clock::now();
-      log_handle << "[" << StringifyTS(ts_init) << ":µs] "
-                 << "|> initial timestamp"      << std::endl
-      ;
+      log_handle << "InitialTimestamp " << StringifyTS(ts_init) << std::endl;
 
       is_initialized = true;
     }
