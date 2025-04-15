@@ -1,0 +1,544 @@
+#!/usr/bin/env python
+
+# ------------------------------
+# License
+
+# Copyright 2025 Aldrin Montana
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# ------------------------------
+# Module Docstring
+"""
+Logic to plot a query plan using matplotlib
+"""
+
+
+# ------------------------------
+# Dependencies
+
+import os
+import sys
+import argparse
+
+import numpy
+
+from matplotlib import style, pyplot, patches
+from matplotlib.figure import Figure
+from matplotlib.font_manager import FontProperties
+
+from skyproto.substrait.plan_pb2    import Plan
+from skyproto.substrait.algebra_pb2 import ( Rel
+                                            ,ProjectRel
+                                            ,AggregateRel
+                                            ,JoinRel
+                                            ,ReferenceRel
+                                            ,ExtensionLeafRel)
+
+from mohair.types import MohairOp
+from mohair.plans import SystemPlan, PipelineStage, OpPipeline
+
+# functions
+from matplotlib.colors import to_rgba
+
+
+# ------------------------------
+# Module variables
+
+# >> hardcoded system paths
+font_fpath = '/Users/octalene/Library/Fonts/iosevka-term-ss05-regular.ttf'
+font_props = FontProperties(fname=font_fpath)
+
+# >> general
+layer_service = 1
+layer_stage   = 2
+layer_op      = 3
+layer_flow    = 4
+layer_text    = 5
+
+default_cfg = {
+     'id'    : None
+    ,'width' : 12
+    ,'height': 6
+    ,'dpi'   : 600
+}
+
+# >> domain-specific
+# commented symbols are not yet necessary
+operator_symbols = {
+     'proj'     : 'Π'
+    ,'sel'      : 'σ'
+    ,'aggr'     : 'Γ'
+    ,'join'     : '⋈'
+    ,'hashjoin' : '⋈→'
+    ,'mergejoin': '⋈⊕'
+    #,'limit'    : '⊤'
+    #,'sort'     : 'τ'
+    #,'cross'    : '×'
+}
+
+# >> Color palette
+
+# Semantic colors
+color_localcompute = '#5E81AC'
+color_datamove     = '#A3BE8C'
+color_dataaccess   = '#B48EAD'
+
+color_opborder     = '#E92063'
+color_stageborder  = '#3B4252'
+
+# This stupid thing is to convert 'grey' to an RGB
+rgb_grey = tuple(list(map(lambda x: x * 255, to_rgba('grey')))[:-1])
+celltype_colors = [
+     (120, 172, 145)
+    ,( 88,  85, 120)
+    ,rgb_grey
+]
+
+
+# >> CLI arg parsing
+if __name__ == '__main__':
+    arg_parser = argparse.ArgumentParser(description='Query Plan Visualizer')
+
+    arg_parser.add_argument(
+         '--plan-path'
+        ,dest='plan_path', type=str, required=True
+        ,help='Path to input query plan'
+    )
+
+    arg_parser.add_argument(
+         '--plot-fpath'
+        ,dest='plot_fpath', type=str, required=False
+        ,default='qplan.plotted.png'
+        ,help='Path to file for this program to produce'
+    )
+
+    parsed_args, parsed_extra_args = arg_parser.parse_known_args()
+
+
+# ------------------------------
+# Classes
+
+type GridPos = tuple[int, int]
+
+class PipelineGrid:
+    grid: dict[GridPos, OpPipeline] = {}
+    flow: dict[GridPos,    GridPos] = {}
+
+
+# ------------------------------
+# Functions
+
+# >> Data parsing
+
+def QueryPlanFromFile(plan_fpath):
+    """ Read substrait plan from :plan_fpath: and determine pipelines. """
+
+    sys_plan = SystemPlan.FromFile(plan_fpath)
+    sys_plan.BuildPipelines()
+
+    return sys_plan
+
+
+
+# >> For data preprocessing
+
+
+def CellTypesFromFile(celltype_fpath, delim='\t', skip_header=True):
+    """
+    Read data from :celltype_fpath: projecting columns [2, 1] from [0, 1, 2].
+    """
+
+    celltype_data = []
+
+    # parse data from input file
+    with open(celltype_fpath, 'r') as input_handle:
+        if skip_header: next(input_handle)
+
+        for input_line in input_handle:
+            input_fields  = input_line.strip().split(delim)
+            celltype_data.append(tuple([
+                 input_fields[2]
+                ,celltype_ids[input_fields[1]]
+            ]))
+
+    return numpy.array(
+         celltype_data
+        ,dtype=[('barcode', str), ('celltype', int)]
+    )
+
+
+# >> For plotting
+
+def ConvertRGB(rgb_tuple):
+    """
+    Converts a tuple of ints (RGB values) to a tuple of floats (range: [0, 1]).
+    """
+
+    return tuple(val / 255 for val in rgb_tuple)
+
+
+def ColorsForCelltype(cell_type):
+    return ConvertRGB(celltype_colors[cell_type])
+
+
+def ColorsForGradient(rgb_list, sample_size=100):
+    """
+    Returns a gradient for a list of RGB points by constructing gradients between each
+    pair of RGB points and combining them together (using list.extend).
+    """
+
+    def PairwiseGradient(rgb_start, rgb_end, gradient_len):
+        """ Closure for generating a gradient between 2 RGB points. """
+
+        # create linear spaces as a column-based list of RGB values
+        gradient_dims = [
+            numpy.linspace(rgb_start[color_dim], rgb_end[color_dim], gradient_len)
+            for color_dim in range(3)
+        ]
+
+        # transforms column-based to row-based
+        return [
+            tuple([
+                 gradient_dims[0][color_ndx]
+                ,gradient_dims[1][color_ndx]
+                ,gradient_dims[2][color_ndx]
+            ])
+            for color_ndx in range(gradient_len)
+        ]
+
+    # number of gradients (intervals between RGB points)
+    gradient_count = len(rgb_list) - 1
+    gradient_len   = int(sample_size / gradient_count) + 1
+
+    # for each gradient interval
+    gradient_colors = []
+    for rgb_ndx in range(gradient_count):
+        gradient_colors.extend(PairwiseGradient(
+             rgb_list[rgb_ndx]
+            ,rgb_list[rgb_ndx + 1]
+            ,gradient_len
+        ))
+
+    return gradient_colors
+
+def ColorsForPlasmaHeatmap(gradient_range=100):
+    """
+    Convenience function that calls `ColorsForGradient` on a fixed list of 5 RGB points.
+    """
+
+    plasma_rgblist = [
+         ConvertRGB(( 15,   0, 118))
+        ,ConvertRGB(( 87,   0, 151))
+        ,ConvertRGB((190,  48, 101))
+        ,ConvertRGB((245, 135,  48))
+        ,ConvertRGB((237, 252,  27))
+    ]
+
+    return ColorsForGradient(plasma_rgblist, gradient_range)
+
+
+def ColorsForViridisHeatmap(gradient_range=100):
+    """
+    Convenience function that calls `ColorsForGradient` on a fixed list of 5 RGB points.
+    """
+
+    viridis_rgblist = [
+         ConvertRGB(( 68,   1,  84))
+        ,ConvertRGB(( 59,  82, 139))
+        ,ConvertRGB(( 33, 145, 140))
+        ,ConvertRGB(( 94, 201,  98))
+        ,ConvertRGB((253, 231,  37))
+    ]
+
+    return ColorsForGradient(viridis_rgblist, gradient_range)
+
+
+def CreateFigure(input_cfg={}) -> Figure:
+    """ Convenience function that creates a matplotlib Figure. """
+
+    # Take specified config over defaults
+    fig_config = dict(default_cfg)
+    fig_config.update(input_cfg)
+
+    # use `pyplot.figure` to create the `matplotlib.Figure`
+    return pyplot.figure(
+         num     =  fig_config['id']
+        ,figsize = (fig_config['width'], fig_config['height'])
+        ,dpi     =  fig_config['dpi']
+    )
+
+
+def CreatePanelQueryTiming( parent_figure
+                           ,sys_plan
+                           ,bin_dim   =0
+                           ,panel_size=(11.50, 5.50)
+                           ,panel_pos =(00.25, 0.25)):
+    """
+    Creates a matplotlib.axes.Axes instance (a "panel") and populates it with the
+    pipelines of a query plan. The plan is visually broken into N "stages," each
+    containing M pipelines. Stages represent a sink operator and all of the pipelines that
+    flow into it. A pipeline represents a series of operators starting with a source and
+    ending with a sink; intermediate operators are all able to stream tuples through.
+    Viewing pipeline stages should make it easy to compare how different decompositions
+    distribute across engines. Viewing each pipeline should make it easy to compare
+    timings between different engines.
+    """
+
+    # Make sure the figure is activated
+    pyplot.figure(parent_figure)
+
+    # Create the `Axes` instance for the panel (percentages of parent dim)
+    qplan_panel = parent_figure.add_axes([
+         panel_pos[0]  / parent_figure.get_figwidth()
+        ,panel_pos[1]  / parent_figure.get_figheight()
+        ,panel_size[0] / parent_figure.get_figwidth()
+        ,panel_size[1] / parent_figure.get_figheight()
+    ])
+
+    # >> Plotting properties for:
+    # operators
+    op_ysize    = 5
+    op_xsize    = 5
+    op_xoffset  = 3
+    op_xincr    = op_xsize + op_xoffset
+
+    # pipeline lanes
+    lane_ypadding = 3
+    lane_yoffset  = 5
+    lane_ysize    = op_ysize   + (lane_ypadding * 2)
+    lane_incr     = lane_ysize + lane_yoffset
+
+    # pipeline stages
+    stage_ypadding = 4
+    stage_xpadding = 4
+    stage_xoffset  = 5
+    stage_bgcolor  = color_localcompute
+
+    # labels
+    stage_fontsize = 6
+    op_fontsize    = 6
+
+    # >> Preprocessing of plan
+    lane_opcount  = 0
+    stage_depth   = 0
+    lanes_by_pipe = {}
+
+    # Collect pipeline IDs for each lane
+    for lane_ndx, current_pipe in enumerate(sys_plan.origin_pipelines, start=1):
+        lanes_by_pipe[current_pipe.pipe_id] = lane_ndx
+
+        lane_depth = 1
+        count_ops  = len(current_pipe)
+        while current_pipe.dest_pipe is not None:
+            lane_depth     += 1
+            count_ops      += len(current_pipe)
+            current_pipe    = current_pipe.dest_pipe
+            current_pipeid  = current_pipe.pipe_id
+            if current_pipeid not in lanes_by_pipe:
+                lanes_by_pipe[current_pipeid] = lane_ndx
+
+        if lane_depth > stage_depth:
+            stage_depth  = lane_depth
+            lane_opcount = count_ops
+
+    # >> Parameters for bounds calculations
+    # Count of origin pipelines to determine lane bounds
+    count_lanes = len(sys_plan.origin_pipelines)
+
+    # Longest stage (by operator count) for horizontal bounds of each stage
+    # max_stageops = 0
+    # for tmp_stage in sys_plan.pipeline_stages:
+    #     max_stageops = max(max_stageops, len(tmp_stage))
+
+    # >> Panel properties
+    max_lane_width = (lane_opcount * op_xincr) + (stage_depth * (stage_xpadding * 2))
+    qplan_panel.set_xlim(0, max_lane_width)
+
+    lane_ytotal  = (count_lanes + 1) * lane_incr
+    qplan_panel.set_ylim(0, lane_ytotal)
+
+    qplan_panel.tick_params(
+        bottom=False, labelbottom=False,
+        left  =False, labelleft  =False,
+        right =False, labelright =False,
+        top   =False, labeltop   =False
+    )
+
+    # For each stage, we plot:
+    #   - A rectangle for the stage
+    #   - A rectangle for the stage sink, if in subplan
+    #   - An arrow connecting:
+    #       - the downstream stage (closer to root)
+    #       - the upstream stage   (closer to scan)
+    lane_xbases = [stage_xoffset] * count_lanes
+    for stage_ndx, pipeline_stage in enumerate(sys_plan.pipeline_stages):
+
+        # For each pipeline, we plot:
+        #   - A rectangle for each pipeline
+        #   - A the first is a base lane for the sink operator and 
+        # List of timings for each step in chronological order (each interval)
+        stage_xpos , stage_ypos = 0, 0
+        stage_width, stage_top  = 0, 0
+
+        min_lane, max_lane = None, None
+        for pipeline in pipeline_stage.pipelines:
+            # Determine our current lane and the lane bounds for the stage
+            pipe_lane  = lanes_by_pipe[pipeline.pipe_id]
+            pipe_lane  = (count_lanes - pipe_lane) + 1
+
+            if not min_lane or pipe_lane < min_lane: min_lane = pipe_lane
+            if not max_lane or pipe_lane > max_lane: max_lane = pipe_lane
+
+            if not stage_xpos: stage_xpos = lane_xbases[pipe_lane - 1]
+
+            op_xpos = stage_xpos + stage_xpadding
+            op_ypos = pipe_lane  * lane_incr
+
+            # Set stage boundaries, assuming the first pipeline is highest
+            if not stage_top: stage_top = op_ypos + op_ysize + stage_ypadding
+
+            stage_bottom = op_ypos - stage_ypadding
+            if not stage_ypos or stage_bottom < stage_ypos:
+                stage_ypos = stage_bottom
+
+            # For each streaming operator, we plot:
+            for op_ndx, stream_op in enumerate(pipeline.pipe_ops, start=1):
+                # TODO: use split information to determine if we include the sink op
+                # Plot the operator box
+                qplan_panel.add_patch(patches.Rectangle(
+                     (op_xpos, op_ypos)
+                    ,op_xsize
+                    ,op_ysize
+                    ,facecolor='white'
+                    ,edgecolor=color_opborder
+                    ,linewidth=1
+                    ,zorder=layer_op
+                ))
+
+                qplan_panel.text(
+                     op_xpos + (op_xsize / 2)
+                    ,op_ypos + (op_ysize / 2)
+                    ,str(stream_op)
+                    ,ha='center'
+                    ,va='center'
+                    ,rotation=0
+                    ,rotation_mode='anchor'
+                    ,fontsize=6
+                    ,fontproperties=font_props
+                    ,color=color_opborder
+                    ,zorder=layer_text
+                )
+
+                op_xpos     += op_xincr
+                stage_width += op_xincr
+
+                # << End Operator Loop
+
+            # Then, we plot the source operator:
+            qplan_panel.add_patch(patches.Rectangle(
+                 (op_xpos, op_ypos)
+                ,op_xsize
+                ,op_ysize
+                ,facecolor='white'
+                ,edgecolor=color_opborder
+                ,linewidth=1
+                ,zorder=layer_op
+            ))
+
+            qplan_panel.text(
+                 op_xpos + (op_xsize / 2)
+                ,op_ypos + (op_ysize / 2)
+                ,str(pipeline.source_op)
+                ,ha='center'
+                ,va='center'
+                ,rotation=0
+                ,rotation_mode='anchor'
+                ,fontsize=6
+                ,fontproperties=font_props
+                ,color=color_opborder
+                ,zorder=layer_text
+            )
+
+            # << End Pipeline Loop
+
+        # Then we plot the stage boundaries
+        stage_width  += op_xsize + (stage_xpadding * 2)
+        stage_height = stage_top - stage_bottom
+
+        qplan_panel.add_patch(patches.Rectangle(
+             (stage_xpos, stage_ypos)
+            ,stage_width
+            ,stage_height
+            ,facecolor='white'
+            ,edgecolor=color_opborder
+            ,linewidth=1
+            ,zorder=layer_stage
+        ))
+
+        qplan_panel.text(
+             stage_xpos + stage_xpadding
+            ,stage_ypos + stage_height
+            ,f'Stage {stage_ndx}'
+            ,ha='left'
+            ,va='center'
+            ,rotation=0
+            ,rotation_mode='anchor'
+            ,fontsize=stage_fontsize
+            ,fontproperties=font_props
+            ,color=color_opborder
+            ,backgroundcolor='white'
+            ,zorder=layer_stage
+        )
+
+        # For stages after stage 0, draw an arrow straight left to show dataflow
+        if stage_ndx:
+            qplan_panel.arrow(
+                 stage_xpos
+                ,stage_ypos + stage_height - stage_ypadding - (op_ysize / 2)
+                ,(-stage_xoffset) + 1
+                ,0
+                ,head_width=1
+                ,head_length=0.8
+                ,facecolor=color_opborder
+                ,edgecolor=color_opborder
+                ,linewidth=1
+                ,zorder=layer_flow
+            )
+
+        # Move the start position for each lane as a block
+        for lane_ndx in range(min_lane - 1, max_lane):
+            lane_xbases[lane_ndx] = stage_xpos + stage_width + stage_xoffset
+
+        # << End Pipeline Stage loop
+
+    return qplan_panel
+
+
+# ------------------------------
+# Main Logic
+
+if __name__ == '__main__':
+    style.use('BME163')
+
+    # Read data common to many panels
+    parsed_plan = QueryPlanFromFile(parsed_args.plan_path)
+
+    # Create figure and panels
+    timing_fig    = CreateFigure()
+    latency_panel = CreatePanelQueryTiming(timing_fig, parsed_plan)
+
+    # Save to file
+    pyplot.savefig(parsed_args.plot_fpath)
+
