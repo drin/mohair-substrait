@@ -38,6 +38,9 @@ namespace mohair {
   using google::protobuf::util::MessageDifferencer;
 
   // >> Substrait types
+  // Statistics
+  using skyproto::substrait::DecomposeStats;
+
   // Type representation
   using SubstraitType   = skyproto::substrait::Type;
   using SubstraitSchema = skyproto::substrait::NamedStruct;
