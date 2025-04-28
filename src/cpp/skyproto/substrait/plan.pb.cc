@@ -60,6 +60,61 @@ struct VersionDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 VersionDefaultTypeInternal _Version_default_instance_;
 
+inline constexpr ExecutionStats::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : pipeline_desc_{},
+        latency_{},
+        result_size_{},
+        _result_size_cached_byte_size_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ExecutionStats::ExecutionStats(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ExecutionStatsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ExecutionStatsDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ExecutionStatsDefaultTypeInternal() {}
+  union {
+    ExecutionStats _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ExecutionStatsDefaultTypeInternal _ExecutionStats_default_instance_;
+
+inline constexpr DecomposeStats::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : step_id_{static_cast< ::skyproto::substrait::DecomposeStats_StepID >(0)},
+        operator_id_{0u},
+        latency_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR DecomposeStats::DecomposeStats(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct DecomposeStatsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DecomposeStatsDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DecomposeStatsDefaultTypeInternal() {}
+  union {
+    DecomposeStats _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DecomposeStatsDefaultTypeInternal _DecomposeStats_default_instance_;
+
 inline constexpr PlanVersion::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -84,6 +139,32 @@ struct PlanVersionDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PlanVersionDefaultTypeInternal _PlanVersion_default_instance_;
+
+inline constexpr DynamicParameterBinding::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        value_{nullptr},
+        parameter_anchor_{0u} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR DynamicParameterBinding::DynamicParameterBinding(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct DynamicParameterBindingDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DynamicParameterBindingDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DynamicParameterBindingDefaultTypeInternal() {}
+  union {
+    DynamicParameterBinding _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DynamicParameterBindingDefaultTypeInternal _DynamicParameterBinding_default_instance_;
 
 inline constexpr PlanRel::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -119,6 +200,11 @@ inline constexpr Plan::Impl_::Impl_(
         extensions_{},
         relations_{},
         expected_type_urls_{},
+        parameter_bindings_{},
+        decompose_stats_{},
+        plan_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
         advanced_extensions_{nullptr},
         version_{nullptr} {}
 
@@ -143,13 +229,34 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PlanDefaultTypeInternal _Plan_default_instance_;
 }  // namespace substrait
 }  // namespace skyproto
-static constexpr const ::_pb::EnumDescriptor**
-    file_level_enum_descriptors_skyproto_2fsubstrait_2fplan_2eproto = nullptr;
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_skyproto_2fsubstrait_2fplan_2eproto[1];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_skyproto_2fsubstrait_2fplan_2eproto = nullptr;
 const ::uint32_t
     TableStruct_skyproto_2fsubstrait_2fplan_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.step_id_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.operator_id_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.latency_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ExecutionStats, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ExecutionStats, _impl_.pipeline_desc_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ExecutionStats, _impl_.latency_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ExecutionStats, _impl_.result_size_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::PlanRel, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -176,11 +283,17 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.relations_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.advanced_extensions_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.expected_type_urls_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.parameter_bindings_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.decompose_stats_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Plan, _impl_.plan_id_),
         1,
         ~0u,
         ~0u,
         ~0u,
         0,
+        ~0u,
+        ~0u,
+        ~0u,
         ~0u,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::PlanVersion, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::PlanVersion, _internal_metadata_),
@@ -205,52 +318,87 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Version, _impl_.patch_number_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Version, _impl_.git_hash_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Version, _impl_.producer_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameterBinding, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameterBinding, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameterBinding, _impl_.parameter_anchor_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameterBinding, _impl_.value_),
+        ~0u,
+        0,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::skyproto::substrait::PlanRel)},
-        {12, 26, -1, sizeof(::skyproto::substrait::Plan)},
-        {32, 41, -1, sizeof(::skyproto::substrait::PlanVersion)},
-        {42, -1, -1, sizeof(::skyproto::substrait::Version)},
+        {0, -1, -1, sizeof(::skyproto::substrait::DecomposeStats)},
+        {11, -1, -1, sizeof(::skyproto::substrait::ExecutionStats)},
+        {22, -1, -1, sizeof(::skyproto::substrait::PlanRel)},
+        {34, 51, -1, sizeof(::skyproto::substrait::Plan)},
+        {60, 69, -1, sizeof(::skyproto::substrait::PlanVersion)},
+        {70, -1, -1, sizeof(::skyproto::substrait::Version)},
+        {83, 93, -1, sizeof(::skyproto::substrait::DynamicParameterBinding)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
+    &::skyproto::substrait::_DecomposeStats_default_instance_._instance,
+    &::skyproto::substrait::_ExecutionStats_default_instance_._instance,
     &::skyproto::substrait::_PlanRel_default_instance_._instance,
     &::skyproto::substrait::_Plan_default_instance_._instance,
     &::skyproto::substrait::_PlanVersion_default_instance_._instance,
     &::skyproto::substrait::_Version_default_instance_._instance,
+    &::skyproto::substrait::_DynamicParameterBinding_default_instance_._instance,
 };
 const char descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\035skyproto/substrait/plan.proto\022\022skyprot"
     "o.substrait\032 skyproto/substrait/algebra."
     "proto\032.skyproto/substrait/extensions/ext"
-    "ensions.proto\"\234\001\n\007PlanRel\022+\n\003rel\030\001 \001(\0132\027"
-    ".skyproto.substrait.RelH\000R\003rel\0221\n\004root\030\002"
-    " \001(\0132\033.skyproto.substrait.RelRootH\000R\004roo"
-    "t\022%\n\016subtree_anchor\030\003 \001(\rR\rsubtreeAnchor"
-    "B\n\n\010rel_type\"\276\003\n\004Plan\0225\n\007version\030\006 \001(\0132\033"
-    ".skyproto.substrait.VersionR\007version\022X\n\016"
-    "extension_uris\030\001 \003(\01321.skyproto.substrai"
-    "t.extensions.SimpleExtensionURIR\rextensi"
-    "onUris\022Y\n\nextensions\030\002 \003(\01329.skyproto.su"
-    "bstrait.extensions.SimpleExtensionDeclar"
-    "ationR\nextensions\0229\n\trelations\030\003 \003(\0132\033.s"
-    "kyproto.substrait.PlanRelR\trelations\022a\n\023"
-    "advanced_extensions\030\004 \001(\01320.skyproto.sub"
-    "strait.extensions.AdvancedExtensionR\022adv"
-    "ancedExtensions\022,\n\022expected_type_urls\030\005 "
-    "\003(\tR\020expectedTypeUrls\"D\n\013PlanVersion\0225\n\007"
-    "version\030\006 \001(\0132\033.skyproto.substrait.Versi"
-    "onR\007version\"\251\001\n\007Version\022!\n\014major_number\030"
-    "\001 \001(\rR\013majorNumber\022!\n\014minor_number\030\002 \001(\r"
-    "R\013minorNumber\022!\n\014patch_number\030\003 \001(\rR\013pat"
-    "chNumber\022\031\n\010git_hash\030\004 \001(\tR\007gitHash\022\032\n\010p"
-    "roducer\030\005 \001(\tR\010producerB\214\001\n\026com.skyproto"
-    ".substraitB\tPlanProtoP\001\242\002\003SSX\252\002\022Skyproto"
-    ".Substrait\312\002\022Skyproto\\Substrait\342\002\036Skypro"
-    "to\\Substrait\\GPBMetadata\352\002\023Skyproto::Sub"
-    "straitb\006proto3"
+    "ensions.proto\"\343\001\n\016DecomposeStats\022B\n\007step"
+    "_id\030\001 \001(\0162).skyproto.substrait.Decompose"
+    "Stats.StepIDR\006stepId\022\037\n\013operator_id\030\002 \001("
+    "\rR\noperatorId\022\030\n\007latency\030\003 \001(\001R\007latency\""
+    "R\n\006StepID\022\t\n\005PARSE\020\000\022\t\n\005SPLIT\020\001\022\t\n\005MERGE"
+    "\020\002\022\014\n\010DELEGATE\020\003\022\r\n\tTRANSLATE\020\004\022\n\n\006ORIGI"
+    "N\020\005\"p\n\016ExecutionStats\022#\n\rpipeline_desc\030\001"
+    " \003(\tR\014pipelineDesc\022\030\n\007latency\030\002 \003(\001R\007lat"
+    "ency\022\037\n\013result_size\030\003 \003(\004R\nresultSize\"\234\001"
+    "\n\007PlanRel\022+\n\003rel\030\001 \001(\0132\027.skyproto.substr"
+    "ait.RelH\000R\003rel\0221\n\004root\030\002 \001(\0132\033.skyproto."
+    "substrait.RelRootH\000R\004root\022%\n\016subtree_anc"
+    "hor\030\003 \001(\rR\rsubtreeAnchorB\n\n\010rel_type\"\200\005\n"
+    "\004Plan\0225\n\007version\030\006 \001(\0132\033.skyproto.substr"
+    "ait.VersionR\007version\022X\n\016extension_uris\030\001"
+    " \003(\01321.skyproto.substrait.extensions.Sim"
+    "pleExtensionURIR\rextensionUris\022Y\n\nextens"
+    "ions\030\002 \003(\01329.skyproto.substrait.extensio"
+    "ns.SimpleExtensionDeclarationR\nextension"
+    "s\0229\n\trelations\030\003 \003(\0132\033.skyproto.substrai"
+    "t.PlanRelR\trelations\022a\n\023advanced_extensi"
+    "ons\030\004 \001(\01320.skyproto.substrait.extension"
+    "s.AdvancedExtensionR\022advancedExtensions\022"
+    ",\n\022expected_type_urls\030\005 \003(\tR\020expectedTyp"
+    "eUrls\022Z\n\022parameter_bindings\030\007 \003(\0132+.skyp"
+    "roto.substrait.DynamicParameterBindingR\021"
+    "parameterBindings\022K\n\017decompose_stats\030\010 \003"
+    "(\0132\".skyproto.substrait.DecomposeStatsR\016"
+    "decomposeStats\022\027\n\007plan_id\030\t \001(\tR\006planId\""
+    "D\n\013PlanVersion\0225\n\007version\030\006 \001(\0132\033.skypro"
+    "to.substrait.VersionR\007version\"\251\001\n\007Versio"
+    "n\022!\n\014major_number\030\001 \001(\rR\013majorNumber\022!\n\014"
+    "minor_number\030\002 \001(\rR\013minorNumber\022!\n\014patch"
+    "_number\030\003 \001(\rR\013patchNumber\022\031\n\010git_hash\030\004"
+    " \001(\tR\007gitHash\022\032\n\010producer\030\005 \001(\tR\010produce"
+    "r\"\202\001\n\027DynamicParameterBinding\022)\n\020paramet"
+    "er_anchor\030\001 \001(\rR\017parameterAnchor\022<\n\005valu"
+    "e\030\002 \001(\0132&.skyproto.substrait.Expression."
+    "LiteralR\005valueB\214\001\n\026com.skyproto.substrai"
+    "tB\tPlanProtoP\001\242\002\003SSX\252\002\022Skyproto.Substrai"
+    "t\312\002\022Skyproto\\Substrait\342\002\036Skyproto\\Substr"
+    "ait\\GPBMetadata\352\002\023Skyproto::Substraitb\006p"
+    "roto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_deps[2] =
     {
@@ -261,13 +409,13 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_on
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2fplan_2eproto = {
     false,
     false,
-    1134,
+    1805,
     descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto,
     "skyproto/substrait/plan.proto",
     &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_once,
     descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_deps,
     2,
-    4,
+    7,
     schemas,
     file_default_instances,
     TableStruct_skyproto_2fsubstrait_2fplan_2eproto::offsets,
@@ -276,6 +424,599 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsub
 };
 namespace skyproto {
 namespace substrait {
+const ::google::protobuf::EnumDescriptor* DecomposeStats_StepID_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skyproto_2fsubstrait_2fplan_2eproto);
+  return file_level_enum_descriptors_skyproto_2fsubstrait_2fplan_2eproto[0];
+}
+PROTOBUF_CONSTINIT const uint32_t DecomposeStats_StepID_internal_data_[] = {
+    393216u, 0u, };
+bool DecomposeStats_StepID_IsValid(int value) {
+  return 0 <= value && value <= 5;
+}
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr DecomposeStats_StepID DecomposeStats::PARSE;
+constexpr DecomposeStats_StepID DecomposeStats::SPLIT;
+constexpr DecomposeStats_StepID DecomposeStats::MERGE;
+constexpr DecomposeStats_StepID DecomposeStats::DELEGATE;
+constexpr DecomposeStats_StepID DecomposeStats::TRANSLATE;
+constexpr DecomposeStats_StepID DecomposeStats::ORIGIN;
+constexpr DecomposeStats_StepID DecomposeStats::StepID_MIN;
+constexpr DecomposeStats_StepID DecomposeStats::StepID_MAX;
+constexpr int DecomposeStats::StepID_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+// ===================================================================
+
+class DecomposeStats::_Internal {
+ public:
+};
+
+DecomposeStats::DecomposeStats(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.DecomposeStats)
+}
+DecomposeStats::DecomposeStats(
+    ::google::protobuf::Arena* arena, const DecomposeStats& from)
+    : DecomposeStats(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE DecomposeStats::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void DecomposeStats::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, step_id_),
+           0,
+           offsetof(Impl_, latency_) -
+               offsetof(Impl_, step_id_) +
+               sizeof(Impl_::latency_));
+}
+DecomposeStats::~DecomposeStats() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.DecomposeStats)
+  SharedDtor(*this);
+}
+inline void DecomposeStats::SharedDtor(MessageLite& self) {
+  DecomposeStats& this_ = static_cast<DecomposeStats&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* DecomposeStats::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) DecomposeStats(arena);
+}
+constexpr auto DecomposeStats::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(DecomposeStats),
+                                            alignof(DecomposeStats));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull DecomposeStats::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_DecomposeStats_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &DecomposeStats::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<DecomposeStats>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &DecomposeStats::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<DecomposeStats>(), &DecomposeStats::ByteSizeLong,
+            &DecomposeStats::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_._cached_size_),
+        false,
+    },
+    &DecomposeStats::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* DecomposeStats::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> DecomposeStats::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::DecomposeStats>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DecomposeStats, _impl_.step_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_)}},
+    // uint32 operator_id = 2 [json_name = "operatorId"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DecomposeStats, _impl_.operator_id_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.operator_id_)}},
+    // double latency = 3 [json_name = "latency"];
+    {::_pbi::TcParser::FastF64S1,
+     {25, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+    // uint32 operator_id = 2 [json_name = "operatorId"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.operator_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // double latency = 3 [json_name = "latency"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void DecomposeStats::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.DecomposeStats)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.step_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.latency_) -
+      reinterpret_cast<char*>(&_impl_.step_id_)) + sizeof(_impl_.latency_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* DecomposeStats::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const DecomposeStats& this_ = static_cast<const DecomposeStats&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* DecomposeStats::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const DecomposeStats& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.DecomposeStats)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+          if (this_._internal_step_id() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                1, this_._internal_step_id(), target);
+          }
+
+          // uint32 operator_id = 2 [json_name = "operatorId"];
+          if (this_._internal_operator_id() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_operator_id(), target);
+          }
+
+          // double latency = 3 [json_name = "latency"];
+          if (::absl::bit_cast<::uint64_t>(this_._internal_latency()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                3, this_._internal_latency(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.DecomposeStats)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t DecomposeStats::ByteSizeLong(const MessageLite& base) {
+          const DecomposeStats& this_ = static_cast<const DecomposeStats&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t DecomposeStats::ByteSizeLong() const {
+          const DecomposeStats& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.DecomposeStats)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+            if (this_._internal_step_id() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_step_id());
+            }
+            // uint32 operator_id = 2 [json_name = "operatorId"];
+            if (this_._internal_operator_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_operator_id());
+            }
+            // double latency = 3 [json_name = "latency"];
+            if (::absl::bit_cast<::uint64_t>(this_._internal_latency()) != 0) {
+              total_size += 9;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void DecomposeStats::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<DecomposeStats*>(&to_msg);
+  auto& from = static_cast<const DecomposeStats&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.DecomposeStats)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_step_id() != 0) {
+    _this->_impl_.step_id_ = from._impl_.step_id_;
+  }
+  if (from._internal_operator_id() != 0) {
+    _this->_impl_.operator_id_ = from._impl_.operator_id_;
+  }
+  if (::absl::bit_cast<::uint64_t>(from._internal_latency()) != 0) {
+    _this->_impl_.latency_ = from._impl_.latency_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DecomposeStats::CopyFrom(const DecomposeStats& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.DecomposeStats)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void DecomposeStats::InternalSwap(DecomposeStats* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_)
+      + sizeof(DecomposeStats::_impl_.latency_)
+      - PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_)>(
+          reinterpret_cast<char*>(&_impl_.step_id_),
+          reinterpret_cast<char*>(&other->_impl_.step_id_));
+}
+
+::google::protobuf::Metadata DecomposeStats::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class ExecutionStats::_Internal {
+ public:
+};
+
+ExecutionStats::ExecutionStats(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.ExecutionStats)
+}
+inline PROTOBUF_NDEBUG_INLINE ExecutionStats::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::ExecutionStats& from_msg)
+      : pipeline_desc_{visibility, arena, from.pipeline_desc_},
+        latency_{visibility, arena, from.latency_},
+        result_size_{visibility, arena, from.result_size_},
+        _result_size_cached_byte_size_{0},
+        _cached_size_{0} {}
+
+ExecutionStats::ExecutionStats(
+    ::google::protobuf::Arena* arena,
+    const ExecutionStats& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  ExecutionStats* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.ExecutionStats)
+}
+inline PROTOBUF_NDEBUG_INLINE ExecutionStats::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : pipeline_desc_{visibility, arena},
+        latency_{visibility, arena},
+        result_size_{visibility, arena},
+        _result_size_cached_byte_size_{0},
+        _cached_size_{0} {}
+
+inline void ExecutionStats::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+ExecutionStats::~ExecutionStats() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.ExecutionStats)
+  SharedDtor(*this);
+}
+inline void ExecutionStats::SharedDtor(MessageLite& self) {
+  ExecutionStats& this_ = static_cast<ExecutionStats&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* ExecutionStats::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) ExecutionStats(arena);
+}
+constexpr auto ExecutionStats::InternalNewImpl_() {
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.pipeline_desc_) +
+          decltype(ExecutionStats::_impl_.pipeline_desc_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.latency_) +
+          decltype(ExecutionStats::_impl_.latency_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.result_size_) +
+          decltype(ExecutionStats::_impl_.result_size_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(ExecutionStats), alignof(ExecutionStats), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&ExecutionStats::PlacementNew_,
+                                 sizeof(ExecutionStats),
+                                 alignof(ExecutionStats));
+  }
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull ExecutionStats::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_ExecutionStats_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &ExecutionStats::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ExecutionStats>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &ExecutionStats::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ExecutionStats>(), &ExecutionStats::ByteSizeLong,
+            &ExecutionStats::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_._cached_size_),
+        false,
+    },
+    &ExecutionStats::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* ExecutionStats::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 55, 2> ExecutionStats::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::ExecutionStats>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+    {::_pbi::TcParser::FastUR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.pipeline_desc_)}},
+    // repeated double latency = 2 [json_name = "latency"];
+    {::_pbi::TcParser::FastF64P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.latency_)}},
+    // repeated uint64 result_size = 3 [json_name = "resultSize"];
+    {::_pbi::TcParser::FastV64P1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.result_size_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.pipeline_desc_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kUtf8String | ::_fl::kRepSString)},
+    // repeated double latency = 2 [json_name = "latency"];
+    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.latency_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedDouble)},
+    // repeated uint64 result_size = 3 [json_name = "resultSize"];
+    {PROTOBUF_FIELD_OFFSET(ExecutionStats, _impl_.result_size_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt64)},
+  }},
+  // no aux_entries
+  {{
+    "\41\15\0\0\0\0\0\0"
+    "skyproto.substrait.ExecutionStats"
+    "pipeline_desc"
+  }},
+};
+
+PROTOBUF_NOINLINE void ExecutionStats::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.ExecutionStats)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.pipeline_desc_.Clear();
+  _impl_.latency_.Clear();
+  _impl_.result_size_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* ExecutionStats::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const ExecutionStats& this_ = static_cast<const ExecutionStats&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* ExecutionStats::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const ExecutionStats& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.ExecutionStats)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+          for (int i = 0, n = this_._internal_pipeline_desc_size(); i < n; ++i) {
+            const auto& s = this_._internal_pipeline_desc().Get(i);
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.substrait.ExecutionStats.pipeline_desc");
+            target = stream->WriteString(1, s, target);
+          }
+
+          // repeated double latency = 2 [json_name = "latency"];
+          if (this_._internal_latency_size() > 0) {
+            target = stream->WriteFixedPacked(2, this_._internal_latency(), target);
+          }
+
+          // repeated uint64 result_size = 3 [json_name = "resultSize"];
+          {
+            int byte_size = this_._impl_._result_size_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteUInt64Packed(
+                  3, this_._internal_result_size(), byte_size, target);
+            }
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.ExecutionStats)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t ExecutionStats::ByteSizeLong(const MessageLite& base) {
+          const ExecutionStats& this_ = static_cast<const ExecutionStats&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t ExecutionStats::ByteSizeLong() const {
+          const ExecutionStats& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.ExecutionStats)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+            {
+              total_size +=
+                  1 * ::google::protobuf::internal::FromIntSize(this_._internal_pipeline_desc().size());
+              for (int i = 0, n = this_._internal_pipeline_desc().size(); i < n; ++i) {
+                total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+                    this_._internal_pipeline_desc().Get(i));
+              }
+            }
+            // repeated double latency = 2 [json_name = "latency"];
+            {
+              std::size_t data_size = std::size_t{8} *
+                  ::_pbi::FromIntSize(this_._internal_latency_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
+            }
+            // repeated uint64 result_size = 3 [json_name = "resultSize"];
+            {
+              total_size +=
+                  ::_pbi::WireFormatLite::UInt64SizeWithPackedTagSize(
+                      this_._internal_result_size(), 1,
+                      this_._impl_._result_size_cached_byte_size_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void ExecutionStats::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ExecutionStats*>(&to_msg);
+  auto& from = static_cast<const ExecutionStats&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.ExecutionStats)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_pipeline_desc()->MergeFrom(from._internal_pipeline_desc());
+  _this->_internal_mutable_latency()->MergeFrom(from._internal_latency());
+  _this->_internal_mutable_result_size()->MergeFrom(from._internal_result_size());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ExecutionStats::CopyFrom(const ExecutionStats& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.ExecutionStats)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void ExecutionStats::InternalSwap(ExecutionStats* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.pipeline_desc_.InternalSwap(&other->_impl_.pipeline_desc_);
+  _impl_.latency_.InternalSwap(&other->_impl_.latency_);
+  _impl_.result_size_.InternalSwap(&other->_impl_.result_size_);
+}
+
+::google::protobuf::Metadata ExecutionStats::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
 // ===================================================================
 
 class PlanRel::_Internal {
@@ -712,7 +1453,10 @@ inline PROTOBUF_NDEBUG_INLINE Plan::Impl_::Impl_(
         extension_uris_{visibility, arena, from.extension_uris_},
         extensions_{visibility, arena, from.extensions_},
         relations_{visibility, arena, from.relations_},
-        expected_type_urls_{visibility, arena, from.expected_type_urls_} {}
+        expected_type_urls_{visibility, arena, from.expected_type_urls_},
+        parameter_bindings_{visibility, arena, from.parameter_bindings_},
+        decompose_stats_{visibility, arena, from.decompose_stats_},
+        plan_id_(arena, from.plan_id_) {}
 
 Plan::Plan(
     ::google::protobuf::Arena* arena,
@@ -744,7 +1488,10 @@ inline PROTOBUF_NDEBUG_INLINE Plan::Impl_::Impl_(
         extension_uris_{visibility, arena},
         extensions_{visibility, arena},
         relations_{visibility, arena},
-        expected_type_urls_{visibility, arena} {}
+        expected_type_urls_{visibility, arena},
+        parameter_bindings_{visibility, arena},
+        decompose_stats_{visibility, arena},
+        plan_id_(arena) {}
 
 inline void Plan::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -763,6 +1510,7 @@ inline void Plan::SharedDtor(MessageLite& self) {
   Plan& this_ = static_cast<Plan&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.plan_id_.Destroy();
   delete this_._impl_.advanced_extensions_;
   delete this_._impl_.version_;
   this_._impl_.~Impl_();
@@ -790,9 +1538,17 @@ constexpr auto Plan::InternalNewImpl_() {
           decltype(Plan::_impl_.expected_type_urls_)::
               InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(Plan, _impl_.parameter_bindings_) +
+          decltype(Plan::_impl_.parameter_bindings_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(Plan, _impl_.decompose_stats_) +
+          decltype(Plan::_impl_.decompose_stats_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
   });
   if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+    return ::google::protobuf::internal::MessageCreator::CopyInit(
         sizeof(Plan), alignof(Plan), *arena_bits);
   } else {
     return ::google::protobuf::internal::MessageCreator(&Plan::PlacementNew_,
@@ -828,16 +1584,16 @@ const ::google::protobuf::internal::ClassData* Plan::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 6, 5, 50, 2> Plan::_table_ = {
+const ::_pbi::TcParseTable<4, 9, 7, 65, 2> Plan::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Plan, _impl_._has_bits_),
     0, // no _extensions_
-    6, 56,  // max_field_number, fast_idx_mask
+    9, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967232,  // skipmap
+    4294966784,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    6,  // num_field_entries
-    5,  // num_aux_entries
+    9,  // num_field_entries
+    7,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -865,6 +1621,20 @@ const ::_pbi::TcParseTable<3, 6, 5, 50, 2> Plan::_table_ = {
     // .skyproto.substrait.Version version = 6 [json_name = "version"];
     {::_pbi::TcParser::FastMtS1,
      {50, 1, 4, PROTOBUF_FIELD_OFFSET(Plan, _impl_.version_)}},
+    // repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+    {::_pbi::TcParser::FastMtR1,
+     {58, 63, 5, PROTOBUF_FIELD_OFFSET(Plan, _impl_.parameter_bindings_)}},
+    // repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+    {::_pbi::TcParser::FastMtR1,
+     {66, 63, 6, PROTOBUF_FIELD_OFFSET(Plan, _impl_.decompose_stats_)}},
+    // string plan_id = 9 [json_name = "planId"];
+    {::_pbi::TcParser::FastUS1,
+     {74, 63, 0, PROTOBUF_FIELD_OFFSET(Plan, _impl_.plan_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
@@ -887,16 +1657,28 @@ const ::_pbi::TcParseTable<3, 6, 5, 50, 2> Plan::_table_ = {
     // .skyproto.substrait.Version version = 6 [json_name = "version"];
     {PROTOBUF_FIELD_OFFSET(Plan, _impl_.version_), _Internal::kHasBitsOffset + 1, 4,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+    {PROTOBUF_FIELD_OFFSET(Plan, _impl_.parameter_bindings_), -1, 5,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+    {PROTOBUF_FIELD_OFFSET(Plan, _impl_.decompose_stats_), -1, 6,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // string plan_id = 9 [json_name = "planId"];
+    {PROTOBUF_FIELD_OFFSET(Plan, _impl_.plan_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::SimpleExtensionURI>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::SimpleExtensionDeclaration>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::PlanRel>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::AdvancedExtension>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Version>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::DynamicParameterBinding>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::DecomposeStats>()},
   }}, {{
-    "\27\0\0\0\0\22\0\0"
+    "\27\0\0\0\0\22\0\0\0\7\0\0\0\0\0\0"
     "skyproto.substrait.Plan"
     "expected_type_urls"
+    "plan_id"
   }},
 };
 
@@ -911,6 +1693,9 @@ PROTOBUF_NOINLINE void Plan::Clear() {
   _impl_.extensions_.Clear();
   _impl_.relations_.Clear();
   _impl_.expected_type_urls_.Clear();
+  _impl_.parameter_bindings_.Clear();
+  _impl_.decompose_stats_.Clear();
+  _impl_.plan_id_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
@@ -997,6 +1782,36 @@ PROTOBUF_NOINLINE void Plan::Clear() {
                 stream);
           }
 
+          // repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_parameter_bindings_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_parameter_bindings().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    7, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_decompose_stats_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_decompose_stats().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    8, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // string plan_id = 9 [json_name = "planId"];
+          if (!this_._internal_plan_id().empty()) {
+            const std::string& _s = this_._internal_plan_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.substrait.Plan.plan_id");
+            target = stream->WriteStringMaybeAliased(9, _s, target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1052,6 +1867,27 @@ PROTOBUF_NOINLINE void Plan::Clear() {
                     this_._internal_expected_type_urls().Get(i));
               }
             }
+            // repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+            {
+              total_size += 1UL * this_._internal_parameter_bindings_size();
+              for (const auto& msg : this_._internal_parameter_bindings()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+            // repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+            {
+              total_size += 1UL * this_._internal_decompose_stats_size();
+              for (const auto& msg : this_._internal_decompose_stats()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+           {
+            // string plan_id = 9 [json_name = "planId"];
+            if (!this_._internal_plan_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_plan_id());
+            }
           }
           cached_has_bits = this_._impl_._has_bits_[0];
           if (cached_has_bits & 0x00000003u) {
@@ -1086,6 +1922,13 @@ void Plan::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::pr
   _this->_internal_mutable_relations()->MergeFrom(
       from._internal_relations());
   _this->_internal_mutable_expected_type_urls()->MergeFrom(from._internal_expected_type_urls());
+  _this->_internal_mutable_parameter_bindings()->MergeFrom(
+      from._internal_parameter_bindings());
+  _this->_internal_mutable_decompose_stats()->MergeFrom(
+      from._internal_decompose_stats());
+  if (!from._internal_plan_id().empty()) {
+    _this->_internal_set_plan_id(from._internal_plan_id());
+  }
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
@@ -1121,12 +1964,17 @@ void Plan::CopyFrom(const Plan& from) {
 
 void Plan::InternalSwap(Plan* PROTOBUF_RESTRICT other) {
   using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.extension_uris_.InternalSwap(&other->_impl_.extension_uris_);
   _impl_.extensions_.InternalSwap(&other->_impl_.extensions_);
   _impl_.relations_.InternalSwap(&other->_impl_.relations_);
   _impl_.expected_type_urls_.InternalSwap(&other->_impl_.expected_type_urls_);
+  _impl_.parameter_bindings_.InternalSwap(&other->_impl_.parameter_bindings_);
+  _impl_.decompose_stats_.InternalSwap(&other->_impl_.decompose_stats_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.plan_id_, &other->_impl_.plan_id_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(Plan, _impl_.version_)
       + sizeof(Plan::_impl_.version_)
@@ -1734,6 +2582,297 @@ void Version::InternalSwap(Version* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata Version::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class DynamicParameterBinding::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<DynamicParameterBinding>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_._has_bits_);
+};
+
+void DynamicParameterBinding::clear_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.value_ != nullptr) _impl_.value_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+DynamicParameterBinding::DynamicParameterBinding(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.DynamicParameterBinding)
+}
+inline PROTOBUF_NDEBUG_INLINE DynamicParameterBinding::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::DynamicParameterBinding& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+DynamicParameterBinding::DynamicParameterBinding(
+    ::google::protobuf::Arena* arena,
+    const DynamicParameterBinding& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  DynamicParameterBinding* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.value_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal>(
+                              arena, *from._impl_.value_)
+                        : nullptr;
+  _impl_.parameter_anchor_ = from._impl_.parameter_anchor_;
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.DynamicParameterBinding)
+}
+inline PROTOBUF_NDEBUG_INLINE DynamicParameterBinding::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void DynamicParameterBinding::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, value_),
+           0,
+           offsetof(Impl_, parameter_anchor_) -
+               offsetof(Impl_, value_) +
+               sizeof(Impl_::parameter_anchor_));
+}
+DynamicParameterBinding::~DynamicParameterBinding() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.DynamicParameterBinding)
+  SharedDtor(*this);
+}
+inline void DynamicParameterBinding::SharedDtor(MessageLite& self) {
+  DynamicParameterBinding& this_ = static_cast<DynamicParameterBinding&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.value_;
+  this_._impl_.~Impl_();
+}
+
+inline void* DynamicParameterBinding::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) DynamicParameterBinding(arena);
+}
+constexpr auto DynamicParameterBinding::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(DynamicParameterBinding),
+                                            alignof(DynamicParameterBinding));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull DynamicParameterBinding::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_DynamicParameterBinding_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &DynamicParameterBinding::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<DynamicParameterBinding>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &DynamicParameterBinding::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<DynamicParameterBinding>(), &DynamicParameterBinding::ByteSizeLong,
+            &DynamicParameterBinding::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_._cached_size_),
+        false,
+    },
+    &DynamicParameterBinding::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* DynamicParameterBinding::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> DynamicParameterBinding::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::DynamicParameterBinding>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.value_)}},
+    // uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DynamicParameterBinding, _impl_.parameter_anchor_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.parameter_anchor_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+    {PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.parameter_anchor_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+    {PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.value_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void DynamicParameterBinding::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.DynamicParameterBinding)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.value_ != nullptr);
+    _impl_.value_->Clear();
+  }
+  _impl_.parameter_anchor_ = 0u;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* DynamicParameterBinding::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const DynamicParameterBinding& this_ = static_cast<const DynamicParameterBinding&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* DynamicParameterBinding::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const DynamicParameterBinding& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.DynamicParameterBinding)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+          if (this_._internal_parameter_anchor() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                1, this_._internal_parameter_anchor(), target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                2, *this_._impl_.value_, this_._impl_.value_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.DynamicParameterBinding)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t DynamicParameterBinding::ByteSizeLong(const MessageLite& base) {
+          const DynamicParameterBinding& this_ = static_cast<const DynamicParameterBinding&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t DynamicParameterBinding::ByteSizeLong() const {
+          const DynamicParameterBinding& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.DynamicParameterBinding)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_);
+            }
+          }
+           {
+            // uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+            if (this_._internal_parameter_anchor() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_parameter_anchor());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void DynamicParameterBinding::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<DynamicParameterBinding*>(&to_msg);
+  auto& from = static_cast<const DynamicParameterBinding&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.DynamicParameterBinding)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.value_ != nullptr);
+    if (_this->_impl_.value_ == nullptr) {
+      _this->_impl_.value_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal>(arena, *from._impl_.value_);
+    } else {
+      _this->_impl_.value_->MergeFrom(*from._impl_.value_);
+    }
+  }
+  if (from._internal_parameter_anchor() != 0) {
+    _this->_impl_.parameter_anchor_ = from._impl_.parameter_anchor_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DynamicParameterBinding::CopyFrom(const DynamicParameterBinding& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.DynamicParameterBinding)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void DynamicParameterBinding::InternalSwap(DynamicParameterBinding* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.parameter_anchor_)
+      + sizeof(DynamicParameterBinding::_impl_.parameter_anchor_)
+      - PROTOBUF_FIELD_OFFSET(DynamicParameterBinding, _impl_.value_)>(
+          reinterpret_cast<char*>(&_impl_.value_),
+          reinterpret_cast<char*>(&other->_impl_.value_));
+}
+
+::google::protobuf::Metadata DynamicParameterBinding::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

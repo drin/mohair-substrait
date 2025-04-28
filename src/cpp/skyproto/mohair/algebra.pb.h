@@ -60,9 +60,6 @@ namespace mohair {
 class ErrRel;
 struct ErrRelDefaultTypeInternal;
 extern ErrRelDefaultTypeInternal _ErrRel_default_instance_;
-class ExecutionStats;
-struct ExecutionStatsDefaultTypeInternal;
-extern ExecutionStatsDefaultTypeInternal _ExecutionStats_default_instance_;
 class QueryRel;
 struct QueryRelDefaultTypeInternal;
 extern QueryRelDefaultTypeInternal _QueryRel_default_instance_;
@@ -202,7 +199,7 @@ class SkyPartitionRel_SliceSelection_SliceList final : public ::google::protobuf
     return reinterpret_cast<const SkyPartitionRel_SliceSelection_SliceList*>(
         &_SkyPartitionRel_SliceSelection_SliceList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(SkyPartitionRel_SliceSelection_SliceList& a, SkyPartitionRel_SliceSelection_SliceList& b) { a.Swap(&b); }
   inline void Swap(SkyPartitionRel_SliceSelection_SliceList* other) {
     if (other == this) return;
@@ -401,7 +398,7 @@ class SkyPartitionRel_SliceSelection_SliceInterval final : public ::google::prot
     return reinterpret_cast<const SkyPartitionRel_SliceSelection_SliceInterval*>(
         &_SkyPartitionRel_SliceSelection_SliceInterval_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(SkyPartitionRel_SliceSelection_SliceInterval& a, SkyPartitionRel_SliceSelection_SliceInterval& b) { a.Swap(&b); }
   inline void Swap(SkyPartitionRel_SliceSelection_SliceInterval* other) {
     if (other == this) return;
@@ -544,6 +541,196 @@ class SkyPartitionRel_SliceSelection_SliceInterval final : public ::google::prot
 };
 // -------------------------------------------------------------------
 
+class SkyLakeRel final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.mohair.SkyLakeRel) */ {
+ public:
+  inline SkyLakeRel() : SkyLakeRel(nullptr) {}
+  ~SkyLakeRel() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SkyLakeRel* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SkyLakeRel));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SkyLakeRel(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SkyLakeRel(const SkyLakeRel& from) : SkyLakeRel(nullptr, from) {}
+  inline SkyLakeRel(SkyLakeRel&& from) noexcept
+      : SkyLakeRel(nullptr, std::move(from)) {}
+  inline SkyLakeRel& operator=(const SkyLakeRel& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SkyLakeRel& operator=(SkyLakeRel&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SkyLakeRel& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SkyLakeRel* internal_default_instance() {
+    return reinterpret_cast<const SkyLakeRel*>(
+        &_SkyLakeRel_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 11;
+  friend void swap(SkyLakeRel& a, SkyLakeRel& b) { a.Swap(&b); }
+  inline void Swap(SkyLakeRel* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SkyLakeRel* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SkyLakeRel* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SkyLakeRel>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SkyLakeRel& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SkyLakeRel& from) { SkyLakeRel::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SkyLakeRel* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.mohair.SkyLakeRel"; }
+
+ protected:
+  explicit SkyLakeRel(::google::protobuf::Arena* arena);
+  SkyLakeRel(::google::protobuf::Arena* arena, const SkyLakeRel& from);
+  SkyLakeRel(::google::protobuf::Arena* arena, SkyLakeRel&& from) noexcept
+      : SkyLakeRel(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kContextIdFieldNumber = 1,
+  };
+  // uint64 context_id = 1 [json_name = "contextId"];
+  void clear_context_id() ;
+  ::uint64_t context_id() const;
+  void set_context_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_context_id() const;
+  void _internal_set_context_id(::uint64_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.mohair.SkyLakeRel)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SkyLakeRel& from_msg);
+    ::uint64_t context_id_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fmohair_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class QueryRel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.mohair.QueryRel) */ {
  public:
@@ -603,7 +790,7 @@ class QueryRel final : public ::google::protobuf::Message
     return reinterpret_cast<const QueryRel*>(
         &_QueryRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(QueryRel& a, QueryRel& b) { a.Swap(&b); }
   inline void Swap(QueryRel* other) {
     if (other == this) return;
@@ -740,198 +927,6 @@ class QueryRel final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class ExecutionStats final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:skyproto.mohair.ExecutionStats) */ {
- public:
-  inline ExecutionStats() : ExecutionStats(nullptr) {}
-  ~ExecutionStats() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(ExecutionStats* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(ExecutionStats));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR ExecutionStats(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline ExecutionStats(const ExecutionStats& from) : ExecutionStats(nullptr, from) {}
-  inline ExecutionStats(ExecutionStats&& from) noexcept
-      : ExecutionStats(nullptr, std::move(from)) {}
-  inline ExecutionStats& operator=(const ExecutionStats& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ExecutionStats& operator=(ExecutionStats&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ExecutionStats& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ExecutionStats* internal_default_instance() {
-    return reinterpret_cast<const ExecutionStats*>(
-        &_ExecutionStats_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 0;
-  friend void swap(ExecutionStats& a, ExecutionStats& b) { a.Swap(&b); }
-  inline void Swap(ExecutionStats* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ExecutionStats* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ExecutionStats* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<ExecutionStats>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const ExecutionStats& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const ExecutionStats& from) { ExecutionStats::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(ExecutionStats* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "skyproto.mohair.ExecutionStats"; }
-
- protected:
-  explicit ExecutionStats(::google::protobuf::Arena* arena);
-  ExecutionStats(::google::protobuf::Arena* arena, const ExecutionStats& from);
-  ExecutionStats(::google::protobuf::Arena* arena, ExecutionStats&& from) noexcept
-      : ExecutionStats(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kRuntimeFieldNumber = 1,
-  };
-  // optional double runtime = 1 [json_name = "runtime"];
-  bool has_runtime() const;
-  void clear_runtime() ;
-  double runtime() const;
-  void set_runtime(double value);
-
-  private:
-  double _internal_runtime() const;
-  void _internal_set_runtime(double value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:skyproto.mohair.ExecutionStats)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const ExecutionStats& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    double runtime_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_skyproto_2fmohair_2falgebra_2eproto;
-};
-// -------------------------------------------------------------------
-
 class ErrRel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.mohair.ErrRel) */ {
  public:
@@ -991,7 +986,7 @@ class ErrRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ErrRel*>(
         &_ErrRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(ErrRel& a, ErrRel& b) { a.Swap(&b); }
   inline void Swap(ErrRel* other) {
     if (other == this) return;
@@ -1222,7 +1217,7 @@ class SkyPartitionRel_SliceSelection final : public ::google::protobuf::Message
     return reinterpret_cast<const SkyPartitionRel_SliceSelection*>(
         &_SkyPartitionRel_SliceSelection_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(SkyPartitionRel_SliceSelection& a, SkyPartitionRel_SliceSelection& b) { a.Swap(&b); }
   inline void Swap(SkyPartitionRel_SliceSelection* other) {
     if (other == this) return;
@@ -1396,214 +1391,6 @@ class SkyPartitionRel_SliceSelection final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class SkyLakeRel final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:skyproto.mohair.SkyLakeRel) */ {
- public:
-  inline SkyLakeRel() : SkyLakeRel(nullptr) {}
-  ~SkyLakeRel() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(SkyLakeRel* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(SkyLakeRel));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR SkyLakeRel(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline SkyLakeRel(const SkyLakeRel& from) : SkyLakeRel(nullptr, from) {}
-  inline SkyLakeRel(SkyLakeRel&& from) noexcept
-      : SkyLakeRel(nullptr, std::move(from)) {}
-  inline SkyLakeRel& operator=(const SkyLakeRel& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline SkyLakeRel& operator=(SkyLakeRel&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const SkyLakeRel& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const SkyLakeRel* internal_default_instance() {
-    return reinterpret_cast<const SkyLakeRel*>(
-        &_SkyLakeRel_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 12;
-  friend void swap(SkyLakeRel& a, SkyLakeRel& b) { a.Swap(&b); }
-  inline void Swap(SkyLakeRel* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(SkyLakeRel* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  SkyLakeRel* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<SkyLakeRel>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const SkyLakeRel& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const SkyLakeRel& from) { SkyLakeRel::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(SkyLakeRel* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "skyproto.mohair.SkyLakeRel"; }
-
- protected:
-  explicit SkyLakeRel(::google::protobuf::Arena* arena);
-  SkyLakeRel(::google::protobuf::Arena* arena, const SkyLakeRel& from);
-  SkyLakeRel(::google::protobuf::Arena* arena, SkyLakeRel&& from) noexcept
-      : SkyLakeRel(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kExecstatsFieldNumber = 2,
-    kContextIdFieldNumber = 1,
-  };
-  // optional .skyproto.mohair.ExecutionStats execstats = 2 [json_name = "execstats"];
-  bool has_execstats() const;
-  void clear_execstats() ;
-  const ::skyproto::mohair::ExecutionStats& execstats() const;
-  PROTOBUF_NODISCARD ::skyproto::mohair::ExecutionStats* release_execstats();
-  ::skyproto::mohair::ExecutionStats* mutable_execstats();
-  void set_allocated_execstats(::skyproto::mohair::ExecutionStats* value);
-  void unsafe_arena_set_allocated_execstats(::skyproto::mohair::ExecutionStats* value);
-  ::skyproto::mohair::ExecutionStats* unsafe_arena_release_execstats();
-
-  private:
-  const ::skyproto::mohair::ExecutionStats& _internal_execstats() const;
-  ::skyproto::mohair::ExecutionStats* _internal_mutable_execstats();
-
-  public:
-  // uint64 context_id = 1 [json_name = "contextId"];
-  void clear_context_id() ;
-  ::uint64_t context_id() const;
-  void set_context_id(::uint64_t value);
-
-  private:
-  ::uint64_t _internal_context_id() const;
-  void _internal_set_context_id(::uint64_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:skyproto.mohair.SkyLakeRel)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 1,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const SkyLakeRel& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::skyproto::mohair::ExecutionStats* execstats_;
-    ::uint64_t context_id_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_skyproto_2fmohair_2falgebra_2eproto;
-};
-// -------------------------------------------------------------------
-
 class SkySliceRel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.mohair.SkySliceRel) */ {
  public:
@@ -1663,7 +1450,7 @@ class SkySliceRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SkySliceRel*>(
         &_SkySliceRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 9;
   friend void swap(SkySliceRel& a, SkySliceRel& b) { a.Swap(&b); }
   inline void Swap(SkySliceRel* other) {
     if (other == this) return;
@@ -1952,7 +1739,7 @@ class SkyRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SkyRel*>(
         &_SkyRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(SkyRel& a, SkyRel& b) { a.Swap(&b); }
   inline void Swap(SkyRel* other) {
     if (other == this) return;
@@ -2184,7 +1971,7 @@ class SkyPartitionRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SkyPartitionRel*>(
         &_SkyPartitionRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(SkyPartitionRel& a, SkyPartitionRel& b) { a.Swap(&b); }
   inline void Swap(SkyPartitionRel* other) {
     if (other == this) return;
@@ -2475,7 +2262,7 @@ class SkyResultRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SkyResultRel*>(
         &_SkyResultRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 10;
   friend void swap(SkyResultRel& a, SkyResultRel& b) { a.Swap(&b); }
   inline void Swap(SkyResultRel* other) {
     if (other == this) return;
@@ -2563,10 +2350,9 @@ class SkyResultRel final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kResultNameFieldNumber = 2,
-    kServiceLocationFieldNumber = 3,
+    kLocationFieldNumber = 3,
     kCommonFieldNumber = 4,
     kSchemaFieldNumber = 5,
-    kExecstatsFieldNumber = 6,
     kContextIdFieldNumber = 1,
   };
   // string result_name = 2 [json_name = "resultName"];
@@ -2585,20 +2371,20 @@ class SkyResultRel final : public ::google::protobuf::Message
   std::string* _internal_mutable_result_name();
 
   public:
-  // string service_location = 3 [json_name = "serviceLocation"];
-  void clear_service_location() ;
-  const std::string& service_location() const;
+  // string location = 3 [json_name = "location"];
+  void clear_location() ;
+  const std::string& location() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_service_location(Arg_&& arg, Args_... args);
-  std::string* mutable_service_location();
-  PROTOBUF_NODISCARD std::string* release_service_location();
-  void set_allocated_service_location(std::string* value);
+  void set_location(Arg_&& arg, Args_... args);
+  std::string* mutable_location();
+  PROTOBUF_NODISCARD std::string* release_location();
+  void set_allocated_location(std::string* value);
 
   private:
-  const std::string& _internal_service_location() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_service_location(
+  const std::string& _internal_location() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_location(
       const std::string& value);
-  std::string* _internal_mutable_service_location();
+  std::string* _internal_mutable_location();
 
   public:
   // .skyproto.substrait.RelCommon common = 4 [json_name = "common"];
@@ -2631,21 +2417,6 @@ class SkyResultRel final : public ::google::protobuf::Message
   ::skyproto::substrait::NamedStruct* _internal_mutable_schema();
 
   public:
-  // optional .skyproto.mohair.ExecutionStats execstats = 6 [json_name = "execstats"];
-  bool has_execstats() const;
-  void clear_execstats() ;
-  const ::skyproto::mohair::ExecutionStats& execstats() const;
-  PROTOBUF_NODISCARD ::skyproto::mohair::ExecutionStats* release_execstats();
-  ::skyproto::mohair::ExecutionStats* mutable_execstats();
-  void set_allocated_execstats(::skyproto::mohair::ExecutionStats* value);
-  void unsafe_arena_set_allocated_execstats(::skyproto::mohair::ExecutionStats* value);
-  ::skyproto::mohair::ExecutionStats* unsafe_arena_release_execstats();
-
-  private:
-  const ::skyproto::mohair::ExecutionStats& _internal_execstats() const;
-  ::skyproto::mohair::ExecutionStats* _internal_mutable_execstats();
-
-  public:
   // uint64 context_id = 1 [json_name = "contextId"];
   void clear_context_id() ;
   ::uint64_t context_id() const;
@@ -2661,8 +2432,8 @@ class SkyResultRel final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 6, 3,
-      64, 2>
+      3, 5, 2,
+      56, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -2682,10 +2453,9 @@ class SkyResultRel final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr result_name_;
-    ::google::protobuf::internal::ArenaStringPtr service_location_;
+    ::google::protobuf::internal::ArenaStringPtr location_;
     ::skyproto::substrait::RelCommon* common_;
     ::skyproto::substrait::NamedStruct* schema_;
-    ::skyproto::mohair::ExecutionStats* execstats_;
     ::uint64_t context_id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -2753,7 +2523,7 @@ class SuperPlan final : public ::google::protobuf::Message
     return reinterpret_cast<const SuperPlan*>(
         &_SuperPlan_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 0;
   friend void swap(SuperPlan& a, SuperPlan& b) { a.Swap(&b); }
   inline void Swap(SuperPlan* other) {
     if (other == this) return;
@@ -2973,7 +2743,7 @@ class SubPlan final : public ::google::protobuf::Message
     return reinterpret_cast<const SubPlan*>(
         &_SubPlan_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 1;
   friend void swap(SubPlan& a, SubPlan& b) { a.Swap(&b); }
   inline void Swap(SubPlan* other) {
     if (other == this) return;
@@ -3133,38 +2903,6 @@ class SubPlan final : public ::google::protobuf::Message
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// ExecutionStats
-
-// optional double runtime = 1 [json_name = "runtime"];
-inline bool ExecutionStats::has_runtime() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void ExecutionStats::clear_runtime() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.runtime_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline double ExecutionStats::runtime() const {
-  // @@protoc_insertion_point(field_get:skyproto.mohair.ExecutionStats.runtime)
-  return _internal_runtime();
-}
-inline void ExecutionStats::set_runtime(double value) {
-  _internal_set_runtime(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:skyproto.mohair.ExecutionStats.runtime)
-}
-inline double ExecutionStats::_internal_runtime() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.runtime_;
-}
-inline void ExecutionStats::_internal_set_runtime(double value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.runtime_ = value;
-}
-
 // -------------------------------------------------------------------
 
 // SuperPlan
@@ -4727,52 +4465,52 @@ inline void SkyResultRel::set_allocated_result_name(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.result_name)
 }
 
-// string service_location = 3 [json_name = "serviceLocation"];
-inline void SkyResultRel::clear_service_location() {
+// string location = 3 [json_name = "location"];
+inline void SkyResultRel::clear_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.service_location_.ClearToEmpty();
+  _impl_.location_.ClearToEmpty();
 }
-inline const std::string& SkyResultRel::service_location() const
+inline const std::string& SkyResultRel::location() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyResultRel.service_location)
-  return _internal_service_location();
+  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyResultRel.location)
+  return _internal_location();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SkyResultRel::set_service_location(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void SkyResultRel::set_location(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.service_location_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:skyproto.mohair.SkyResultRel.service_location)
+  _impl_.location_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.mohair.SkyResultRel.location)
 }
-inline std::string* SkyResultRel::mutable_service_location() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_service_location();
-  // @@protoc_insertion_point(field_mutable:skyproto.mohair.SkyResultRel.service_location)
+inline std::string* SkyResultRel::mutable_location() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_location();
+  // @@protoc_insertion_point(field_mutable:skyproto.mohair.SkyResultRel.location)
   return _s;
 }
-inline const std::string& SkyResultRel::_internal_service_location() const {
+inline const std::string& SkyResultRel::_internal_location() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.service_location_.Get();
+  return _impl_.location_.Get();
 }
-inline void SkyResultRel::_internal_set_service_location(const std::string& value) {
+inline void SkyResultRel::_internal_set_location(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.service_location_.Set(value, GetArena());
+  _impl_.location_.Set(value, GetArena());
 }
-inline std::string* SkyResultRel::_internal_mutable_service_location() {
+inline std::string* SkyResultRel::_internal_mutable_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.service_location_.Mutable( GetArena());
+  return _impl_.location_.Mutable( GetArena());
 }
-inline std::string* SkyResultRel::release_service_location() {
+inline std::string* SkyResultRel::release_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.mohair.SkyResultRel.service_location)
-  return _impl_.service_location_.Release();
+  // @@protoc_insertion_point(field_release:skyproto.mohair.SkyResultRel.location)
+  return _impl_.location_.Release();
 }
-inline void SkyResultRel::set_allocated_service_location(std::string* value) {
+inline void SkyResultRel::set_allocated_location(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.service_location_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.service_location_.IsDefault()) {
-    _impl_.service_location_.Set("", GetArena());
+  _impl_.location_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.location_.IsDefault()) {
+    _impl_.location_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.service_location)
+  // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.location)
 }
 
 // .skyproto.substrait.RelCommon common = 4 [json_name = "common"];
@@ -4957,102 +4695,6 @@ inline void SkyResultRel::set_allocated_schema(::skyproto::substrait::NamedStruc
   // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.schema)
 }
 
-// optional .skyproto.mohair.ExecutionStats execstats = 6 [json_name = "execstats"];
-inline bool SkyResultRel::has_execstats() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.execstats_ != nullptr);
-  return value;
-}
-inline void SkyResultRel::clear_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.execstats_ != nullptr) _impl_.execstats_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline const ::skyproto::mohair::ExecutionStats& SkyResultRel::_internal_execstats() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::skyproto::mohair::ExecutionStats* p = _impl_.execstats_;
-  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::mohair::ExecutionStats&>(::skyproto::mohair::_ExecutionStats_default_instance_);
-}
-inline const ::skyproto::mohair::ExecutionStats& SkyResultRel::execstats() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyResultRel.execstats)
-  return _internal_execstats();
-}
-inline void SkyResultRel::unsafe_arena_set_allocated_execstats(::skyproto::mohair::ExecutionStats* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.execstats_);
-  }
-  _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.mohair.SkyResultRel.execstats)
-}
-inline ::skyproto::mohair::ExecutionStats* SkyResultRel::release_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  ::skyproto::mohair::ExecutionStats* released = _impl_.execstats_;
-  _impl_.execstats_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyResultRel::unsafe_arena_release_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.mohair.SkyResultRel.execstats)
-
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  ::skyproto::mohair::ExecutionStats* temp = _impl_.execstats_;
-  _impl_.execstats_ = nullptr;
-  return temp;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyResultRel::_internal_mutable_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.execstats_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::mohair::ExecutionStats>(GetArena());
-    _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(p);
-  }
-  return _impl_.execstats_;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyResultRel::mutable_execstats() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  ::skyproto::mohair::ExecutionStats* _msg = _internal_mutable_execstats();
-  // @@protoc_insertion_point(field_mutable:skyproto.mohair.SkyResultRel.execstats)
-  return _msg;
-}
-inline void SkyResultRel::set_allocated_execstats(::skyproto::mohair::ExecutionStats* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete (_impl_.execstats_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-
-  _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(value);
-  // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyResultRel.execstats)
-}
-
 // -------------------------------------------------------------------
 
 // SkyLakeRel
@@ -5077,102 +4719,6 @@ inline ::uint64_t SkyLakeRel::_internal_context_id() const {
 inline void SkyLakeRel::_internal_set_context_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.context_id_ = value;
-}
-
-// optional .skyproto.mohair.ExecutionStats execstats = 2 [json_name = "execstats"];
-inline bool SkyLakeRel::has_execstats() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.execstats_ != nullptr);
-  return value;
-}
-inline void SkyLakeRel::clear_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.execstats_ != nullptr) _impl_.execstats_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const ::skyproto::mohair::ExecutionStats& SkyLakeRel::_internal_execstats() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::skyproto::mohair::ExecutionStats* p = _impl_.execstats_;
-  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::mohair::ExecutionStats&>(::skyproto::mohair::_ExecutionStats_default_instance_);
-}
-inline const ::skyproto::mohair::ExecutionStats& SkyLakeRel::execstats() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:skyproto.mohair.SkyLakeRel.execstats)
-  return _internal_execstats();
-}
-inline void SkyLakeRel::unsafe_arena_set_allocated_execstats(::skyproto::mohair::ExecutionStats* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.execstats_);
-  }
-  _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.mohair.SkyLakeRel.execstats)
-}
-inline ::skyproto::mohair::ExecutionStats* SkyLakeRel::release_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::skyproto::mohair::ExecutionStats* released = _impl_.execstats_;
-  _impl_.execstats_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyLakeRel::unsafe_arena_release_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:skyproto.mohair.SkyLakeRel.execstats)
-
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  ::skyproto::mohair::ExecutionStats* temp = _impl_.execstats_;
-  _impl_.execstats_ = nullptr;
-  return temp;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyLakeRel::_internal_mutable_execstats() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.execstats_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::mohair::ExecutionStats>(GetArena());
-    _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(p);
-  }
-  return _impl_.execstats_;
-}
-inline ::skyproto::mohair::ExecutionStats* SkyLakeRel::mutable_execstats() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  ::skyproto::mohair::ExecutionStats* _msg = _internal_mutable_execstats();
-  // @@protoc_insertion_point(field_mutable:skyproto.mohair.SkyLakeRel.execstats)
-  return _msg;
-}
-inline void SkyLakeRel::set_allocated_execstats(::skyproto::mohair::ExecutionStats* value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete (_impl_.execstats_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-
-  _impl_.execstats_ = reinterpret_cast<::skyproto::mohair::ExecutionStats*>(value);
-  // @@protoc_insertion_point(field_set_allocated:skyproto.mohair.SkyLakeRel.execstats)
 }
 
 #ifdef __GNUC__

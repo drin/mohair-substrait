@@ -115,6 +115,9 @@ extern Type_MapDefaultTypeInternal _Type_Map_default_instance_;
 class Type_Parameter;
 struct Type_ParameterDefaultTypeInternal;
 extern Type_ParameterDefaultTypeInternal _Type_Parameter_default_instance_;
+class Type_PrecisionTime;
+struct Type_PrecisionTimeDefaultTypeInternal;
+extern Type_PrecisionTimeDefaultTypeInternal _Type_PrecisionTime_default_instance_;
 class Type_PrecisionTimestamp;
 struct Type_PrecisionTimestampDefaultTypeInternal;
 extern Type_PrecisionTimestampDefaultTypeInternal _Type_PrecisionTimestamp_default_instance_;
@@ -1477,7 +1480,7 @@ class Type_PrecisionTimestampTZ final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_PrecisionTimestampTZ*>(
         &_Type_PrecisionTimestampTZ_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 22;
+  static constexpr int kIndexInFileMessages = 23;
   friend void swap(Type_PrecisionTimestampTZ& a, Type_PrecisionTimestampTZ& b) { a.Swap(&b); }
   inline void Swap(Type_PrecisionTimestampTZ* other) {
     if (other == this) return;
@@ -1691,7 +1694,7 @@ class Type_PrecisionTimestamp final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_PrecisionTimestamp*>(
         &_Type_PrecisionTimestamp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 21;
+  static constexpr int kIndexInFileMessages = 22;
   friend void swap(Type_PrecisionTimestamp& a, Type_PrecisionTimestamp& b) { a.Swap(&b); }
   inline void Swap(Type_PrecisionTimestamp* other) {
     if (other == this) return;
@@ -1835,6 +1838,220 @@ class Type_PrecisionTimestamp final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const Type_PrecisionTimestamp& from_msg);
+    ::int32_t precision_;
+    ::uint32_t type_variation_reference_;
+    int nullability_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2ftype_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Type_PrecisionTime final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.Type.PrecisionTime) */ {
+ public:
+  inline Type_PrecisionTime() : Type_PrecisionTime(nullptr) {}
+  ~Type_PrecisionTime() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(Type_PrecisionTime* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(Type_PrecisionTime));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR Type_PrecisionTime(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline Type_PrecisionTime(const Type_PrecisionTime& from) : Type_PrecisionTime(nullptr, from) {}
+  inline Type_PrecisionTime(Type_PrecisionTime&& from) noexcept
+      : Type_PrecisionTime(nullptr, std::move(from)) {}
+  inline Type_PrecisionTime& operator=(const Type_PrecisionTime& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Type_PrecisionTime& operator=(Type_PrecisionTime&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Type_PrecisionTime& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Type_PrecisionTime* internal_default_instance() {
+    return reinterpret_cast<const Type_PrecisionTime*>(
+        &_Type_PrecisionTime_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 21;
+  friend void swap(Type_PrecisionTime& a, Type_PrecisionTime& b) { a.Swap(&b); }
+  inline void Swap(Type_PrecisionTime* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Type_PrecisionTime* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Type_PrecisionTime* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<Type_PrecisionTime>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Type_PrecisionTime& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const Type_PrecisionTime& from) { Type_PrecisionTime::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(Type_PrecisionTime* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.Type.PrecisionTime"; }
+
+ protected:
+  explicit Type_PrecisionTime(::google::protobuf::Arena* arena);
+  Type_PrecisionTime(::google::protobuf::Arena* arena, const Type_PrecisionTime& from);
+  Type_PrecisionTime(::google::protobuf::Arena* arena, Type_PrecisionTime&& from) noexcept
+      : Type_PrecisionTime(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPrecisionFieldNumber = 1,
+    kTypeVariationReferenceFieldNumber = 2,
+    kNullabilityFieldNumber = 3,
+  };
+  // int32 precision = 1 [json_name = "precision"];
+  void clear_precision() ;
+  ::int32_t precision() const;
+  void set_precision(::int32_t value);
+
+  private:
+  ::int32_t _internal_precision() const;
+  void _internal_set_precision(::int32_t value);
+
+  public:
+  // uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+  void clear_type_variation_reference() ;
+  ::uint32_t type_variation_reference() const;
+  void set_type_variation_reference(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_type_variation_reference() const;
+  void _internal_set_type_variation_reference(::uint32_t value);
+
+  public:
+  // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+  void clear_nullability() ;
+  ::skyproto::substrait::Type_Nullability nullability() const;
+  void set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  private:
+  ::skyproto::substrait::Type_Nullability _internal_nullability() const;
+  void _internal_set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.Type.PrecisionTime)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const Type_PrecisionTime& from_msg);
     ::int32_t precision_;
     ::uint32_t type_variation_reference_;
     int nullability_;
@@ -5027,6 +5244,7 @@ class Type final : public ::google::protobuf::Message
     kVarchar = 22,
     kFixedBinary = 23,
     kDecimal = 24,
+    kPrecisionTime = 36,
     kPrecisionTimestamp = 33,
     kPrecisionTimestampTz = 34,
     kStruct = 25,
@@ -5040,7 +5258,7 @@ class Type final : public ::google::protobuf::Message
     return reinterpret_cast<const Type*>(
         &_Type_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 28;
+  static constexpr int kIndexInFileMessages = 29;
   friend void swap(Type& a, Type& b) { a.Swap(&b); }
   inline void Swap(Type* other) {
     if (other == this) return;
@@ -5145,6 +5363,7 @@ class Type final : public ::google::protobuf::Message
   using VarChar = Type_VarChar;
   using FixedBinary = Type_FixedBinary;
   using Decimal = Type_Decimal;
+  using PrecisionTime = Type_PrecisionTime;
   using PrecisionTimestamp = Type_PrecisionTimestamp;
   using PrecisionTimestampTZ = Type_PrecisionTimestampTZ;
   using Struct = Type_Struct;
@@ -5196,6 +5415,7 @@ class Type final : public ::google::protobuf::Message
     kVarcharFieldNumber = 22,
     kFixedBinaryFieldNumber = 23,
     kDecimalFieldNumber = 24,
+    kPrecisionTimeFieldNumber = 36,
     kPrecisionTimestampFieldNumber = 33,
     kPrecisionTimestampTzFieldNumber = 34,
     kStructFieldNumber = 25,
@@ -5603,6 +5823,25 @@ class Type final : public ::google::protobuf::Message
   ::skyproto::substrait::Type_Decimal* _internal_mutable_decimal();
 
   public:
+  // .skyproto.substrait.Type.PrecisionTime precision_time = 36 [json_name = "precisionTime"];
+  bool has_precision_time() const;
+  private:
+  bool _internal_has_precision_time() const;
+
+  public:
+  void clear_precision_time() ;
+  const ::skyproto::substrait::Type_PrecisionTime& precision_time() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::Type_PrecisionTime* release_precision_time();
+  ::skyproto::substrait::Type_PrecisionTime* mutable_precision_time();
+  void set_allocated_precision_time(::skyproto::substrait::Type_PrecisionTime* value);
+  void unsafe_arena_set_allocated_precision_time(::skyproto::substrait::Type_PrecisionTime* value);
+  ::skyproto::substrait::Type_PrecisionTime* unsafe_arena_release_precision_time();
+
+  private:
+  const ::skyproto::substrait::Type_PrecisionTime& _internal_precision_time() const;
+  ::skyproto::substrait::Type_PrecisionTime* _internal_mutable_precision_time();
+
+  public:
   // .skyproto.substrait.Type.PrecisionTimestamp precision_timestamp = 33 [json_name = "precisionTimestamp"];
   bool has_precision_timestamp() const;
   private:
@@ -5754,6 +5993,7 @@ class Type final : public ::google::protobuf::Message
   void set_has_varchar();
   void set_has_fixed_binary();
   void set_has_decimal();
+  void set_has_precision_time();
   void set_has_precision_timestamp();
   void set_has_precision_timestamp_tz();
   void set_has_struct_();
@@ -5765,7 +6005,7 @@ class Type final : public ::google::protobuf::Message
   inline void clear_has_kind();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 28, 27,
+      0, 29, 28,
       0, 7>
       _table_;
 
@@ -5807,6 +6047,7 @@ class Type final : public ::google::protobuf::Message
       ::skyproto::substrait::Type_VarChar* varchar_;
       ::skyproto::substrait::Type_FixedBinary* fixed_binary_;
       ::skyproto::substrait::Type_Decimal* decimal_;
+      ::skyproto::substrait::Type_PrecisionTime* precision_time_;
       ::skyproto::substrait::Type_PrecisionTimestamp* precision_timestamp_;
       ::skyproto::substrait::Type_PrecisionTimestampTZ* precision_timestamp_tz_;
       ::skyproto::substrait::Type_Struct* struct__;
@@ -5883,7 +6124,7 @@ class Type_List final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_List*>(
         &_Type_List_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 24;
+  static constexpr int kIndexInFileMessages = 25;
   friend void swap(Type_List& a, Type_List& b) { a.Swap(&b); }
   inline void Swap(Type_List* other) {
     if (other == this) return;
@@ -6103,7 +6344,7 @@ class Type_Map final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_Map*>(
         &_Type_Map_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 25;
+  static constexpr int kIndexInFileMessages = 26;
   friend void swap(Type_Map& a, Type_Map& b) { a.Swap(&b); }
   inline void Swap(Type_Map* other) {
     if (other == this) return;
@@ -6349,7 +6590,7 @@ class Type_Parameter final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_Parameter*>(
         &_Type_Parameter_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 27;
+  static constexpr int kIndexInFileMessages = 28;
   friend void swap(Type_Parameter& a, Type_Parameter& b) { a.Swap(&b); }
   inline void Swap(Type_Parameter* other) {
     if (other == this) return;
@@ -6648,7 +6889,7 @@ class Type_Struct final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_Struct*>(
         &_Type_Struct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 23;
+  static constexpr int kIndexInFileMessages = 24;
   friend void swap(Type_Struct& a, Type_Struct& b) { a.Swap(&b); }
   inline void Swap(Type_Struct* other) {
     if (other == this) return;
@@ -6869,7 +7110,7 @@ class Type_UserDefined final : public ::google::protobuf::Message
     return reinterpret_cast<const Type_UserDefined*>(
         &_Type_UserDefined_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 26;
+  static constexpr int kIndexInFileMessages = 27;
   friend void swap(Type_UserDefined& a, Type_UserDefined& b) { a.Swap(&b); }
   inline void Swap(Type_UserDefined* other) {
     if (other == this) return;
@@ -7102,7 +7343,7 @@ class NamedStruct final : public ::google::protobuf::Message
     return reinterpret_cast<const NamedStruct*>(
         &_NamedStruct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 29;
+  static constexpr int kIndexInFileMessages = 30;
   friend void swap(NamedStruct& a, NamedStruct& b) { a.Swap(&b); }
   inline void Swap(NamedStruct* other) {
     if (other == this) return;
@@ -8438,6 +8679,76 @@ inline ::skyproto::substrait::Type_Nullability Type_Decimal::_internal_nullabili
   return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
 }
 inline void Type_Decimal::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// Type_PrecisionTime
+
+// int32 precision = 1 [json_name = "precision"];
+inline void Type_PrecisionTime::clear_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.precision_ = 0;
+}
+inline ::int32_t Type_PrecisionTime::precision() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Type.PrecisionTime.precision)
+  return _internal_precision();
+}
+inline void Type_PrecisionTime::set_precision(::int32_t value) {
+  _internal_set_precision(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Type.PrecisionTime.precision)
+}
+inline ::int32_t Type_PrecisionTime::_internal_precision() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.precision_;
+}
+inline void Type_PrecisionTime::_internal_set_precision(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.precision_ = value;
+}
+
+// uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+inline void Type_PrecisionTime::clear_type_variation_reference() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_variation_reference_ = 0u;
+}
+inline ::uint32_t Type_PrecisionTime::type_variation_reference() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Type.PrecisionTime.type_variation_reference)
+  return _internal_type_variation_reference();
+}
+inline void Type_PrecisionTime::set_type_variation_reference(::uint32_t value) {
+  _internal_set_type_variation_reference(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Type.PrecisionTime.type_variation_reference)
+}
+inline ::uint32_t Type_PrecisionTime::_internal_type_variation_reference() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.type_variation_reference_;
+}
+inline void Type_PrecisionTime::_internal_set_type_variation_reference(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_variation_reference_ = value;
+}
+
+// .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+inline void Type_PrecisionTime::clear_nullability() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = 0;
+}
+inline ::skyproto::substrait::Type_Nullability Type_PrecisionTime::nullability() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Type.PrecisionTime.nullability)
+  return _internal_nullability();
+}
+inline void Type_PrecisionTime::set_nullability(::skyproto::substrait::Type_Nullability value) {
+  _internal_set_nullability(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Type.PrecisionTime.nullability)
+}
+inline ::skyproto::substrait::Type_Nullability Type_PrecisionTime::_internal_nullability() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
+}
+inline void Type_PrecisionTime::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.nullability_ = value;
 }
@@ -11238,6 +11549,85 @@ inline ::skyproto::substrait::Type_Decimal* Type::_internal_mutable_decimal() {
 inline ::skyproto::substrait::Type_Decimal* Type::mutable_decimal() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::skyproto::substrait::Type_Decimal* _msg = _internal_mutable_decimal();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.Type.decimal)
+  return _msg;
+}
+
+// .skyproto.substrait.Type.PrecisionTime precision_time = 36 [json_name = "precisionTime"];
+inline bool Type::has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline bool Type::_internal_has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline void Type::set_has_precision_time() {
+  _impl_._oneof_case_[0] = kPrecisionTime;
+}
+inline void Type::clear_precision_time() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (kind_case() == kPrecisionTime) {
+    if (GetArena() == nullptr) {
+      delete _impl_.kind_.precision_time_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.kind_.precision_time_);
+    }
+    clear_has_kind();
+  }
+}
+inline ::skyproto::substrait::Type_PrecisionTime* Type::release_precision_time() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.Type.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::Type_PrecisionTime& Type::_internal_precision_time() const {
+  return kind_case() == kPrecisionTime ? *_impl_.kind_.precision_time_ : reinterpret_cast<::skyproto::substrait::Type_PrecisionTime&>(::skyproto::substrait::_Type_PrecisionTime_default_instance_);
+}
+inline const ::skyproto::substrait::Type_PrecisionTime& Type::precision_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Type.precision_time)
+  return _internal_precision_time();
+}
+inline ::skyproto::substrait::Type_PrecisionTime* Type::unsafe_arena_release_precision_time() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.Type.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void Type::unsafe_arena_set_allocated_precision_time(::skyproto::substrait::Type_PrecisionTime* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_kind();
+  if (value) {
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Type.precision_time)
+}
+inline ::skyproto::substrait::Type_PrecisionTime* Type::_internal_mutable_precision_time() {
+  if (kind_case() != kPrecisionTime) {
+    clear_kind();
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Type_PrecisionTime>(GetArena());
+  }
+  return _impl_.kind_.precision_time_;
+}
+inline ::skyproto::substrait::Type_PrecisionTime* Type::mutable_precision_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::Type_PrecisionTime* _msg = _internal_mutable_precision_time();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Type.precision_time)
   return _msg;
 }
 

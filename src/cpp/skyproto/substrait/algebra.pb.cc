@@ -259,6 +259,35 @@ struct ReadRel_LocalFiles_FileOrFiles_ArrowReadOptionsDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_LocalFiles_FileOrFiles_ArrowReadOptionsDefaultTypeInternal _ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions_default_instance_;
 
+inline constexpr ReadRel_IcebergTable_MetadataFileRead::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : metadata_uri_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        snapshot_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ReadRel_IcebergTable_MetadataFileRead::ReadRel_IcebergTable_MetadataFileRead(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal() {}
+  union {
+    ReadRel_IcebergTable_MetadataFileRead _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal _ReadRel_IcebergTable_MetadataFileRead_default_instance_;
+
 inline constexpr FunctionOption::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : preference_{},
@@ -531,6 +560,32 @@ struct Expression_Literal_PrecisionTimestampDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Expression_Literal_PrecisionTimestampDefaultTypeInternal _Expression_Literal_PrecisionTimestamp_default_instance_;
+
+inline constexpr Expression_Literal_PrecisionTime::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : value_{::int64_t{0}},
+        precision_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Expression_Literal_PrecisionTime::Expression_Literal_PrecisionTime(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct Expression_Literal_PrecisionTimeDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Expression_Literal_PrecisionTimeDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Expression_Literal_PrecisionTimeDefaultTypeInternal() {}
+  union {
+    Expression_Literal_PrecisionTime _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Expression_Literal_PrecisionTimeDefaultTypeInternal _Expression_Literal_PrecisionTime_default_instance_;
 
 inline constexpr Expression_Literal_IntervalYearToMonth::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -831,6 +886,32 @@ struct ReadRel_LocalFiles_FileOrFilesDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_LocalFiles_FileOrFilesDefaultTypeInternal _ReadRel_LocalFiles_FileOrFiles_default_instance_;
+
+inline constexpr ReadRel_IcebergTable::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : table_type_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ReadRel_IcebergTable::ReadRel_IcebergTable(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ReadRel_IcebergTableDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ReadRel_IcebergTableDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ReadRel_IcebergTableDefaultTypeInternal() {}
+  union {
+    ReadRel_IcebergTable _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ReadRel_IcebergTableDefaultTypeInternal _ReadRel_IcebergTable_default_instance_;
 
 inline constexpr ReadRel_ExtensionTable::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -1457,6 +1538,32 @@ struct Expression_Literal_UserDefinedDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Expression_Literal_UserDefinedDefaultTypeInternal _Expression_Literal_UserDefined_default_instance_;
 
+inline constexpr DynamicParameter::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        type_{nullptr},
+        parameter_reference_{0u} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR DynamicParameter::DynamicParameter(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct DynamicParameterDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DynamicParameterDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DynamicParameterDefaultTypeInternal() {}
+  union {
+    DynamicParameter _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DynamicParameterDefaultTypeInternal _DynamicParameter_default_instance_;
+
 inline constexpr RelCommon_Hint::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -1469,7 +1576,8 @@ inline constexpr RelCommon_Hint::Impl_::Impl_(
         stats_{nullptr},
         constraint_{nullptr},
         output_schema_{nullptr},
-        advanced_extension_{nullptr} {}
+        advanced_extension_{nullptr},
+        alias_hash_{::uint64_t{0u}} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR RelCommon_Hint::RelCommon_Hint(::_pbi::ConstantInitialized)
@@ -1626,6 +1734,7 @@ inline constexpr RelCommon::Impl_::Impl_(
       : _cached_size_{0},
         hint_{nullptr},
         advanced_extension_{nullptr},
+        operator_id_{0u},
         emit_kind_{},
         _oneof_case_{} {}
 
@@ -1915,6 +2024,7 @@ inline constexpr DdlRel::Impl_::Impl_(
         table_defaults_{nullptr},
         view_definition_{nullptr},
         common_{nullptr},
+        advanced_extension_{nullptr},
         object_{static_cast< ::skyproto::substrait::DdlRel_DdlObject >(0)},
         op_{static_cast< ::skyproto::substrait::DdlRel_DdlOp >(0)},
         write_type_{},
@@ -3179,6 +3289,7 @@ inline constexpr UpdateRel::Impl_::Impl_(
         transformations_{},
         table_schema_{nullptr},
         condition_{nullptr},
+        advanced_extension_{nullptr},
         update_type_{},
         _oneof_case_{} {}
 
@@ -3234,6 +3345,7 @@ inline constexpr WriteRel::Impl_::Impl_(
         table_schema_{nullptr},
         input_{nullptr},
         common_{nullptr},
+        advanced_extension_{nullptr},
         op_{static_cast< ::skyproto::substrait::WriteRel_WriteOp >(0)},
         output_{static_cast< ::skyproto::substrait::WriteRel_OutputMode >(0)},
         create_mode_{static_cast< ::skyproto::substrait::WriteRel_CreateMode >(0)},
@@ -3393,6 +3505,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.stats_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.constraint_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.alias_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.alias_hash_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.output_names_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.output_schema_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.advanced_extension_),
@@ -3400,6 +3513,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon_Hint, _impl_.loaded_computations_),
         0,
         1,
+        ~0u,
         ~0u,
         ~0u,
         2,
@@ -3418,11 +3532,13 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon, _impl_.hint_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon, _impl_.advanced_extension_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon, _impl_.operator_id_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::RelCommon, _impl_.emit_kind_),
         ~0u,
         ~0u,
         0,
         1,
+        2,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_NamedTable, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_NamedTable, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3435,6 +3551,28 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_NamedTable, _impl_.advanced_extension_),
         ~0u,
         0,
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead, _internal_metadata_),
+        ~0u,  // no _extensions_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead, _impl_._oneof_case_[0]),
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead, _impl_.metadata_uri_),
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead, _impl_.snapshot_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable, _internal_metadata_),
+        ~0u,  // no _extensions_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable, _impl_._oneof_case_[0]),
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable, _impl_.table_type_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_VirtualTable, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -3560,6 +3698,7 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel, _impl_.read_type_),
         0,
         1,
@@ -3567,6 +3706,7 @@ const ::uint32_t
         5,
         3,
         4,
+        ~0u,
         ~0u,
         ~0u,
         ~0u,
@@ -4030,6 +4170,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DdlRel, _impl_.op_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DdlRel, _impl_.view_definition_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DdlRel, _impl_.common_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DdlRel, _impl_.advanced_extension_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DdlRel, _impl_.write_type_),
         ~0u,
         ~0u,
@@ -4039,6 +4180,7 @@ const ::uint32_t
         ~0u,
         2,
         3,
+        4,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -4055,6 +4197,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_.create_mode_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_.output_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_.common_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_.advanced_extension_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::WriteRel, _impl_.write_type_),
         ~0u,
         ~0u,
@@ -4064,6 +4207,7 @@ const ::uint32_t
         ~0u,
         ~0u,
         2,
+        3,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel_TransformExpression, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel_TransformExpression, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -4088,11 +4232,13 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel, _impl_.table_schema_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel, _impl_.condition_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel, _impl_.transformations_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel, _impl_.advanced_extension_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::UpdateRel, _impl_.update_type_),
         ~0u,
         0,
         1,
         ~0u,
+        2,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedTable, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedTable, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -4265,6 +4411,16 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_Decimal, _impl_.precision_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_Decimal, _impl_.scale_),
         ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_PrecisionTime, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_PrecisionTime, _impl_.precision_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_PrecisionTime, _impl_.value_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression_Literal_PrecisionTimestamp, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -4370,6 +4526,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
@@ -4968,7 +5125,20 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Expression, _impl_.rex_type_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameter, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameter, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameter, _impl_.type_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DynamicParameter, _impl_.parameter_reference_),
+        0,
+        ~0u,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::SortField, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::SortField, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -5030,124 +5200,128 @@ static const ::_pbi::MigrationSchema
         {31, 40, -1, sizeof(::skyproto::substrait::RelCommon_Hint_RuntimeConstraint)},
         {41, -1, -1, sizeof(::skyproto::substrait::RelCommon_Hint_SavedComputation)},
         {51, -1, -1, sizeof(::skyproto::substrait::RelCommon_Hint_LoadedComputation)},
-        {61, 77, -1, sizeof(::skyproto::substrait::RelCommon_Hint)},
-        {85, 98, -1, sizeof(::skyproto::substrait::RelCommon)},
-        {102, 112, -1, sizeof(::skyproto::substrait::ReadRel_NamedTable)},
-        {114, -1, -1, sizeof(::skyproto::substrait::ReadRel_VirtualTable)},
-        {124, 133, -1, sizeof(::skyproto::substrait::ReadRel_ExtensionTable)},
-        {134, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions)},
-        {142, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions)},
-        {150, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_OrcReadOptions)},
-        {158, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions)},
-        {166, 180, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions)},
-        {186, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles)},
-        {209, 219, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles)},
-        {221, 240, -1, sizeof(::skyproto::substrait::ReadRel)},
-        {250, 262, -1, sizeof(::skyproto::substrait::ProjectRel)},
-        {266, 281, -1, sizeof(::skyproto::substrait::JoinRel)},
-        {288, 300, -1, sizeof(::skyproto::substrait::CrossRel)},
-        {304, 321, -1, sizeof(::skyproto::substrait::FetchRel)},
-        {328, -1, -1, sizeof(::skyproto::substrait::AggregateRel_Grouping)},
-        {338, 348, -1, sizeof(::skyproto::substrait::AggregateRel_Measure)},
-        {350, 364, -1, sizeof(::skyproto::substrait::AggregateRel)},
-        {370, 387, -1, sizeof(::skyproto::substrait::ConsistentPartitionWindowRel_WindowRelFunction)},
-        {396, 410, -1, sizeof(::skyproto::substrait::ConsistentPartitionWindowRel)},
-        {416, 428, -1, sizeof(::skyproto::substrait::SortRel)},
-        {432, 444, -1, sizeof(::skyproto::substrait::FilterRel)},
-        {448, 460, -1, sizeof(::skyproto::substrait::SetRel)},
-        {464, 475, -1, sizeof(::skyproto::substrait::ExtensionSingleRel)},
-        {478, 488, -1, sizeof(::skyproto::substrait::ExtensionLeafRel)},
-        {490, 501, -1, sizeof(::skyproto::substrait::ExtensionMultiRel)},
-        {504, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_ScatterFields)},
-        {513, 522, -1, sizeof(::skyproto::substrait::ExchangeRel_SingleBucketExpression)},
-        {523, 533, -1, sizeof(::skyproto::substrait::ExchangeRel_MultiBucketExpression)},
-        {535, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_Broadcast)},
-        {543, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_RoundRobin)},
-        {552, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_ExchangeTarget)},
-        {564, 583, -1, sizeof(::skyproto::substrait::ExchangeRel)},
-        {593, -1, -1, sizeof(::skyproto::substrait::ExpandRel_ExpandField)},
-        {604, -1, -1, sizeof(::skyproto::substrait::ExpandRel_SwitchingField)},
-        {613, 624, -1, sizeof(::skyproto::substrait::ExpandRel)},
-        {627, 637, -1, sizeof(::skyproto::substrait::RelRoot)},
-        {639, -1, -1, sizeof(::skyproto::substrait::Rel)},
-        {671, 681, -1, sizeof(::skyproto::substrait::NamedObjectWrite)},
-        {683, 692, -1, sizeof(::skyproto::substrait::ExtensionObject)},
-        {693, 710, -1, sizeof(::skyproto::substrait::DdlRel)},
-        {718, 735, -1, sizeof(::skyproto::substrait::WriteRel)},
-        {743, 753, -1, sizeof(::skyproto::substrait::UpdateRel_TransformExpression)},
-        {755, 768, -1, sizeof(::skyproto::substrait::UpdateRel)},
-        {772, 782, -1, sizeof(::skyproto::substrait::NamedTable)},
-        {784, -1, -1, sizeof(::skyproto::substrait::ComparisonJoinKey_ComparisonType)},
-        {795, 806, -1, sizeof(::skyproto::substrait::ComparisonJoinKey)},
-        {809, 826, -1, sizeof(::skyproto::substrait::HashJoinRel)},
-        {835, 852, -1, sizeof(::skyproto::substrait::MergeJoinRel)},
-        {861, 875, -1, sizeof(::skyproto::substrait::NestedLoopJoinRel)},
-        {881, -1, -1, sizeof(::skyproto::substrait::FunctionArgument)},
-        {893, -1, -1, sizeof(::skyproto::substrait::FunctionOption)},
-        {903, -1, -1, sizeof(::skyproto::substrait::Expression_Enum_Empty)},
-        {911, -1, -1, sizeof(::skyproto::substrait::Expression_Enum)},
-        {922, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_VarChar)},
-        {932, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Decimal)},
-        {943, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_PrecisionTimestamp)},
-        {953, 963, -1, sizeof(::skyproto::substrait::Expression_Literal_Map_KeyValue)},
-        {965, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Map)},
-        {974, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalYearToMonth)},
-        {984, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalDayToSecond)},
-        {998, 1008, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalCompound)},
-        {1010, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Struct)},
-        {1019, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_List)},
-        {1028, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_UserDefined)},
-        {1041, -1, -1, sizeof(::skyproto::substrait::Expression_Literal)},
-        {1082, 1092, -1, sizeof(::skyproto::substrait::Expression_Nested_Map_KeyValue)},
-        {1094, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Map)},
-        {1103, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Struct)},
-        {1112, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_List)},
-        {1121, -1, -1, sizeof(::skyproto::substrait::Expression_Nested)},
-        {1135, 1148, -1, sizeof(::skyproto::substrait::Expression_ScalarFunction)},
-        {1153, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Preceding)},
-        {1162, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Following)},
-        {1171, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_CurrentRow)},
-        {1179, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Unbounded)},
-        {1187, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound)},
-        {1200, 1220, -1, sizeof(::skyproto::substrait::Expression_WindowFunction)},
-        {1232, 1242, -1, sizeof(::skyproto::substrait::Expression_IfThen_IfClause)},
-        {1244, 1254, -1, sizeof(::skyproto::substrait::Expression_IfThen)},
-        {1256, 1267, -1, sizeof(::skyproto::substrait::Expression_Cast)},
-        {1270, 1280, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression_IfValue)},
-        {1282, 1293, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression)},
-        {1296, 1306, -1, sizeof(::skyproto::substrait::Expression_SingularOrList)},
-        {1308, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList_Record)},
-        {1317, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList)},
-        {1327, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
-        {1337, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
-        {1347, 1360, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction)},
-        {1364, 1374, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_MapKey)},
-        {1376, 1386, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_StructField)},
-        {1388, 1398, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_ListElement)},
-        {1400, -1, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment)},
-        {1412, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_Select)},
-        {1424, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructSelect)},
-        {1433, 1443, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructItem)},
-        {1445, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
-        {1454, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
-        {1464, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
-        {1475, 1485, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect)},
-        {1487, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKey)},
-        {1496, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
-        {1505, 1517, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect)},
-        {1520, 1530, -1, sizeof(::skyproto::substrait::Expression_MaskExpression)},
-        {1532, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_RootReference)},
-        {1540, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_OuterReference)},
-        {1549, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference)},
-        {1564, 1573, -1, sizeof(::skyproto::substrait::Expression_Subquery_Scalar)},
-        {1574, 1584, -1, sizeof(::skyproto::substrait::Expression_Subquery_InPredicate)},
-        {1586, 1596, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetPredicate)},
-        {1598, 1610, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetComparison)},
-        {1614, -1, -1, sizeof(::skyproto::substrait::Expression_Subquery)},
-        {1627, -1, -1, sizeof(::skyproto::substrait::Expression)},
-        {1648, 1660, -1, sizeof(::skyproto::substrait::SortField)},
-        {1663, 1679, -1, sizeof(::skyproto::substrait::AggregateFunction)},
-        {1687, 1697, -1, sizeof(::skyproto::substrait::ReferenceRel)},
+        {61, 78, -1, sizeof(::skyproto::substrait::RelCommon_Hint)},
+        {87, 101, -1, sizeof(::skyproto::substrait::RelCommon)},
+        {106, 116, -1, sizeof(::skyproto::substrait::ReadRel_NamedTable)},
+        {118, -1, -1, sizeof(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead)},
+        {130, -1, -1, sizeof(::skyproto::substrait::ReadRel_IcebergTable)},
+        {140, -1, -1, sizeof(::skyproto::substrait::ReadRel_VirtualTable)},
+        {150, 159, -1, sizeof(::skyproto::substrait::ReadRel_ExtensionTable)},
+        {160, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions)},
+        {168, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions)},
+        {176, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_OrcReadOptions)},
+        {184, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions)},
+        {192, 206, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions)},
+        {212, -1, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles_FileOrFiles)},
+        {235, 245, -1, sizeof(::skyproto::substrait::ReadRel_LocalFiles)},
+        {247, 267, -1, sizeof(::skyproto::substrait::ReadRel)},
+        {278, 290, -1, sizeof(::skyproto::substrait::ProjectRel)},
+        {294, 309, -1, sizeof(::skyproto::substrait::JoinRel)},
+        {316, 328, -1, sizeof(::skyproto::substrait::CrossRel)},
+        {332, 349, -1, sizeof(::skyproto::substrait::FetchRel)},
+        {356, -1, -1, sizeof(::skyproto::substrait::AggregateRel_Grouping)},
+        {366, 376, -1, sizeof(::skyproto::substrait::AggregateRel_Measure)},
+        {378, 392, -1, sizeof(::skyproto::substrait::AggregateRel)},
+        {398, 415, -1, sizeof(::skyproto::substrait::ConsistentPartitionWindowRel_WindowRelFunction)},
+        {424, 438, -1, sizeof(::skyproto::substrait::ConsistentPartitionWindowRel)},
+        {444, 456, -1, sizeof(::skyproto::substrait::SortRel)},
+        {460, 472, -1, sizeof(::skyproto::substrait::FilterRel)},
+        {476, 488, -1, sizeof(::skyproto::substrait::SetRel)},
+        {492, 503, -1, sizeof(::skyproto::substrait::ExtensionSingleRel)},
+        {506, 516, -1, sizeof(::skyproto::substrait::ExtensionLeafRel)},
+        {518, 529, -1, sizeof(::skyproto::substrait::ExtensionMultiRel)},
+        {532, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_ScatterFields)},
+        {541, 550, -1, sizeof(::skyproto::substrait::ExchangeRel_SingleBucketExpression)},
+        {551, 561, -1, sizeof(::skyproto::substrait::ExchangeRel_MultiBucketExpression)},
+        {563, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_Broadcast)},
+        {571, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_RoundRobin)},
+        {580, -1, -1, sizeof(::skyproto::substrait::ExchangeRel_ExchangeTarget)},
+        {592, 611, -1, sizeof(::skyproto::substrait::ExchangeRel)},
+        {621, -1, -1, sizeof(::skyproto::substrait::ExpandRel_ExpandField)},
+        {632, -1, -1, sizeof(::skyproto::substrait::ExpandRel_SwitchingField)},
+        {641, 652, -1, sizeof(::skyproto::substrait::ExpandRel)},
+        {655, 665, -1, sizeof(::skyproto::substrait::RelRoot)},
+        {667, -1, -1, sizeof(::skyproto::substrait::Rel)},
+        {699, 709, -1, sizeof(::skyproto::substrait::NamedObjectWrite)},
+        {711, 720, -1, sizeof(::skyproto::substrait::ExtensionObject)},
+        {721, 739, -1, sizeof(::skyproto::substrait::DdlRel)},
+        {748, 766, -1, sizeof(::skyproto::substrait::WriteRel)},
+        {775, 785, -1, sizeof(::skyproto::substrait::UpdateRel_TransformExpression)},
+        {787, 801, -1, sizeof(::skyproto::substrait::UpdateRel)},
+        {806, 816, -1, sizeof(::skyproto::substrait::NamedTable)},
+        {818, -1, -1, sizeof(::skyproto::substrait::ComparisonJoinKey_ComparisonType)},
+        {829, 840, -1, sizeof(::skyproto::substrait::ComparisonJoinKey)},
+        {843, 860, -1, sizeof(::skyproto::substrait::HashJoinRel)},
+        {869, 886, -1, sizeof(::skyproto::substrait::MergeJoinRel)},
+        {895, 909, -1, sizeof(::skyproto::substrait::NestedLoopJoinRel)},
+        {915, -1, -1, sizeof(::skyproto::substrait::FunctionArgument)},
+        {927, -1, -1, sizeof(::skyproto::substrait::FunctionOption)},
+        {937, -1, -1, sizeof(::skyproto::substrait::Expression_Enum_Empty)},
+        {945, -1, -1, sizeof(::skyproto::substrait::Expression_Enum)},
+        {956, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_VarChar)},
+        {966, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Decimal)},
+        {977, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_PrecisionTime)},
+        {987, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_PrecisionTimestamp)},
+        {997, 1007, -1, sizeof(::skyproto::substrait::Expression_Literal_Map_KeyValue)},
+        {1009, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Map)},
+        {1018, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalYearToMonth)},
+        {1028, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalDayToSecond)},
+        {1042, 1052, -1, sizeof(::skyproto::substrait::Expression_Literal_IntervalCompound)},
+        {1054, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_Struct)},
+        {1063, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_List)},
+        {1072, -1, -1, sizeof(::skyproto::substrait::Expression_Literal_UserDefined)},
+        {1085, -1, -1, sizeof(::skyproto::substrait::Expression_Literal)},
+        {1127, 1137, -1, sizeof(::skyproto::substrait::Expression_Nested_Map_KeyValue)},
+        {1139, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Map)},
+        {1148, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_Struct)},
+        {1157, -1, -1, sizeof(::skyproto::substrait::Expression_Nested_List)},
+        {1166, -1, -1, sizeof(::skyproto::substrait::Expression_Nested)},
+        {1180, 1193, -1, sizeof(::skyproto::substrait::Expression_ScalarFunction)},
+        {1198, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Preceding)},
+        {1207, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Following)},
+        {1216, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_CurrentRow)},
+        {1224, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound_Unbounded)},
+        {1232, -1, -1, sizeof(::skyproto::substrait::Expression_WindowFunction_Bound)},
+        {1245, 1265, -1, sizeof(::skyproto::substrait::Expression_WindowFunction)},
+        {1277, 1287, -1, sizeof(::skyproto::substrait::Expression_IfThen_IfClause)},
+        {1289, 1299, -1, sizeof(::skyproto::substrait::Expression_IfThen)},
+        {1301, 1312, -1, sizeof(::skyproto::substrait::Expression_Cast)},
+        {1315, 1325, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression_IfValue)},
+        {1327, 1338, -1, sizeof(::skyproto::substrait::Expression_SwitchExpression)},
+        {1341, 1351, -1, sizeof(::skyproto::substrait::Expression_SingularOrList)},
+        {1353, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList_Record)},
+        {1362, -1, -1, sizeof(::skyproto::substrait::Expression_MultiOrList)},
+        {1372, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_PythonPickleFunction)},
+        {1382, -1, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction_WebAssemblyFunction)},
+        {1392, 1405, -1, sizeof(::skyproto::substrait::Expression_EmbeddedFunction)},
+        {1409, 1419, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_MapKey)},
+        {1421, 1431, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_StructField)},
+        {1433, 1443, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment_ListElement)},
+        {1445, -1, -1, sizeof(::skyproto::substrait::Expression_ReferenceSegment)},
+        {1457, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_Select)},
+        {1469, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructSelect)},
+        {1478, 1488, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_StructItem)},
+        {1490, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListElement)},
+        {1499, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice)},
+        {1509, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect_ListSelectItem)},
+        {1520, 1530, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_ListSelect)},
+        {1532, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKey)},
+        {1541, -1, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect_MapKeyExpression)},
+        {1550, 1562, -1, sizeof(::skyproto::substrait::Expression_MaskExpression_MapSelect)},
+        {1565, 1575, -1, sizeof(::skyproto::substrait::Expression_MaskExpression)},
+        {1577, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_RootReference)},
+        {1585, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference_OuterReference)},
+        {1594, -1, -1, sizeof(::skyproto::substrait::Expression_FieldReference)},
+        {1609, 1618, -1, sizeof(::skyproto::substrait::Expression_Subquery_Scalar)},
+        {1619, 1629, -1, sizeof(::skyproto::substrait::Expression_Subquery_InPredicate)},
+        {1631, 1641, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetPredicate)},
+        {1643, 1655, -1, sizeof(::skyproto::substrait::Expression_Subquery_SetComparison)},
+        {1659, -1, -1, sizeof(::skyproto::substrait::Expression_Subquery)},
+        {1672, -1, -1, sizeof(::skyproto::substrait::Expression)},
+        {1694, 1704, -1, sizeof(::skyproto::substrait::DynamicParameter)},
+        {1706, 1718, -1, sizeof(::skyproto::substrait::SortField)},
+        {1721, 1737, -1, sizeof(::skyproto::substrait::AggregateFunction)},
+        {1745, 1755, -1, sizeof(::skyproto::substrait::ReferenceRel)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_RelCommon_Direct_default_instance_._instance,
@@ -5159,6 +5333,8 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_RelCommon_Hint_default_instance_._instance,
     &::skyproto::substrait::_RelCommon_default_instance_._instance,
     &::skyproto::substrait::_ReadRel_NamedTable_default_instance_._instance,
+    &::skyproto::substrait::_ReadRel_IcebergTable_MetadataFileRead_default_instance_._instance,
+    &::skyproto::substrait::_ReadRel_IcebergTable_default_instance_._instance,
     &::skyproto::substrait::_ReadRel_VirtualTable_default_instance_._instance,
     &::skyproto::substrait::_ReadRel_ExtensionTable_default_instance_._instance,
     &::skyproto::substrait::_ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions_default_instance_._instance,
@@ -5214,6 +5390,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_Expression_Enum_default_instance_._instance,
     &::skyproto::substrait::_Expression_Literal_VarChar_default_instance_._instance,
     &::skyproto::substrait::_Expression_Literal_Decimal_default_instance_._instance,
+    &::skyproto::substrait::_Expression_Literal_PrecisionTime_default_instance_._instance,
     &::skyproto::substrait::_Expression_Literal_PrecisionTimestamp_default_instance_._instance,
     &::skyproto::substrait::_Expression_Literal_Map_KeyValue_default_instance_._instance,
     &::skyproto::substrait::_Expression_Literal_Map_default_instance_._instance,
@@ -5271,6 +5448,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_Expression_Subquery_SetComparison_default_instance_._instance,
     &::skyproto::substrait::_Expression_Subquery_default_instance_._instance,
     &::skyproto::substrait::_Expression_default_instance_._instance,
+    &::skyproto::substrait::_DynamicParameter_default_instance_._instance,
     &::skyproto::substrait::_SortField_default_instance_._instance,
     &::skyproto::substrait::_AggregateFunction_default_instance_._instance,
     &::skyproto::substrait::_ReferenceRel_default_instance_._instance,
@@ -5281,828 +5459,855 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto[] AB
     "roto.substrait\032\031google/protobuf/any.prot"
     "o\032.skyproto/substrait/extensions/extensi"
     "ons.proto\032\035skyproto/substrait/type.proto"
-    "\"\230\r\n\tRelCommon\022>\n\006direct\030\001 \001(\0132$.skyprot"
+    "\"\355\r\n\tRelCommon\022>\n\006direct\030\001 \001(\0132$.skyprot"
     "o.substrait.RelCommon.DirectH\000R\006direct\0228"
     "\n\004emit\030\002 \001(\0132\".skyproto.substrait.RelCom"
     "mon.EmitH\000R\004emit\0226\n\004hint\030\003 \001(\0132\".skyprot"
     "o.substrait.RelCommon.HintR\004hint\022_\n\022adva"
     "nced_extension\030\004 \001(\01320.skyproto.substrai"
     "t.extensions.AdvancedExtensionR\021advanced"
-    "Extension\032\010\n\006Direct\032-\n\004Emit\022%\n\016output_ma"
-    "pping\030\001 \003(\005R\routputMapping\032\261\n\n\004Hint\022>\n\005s"
-    "tats\030\001 \001(\0132(.skyproto.substrait.RelCommo"
-    "n.Hint.StatsR\005stats\022T\n\nconstraint\030\002 \001(\0132"
-    "4.skyproto.substrait.RelCommon.Hint.Runt"
-    "imeConstraintR\nconstraint\022\024\n\005alias\030\003 \001(\t"
-    "R\005alias\022!\n\014output_names\030\004 \003(\tR\013outputNam"
-    "es\022I\n\routput_schema\030\005 \001(\0132\037.skyproto.sub"
-    "strait.NamedStructH\000R\014outputSchema\210\001\001\022_\n"
-    "\022advanced_extension\030\n \001(\01320.skyproto.sub"
-    "strait.extensions.AdvancedExtensionR\021adv"
-    "ancedExtension\022b\n\022saved_computations\030\013 \003"
-    "(\01323.skyproto.substrait.RelCommon.Hint.S"
-    "avedComputationR\021savedComputations\022e\n\023lo"
-    "aded_computations\030\014 \003(\01324.skyproto.subst"
-    "rait.RelCommon.Hint.LoadedComputationR\022l"
-    "oadedComputations\032\246\001\n\005Stats\022\033\n\trow_count"
-    "\030\001 \001(\001R\010rowCount\022\037\n\013record_size\030\002 \001(\001R\nr"
-    "ecordSize\022_\n\022advanced_extension\030\n \001(\01320."
-    "skyproto.substrait.extensions.AdvancedEx"
-    "tensionR\021advancedExtension\032t\n\021RuntimeCon"
-    "straint\022_\n\022advanced_extension\030\n \001(\01320.sk"
-    "yproto.substrait.extensions.AdvancedExte"
-    "nsionR\021advancedExtension\032\201\001\n\020SavedComput"
-    "ation\022%\n\016computation_id\030\001 \001(\005R\rcomputati"
-    "onId\022F\n\004type\030\002 \001(\01622.skyproto.substrait."
-    "RelCommon.Hint.ComputationTypeR\004type\032\225\001\n"
-    "\021LoadedComputation\0228\n\030computation_id_ref"
-    "erence\030\001 \001(\005R\026computationIdReference\022F\n\004"
-    "type\030\002 \001(\01622.skyproto.substrait.RelCommo"
-    "n.Hint.ComputationTypeR\004type\"\225\001\n\017Computa"
-    "tionType\022 \n\034COMPUTATION_TYPE_UNSPECIFIED"
-    "\020\000\022\036\n\032COMPUTATION_TYPE_HASHTABLE\020\001\022!\n\035CO"
-    "MPUTATION_TYPE_BLOOM_FILTER\020\002\022\035\n\030COMPUTA"
-    "TION_TYPE_UNKNOWN\020\217NB\020\n\016_output_schemaB\013"
-    "\n\temit_kind\"\307\023\n\007ReadRel\0225\n\006common\030\001 \001(\0132"
-    "\035.skyproto.substrait.RelCommonR\006common\022@"
-    "\n\013base_schema\030\002 \001(\0132\037.skyproto.substrait"
-    ".NamedStructR\nbaseSchema\0226\n\006filter\030\003 \001(\013"
-    "2\036.skyproto.substrait.ExpressionR\006filter"
-    "\022L\n\022best_effort_filter\030\013 \001(\0132\036.skyproto."
-    "substrait.ExpressionR\020bestEffortFilter\022M"
-    "\n\nprojection\030\004 \001(\0132-.skyproto.substrait."
-    "Expression.MaskExpressionR\nprojection\022_\n"
-    "\022advanced_extension\030\n \001(\01320.skyproto.sub"
-    "strait.extensions.AdvancedExtensionR\021adv"
-    "ancedExtension\022O\n\rvirtual_table\030\005 \001(\0132(."
-    "skyproto.substrait.ReadRel.VirtualTableH"
-    "\000R\014virtualTable\022I\n\013local_files\030\006 \001(\0132&.s"
-    "kyproto.substrait.ReadRel.LocalFilesH\000R\n"
-    "localFiles\022I\n\013named_table\030\007 \001(\0132&.skypro"
-    "to.substrait.ReadRel.NamedTableH\000R\nnamed"
-    "Table\022U\n\017extension_table\030\010 \001(\0132*.skyprot"
-    "o.substrait.ReadRel.ExtensionTableH\000R\016ex"
-    "tensionTable\032\203\001\n\nNamedTable\022\024\n\005names\030\001 \003"
-    "(\tR\005names\022_\n\022advanced_extension\030\n \001(\01320."
-    "skyproto.substrait.extensions.AdvancedEx"
-    "tensionR\021advancedExtension\032\251\001\n\014VirtualTa"
-    "ble\022I\n\006values\030\001 \003(\0132-.skyproto.substrait"
-    ".Expression.Literal.StructB\002\030\001R\006values\022N"
-    "\n\013expressions\030\002 \003(\0132,.skyproto.substrait"
-    ".Expression.Nested.StructR\013expressions\032>"
-    "\n\016ExtensionTable\022,\n\006detail\030\001 \001(\0132\024.googl"
-    "e.protobuf.AnyR\006detail\032\317\n\n\nLocalFiles\022H\n"
-    "\005items\030\001 \003(\01322.skyproto.substrait.ReadRe"
-    "l.LocalFiles.FileOrFilesR\005items\022_\n\022advan"
-    "ced_extension\030\n \001(\01320.skyproto.substrait"
-    ".extensions.AdvancedExtensionR\021advancedE"
-    "xtension\032\225\t\n\013FileOrFiles\022\033\n\010uri_path\030\001 \001"
-    "(\tH\000R\007uriPath\022$\n\ruri_path_glob\030\002 \001(\tH\000R\013"
-    "uriPathGlob\022\033\n\010uri_file\030\003 \001(\tH\000R\007uriFile"
-    "\022\037\n\nuri_folder\030\004 \001(\tH\000R\turiFolder\022\'\n\017par"
-    "tition_index\030\006 \001(\004R\016partitionIndex\022\024\n\005st"
-    "art\030\007 \001(\004R\005start\022\026\n\006length\030\010 \001(\004R\006length"
-    "\022a\n\007parquet\030\t \001(\0132E.skyproto.substrait.R"
-    "eadRel.LocalFiles.FileOrFiles.ParquetRea"
-    "dOptionsH\001R\007parquet\022[\n\005arrow\030\n \001(\0132C.sky"
-    "proto.substrait.ReadRel.LocalFiles.FileO"
-    "rFiles.ArrowReadOptionsH\001R\005arrow\022U\n\003orc\030"
-    "\013 \001(\0132A.skyproto.substrait.ReadRel.Local"
-    "Files.FileOrFiles.OrcReadOptionsH\001R\003orc\022"
-    "4\n\textension\030\014 \001(\0132\024.google.protobuf.Any"
-    "H\001R\textension\022X\n\004dwrf\030\r \001(\0132B.skyproto.s"
-    "ubstrait.ReadRel.LocalFiles.FileOrFiles."
-    "DwrfReadOptionsH\001R\004dwrf\022j\n\004text\030\016 \001(\0132T."
-    "skyproto.substrait.ReadRel.LocalFiles.Fi"
-    "leOrFiles.DelimiterSeparatedTextReadOpti"
-    "onsH\001R\004text\032\024\n\022ParquetReadOptions\032\022\n\020Arr"
-    "owReadOptions\032\020\n\016OrcReadOptions\032\021\n\017DwrfR"
-    "eadOptions\032\241\002\n!DelimiterSeparatedTextRea"
-    "dOptions\022\'\n\017field_delimiter\030\001 \001(\tR\016field"
-    "Delimiter\022\"\n\rmax_line_size\030\002 \001(\004R\013maxLin"
-    "eSize\022\024\n\005quote\030\003 \001(\tR\005quote\022/\n\024header_li"
-    "nes_to_skip\030\004 \001(\004R\021headerLinesToSkip\022\026\n\006"
-    "escape\030\005 \001(\tR\006escape\0226\n\025value_treated_as"
-    "_null\030\006 \001(\tH\000R\022valueTreatedAsNull\210\001\001B\030\n\026"
-    "_value_treated_as_nullB\013\n\tpath_typeB\r\n\013f"
-    "ile_formatJ\004\010\005\020\006R\006formatB\013\n\tread_type\"\225\002"
-    "\n\nProjectRel\0225\n\006common\030\001 \001(\0132\035.skyproto."
-    "substrait.RelCommonR\006common\022-\n\005input\030\002 \001"
-    "(\0132\027.skyproto.substrait.RelR\005input\022@\n\013ex"
-    "pressions\030\003 \003(\0132\036.skyproto.substrait.Exp"
-    "ressionR\013expressions\022_\n\022advanced_extensi"
-    "on\030\n \001(\01320.skyproto.substrait.extensions"
-    ".AdvancedExtensionR\021advancedExtension\"\214\006"
-    "\n\007JoinRel\0225\n\006common\030\001 \001(\0132\035.skyproto.sub"
-    "strait.RelCommonR\006common\022+\n\004left\030\002 \001(\0132\027"
-    ".skyproto.substrait.RelR\004left\022-\n\005right\030\003"
-    " \001(\0132\027.skyproto.substrait.RelR\005right\022>\n\n"
-    "expression\030\004 \001(\0132\036.skyproto.substrait.Ex"
-    "pressionR\nexpression\022H\n\020post_join_filter"
-    "\030\005 \001(\0132\036.skyproto.substrait.ExpressionR\016"
-    "postJoinFilter\0228\n\004type\030\006 \001(\0162$.skyproto."
-    "substrait.JoinRel.JoinTypeR\004type\022_\n\022adva"
-    "nced_extension\030\n \001(\01320.skyproto.substrai"
-    "t.extensions.AdvancedExtensionR\021advanced"
-    "Extension\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSP"
-    "ECIFIED\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_T"
-    "YPE_OUTER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_"
-    "TYPE_RIGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\027\n"
-    "\023JOIN_TYPE_LEFT_ANTI\020\006\022\031\n\025JOIN_TYPE_LEFT"
-    "_SINGLE\020\007\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\010\022\030\n\024J"
-    "OIN_TYPE_RIGHT_ANTI\020\t\022\032\n\026JOIN_TYPE_RIGHT"
-    "_SINGLE\020\n\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JO"
-    "IN_TYPE_RIGHT_MARK\020\014\"\376\001\n\010CrossRel\0225\n\006com"
-    "mon\030\001 \001(\0132\035.skyproto.substrait.RelCommon"
-    "R\006common\022+\n\004left\030\002 \001(\0132\027.skyproto.substr"
-    "ait.RelR\004left\022-\n\005right\030\003 \001(\0132\027.skyproto."
-    "substrait.RelR\005right\022_\n\022advanced_extensi"
-    "on\030\n \001(\01320.skyproto.substrait.extensions"
-    ".AdvancedExtensionR\021advancedExtension\"\254\003"
-    "\n\010FetchRel\0225\n\006common\030\001 \001(\0132\035.skyproto.su"
-    "bstrait.RelCommonR\006common\022-\n\005input\030\002 \001(\013"
-    "2\027.skyproto.substrait.RelR\005input\022\034\n\006offs"
-    "et\030\003 \001(\003B\002\030\001H\000R\006offset\022A\n\013offset_expr\030\005 "
-    "\001(\0132\036.skyproto.substrait.ExpressionH\000R\no"
-    "ffsetExpr\022\032\n\005count\030\004 \001(\003B\002\030\001H\001R\005count\022\?\n"
-    "\ncount_expr\030\006 \001(\0132\036.skyproto.substrait.E"
-    "xpressionH\001R\tcountExpr\022_\n\022advanced_exten"
-    "sion\030\n \001(\01320.skyproto.substrait.extensio"
-    "ns.AdvancedExtensionR\021advancedExtensionB"
-    "\r\n\013offset_modeB\014\n\ncount_mode\"\325\005\n\014Aggrega"
-    "teRel\0225\n\006common\030\001 \001(\0132\035.skyproto.substra"
-    "it.RelCommonR\006common\022-\n\005input\030\002 \001(\0132\027.sk"
-    "yproto.substrait.RelR\005input\022G\n\tgroupings"
-    "\030\003 \003(\0132).skyproto.substrait.AggregateRel"
-    ".GroupingR\tgroupings\022D\n\010measures\030\004 \003(\0132("
-    ".skyproto.substrait.AggregateRel.Measure"
-    "R\010measures\022Q\n\024grouping_expressions\030\005 \003(\013"
-    "2\036.skyproto.substrait.ExpressionR\023groupi"
-    "ngExpressions\022_\n\022advanced_extension\030\n \001("
-    "\01320.skyproto.substrait.extensions.Advanc"
-    "edExtensionR\021advancedExtension\032\226\001\n\010Group"
-    "ing\022U\n\024grouping_expressions\030\001 \003(\0132\036.skyp"
-    "roto.substrait.ExpressionB\002\030\001R\023groupingE"
-    "xpressions\0223\n\025expression_references\030\002 \003("
-    "\rR\024expressionReferences\032\202\001\n\007Measure\022\?\n\007m"
-    "easure\030\001 \001(\0132%.skyproto.substrait.Aggreg"
-    "ateFunctionR\007measure\0226\n\006filter\030\002 \001(\0132\036.s"
-    "kyproto.substrait.ExpressionR\006filter\"\200\t\n"
-    "\034ConsistentPartitionWindowRel\0225\n\006common\030"
-    "\001 \001(\0132\035.skyproto.substrait.RelCommonR\006co"
-    "mmon\022-\n\005input\030\002 \001(\0132\027.skyproto.substrait"
-    ".RelR\005input\022m\n\020window_functions\030\003 \003(\0132B."
-    "skyproto.substrait.ConsistentPartitionWi"
-    "ndowRel.WindowRelFunctionR\017windowFunctio"
-    "ns\022S\n\025partition_expressions\030\004 \003(\0132\036.skyp"
-    "roto.substrait.ExpressionR\024partitionExpr"
-    "essions\0223\n\005sorts\030\005 \003(\0132\035.skyproto.substr"
-    "ait.SortFieldR\005sorts\022_\n\022advanced_extensi"
-    "on\030\n \001(\01320.skyproto.substrait.extensions"
-    ".AdvancedExtensionR\021advancedExtension\032\237\005"
-    "\n\021WindowRelFunction\022-\n\022function_referenc"
-    "e\030\001 \001(\rR\021functionReference\022B\n\targuments\030"
-    "\t \003(\0132$.skyproto.substrait.FunctionArgum"
-    "entR\targuments\022<\n\007options\030\013 \003(\0132\".skypro"
-    "to.substrait.FunctionOptionR\007options\0229\n\013"
-    "output_type\030\007 \001(\0132\030.skyproto.substrait.T"
-    "ypeR\noutputType\022:\n\005phase\030\006 \001(\0162$.skyprot"
-    "o.substrait.AggregationPhaseR\005phase\022[\n\ni"
-    "nvocation\030\n \001(\0162;.skyproto.substrait.Agg"
-    "regateFunction.AggregationInvocationR\nin"
-    "vocation\022T\n\013lower_bound\030\005 \001(\01323.skyproto"
-    ".substrait.Expression.WindowFunction.Bou"
-    "ndR\nlowerBound\022T\n\013upper_bound\030\004 \001(\01323.sk"
-    "yproto.substrait.Expression.WindowFuncti"
-    "on.BoundR\nupperBound\022Y\n\013bounds_type\030\014 \001("
-    "\01628.skyproto.substrait.Expression.Window"
-    "Function.BoundsTypeR\nboundsType\"\205\002\n\007Sort"
-    "Rel\0225\n\006common\030\001 \001(\0132\035.skyproto.substrait"
-    ".RelCommonR\006common\022-\n\005input\030\002 \001(\0132\027.skyp"
-    "roto.substrait.RelR\005input\0223\n\005sorts\030\003 \003(\013"
-    "2\035.skyproto.substrait.SortFieldR\005sorts\022_"
+    "Extension\022$\n\013operator_id\030\005 \001(\rH\001R\noperat"
+    "orId\210\001\001\032\010\n\006Direct\032-\n\004Emit\022%\n\016output_mapp"
+    "ing\030\001 \003(\005R\routputMapping\032\320\n\n\004Hint\022>\n\005sta"
+    "ts\030\001 \001(\0132(.skyproto.substrait.RelCommon."
+    "Hint.StatsR\005stats\022T\n\nconstraint\030\002 \001(\01324."
+    "skyproto.substrait.RelCommon.Hint.Runtim"
+    "eConstraintR\nconstraint\022\024\n\005alias\030\003 \001(\tR\005"
+    "alias\022\035\n\nalias_hash\030\006 \001(\004R\taliasHash\022!\n\014"
+    "output_names\030\004 \003(\tR\013outputNames\022I\n\routpu"
+    "t_schema\030\005 \001(\0132\037.skyproto.substrait.Name"
+    "dStructH\000R\014outputSchema\210\001\001\022_\n\022advanced_e"
+    "xtension\030\n \001(\01320.skyproto.substrait.exte"
+    "nsions.AdvancedExtensionR\021advancedExtens"
+    "ion\022b\n\022saved_computations\030\013 \003(\01323.skypro"
+    "to.substrait.RelCommon.Hint.SavedComputa"
+    "tionR\021savedComputations\022e\n\023loaded_comput"
+    "ations\030\014 \003(\01324.skyproto.substrait.RelCom"
+    "mon.Hint.LoadedComputationR\022loadedComput"
+    "ations\032\246\001\n\005Stats\022\033\n\trow_count\030\001 \001(\001R\010row"
+    "Count\022\037\n\013record_size\030\002 \001(\001R\nrecordSize\022_"
     "\n\022advanced_extension\030\n \001(\01320.skyproto.su"
     "bstrait.extensions.AdvancedExtensionR\021ad"
-    "vancedExtension\"\220\002\n\tFilterRel\0225\n\006common\030"
-    "\001 \001(\0132\035.skyproto.substrait.RelCommonR\006co"
-    "mmon\022-\n\005input\030\002 \001(\0132\027.skyproto.substrait"
-    ".RelR\005input\022<\n\tcondition\030\003 \001(\0132\036.skyprot"
-    "o.substrait.ExpressionR\tcondition\022_\n\022adv"
-    "anced_extension\030\n \001(\01320.skyproto.substra"
-    "it.extensions.AdvancedExtensionR\021advance"
-    "dExtension\"\222\004\n\006SetRel\0225\n\006common\030\001 \001(\0132\035."
-    "skyproto.substrait.RelCommonR\006common\022/\n\006"
-    "inputs\030\002 \003(\0132\027.skyproto.substrait.RelR\006i"
-    "nputs\0220\n\002op\030\003 \001(\0162 .skyproto.substrait.S"
-    "etRel.SetOpR\002op\022_\n\022advanced_extension\030\n "
+    "vancedExtension\032t\n\021RuntimeConstraint\022_\n\022"
+    "advanced_extension\030\n \001(\01320.skyproto.subs"
+    "trait.extensions.AdvancedExtensionR\021adva"
+    "ncedExtension\032\201\001\n\020SavedComputation\022%\n\016co"
+    "mputation_id\030\001 \001(\005R\rcomputationId\022F\n\004typ"
+    "e\030\002 \001(\01622.skyproto.substrait.RelCommon.H"
+    "int.ComputationTypeR\004type\032\225\001\n\021LoadedComp"
+    "utation\0228\n\030computation_id_reference\030\001 \001("
+    "\005R\026computationIdReference\022F\n\004type\030\002 \001(\0162"
+    "2.skyproto.substrait.RelCommon.Hint.Comp"
+    "utationTypeR\004type\"\225\001\n\017ComputationType\022 \n"
+    "\034COMPUTATION_TYPE_UNSPECIFIED\020\000\022\036\n\032COMPU"
+    "TATION_TYPE_HASHTABLE\020\001\022!\n\035COMPUTATION_T"
+    "YPE_BLOOM_FILTER\020\002\022\035\n\030COMPUTATION_TYPE_U"
+    "NKNOWN\020\217NB\020\n\016_output_schemaB\013\n\temit_kind"
+    "B\016\n\014_operator_id\"\244\026\n\007ReadRel\0225\n\006common\030\001"
+    " \001(\0132\035.skyproto.substrait.RelCommonR\006com"
+    "mon\022@\n\013base_schema\030\002 \001(\0132\037.skyproto.subs"
+    "trait.NamedStructR\nbaseSchema\0226\n\006filter\030"
+    "\003 \001(\0132\036.skyproto.substrait.ExpressionR\006f"
+    "ilter\022L\n\022best_effort_filter\030\013 \001(\0132\036.skyp"
+    "roto.substrait.ExpressionR\020bestEffortFil"
+    "ter\022M\n\nprojection\030\004 \001(\0132-.skyproto.subst"
+    "rait.Expression.MaskExpressionR\nprojecti"
+    "on\022_\n\022advanced_extension\030\n \001(\01320.skyprot"
+    "o.substrait.extensions.AdvancedExtension"
+    "R\021advancedExtension\022O\n\rvirtual_table\030\005 \001"
+    "(\0132(.skyproto.substrait.ReadRel.VirtualT"
+    "ableH\000R\014virtualTable\022I\n\013local_files\030\006 \001("
+    "\0132&.skyproto.substrait.ReadRel.LocalFile"
+    "sH\000R\nlocalFiles\022I\n\013named_table\030\007 \001(\0132&.s"
+    "kyproto.substrait.ReadRel.NamedTableH\000R\n"
+    "namedTable\022U\n\017extension_table\030\010 \001(\0132*.sk"
+    "yproto.substrait.ReadRel.ExtensionTableH"
+    "\000R\016extensionTable\022O\n\riceberg_table\030\t \001(\013"
+    "2(.skyproto.substrait.ReadRel.IcebergTab"
+    "leH\000R\014icebergTable\032\203\001\n\nNamedTable\022\024\n\005nam"
+    "es\030\001 \003(\tR\005names\022_\n\022advanced_extension\030\n "
     "\001(\01320.skyproto.substrait.extensions.Adva"
-    "ncedExtensionR\021advancedExtension\"\214\002\n\005Set"
-    "Op\022\026\n\022SET_OP_UNSPECIFIED\020\000\022\030\n\024SET_OP_MIN"
-    "US_PRIMARY\020\001\022\034\n\030SET_OP_MINUS_PRIMARY_ALL"
-    "\020\007\022\031\n\025SET_OP_MINUS_MULTISET\020\002\022\037\n\033SET_OP_"
-    "INTERSECTION_PRIMARY\020\003\022 \n\034SET_OP_INTERSE"
-    "CTION_MULTISET\020\004\022$\n SET_OP_INTERSECTION_"
-    "MULTISET_ALL\020\010\022\031\n\025SET_OP_UNION_DISTINCT\020"
-    "\005\022\024\n\020SET_OP_UNION_ALL\020\006\"\250\001\n\022ExtensionSin"
-    "gleRel\0225\n\006common\030\001 \001(\0132\035.skyproto.substr"
+    "ncedExtensionR\021advancedExtension\032\211\002\n\014Ice"
+    "bergTable\022S\n\006direct\030\001 \001(\01329.skyproto.sub"
+    "strait.ReadRel.IcebergTable.MetadataFile"
+    "ReadH\000R\006direct\032\225\001\n\020MetadataFileRead\022!\n\014m"
+    "etadata_uri\030\001 \001(\tR\013metadataUri\022!\n\013snapsh"
+    "ot_id\030\002 \001(\tH\000R\nsnapshotId\022/\n\022snapshot_ti"
+    "mestamp\030\003 \001(\003H\000R\021snapshotTimestampB\n\n\010sn"
+    "apshotB\014\n\ntable_type\032\251\001\n\014VirtualTable\022I\n"
+    "\006values\030\001 \003(\0132-.skyproto.substrait.Expre"
+    "ssion.Literal.StructB\002\030\001R\006values\022N\n\013expr"
+    "essions\030\002 \003(\0132,.skyproto.substrait.Expre"
+    "ssion.Nested.StructR\013expressions\032>\n\016Exte"
+    "nsionTable\022,\n\006detail\030\001 \001(\0132\024.google.prot"
+    "obuf.AnyR\006detail\032\317\n\n\nLocalFiles\022H\n\005items"
+    "\030\001 \003(\01322.skyproto.substrait.ReadRel.Loca"
+    "lFiles.FileOrFilesR\005items\022_\n\022advanced_ex"
+    "tension\030\n \001(\01320.skyproto.substrait.exten"
+    "sions.AdvancedExtensionR\021advancedExtensi"
+    "on\032\225\t\n\013FileOrFiles\022\033\n\010uri_path\030\001 \001(\tH\000R\007"
+    "uriPath\022$\n\ruri_path_glob\030\002 \001(\tH\000R\013uriPat"
+    "hGlob\022\033\n\010uri_file\030\003 \001(\tH\000R\007uriFile\022\037\n\nur"
+    "i_folder\030\004 \001(\tH\000R\turiFolder\022\'\n\017partition"
+    "_index\030\006 \001(\004R\016partitionIndex\022\024\n\005start\030\007 "
+    "\001(\004R\005start\022\026\n\006length\030\010 \001(\004R\006length\022a\n\007pa"
+    "rquet\030\t \001(\0132E.skyproto.substrait.ReadRel"
+    ".LocalFiles.FileOrFiles.ParquetReadOptio"
+    "nsH\001R\007parquet\022[\n\005arrow\030\n \001(\0132C.skyproto."
+    "substrait.ReadRel.LocalFiles.FileOrFiles"
+    ".ArrowReadOptionsH\001R\005arrow\022U\n\003orc\030\013 \001(\0132"
+    "A.skyproto.substrait.ReadRel.LocalFiles."
+    "FileOrFiles.OrcReadOptionsH\001R\003orc\0224\n\text"
+    "ension\030\014 \001(\0132\024.google.protobuf.AnyH\001R\tex"
+    "tension\022X\n\004dwrf\030\r \001(\0132B.skyproto.substra"
+    "it.ReadRel.LocalFiles.FileOrFiles.DwrfRe"
+    "adOptionsH\001R\004dwrf\022j\n\004text\030\016 \001(\0132T.skypro"
+    "to.substrait.ReadRel.LocalFiles.FileOrFi"
+    "les.DelimiterSeparatedTextReadOptionsH\001R"
+    "\004text\032\024\n\022ParquetReadOptions\032\022\n\020ArrowRead"
+    "Options\032\020\n\016OrcReadOptions\032\021\n\017DwrfReadOpt"
+    "ions\032\241\002\n!DelimiterSeparatedTextReadOptio"
+    "ns\022\'\n\017field_delimiter\030\001 \001(\tR\016fieldDelimi"
+    "ter\022\"\n\rmax_line_size\030\002 \001(\004R\013maxLineSize\022"
+    "\024\n\005quote\030\003 \001(\tR\005quote\022/\n\024header_lines_to"
+    "_skip\030\004 \001(\004R\021headerLinesToSkip\022\026\n\006escape"
+    "\030\005 \001(\tR\006escape\0226\n\025value_treated_as_null\030"
+    "\006 \001(\tH\000R\022valueTreatedAsNull\210\001\001B\030\n\026_value"
+    "_treated_as_nullB\013\n\tpath_typeB\r\n\013file_fo"
+    "rmatJ\004\010\005\020\006R\006formatB\013\n\tread_type\"\225\002\n\nProj"
+    "ectRel\0225\n\006common\030\001 \001(\0132\035.skyproto.substr"
     "ait.RelCommonR\006common\022-\n\005input\030\002 \001(\0132\027.s"
-    "kyproto.substrait.RelR\005input\022,\n\006detail\030\003"
-    " \001(\0132\024.google.protobuf.AnyR\006detail\"w\n\020Ex"
-    "tensionLeafRel\0225\n\006common\030\001 \001(\0132\035.skyprot"
-    "o.substrait.RelCommonR\006common\022,\n\006detail\030"
-    "\002 \001(\0132\024.google.protobuf.AnyR\006detail\"\251\001\n\021"
-    "ExtensionMultiRel\0225\n\006common\030\001 \001(\0132\035.skyp"
-    "roto.substrait.RelCommonR\006common\022/\n\006inpu"
-    "ts\030\002 \003(\0132\027.skyproto.substrait.RelR\006input"
-    "s\022,\n\006detail\030\003 \001(\0132\024.google.protobuf.AnyR"
-    "\006detail\"\206\n\n\013ExchangeRel\0225\n\006common\030\001 \001(\0132"
+    "kyproto.substrait.RelR\005input\022@\n\013expressi"
+    "ons\030\003 \003(\0132\036.skyproto.substrait.Expressio"
+    "nR\013expressions\022_\n\022advanced_extension\030\n \001"
+    "(\01320.skyproto.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\"\214\006\n\007Join"
+    "Rel\0225\n\006common\030\001 \001(\0132\035.skyproto.substrait"
+    ".RelCommonR\006common\022+\n\004left\030\002 \001(\0132\027.skypr"
+    "oto.substrait.RelR\004left\022-\n\005right\030\003 \001(\0132\027"
+    ".skyproto.substrait.RelR\005right\022>\n\nexpres"
+    "sion\030\004 \001(\0132\036.skyproto.substrait.Expressi"
+    "onR\nexpression\022H\n\020post_join_filter\030\005 \001(\013"
+    "2\036.skyproto.substrait.ExpressionR\016postJo"
+    "inFilter\0228\n\004type\030\006 \001(\0162$.skyproto.substr"
+    "ait.JoinRel.JoinTypeR\004type\022_\n\022advanced_e"
+    "xtension\030\n \001(\01320.skyproto.substrait.exte"
+    "nsions.AdvancedExtensionR\021advancedExtens"
+    "ion\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIE"
+    "D\020\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OU"
+    "TER\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_R"
+    "IGHT\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\027\n\023JOIN_"
+    "TYPE_LEFT_ANTI\020\006\022\031\n\025JOIN_TYPE_LEFT_SINGL"
+    "E\020\007\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\010\022\030\n\024JOIN_TY"
+    "PE_RIGHT_ANTI\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGL"
+    "E\020\n\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYP"
+    "E_RIGHT_MARK\020\014\"\376\001\n\010CrossRel\0225\n\006common\030\001 "
+    "\001(\0132\035.skyproto.substrait.RelCommonR\006comm"
+    "on\022+\n\004left\030\002 \001(\0132\027.skyproto.substrait.Re"
+    "lR\004left\022-\n\005right\030\003 \001(\0132\027.skyproto.substr"
+    "ait.RelR\005right\022_\n\022advanced_extension\030\n \001"
+    "(\01320.skyproto.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\"\254\003\n\010Fetc"
+    "hRel\0225\n\006common\030\001 \001(\0132\035.skyproto.substrai"
+    "t.RelCommonR\006common\022-\n\005input\030\002 \001(\0132\027.sky"
+    "proto.substrait.RelR\005input\022\034\n\006offset\030\003 \001"
+    "(\003B\002\030\001H\000R\006offset\022A\n\013offset_expr\030\005 \001(\0132\036."
+    "skyproto.substrait.ExpressionH\000R\noffsetE"
+    "xpr\022\032\n\005count\030\004 \001(\003B\002\030\001H\001R\005count\022\?\n\ncount"
+    "_expr\030\006 \001(\0132\036.skyproto.substrait.Express"
+    "ionH\001R\tcountExpr\022_\n\022advanced_extension\030\n"
+    " \001(\01320.skyproto.substrait.extensions.Adv"
+    "ancedExtensionR\021advancedExtensionB\r\n\013off"
+    "set_modeB\014\n\ncount_mode\"\325\005\n\014AggregateRel\022"
+    "5\n\006common\030\001 \001(\0132\035.skyproto.substrait.Rel"
+    "CommonR\006common\022-\n\005input\030\002 \001(\0132\027.skyproto"
+    ".substrait.RelR\005input\022G\n\tgroupings\030\003 \003(\013"
+    "2).skyproto.substrait.AggregateRel.Group"
+    "ingR\tgroupings\022D\n\010measures\030\004 \003(\0132(.skypr"
+    "oto.substrait.AggregateRel.MeasureR\010meas"
+    "ures\022Q\n\024grouping_expressions\030\005 \003(\0132\036.sky"
+    "proto.substrait.ExpressionR\023groupingExpr"
+    "essions\022_\n\022advanced_extension\030\n \001(\01320.sk"
+    "yproto.substrait.extensions.AdvancedExte"
+    "nsionR\021advancedExtension\032\226\001\n\010Grouping\022U\n"
+    "\024grouping_expressions\030\001 \003(\0132\036.skyproto.s"
+    "ubstrait.ExpressionB\002\030\001R\023groupingExpress"
+    "ions\0223\n\025expression_references\030\002 \003(\rR\024exp"
+    "ressionReferences\032\202\001\n\007Measure\022\?\n\007measure"
+    "\030\001 \001(\0132%.skyproto.substrait.AggregateFun"
+    "ctionR\007measure\0226\n\006filter\030\002 \001(\0132\036.skyprot"
+    "o.substrait.ExpressionR\006filter\"\200\t\n\034Consi"
+    "stentPartitionWindowRel\0225\n\006common\030\001 \001(\0132"
     "\035.skyproto.substrait.RelCommonR\006common\022-"
     "\n\005input\030\002 \001(\0132\027.skyproto.substrait.RelR\005"
-    "input\022\'\n\017partition_count\030\003 \001(\005R\016partitio"
-    "nCount\022H\n\007targets\030\004 \003(\0132..skyproto.subst"
-    "rait.ExchangeRel.ExchangeTargetR\007targets"
-    "\022[\n\021scatter_by_fields\030\005 \001(\0132-.skyproto.s"
-    "ubstrait.ExchangeRel.ScatterFieldsH\000R\017sc"
-    "atterByFields\022]\n\rsingle_target\030\006 \001(\01326.s"
-    "kyproto.substrait.ExchangeRel.SingleBuck"
-    "etExpressionH\000R\014singleTarget\022Z\n\014multi_ta"
-    "rget\030\007 \001(\01325.skyproto.substrait.Exchange"
-    "Rel.MultiBucketExpressionH\000R\013multiTarget"
-    "\022M\n\013round_robin\030\010 \001(\0132*.skyproto.substra"
-    "it.ExchangeRel.RoundRobinH\000R\nroundRobin\022"
-    "I\n\tbroadcast\030\t \001(\0132).skyproto.substrait."
-    "ExchangeRel.BroadcastH\000R\tbroadcast\022_\n\022ad"
-    "vanced_extension\030\n \001(\01320.skyproto.substr"
-    "ait.extensions.AdvancedExtensionR\021advanc"
-    "edExtension\032V\n\rScatterFields\022E\n\006fields\030\001"
-    " \003(\0132-.skyproto.substrait.Expression.Fie"
-    "ldReferenceR\006fields\032X\n\026SingleBucketExpre"
-    "ssion\022>\n\nexpression\030\001 \001(\0132\036.skyproto.sub"
-    "strait.ExpressionR\nexpression\032\211\001\n\025MultiB"
-    "ucketExpression\022>\n\nexpression\030\001 \001(\0132\036.sk"
-    "yproto.substrait.ExpressionR\nexpression\022"
-    "0\n\024constrained_to_count\030\002 \001(\010R\022constrain"
-    "edToCount\032\013\n\tBroadcast\032\"\n\nRoundRobin\022\024\n\005"
-    "exact\030\001 \001(\010R\005exact\032\212\001\n\016ExchangeTarget\022!\n"
-    "\014partition_id\030\001 \003(\005R\013partitionId\022\022\n\003uri\030"
-    "\002 \001(\tH\000R\003uri\0222\n\010extended\030\003 \001(\0132\024.google."
-    "protobuf.AnyH\000R\010extendedB\r\n\013target_typeB"
-    "\017\n\rexchange_kind\"\312\003\n\tExpandRel\0225\n\006common"
-    "\030\001 \001(\0132\035.skyproto.substrait.RelCommonR\006c"
-    "ommon\022-\n\005input\030\002 \001(\0132\027.skyproto.substrai"
-    "t.RelR\005input\022A\n\006fields\030\004 \003(\0132).skyproto."
-    "substrait.ExpandRel.ExpandFieldR\006fields\032"
-    "\301\001\n\013ExpandField\022W\n\017switching_field\030\002 \001(\013"
-    "2,.skyproto.substrait.ExpandRel.Switchin"
-    "gFieldH\000R\016switchingField\022K\n\020consistent_f"
-    "ield\030\003 \001(\0132\036.skyproto.substrait.Expressi"
-    "onH\000R\017consistentFieldB\014\n\nfield_type\032P\n\016S"
-    "witchingField\022>\n\nduplicates\030\001 \003(\0132\036.skyp"
-    "roto.substrait.ExpressionR\nduplicates\"N\n"
-    "\007RelRoot\022-\n\005input\030\001 \001(\0132\027.skyproto.subst"
-    "rait.RelR\005input\022\024\n\005names\030\002 \003(\tR\005names\"\233\013"
-    "\n\003Rel\0221\n\004read\030\001 \001(\0132\033.skyproto.substrait"
-    ".ReadRelH\000R\004read\0227\n\006filter\030\002 \001(\0132\035.skypr"
-    "oto.substrait.FilterRelH\000R\006filter\0224\n\005fet"
-    "ch\030\003 \001(\0132\034.skyproto.substrait.FetchRelH\000"
-    "R\005fetch\022@\n\taggregate\030\004 \001(\0132 .skyproto.su"
-    "bstrait.AggregateRelH\000R\taggregate\0221\n\004sor"
-    "t\030\005 \001(\0132\033.skyproto.substrait.SortRelH\000R\004"
-    "sort\0221\n\004join\030\006 \001(\0132\033.skyproto.substrait."
-    "JoinRelH\000R\004join\022:\n\007project\030\007 \001(\0132\036.skypr"
-    "oto.substrait.ProjectRelH\000R\007project\022.\n\003s"
-    "et\030\010 \001(\0132\032.skyproto.substrait.SetRelH\000R\003"
-    "set\022S\n\020extension_single\030\t \001(\0132&.skyproto"
-    ".substrait.ExtensionSingleRelH\000R\017extensi"
-    "onSingle\022P\n\017extension_multi\030\n \001(\0132%.skyp"
-    "roto.substrait.ExtensionMultiRelH\000R\016exte"
-    "nsionMulti\022M\n\016extension_leaf\030\013 \001(\0132$.sky"
-    "proto.substrait.ExtensionLeafRelH\000R\rexte"
-    "nsionLeaf\0224\n\005cross\030\014 \001(\0132\034.skyproto.subs"
-    "trait.CrossRelH\000R\005cross\022@\n\treference\030\025 \001"
-    "(\0132 .skyproto.substrait.ReferenceRelH\000R\t"
-    "reference\0224\n\005write\030\023 \001(\0132\034.skyproto.subs"
-    "trait.WriteRelH\000R\005write\022.\n\003ddl\030\024 \001(\0132\032.s"
-    "kyproto.substrait.DdlRelH\000R\003ddl\0227\n\006updat"
-    "e\030\026 \001(\0132\035.skyproto.substrait.UpdateRelH\000"
-    "R\006update\022>\n\thash_join\030\r \001(\0132\037.skyproto.s"
-    "ubstrait.HashJoinRelH\000R\010hashJoin\022A\n\nmerg"
-    "e_join\030\016 \001(\0132 .skyproto.substrait.MergeJ"
-    "oinRelH\000R\tmergeJoin\022Q\n\020nested_loop_join\030"
-    "\022 \001(\0132%.skyproto.substrait.NestedLoopJoi"
-    "nRelH\000R\016nestedLoopJoin\022J\n\006window\030\021 \001(\01320"
-    ".skyproto.substrait.ConsistentPartitionW"
-    "indowRelH\000R\006window\022=\n\010exchange\030\017 \001(\0132\037.s"
-    "kyproto.substrait.ExchangeRelH\000R\010exchang"
-    "e\0227\n\006expand\030\020 \001(\0132\035.skyproto.substrait.E"
-    "xpandRelH\000R\006expand\022+\n\021has_splitoverride\030"
-    "\037 \001(\010R\020hasSplitoverrideB\n\n\010rel_type\"\211\001\n\020"
-    "NamedObjectWrite\022\024\n\005names\030\001 \003(\tR\005names\022_"
-    "\n\022advanced_extension\030\n \001(\01320.skyproto.su"
-    "bstrait.extensions.AdvancedExtensionR\021ad"
-    "vancedExtension\"\?\n\017ExtensionObject\022,\n\006de"
-    "tail\030\001 \001(\0132\024.google.protobuf.AnyR\006detail"
-    "\"\232\006\n\006DdlRel\022I\n\014named_object\030\001 \001(\0132$.skyp"
-    "roto.substrait.NamedObjectWriteH\000R\013named"
-    "Object\022P\n\020extension_object\030\002 \001(\0132#.skypr"
-    "oto.substrait.ExtensionObjectH\000R\017extensi"
-    "onObject\022B\n\014table_schema\030\003 \001(\0132\037.skyprot"
-    "o.substrait.NamedStructR\013tableSchema\022T\n\016"
-    "table_defaults\030\004 \001(\0132-.skyproto.substrai"
-    "t.Expression.Literal.StructR\rtableDefaul"
-    "ts\022<\n\006object\030\005 \001(\0162$.skyproto.substrait."
-    "DdlRel.DdlObjectR\006object\0220\n\002op\030\006 \001(\0162 .s"
-    "kyproto.substrait.DdlRel.DdlOpR\002op\022@\n\017vi"
-    "ew_definition\030\007 \001(\0132\027.skyproto.substrait"
-    ".RelR\016viewDefinition\0225\n\006common\030\010 \001(\0132\035.s"
-    "kyproto.substrait.RelCommonR\006common\"R\n\tD"
-    "dlObject\022\032\n\026DDL_OBJECT_UNSPECIFIED\020\000\022\024\n\020"
-    "DDL_OBJECT_TABLE\020\001\022\023\n\017DDL_OBJECT_VIEW\020\002\""
-    "\215\001\n\005DdlOp\022\026\n\022DDL_OP_UNSPECIFIED\020\000\022\021\n\rDDL"
-    "_OP_CREATE\020\001\022\034\n\030DDL_OP_CREATE_OR_REPLACE"
-    "\020\002\022\020\n\014DDL_OP_ALTER\020\003\022\017\n\013DDL_OP_DROP\020\004\022\030\n"
-    "\024DDL_OP_DROP_IF_EXIST\020\005B\014\n\nwrite_type\"\257\007"
-    "\n\010WriteRel\022G\n\013named_table\030\001 \001(\0132$.skypro"
-    "to.substrait.NamedObjectWriteH\000R\nnamedTa"
-    "ble\022N\n\017extension_table\030\002 \001(\0132#.skyproto."
-    "substrait.ExtensionObjectH\000R\016extensionTa"
-    "ble\022B\n\014table_schema\030\003 \001(\0132\037.skyproto.sub"
-    "strait.NamedStructR\013tableSchema\0224\n\002op\030\004 "
-    "\001(\0162$.skyproto.substrait.WriteRel.WriteO"
-    "pR\002op\022-\n\005input\030\005 \001(\0132\027.skyproto.substrai"
-    "t.RelR\005input\022H\n\013create_mode\030\010 \001(\0162\'.skyp"
-    "roto.substrait.WriteRel.CreateModeR\ncrea"
-    "teMode\022\?\n\006output\030\006 \001(\0162\'.skyproto.substr"
-    "ait.WriteRel.OutputModeR\006output\0225\n\006commo"
-    "n\030\007 \001(\0132\035.skyproto.substrait.RelCommonR\006"
-    "common\"u\n\007WriteOp\022\030\n\024WRITE_OP_UNSPECIFIE"
-    "D\020\000\022\023\n\017WRITE_OP_INSERT\020\001\022\023\n\017WRITE_OP_DEL"
-    "ETE\020\002\022\023\n\017WRITE_OP_UPDATE\020\003\022\021\n\rWRITE_OP_C"
-    "TAS\020\004\"\261\001\n\nCreateMode\022\033\n\027CREATE_MODE_UNSP"
-    "ECIFIED\020\000\022 \n\034CREATE_MODE_APPEND_IF_EXIST"
-    "S\020\001\022!\n\035CREATE_MODE_REPLACE_IF_EXISTS\020\002\022 "
-    "\n\034CREATE_MODE_IGNORE_IF_EXISTS\020\003\022\037\n\033CREA"
-    "TE_MODE_ERROR_IF_EXISTS\020\004\"f\n\nOutputMode\022"
-    "\033\n\027OUTPUT_MODE_UNSPECIFIED\020\000\022\031\n\025OUTPUT_M"
-    "ODE_NO_OUTPUT\020\001\022 \n\034OUTPUT_MODE_MODIFIED_"
-    "RECORDS\020\002B\014\n\nwrite_type\"\301\003\n\tUpdateRel\022A\n"
-    "\013named_table\030\001 \001(\0132\036.skyproto.substrait."
-    "NamedTableH\000R\nnamedTable\022B\n\014table_schema"
-    "\030\002 \001(\0132\037.skyproto.substrait.NamedStructR"
-    "\013tableSchema\022<\n\tcondition\030\003 \001(\0132\036.skypro"
-    "to.substrait.ExpressionR\tcondition\022[\n\017tr"
-    "ansformations\030\004 \003(\01321.skyproto.substrait"
-    ".UpdateRel.TransformExpressionR\017transfor"
-    "mations\032\202\001\n\023TransformExpression\022F\n\016trans"
-    "formation\030\001 \001(\0132\036.skyproto.substrait.Exp"
-    "ressionR\016transformation\022#\n\rcolumn_target"
-    "\030\002 \001(\005R\014columnTargetB\r\n\013update_type\"\203\001\n\n"
-    "NamedTable\022\024\n\005names\030\001 \003(\tR\005names\022_\n\022adva"
+    "input\022m\n\020window_functions\030\003 \003(\0132B.skypro"
+    "to.substrait.ConsistentPartitionWindowRe"
+    "l.WindowRelFunctionR\017windowFunctions\022S\n\025"
+    "partition_expressions\030\004 \003(\0132\036.skyproto.s"
+    "ubstrait.ExpressionR\024partitionExpression"
+    "s\0223\n\005sorts\030\005 \003(\0132\035.skyproto.substrait.So"
+    "rtFieldR\005sorts\022_\n\022advanced_extension\030\n \001"
+    "(\01320.skyproto.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\032\237\005\n\021Wind"
+    "owRelFunction\022-\n\022function_reference\030\001 \001("
+    "\rR\021functionReference\022B\n\targuments\030\t \003(\0132"
+    "$.skyproto.substrait.FunctionArgumentR\ta"
+    "rguments\022<\n\007options\030\013 \003(\0132\".skyproto.sub"
+    "strait.FunctionOptionR\007options\0229\n\013output"
+    "_type\030\007 \001(\0132\030.skyproto.substrait.TypeR\no"
+    "utputType\022:\n\005phase\030\006 \001(\0162$.skyproto.subs"
+    "trait.AggregationPhaseR\005phase\022[\n\ninvocat"
+    "ion\030\n \001(\0162;.skyproto.substrait.Aggregate"
+    "Function.AggregationInvocationR\ninvocati"
+    "on\022T\n\013lower_bound\030\005 \001(\01323.skyproto.subst"
+    "rait.Expression.WindowFunction.BoundR\nlo"
+    "werBound\022T\n\013upper_bound\030\004 \001(\01323.skyproto"
+    ".substrait.Expression.WindowFunction.Bou"
+    "ndR\nupperBound\022Y\n\013bounds_type\030\014 \001(\01628.sk"
+    "yproto.substrait.Expression.WindowFuncti"
+    "on.BoundsTypeR\nboundsType\"\205\002\n\007SortRel\0225\n"
+    "\006common\030\001 \001(\0132\035.skyproto.substrait.RelCo"
+    "mmonR\006common\022-\n\005input\030\002 \001(\0132\027.skyproto.s"
+    "ubstrait.RelR\005input\0223\n\005sorts\030\003 \003(\0132\035.sky"
+    "proto.substrait.SortFieldR\005sorts\022_\n\022adva"
     "nced_extension\030\n \001(\01320.skyproto.substrai"
     "t.extensions.AdvancedExtensionR\021advanced"
-    "Extension\"\337\004\n\021ComparisonJoinKey\022A\n\004left\030"
-    "\001 \001(\0132-.skyproto.substrait.Expression.Fi"
-    "eldReferenceR\004left\022C\n\005right\030\002 \001(\0132-.skyp"
-    "roto.substrait.Expression.FieldReference"
-    "R\005right\022T\n\ncomparison\030\003 \001(\01324.skyproto.s"
-    "ubstrait.ComparisonJoinKey.ComparisonTyp"
-    "eR\ncomparison\032\262\001\n\016ComparisonType\022T\n\006simp"
-    "le\030\001 \001(\0162:.skyproto.substrait.Comparison"
-    "JoinKey.SimpleComparisonTypeH\000R\006simple\022<"
-    "\n\031custom_function_reference\030\002 \001(\rH\000R\027cus"
-    "tomFunctionReferenceB\014\n\ninner_type\"\266\001\n\024S"
-    "impleComparisonType\022&\n\"SIMPLE_COMPARISON"
-    "_TYPE_UNSPECIFIED\020\000\022\035\n\031SIMPLE_COMPARISON"
-    "_TYPE_EQ\020\001\022/\n+SIMPLE_COMPARISON_TYPE_IS_"
-    "NOT_DISTINCT_FROM\020\002\022&\n\"SIMPLE_COMPARISON"
-    "_TYPE_MIGHT_EQUAL\020\003\"\261\007\n\013HashJoinRel\0225\n\006c"
-    "ommon\030\001 \001(\0132\035.skyproto.substrait.RelComm"
-    "onR\006common\022+\n\004left\030\002 \001(\0132\027.skyproto.subs"
-    "trait.RelR\004left\022-\n\005right\030\003 \001(\0132\027.skyprot"
-    "o.substrait.RelR\005right\022N\n\tleft_keys\030\004 \003("
-    "\0132-.skyproto.substrait.Expression.FieldR"
-    "eferenceB\002\030\001R\010leftKeys\022P\n\nright_keys\030\005 \003"
-    "(\0132-.skyproto.substrait.Expression.Field"
-    "ReferenceB\002\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%"
-    ".skyproto.substrait.ComparisonJoinKeyR\004k"
-    "eys\022H\n\020post_join_filter\030\006 \001(\0132\036.skyproto"
-    ".substrait.ExpressionR\016postJoinFilter\022<\n"
-    "\004type\030\007 \001(\0162(.skyproto.substrait.HashJoi"
-    "nRel.JoinTypeR\004type\022_\n\022advanced_extensio"
-    "n\030\n \001(\01320.skyproto.substrait.extensions."
-    "AdvancedExtensionR\021advancedExtension\"\310\002\n"
-    "\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017"
-    "JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022"
-    "\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022"
-    "\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RI"
-    "GHT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024J"
-    "OIN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_"
-    "SINGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023"
-    "JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT"
-    "_MARK\020\014\"\263\007\n\014MergeJoinRel\0225\n\006common\030\001 \001(\013"
+    "Extension\"\220\002\n\tFilterRel\0225\n\006common\030\001 \001(\0132"
+    "\035.skyproto.substrait.RelCommonR\006common\022-"
+    "\n\005input\030\002 \001(\0132\027.skyproto.substrait.RelR\005"
+    "input\022<\n\tcondition\030\003 \001(\0132\036.skyproto.subs"
+    "trait.ExpressionR\tcondition\022_\n\022advanced_"
+    "extension\030\n \001(\01320.skyproto.substrait.ext"
+    "ensions.AdvancedExtensionR\021advancedExten"
+    "sion\"\222\004\n\006SetRel\0225\n\006common\030\001 \001(\0132\035.skypro"
+    "to.substrait.RelCommonR\006common\022/\n\006inputs"
+    "\030\002 \003(\0132\027.skyproto.substrait.RelR\006inputs\022"
+    "0\n\002op\030\003 \001(\0162 .skyproto.substrait.SetRel."
+    "SetOpR\002op\022_\n\022advanced_extension\030\n \001(\01320."
+    "skyproto.substrait.extensions.AdvancedEx"
+    "tensionR\021advancedExtension\"\214\002\n\005SetOp\022\026\n\022"
+    "SET_OP_UNSPECIFIED\020\000\022\030\n\024SET_OP_MINUS_PRI"
+    "MARY\020\001\022\034\n\030SET_OP_MINUS_PRIMARY_ALL\020\007\022\031\n\025"
+    "SET_OP_MINUS_MULTISET\020\002\022\037\n\033SET_OP_INTERS"
+    "ECTION_PRIMARY\020\003\022 \n\034SET_OP_INTERSECTION_"
+    "MULTISET\020\004\022$\n SET_OP_INTERSECTION_MULTIS"
+    "ET_ALL\020\010\022\031\n\025SET_OP_UNION_DISTINCT\020\005\022\024\n\020S"
+    "ET_OP_UNION_ALL\020\006\"\250\001\n\022ExtensionSingleRel"
+    "\0225\n\006common\030\001 \001(\0132\035.skyproto.substrait.Re"
+    "lCommonR\006common\022-\n\005input\030\002 \001(\0132\027.skyprot"
+    "o.substrait.RelR\005input\022,\n\006detail\030\003 \001(\0132\024"
+    ".google.protobuf.AnyR\006detail\"w\n\020Extensio"
+    "nLeafRel\0225\n\006common\030\001 \001(\0132\035.skyproto.subs"
+    "trait.RelCommonR\006common\022,\n\006detail\030\002 \001(\0132"
+    "\024.google.protobuf.AnyR\006detail\"\251\001\n\021Extens"
+    "ionMultiRel\0225\n\006common\030\001 \001(\0132\035.skyproto.s"
+    "ubstrait.RelCommonR\006common\022/\n\006inputs\030\002 \003"
+    "(\0132\027.skyproto.substrait.RelR\006inputs\022,\n\006d"
+    "etail\030\003 \001(\0132\024.google.protobuf.AnyR\006detai"
+    "l\"\206\n\n\013ExchangeRel\0225\n\006common\030\001 \001(\0132\035.skyp"
+    "roto.substrait.RelCommonR\006common\022-\n\005inpu"
+    "t\030\002 \001(\0132\027.skyproto.substrait.RelR\005input\022"
+    "\'\n\017partition_count\030\003 \001(\005R\016partitionCount"
+    "\022H\n\007targets\030\004 \003(\0132..skyproto.substrait.E"
+    "xchangeRel.ExchangeTargetR\007targets\022[\n\021sc"
+    "atter_by_fields\030\005 \001(\0132-.skyproto.substra"
+    "it.ExchangeRel.ScatterFieldsH\000R\017scatterB"
+    "yFields\022]\n\rsingle_target\030\006 \001(\01326.skyprot"
+    "o.substrait.ExchangeRel.SingleBucketExpr"
+    "essionH\000R\014singleTarget\022Z\n\014multi_target\030\007"
+    " \001(\01325.skyproto.substrait.ExchangeRel.Mu"
+    "ltiBucketExpressionH\000R\013multiTarget\022M\n\013ro"
+    "und_robin\030\010 \001(\0132*.skyproto.substrait.Exc"
+    "hangeRel.RoundRobinH\000R\nroundRobin\022I\n\tbro"
+    "adcast\030\t \001(\0132).skyproto.substrait.Exchan"
+    "geRel.BroadcastH\000R\tbroadcast\022_\n\022advanced"
+    "_extension\030\n \001(\01320.skyproto.substrait.ex"
+    "tensions.AdvancedExtensionR\021advancedExte"
+    "nsion\032V\n\rScatterFields\022E\n\006fields\030\001 \003(\0132-"
+    ".skyproto.substrait.Expression.FieldRefe"
+    "renceR\006fields\032X\n\026SingleBucketExpression\022"
+    ">\n\nexpression\030\001 \001(\0132\036.skyproto.substrait"
+    ".ExpressionR\nexpression\032\211\001\n\025MultiBucketE"
+    "xpression\022>\n\nexpression\030\001 \001(\0132\036.skyproto"
+    ".substrait.ExpressionR\nexpression\0220\n\024con"
+    "strained_to_count\030\002 \001(\010R\022constrainedToCo"
+    "unt\032\013\n\tBroadcast\032\"\n\nRoundRobin\022\024\n\005exact\030"
+    "\001 \001(\010R\005exact\032\212\001\n\016ExchangeTarget\022!\n\014parti"
+    "tion_id\030\001 \003(\005R\013partitionId\022\022\n\003uri\030\002 \001(\tH"
+    "\000R\003uri\0222\n\010extended\030\003 \001(\0132\024.google.protob"
+    "uf.AnyH\000R\010extendedB\r\n\013target_typeB\017\n\rexc"
+    "hange_kind\"\312\003\n\tExpandRel\0225\n\006common\030\001 \001(\013"
+    "2\035.skyproto.substrait.RelCommonR\006common\022"
+    "-\n\005input\030\002 \001(\0132\027.skyproto.substrait.RelR"
+    "\005input\022A\n\006fields\030\004 \003(\0132).skyproto.substr"
+    "ait.ExpandRel.ExpandFieldR\006fields\032\301\001\n\013Ex"
+    "pandField\022W\n\017switching_field\030\002 \001(\0132,.sky"
+    "proto.substrait.ExpandRel.SwitchingField"
+    "H\000R\016switchingField\022K\n\020consistent_field\030\003"
+    " \001(\0132\036.skyproto.substrait.ExpressionH\000R\017"
+    "consistentFieldB\014\n\nfield_type\032P\n\016Switchi"
+    "ngField\022>\n\nduplicates\030\001 \003(\0132\036.skyproto.s"
+    "ubstrait.ExpressionR\nduplicates\"N\n\007RelRo"
+    "ot\022-\n\005input\030\001 \001(\0132\027.skyproto.substrait.R"
+    "elR\005input\022\024\n\005names\030\002 \003(\tR\005names\"\233\013\n\003Rel\022"
+    "1\n\004read\030\001 \001(\0132\033.skyproto.substrait.ReadR"
+    "elH\000R\004read\0227\n\006filter\030\002 \001(\0132\035.skyproto.su"
+    "bstrait.FilterRelH\000R\006filter\0224\n\005fetch\030\003 \001"
+    "(\0132\034.skyproto.substrait.FetchRelH\000R\005fetc"
+    "h\022@\n\taggregate\030\004 \001(\0132 .skyproto.substrai"
+    "t.AggregateRelH\000R\taggregate\0221\n\004sort\030\005 \001("
+    "\0132\033.skyproto.substrait.SortRelH\000R\004sort\0221"
+    "\n\004join\030\006 \001(\0132\033.skyproto.substrait.JoinRe"
+    "lH\000R\004join\022:\n\007project\030\007 \001(\0132\036.skyproto.su"
+    "bstrait.ProjectRelH\000R\007project\022.\n\003set\030\010 \001"
+    "(\0132\032.skyproto.substrait.SetRelH\000R\003set\022S\n"
+    "\020extension_single\030\t \001(\0132&.skyproto.subst"
+    "rait.ExtensionSingleRelH\000R\017extensionSing"
+    "le\022P\n\017extension_multi\030\n \001(\0132%.skyproto.s"
+    "ubstrait.ExtensionMultiRelH\000R\016extensionM"
+    "ulti\022M\n\016extension_leaf\030\013 \001(\0132$.skyproto."
+    "substrait.ExtensionLeafRelH\000R\rextensionL"
+    "eaf\0224\n\005cross\030\014 \001(\0132\034.skyproto.substrait."
+    "CrossRelH\000R\005cross\022@\n\treference\030\025 \001(\0132 .s"
+    "kyproto.substrait.ReferenceRelH\000R\trefere"
+    "nce\0224\n\005write\030\023 \001(\0132\034.skyproto.substrait."
+    "WriteRelH\000R\005write\022.\n\003ddl\030\024 \001(\0132\032.skyprot"
+    "o.substrait.DdlRelH\000R\003ddl\0227\n\006update\030\026 \001("
+    "\0132\035.skyproto.substrait.UpdateRelH\000R\006upda"
+    "te\022>\n\thash_join\030\r \001(\0132\037.skyproto.substra"
+    "it.HashJoinRelH\000R\010hashJoin\022A\n\nmerge_join"
+    "\030\016 \001(\0132 .skyproto.substrait.MergeJoinRel"
+    "H\000R\tmergeJoin\022Q\n\020nested_loop_join\030\022 \001(\0132"
+    "%.skyproto.substrait.NestedLoopJoinRelH\000"
+    "R\016nestedLoopJoin\022J\n\006window\030\021 \001(\01320.skypr"
+    "oto.substrait.ConsistentPartitionWindowR"
+    "elH\000R\006window\022=\n\010exchange\030\017 \001(\0132\037.skyprot"
+    "o.substrait.ExchangeRelH\000R\010exchange\0227\n\006e"
+    "xpand\030\020 \001(\0132\035.skyproto.substrait.ExpandR"
+    "elH\000R\006expand\022+\n\021has_splitoverride\030\037 \001(\010R"
+    "\020hasSplitoverrideB\n\n\010rel_type\"\211\001\n\020NamedO"
+    "bjectWrite\022\024\n\005names\030\001 \003(\tR\005names\022_\n\022adva"
+    "nced_extension\030\n \001(\01320.skyproto.substrai"
+    "t.extensions.AdvancedExtensionR\021advanced"
+    "Extension\"\?\n\017ExtensionObject\022,\n\006detail\030\001"
+    " \001(\0132\024.google.protobuf.AnyR\006detail\"\373\006\n\006D"
+    "dlRel\022I\n\014named_object\030\001 \001(\0132$.skyproto.s"
+    "ubstrait.NamedObjectWriteH\000R\013namedObject"
+    "\022P\n\020extension_object\030\002 \001(\0132#.skyproto.su"
+    "bstrait.ExtensionObjectH\000R\017extensionObje"
+    "ct\022B\n\014table_schema\030\003 \001(\0132\037.skyproto.subs"
+    "trait.NamedStructR\013tableSchema\022T\n\016table_"
+    "defaults\030\004 \001(\0132-.skyproto.substrait.Expr"
+    "ession.Literal.StructR\rtableDefaults\022<\n\006"
+    "object\030\005 \001(\0162$.skyproto.substrait.DdlRel"
+    ".DdlObjectR\006object\0220\n\002op\030\006 \001(\0162 .skyprot"
+    "o.substrait.DdlRel.DdlOpR\002op\022@\n\017view_def"
+    "inition\030\007 \001(\0132\027.skyproto.substrait.RelR\016"
+    "viewDefinition\0225\n\006common\030\010 \001(\0132\035.skyprot"
+    "o.substrait.RelCommonR\006common\022_\n\022advance"
+    "d_extension\030\t \001(\01320.skyproto.substrait.e"
+    "xtensions.AdvancedExtensionR\021advancedExt"
+    "ension\"R\n\tDdlObject\022\032\n\026DDL_OBJECT_UNSPEC"
+    "IFIED\020\000\022\024\n\020DDL_OBJECT_TABLE\020\001\022\023\n\017DDL_OBJ"
+    "ECT_VIEW\020\002\"\215\001\n\005DdlOp\022\026\n\022DDL_OP_UNSPECIFI"
+    "ED\020\000\022\021\n\rDDL_OP_CREATE\020\001\022\034\n\030DDL_OP_CREATE"
+    "_OR_REPLACE\020\002\022\020\n\014DDL_OP_ALTER\020\003\022\017\n\013DDL_O"
+    "P_DROP\020\004\022\030\n\024DDL_OP_DROP_IF_EXIST\020\005B\014\n\nwr"
+    "ite_type\"\220\010\n\010WriteRel\022G\n\013named_table\030\001 \001"
+    "(\0132$.skyproto.substrait.NamedObjectWrite"
+    "H\000R\nnamedTable\022N\n\017extension_table\030\002 \001(\0132"
+    "#.skyproto.substrait.ExtensionObjectH\000R\016"
+    "extensionTable\022B\n\014table_schema\030\003 \001(\0132\037.s"
+    "kyproto.substrait.NamedStructR\013tableSche"
+    "ma\0224\n\002op\030\004 \001(\0162$.skyproto.substrait.Writ"
+    "eRel.WriteOpR\002op\022-\n\005input\030\005 \001(\0132\027.skypro"
+    "to.substrait.RelR\005input\022H\n\013create_mode\030\010"
+    " \001(\0162\'.skyproto.substrait.WriteRel.Creat"
+    "eModeR\ncreateMode\022\?\n\006output\030\006 \001(\0162\'.skyp"
+    "roto.substrait.WriteRel.OutputModeR\006outp"
+    "ut\0225\n\006common\030\007 \001(\0132\035.skyproto.substrait."
+    "RelCommonR\006common\022_\n\022advanced_extension\030"
+    "\t \001(\01320.skyproto.substrait.extensions.Ad"
+    "vancedExtensionR\021advancedExtension\"u\n\007Wr"
+    "iteOp\022\030\n\024WRITE_OP_UNSPECIFIED\020\000\022\023\n\017WRITE"
+    "_OP_INSERT\020\001\022\023\n\017WRITE_OP_DELETE\020\002\022\023\n\017WRI"
+    "TE_OP_UPDATE\020\003\022\021\n\rWRITE_OP_CTAS\020\004\"\261\001\n\nCr"
+    "eateMode\022\033\n\027CREATE_MODE_UNSPECIFIED\020\000\022 \n"
+    "\034CREATE_MODE_APPEND_IF_EXISTS\020\001\022!\n\035CREAT"
+    "E_MODE_REPLACE_IF_EXISTS\020\002\022 \n\034CREATE_MOD"
+    "E_IGNORE_IF_EXISTS\020\003\022\037\n\033CREATE_MODE_ERRO"
+    "R_IF_EXISTS\020\004\"f\n\nOutputMode\022\033\n\027OUTPUT_MO"
+    "DE_UNSPECIFIED\020\000\022\031\n\025OUTPUT_MODE_NO_OUTPU"
+    "T\020\001\022 \n\034OUTPUT_MODE_MODIFIED_RECORDS\020\002B\014\n"
+    "\nwrite_type\"\242\004\n\tUpdateRel\022A\n\013named_table"
+    "\030\001 \001(\0132\036.skyproto.substrait.NamedTableH\000"
+    "R\nnamedTable\022B\n\014table_schema\030\002 \001(\0132\037.sky"
+    "proto.substrait.NamedStructR\013tableSchema"
+    "\022<\n\tcondition\030\003 \001(\0132\036.skyproto.substrait"
+    ".ExpressionR\tcondition\022[\n\017transformation"
+    "s\030\004 \003(\01321.skyproto.substrait.UpdateRel.T"
+    "ransformExpressionR\017transformations\022_\n\022a"
+    "dvanced_extension\030\005 \001(\01320.skyproto.subst"
+    "rait.extensions.AdvancedExtensionR\021advan"
+    "cedExtension\032\202\001\n\023TransformExpression\022F\n\016"
+    "transformation\030\001 \001(\0132\036.skyproto.substrai"
+    "t.ExpressionR\016transformation\022#\n\rcolumn_t"
+    "arget\030\002 \001(\005R\014columnTargetB\r\n\013update_type"
+    "\"\203\001\n\nNamedTable\022\024\n\005names\030\001 \003(\tR\005names\022_\n"
+    "\022advanced_extension\030\n \001(\01320.skyproto.sub"
+    "strait.extensions.AdvancedExtensionR\021adv"
+    "ancedExtension\"\337\004\n\021ComparisonJoinKey\022A\n\004"
+    "left\030\001 \001(\0132-.skyproto.substrait.Expressi"
+    "on.FieldReferenceR\004left\022C\n\005right\030\002 \001(\0132-"
+    ".skyproto.substrait.Expression.FieldRefe"
+    "renceR\005right\022T\n\ncomparison\030\003 \001(\01324.skypr"
+    "oto.substrait.ComparisonJoinKey.Comparis"
+    "onTypeR\ncomparison\032\262\001\n\016ComparisonType\022T\n"
+    "\006simple\030\001 \001(\0162:.skyproto.substrait.Compa"
+    "risonJoinKey.SimpleComparisonTypeH\000R\006sim"
+    "ple\022<\n\031custom_function_reference\030\002 \001(\rH\000"
+    "R\027customFunctionReferenceB\014\n\ninner_type\""
+    "\266\001\n\024SimpleComparisonType\022&\n\"SIMPLE_COMPA"
+    "RISON_TYPE_UNSPECIFIED\020\000\022\035\n\031SIMPLE_COMPA"
+    "RISON_TYPE_EQ\020\001\022/\n+SIMPLE_COMPARISON_TYP"
+    "E_IS_NOT_DISTINCT_FROM\020\002\022&\n\"SIMPLE_COMPA"
+    "RISON_TYPE_MIGHT_EQUAL\020\003\"\261\007\n\013HashJoinRel"
+    "\0225\n\006common\030\001 \001(\0132\035.skyproto.substrait.Re"
+    "lCommonR\006common\022+\n\004left\030\002 \001(\0132\027.skyproto"
+    ".substrait.RelR\004left\022-\n\005right\030\003 \001(\0132\027.sk"
+    "yproto.substrait.RelR\005right\022N\n\tleft_keys"
+    "\030\004 \003(\0132-.skyproto.substrait.Expression.F"
+    "ieldReferenceB\002\030\001R\010leftKeys\022P\n\nright_key"
+    "s\030\005 \003(\0132-.skyproto.substrait.Expression."
+    "FieldReferenceB\002\030\001R\trightKeys\0229\n\004keys\030\010 "
+    "\003(\0132%.skyproto.substrait.ComparisonJoinK"
+    "eyR\004keys\022H\n\020post_join_filter\030\006 \001(\0132\036.sky"
+    "proto.substrait.ExpressionR\016postJoinFilt"
+    "er\022<\n\004type\030\007 \001(\0162(.skyproto.substrait.Ha"
+    "shJoinRel.JoinTypeR\004type\022_\n\022advanced_ext"
+    "ension\030\n \001(\01320.skyproto.substrait.extens"
+    "ions.AdvancedExtensionR\021advancedExtensio"
+    "n\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020"
+    "\000\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTE"
+    "R\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIG"
+    "HT\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TY"
+    "PE_RIGHT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007"
+    "\022\030\n\024JOIN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_"
+    "LEFT_SINGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020"
+    "\n\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_"
+    "RIGHT_MARK\020\014\"\263\007\n\014MergeJoinRel\0225\n\006common\030"
+    "\001 \001(\0132\035.skyproto.substrait.RelCommonR\006co"
+    "mmon\022+\n\004left\030\002 \001(\0132\027.skyproto.substrait."
+    "RelR\004left\022-\n\005right\030\003 \001(\0132\027.skyproto.subs"
+    "trait.RelR\005right\022N\n\tleft_keys\030\004 \003(\0132-.sk"
+    "yproto.substrait.Expression.FieldReferen"
+    "ceB\002\030\001R\010leftKeys\022P\n\nright_keys\030\005 \003(\0132-.s"
+    "kyproto.substrait.Expression.FieldRefere"
+    "nceB\002\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%.skypr"
+    "oto.substrait.ComparisonJoinKeyR\004keys\022H\n"
+    "\020post_join_filter\030\006 \001(\0132\036.skyproto.subst"
+    "rait.ExpressionR\016postJoinFilter\022=\n\004type\030"
+    "\007 \001(\0162).skyproto.substrait.MergeJoinRel."
+    "JoinTypeR\004type\022_\n\022advanced_extension\030\n \001"
+    "(\01320.skyproto.substrait.extensions.Advan"
+    "cedExtensionR\021advancedExtension\"\310\002\n\010Join"
+    "Type\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_"
+    "TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOI"
+    "N_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JO"
+    "IN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_S"
+    "EMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_T"
+    "YPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGL"
+    "E\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_"
+    "TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK"
+    "\020\014\"\326\005\n\021NestedLoopJoinRel\0225\n\006common\030\001 \001(\013"
     "2\035.skyproto.substrait.RelCommonR\006common\022"
     "+\n\004left\030\002 \001(\0132\027.skyproto.substrait.RelR\004"
     "left\022-\n\005right\030\003 \001(\0132\027.skyproto.substrait"
-    ".RelR\005right\022N\n\tleft_keys\030\004 \003(\0132-.skyprot"
-    "o.substrait.Expression.FieldReferenceB\002\030"
-    "\001R\010leftKeys\022P\n\nright_keys\030\005 \003(\0132-.skypro"
-    "to.substrait.Expression.FieldReferenceB\002"
-    "\030\001R\trightKeys\0229\n\004keys\030\010 \003(\0132%.skyproto.s"
-    "ubstrait.ComparisonJoinKeyR\004keys\022H\n\020post"
-    "_join_filter\030\006 \001(\0132\036.skyproto.substrait."
-    "ExpressionR\016postJoinFilter\022=\n\004type\030\007 \001(\016"
-    "2).skyproto.substrait.MergeJoinRel.JoinT"
-    "ypeR\004type\022_\n\022advanced_extension\030\n \001(\01320."
-    "skyproto.substrait.extensions.AdvancedEx"
-    "tensionR\021advancedExtension\"\310\002\n\010JoinType\022"
-    "\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017JOIN_TYPE_"
-    "INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n\016JOIN_TYP"
-    "E_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027\n\023JOIN_TY"
-    "PE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIGHT_SEMI\020\006"
-    "\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JOIN_TYPE_R"
-    "IGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_SINGLE\020\t\022\032"
-    "\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023JOIN_TYPE_"
-    "LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_MARK\020\014\"\326\005"
-    "\n\021NestedLoopJoinRel\0225\n\006common\030\001 \001(\0132\035.sk"
-    "yproto.substrait.RelCommonR\006common\022+\n\004le"
-    "ft\030\002 \001(\0132\027.skyproto.substrait.RelR\004left\022"
-    "-\n\005right\030\003 \001(\0132\027.skyproto.substrait.RelR"
-    "\005right\022>\n\nexpression\030\004 \001(\0132\036.skyproto.su"
-    "bstrait.ExpressionR\nexpression\022B\n\004type\030\005"
-    " \001(\0162..skyproto.substrait.NestedLoopJoin"
-    "Rel.JoinTypeR\004type\022_\n\022advanced_extension"
-    "\030\n \001(\01320.skyproto.substrait.extensions.A"
-    "dvancedExtensionR\021advancedExtension\"\310\002\n\010"
-    "JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000\022\023\n\017J"
-    "OIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER\020\002\022\022\n"
-    "\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGHT\020\004\022\027"
-    "\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYPE_RIG"
-    "HT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022\030\n\024JO"
-    "IN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_LEFT_S"
-    "INGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n\022\027\n\023J"
-    "OIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_RIGHT_"
-    "MARK\020\014\"\234\001\n\020FunctionArgument\022\024\n\004enum\030\001 \001("
-    "\tH\000R\004enum\022.\n\004type\030\002 \001(\0132\030.skyproto.subst"
-    "rait.TypeH\000R\004type\0226\n\005value\030\003 \001(\0132\036.skypr"
-    "oto.substrait.ExpressionH\000R\005valueB\n\n\010arg"
-    "_type\"D\n\016FunctionOption\022\022\n\004name\030\001 \001(\tR\004n"
-    "ame\022\036\n\npreference\030\002 \003(\tR\npreference\"\265b\n\n"
-    "Expression\022B\n\007literal\030\001 \001(\0132&.skyproto.s"
-    "ubstrait.Expression.LiteralH\000R\007literal\022M"
-    "\n\tselection\030\002 \001(\0132-.skyproto.substrait.E"
-    "xpression.FieldReferenceH\000R\tselection\022X\n"
-    "\017scalar_function\030\003 \001(\0132-.skyproto.substr"
-    "ait.Expression.ScalarFunctionH\000R\016scalarF"
-    "unction\022X\n\017window_function\030\005 \001(\0132-.skypr"
-    "oto.substrait.Expression.WindowFunctionH"
-    "\000R\016windowFunction\022@\n\007if_then\030\006 \001(\0132%.sky"
-    "proto.substrait.Expression.IfThenH\000R\006ifT"
-    "hen\022^\n\021switch_expression\030\007 \001(\0132/.skyprot"
-    "o.substrait.Expression.SwitchExpressionH"
-    "\000R\020switchExpression\022Y\n\020singular_or_list\030"
-    "\010 \001(\0132-.skyproto.substrait.Expression.Si"
-    "ngularOrListH\000R\016singularOrList\022P\n\rmulti_"
-    "or_list\030\t \001(\0132*.skyproto.substrait.Expre"
-    "ssion.MultiOrListH\000R\013multiOrList\0229\n\004cast"
-    "\030\013 \001(\0132#.skyproto.substrait.Expression.C"
-    "astH\000R\004cast\022E\n\010subquery\030\014 \001(\0132\'.skyproto"
-    ".substrait.Expression.SubqueryH\000R\010subque"
-    "ry\022\?\n\006nested\030\r \001(\0132%.skyproto.substrait."
-    "Expression.NestedH\000R\006nested\022=\n\004enum\030\n \001("
-    "\0132#.skyproto.substrait.Expression.EnumB\002"
-    "\030\001H\000R\004enum\032\223\001\n\004Enum\022\036\n\tspecified\030\001 \001(\tH\000"
-    "R\tspecified\022M\n\013unspecified\030\002 \001(\0132).skypr"
-    "oto.substrait.Expression.Enum.EmptyH\000R\013u"
-    "nspecified\032\013\n\005Empty:\002\030\001:\002\030\001B\013\n\tenum_kind"
-    "\032\363\027\n\007Literal\022\032\n\007boolean\030\001 \001(\010H\000R\007boolean"
-    "\022\020\n\002i8\030\002 \001(\005H\000R\002i8\022\022\n\003i16\030\003 \001(\005H\000R\003i16\022\022"
-    "\n\003i32\030\005 \001(\005H\000R\003i32\022\022\n\003i64\030\007 \001(\003H\000R\003i64\022\024"
-    "\n\004fp32\030\n \001(\002H\000R\004fp32\022\024\n\004fp64\030\013 \001(\001H\000R\004fp"
-    "64\022\030\n\006string\030\014 \001(\tH\000R\006string\022\030\n\006binary\030\r"
-    " \001(\014H\000R\006binary\022\"\n\ttimestamp\030\016 \001(\003B\002\030\001H\000R"
-    "\ttimestamp\022\024\n\004date\030\020 \001(\005H\000R\004date\022\024\n\004time"
-    "\030\021 \001(\003H\000R\004time\022q\n\026interval_year_to_month"
-    "\030\023 \001(\0132:.skyproto.substrait.Expression.L"
-    "iteral.IntervalYearToMonthH\000R\023intervalYe"
-    "arToMonth\022q\n\026interval_day_to_second\030\024 \001("
-    "\0132:.skyproto.substrait.Expression.Litera"
-    "l.IntervalDayToSecondH\000R\023intervalDayToSe"
-    "cond\022f\n\021interval_compound\030$ \001(\01327.skypro"
-    "to.substrait.Expression.Literal.Interval"
-    "CompoundH\000R\020intervalCompound\022\037\n\nfixed_ch"
-    "ar\030\025 \001(\tH\000R\tfixedChar\022K\n\010var_char\030\026 \001(\0132"
-    "..skyproto.substrait.Expression.Literal."
-    "VarCharH\000R\007varChar\022#\n\014fixed_binary\030\027 \001(\014"
-    "H\000R\013fixedBinary\022J\n\007decimal\030\030 \001(\0132..skypr"
-    "oto.substrait.Expression.Literal.Decimal"
-    "H\000R\007decimal\022l\n\023precision_timestamp\030\" \001(\013"
-    "29.skyproto.substrait.Expression.Literal"
-    ".PrecisionTimestampH\000R\022precisionTimestam"
-    "p\022q\n\026precision_timestamp_tz\030# \001(\01329.skyp"
-    "roto.substrait.Expression.Literal.Precis"
-    "ionTimestampH\000R\024precisionTimestampTz\022G\n\006"
-    "struct\030\031 \001(\0132-.skyproto.substrait.Expres"
-    "sion.Literal.StructH\000R\006struct\022>\n\003map\030\032 \001"
-    "(\0132*.skyproto.substrait.Expression.Liter"
-    "al.MapH\000R\003map\022\'\n\014timestamp_tz\030\033 \001(\003B\002\030\001H"
-    "\000R\013timestampTz\022\024\n\004uuid\030\034 \001(\014H\000R\004uuid\022.\n\004"
-    "null\030\035 \001(\0132\030.skyproto.substrait.TypeH\000R\004"
-    "null\022A\n\004list\030\036 \001(\0132+.skyproto.substrait."
-    "Expression.Literal.ListH\000R\004list\022>\n\nempty"
-    "_list\030\037 \001(\0132\035.skyproto.substrait.Type.Li"
-    "stH\000R\temptyList\022;\n\tempty_map\030  \001(\0132\034.sky"
-    "proto.substrait.Type.MapH\000R\010emptyMap\022W\n\014"
-    "user_defined\030! \001(\01322.skyproto.substrait."
-    "Expression.Literal.UserDefinedH\000R\013userDe"
-    "fined\022\032\n\010nullable\0302 \001(\010R\010nullable\0228\n\030typ"
-    "e_variation_reference\0303 \001(\rR\026typeVariati"
-    "onReference\0327\n\007VarChar\022\024\n\005value\030\001 \001(\tR\005v"
-    "alue\022\026\n\006length\030\002 \001(\rR\006length\032S\n\007Decimal\022"
-    "\024\n\005value\030\001 \001(\014R\005value\022\034\n\tprecision\030\002 \001(\005"
-    "R\tprecision\022\024\n\005scale\030\003 \001(\005R\005scale\032H\n\022Pre"
-    "cisionTimestamp\022\034\n\tprecision\030\001 \001(\005R\tprec"
-    "ision\022\024\n\005value\030\002 \001(\003R\005value\032\336\001\n\003Map\022R\n\nk"
-    "ey_values\030\001 \003(\01323.skyproto.substrait.Exp"
-    "ression.Literal.Map.KeyValueR\tkeyValues\032"
-    "\202\001\n\010KeyValue\0228\n\003key\030\001 \001(\0132&.skyproto.sub"
-    "strait.Expression.LiteralR\003key\022<\n\005value\030"
-    "\002 \001(\0132&.skyproto.substrait.Expression.Li"
-    "teralR\005value\032C\n\023IntervalYearToMonth\022\024\n\005y"
-    "ears\030\001 \001(\005R\005years\022\026\n\006months\030\002 \001(\005R\006month"
-    "s\032\277\001\n\023IntervalDayToSecond\022\022\n\004days\030\001 \001(\005R"
-    "\004days\022\030\n\007seconds\030\002 \001(\005R\007seconds\022(\n\014micro"
-    "seconds\030\003 \001(\005B\002\030\001H\000R\014microseconds\022\036\n\tpre"
-    "cision\030\004 \001(\005H\000R\tprecision\022\036\n\nsubseconds\030"
-    "\005 \001(\003R\nsubsecondsB\020\n\016precision_mode\032\364\001\n\020"
-    "IntervalCompound\022o\n\026interval_year_to_mon"
-    "th\030\001 \001(\0132:.skyproto.substrait.Expression"
-    ".Literal.IntervalYearToMonthR\023intervalYe"
-    "arToMonth\022o\n\026interval_day_to_second\030\002 \001("
-    "\0132:.skyproto.substrait.Expression.Litera"
-    "l.IntervalDayToSecondR\023intervalDayToSeco"
-    "nd\032H\n\006Struct\022>\n\006fields\030\001 \003(\0132&.skyproto."
-    "substrait.Expression.LiteralR\006fields\032F\n\004"
-    "List\022>\n\006values\030\001 \003(\0132&.skyproto.substrai"
-    "t.Expression.LiteralR\006values\032\377\001\n\013UserDef"
-    "ined\022%\n\016type_reference\030\001 \001(\rR\rtypeRefere"
-    "nce\022K\n\017type_parameters\030\003 \003(\0132\".skyproto."
-    "substrait.Type.ParameterR\016typeParameters"
-    "\022,\n\005value\030\002 \001(\0132\024.google.protobuf.AnyH\000R"
-    "\005value\022G\n\006struct\030\004 \001(\0132-.skyproto.substr"
-    "ait.Expression.Literal.StructH\000R\006structB"
-    "\005\n\003valB\016\n\014literal_type\032\207\005\n\006Nested\022\032\n\010nul"
-    "lable\030\001 \001(\010R\010nullable\0228\n\030type_variation_"
-    "reference\030\002 \001(\rR\026typeVariationReference\022"
-    "F\n\006struct\030\003 \001(\0132,.skyproto.substrait.Exp"
-    "ression.Nested.StructH\000R\006struct\022@\n\004list\030"
-    "\004 \001(\0132*.skyproto.substrait.Expression.Ne"
-    "sted.ListH\000R\004list\022=\n\003map\030\005 \001(\0132).skyprot"
-    "o.substrait.Expression.Nested.MapH\000R\003map"
-    "\032\314\001\n\003Map\022Q\n\nkey_values\030\001 \003(\01322.skyproto."
-    "substrait.Expression.Nested.Map.KeyValue"
-    "R\tkeyValues\032r\n\010KeyValue\0220\n\003key\030\001 \001(\0132\036.s"
-    "kyproto.substrait.ExpressionR\003key\0224\n\005val"
-    "ue\030\002 \001(\0132\036.skyproto.substrait.Expression"
-    "R\005value\032@\n\006Struct\0226\n\006fields\030\001 \003(\0132\036.skyp"
-    "roto.substrait.ExpressionR\006fields\032>\n\004Lis"
-    "t\0226\n\006values\030\001 \003(\0132\036.skyproto.substrait.E"
-    "xpressionR\006valuesB\r\n\013nested_type\032\264\002\n\016Sca"
-    "larFunction\022-\n\022function_reference\030\001 \001(\rR"
-    "\021functionReference\022B\n\targuments\030\004 \003(\0132$."
-    "skyproto.substrait.FunctionArgumentR\targ"
-    "uments\022<\n\007options\030\005 \003(\0132\".skyproto.subst"
-    "rait.FunctionOptionR\007options\0229\n\013output_t"
-    "ype\030\003 \001(\0132\030.skyproto.substrait.TypeR\nout"
-    "putType\0226\n\004args\030\002 \003(\0132\036.skyproto.substra"
-    "it.ExpressionB\002\030\001R\004args\032\230\013\n\016WindowFuncti"
-    "on\022-\n\022function_reference\030\001 \001(\rR\021function"
-    "Reference\022B\n\targuments\030\t \003(\0132$.skyproto."
-    "substrait.FunctionArgumentR\targuments\022<\n"
-    "\007options\030\013 \003(\0132\".skyproto.substrait.Func"
-    "tionOptionR\007options\0229\n\013output_type\030\007 \001(\013"
-    "2\030.skyproto.substrait.TypeR\noutputType\022:"
-    "\n\005phase\030\006 \001(\0162$.skyproto.substrait.Aggre"
-    "gationPhaseR\005phase\0223\n\005sorts\030\003 \003(\0132\035.skyp"
-    "roto.substrait.SortFieldR\005sorts\022[\n\ninvoc"
-    "ation\030\n \001(\0162;.skyproto.substrait.Aggrega"
-    "teFunction.AggregationInvocationR\ninvoca"
-    "tion\022>\n\npartitions\030\002 \003(\0132\036.skyproto.subs"
-    "trait.ExpressionR\npartitions\022Y\n\013bounds_t"
-    "ype\030\014 \001(\01628.skyproto.substrait.Expressio"
-    "n.WindowFunction.BoundsTypeR\nboundsType\022"
-    "T\n\013lower_bound\030\005 \001(\01323.skyproto.substrai"
-    "t.Expression.WindowFunction.BoundR\nlower"
-    "Bound\022T\n\013upper_bound\030\004 \001(\01323.skyproto.su"
-    "bstrait.Expression.WindowFunction.BoundR"
-    "\nupperBound\0226\n\004args\030\010 \003(\0132\036.skyproto.sub"
-    "strait.ExpressionB\002\030\001R\004args\032\364\003\n\005Bound\022]\n"
-    "\tpreceding\030\001 \001(\0132=.skyproto.substrait.Ex"
-    "pression.WindowFunction.Bound.PrecedingH"
-    "\000R\tpreceding\022]\n\tfollowing\030\002 \001(\0132=.skypro"
-    "to.substrait.Expression.WindowFunction.B"
-    "ound.FollowingH\000R\tfollowing\022a\n\013current_r"
-    "ow\030\003 \001(\0132>.skyproto.substrait.Expression"
-    ".WindowFunction.Bound.CurrentRowH\000R\ncurr"
-    "entRow\022]\n\tunbounded\030\004 \001(\0132=.skyproto.sub"
-    "strait.Expression.WindowFunction.Bound.U"
-    "nboundedH\000R\tunbounded\032#\n\tPreceding\022\026\n\006of"
-    "fset\030\001 \001(\003R\006offset\032#\n\tFollowing\022\026\n\006offse"
-    "t\030\001 \001(\003R\006offset\032\014\n\nCurrentRow\032\013\n\tUnbound"
-    "edB\006\n\004kind\"V\n\nBoundsType\022\033\n\027BOUNDS_TYPE_"
-    "UNSPECIFIED\020\000\022\024\n\020BOUNDS_TYPE_ROWS\020\001\022\025\n\021B"
-    "OUNDS_TYPE_RANGE\020\002\032\356\001\n\006IfThen\022@\n\003ifs\030\001 \003"
-    "(\0132..skyproto.substrait.Expression.IfThe"
-    "n.IfClauseR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyproto"
-    ".substrait.ExpressionR\004else\032n\n\010IfClause\022"
-    ".\n\002if\030\001 \001(\0132\036.skyproto.substrait.Express"
-    "ionR\002if\0222\n\004then\030\002 \001(\0132\036.skyproto.substra"
-    "it.ExpressionR\004then\032\307\002\n\004Cast\022,\n\004type\030\001 \001"
-    "(\0132\030.skyproto.substrait.TypeR\004type\0224\n\005in"
-    "put\030\002 \001(\0132\036.skyproto.substrait.Expressio"
-    "nR\005input\022^\n\020failure_behavior\030\003 \001(\01623.sky"
-    "proto.substrait.Expression.Cast.FailureB"
-    "ehaviorR\017failureBehavior\"{\n\017FailureBehav"
-    "ior\022 \n\034FAILURE_BEHAVIOR_UNSPECIFIED\020\000\022 \n"
-    "\034FAILURE_BEHAVIOR_RETURN_NULL\020\001\022$\n FAILU"
-    "RE_BEHAVIOR_THROW_EXCEPTION\020\002\032\276\002\n\020Switch"
-    "Expression\0224\n\005match\030\003 \001(\0132\036.skyproto.sub"
-    "strait.ExpressionR\005match\022I\n\003ifs\030\001 \003(\01327."
-    "skyproto.substrait.Expression.SwitchExpr"
-    "ession.IfValueR\003ifs\0222\n\004else\030\002 \001(\0132\036.skyp"
-    "roto.substrait.ExpressionR\004else\032u\n\007IfVal"
-    "ue\0226\n\002if\030\001 \001(\0132&.skyproto.substrait.Expr"
-    "ession.LiteralR\002if\0222\n\004then\030\002 \001(\0132\036.skypr"
-    "oto.substrait.ExpressionR\004then\032\200\001\n\016Singu"
-    "larOrList\0224\n\005value\030\001 \001(\0132\036.skyproto.subs"
-    "trait.ExpressionR\005value\0228\n\007options\030\002 \003(\013"
-    "2\036.skyproto.substrait.ExpressionR\007option"
-    "s\032\322\001\n\013MultiOrList\0224\n\005value\030\001 \003(\0132\036.skypr"
-    "oto.substrait.ExpressionR\005value\022K\n\007optio"
-    "ns\030\002 \003(\01321.skyproto.substrait.Expression"
-    ".MultiOrList.RecordR\007options\032@\n\006Record\0226"
-    "\n\006fields\030\001 \003(\0132\036.skyproto.substrait.Expr"
-    "essionR\006fields\032\267\004\n\020EmbeddedFunction\022<\n\ta"
-    "rguments\030\001 \003(\0132\036.skyproto.substrait.Expr"
-    "essionR\targuments\0229\n\013output_type\030\002 \001(\0132\030"
-    ".skyproto.substrait.TypeR\noutputType\022|\n\026"
-    "python_pickle_function\030\003 \001(\0132D.skyproto."
-    "substrait.Expression.EmbeddedFunction.Py"
-    "thonPickleFunctionH\000R\024pythonPickleFuncti"
-    "on\022y\n\025web_assembly_function\030\004 \001(\0132C.skyp"
-    "roto.substrait.Expression.EmbeddedFuncti"
-    "on.WebAssemblyFunctionH\000R\023webAssemblyFun"
-    "ction\032V\n\024PythonPickleFunction\022\032\n\010functio"
-    "n\030\001 \001(\014R\010function\022\"\n\014prerequisite\030\002 \003(\tR"
-    "\014prerequisite\032Q\n\023WebAssemblyFunction\022\026\n\006"
-    "script\030\001 \001(\014R\006script\022\"\n\014prerequisite\030\002 \003"
-    "(\tR\014prerequisiteB\006\n\004kind\032\250\005\n\020ReferenceSe"
-    "gment\022Q\n\007map_key\030\001 \001(\01326.skyproto.substr"
-    "ait.Expression.ReferenceSegment.MapKeyH\000"
-    "R\006mapKey\022`\n\014struct_field\030\002 \001(\0132;.skyprot"
-    "o.substrait.Expression.ReferenceSegment."
-    "StructFieldH\000R\013structField\022`\n\014list_eleme"
-    "nt\030\003 \001(\0132;.skyproto.substrait.Expression"
-    ".ReferenceSegment.ListElementH\000R\013listEle"
-    "ment\032\220\001\n\006MapKey\022\?\n\007map_key\030\001 \001(\0132&.skypr"
-    "oto.substrait.Expression.LiteralR\006mapKey"
-    "\022E\n\005child\030\002 \001(\0132/.skyproto.substrait.Exp"
-    "ression.ReferenceSegmentR\005child\032j\n\013Struc"
-    "tField\022\024\n\005field\030\001 \001(\005R\005field\022E\n\005child\030\002 "
-    "\001(\0132/.skyproto.substrait.Expression.Refe"
-    "renceSegmentR\005child\032l\n\013ListElement\022\026\n\006of"
-    "fset\030\001 \001(\005R\006offset\022E\n\005child\030\002 \001(\0132/.skyp"
-    "roto.substrait.Expression.ReferenceSegme"
-    "ntR\005childB\020\n\016reference_type\032\227\014\n\016MaskExpr"
-    "ession\022R\n\006select\030\001 \001(\0132:.skyproto.substr"
-    "ait.Expression.MaskExpression.StructSele"
-    "ctR\006select\0228\n\030maintain_singular_struct\030\002"
-    " \001(\010R\026maintainSingularStruct\032\203\002\n\006Select\022"
-    "T\n\006struct\030\001 \001(\0132:.skyproto.substrait.Exp"
-    "ression.MaskExpression.StructSelectH\000R\006s"
-    "truct\022N\n\004list\030\002 \001(\01328.skyproto.substrait"
-    ".Expression.MaskExpression.ListSelectH\000R"
-    "\004list\022K\n\003map\030\003 \001(\01327.skyproto.substrait."
-    "Expression.MaskExpression.MapSelectH\000R\003m"
-    "apB\006\n\004type\032k\n\014StructSelect\022[\n\014struct_ite"
-    "ms\030\001 \003(\01328.skyproto.substrait.Expression"
-    ".MaskExpression.StructItemR\013structItems\032"
-    "n\n\nStructItem\022\024\n\005field\030\001 \001(\005R\005field\022J\n\005c"
-    "hild\030\002 \001(\01324.skyproto.substrait.Expressi"
-    "on.MaskExpression.SelectR\005child\032\212\004\n\nList"
-    "Select\022e\n\tselection\030\001 \003(\0132G.skyproto.sub"
-    "strait.Expression.MaskExpression.ListSel"
-    "ect.ListSelectItemR\tselection\022J\n\005child\030\002"
-    " \001(\01324.skyproto.substrait.Expression.Mas"
-    "kExpression.SelectR\005child\032\310\002\n\016ListSelect"
-    "Item\022i\n\004item\030\001 \001(\0132S.skyproto.substrait."
-    "Expression.MaskExpression.ListSelect.Lis"
-    "tSelectItem.ListElementH\000R\004item\022i\n\005slice"
-    "\030\002 \001(\0132Q.skyproto.substrait.Expression.M"
-    "askExpression.ListSelect.ListSelectItem."
-    "ListSliceH\000R\005slice\032#\n\013ListElement\022\024\n\005fie"
-    "ld\030\001 \001(\005R\005field\0323\n\tListSlice\022\024\n\005start\030\001 "
-    "\001(\005R\005start\022\020\n\003end\030\002 \001(\005R\003endB\006\n\004type\032\206\003\n"
-    "\tMapSelect\022R\n\003key\030\001 \001(\0132>.skyproto.subst"
-    "rait.Expression.MaskExpression.MapSelect"
-    ".MapKeyH\000R\003key\022j\n\nexpression\030\002 \001(\0132H.sky"
-    "proto.substrait.Expression.MaskExpressio"
-    "n.MapSelect.MapKeyExpressionH\000R\nexpressi"
-    "on\022J\n\005child\030\003 \001(\01324.skyproto.substrait.E"
-    "xpression.MaskExpression.SelectR\005child\032!"
-    "\n\006MapKey\022\027\n\007map_key\030\001 \001(\tR\006mapKey\032@\n\020Map"
-    "KeyExpression\022,\n\022map_key_expression\030\001 \001("
-    "\tR\020mapKeyExpressionB\010\n\006select\032\272\004\n\016FieldR"
-    "eference\022\\\n\020direct_reference\030\001 \001(\0132/.sky"
-    "proto.substrait.Expression.ReferenceSegm"
-    "entH\000R\017directReference\022Z\n\020masked_referen"
-    "ce\030\002 \001(\0132-.skyproto.substrait.Expression"
-    ".MaskExpressionH\000R\017maskedReference\022@\n\nex"
-    "pression\030\003 \001(\0132\036.skyproto.substrait.Expr"
-    "essionH\001R\nexpression\022d\n\016root_reference\030\004"
-    " \001(\0132;.skyproto.substrait.Expression.Fie"
-    "ldReference.RootReferenceH\001R\rrootReferen"
-    "ce\022g\n\017outer_reference\030\005 \001(\0132<.skyproto.s"
-    "ubstrait.Expression.FieldReference.Outer"
-    "ReferenceH\001R\016outerReference\032\017\n\rRootRefer"
-    "ence\032-\n\016OuterReference\022\033\n\tsteps_out\030\001 \001("
-    "\rR\010stepsOutB\020\n\016reference_typeB\013\n\troot_ty"
-    "pe\032\212\013\n\010Subquery\022H\n\006scalar\030\001 \001(\0132..skypro"
-    "to.substrait.Expression.Subquery.ScalarH"
-    "\000R\006scalar\022X\n\014in_predicate\030\002 \001(\01323.skypro"
-    "to.substrait.Expression.Subquery.InPredi"
-    "cateH\000R\013inPredicate\022[\n\rset_predicate\030\003 \001"
-    "(\01324.skyproto.substrait.Expression.Subqu"
-    "ery.SetPredicateH\000R\014setPredicate\022^\n\016set_"
-    "comparison\030\004 \001(\01325.skyproto.substrait.Ex"
-    "pression.Subquery.SetComparisonH\000R\rsetCo"
-    "mparison\0327\n\006Scalar\022-\n\005input\030\001 \001(\0132\027.skyp"
-    "roto.substrait.RelR\005input\032|\n\013InPredicate"
-    "\0228\n\007needles\030\001 \003(\0132\036.skyproto.substrait.E"
-    "xpressionR\007needles\0223\n\010haystack\030\002 \001(\0132\027.s"
-    "kyproto.substrait.RelR\010haystack\032\203\002\n\014SetP"
-    "redicate\022c\n\014predicate_op\030\001 \001(\0162@.skyprot"
-    "o.substrait.Expression.Subquery.SetPredi"
-    "cate.PredicateOpR\013predicateOp\022/\n\006tuples\030"
-    "\002 \001(\0132\027.skyproto.substrait.RelR\006tuples\"]"
-    "\n\013PredicateOp\022\034\n\030PREDICATE_OP_UNSPECIFIE"
-    "D\020\000\022\027\n\023PREDICATE_OP_EXISTS\020\001\022\027\n\023PREDICAT"
-    "E_OP_UNIQUE\020\002\032\316\004\n\rSetComparison\022d\n\014reduc"
-    "tion_op\030\001 \001(\0162A.skyproto.substrait.Expre"
-    "ssion.Subquery.SetComparison.ReductionOp"
-    "R\013reductionOp\022g\n\rcomparison_op\030\002 \001(\0162B.s"
-    "kyproto.substrait.Expression.Subquery.Se"
-    "tComparison.ComparisonOpR\014comparisonOp\0222"
-    "\n\004left\030\003 \001(\0132\036.skyproto.substrait.Expres"
-    "sionR\004left\022-\n\005right\030\004 \001(\0132\027.skyproto.sub"
-    "strait.RelR\005right\"\261\001\n\014ComparisonOp\022\035\n\031CO"
-    "MPARISON_OP_UNSPECIFIED\020\000\022\024\n\020COMPARISON_"
-    "OP_EQ\020\001\022\024\n\020COMPARISON_OP_NE\020\002\022\024\n\020COMPARI"
-    "SON_OP_LT\020\003\022\024\n\020COMPARISON_OP_GT\020\004\022\024\n\020COM"
-    "PARISON_OP_LE\020\005\022\024\n\020COMPARISON_OP_GE\020\006\"W\n"
-    "\013ReductionOp\022\034\n\030REDUCTION_OP_UNSPECIFIED"
-    "\020\000\022\024\n\020REDUCTION_OP_ANY\020\001\022\024\n\020REDUCTION_OP"
-    "_ALL\020\002B\017\n\rsubquery_typeB\n\n\010rex_type\"\277\003\n\t"
-    "SortField\0222\n\004expr\030\001 \001(\0132\036.skyproto.subst"
-    "rait.ExpressionR\004expr\022K\n\tdirection\030\002 \001(\016"
-    "2+.skyproto.substrait.SortField.SortDire"
-    "ctionH\000R\tdirection\022D\n\035comparison_functio"
-    "n_reference\030\003 \001(\rH\000R\033comparisonFunctionR"
-    "eference\"\335\001\n\rSortDirection\022\036\n\032SORT_DIREC"
-    "TION_UNSPECIFIED\020\000\022\"\n\036SORT_DIRECTION_ASC"
-    "_NULLS_FIRST\020\001\022!\n\035SORT_DIRECTION_ASC_NUL"
-    "LS_LAST\020\002\022#\n\037SORT_DIRECTION_DESC_NULLS_F"
-    "IRST\020\003\022\"\n\036SORT_DIRECTION_DESC_NULLS_LAST"
-    "\020\004\022\034\n\030SORT_DIRECTION_CLUSTERED\020\005B\013\n\tsort"
-    "_kind\"\214\005\n\021AggregateFunction\022-\n\022function_"
-    "reference\030\001 \001(\rR\021functionReference\022B\n\tar"
-    "guments\030\007 \003(\0132$.skyproto.substrait.Funct"
-    "ionArgumentR\targuments\022<\n\007options\030\010 \003(\0132"
-    "\".skyproto.substrait.FunctionOptionR\007opt"
-    "ions\0229\n\013output_type\030\005 \001(\0132\030.skyproto.sub"
-    "strait.TypeR\noutputType\022:\n\005phase\030\004 \001(\0162$"
-    ".skyproto.substrait.AggregationPhaseR\005ph"
-    "ase\0223\n\005sorts\030\003 \003(\0132\035.skyproto.substrait."
-    "SortFieldR\005sorts\022[\n\ninvocation\030\006 \001(\0162;.s"
-    "kyproto.substrait.AggregateFunction.Aggr"
-    "egationInvocationR\ninvocation\0226\n\004args\030\002 "
-    "\003(\0132\036.skyproto.substrait.ExpressionB\002\030\001R"
-    "\004args\"\204\001\n\025AggregationInvocation\022&\n\"AGGRE"
-    "GATION_INVOCATION_UNSPECIFIED\020\000\022\036\n\032AGGRE"
-    "GATION_INVOCATION_ALL\020\001\022#\n\037AGGREGATION_I"
-    "NVOCATION_DISTINCT\020\002\"}\n\014ReferenceRel\022,\n\017"
-    "subtree_ordinal\030\001 \001(\005H\000R\016subtreeOrdinal\210"
-    "\001\001\022+\n\021subtree_reference\030\002 \001(\rR\020subtreeRe"
-    "ferenceB\022\n\020_subtree_ordinal*\357\001\n\020Aggregat"
-    "ionPhase\022!\n\035AGGREGATION_PHASE_UNSPECIFIE"
-    "D\020\000\022-\n)AGGREGATION_PHASE_INITIAL_TO_INTE"
-    "RMEDIATE\020\001\0222\n.AGGREGATION_PHASE_INTERMED"
-    "IATE_TO_INTERMEDIATE\020\002\022\'\n#AGGREGATION_PH"
-    "ASE_INITIAL_TO_RESULT\020\003\022,\n(AGGREGATION_P"
-    "HASE_INTERMEDIATE_TO_RESULT\020\004B\217\001\n\026com.sk"
-    "yproto.substraitB\014AlgebraProtoP\001\242\002\003SSX\252\002"
-    "\022Skyproto.Substrait\312\002\022Skyproto\\Substrait"
-    "\342\002\036Skyproto\\Substrait\\GPBMetadata\352\002\023Skyp"
-    "roto::Substraitb\006proto3"
+    ".RelR\005right\022>\n\nexpression\030\004 \001(\0132\036.skypro"
+    "to.substrait.ExpressionR\nexpression\022B\n\004t"
+    "ype\030\005 \001(\0162..skyproto.substrait.NestedLoo"
+    "pJoinRel.JoinTypeR\004type\022_\n\022advanced_exte"
+    "nsion\030\n \001(\01320.skyproto.substrait.extensi"
+    "ons.AdvancedExtensionR\021advancedExtension"
+    "\"\310\002\n\010JoinType\022\031\n\025JOIN_TYPE_UNSPECIFIED\020\000"
+    "\022\023\n\017JOIN_TYPE_INNER\020\001\022\023\n\017JOIN_TYPE_OUTER"
+    "\020\002\022\022\n\016JOIN_TYPE_LEFT\020\003\022\023\n\017JOIN_TYPE_RIGH"
+    "T\020\004\022\027\n\023JOIN_TYPE_LEFT_SEMI\020\005\022\030\n\024JOIN_TYP"
+    "E_RIGHT_SEMI\020\006\022\027\n\023JOIN_TYPE_LEFT_ANTI\020\007\022"
+    "\030\n\024JOIN_TYPE_RIGHT_ANTI\020\010\022\031\n\025JOIN_TYPE_L"
+    "EFT_SINGLE\020\t\022\032\n\026JOIN_TYPE_RIGHT_SINGLE\020\n"
+    "\022\027\n\023JOIN_TYPE_LEFT_MARK\020\013\022\030\n\024JOIN_TYPE_R"
+    "IGHT_MARK\020\014\"\234\001\n\020FunctionArgument\022\024\n\004enum"
+    "\030\001 \001(\tH\000R\004enum\022.\n\004type\030\002 \001(\0132\030.skyproto."
+    "substrait.TypeH\000R\004type\0226\n\005value\030\003 \001(\0132\036."
+    "skyproto.substrait.ExpressionH\000R\005valueB\n"
+    "\n\010arg_type\"D\n\016FunctionOption\022\022\n\004name\030\001 \001"
+    "(\tR\004name\022\036\n\npreference\030\002 \003(\tR\npreference"
+    "\"\256d\n\nExpression\022B\n\007literal\030\001 \001(\0132&.skypr"
+    "oto.substrait.Expression.LiteralH\000R\007lite"
+    "ral\022M\n\tselection\030\002 \001(\0132-.skyproto.substr"
+    "ait.Expression.FieldReferenceH\000R\tselecti"
+    "on\022X\n\017scalar_function\030\003 \001(\0132-.skyproto.s"
+    "ubstrait.Expression.ScalarFunctionH\000R\016sc"
+    "alarFunction\022X\n\017window_function\030\005 \001(\0132-."
+    "skyproto.substrait.Expression.WindowFunc"
+    "tionH\000R\016windowFunction\022@\n\007if_then\030\006 \001(\0132"
+    "%.skyproto.substrait.Expression.IfThenH\000"
+    "R\006ifThen\022^\n\021switch_expression\030\007 \001(\0132/.sk"
+    "yproto.substrait.Expression.SwitchExpres"
+    "sionH\000R\020switchExpression\022Y\n\020singular_or_"
+    "list\030\010 \001(\0132-.skyproto.substrait.Expressi"
+    "on.SingularOrListH\000R\016singularOrList\022P\n\rm"
+    "ulti_or_list\030\t \001(\0132*.skyproto.substrait."
+    "Expression.MultiOrListH\000R\013multiOrList\0229\n"
+    "\004cast\030\013 \001(\0132#.skyproto.substrait.Express"
+    "ion.CastH\000R\004cast\022E\n\010subquery\030\014 \001(\0132\'.sky"
+    "proto.substrait.Expression.SubqueryH\000R\010s"
+    "ubquery\022\?\n\006nested\030\r \001(\0132%.skyproto.subst"
+    "rait.Expression.NestedH\000R\006nested\022S\n\021dyna"
+    "mic_parameter\030\016 \001(\0132$.skyproto.substrait"
+    ".DynamicParameterH\000R\020dynamicParameter\022=\n"
+    "\004enum\030\n \001(\0132#.skyproto.substrait.Express"
+    "ion.EnumB\002\030\001H\000R\004enum\032\223\001\n\004Enum\022\036\n\tspecifi"
+    "ed\030\001 \001(\tH\000R\tspecified\022M\n\013unspecified\030\002 \001"
+    "(\0132).skyproto.substrait.Expression.Enum."
+    "EmptyH\000R\013unspecified\032\013\n\005Empty:\002\030\001:\002\030\001B\013\n"
+    "\tenum_kind\032\227\031\n\007Literal\022\032\n\007boolean\030\001 \001(\010H"
+    "\000R\007boolean\022\020\n\002i8\030\002 \001(\005H\000R\002i8\022\022\n\003i16\030\003 \001("
+    "\005H\000R\003i16\022\022\n\003i32\030\005 \001(\005H\000R\003i32\022\022\n\003i64\030\007 \001("
+    "\003H\000R\003i64\022\024\n\004fp32\030\n \001(\002H\000R\004fp32\022\024\n\004fp64\030\013"
+    " \001(\001H\000R\004fp64\022\030\n\006string\030\014 \001(\tH\000R\006string\022\030"
+    "\n\006binary\030\r \001(\014H\000R\006binary\022\"\n\ttimestamp\030\016 "
+    "\001(\003B\002\030\001H\000R\ttimestamp\022\024\n\004date\030\020 \001(\005H\000R\004da"
+    "te\022\024\n\004time\030\021 \001(\003H\000R\004time\022q\n\026interval_yea"
+    "r_to_month\030\023 \001(\0132:.skyproto.substrait.Ex"
+    "pression.Literal.IntervalYearToMonthH\000R\023"
+    "intervalYearToMonth\022q\n\026interval_day_to_s"
+    "econd\030\024 \001(\0132:.skyproto.substrait.Express"
+    "ion.Literal.IntervalDayToSecondH\000R\023inter"
+    "valDayToSecond\022f\n\021interval_compound\030$ \001("
+    "\01327.skyproto.substrait.Expression.Litera"
+    "l.IntervalCompoundH\000R\020intervalCompound\022\037"
+    "\n\nfixed_char\030\025 \001(\tH\000R\tfixedChar\022K\n\010var_c"
+    "har\030\026 \001(\0132..skyproto.substrait.Expressio"
+    "n.Literal.VarCharH\000R\007varChar\022#\n\014fixed_bi"
+    "nary\030\027 \001(\014H\000R\013fixedBinary\022J\n\007decimal\030\030 \001"
+    "(\0132..skyproto.substrait.Expression.Liter"
+    "al.DecimalH\000R\007decimal\022]\n\016precision_time\030"
+    "% \001(\01324.skyproto.substrait.Expression.Li"
+    "teral.PrecisionTimeH\000R\rprecisionTime\022l\n\023"
+    "precision_timestamp\030\" \001(\01329.skyproto.sub"
+    "strait.Expression.Literal.PrecisionTimes"
+    "tampH\000R\022precisionTimestamp\022q\n\026precision_"
+    "timestamp_tz\030# \001(\01329.skyproto.substrait."
+    "Expression.Literal.PrecisionTimestampH\000R"
+    "\024precisionTimestampTz\022G\n\006struct\030\031 \001(\0132-."
+    "skyproto.substrait.Expression.Literal.St"
+    "ructH\000R\006struct\022>\n\003map\030\032 \001(\0132*.skyproto.s"
+    "ubstrait.Expression.Literal.MapH\000R\003map\022\'"
+    "\n\014timestamp_tz\030\033 \001(\003B\002\030\001H\000R\013timestampTz\022"
+    "\024\n\004uuid\030\034 \001(\014H\000R\004uuid\022.\n\004null\030\035 \001(\0132\030.sk"
+    "yproto.substrait.TypeH\000R\004null\022A\n\004list\030\036 "
+    "\001(\0132+.skyproto.substrait.Expression.Lite"
+    "ral.ListH\000R\004list\022>\n\nempty_list\030\037 \001(\0132\035.s"
+    "kyproto.substrait.Type.ListH\000R\temptyList"
+    "\022;\n\tempty_map\030  \001(\0132\034.skyproto.substrait"
+    ".Type.MapH\000R\010emptyMap\022W\n\014user_defined\030! "
+    "\001(\01322.skyproto.substrait.Expression.Lite"
+    "ral.UserDefinedH\000R\013userDefined\022\032\n\010nullab"
+    "le\0302 \001(\010R\010nullable\0228\n\030type_variation_ref"
+    "erence\0303 \001(\rR\026typeVariationReference\0327\n\007"
+    "VarChar\022\024\n\005value\030\001 \001(\tR\005value\022\026\n\006length\030"
+    "\002 \001(\rR\006length\032S\n\007Decimal\022\024\n\005value\030\001 \001(\014R"
+    "\005value\022\034\n\tprecision\030\002 \001(\005R\tprecision\022\024\n\005"
+    "scale\030\003 \001(\005R\005scale\032C\n\rPrecisionTime\022\034\n\tp"
+    "recision\030\001 \001(\005R\tprecision\022\024\n\005value\030\002 \001(\003"
+    "R\005value\032H\n\022PrecisionTimestamp\022\034\n\tprecisi"
+    "on\030\001 \001(\005R\tprecision\022\024\n\005value\030\002 \001(\003R\005valu"
+    "e\032\336\001\n\003Map\022R\n\nkey_values\030\001 \003(\01323.skyproto"
+    ".substrait.Expression.Literal.Map.KeyVal"
+    "ueR\tkeyValues\032\202\001\n\010KeyValue\0228\n\003key\030\001 \001(\0132"
+    "&.skyproto.substrait.Expression.LiteralR"
+    "\003key\022<\n\005value\030\002 \001(\0132&.skyproto.substrait"
+    ".Expression.LiteralR\005value\032C\n\023IntervalYe"
+    "arToMonth\022\024\n\005years\030\001 \001(\005R\005years\022\026\n\006month"
+    "s\030\002 \001(\005R\006months\032\277\001\n\023IntervalDayToSecond\022"
+    "\022\n\004days\030\001 \001(\005R\004days\022\030\n\007seconds\030\002 \001(\005R\007se"
+    "conds\022(\n\014microseconds\030\003 \001(\005B\002\030\001H\000R\014micro"
+    "seconds\022\036\n\tprecision\030\004 \001(\005H\000R\tprecision\022"
+    "\036\n\nsubseconds\030\005 \001(\003R\nsubsecondsB\020\n\016preci"
+    "sion_mode\032\364\001\n\020IntervalCompound\022o\n\026interv"
+    "al_year_to_month\030\001 \001(\0132:.skyproto.substr"
+    "ait.Expression.Literal.IntervalYearToMon"
+    "thR\023intervalYearToMonth\022o\n\026interval_day_"
+    "to_second\030\002 \001(\0132:.skyproto.substrait.Exp"
+    "ression.Literal.IntervalDayToSecondR\023int"
+    "ervalDayToSecond\032H\n\006Struct\022>\n\006fields\030\001 \003"
+    "(\0132&.skyproto.substrait.Expression.Liter"
+    "alR\006fields\032F\n\004List\022>\n\006values\030\001 \003(\0132&.sky"
+    "proto.substrait.Expression.LiteralR\006valu"
+    "es\032\377\001\n\013UserDefined\022%\n\016type_reference\030\001 \001"
+    "(\rR\rtypeReference\022K\n\017type_parameters\030\003 \003"
+    "(\0132\".skyproto.substrait.Type.ParameterR\016"
+    "typeParameters\022,\n\005value\030\002 \001(\0132\024.google.p"
+    "rotobuf.AnyH\000R\005value\022G\n\006struct\030\004 \001(\0132-.s"
+    "kyproto.substrait.Expression.Literal.Str"
+    "uctH\000R\006structB\005\n\003valB\016\n\014literal_type\032\207\005\n"
+    "\006Nested\022\032\n\010nullable\030\001 \001(\010R\010nullable\0228\n\030t"
+    "ype_variation_reference\030\002 \001(\rR\026typeVaria"
+    "tionReference\022F\n\006struct\030\003 \001(\0132,.skyproto"
+    ".substrait.Expression.Nested.StructH\000R\006s"
+    "truct\022@\n\004list\030\004 \001(\0132*.skyproto.substrait"
+    ".Expression.Nested.ListH\000R\004list\022=\n\003map\030\005"
+    " \001(\0132).skyproto.substrait.Expression.Nes"
+    "ted.MapH\000R\003map\032\314\001\n\003Map\022Q\n\nkey_values\030\001 \003"
+    "(\01322.skyproto.substrait.Expression.Neste"
+    "d.Map.KeyValueR\tkeyValues\032r\n\010KeyValue\0220\n"
+    "\003key\030\001 \001(\0132\036.skyproto.substrait.Expressi"
+    "onR\003key\0224\n\005value\030\002 \001(\0132\036.skyproto.substr"
+    "ait.ExpressionR\005value\032@\n\006Struct\0226\n\006field"
+    "s\030\001 \003(\0132\036.skyproto.substrait.ExpressionR"
+    "\006fields\032>\n\004List\0226\n\006values\030\001 \003(\0132\036.skypro"
+    "to.substrait.ExpressionR\006valuesB\r\n\013neste"
+    "d_type\032\264\002\n\016ScalarFunction\022-\n\022function_re"
+    "ference\030\001 \001(\rR\021functionReference\022B\n\targu"
+    "ments\030\004 \003(\0132$.skyproto.substrait.Functio"
+    "nArgumentR\targuments\022<\n\007options\030\005 \003(\0132\"."
+    "skyproto.substrait.FunctionOptionR\007optio"
+    "ns\0229\n\013output_type\030\003 \001(\0132\030.skyproto.subst"
+    "rait.TypeR\noutputType\0226\n\004args\030\002 \003(\0132\036.sk"
+    "yproto.substrait.ExpressionB\002\030\001R\004args\032\230\013"
+    "\n\016WindowFunction\022-\n\022function_reference\030\001"
+    " \001(\rR\021functionReference\022B\n\targuments\030\t \003"
+    "(\0132$.skyproto.substrait.FunctionArgument"
+    "R\targuments\022<\n\007options\030\013 \003(\0132\".skyproto."
+    "substrait.FunctionOptionR\007options\0229\n\013out"
+    "put_type\030\007 \001(\0132\030.skyproto.substrait.Type"
+    "R\noutputType\022:\n\005phase\030\006 \001(\0162$.skyproto.s"
+    "ubstrait.AggregationPhaseR\005phase\0223\n\005sort"
+    "s\030\003 \003(\0132\035.skyproto.substrait.SortFieldR\005"
+    "sorts\022[\n\ninvocation\030\n \001(\0162;.skyproto.sub"
+    "strait.AggregateFunction.AggregationInvo"
+    "cationR\ninvocation\022>\n\npartitions\030\002 \003(\0132\036"
+    ".skyproto.substrait.ExpressionR\npartitio"
+    "ns\022Y\n\013bounds_type\030\014 \001(\01628.skyproto.subst"
+    "rait.Expression.WindowFunction.BoundsTyp"
+    "eR\nboundsType\022T\n\013lower_bound\030\005 \001(\01323.sky"
+    "proto.substrait.Expression.WindowFunctio"
+    "n.BoundR\nlowerBound\022T\n\013upper_bound\030\004 \001(\013"
+    "23.skyproto.substrait.Expression.WindowF"
+    "unction.BoundR\nupperBound\0226\n\004args\030\010 \003(\0132"
+    "\036.skyproto.substrait.ExpressionB\002\030\001R\004arg"
+    "s\032\364\003\n\005Bound\022]\n\tpreceding\030\001 \001(\0132=.skyprot"
+    "o.substrait.Expression.WindowFunction.Bo"
+    "und.PrecedingH\000R\tpreceding\022]\n\tfollowing\030"
+    "\002 \001(\0132=.skyproto.substrait.Expression.Wi"
+    "ndowFunction.Bound.FollowingH\000R\tfollowin"
+    "g\022a\n\013current_row\030\003 \001(\0132>.skyproto.substr"
+    "ait.Expression.WindowFunction.Bound.Curr"
+    "entRowH\000R\ncurrentRow\022]\n\tunbounded\030\004 \001(\0132"
+    "=.skyproto.substrait.Expression.WindowFu"
+    "nction.Bound.UnboundedH\000R\tunbounded\032#\n\tP"
+    "receding\022\026\n\006offset\030\001 \001(\003R\006offset\032#\n\tFoll"
+    "owing\022\026\n\006offset\030\001 \001(\003R\006offset\032\014\n\nCurrent"
+    "Row\032\013\n\tUnboundedB\006\n\004kind\"V\n\nBoundsType\022\033"
+    "\n\027BOUNDS_TYPE_UNSPECIFIED\020\000\022\024\n\020BOUNDS_TY"
+    "PE_ROWS\020\001\022\025\n\021BOUNDS_TYPE_RANGE\020\002\032\356\001\n\006IfT"
+    "hen\022@\n\003ifs\030\001 \003(\0132..skyproto.substrait.Ex"
+    "pression.IfThen.IfClauseR\003ifs\0222\n\004else\030\002 "
+    "\001(\0132\036.skyproto.substrait.ExpressionR\004els"
+    "e\032n\n\010IfClause\022.\n\002if\030\001 \001(\0132\036.skyproto.sub"
+    "strait.ExpressionR\002if\0222\n\004then\030\002 \001(\0132\036.sk"
+    "yproto.substrait.ExpressionR\004then\032\307\002\n\004Ca"
+    "st\022,\n\004type\030\001 \001(\0132\030.skyproto.substrait.Ty"
+    "peR\004type\0224\n\005input\030\002 \001(\0132\036.skyproto.subst"
+    "rait.ExpressionR\005input\022^\n\020failure_behavi"
+    "or\030\003 \001(\01623.skyproto.substrait.Expression"
+    ".Cast.FailureBehaviorR\017failureBehavior\"{"
+    "\n\017FailureBehavior\022 \n\034FAILURE_BEHAVIOR_UN"
+    "SPECIFIED\020\000\022 \n\034FAILURE_BEHAVIOR_RETURN_N"
+    "ULL\020\001\022$\n FAILURE_BEHAVIOR_THROW_EXCEPTIO"
+    "N\020\002\032\276\002\n\020SwitchExpression\0224\n\005match\030\003 \001(\0132"
+    "\036.skyproto.substrait.ExpressionR\005match\022I"
+    "\n\003ifs\030\001 \003(\01327.skyproto.substrait.Express"
+    "ion.SwitchExpression.IfValueR\003ifs\0222\n\004els"
+    "e\030\002 \001(\0132\036.skyproto.substrait.ExpressionR"
+    "\004else\032u\n\007IfValue\0226\n\002if\030\001 \001(\0132&.skyproto."
+    "substrait.Expression.LiteralR\002if\0222\n\004then"
+    "\030\002 \001(\0132\036.skyproto.substrait.ExpressionR\004"
+    "then\032\200\001\n\016SingularOrList\0224\n\005value\030\001 \001(\0132\036"
+    ".skyproto.substrait.ExpressionR\005value\0228\n"
+    "\007options\030\002 \003(\0132\036.skyproto.substrait.Expr"
+    "essionR\007options\032\322\001\n\013MultiOrList\0224\n\005value"
+    "\030\001 \003(\0132\036.skyproto.substrait.ExpressionR\005"
+    "value\022K\n\007options\030\002 \003(\01321.skyproto.substr"
+    "ait.Expression.MultiOrList.RecordR\007optio"
+    "ns\032@\n\006Record\0226\n\006fields\030\001 \003(\0132\036.skyproto."
+    "substrait.ExpressionR\006fields\032\267\004\n\020Embedde"
+    "dFunction\022<\n\targuments\030\001 \003(\0132\036.skyproto."
+    "substrait.ExpressionR\targuments\0229\n\013outpu"
+    "t_type\030\002 \001(\0132\030.skyproto.substrait.TypeR\n"
+    "outputType\022|\n\026python_pickle_function\030\003 \001"
+    "(\0132D.skyproto.substrait.Expression.Embed"
+    "dedFunction.PythonPickleFunctionH\000R\024pyth"
+    "onPickleFunction\022y\n\025web_assembly_functio"
+    "n\030\004 \001(\0132C.skyproto.substrait.Expression."
+    "EmbeddedFunction.WebAssemblyFunctionH\000R\023"
+    "webAssemblyFunction\032V\n\024PythonPickleFunct"
+    "ion\022\032\n\010function\030\001 \001(\014R\010function\022\"\n\014prere"
+    "quisite\030\002 \003(\tR\014prerequisite\032Q\n\023WebAssemb"
+    "lyFunction\022\026\n\006script\030\001 \001(\014R\006script\022\"\n\014pr"
+    "erequisite\030\002 \003(\tR\014prerequisiteB\006\n\004kind\032\250"
+    "\005\n\020ReferenceSegment\022Q\n\007map_key\030\001 \001(\01326.s"
+    "kyproto.substrait.Expression.ReferenceSe"
+    "gment.MapKeyH\000R\006mapKey\022`\n\014struct_field\030\002"
+    " \001(\0132;.skyproto.substrait.Expression.Ref"
+    "erenceSegment.StructFieldH\000R\013structField"
+    "\022`\n\014list_element\030\003 \001(\0132;.skyproto.substr"
+    "ait.Expression.ReferenceSegment.ListElem"
+    "entH\000R\013listElement\032\220\001\n\006MapKey\022\?\n\007map_key"
+    "\030\001 \001(\0132&.skyproto.substrait.Expression.L"
+    "iteralR\006mapKey\022E\n\005child\030\002 \001(\0132/.skyproto"
+    ".substrait.Expression.ReferenceSegmentR\005"
+    "child\032j\n\013StructField\022\024\n\005field\030\001 \001(\005R\005fie"
+    "ld\022E\n\005child\030\002 \001(\0132/.skyproto.substrait.E"
+    "xpression.ReferenceSegmentR\005child\032l\n\013Lis"
+    "tElement\022\026\n\006offset\030\001 \001(\005R\006offset\022E\n\005chil"
+    "d\030\002 \001(\0132/.skyproto.substrait.Expression."
+    "ReferenceSegmentR\005childB\020\n\016reference_typ"
+    "e\032\227\014\n\016MaskExpression\022R\n\006select\030\001 \001(\0132:.s"
+    "kyproto.substrait.Expression.MaskExpress"
+    "ion.StructSelectR\006select\0228\n\030maintain_sin"
+    "gular_struct\030\002 \001(\010R\026maintainSingularStru"
+    "ct\032\203\002\n\006Select\022T\n\006struct\030\001 \001(\0132:.skyproto"
+    ".substrait.Expression.MaskExpression.Str"
+    "uctSelectH\000R\006struct\022N\n\004list\030\002 \001(\01328.skyp"
+    "roto.substrait.Expression.MaskExpression"
+    ".ListSelectH\000R\004list\022K\n\003map\030\003 \001(\01327.skypr"
+    "oto.substrait.Expression.MaskExpression."
+    "MapSelectH\000R\003mapB\006\n\004type\032k\n\014StructSelect"
+    "\022[\n\014struct_items\030\001 \003(\01328.skyproto.substr"
+    "ait.Expression.MaskExpression.StructItem"
+    "R\013structItems\032n\n\nStructItem\022\024\n\005field\030\001 \001"
+    "(\005R\005field\022J\n\005child\030\002 \001(\01324.skyproto.subs"
+    "trait.Expression.MaskExpression.SelectR\005"
+    "child\032\212\004\n\nListSelect\022e\n\tselection\030\001 \003(\0132"
+    "G.skyproto.substrait.Expression.MaskExpr"
+    "ession.ListSelect.ListSelectItemR\tselect"
+    "ion\022J\n\005child\030\002 \001(\01324.skyproto.substrait."
+    "Expression.MaskExpression.SelectR\005child\032"
+    "\310\002\n\016ListSelectItem\022i\n\004item\030\001 \001(\0132S.skypr"
+    "oto.substrait.Expression.MaskExpression."
+    "ListSelect.ListSelectItem.ListElementH\000R"
+    "\004item\022i\n\005slice\030\002 \001(\0132Q.skyproto.substrai"
+    "t.Expression.MaskExpression.ListSelect.L"
+    "istSelectItem.ListSliceH\000R\005slice\032#\n\013List"
+    "Element\022\024\n\005field\030\001 \001(\005R\005field\0323\n\tListSli"
+    "ce\022\024\n\005start\030\001 \001(\005R\005start\022\020\n\003end\030\002 \001(\005R\003e"
+    "ndB\006\n\004type\032\206\003\n\tMapSelect\022R\n\003key\030\001 \001(\0132>."
+    "skyproto.substrait.Expression.MaskExpres"
+    "sion.MapSelect.MapKeyH\000R\003key\022j\n\nexpressi"
+    "on\030\002 \001(\0132H.skyproto.substrait.Expression"
+    ".MaskExpression.MapSelect.MapKeyExpressi"
+    "onH\000R\nexpression\022J\n\005child\030\003 \001(\01324.skypro"
+    "to.substrait.Expression.MaskExpression.S"
+    "electR\005child\032!\n\006MapKey\022\027\n\007map_key\030\001 \001(\tR"
+    "\006mapKey\032@\n\020MapKeyExpression\022,\n\022map_key_e"
+    "xpression\030\001 \001(\tR\020mapKeyExpressionB\010\n\006sel"
+    "ect\032\272\004\n\016FieldReference\022\\\n\020direct_referen"
+    "ce\030\001 \001(\0132/.skyproto.substrait.Expression"
+    ".ReferenceSegmentH\000R\017directReference\022Z\n\020"
+    "masked_reference\030\002 \001(\0132-.skyproto.substr"
+    "ait.Expression.MaskExpressionH\000R\017maskedR"
+    "eference\022@\n\nexpression\030\003 \001(\0132\036.skyproto."
+    "substrait.ExpressionH\001R\nexpression\022d\n\016ro"
+    "ot_reference\030\004 \001(\0132;.skyproto.substrait."
+    "Expression.FieldReference.RootReferenceH"
+    "\001R\rrootReference\022g\n\017outer_reference\030\005 \001("
+    "\0132<.skyproto.substrait.Expression.FieldR"
+    "eference.OuterReferenceH\001R\016outerReferenc"
+    "e\032\017\n\rRootReference\032-\n\016OuterReference\022\033\n\t"
+    "steps_out\030\001 \001(\rR\010stepsOutB\020\n\016reference_t"
+    "ypeB\013\n\troot_type\032\212\013\n\010Subquery\022H\n\006scalar\030"
+    "\001 \001(\0132..skyproto.substrait.Expression.Su"
+    "bquery.ScalarH\000R\006scalar\022X\n\014in_predicate\030"
+    "\002 \001(\01323.skyproto.substrait.Expression.Su"
+    "bquery.InPredicateH\000R\013inPredicate\022[\n\rset"
+    "_predicate\030\003 \001(\01324.skyproto.substrait.Ex"
+    "pression.Subquery.SetPredicateH\000R\014setPre"
+    "dicate\022^\n\016set_comparison\030\004 \001(\01325.skyprot"
+    "o.substrait.Expression.Subquery.SetCompa"
+    "risonH\000R\rsetComparison\0327\n\006Scalar\022-\n\005inpu"
+    "t\030\001 \001(\0132\027.skyproto.substrait.RelR\005input\032"
+    "|\n\013InPredicate\0228\n\007needles\030\001 \003(\0132\036.skypro"
+    "to.substrait.ExpressionR\007needles\0223\n\010hays"
+    "tack\030\002 \001(\0132\027.skyproto.substrait.RelR\010hay"
+    "stack\032\203\002\n\014SetPredicate\022c\n\014predicate_op\030\001"
+    " \001(\0162@.skyproto.substrait.Expression.Sub"
+    "query.SetPredicate.PredicateOpR\013predicat"
+    "eOp\022/\n\006tuples\030\002 \001(\0132\027.skyproto.substrait"
+    ".RelR\006tuples\"]\n\013PredicateOp\022\034\n\030PREDICATE"
+    "_OP_UNSPECIFIED\020\000\022\027\n\023PREDICATE_OP_EXISTS"
+    "\020\001\022\027\n\023PREDICATE_OP_UNIQUE\020\002\032\316\004\n\rSetCompa"
+    "rison\022d\n\014reduction_op\030\001 \001(\0162A.skyproto.s"
+    "ubstrait.Expression.Subquery.SetComparis"
+    "on.ReductionOpR\013reductionOp\022g\n\rcompariso"
+    "n_op\030\002 \001(\0162B.skyproto.substrait.Expressi"
+    "on.Subquery.SetComparison.ComparisonOpR\014"
+    "comparisonOp\0222\n\004left\030\003 \001(\0132\036.skyproto.su"
+    "bstrait.ExpressionR\004left\022-\n\005right\030\004 \001(\0132"
+    "\027.skyproto.substrait.RelR\005right\"\261\001\n\014Comp"
+    "arisonOp\022\035\n\031COMPARISON_OP_UNSPECIFIED\020\000\022"
+    "\024\n\020COMPARISON_OP_EQ\020\001\022\024\n\020COMPARISON_OP_N"
+    "E\020\002\022\024\n\020COMPARISON_OP_LT\020\003\022\024\n\020COMPARISON_"
+    "OP_GT\020\004\022\024\n\020COMPARISON_OP_LE\020\005\022\024\n\020COMPARI"
+    "SON_OP_GE\020\006\"W\n\013ReductionOp\022\034\n\030REDUCTION_"
+    "OP_UNSPECIFIED\020\000\022\024\n\020REDUCTION_OP_ANY\020\001\022\024"
+    "\n\020REDUCTION_OP_ALL\020\002B\017\n\rsubquery_typeB\n\n"
+    "\010rex_type\"q\n\020DynamicParameter\022,\n\004type\030\001 "
+    "\001(\0132\030.skyproto.substrait.TypeR\004type\022/\n\023p"
+    "arameter_reference\030\002 \001(\rR\022parameterRefer"
+    "ence\"\277\003\n\tSortField\0222\n\004expr\030\001 \001(\0132\036.skypr"
+    "oto.substrait.ExpressionR\004expr\022K\n\tdirect"
+    "ion\030\002 \001(\0162+.skyproto.substrait.SortField"
+    ".SortDirectionH\000R\tdirection\022D\n\035compariso"
+    "n_function_reference\030\003 \001(\rH\000R\033comparison"
+    "FunctionReference\"\335\001\n\rSortDirection\022\036\n\032S"
+    "ORT_DIRECTION_UNSPECIFIED\020\000\022\"\n\036SORT_DIRE"
+    "CTION_ASC_NULLS_FIRST\020\001\022!\n\035SORT_DIRECTIO"
+    "N_ASC_NULLS_LAST\020\002\022#\n\037SORT_DIRECTION_DES"
+    "C_NULLS_FIRST\020\003\022\"\n\036SORT_DIRECTION_DESC_N"
+    "ULLS_LAST\020\004\022\034\n\030SORT_DIRECTION_CLUSTERED\020"
+    "\005B\013\n\tsort_kind\"\214\005\n\021AggregateFunction\022-\n\022"
+    "function_reference\030\001 \001(\rR\021functionRefere"
+    "nce\022B\n\targuments\030\007 \003(\0132$.skyproto.substr"
+    "ait.FunctionArgumentR\targuments\022<\n\007optio"
+    "ns\030\010 \003(\0132\".skyproto.substrait.FunctionOp"
+    "tionR\007options\0229\n\013output_type\030\005 \001(\0132\030.sky"
+    "proto.substrait.TypeR\noutputType\022:\n\005phas"
+    "e\030\004 \001(\0162$.skyproto.substrait.Aggregation"
+    "PhaseR\005phase\0223\n\005sorts\030\003 \003(\0132\035.skyproto.s"
+    "ubstrait.SortFieldR\005sorts\022[\n\ninvocation\030"
+    "\006 \001(\0162;.skyproto.substrait.AggregateFunc"
+    "tion.AggregationInvocationR\ninvocation\0226"
+    "\n\004args\030\002 \003(\0132\036.skyproto.substrait.Expres"
+    "sionB\002\030\001R\004args\"\204\001\n\025AggregationInvocation"
+    "\022&\n\"AGGREGATION_INVOCATION_UNSPECIFIED\020\000"
+    "\022\036\n\032AGGREGATION_INVOCATION_ALL\020\001\022#\n\037AGGR"
+    "EGATION_INVOCATION_DISTINCT\020\002\"}\n\014Referen"
+    "ceRel\022,\n\017subtree_ordinal\030\001 \001(\005H\000R\016subtre"
+    "eOrdinal\210\001\001\022+\n\021subtree_reference\030\002 \001(\rR\020"
+    "subtreeReferenceB\022\n\020_subtree_ordinal*\357\001\n"
+    "\020AggregationPhase\022!\n\035AGGREGATION_PHASE_U"
+    "NSPECIFIED\020\000\022-\n)AGGREGATION_PHASE_INITIA"
+    "L_TO_INTERMEDIATE\020\001\0222\n.AGGREGATION_PHASE"
+    "_INTERMEDIATE_TO_INTERMEDIATE\020\002\022\'\n#AGGRE"
+    "GATION_PHASE_INITIAL_TO_RESULT\020\003\022,\n(AGGR"
+    "EGATION_PHASE_INTERMEDIATE_TO_RESULT\020\004B\217"
+    "\001\n\026com.skyproto.substraitB\014AlgebraProtoP"
+    "\001\242\002\003SSX\252\002\022Skyproto.Substrait\312\002\022Skyproto\\"
+    "Substrait\342\002\036Skyproto\\Substrait\\GPBMetada"
+    "ta\352\002\023Skyproto::Substraitb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_deps[3] =
     {
@@ -6114,13 +6319,13 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto = {
     false,
     false,
-    33023,
+    34112,
     descriptor_table_protodef_skyproto_2fsubstrait_2falgebra_2eproto,
     "skyproto/substrait/algebra.proto",
     &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_once,
     descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto_deps,
     3,
-    124,
+    128,
     schemas,
     file_default_instances,
     TableStruct_skyproto_2fsubstrait_2falgebra_2eproto::offsets,
@@ -8060,6 +8265,7 @@ RelCommon_Hint::RelCommon_Hint(
   _impl_.advanced_extension_ = (cached_has_bits & 0x00000008u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(
                               arena, *from._impl_.advanced_extension_)
                         : nullptr;
+  _impl_.alias_hash_ = from._impl_.alias_hash_;
 
   // @@protoc_insertion_point(copy_constructor:skyproto.substrait.RelCommon.Hint)
 }
@@ -8077,9 +8283,9 @@ inline void RelCommon_Hint::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, stats_),
            0,
-           offsetof(Impl_, advanced_extension_) -
+           offsetof(Impl_, alias_hash_) -
                offsetof(Impl_, stats_) +
-               sizeof(Impl_::advanced_extension_));
+               sizeof(Impl_::alias_hash_));
 }
 RelCommon_Hint::~RelCommon_Hint() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.RelCommon.Hint)
@@ -8153,15 +8359,15 @@ const ::google::protobuf::internal::ClassData* RelCommon_Hint::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 8, 6, 67, 2> RelCommon_Hint::_table_ = {
+const ::_pbi::TcParseTable<4, 9, 6, 67, 2> RelCommon_Hint::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_._has_bits_),
     0, // no _extensions_
     12, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294963680,  // skipmap
+    4294963648,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    8,  // num_field_entries
+    9,  // num_field_entries
     6,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -8187,7 +8393,9 @@ const ::_pbi::TcParseTable<4, 8, 6, 67, 2> RelCommon_Hint::_table_ = {
     // optional .skyproto.substrait.NamedStruct output_schema = 5 [json_name = "outputSchema"];
     {::_pbi::TcParser::FastMtS1,
      {42, 2, 2, PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.output_schema_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // uint64 alias_hash = 6 [json_name = "aliasHash"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(RelCommon_Hint, _impl_.alias_hash_), 63>(),
+     {48, 63, 0, PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.alias_hash_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
@@ -8221,6 +8429,9 @@ const ::_pbi::TcParseTable<4, 8, 6, 67, 2> RelCommon_Hint::_table_ = {
     // optional .skyproto.substrait.NamedStruct output_schema = 5 [json_name = "outputSchema"];
     {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.output_schema_), _Internal::kHasBitsOffset + 2, 2,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint64 alias_hash = 6 [json_name = "aliasHash"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.alias_hash_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
     // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
     {PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 3, 3,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
@@ -8275,6 +8486,7 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
       _impl_.advanced_extension_->Clear();
     }
   }
+  _impl_.alias_hash_ = ::uint64_t{0u};
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -8330,6 +8542,13 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                 5, *this_._impl_.output_schema_, this_._impl_.output_schema_->GetCachedSize(), target,
                 stream);
+          }
+
+          // uint64 alias_hash = 6 [json_name = "aliasHash"];
+          if (this_._internal_alias_hash() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+                6, this_._internal_alias_hash(), target);
           }
 
           // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
@@ -8440,6 +8659,13 @@ PROTOBUF_NOINLINE void RelCommon_Hint::Clear() {
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
             }
           }
+           {
+            // uint64 alias_hash = 6 [json_name = "aliasHash"];
+            if (this_._internal_alias_hash() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+                  this_._internal_alias_hash());
+            }
+          }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
@@ -8500,6 +8726,9 @@ void RelCommon_Hint::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
       }
     }
   }
+  if (from._internal_alias_hash() != 0) {
+    _this->_impl_.alias_hash_ = from._impl_.alias_hash_;
+  }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -8523,8 +8752,8 @@ void RelCommon_Hint::InternalSwap(RelCommon_Hint* PROTOBUF_RESTRICT other) {
   _impl_.loaded_computations_.InternalSwap(&other->_impl_.loaded_computations_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.alias_, &other->_impl_.alias_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.advanced_extension_)
-      + sizeof(RelCommon_Hint::_impl_.advanced_extension_)
+      PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.alias_hash_)
+      + sizeof(RelCommon_Hint::_impl_.alias_hash_)
       - PROTOBUF_FIELD_OFFSET(RelCommon_Hint, _impl_.stats_)>(
           reinterpret_cast<char*>(&_impl_.stats_),
           reinterpret_cast<char*>(&other->_impl_.stats_));
@@ -8613,6 +8842,7 @@ RelCommon::RelCommon(
   _impl_.advanced_extension_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(
                               arena, *from._impl_.advanced_extension_)
                         : nullptr;
+  _impl_.operator_id_ = from._impl_.operator_id_;
   switch (emit_kind_case()) {
     case EMIT_KIND_NOT_SET:
       break;
@@ -8638,9 +8868,9 @@ inline void RelCommon::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, hint_),
            0,
-           offsetof(Impl_, advanced_extension_) -
+           offsetof(Impl_, operator_id_) -
                offsetof(Impl_, hint_) +
-               sizeof(Impl_::advanced_extension_));
+               sizeof(Impl_::operator_id_));
 }
 RelCommon::~RelCommon() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.RelCommon)
@@ -8722,15 +8952,15 @@ const ::google::protobuf::internal::ClassData* RelCommon::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 4, 4, 0, 2> RelCommon::_table_ = {
+const ::_pbi::TcParseTable<2, 5, 4, 0, 2> RelCommon::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(RelCommon, _impl_._has_bits_),
     0, // no _extensions_
-    4, 8,  // max_field_number, fast_idx_mask
+    5, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967264,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    5,  // num_field_entries
     4,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -8743,6 +8973,10 @@ const ::_pbi::TcParseTable<1, 4, 4, 0, 2> RelCommon::_table_ = {
     // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 4 [json_name = "advancedExtension"];
     {::_pbi::TcParser::FastMtS1,
      {34, 1, 3, PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.advanced_extension_)}},
+    // optional uint32 operator_id = 5 [json_name = "operatorId"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RelCommon, _impl_.operator_id_), 2>(),
+     {40, 2, 0, PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.operator_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // .skyproto.substrait.RelCommon.Hint hint = 3 [json_name = "hint"];
     {::_pbi::TcParser::FastMtS1,
      {26, 0, 2, PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.hint_)}},
@@ -8761,6 +8995,9 @@ const ::_pbi::TcParseTable<1, 4, 4, 0, 2> RelCommon::_table_ = {
     // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 4 [json_name = "advancedExtension"];
     {PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 1, 3,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional uint32 operator_id = 5 [json_name = "operatorId"];
+    {PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.operator_id_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelCommon_Direct>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelCommon_Emit>()},
@@ -8788,6 +9025,7 @@ PROTOBUF_NOINLINE void RelCommon::Clear() {
       _impl_.advanced_extension_->Clear();
     }
   }
+  _impl_.operator_id_ = 0u;
   clear_emit_kind();
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -8839,6 +9077,13 @@ PROTOBUF_NOINLINE void RelCommon::Clear() {
                 stream);
           }
 
+          // optional uint32 operator_id = 5 [json_name = "operatorId"];
+          if (cached_has_bits & 0x00000004u) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                5, this_._internal_operator_id(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -8864,7 +9109,7 @@ PROTOBUF_NOINLINE void RelCommon::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
           cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
+          if (cached_has_bits & 0x00000007u) {
             // .skyproto.substrait.RelCommon.Hint hint = 3 [json_name = "hint"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
@@ -8874,6 +9119,11 @@ PROTOBUF_NOINLINE void RelCommon::Clear() {
             if (cached_has_bits & 0x00000002u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
+            }
+            // optional uint32 operator_id = 5 [json_name = "operatorId"];
+            if (cached_has_bits & 0x00000004u) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_operator_id());
             }
           }
           switch (this_.emit_kind_case()) {
@@ -8907,7 +9157,7 @@ void RelCommon::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(from._impl_.hint_ != nullptr);
       if (_this->_impl_.hint_ == nullptr) {
@@ -8925,6 +9175,9 @@ void RelCommon::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
       } else {
         _this->_impl_.advanced_extension_->MergeFrom(*from._impl_.advanced_extension_);
       }
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_impl_.operator_id_ = from._impl_.operator_id_;
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -8977,8 +9230,8 @@ void RelCommon::InternalSwap(RelCommon* PROTOBUF_RESTRICT other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.advanced_extension_)
-      + sizeof(RelCommon::_impl_.advanced_extension_)
+      PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.operator_id_)
+      + sizeof(RelCommon::_impl_.operator_id_)
       - PROTOBUF_FIELD_OFFSET(RelCommon, _impl_.hint_)>(
           reinterpret_cast<char*>(&_impl_.hint_),
           reinterpret_cast<char*>(&other->_impl_.hint_));
@@ -9288,6 +9541,643 @@ void ReadRel_NamedTable::InternalSwap(ReadRel_NamedTable* PROTOBUF_RESTRICT othe
 }
 
 ::google::protobuf::Metadata ReadRel_NamedTable::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class ReadRel_IcebergTable_MetadataFileRead::_Internal {
+ public:
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead, _impl_._oneof_case_);
+};
+
+ReadRel_IcebergTable_MetadataFileRead::ReadRel_IcebergTable_MetadataFileRead(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+}
+inline PROTOBUF_NDEBUG_INLINE ReadRel_IcebergTable_MetadataFileRead::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead& from_msg)
+      : metadata_uri_(arena, from.metadata_uri_),
+        snapshot_{},
+        _cached_size_{0},
+        _oneof_case_{from._oneof_case_[0]} {}
+
+ReadRel_IcebergTable_MetadataFileRead::ReadRel_IcebergTable_MetadataFileRead(
+    ::google::protobuf::Arena* arena,
+    const ReadRel_IcebergTable_MetadataFileRead& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  ReadRel_IcebergTable_MetadataFileRead* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  switch (snapshot_case()) {
+    case SNAPSHOT_NOT_SET:
+      break;
+      case kSnapshotId:
+        new (&_impl_.snapshot_.snapshot_id_) decltype(_impl_.snapshot_.snapshot_id_){arena, from._impl_.snapshot_.snapshot_id_};
+        break;
+      case kSnapshotTimestamp:
+        _impl_.snapshot_.snapshot_timestamp_ = from._impl_.snapshot_.snapshot_timestamp_;
+        break;
+  }
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+}
+inline PROTOBUF_NDEBUG_INLINE ReadRel_IcebergTable_MetadataFileRead::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : metadata_uri_(arena),
+        snapshot_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+inline void ReadRel_IcebergTable_MetadataFileRead::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+ReadRel_IcebergTable_MetadataFileRead::~ReadRel_IcebergTable_MetadataFileRead() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+  SharedDtor(*this);
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::SharedDtor(MessageLite& self) {
+  ReadRel_IcebergTable_MetadataFileRead& this_ = static_cast<ReadRel_IcebergTable_MetadataFileRead&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.metadata_uri_.Destroy();
+  if (this_.has_snapshot()) {
+    this_.clear_snapshot();
+  }
+  this_._impl_.~Impl_();
+}
+
+void ReadRel_IcebergTable_MetadataFileRead::clear_snapshot() {
+// @@protoc_insertion_point(one_of_clear_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (snapshot_case()) {
+    case kSnapshotId: {
+      _impl_.snapshot_.snapshot_id_.Destroy();
+      break;
+    }
+    case kSnapshotTimestamp: {
+      // No need to clear
+      break;
+    }
+    case SNAPSHOT_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = SNAPSHOT_NOT_SET;
+}
+
+
+inline void* ReadRel_IcebergTable_MetadataFileRead::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) ReadRel_IcebergTable_MetadataFileRead(arena);
+}
+constexpr auto ReadRel_IcebergTable_MetadataFileRead::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(ReadRel_IcebergTable_MetadataFileRead),
+                                            alignof(ReadRel_IcebergTable_MetadataFileRead));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull ReadRel_IcebergTable_MetadataFileRead::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_ReadRel_IcebergTable_MetadataFileRead_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &ReadRel_IcebergTable_MetadataFileRead::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ReadRel_IcebergTable_MetadataFileRead>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &ReadRel_IcebergTable_MetadataFileRead::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ReadRel_IcebergTable_MetadataFileRead>(), &ReadRel_IcebergTable_MetadataFileRead::ByteSizeLong,
+            &ReadRel_IcebergTable_MetadataFileRead::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable_MetadataFileRead, _impl_._cached_size_),
+        false,
+    },
+    &ReadRel_IcebergTable_MetadataFileRead::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* ReadRel_IcebergTable_MetadataFileRead::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 3, 0, 88, 2> ReadRel_IcebergTable_MetadataFileRead::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string metadata_uri = 1 [json_name = "metadataUri"];
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable_MetadataFileRead, _impl_.metadata_uri_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string metadata_uri = 1 [json_name = "metadataUri"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable_MetadataFileRead, _impl_.metadata_uri_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string snapshot_id = 2 [json_name = "snapshotId"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable_MetadataFileRead, _impl_.snapshot_.snapshot_id_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int64 snapshot_timestamp = 3 [json_name = "snapshotTimestamp"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable_MetadataFileRead, _impl_.snapshot_.snapshot_timestamp_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+    "\70\14\13\0\0\0\0\0"
+    "skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead"
+    "metadata_uri"
+    "snapshot_id"
+  }},
+};
+
+PROTOBUF_NOINLINE void ReadRel_IcebergTable_MetadataFileRead::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.metadata_uri_.ClearToEmpty();
+  clear_snapshot();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* ReadRel_IcebergTable_MetadataFileRead::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const ReadRel_IcebergTable_MetadataFileRead& this_ = static_cast<const ReadRel_IcebergTable_MetadataFileRead&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* ReadRel_IcebergTable_MetadataFileRead::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const ReadRel_IcebergTable_MetadataFileRead& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string metadata_uri = 1 [json_name = "metadataUri"];
+          if (!this_._internal_metadata_uri().empty()) {
+            const std::string& _s = this_._internal_metadata_uri();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          switch (this_.snapshot_case()) {
+            case kSnapshotId: {
+              const std::string& _s = this_._internal_snapshot_id();
+              ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                  _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id");
+              target = stream->WriteStringMaybeAliased(2, _s, target);
+              break;
+            }
+            case kSnapshotTimestamp: {
+              target = ::google::protobuf::internal::WireFormatLite::
+                  WriteInt64ToArrayWithField<3>(
+                      stream, this_._internal_snapshot_timestamp(), target);
+              break;
+            }
+            default:
+              break;
+          }
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t ReadRel_IcebergTable_MetadataFileRead::ByteSizeLong(const MessageLite& base) {
+          const ReadRel_IcebergTable_MetadataFileRead& this_ = static_cast<const ReadRel_IcebergTable_MetadataFileRead&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t ReadRel_IcebergTable_MetadataFileRead::ByteSizeLong() const {
+          const ReadRel_IcebergTable_MetadataFileRead& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string metadata_uri = 1 [json_name = "metadataUri"];
+            if (!this_._internal_metadata_uri().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_metadata_uri());
+            }
+          }
+          switch (this_.snapshot_case()) {
+            // string snapshot_id = 2 [json_name = "snapshotId"];
+            case kSnapshotId: {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_snapshot_id());
+              break;
+            }
+            // int64 snapshot_timestamp = 3 [json_name = "snapshotTimestamp"];
+            case kSnapshotTimestamp: {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_snapshot_timestamp());
+              break;
+            }
+            case SNAPSHOT_NOT_SET: {
+              break;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void ReadRel_IcebergTable_MetadataFileRead::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ReadRel_IcebergTable_MetadataFileRead*>(&to_msg);
+  auto& from = static_cast<const ReadRel_IcebergTable_MetadataFileRead&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_metadata_uri().empty()) {
+    _this->_internal_set_metadata_uri(from._internal_metadata_uri());
+  }
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_snapshot();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kSnapshotId: {
+        if (oneof_needs_init) {
+          _this->_impl_.snapshot_.snapshot_id_.InitDefault();
+        }
+        _this->_impl_.snapshot_.snapshot_id_.Set(from._internal_snapshot_id(), arena);
+        break;
+      }
+      case kSnapshotTimestamp: {
+        _this->_impl_.snapshot_.snapshot_timestamp_ = from._impl_.snapshot_.snapshot_timestamp_;
+        break;
+      }
+      case SNAPSHOT_NOT_SET:
+        break;
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ReadRel_IcebergTable_MetadataFileRead::CopyFrom(const ReadRel_IcebergTable_MetadataFileRead& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void ReadRel_IcebergTable_MetadataFileRead::InternalSwap(ReadRel_IcebergTable_MetadataFileRead* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.metadata_uri_, &other->_impl_.metadata_uri_, arena);
+  swap(_impl_.snapshot_, other->_impl_.snapshot_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+}
+
+::google::protobuf::Metadata ReadRel_IcebergTable_MetadataFileRead::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class ReadRel_IcebergTable::_Internal {
+ public:
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ReadRel_IcebergTable, _impl_._oneof_case_);
+};
+
+void ReadRel_IcebergTable::set_allocated_direct(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* direct) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_table_type();
+  if (direct) {
+    ::google::protobuf::Arena* submessage_arena = direct->GetArena();
+    if (message_arena != submessage_arena) {
+      direct = ::google::protobuf::internal::GetOwnedMessage(message_arena, direct, submessage_arena);
+    }
+    set_has_direct();
+    _impl_.table_type_.direct_ = direct;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.IcebergTable.direct)
+}
+ReadRel_IcebergTable::ReadRel_IcebergTable(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.ReadRel.IcebergTable)
+}
+inline PROTOBUF_NDEBUG_INLINE ReadRel_IcebergTable::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::ReadRel_IcebergTable& from_msg)
+      : table_type_{},
+        _cached_size_{0},
+        _oneof_case_{from._oneof_case_[0]} {}
+
+ReadRel_IcebergTable::ReadRel_IcebergTable(
+    ::google::protobuf::Arena* arena,
+    const ReadRel_IcebergTable& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  ReadRel_IcebergTable* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  switch (table_type_case()) {
+    case TABLE_TYPE_NOT_SET:
+      break;
+      case kDirect:
+        _impl_.table_type_.direct_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead>(arena, *from._impl_.table_type_.direct_);
+        break;
+  }
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.ReadRel.IcebergTable)
+}
+inline PROTOBUF_NDEBUG_INLINE ReadRel_IcebergTable::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : table_type_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+inline void ReadRel_IcebergTable::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+ReadRel_IcebergTable::~ReadRel_IcebergTable() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.ReadRel.IcebergTable)
+  SharedDtor(*this);
+}
+inline void ReadRel_IcebergTable::SharedDtor(MessageLite& self) {
+  ReadRel_IcebergTable& this_ = static_cast<ReadRel_IcebergTable&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  if (this_.has_table_type()) {
+    this_.clear_table_type();
+  }
+  this_._impl_.~Impl_();
+}
+
+void ReadRel_IcebergTable::clear_table_type() {
+// @@protoc_insertion_point(one_of_clear_start:skyproto.substrait.ReadRel.IcebergTable)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (table_type_case()) {
+    case kDirect: {
+      if (GetArena() == nullptr) {
+        delete _impl_.table_type_.direct_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.table_type_.direct_);
+      }
+      break;
+    }
+    case TABLE_TYPE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = TABLE_TYPE_NOT_SET;
+}
+
+
+inline void* ReadRel_IcebergTable::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) ReadRel_IcebergTable(arena);
+}
+constexpr auto ReadRel_IcebergTable::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(ReadRel_IcebergTable),
+                                            alignof(ReadRel_IcebergTable));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull ReadRel_IcebergTable::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_ReadRel_IcebergTable_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &ReadRel_IcebergTable::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ReadRel_IcebergTable>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &ReadRel_IcebergTable::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ReadRel_IcebergTable>(), &ReadRel_IcebergTable::ByteSizeLong,
+            &ReadRel_IcebergTable::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable, _impl_._cached_size_),
+        false,
+    },
+    &ReadRel_IcebergTable::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* ReadRel_IcebergTable::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> ReadRel_IcebergTable::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_IcebergTable>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead direct = 1 [json_name = "direct"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel_IcebergTable, _impl_.table_type_.direct_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void ReadRel_IcebergTable::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.ReadRel.IcebergTable)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  clear_table_type();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* ReadRel_IcebergTable::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const ReadRel_IcebergTable& this_ = static_cast<const ReadRel_IcebergTable&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* ReadRel_IcebergTable::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const ReadRel_IcebergTable& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.ReadRel.IcebergTable)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // .skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead direct = 1 [json_name = "direct"];
+          if (this_.table_type_case() == kDirect) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.table_type_.direct_, this_._impl_.table_type_.direct_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.ReadRel.IcebergTable)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t ReadRel_IcebergTable::ByteSizeLong(const MessageLite& base) {
+          const ReadRel_IcebergTable& this_ = static_cast<const ReadRel_IcebergTable&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t ReadRel_IcebergTable::ByteSizeLong() const {
+          const ReadRel_IcebergTable& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.ReadRel.IcebergTable)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          switch (this_.table_type_case()) {
+            // .skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead direct = 1 [json_name = "direct"];
+            case kDirect: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.table_type_.direct_);
+              break;
+            }
+            case TABLE_TYPE_NOT_SET: {
+              break;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void ReadRel_IcebergTable::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ReadRel_IcebergTable*>(&to_msg);
+  auto& from = static_cast<const ReadRel_IcebergTable&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.ReadRel.IcebergTable)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_table_type();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kDirect: {
+        if (oneof_needs_init) {
+          _this->_impl_.table_type_.direct_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead>(arena, *from._impl_.table_type_.direct_);
+        } else {
+          _this->_impl_.table_type_.direct_->MergeFrom(from._internal_direct());
+        }
+        break;
+      }
+      case TABLE_TYPE_NOT_SET:
+        break;
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ReadRel_IcebergTable::CopyFrom(const ReadRel_IcebergTable& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.ReadRel.IcebergTable)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void ReadRel_IcebergTable::InternalSwap(ReadRel_IcebergTable* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.table_type_, other->_impl_.table_type_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+}
+
+::google::protobuf::Metadata ReadRel_IcebergTable::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -11825,6 +12715,19 @@ void ReadRel::set_allocated_extension_table(::skyproto::substrait::ReadRel_Exten
   }
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.extension_table)
 }
+void ReadRel::set_allocated_iceberg_table(::skyproto::substrait::ReadRel_IcebergTable* iceberg_table) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_read_type();
+  if (iceberg_table) {
+    ::google::protobuf::Arena* submessage_arena = iceberg_table->GetArena();
+    if (message_arena != submessage_arena) {
+      iceberg_table = ::google::protobuf::internal::GetOwnedMessage(message_arena, iceberg_table, submessage_arena);
+    }
+    set_has_iceberg_table();
+    _impl_.read_type_.iceberg_table_ = iceberg_table;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.iceberg_table)
+}
 ReadRel::ReadRel(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -11888,6 +12791,9 @@ ReadRel::ReadRel(
         break;
       case kExtensionTable:
         _impl_.read_type_.extension_table_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_ExtensionTable>(arena, *from._impl_.read_type_.extension_table_);
+        break;
+      case kIcebergTable:
+        _impl_.read_type_.iceberg_table_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_IcebergTable>(arena, *from._impl_.read_type_.iceberg_table_);
         break;
   }
 
@@ -11965,6 +12871,14 @@ void ReadRel::clear_read_type() {
       }
       break;
     }
+    case kIcebergTable: {
+      if (GetArena() == nullptr) {
+        delete _impl_.read_type_.iceberg_table_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.read_type_.iceberg_table_);
+      }
+      break;
+    }
     case READ_TYPE_NOT_SET: {
       break;
     }
@@ -12009,16 +12923,16 @@ const ::google::protobuf::internal::ClassData* ReadRel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 10, 10, 0, 2> ReadRel::_table_ = {
+const ::_pbi::TcParseTable<4, 11, 11, 0, 2> ReadRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ReadRel, _impl_._has_bits_),
     0, // no _extensions_
     11, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294965504,  // skipmap
+    4294965248,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    10,  // num_field_entries
-    10,  // num_aux_entries
+    11,  // num_field_entries
+    11,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -12047,10 +12961,10 @@ const ::_pbi::TcParseTable<4, 10, 10, 0, 2> ReadRel::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
     // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
     {::_pbi::TcParser::FastMtS1,
-     {82, 4, 8, PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.advanced_extension_)}},
+     {82, 4, 9, PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.advanced_extension_)}},
     // .skyproto.substrait.Expression best_effort_filter = 11 [json_name = "bestEffortFilter"];
     {::_pbi::TcParser::FastMtS1,
-     {90, 5, 9, PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.best_effort_filter_)}},
+     {90, 5, 10, PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.best_effort_filter_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
@@ -12082,11 +12996,14 @@ const ::_pbi::TcParseTable<4, 10, 10, 0, 2> ReadRel::_table_ = {
     // .skyproto.substrait.ReadRel.ExtensionTable extension_table = 8 [json_name = "extensionTable"];
     {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.read_type_.extension_table_), _Internal::kOneofCaseOffset + 0, 7,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.ReadRel.IcebergTable iceberg_table = 9 [json_name = "icebergTable"];
+    {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.read_type_.iceberg_table_), _Internal::kOneofCaseOffset + 0, 8,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 10 [json_name = "advancedExtension"];
-    {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 4, 8,
+    {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 4, 9,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .skyproto.substrait.Expression best_effort_filter = 11 [json_name = "bestEffortFilter"];
-    {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.best_effort_filter_), _Internal::kHasBitsOffset + 5, 9,
+    {PROTOBUF_FIELD_OFFSET(ReadRel, _impl_.best_effort_filter_), _Internal::kHasBitsOffset + 5, 10,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelCommon>()},
@@ -12097,6 +13014,7 @@ const ::_pbi::TcParseTable<4, 10, 10, 0, 2> ReadRel::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_LocalFiles>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_NamedTable>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_ExtensionTable>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::ReadRel_IcebergTable>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::AdvancedExtension>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression>()},
   }}, {{
@@ -12211,6 +13129,12 @@ PROTOBUF_NOINLINE void ReadRel::Clear() {
                   stream);
               break;
             }
+            case kIcebergTable: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  9, *this_._impl_.read_type_.iceberg_table_, this_._impl_.read_type_.iceberg_table_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -12308,6 +13232,12 @@ PROTOBUF_NOINLINE void ReadRel::Clear() {
             case kExtensionTable: {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.read_type_.extension_table_);
+              break;
+            }
+            // .skyproto.substrait.ReadRel.IcebergTable iceberg_table = 9 [json_name = "icebergTable"];
+            case kIcebergTable: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.read_type_.iceberg_table_);
               break;
             }
             case READ_TYPE_NOT_SET: {
@@ -12429,6 +13359,15 @@ void ReadRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
               ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_ExtensionTable>(arena, *from._impl_.read_type_.extension_table_);
         } else {
           _this->_impl_.read_type_.extension_table_->MergeFrom(from._internal_extension_table());
+        }
+        break;
+      }
+      case kIcebergTable: {
+        if (oneof_needs_init) {
+          _this->_impl_.read_type_.iceberg_table_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::ReadRel_IcebergTable>(arena, *from._impl_.read_type_.iceberg_table_);
+        } else {
+          _this->_impl_.read_type_.iceberg_table_->MergeFrom(from._internal_iceberg_table());
         }
         break;
       }
@@ -23811,6 +24750,11 @@ void DdlRel::clear_table_schema() {
   if (_impl_.table_schema_ != nullptr) _impl_.table_schema_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
+void DdlRel::clear_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ != nullptr) _impl_.advanced_extension_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
 DdlRel::DdlRel(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -23853,6 +24797,9 @@ DdlRel::DdlRel(
                         : nullptr;
   _impl_.common_ = (cached_has_bits & 0x00000008u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::RelCommon>(
                               arena, *from._impl_.common_)
+                        : nullptr;
+  _impl_.advanced_extension_ = (cached_has_bits & 0x00000010u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(
+                              arena, *from._impl_.advanced_extension_)
                         : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, object_),
@@ -23902,6 +24849,7 @@ inline void DdlRel::SharedDtor(MessageLite& self) {
   delete this_._impl_.table_defaults_;
   delete this_._impl_.view_definition_;
   delete this_._impl_.common_;
+  delete this_._impl_.advanced_extension_;
   if (this_.has_write_type()) {
     this_.clear_write_type();
   }
@@ -23972,16 +24920,16 @@ const ::google::protobuf::internal::ClassData* DdlRel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 8, 6, 0, 2> DdlRel::_table_ = {
+const ::_pbi::TcParseTable<3, 9, 7, 0, 2> DdlRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(DdlRel, _impl_._has_bits_),
     0, // no _extensions_
-    8, 56,  // max_field_number, fast_idx_mask
+    9, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967040,  // skipmap
+    4294966784,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    8,  // num_field_entries
-    6,  // num_aux_entries
+    9,  // num_field_entries
+    7,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -23993,7 +24941,9 @@ const ::_pbi::TcParseTable<3, 8, 6, 0, 2> DdlRel::_table_ = {
     // .skyproto.substrait.RelCommon common = 8 [json_name = "common"];
     {::_pbi::TcParser::FastMtS1,
      {66, 3, 5, PROTOBUF_FIELD_OFFSET(DdlRel, _impl_.common_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+    {::_pbi::TcParser::FastMtS1,
+     {74, 4, 6, PROTOBUF_FIELD_OFFSET(DdlRel, _impl_.advanced_extension_)}},
     {::_pbi::TcParser::MiniParse, {}},
     // .skyproto.substrait.NamedStruct table_schema = 3 [json_name = "tableSchema"];
     {::_pbi::TcParser::FastMtS1,
@@ -24037,6 +24987,9 @@ const ::_pbi::TcParseTable<3, 8, 6, 0, 2> DdlRel::_table_ = {
     // .skyproto.substrait.RelCommon common = 8 [json_name = "common"];
     {PROTOBUF_FIELD_OFFSET(DdlRel, _impl_.common_), _Internal::kHasBitsOffset + 3, 5,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+    {PROTOBUF_FIELD_OFFSET(DdlRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 4, 6,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::NamedObjectWrite>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ExtensionObject>()},
@@ -24044,6 +24997,7 @@ const ::_pbi::TcParseTable<3, 8, 6, 0, 2> DdlRel::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_Struct>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Rel>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelCommon>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::AdvancedExtension>()},
   }}, {{
   }},
 };
@@ -24056,7 +25010,7 @@ PROTOBUF_NOINLINE void DdlRel::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.table_schema_ != nullptr);
       _impl_.table_schema_->Clear();
@@ -24072,6 +25026,10 @@ PROTOBUF_NOINLINE void DdlRel::Clear() {
     if (cached_has_bits & 0x00000008u) {
       ABSL_DCHECK(_impl_.common_ != nullptr);
       _impl_.common_->Clear();
+    }
+    if (cached_has_bits & 0x00000010u) {
+      ABSL_DCHECK(_impl_.advanced_extension_ != nullptr);
+      _impl_.advanced_extension_->Clear();
     }
   }
   ::memset(&_impl_.object_, 0, static_cast<::size_t>(
@@ -24156,6 +25114,13 @@ PROTOBUF_NOINLINE void DdlRel::Clear() {
                 stream);
           }
 
+          // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+          if (cached_has_bits & 0x00000010u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                9, *this_._impl_.advanced_extension_, this_._impl_.advanced_extension_->GetCachedSize(), target,
+                stream);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -24181,7 +25146,7 @@ PROTOBUF_NOINLINE void DdlRel::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
           cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x0000000fu) {
+          if (cached_has_bits & 0x0000001fu) {
             // .skyproto.substrait.NamedStruct table_schema = 3 [json_name = "tableSchema"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
@@ -24201,6 +25166,11 @@ PROTOBUF_NOINLINE void DdlRel::Clear() {
             if (cached_has_bits & 0x00000008u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.common_);
+            }
+            // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+            if (cached_has_bits & 0x00000010u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
             }
           }
            {
@@ -24246,7 +25216,7 @@ void DdlRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(from._impl_.table_schema_ != nullptr);
       if (_this->_impl_.table_schema_ == nullptr) {
@@ -24281,6 +25251,15 @@ void DdlRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
             ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::RelCommon>(arena, *from._impl_.common_);
       } else {
         _this->_impl_.common_->MergeFrom(*from._impl_.common_);
+      }
+    }
+    if (cached_has_bits & 0x00000010u) {
+      ABSL_DCHECK(from._impl_.advanced_extension_ != nullptr);
+      if (_this->_impl_.advanced_extension_ == nullptr) {
+        _this->_impl_.advanced_extension_ =
+            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(arena, *from._impl_.advanced_extension_);
+      } else {
+        _this->_impl_.advanced_extension_->MergeFrom(*from._impl_.advanced_extension_);
       }
     }
   }
@@ -24395,6 +25374,11 @@ void WriteRel::clear_table_schema() {
   if (_impl_.table_schema_ != nullptr) _impl_.table_schema_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
+void WriteRel::clear_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ != nullptr) _impl_.advanced_extension_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
 WriteRel::WriteRel(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -24434,6 +25418,9 @@ WriteRel::WriteRel(
                         : nullptr;
   _impl_.common_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::RelCommon>(
                               arena, *from._impl_.common_)
+                        : nullptr;
+  _impl_.advanced_extension_ = (cached_has_bits & 0x00000008u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(
+                              arena, *from._impl_.advanced_extension_)
                         : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, op_),
@@ -24482,6 +25469,7 @@ inline void WriteRel::SharedDtor(MessageLite& self) {
   delete this_._impl_.table_schema_;
   delete this_._impl_.input_;
   delete this_._impl_.common_;
+  delete this_._impl_.advanced_extension_;
   if (this_.has_write_type()) {
     this_.clear_write_type();
   }
@@ -24552,16 +25540,16 @@ const ::google::protobuf::internal::ClassData* WriteRel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 8, 5, 0, 2> WriteRel::_table_ = {
+const ::_pbi::TcParseTable<3, 9, 6, 0, 2> WriteRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(WriteRel, _impl_._has_bits_),
     0, // no _extensions_
-    8, 56,  // max_field_number, fast_idx_mask
+    9, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967040,  // skipmap
+    4294966784,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    8,  // num_field_entries
-    5,  // num_aux_entries
+    9,  // num_field_entries
+    6,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -24573,7 +25561,9 @@ const ::_pbi::TcParseTable<3, 8, 5, 0, 2> WriteRel::_table_ = {
     // .skyproto.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(WriteRel, _impl_.create_mode_), 63>(),
      {64, 63, 0, PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.create_mode_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+    {::_pbi::TcParser::FastMtS1,
+     {74, 3, 5, PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.advanced_extension_)}},
     {::_pbi::TcParser::MiniParse, {}},
     // .skyproto.substrait.NamedStruct table_schema = 3 [json_name = "tableSchema"];
     {::_pbi::TcParser::FastMtS1,
@@ -24617,12 +25607,16 @@ const ::_pbi::TcParseTable<3, 8, 5, 0, 2> WriteRel::_table_ = {
     // .skyproto.substrait.WriteRel.CreateMode create_mode = 8 [json_name = "createMode"];
     {PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.create_mode_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+    {PROTOBUF_FIELD_OFFSET(WriteRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 3, 5,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::NamedObjectWrite>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::ExtensionObject>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::NamedStruct>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Rel>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::RelCommon>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::AdvancedExtension>()},
   }}, {{
   }},
 };
@@ -24635,7 +25629,7 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.table_schema_ != nullptr);
       _impl_.table_schema_->Clear();
@@ -24647,6 +25641,10 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
     if (cached_has_bits & 0x00000004u) {
       ABSL_DCHECK(_impl_.common_ != nullptr);
       _impl_.common_->Clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      ABSL_DCHECK(_impl_.advanced_extension_ != nullptr);
+      _impl_.advanced_extension_->Clear();
     }
   }
   ::memset(&_impl_.op_, 0, static_cast<::size_t>(
@@ -24731,6 +25729,13 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
                 8, this_._internal_create_mode(), target);
           }
 
+          // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+          if (cached_has_bits & 0x00000008u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                9, *this_._impl_.advanced_extension_, this_._impl_.advanced_extension_->GetCachedSize(), target,
+                stream);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -24756,7 +25761,7 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
           cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000007u) {
+          if (cached_has_bits & 0x0000000fu) {
             // .skyproto.substrait.NamedStruct table_schema = 3 [json_name = "tableSchema"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
@@ -24771,6 +25776,11 @@ PROTOBUF_NOINLINE void WriteRel::Clear() {
             if (cached_has_bits & 0x00000004u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.common_);
+            }
+            // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+            if (cached_has_bits & 0x00000008u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
             }
           }
            {
@@ -24821,7 +25831,7 @@ void WriteRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(from._impl_.table_schema_ != nullptr);
       if (_this->_impl_.table_schema_ == nullptr) {
@@ -24847,6 +25857,15 @@ void WriteRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
             ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::RelCommon>(arena, *from._impl_.common_);
       } else {
         _this->_impl_.common_->MergeFrom(*from._impl_.common_);
+      }
+    }
+    if (cached_has_bits & 0x00000008u) {
+      ABSL_DCHECK(from._impl_.advanced_extension_ != nullptr);
+      if (_this->_impl_.advanced_extension_ == nullptr) {
+        _this->_impl_.advanced_extension_ =
+            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(arena, *from._impl_.advanced_extension_);
+      } else {
+        _this->_impl_.advanced_extension_->MergeFrom(*from._impl_.advanced_extension_);
       }
     }
   }
@@ -25237,6 +26256,11 @@ void UpdateRel::clear_table_schema() {
   if (_impl_.table_schema_ != nullptr) _impl_.table_schema_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
+void UpdateRel::clear_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ != nullptr) _impl_.advanced_extension_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
 UpdateRel::UpdateRel(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -25275,6 +26299,9 @@ UpdateRel::UpdateRel(
   _impl_.condition_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression>(
                               arena, *from._impl_.condition_)
                         : nullptr;
+  _impl_.advanced_extension_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(
+                              arena, *from._impl_.advanced_extension_)
+                        : nullptr;
   switch (update_type_case()) {
     case UPDATE_TYPE_NOT_SET:
       break;
@@ -25298,9 +26325,9 @@ inline void UpdateRel::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, table_schema_),
            0,
-           offsetof(Impl_, condition_) -
+           offsetof(Impl_, advanced_extension_) -
                offsetof(Impl_, table_schema_) +
-               sizeof(Impl_::condition_));
+               sizeof(Impl_::advanced_extension_));
 }
 UpdateRel::~UpdateRel() {
   // @@protoc_insertion_point(destructor:skyproto.substrait.UpdateRel)
@@ -25312,6 +26339,7 @@ inline void UpdateRel::SharedDtor(MessageLite& self) {
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.table_schema_;
   delete this_._impl_.condition_;
+  delete this_._impl_.advanced_extension_;
   if (this_.has_update_type()) {
     this_.clear_update_type();
   }
@@ -25386,16 +26414,16 @@ const ::google::protobuf::internal::ClassData* UpdateRel::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 4, 0, 2> UpdateRel::_table_ = {
+const ::_pbi::TcParseTable<2, 5, 5, 0, 2> UpdateRel::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_._has_bits_),
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    5, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967264,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    4,  // num_aux_entries
+    5,  // num_field_entries
+    5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -25407,7 +26435,9 @@ const ::_pbi::TcParseTable<2, 4, 4, 0, 2> UpdateRel::_table_ = {
     // repeated .skyproto.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
     {::_pbi::TcParser::FastMtR1,
      {34, 63, 3, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.transformations_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+    {::_pbi::TcParser::FastMtS1,
+     {42, 2, 4, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.advanced_extension_)}},
     // .skyproto.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
     {::_pbi::TcParser::FastMtS1,
      {18, 0, 1, PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.table_schema_)}},
@@ -25429,11 +26459,15 @@ const ::_pbi::TcParseTable<2, 4, 4, 0, 2> UpdateRel::_table_ = {
     // repeated .skyproto.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
     {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.transformations_), -1, 3,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+    {PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.advanced_extension_), _Internal::kHasBitsOffset + 2, 4,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::NamedTable>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::NamedStruct>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::UpdateRel_TransformExpression>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::extensions::AdvancedExtension>()},
   }}, {{
   }},
 };
@@ -25447,7 +26481,7 @@ PROTOBUF_NOINLINE void UpdateRel::Clear() {
 
   _impl_.transformations_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.table_schema_ != nullptr);
       _impl_.table_schema_->Clear();
@@ -25455,6 +26489,10 @@ PROTOBUF_NOINLINE void UpdateRel::Clear() {
     if (cached_has_bits & 0x00000002u) {
       ABSL_DCHECK(_impl_.condition_ != nullptr);
       _impl_.condition_->Clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(_impl_.advanced_extension_ != nullptr);
+      _impl_.advanced_extension_->Clear();
     }
   }
   clear_update_type();
@@ -25510,6 +26548,13 @@ PROTOBUF_NOINLINE void UpdateRel::Clear() {
                     target, stream);
           }
 
+          // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+          if (cached_has_bits & 0x00000004u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                5, *this_._impl_.advanced_extension_, this_._impl_.advanced_extension_->GetCachedSize(), target,
+                stream);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -25544,7 +26589,7 @@ PROTOBUF_NOINLINE void UpdateRel::Clear() {
             }
           }
           cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
+          if (cached_has_bits & 0x00000007u) {
             // .skyproto.substrait.NamedStruct table_schema = 2 [json_name = "tableSchema"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
@@ -25554,6 +26599,11 @@ PROTOBUF_NOINLINE void UpdateRel::Clear() {
             if (cached_has_bits & 0x00000002u) {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.condition_);
+            }
+            // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+            if (cached_has_bits & 0x00000004u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.advanced_extension_);
             }
           }
           switch (this_.update_type_case()) {
@@ -25583,7 +26633,7 @@ void UpdateRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
   _this->_internal_mutable_transformations()->MergeFrom(
       from._internal_transformations());
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(from._impl_.table_schema_ != nullptr);
       if (_this->_impl_.table_schema_ == nullptr) {
@@ -25600,6 +26650,15 @@ void UpdateRel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
             ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression>(arena, *from._impl_.condition_);
       } else {
         _this->_impl_.condition_->MergeFrom(*from._impl_.condition_);
+      }
+    }
+    if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(from._impl_.advanced_extension_ != nullptr);
+      if (_this->_impl_.advanced_extension_ == nullptr) {
+        _this->_impl_.advanced_extension_ =
+            ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::extensions::AdvancedExtension>(arena, *from._impl_.advanced_extension_);
+      } else {
+        _this->_impl_.advanced_extension_->MergeFrom(*from._impl_.advanced_extension_);
       }
     }
   }
@@ -25645,8 +26704,8 @@ void UpdateRel::InternalSwap(UpdateRel* PROTOBUF_RESTRICT other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.transformations_.InternalSwap(&other->_impl_.transformations_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.condition_)
-      + sizeof(UpdateRel::_impl_.condition_)
+      PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.advanced_extension_)
+      + sizeof(UpdateRel::_impl_.advanced_extension_)
       - PROTOBUF_FIELD_OFFSET(UpdateRel, _impl_.table_schema_)>(
           reinterpret_cast<char*>(&_impl_.table_schema_),
           reinterpret_cast<char*>(&other->_impl_.table_schema_));
@@ -29812,6 +30871,247 @@ void Expression_Literal_Decimal::InternalSwap(Expression_Literal_Decimal* PROTOB
 }
 // ===================================================================
 
+class Expression_Literal_PrecisionTime::_Internal {
+ public:
+};
+
+Expression_Literal_PrecisionTime::Expression_Literal_PrecisionTime(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.Expression.Literal.PrecisionTime)
+}
+Expression_Literal_PrecisionTime::Expression_Literal_PrecisionTime(
+    ::google::protobuf::Arena* arena, const Expression_Literal_PrecisionTime& from)
+    : Expression_Literal_PrecisionTime(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE Expression_Literal_PrecisionTime::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void Expression_Literal_PrecisionTime::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, value_),
+           0,
+           offsetof(Impl_, precision_) -
+               offsetof(Impl_, value_) +
+               sizeof(Impl_::precision_));
+}
+Expression_Literal_PrecisionTime::~Expression_Literal_PrecisionTime() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.Expression.Literal.PrecisionTime)
+  SharedDtor(*this);
+}
+inline void Expression_Literal_PrecisionTime::SharedDtor(MessageLite& self) {
+  Expression_Literal_PrecisionTime& this_ = static_cast<Expression_Literal_PrecisionTime&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* Expression_Literal_PrecisionTime::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) Expression_Literal_PrecisionTime(arena);
+}
+constexpr auto Expression_Literal_PrecisionTime::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(Expression_Literal_PrecisionTime),
+                                            alignof(Expression_Literal_PrecisionTime));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull Expression_Literal_PrecisionTime::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_Expression_Literal_PrecisionTime_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &Expression_Literal_PrecisionTime::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<Expression_Literal_PrecisionTime>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &Expression_Literal_PrecisionTime::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<Expression_Literal_PrecisionTime>(), &Expression_Literal_PrecisionTime::ByteSizeLong,
+            &Expression_Literal_PrecisionTime::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_._cached_size_),
+        false,
+    },
+    &Expression_Literal_PrecisionTime::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* Expression_Literal_PrecisionTime::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> Expression_Literal_PrecisionTime::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_PrecisionTime>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int64 value = 2 [json_name = "value"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Expression_Literal_PrecisionTime, _impl_.value_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.value_)}},
+    // int32 precision = 1 [json_name = "precision"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Expression_Literal_PrecisionTime, _impl_.precision_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.precision_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 precision = 1 [json_name = "precision"];
+    {PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.precision_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 value = 2 [json_name = "value"];
+    {PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.value_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void Expression_Literal_PrecisionTime::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.Expression.Literal.PrecisionTime)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.value_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.precision_) -
+      reinterpret_cast<char*>(&_impl_.value_)) + sizeof(_impl_.precision_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* Expression_Literal_PrecisionTime::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const Expression_Literal_PrecisionTime& this_ = static_cast<const Expression_Literal_PrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* Expression_Literal_PrecisionTime::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const Expression_Literal_PrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.Expression.Literal.PrecisionTime)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 precision = 1 [json_name = "precision"];
+          if (this_._internal_precision() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_precision(), target);
+          }
+
+          // int64 value = 2 [json_name = "value"];
+          if (this_._internal_value() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt64ToArrayWithField<2>(
+                    stream, this_._internal_value(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.Expression.Literal.PrecisionTime)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t Expression_Literal_PrecisionTime::ByteSizeLong(const MessageLite& base) {
+          const Expression_Literal_PrecisionTime& this_ = static_cast<const Expression_Literal_PrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t Expression_Literal_PrecisionTime::ByteSizeLong() const {
+          const Expression_Literal_PrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.Expression.Literal.PrecisionTime)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int64 value = 2 [json_name = "value"];
+            if (this_._internal_value() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_value());
+            }
+            // int32 precision = 1 [json_name = "precision"];
+            if (this_._internal_precision() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_precision());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void Expression_Literal_PrecisionTime::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<Expression_Literal_PrecisionTime*>(&to_msg);
+  auto& from = static_cast<const Expression_Literal_PrecisionTime&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.Expression.Literal.PrecisionTime)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_value() != 0) {
+    _this->_impl_.value_ = from._impl_.value_;
+  }
+  if (from._internal_precision() != 0) {
+    _this->_impl_.precision_ = from._impl_.precision_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Expression_Literal_PrecisionTime::CopyFrom(const Expression_Literal_PrecisionTime& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.Expression.Literal.PrecisionTime)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void Expression_Literal_PrecisionTime::InternalSwap(Expression_Literal_PrecisionTime* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.precision_)
+      + sizeof(Expression_Literal_PrecisionTime::_impl_.precision_)
+      - PROTOBUF_FIELD_OFFSET(Expression_Literal_PrecisionTime, _impl_.value_)>(
+          reinterpret_cast<char*>(&_impl_.value_),
+          reinterpret_cast<char*>(&other->_impl_.value_));
+}
+
+::google::protobuf::Metadata Expression_Literal_PrecisionTime::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
 class Expression_Literal_PrecisionTimestamp::_Internal {
  public:
 };
@@ -32522,6 +33822,19 @@ void Expression_Literal::set_allocated_decimal(::skyproto::substrait::Expression
   }
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.Literal.decimal)
 }
+void Expression_Literal::set_allocated_precision_time(::skyproto::substrait::Expression_Literal_PrecisionTime* precision_time) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_literal_type();
+  if (precision_time) {
+    ::google::protobuf::Arena* submessage_arena = precision_time->GetArena();
+    if (message_arena != submessage_arena) {
+      precision_time = ::google::protobuf::internal::GetOwnedMessage(message_arena, precision_time, submessage_arena);
+    }
+    set_has_precision_time();
+    _impl_.literal_type_.precision_time_ = precision_time;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.Literal.precision_time)
+}
 void Expression_Literal::set_allocated_precision_timestamp(::skyproto::substrait::Expression_Literal_PrecisionTimestamp* precision_timestamp) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_literal_type();
@@ -32768,6 +34081,9 @@ Expression_Literal::Expression_Literal(
       case kDecimal:
         _impl_.literal_type_.decimal_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal_Decimal>(arena, *from._impl_.literal_type_.decimal_);
         break;
+      case kPrecisionTime:
+        _impl_.literal_type_.precision_time_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal_PrecisionTime>(arena, *from._impl_.literal_type_.precision_time_);
+        break;
       case kPrecisionTimestamp:
         _impl_.literal_type_.precision_timestamp_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal_PrecisionTimestamp>(arena, *from._impl_.literal_type_.precision_timestamp_);
         break;
@@ -32935,6 +34251,14 @@ void Expression_Literal::clear_literal_type() {
       }
       break;
     }
+    case kPrecisionTime: {
+      if (GetArena() == nullptr) {
+        delete _impl_.literal_type_.precision_time_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.literal_type_.precision_time_);
+      }
+      break;
+    }
     case kPrecisionTimestamp: {
       if (GetArena() == nullptr) {
         delete _impl_.literal_type_.precision_timestamp_;
@@ -33059,7 +34383,7 @@ const ::google::protobuf::internal::ClassData* Expression_Literal::GetClassData(
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 32, 14, 94, 9> Expression_Literal::_table_ = {
+const ::_pbi::TcParseTable<1, 33, 15, 94, 9> Expression_Literal::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -33067,8 +34391,8 @@ const ::_pbi::TcParseTable<1, 32, 14, 94, 9> Expression_Literal::_table_ = {
     offsetof(decltype(_table_), field_lookup_table),
     147880,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    32,  // num_field_entries
-    14,  // num_aux_entries
+    33,  // num_field_entries
+    15,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -33085,7 +34409,7 @@ const ::_pbi::TcParseTable<1, 32, 14, 94, 9> Expression_Literal::_table_ = {
      {920, 63, 0, PROTOBUF_FIELD_OFFSET(Expression_Literal, _impl_.type_variation_reference_)}},
   }}, {{
     33, 0, 2,
-    65520, 26, 65529, 30,
+    65504, 26, 65529, 31,
     65535, 65535
   }}, {{
     // bool boolean = 1 [json_name = "boolean"];
@@ -33178,6 +34502,9 @@ const ::_pbi::TcParseTable<1, 32, 14, 94, 9> Expression_Literal::_table_ = {
     // .skyproto.substrait.Expression.Literal.IntervalCompound interval_compound = 36 [json_name = "intervalCompound"];
     {PROTOBUF_FIELD_OFFSET(Expression_Literal, _impl_.literal_type_.interval_compound_), _Internal::kOneofCaseOffset + 0, 13,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.Expression.Literal.PrecisionTime precision_time = 37 [json_name = "precisionTime"];
+    {PROTOBUF_FIELD_OFFSET(Expression_Literal, _impl_.literal_type_.precision_time_), _Internal::kOneofCaseOffset + 0, 14,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // bool nullable = 50 [json_name = "nullable"];
     {PROTOBUF_FIELD_OFFSET(Expression_Literal, _impl_.nullable_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
@@ -33199,6 +34526,7 @@ const ::_pbi::TcParseTable<1, 32, 14, 94, 9> Expression_Literal::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_PrecisionTimestamp>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_PrecisionTimestamp>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_IntervalCompound>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal_PrecisionTime>()},
   }}, {{
     "\45\0\0\0\0\0\0\0\6\0\0\0\0\0\0\12\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
     "skyproto.substrait.Expression.Literal"
@@ -33416,6 +34744,12 @@ PROTOBUF_NOINLINE void Expression_Literal::Clear() {
                   stream);
               break;
             }
+            case kPrecisionTime: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  37, *this_._impl_.literal_type_.precision_time_, this_._impl_.literal_type_.precision_time_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -33578,6 +34912,12 @@ PROTOBUF_NOINLINE void Expression_Literal::Clear() {
             case kDecimal: {
               total_size += 2 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.literal_type_.decimal_);
+              break;
+            }
+            // .skyproto.substrait.Expression.Literal.PrecisionTime precision_time = 37 [json_name = "precisionTime"];
+            case kPrecisionTime: {
+              total_size += 2 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.literal_type_.precision_time_);
               break;
             }
             // .skyproto.substrait.Expression.Literal.PrecisionTimestamp precision_timestamp = 34 [json_name = "precisionTimestamp"];
@@ -33790,6 +35130,15 @@ void Expression_Literal::MergeImpl(::google::protobuf::MessageLite& to_msg, cons
               ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal_Decimal>(arena, *from._impl_.literal_type_.decimal_);
         } else {
           _this->_impl_.literal_type_.decimal_->MergeFrom(from._internal_decimal());
+        }
+        break;
+      }
+      case kPrecisionTime: {
+        if (oneof_needs_init) {
+          _this->_impl_.literal_type_.precision_time_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Literal_PrecisionTime>(arena, *from._impl_.literal_type_.precision_time_);
+        } else {
+          _this->_impl_.literal_type_.precision_time_->MergeFrom(from._internal_precision_time());
         }
         break;
       }
@@ -47964,6 +49313,19 @@ void Expression::set_allocated_nested(::skyproto::substrait::Expression_Nested* 
   }
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.nested)
 }
+void Expression::set_allocated_dynamic_parameter(::skyproto::substrait::DynamicParameter* dynamic_parameter) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_rex_type();
+  if (dynamic_parameter) {
+    ::google::protobuf::Arena* submessage_arena = dynamic_parameter->GetArena();
+    if (message_arena != submessage_arena) {
+      dynamic_parameter = ::google::protobuf::internal::GetOwnedMessage(message_arena, dynamic_parameter, submessage_arena);
+    }
+    set_has_dynamic_parameter();
+    _impl_.rex_type_.dynamic_parameter_ = dynamic_parameter;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Expression.dynamic_parameter)
+}
 void Expression::set_allocated_enum_(::skyproto::substrait::Expression_Enum* enum_) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_rex_type();
@@ -48041,6 +49403,9 @@ Expression::Expression(
         break;
       case kNested:
         _impl_.rex_type_.nested_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Nested>(arena, *from._impl_.rex_type_.nested_);
+        break;
+      case kDynamicParameter:
+        _impl_.rex_type_.dynamic_parameter_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DynamicParameter>(arena, *from._impl_.rex_type_.dynamic_parameter_);
         break;
       case kEnum:
         _impl_.rex_type_.enum__ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Expression_Enum>(arena, *from._impl_.rex_type_.enum__);
@@ -48165,6 +49530,14 @@ void Expression::clear_rex_type() {
       }
       break;
     }
+    case kDynamicParameter: {
+      if (GetArena() == nullptr) {
+        delete _impl_.rex_type_.dynamic_parameter_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.rex_type_.dynamic_parameter_);
+      }
+      break;
+    }
     case kEnum: {
       if (GetArena() == nullptr) {
         delete _impl_.rex_type_.enum__;
@@ -48217,16 +49590,16 @@ const ::google::protobuf::internal::ClassData* Expression::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 12, 12, 0, 2> Expression::_table_ = {
+const ::_pbi::TcParseTable<0, 13, 13, 0, 2> Expression::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    13, 0,  // max_field_number, fast_idx_mask
+    14, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294959112,  // skipmap
+    4294950920,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    12,  // num_field_entries
-    12,  // num_aux_entries
+    13,  // num_field_entries
+    13,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -48275,6 +49648,9 @@ const ::_pbi::TcParseTable<0, 12, 12, 0, 2> Expression::_table_ = {
     // .skyproto.substrait.Expression.Nested nested = 13 [json_name = "nested"];
     {PROTOBUF_FIELD_OFFSET(Expression, _impl_.rex_type_.nested_), _Internal::kOneofCaseOffset + 0, 11,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.DynamicParameter dynamic_parameter = 14 [json_name = "dynamicParameter"];
+    {PROTOBUF_FIELD_OFFSET(Expression, _impl_.rex_type_.dynamic_parameter_), _Internal::kOneofCaseOffset + 0, 12,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Literal>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_FieldReference>()},
@@ -48288,6 +49664,7 @@ const ::_pbi::TcParseTable<0, 12, 12, 0, 2> Expression::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Cast>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Subquery>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Expression_Nested>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::DynamicParameter>()},
   }}, {{
   }},
 };
@@ -48391,6 +49768,12 @@ PROTOBUF_NOINLINE void Expression::Clear() {
                   stream);
               break;
             }
+            case kDynamicParameter: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  14, *this_._impl_.rex_type_.dynamic_parameter_, this_._impl_.rex_type_.dynamic_parameter_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -48482,6 +49865,12 @@ PROTOBUF_NOINLINE void Expression::Clear() {
             case kNested: {
               total_size += 1 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.rex_type_.nested_);
+              break;
+            }
+            // .skyproto.substrait.DynamicParameter dynamic_parameter = 14 [json_name = "dynamicParameter"];
+            case kDynamicParameter: {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.rex_type_.dynamic_parameter_);
               break;
             }
             // .skyproto.substrait.Expression.Enum enum = 10 [json_name = "enum", deprecated = true];
@@ -48617,6 +50006,15 @@ void Expression::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
         }
         break;
       }
+      case kDynamicParameter: {
+        if (oneof_needs_init) {
+          _this->_impl_.rex_type_.dynamic_parameter_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DynamicParameter>(arena, *from._impl_.rex_type_.dynamic_parameter_);
+        } else {
+          _this->_impl_.rex_type_.dynamic_parameter_->MergeFrom(from._internal_dynamic_parameter());
+        }
+        break;
+      }
       case kEnum: {
         if (oneof_needs_init) {
           _this->_impl_.rex_type_.enum__ =
@@ -48649,6 +50047,297 @@ void Expression::InternalSwap(Expression* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata Expression::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class DynamicParameter::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<DynamicParameter>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_._has_bits_);
+};
+
+void DynamicParameter::clear_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.type_ != nullptr) _impl_.type_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+DynamicParameter::DynamicParameter(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.DynamicParameter)
+}
+inline PROTOBUF_NDEBUG_INLINE DynamicParameter::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::DynamicParameter& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+DynamicParameter::DynamicParameter(
+    ::google::protobuf::Arena* arena,
+    const DynamicParameter& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  DynamicParameter* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.type_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(
+                              arena, *from._impl_.type_)
+                        : nullptr;
+  _impl_.parameter_reference_ = from._impl_.parameter_reference_;
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.DynamicParameter)
+}
+inline PROTOBUF_NDEBUG_INLINE DynamicParameter::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void DynamicParameter::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, type_),
+           0,
+           offsetof(Impl_, parameter_reference_) -
+               offsetof(Impl_, type_) +
+               sizeof(Impl_::parameter_reference_));
+}
+DynamicParameter::~DynamicParameter() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.DynamicParameter)
+  SharedDtor(*this);
+}
+inline void DynamicParameter::SharedDtor(MessageLite& self) {
+  DynamicParameter& this_ = static_cast<DynamicParameter&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.type_;
+  this_._impl_.~Impl_();
+}
+
+inline void* DynamicParameter::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) DynamicParameter(arena);
+}
+constexpr auto DynamicParameter::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(DynamicParameter),
+                                            alignof(DynamicParameter));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull DynamicParameter::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_DynamicParameter_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &DynamicParameter::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<DynamicParameter>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &DynamicParameter::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<DynamicParameter>(), &DynamicParameter::ByteSizeLong,
+            &DynamicParameter::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_._cached_size_),
+        false,
+    },
+    &DynamicParameter::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2falgebra_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* DynamicParameter::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> DynamicParameter::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::DynamicParameter>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // uint32 parameter_reference = 2 [json_name = "parameterReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DynamicParameter, _impl_.parameter_reference_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.parameter_reference_)}},
+    // .skyproto.substrait.Type type = 1 [json_name = "type"];
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.type_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skyproto.substrait.Type type = 1 [json_name = "type"];
+    {PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.type_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 parameter_reference = 2 [json_name = "parameterReference"];
+    {PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.parameter_reference_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::Type>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void DynamicParameter::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.DynamicParameter)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.type_ != nullptr);
+    _impl_.type_->Clear();
+  }
+  _impl_.parameter_reference_ = 0u;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* DynamicParameter::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const DynamicParameter& this_ = static_cast<const DynamicParameter&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* DynamicParameter::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const DynamicParameter& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.DynamicParameter)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skyproto.substrait.Type type = 1 [json_name = "type"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.type_, this_._impl_.type_->GetCachedSize(), target,
+                stream);
+          }
+
+          // uint32 parameter_reference = 2 [json_name = "parameterReference"];
+          if (this_._internal_parameter_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_parameter_reference(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.DynamicParameter)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t DynamicParameter::ByteSizeLong(const MessageLite& base) {
+          const DynamicParameter& this_ = static_cast<const DynamicParameter&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t DynamicParameter::ByteSizeLong() const {
+          const DynamicParameter& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.DynamicParameter)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skyproto.substrait.Type type = 1 [json_name = "type"];
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.type_);
+            }
+          }
+           {
+            // uint32 parameter_reference = 2 [json_name = "parameterReference"];
+            if (this_._internal_parameter_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_parameter_reference());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void DynamicParameter::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<DynamicParameter*>(&to_msg);
+  auto& from = static_cast<const DynamicParameter&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.DynamicParameter)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.type_ != nullptr);
+    if (_this->_impl_.type_ == nullptr) {
+      _this->_impl_.type_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type>(arena, *from._impl_.type_);
+    } else {
+      _this->_impl_.type_->MergeFrom(*from._impl_.type_);
+    }
+  }
+  if (from._internal_parameter_reference() != 0) {
+    _this->_impl_.parameter_reference_ = from._impl_.parameter_reference_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DynamicParameter::CopyFrom(const DynamicParameter& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.DynamicParameter)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void DynamicParameter::InternalSwap(DynamicParameter* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.parameter_reference_)
+      + sizeof(DynamicParameter::_impl_.parameter_reference_)
+      - PROTOBUF_FIELD_OFFSET(DynamicParameter, _impl_.type_)>(
+          reinterpret_cast<char*>(&_impl_.type_),
+          reinterpret_cast<char*>(&other->_impl_.type_));
+}
+
+::google::protobuf::Metadata DynamicParameter::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

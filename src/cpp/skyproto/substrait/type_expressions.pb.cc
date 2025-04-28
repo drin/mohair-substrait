@@ -298,6 +298,33 @@ struct DerivationExpression_ExpressionMapDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DerivationExpression_ExpressionMapDefaultTypeInternal _DerivationExpression_ExpressionMap_default_instance_;
 
+inline constexpr DerivationExpression_ExpressionPrecisionTime::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        precision_{nullptr},
+        variation_pointer_{0u},
+        nullability_{static_cast< ::skyproto::substrait::Type_Nullability >(0)} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR DerivationExpression_ExpressionPrecisionTime::DerivationExpression_ExpressionPrecisionTime(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal() {}
+  union {
+    DerivationExpression_ExpressionPrecisionTime _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal _DerivationExpression_ExpressionPrecisionTime_default_instance_;
+
 inline constexpr DerivationExpression_ExpressionPrecisionTimestamp::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -604,6 +631,20 @@ const ::uint32_t
         1,
         ~0u,
         ~0u,
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime, _impl_.precision_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime, _impl_.variation_pointer_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime, _impl_.nullability_),
+        0,
+        ~0u,
+        ~0u,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -831,6 +872,7 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DerivationExpression, _impl_.kind_),
 };
 
@@ -840,27 +882,29 @@ static const ::_pbi::MigrationSchema
         {14, 25, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionVarChar)},
         {28, 39, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionFixedBinary)},
         {42, 54, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionDecimal)},
-        {58, 69, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp)},
-        {72, 83, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionIntervalDay)},
-        {86, 97, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionIntervalCompound)},
-        {100, 111, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestampTZ)},
-        {114, -1, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionStruct)},
-        {125, 135, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionNamedStruct)},
-        {137, 148, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionList)},
-        {151, 163, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionMap)},
-        {167, -1, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionUserDefined)},
-        {178, 189, -1, sizeof(::skyproto::substrait::DerivationExpression_IfElse)},
-        {192, 202, -1, sizeof(::skyproto::substrait::DerivationExpression_UnaryOp)},
-        {204, 215, -1, sizeof(::skyproto::substrait::DerivationExpression_BinaryOp)},
-        {218, 228, -1, sizeof(::skyproto::substrait::DerivationExpression_ReturnProgram_Assignment)},
-        {230, 240, -1, sizeof(::skyproto::substrait::DerivationExpression_ReturnProgram)},
-        {242, -1, -1, sizeof(::skyproto::substrait::DerivationExpression)},
+        {58, 69, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime)},
+        {72, 83, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp)},
+        {86, 97, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionIntervalDay)},
+        {100, 111, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionIntervalCompound)},
+        {114, 125, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestampTZ)},
+        {128, -1, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionStruct)},
+        {139, 149, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionNamedStruct)},
+        {151, 162, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionList)},
+        {165, 177, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionMap)},
+        {181, -1, -1, sizeof(::skyproto::substrait::DerivationExpression_ExpressionUserDefined)},
+        {192, 203, -1, sizeof(::skyproto::substrait::DerivationExpression_IfElse)},
+        {206, 216, -1, sizeof(::skyproto::substrait::DerivationExpression_UnaryOp)},
+        {218, 229, -1, sizeof(::skyproto::substrait::DerivationExpression_BinaryOp)},
+        {232, 242, -1, sizeof(::skyproto::substrait::DerivationExpression_ReturnProgram_Assignment)},
+        {244, 254, -1, sizeof(::skyproto::substrait::DerivationExpression_ReturnProgram)},
+        {256, -1, -1, sizeof(::skyproto::substrait::DerivationExpression)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_DerivationExpression_ExpressionFixedChar_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionVarChar_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionFixedBinary_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionDecimal_default_instance_._instance,
+    &::skyproto::substrait::_DerivationExpression_ExpressionPrecisionTime_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionPrecisionTimestamp_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionIntervalDay_default_instance_._instance,
     &::skyproto::substrait::_DerivationExpression_ExpressionIntervalCompound_default_instance_._instance,
@@ -881,7 +925,7 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2ftype_5fexpressions_2
     protodesc_cold) = {
     "\n)skyproto/substrait/type_expressions.pr"
     "oto\022\022skyproto.substrait\032\035skyproto/substr"
-    "ait/type.proto\"\3204\n\024DerivationExpression\022"
+    "ait/type.proto\"\2307\n\024DerivationExpression\022"
     "6\n\004bool\030\001 \001(\0132 .skyproto.substrait.Type."
     "BooleanH\000R\004bool\022-\n\002i8\030\002 \001(\0132\033.skyproto.s"
     "ubstrait.Type.I8H\000R\002i8\0220\n\003i16\030\003 \001(\0132\034.sk"
@@ -897,163 +941,172 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2ftype_5fexpressions_2
     "timestamp\030\016 \001(\0132\".skyproto.substrait.Typ"
     "e.TimestampB\002\030\001H\000R\ttimestamp\0223\n\004date\030\020 \001"
     "(\0132\035.skyproto.substrait.Type.DateH\000R\004dat"
-    "e\0223\n\004time\030\021 \001(\0132\035.skyproto.substrait.Typ"
-    "e.TimeH\000R\004time\022L\n\rinterval_year\030\023 \001(\0132%."
-    "skyproto.substrait.Type.IntervalYearH\000R\014"
-    "intervalYear\022M\n\014timestamp_tz\030\035 \001(\0132$.sky"
-    "proto.substrait.Type.TimestampTZB\002\030\001H\000R\013"
-    "timestampTz\0223\n\004uuid\030  \001(\0132\035.skyproto.sub"
-    "strait.Type.UUIDH\000R\004uuid\022c\n\014interval_day"
-    "\030\024 \001(\0132>.skyproto.substrait.DerivationEx"
-    "pression.ExpressionIntervalDayH\000R\013interv"
-    "alDay\022r\n\021interval_compound\030* \001(\0132C.skypr"
-    "oto.substrait.DerivationExpression.Expre"
-    "ssionIntervalCompoundH\000R\020intervalCompoun"
-    "d\022]\n\nfixed_char\030\025 \001(\0132<.skyproto.substra"
-    "it.DerivationExpression.ExpressionFixedC"
-    "harH\000R\tfixedChar\022V\n\007varchar\030\026 \001(\0132:.skyp"
+    "e\0227\n\004time\030\021 \001(\0132\035.skyproto.substrait.Typ"
+    "e.TimeB\002\030\001H\000R\004time\022L\n\rinterval_year\030\023 \001("
+    "\0132%.skyproto.substrait.Type.IntervalYear"
+    "H\000R\014intervalYear\022M\n\014timestamp_tz\030\035 \001(\0132$"
+    ".skyproto.substrait.Type.TimestampTZB\002\030\001"
+    "H\000R\013timestampTz\0223\n\004uuid\030  \001(\0132\035.skyproto"
+    ".substrait.Type.UUIDH\000R\004uuid\022c\n\014interval"
+    "_day\030\024 \001(\0132>.skyproto.substrait.Derivati"
+    "onExpression.ExpressionIntervalDayH\000R\013in"
+    "tervalDay\022r\n\021interval_compound\030* \001(\0132C.s"
+    "kyproto.substrait.DerivationExpression.E"
+    "xpressionIntervalCompoundH\000R\020intervalCom"
+    "pound\022]\n\nfixed_char\030\025 \001(\0132<.skyproto.sub"
+    "strait.DerivationExpression.ExpressionFi"
+    "xedCharH\000R\tfixedChar\022V\n\007varchar\030\026 \001(\0132:."
+    "skyproto.substrait.DerivationExpression."
+    "ExpressionVarCharH\000R\007varchar\022c\n\014fixed_bi"
+    "nary\030\027 \001(\0132>.skyproto.substrait.Derivati"
+    "onExpression.ExpressionFixedBinaryH\000R\013fi"
+    "xedBinary\022V\n\007decimal\030\030 \001(\0132:.skyproto.su"
+    "bstrait.DerivationExpression.ExpressionD"
+    "ecimalH\000R\007decimal\022i\n\016precision_time\030+ \001("
+    "\0132@.skyproto.substrait.DerivationExpress"
+    "ion.ExpressionPrecisionTimeH\000R\rprecision"
+    "Time\022x\n\023precision_timestamp\030( \001(\0132E.skyp"
     "roto.substrait.DerivationExpression.Expr"
-    "essionVarCharH\000R\007varchar\022c\n\014fixed_binary"
-    "\030\027 \001(\0132>.skyproto.substrait.DerivationEx"
-    "pression.ExpressionFixedBinaryH\000R\013fixedB"
-    "inary\022V\n\007decimal\030\030 \001(\0132:.skyproto.substr"
-    "ait.DerivationExpression.ExpressionDecim"
-    "alH\000R\007decimal\022x\n\023precision_timestamp\030( \001"
-    "(\0132E.skyproto.substrait.DerivationExpres"
-    "sion.ExpressionPrecisionTimestampH\000R\022pre"
-    "cisionTimestamp\022\177\n\026precision_timestamp_t"
-    "z\030) \001(\0132G.skyproto.substrait.DerivationE"
-    "xpression.ExpressionPrecisionTimestampTZ"
-    "H\000R\024precisionTimestampTz\022S\n\006struct\030\031 \001(\013"
-    "29.skyproto.substrait.DerivationExpressi"
-    "on.ExpressionStructH\000R\006struct\022M\n\004list\030\033 "
-    "\001(\01327.skyproto.substrait.DerivationExpre"
-    "ssion.ExpressionListH\000R\004list\022J\n\003map\030\034 \001("
-    "\01326.skyproto.substrait.DerivationExpress"
-    "ion.ExpressionMapH\000R\003map\022c\n\014user_defined"
-    "\030\036 \001(\0132>.skyproto.substrait.DerivationEx"
-    "pression.ExpressionUserDefinedH\000R\013userDe"
-    "fined\0226\n\024user_defined_pointer\030\037 \001(\rB\002\030\001H"
-    "\000R\022userDefinedPointer\0220\n\023type_parameter_"
-    "name\030! \001(\tH\000R\021typeParameterName\0226\n\026integ"
-    "er_parameter_name\030\" \001(\tH\000R\024integerParame"
-    "terName\022)\n\017integer_literal\030# \001(\005H\000R\016inte"
-    "gerLiteral\022M\n\010unary_op\030$ \001(\01320.skyproto."
-    "substrait.DerivationExpression.UnaryOpH\000"
-    "R\007unaryOp\022P\n\tbinary_op\030% \001(\01321.skyproto."
-    "substrait.DerivationExpression.BinaryOpH"
-    "\000R\010binaryOp\022J\n\007if_else\030& \001(\0132/.skyproto."
-    "substrait.DerivationExpression.IfElseH\000R"
-    "\006ifElse\022_\n\016return_program\030\' \001(\01326.skypro"
-    "to.substrait.DerivationExpression.Return"
-    "ProgramH\000R\rreturnProgram\032\314\001\n\023ExpressionF"
-    "ixedChar\022@\n\006length\030\001 \001(\0132(.skyproto.subs"
-    "trait.DerivationExpressionR\006length\022+\n\021va"
-    "riation_pointer\030\002 \001(\rR\020variationPointer\022"
-    "F\n\013nullability\030\003 \001(\0162$.skyproto.substrai"
-    "t.Type.NullabilityR\013nullability\032\312\001\n\021Expr"
-    "essionVarChar\022@\n\006length\030\001 \001(\0132(.skyproto"
+    "essionPrecisionTimestampH\000R\022precisionTim"
+    "estamp\022\177\n\026precision_timestamp_tz\030) \001(\0132G"
+    ".skyproto.substrait.DerivationExpression"
+    ".ExpressionPrecisionTimestampTZH\000R\024preci"
+    "sionTimestampTz\022S\n\006struct\030\031 \001(\01329.skypro"
+    "to.substrait.DerivationExpression.Expres"
+    "sionStructH\000R\006struct\022M\n\004list\030\033 \001(\01327.sky"
+    "proto.substrait.DerivationExpression.Exp"
+    "ressionListH\000R\004list\022J\n\003map\030\034 \001(\01326.skypr"
+    "oto.substrait.DerivationExpression.Expre"
+    "ssionMapH\000R\003map\022c\n\014user_defined\030\036 \001(\0132>."
+    "skyproto.substrait.DerivationExpression."
+    "ExpressionUserDefinedH\000R\013userDefined\0226\n\024"
+    "user_defined_pointer\030\037 \001(\rB\002\030\001H\000R\022userDe"
+    "finedPointer\0220\n\023type_parameter_name\030! \001("
+    "\tH\000R\021typeParameterName\0226\n\026integer_parame"
+    "ter_name\030\" \001(\tH\000R\024integerParameterName\022)"
+    "\n\017integer_literal\030# \001(\005H\000R\016integerLitera"
+    "l\022M\n\010unary_op\030$ \001(\01320.skyproto.substrait"
+    ".DerivationExpression.UnaryOpH\000R\007unaryOp"
+    "\022P\n\tbinary_op\030% \001(\01321.skyproto.substrait"
+    ".DerivationExpression.BinaryOpH\000R\010binary"
+    "Op\022J\n\007if_else\030& \001(\0132/.skyproto.substrait"
+    ".DerivationExpression.IfElseH\000R\006ifElse\022_"
+    "\n\016return_program\030\' \001(\01326.skyproto.substr"
+    "ait.DerivationExpression.ReturnProgramH\000"
+    "R\rreturnProgram\032\314\001\n\023ExpressionFixedChar\022"
+    "@\n\006length\030\001 \001(\0132(.skyproto.substrait.Der"
+    "ivationExpressionR\006length\022+\n\021variation_p"
+    "ointer\030\002 \001(\rR\020variationPointer\022F\n\013nullab"
+    "ility\030\003 \001(\0162$.skyproto.substrait.Type.Nu"
+    "llabilityR\013nullability\032\312\001\n\021ExpressionVar"
+    "Char\022@\n\006length\030\001 \001(\0132(.skyproto.substrai"
+    "t.DerivationExpressionR\006length\022+\n\021variat"
+    "ion_pointer\030\002 \001(\rR\020variationPointer\022F\n\013n"
+    "ullability\030\003 \001(\0162$.skyproto.substrait.Ty"
+    "pe.NullabilityR\013nullability\032\316\001\n\025Expressi"
+    "onFixedBinary\022@\n\006length\030\001 \001(\0132(.skyproto"
     ".substrait.DerivationExpressionR\006length\022"
     "+\n\021variation_pointer\030\002 \001(\rR\020variationPoi"
     "nter\022F\n\013nullability\030\003 \001(\0162$.skyproto.sub"
-    "strait.Type.NullabilityR\013nullability\032\316\001\n"
-    "\025ExpressionFixedBinary\022@\n\006length\030\001 \001(\0132("
-    ".skyproto.substrait.DerivationExpression"
-    "R\006length\022+\n\021variation_pointer\030\002 \001(\rR\020var"
-    "iationPointer\022F\n\013nullability\030\003 \001(\0162$.sky"
-    "proto.substrait.Type.NullabilityR\013nullab"
-    "ility\032\220\002\n\021ExpressionDecimal\022>\n\005scale\030\001 \001"
-    "(\0132(.skyproto.substrait.DerivationExpres"
-    "sionR\005scale\022F\n\tprecision\030\002 \001(\0132(.skyprot"
-    "o.substrait.DerivationExpressionR\tprecis"
-    "ion\022+\n\021variation_pointer\030\003 \001(\rR\020variatio"
-    "nPointer\022F\n\013nullability\030\004 \001(\0162$.skyproto"
-    ".substrait.Type.NullabilityR\013nullability"
-    "\032\333\001\n\034ExpressionPrecisionTimestamp\022F\n\tpre"
-    "cision\030\001 \001(\0132(.skyproto.substrait.Deriva"
-    "tionExpressionR\tprecision\022+\n\021variation_p"
-    "ointer\030\002 \001(\rR\020variationPointer\022F\n\013nullab"
-    "ility\030\003 \001(\0162$.skyproto.substrait.Type.Nu"
-    "llabilityR\013nullability\032\324\001\n\025ExpressionInt"
-    "ervalDay\022F\n\tprecision\030\001 \001(\0132(.skyproto.s"
-    "ubstrait.DerivationExpressionR\tprecision"
-    "\022+\n\021variation_pointer\030\002 \001(\rR\020variationPo"
-    "inter\022F\n\013nullability\030\003 \001(\0162$.skyproto.su"
-    "bstrait.Type.NullabilityR\013nullability\032\331\001"
-    "\n\032ExpressionIntervalCompound\022F\n\tprecisio"
-    "n\030\001 \001(\0132(.skyproto.substrait.DerivationE"
-    "xpressionR\tprecision\022+\n\021variation_pointe"
-    "r\030\002 \001(\rR\020variationPointer\022F\n\013nullability"
-    "\030\003 \001(\0162$.skyproto.substrait.Type.Nullabi"
-    "lityR\013nullability\032\335\001\n\036ExpressionPrecisio"
-    "nTimestampTZ\022F\n\tprecision\030\001 \001(\0132(.skypro"
-    "to.substrait.DerivationExpressionR\tpreci"
-    "sion\022+\n\021variation_pointer\030\002 \001(\rR\020variati"
-    "onPointer\022F\n\013nullability\030\003 \001(\0162$.skyprot"
-    "o.substrait.Type.NullabilityR\013nullabilit"
-    "y\032\307\001\n\020ExpressionStruct\022>\n\005types\030\001 \003(\0132(."
-    "skyproto.substrait.DerivationExpressionR"
-    "\005types\022+\n\021variation_pointer\030\002 \001(\rR\020varia"
-    "tionPointer\022F\n\013nullability\030\003 \001(\0162$.skypr"
-    "oto.substrait.Type.NullabilityR\013nullabil"
-    "ity\032\200\001\n\025ExpressionNamedStruct\022\024\n\005names\030\001"
-    " \003(\tR\005names\022Q\n\006struct\030\002 \001(\01329.skyproto.s"
-    "ubstrait.DerivationExpression.Expression"
-    "StructR\006struct\032\303\001\n\016ExpressionList\022<\n\004typ"
-    "e\030\001 \001(\0132(.skyproto.substrait.DerivationE"
-    "xpressionR\004type\022+\n\021variation_pointer\030\002 \001"
-    "(\rR\020variationPointer\022F\n\013nullability\030\003 \001("
-    "\0162$.skyproto.substrait.Type.NullabilityR"
-    "\013nullability\032\200\002\n\rExpressionMap\022:\n\003key\030\001 "
-    "\001(\0132(.skyproto.substrait.DerivationExpre"
-    "ssionR\003key\022>\n\005value\030\002 \001(\0132(.skyproto.sub"
-    "strait.DerivationExpressionR\005value\022+\n\021va"
+    "strait.Type.NullabilityR\013nullability\032\220\002\n"
+    "\021ExpressionDecimal\022>\n\005scale\030\001 \001(\0132(.skyp"
+    "roto.substrait.DerivationExpressionR\005sca"
+    "le\022F\n\tprecision\030\002 \001(\0132(.skyproto.substra"
+    "it.DerivationExpressionR\tprecision\022+\n\021va"
     "riation_pointer\030\003 \001(\rR\020variationPointer\022"
     "F\n\013nullability\030\004 \001(\0162$.skyproto.substrai"
-    "t.Type.NullabilityR\013nullability\032\257\001\n\025Expr"
-    "essionUserDefined\022!\n\014type_pointer\030\001 \001(\rR"
-    "\013typePointer\022+\n\021variation_pointer\030\002 \001(\rR"
+    "t.Type.NullabilityR\013nullability\032\326\001\n\027Expr"
+    "essionPrecisionTime\022F\n\tprecision\030\001 \001(\0132("
+    ".skyproto.substrait.DerivationExpression"
+    "R\tprecision\022+\n\021variation_pointer\030\002 \001(\rR\020"
+    "variationPointer\022F\n\013nullability\030\003 \001(\0162$."
+    "skyproto.substrait.Type.NullabilityR\013nul"
+    "lability\032\333\001\n\034ExpressionPrecisionTimestam"
+    "p\022F\n\tprecision\030\001 \001(\0132(.skyproto.substrai"
+    "t.DerivationExpressionR\tprecision\022+\n\021var"
+    "iation_pointer\030\002 \001(\rR\020variationPointer\022F"
+    "\n\013nullability\030\003 \001(\0162$.skyproto.substrait"
+    ".Type.NullabilityR\013nullability\032\324\001\n\025Expre"
+    "ssionIntervalDay\022F\n\tprecision\030\001 \001(\0132(.sk"
+    "yproto.substrait.DerivationExpressionR\tp"
+    "recision\022+\n\021variation_pointer\030\002 \001(\rR\020var"
+    "iationPointer\022F\n\013nullability\030\003 \001(\0162$.sky"
+    "proto.substrait.Type.NullabilityR\013nullab"
+    "ility\032\331\001\n\032ExpressionIntervalCompound\022F\n\t"
+    "precision\030\001 \001(\0132(.skyproto.substrait.Der"
+    "ivationExpressionR\tprecision\022+\n\021variatio"
+    "n_pointer\030\002 \001(\rR\020variationPointer\022F\n\013nul"
+    "lability\030\003 \001(\0162$.skyproto.substrait.Type"
+    ".NullabilityR\013nullability\032\335\001\n\036Expression"
+    "PrecisionTimestampTZ\022F\n\tprecision\030\001 \001(\0132"
+    "(.skyproto.substrait.DerivationExpressio"
+    "nR\tprecision\022+\n\021variation_pointer\030\002 \001(\rR"
     "\020variationPointer\022F\n\013nullability\030\003 \001(\0162$"
     ".skyproto.substrait.Type.NullabilityR\013nu"
-    "llability\032\347\001\n\006IfElse\022K\n\014if_condition\030\001 \001"
-    "(\0132(.skyproto.substrait.DerivationExpres"
-    "sionR\013ifCondition\022E\n\tif_return\030\002 \001(\0132(.s"
-    "kyproto.substrait.DerivationExpressionR\010"
-    "ifReturn\022I\n\013else_return\030\003 \001(\0132(.skyproto"
-    ".substrait.DerivationExpressionR\nelseRet"
-    "urn\032\351\001\n\007UnaryOp\022U\n\007op_type\030\001 \001(\0162<.skypr"
-    "oto.substrait.DerivationExpression.Unary"
-    "Op.UnaryOpTypeR\006opType\022:\n\003arg\030\002 \001(\0132(.sk"
-    "yproto.substrait.DerivationExpressionR\003a"
-    "rg\"K\n\013UnaryOpType\022\035\n\031UNARY_OP_TYPE_UNSPE"
-    "CIFIED\020\000\022\035\n\031UNARY_OP_TYPE_BOOLEAN_NOT\020\001\032"
-    "\317\004\n\010BinaryOp\022W\n\007op_type\030\001 \001(\0162>.skyproto"
-    ".substrait.DerivationExpression.BinaryOp"
-    ".BinaryOpTypeR\006opType\022<\n\004arg1\030\002 \001(\0132(.sk"
-    "yproto.substrait.DerivationExpressionR\004a"
-    "rg1\022<\n\004arg2\030\003 \001(\0132(.skyproto.substrait.D"
-    "erivationExpressionR\004arg2\"\355\002\n\014BinaryOpTy"
-    "pe\022\036\n\032BINARY_OP_TYPE_UNSPECIFIED\020\000\022\027\n\023BI"
-    "NARY_OP_TYPE_PLUS\020\001\022\030\n\024BINARY_OP_TYPE_MI"
-    "NUS\020\002\022\033\n\027BINARY_OP_TYPE_MULTIPLY\020\003\022\031\n\025BI"
-    "NARY_OP_TYPE_DIVIDE\020\004\022\026\n\022BINARY_OP_TYPE_"
-    "MIN\020\005\022\026\n\022BINARY_OP_TYPE_MAX\020\006\022\037\n\033BINARY_"
-    "OP_TYPE_GREATER_THAN\020\007\022\034\n\030BINARY_OP_TYPE"
-    "_LESS_THAN\020\010\022\026\n\022BINARY_OP_TYPE_AND\020\t\022\025\n\021"
-    "BINARY_OP_TYPE_OR\020\n\022\031\n\025BINARY_OP_TYPE_EQ"
-    "UALS\020\013\022\031\n\025BINARY_OP_TYPE_COVERS\020\014\032\265\002\n\rRe"
-    "turnProgram\022c\n\013assignments\030\001 \003(\0132A.skypr"
-    "oto.substrait.DerivationExpression.Retur"
-    "nProgram.AssignmentR\013assignments\022S\n\020fina"
-    "l_expression\030\002 \001(\0132(.skyproto.substrait."
-    "DerivationExpressionR\017finalExpression\032j\n"
-    "\nAssignment\022\022\n\004name\030\001 \001(\tR\004name\022H\n\nexpre"
-    "ssion\030\002 \001(\0132(.skyproto.substrait.Derivat"
-    "ionExpressionR\nexpressionB\006\n\004kindB\227\001\n\026co"
-    "m.skyproto.substraitB\024TypeExpressionsPro"
-    "toP\001\242\002\003SSX\252\002\022Skyproto.Substrait\312\002\022Skypro"
-    "to\\Substrait\342\002\036Skyproto\\Substrait\\GPBMet"
-    "adata\352\002\023Skyproto::Substraitb\006proto3"
+    "llability\032\307\001\n\020ExpressionStruct\022>\n\005types\030"
+    "\001 \003(\0132(.skyproto.substrait.DerivationExp"
+    "ressionR\005types\022+\n\021variation_pointer\030\002 \001("
+    "\rR\020variationPointer\022F\n\013nullability\030\003 \001(\016"
+    "2$.skyproto.substrait.Type.NullabilityR\013"
+    "nullability\032\200\001\n\025ExpressionNamedStruct\022\024\n"
+    "\005names\030\001 \003(\tR\005names\022Q\n\006struct\030\002 \001(\01329.sk"
+    "yproto.substrait.DerivationExpression.Ex"
+    "pressionStructR\006struct\032\303\001\n\016ExpressionLis"
+    "t\022<\n\004type\030\001 \001(\0132(.skyproto.substrait.Der"
+    "ivationExpressionR\004type\022+\n\021variation_poi"
+    "nter\030\002 \001(\rR\020variationPointer\022F\n\013nullabil"
+    "ity\030\003 \001(\0162$.skyproto.substrait.Type.Null"
+    "abilityR\013nullability\032\200\002\n\rExpressionMap\022:"
+    "\n\003key\030\001 \001(\0132(.skyproto.substrait.Derivat"
+    "ionExpressionR\003key\022>\n\005value\030\002 \001(\0132(.skyp"
+    "roto.substrait.DerivationExpressionR\005val"
+    "ue\022+\n\021variation_pointer\030\003 \001(\rR\020variation"
+    "Pointer\022F\n\013nullability\030\004 \001(\0162$.skyproto."
+    "substrait.Type.NullabilityR\013nullability\032"
+    "\257\001\n\025ExpressionUserDefined\022!\n\014type_pointe"
+    "r\030\001 \001(\rR\013typePointer\022+\n\021variation_pointe"
+    "r\030\002 \001(\rR\020variationPointer\022F\n\013nullability"
+    "\030\003 \001(\0162$.skyproto.substrait.Type.Nullabi"
+    "lityR\013nullability\032\347\001\n\006IfElse\022K\n\014if_condi"
+    "tion\030\001 \001(\0132(.skyproto.substrait.Derivati"
+    "onExpressionR\013ifCondition\022E\n\tif_return\030\002"
+    " \001(\0132(.skyproto.substrait.DerivationExpr"
+    "essionR\010ifReturn\022I\n\013else_return\030\003 \001(\0132(."
+    "skyproto.substrait.DerivationExpressionR"
+    "\nelseReturn\032\351\001\n\007UnaryOp\022U\n\007op_type\030\001 \001(\016"
+    "2<.skyproto.substrait.DerivationExpressi"
+    "on.UnaryOp.UnaryOpTypeR\006opType\022:\n\003arg\030\002 "
+    "\001(\0132(.skyproto.substrait.DerivationExpre"
+    "ssionR\003arg\"K\n\013UnaryOpType\022\035\n\031UNARY_OP_TY"
+    "PE_UNSPECIFIED\020\000\022\035\n\031UNARY_OP_TYPE_BOOLEA"
+    "N_NOT\020\001\032\317\004\n\010BinaryOp\022W\n\007op_type\030\001 \001(\0162>."
+    "skyproto.substrait.DerivationExpression."
+    "BinaryOp.BinaryOpTypeR\006opType\022<\n\004arg1\030\002 "
+    "\001(\0132(.skyproto.substrait.DerivationExpre"
+    "ssionR\004arg1\022<\n\004arg2\030\003 \001(\0132(.skyproto.sub"
+    "strait.DerivationExpressionR\004arg2\"\355\002\n\014Bi"
+    "naryOpType\022\036\n\032BINARY_OP_TYPE_UNSPECIFIED"
+    "\020\000\022\027\n\023BINARY_OP_TYPE_PLUS\020\001\022\030\n\024BINARY_OP"
+    "_TYPE_MINUS\020\002\022\033\n\027BINARY_OP_TYPE_MULTIPLY"
+    "\020\003\022\031\n\025BINARY_OP_TYPE_DIVIDE\020\004\022\026\n\022BINARY_"
+    "OP_TYPE_MIN\020\005\022\026\n\022BINARY_OP_TYPE_MAX\020\006\022\037\n"
+    "\033BINARY_OP_TYPE_GREATER_THAN\020\007\022\034\n\030BINARY"
+    "_OP_TYPE_LESS_THAN\020\010\022\026\n\022BINARY_OP_TYPE_A"
+    "ND\020\t\022\025\n\021BINARY_OP_TYPE_OR\020\n\022\031\n\025BINARY_OP"
+    "_TYPE_EQUALS\020\013\022\031\n\025BINARY_OP_TYPE_COVERS\020"
+    "\014\032\265\002\n\rReturnProgram\022c\n\013assignments\030\001 \003(\013"
+    "2A.skyproto.substrait.DerivationExpressi"
+    "on.ReturnProgram.AssignmentR\013assignments"
+    "\022S\n\020final_expression\030\002 \001(\0132(.skyproto.su"
+    "bstrait.DerivationExpressionR\017finalExpre"
+    "ssion\032j\n\nAssignment\022\022\n\004name\030\001 \001(\tR\004name\022"
+    "H\n\nexpression\030\002 \001(\0132(.skyproto.substrait"
+    ".DerivationExpressionR\nexpressionB\006\n\004kin"
+    "dB\227\001\n\026com.skyproto.substraitB\024TypeExpres"
+    "sionsProtoP\001\242\002\003SSX\252\002\022Skyproto.Substrait\312"
+    "\002\022Skyproto\\Substrait\342\002\036Skyproto\\Substrai"
+    "t\\GPBMetadata\352\002\023Skyproto::Substraitb\006pro"
+    "to3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto_deps[1] =
     {
@@ -1063,13 +1116,13 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressi
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto = {
     false,
     false,
-    6995,
+    7323,
     descriptor_table_protodef_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto,
     "skyproto/substrait/type_expressions.proto",
     &descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto_once,
     descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto_deps,
     1,
-    19,
+    20,
     schemas,
     file_default_instances,
     TableStruct_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto::offsets,
@@ -2430,6 +2483,322 @@ void DerivationExpression_ExpressionDecimal::InternalSwap(DerivationExpression_E
 }
 
 ::google::protobuf::Metadata DerivationExpression_ExpressionDecimal::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class DerivationExpression_ExpressionPrecisionTime::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<DerivationExpression_ExpressionPrecisionTime>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_._has_bits_);
+};
+
+DerivationExpression_ExpressionPrecisionTime::DerivationExpression_ExpressionPrecisionTime(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+}
+inline PROTOBUF_NDEBUG_INLINE DerivationExpression_ExpressionPrecisionTime::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+DerivationExpression_ExpressionPrecisionTime::DerivationExpression_ExpressionPrecisionTime(
+    ::google::protobuf::Arena* arena,
+    const DerivationExpression_ExpressionPrecisionTime& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  DerivationExpression_ExpressionPrecisionTime* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.precision_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression>(
+                              arena, *from._impl_.precision_)
+                        : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, variation_pointer_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, variation_pointer_),
+           offsetof(Impl_, nullability_) -
+               offsetof(Impl_, variation_pointer_) +
+               sizeof(Impl_::nullability_));
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+}
+inline PROTOBUF_NDEBUG_INLINE DerivationExpression_ExpressionPrecisionTime::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void DerivationExpression_ExpressionPrecisionTime::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, precision_),
+           0,
+           offsetof(Impl_, nullability_) -
+               offsetof(Impl_, precision_) +
+               sizeof(Impl_::nullability_));
+}
+DerivationExpression_ExpressionPrecisionTime::~DerivationExpression_ExpressionPrecisionTime() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+  SharedDtor(*this);
+}
+inline void DerivationExpression_ExpressionPrecisionTime::SharedDtor(MessageLite& self) {
+  DerivationExpression_ExpressionPrecisionTime& this_ = static_cast<DerivationExpression_ExpressionPrecisionTime&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.precision_;
+  this_._impl_.~Impl_();
+}
+
+inline void* DerivationExpression_ExpressionPrecisionTime::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) DerivationExpression_ExpressionPrecisionTime(arena);
+}
+constexpr auto DerivationExpression_ExpressionPrecisionTime::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(DerivationExpression_ExpressionPrecisionTime),
+                                            alignof(DerivationExpression_ExpressionPrecisionTime));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull DerivationExpression_ExpressionPrecisionTime::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_DerivationExpression_ExpressionPrecisionTime_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &DerivationExpression_ExpressionPrecisionTime::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<DerivationExpression_ExpressionPrecisionTime>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &DerivationExpression_ExpressionPrecisionTime::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<DerivationExpression_ExpressionPrecisionTime>(), &DerivationExpression_ExpressionPrecisionTime::ByteSizeLong,
+            &DerivationExpression_ExpressionPrecisionTime::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_._cached_size_),
+        false,
+    },
+    &DerivationExpression_ExpressionPrecisionTime::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* DerivationExpression_ExpressionPrecisionTime::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2> DerivationExpression_ExpressionPrecisionTime::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.precision_)}},
+    // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DerivationExpression_ExpressionPrecisionTime, _impl_.variation_pointer_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.variation_pointer_)}},
+    // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DerivationExpression_ExpressionPrecisionTime, _impl_.nullability_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.nullability_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+    {PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.precision_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+    {PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.variation_pointer_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+    {PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.nullability_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void DerivationExpression_ExpressionPrecisionTime::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.precision_ != nullptr);
+    _impl_.precision_->Clear();
+  }
+  ::memset(&_impl_.variation_pointer_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.nullability_) -
+      reinterpret_cast<char*>(&_impl_.variation_pointer_)) + sizeof(_impl_.nullability_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* DerivationExpression_ExpressionPrecisionTime::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const DerivationExpression_ExpressionPrecisionTime& this_ = static_cast<const DerivationExpression_ExpressionPrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* DerivationExpression_ExpressionPrecisionTime::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const DerivationExpression_ExpressionPrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.precision_, this_._impl_.precision_->GetCachedSize(), target,
+                stream);
+          }
+
+          // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+          if (this_._internal_variation_pointer() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_variation_pointer(), target);
+          }
+
+          // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+          if (this_._internal_nullability() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                3, this_._internal_nullability(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t DerivationExpression_ExpressionPrecisionTime::ByteSizeLong(const MessageLite& base) {
+          const DerivationExpression_ExpressionPrecisionTime& this_ = static_cast<const DerivationExpression_ExpressionPrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t DerivationExpression_ExpressionPrecisionTime::ByteSizeLong() const {
+          const DerivationExpression_ExpressionPrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.precision_);
+            }
+          }
+           {
+            // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+            if (this_._internal_variation_pointer() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_variation_pointer());
+            }
+            // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+            if (this_._internal_nullability() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_nullability());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void DerivationExpression_ExpressionPrecisionTime::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<DerivationExpression_ExpressionPrecisionTime*>(&to_msg);
+  auto& from = static_cast<const DerivationExpression_ExpressionPrecisionTime&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.precision_ != nullptr);
+    if (_this->_impl_.precision_ == nullptr) {
+      _this->_impl_.precision_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression>(arena, *from._impl_.precision_);
+    } else {
+      _this->_impl_.precision_->MergeFrom(*from._impl_.precision_);
+    }
+  }
+  if (from._internal_variation_pointer() != 0) {
+    _this->_impl_.variation_pointer_ = from._impl_.variation_pointer_;
+  }
+  if (from._internal_nullability() != 0) {
+    _this->_impl_.nullability_ = from._impl_.nullability_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DerivationExpression_ExpressionPrecisionTime::CopyFrom(const DerivationExpression_ExpressionPrecisionTime& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void DerivationExpression_ExpressionPrecisionTime::InternalSwap(DerivationExpression_ExpressionPrecisionTime* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.nullability_)
+      + sizeof(DerivationExpression_ExpressionPrecisionTime::_impl_.nullability_)
+      - PROTOBUF_FIELD_OFFSET(DerivationExpression_ExpressionPrecisionTime, _impl_.precision_)>(
+          reinterpret_cast<char*>(&_impl_.precision_),
+          reinterpret_cast<char*>(&other->_impl_.precision_));
+}
+
+::google::protobuf::Metadata DerivationExpression_ExpressionPrecisionTime::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -7213,6 +7582,19 @@ void DerivationExpression::set_allocated_decimal(::skyproto::substrait::Derivati
   }
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DerivationExpression.decimal)
 }
+void DerivationExpression::set_allocated_precision_time(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* precision_time) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_kind();
+  if (precision_time) {
+    ::google::protobuf::Arena* submessage_arena = precision_time->GetArena();
+    if (message_arena != submessage_arena) {
+      precision_time = ::google::protobuf::internal::GetOwnedMessage(message_arena, precision_time, submessage_arena);
+    }
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ = precision_time;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DerivationExpression.precision_time)
+}
 void DerivationExpression::set_allocated_precision_timestamp(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp* precision_timestamp) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_kind();
@@ -7437,6 +7819,9 @@ DerivationExpression::DerivationExpression(
         break;
       case kDecimal:
         _impl_.kind_.decimal_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression_ExpressionDecimal>(arena, *from._impl_.kind_.decimal_);
+        break;
+      case kPrecisionTime:
+        _impl_.kind_.precision_time_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime>(arena, *from._impl_.kind_.precision_time_);
         break;
       case kPrecisionTimestamp:
         _impl_.kind_.precision_timestamp_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp>(arena, *from._impl_.kind_.precision_timestamp_);
@@ -7680,6 +8065,14 @@ void DerivationExpression::clear_kind() {
       }
       break;
     }
+    case kPrecisionTime: {
+      if (GetArena() == nullptr) {
+        delete _impl_.kind_.precision_time_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.kind_.precision_time_);
+      }
+      break;
+    }
     case kPrecisionTimestamp: {
       if (GetArena() == nullptr) {
         delete _impl_.kind_.precision_timestamp_;
@@ -7820,16 +8213,16 @@ const ::google::protobuf::internal::ClassData* DerivationExpression::GetClassDat
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 35, 31, 121, 7> DerivationExpression::_table_ = {
+const ::_pbi::TcParseTable<0, 36, 32, 121, 7> DerivationExpression::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    42, 0,  // max_field_number, fast_idx_mask
+    43, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
     33702312,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    35,  // num_field_entries
-    31,  // num_aux_entries
+    36,  // num_field_entries
+    32,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -7841,7 +8234,7 @@ const ::_pbi::TcParseTable<0, 35, 31, 121, 7> DerivationExpression::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     33, 0, 1,
-    64512, 25,
+    63488, 25,
     65535, 65535
   }}, {{
     // .skyproto.substrait.Type.Boolean bool = 1 [json_name = "bool"];
@@ -7877,7 +8270,7 @@ const ::_pbi::TcParseTable<0, 35, 31, 121, 7> DerivationExpression::_table_ = {
     // .skyproto.substrait.Type.Date date = 16 [json_name = "date"];
     {PROTOBUF_FIELD_OFFSET(DerivationExpression, _impl_.kind_.date_), _Internal::kOneofCaseOffset + 0, 10,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
+    // .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
     {PROTOBUF_FIELD_OFFSET(DerivationExpression, _impl_.kind_.time_), _Internal::kOneofCaseOffset + 0, 11,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .skyproto.substrait.Type.IntervalYear interval_year = 19 [json_name = "intervalYear"];
@@ -7949,6 +8342,9 @@ const ::_pbi::TcParseTable<0, 35, 31, 121, 7> DerivationExpression::_table_ = {
     // .skyproto.substrait.DerivationExpression.ExpressionIntervalCompound interval_compound = 42 [json_name = "intervalCompound"];
     {PROTOBUF_FIELD_OFFSET(DerivationExpression, _impl_.kind_.interval_compound_), _Internal::kOneofCaseOffset + 0, 30,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.DerivationExpression.ExpressionPrecisionTime precision_time = 43 [json_name = "precisionTime"];
+    {PROTOBUF_FIELD_OFFSET(DerivationExpression, _impl_.kind_.precision_time_), _Internal::kOneofCaseOffset + 0, 31,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_Boolean>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_I8>()},
@@ -7981,6 +8377,7 @@ const ::_pbi::TcParseTable<0, 35, 31, 121, 7> DerivationExpression::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestampTZ>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression_ExpressionIntervalCompound>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime>()},
   }}, {{
     "\47\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\23\26\0\0\0\0\0\0\0\0\0\0\0\0"
     "skyproto.substrait.DerivationExpression"
@@ -8228,6 +8625,12 @@ PROTOBUF_NOINLINE void DerivationExpression::Clear() {
                   stream);
               break;
             }
+            case kPrecisionTime: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  43, *this_._impl_.kind_.precision_time_, this_._impl_.kind_.precision_time_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -8321,7 +8724,7 @@ PROTOBUF_NOINLINE void DerivationExpression::Clear() {
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.date_);
               break;
             }
-            // .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
+            // .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
             case kTime: {
               total_size += 2 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.time_);
@@ -8379,6 +8782,12 @@ PROTOBUF_NOINLINE void DerivationExpression::Clear() {
             case kDecimal: {
               total_size += 2 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.decimal_);
+              break;
+            }
+            // .skyproto.substrait.DerivationExpression.ExpressionPrecisionTime precision_time = 43 [json_name = "precisionTime"];
+            case kPrecisionTime: {
+              total_size += 2 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.precision_time_);
               break;
             }
             // .skyproto.substrait.DerivationExpression.ExpressionPrecisionTimestamp precision_timestamp = 40 [json_name = "precisionTimestamp"];
@@ -8679,6 +9088,15 @@ void DerivationExpression::MergeImpl(::google::protobuf::MessageLite& to_msg, co
               ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression_ExpressionDecimal>(arena, *from._impl_.kind_.decimal_);
         } else {
           _this->_impl_.kind_.decimal_->MergeFrom(from._internal_decimal());
+        }
+        break;
+      }
+      case kPrecisionTime: {
+        if (oneof_needs_init) {
+          _this->_impl_.kind_.precision_time_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime>(arena, *from._impl_.kind_.precision_time_);
+        } else {
+          _this->_impl_.kind_.precision_time_->MergeFrom(from._internal_precision_time());
         }
         break;
       }

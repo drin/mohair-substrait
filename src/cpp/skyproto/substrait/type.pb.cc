@@ -238,6 +238,33 @@ struct Type_PrecisionTimestampDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Type_PrecisionTimestampDefaultTypeInternal _Type_PrecisionTimestamp_default_instance_;
 
+inline constexpr Type_PrecisionTime::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : precision_{0},
+        type_variation_reference_{0u},
+        nullability_{static_cast< ::skyproto::substrait::Type_Nullability >(0)},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Type_PrecisionTime::Type_PrecisionTime(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct Type_PrecisionTimeDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Type_PrecisionTimeDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Type_PrecisionTimeDefaultTypeInternal() {}
+  union {
+    Type_PrecisionTime _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Type_PrecisionTimeDefaultTypeInternal _Type_PrecisionTime_default_instance_;
+
 inline constexpr Type_IntervalYear::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : type_variation_reference_{0u},
@@ -1050,6 +1077,17 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_Decimal, _impl_.type_variation_reference_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_Decimal, _impl_.nullability_),
         ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_PrecisionTime, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_PrecisionTime, _impl_.precision_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_PrecisionTime, _impl_.type_variation_reference_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_PrecisionTime, _impl_.nullability_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type_PrecisionTimestamp, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -1175,6 +1213,7 @@ const ::uint32_t
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
         ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::Type, _impl_.kind_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedStruct, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::NamedStruct, _internal_metadata_),
@@ -1213,15 +1252,16 @@ static const ::_pbi::MigrationSchema
         {186, -1, -1, sizeof(::skyproto::substrait::Type_VarChar)},
         {197, -1, -1, sizeof(::skyproto::substrait::Type_FixedBinary)},
         {208, -1, -1, sizeof(::skyproto::substrait::Type_Decimal)},
-        {220, -1, -1, sizeof(::skyproto::substrait::Type_PrecisionTimestamp)},
-        {231, -1, -1, sizeof(::skyproto::substrait::Type_PrecisionTimestampTZ)},
-        {242, -1, -1, sizeof(::skyproto::substrait::Type_Struct)},
-        {253, 264, -1, sizeof(::skyproto::substrait::Type_List)},
-        {267, 279, -1, sizeof(::skyproto::substrait::Type_Map)},
-        {283, -1, -1, sizeof(::skyproto::substrait::Type_UserDefined)},
-        {295, -1, -1, sizeof(::skyproto::substrait::Type_Parameter)},
-        {310, -1, -1, sizeof(::skyproto::substrait::Type)},
-        {347, 357, -1, sizeof(::skyproto::substrait::NamedStruct)},
+        {220, -1, -1, sizeof(::skyproto::substrait::Type_PrecisionTime)},
+        {231, -1, -1, sizeof(::skyproto::substrait::Type_PrecisionTimestamp)},
+        {242, -1, -1, sizeof(::skyproto::substrait::Type_PrecisionTimestampTZ)},
+        {253, -1, -1, sizeof(::skyproto::substrait::Type_Struct)},
+        {264, 275, -1, sizeof(::skyproto::substrait::Type_List)},
+        {278, 290, -1, sizeof(::skyproto::substrait::Type_Map)},
+        {294, -1, -1, sizeof(::skyproto::substrait::Type_UserDefined)},
+        {306, -1, -1, sizeof(::skyproto::substrait::Type_Parameter)},
+        {321, -1, -1, sizeof(::skyproto::substrait::Type)},
+        {359, 369, -1, sizeof(::skyproto::substrait::NamedStruct)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_Type_Boolean_default_instance_._instance,
@@ -1245,6 +1285,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_Type_VarChar_default_instance_._instance,
     &::skyproto::substrait::_Type_FixedBinary_default_instance_._instance,
     &::skyproto::substrait::_Type_Decimal_default_instance_._instance,
+    &::skyproto::substrait::_Type_PrecisionTime_default_instance_._instance,
     &::skyproto::substrait::_Type_PrecisionTimestamp_default_instance_._instance,
     &::skyproto::substrait::_Type_PrecisionTimestampTZ_default_instance_._instance,
     &::skyproto::substrait::_Type_Struct_default_instance_._instance,
@@ -1259,7 +1300,7 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2ftype_2eproto[] ABSL_
     protodesc_cold) = {
     "\n\035skyproto/substrait/type.proto\022\022skyprot"
     "o.substrait\032\033google/protobuf/empty.proto"
-    "\"\2423\n\004Type\0226\n\004bool\030\001 \001(\0132 .skyproto.subst"
+    "\"\2455\n\004Type\0226\n\004bool\030\001 \001(\0132 .skyproto.subst"
     "rait.Type.BooleanH\000R\004bool\022-\n\002i8\030\002 \001(\0132\033."
     "skyproto.substrait.Type.I8H\000R\002i8\0220\n\003i16\030"
     "\003 \001(\0132\034.skyproto.substrait.Type.I16H\000R\003i"
@@ -1291,145 +1332,151 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2ftype_2eproto[] ABSL_
     "\000R\007varchar\022I\n\014fixed_binary\030\027 \001(\0132$.skypr"
     "oto.substrait.Type.FixedBinaryH\000R\013fixedB"
     "inary\022<\n\007decimal\030\030 \001(\0132 .skyproto.substr"
-    "ait.Type.DecimalH\000R\007decimal\022^\n\023precision"
-    "_timestamp\030! \001(\0132+.skyproto.substrait.Ty"
-    "pe.PrecisionTimestampH\000R\022precisionTimest"
-    "amp\022e\n\026precision_timestamp_tz\030\" \001(\0132-.sk"
-    "yproto.substrait.Type.PrecisionTimestamp"
-    "TZH\000R\024precisionTimestampTz\0229\n\006struct\030\031 \001"
-    "(\0132\037.skyproto.substrait.Type.StructH\000R\006s"
-    "truct\0223\n\004list\030\033 \001(\0132\035.skyproto.substrait"
-    ".Type.ListH\000R\004list\0220\n\003map\030\034 \001(\0132\034.skypro"
-    "to.substrait.Type.MapH\000R\003map\022I\n\014user_def"
-    "ined\030\036 \001(\0132$.skyproto.substrait.Type.Use"
-    "rDefinedH\000R\013userDefined\022C\n\033user_defined_"
-    "type_reference\030\037 \001(\rB\002\030\001H\000R\030userDefinedT"
-    "ypeReference\032\213\001\n\007Boolean\0228\n\030type_variati"
-    "on_reference\030\001 \001(\rR\026typeVariationReferen"
-    "ce\022F\n\013nullability\030\002 \001(\0162$.skyproto.subst"
-    "rait.Type.NullabilityR\013nullability\032\206\001\n\002I"
-    "8\0228\n\030type_variation_reference\030\001 \001(\rR\026typ"
-    "eVariationReference\022F\n\013nullability\030\002 \001(\016"
-    "2$.skyproto.substrait.Type.NullabilityR\013"
-    "nullability\032\207\001\n\003I16\0228\n\030type_variation_re"
+    "ait.Type.DecimalH\000R\007decimal\022O\n\016precision"
+    "_time\030$ \001(\0132&.skyproto.substrait.Type.Pr"
+    "ecisionTimeH\000R\rprecisionTime\022^\n\023precisio"
+    "n_timestamp\030! \001(\0132+.skyproto.substrait.T"
+    "ype.PrecisionTimestampH\000R\022precisionTimes"
+    "tamp\022e\n\026precision_timestamp_tz\030\" \001(\0132-.s"
+    "kyproto.substrait.Type.PrecisionTimestam"
+    "pTZH\000R\024precisionTimestampTz\0229\n\006struct\030\031 "
+    "\001(\0132\037.skyproto.substrait.Type.StructH\000R\006"
+    "struct\0223\n\004list\030\033 \001(\0132\035.skyproto.substrai"
+    "t.Type.ListH\000R\004list\0220\n\003map\030\034 \001(\0132\034.skypr"
+    "oto.substrait.Type.MapH\000R\003map\022I\n\014user_de"
+    "fined\030\036 \001(\0132$.skyproto.substrait.Type.Us"
+    "erDefinedH\000R\013userDefined\022C\n\033user_defined"
+    "_type_reference\030\037 \001(\rB\002\030\001H\000R\030userDefined"
+    "TypeReference\032\213\001\n\007Boolean\0228\n\030type_variat"
+    "ion_reference\030\001 \001(\rR\026typeVariationRefere"
+    "nce\022F\n\013nullability\030\002 \001(\0162$.skyproto.subs"
+    "trait.Type.NullabilityR\013nullability\032\206\001\n\002"
+    "I8\0228\n\030type_variation_reference\030\001 \001(\rR\026ty"
+    "peVariationReference\022F\n\013nullability\030\002 \001("
+    "\0162$.skyproto.substrait.Type.NullabilityR"
+    "\013nullability\032\207\001\n\003I16\0228\n\030type_variation_r"
+    "eference\030\001 \001(\rR\026typeVariationReference\022F"
+    "\n\013nullability\030\002 \001(\0162$.skyproto.substrait"
+    ".Type.NullabilityR\013nullability\032\207\001\n\003I32\0228"
+    "\n\030type_variation_reference\030\001 \001(\rR\026typeVa"
+    "riationReference\022F\n\013nullability\030\002 \001(\0162$."
+    "skyproto.substrait.Type.NullabilityR\013nul"
+    "lability\032\207\001\n\003I64\0228\n\030type_variation_refer"
+    "ence\030\001 \001(\rR\026typeVariationReference\022F\n\013nu"
+    "llability\030\002 \001(\0162$.skyproto.substrait.Typ"
+    "e.NullabilityR\013nullability\032\210\001\n\004FP32\0228\n\030t"
+    "ype_variation_reference\030\001 \001(\rR\026typeVaria"
+    "tionReference\022F\n\013nullability\030\002 \001(\0162$.sky"
+    "proto.substrait.Type.NullabilityR\013nullab"
+    "ility\032\210\001\n\004FP64\0228\n\030type_variation_referen"
+    "ce\030\001 \001(\rR\026typeVariationReference\022F\n\013null"
+    "ability\030\002 \001(\0162$.skyproto.substrait.Type."
+    "NullabilityR\013nullability\032\212\001\n\006String\0228\n\030t"
+    "ype_variation_reference\030\001 \001(\rR\026typeVaria"
+    "tionReference\022F\n\013nullability\030\002 \001(\0162$.sky"
+    "proto.substrait.Type.NullabilityR\013nullab"
+    "ility\032\212\001\n\006Binary\0228\n\030type_variation_refer"
+    "ence\030\001 \001(\rR\026typeVariationReference\022F\n\013nu"
+    "llability\030\002 \001(\0162$.skyproto.substrait.Typ"
+    "e.NullabilityR\013nullability\032\215\001\n\tTimestamp"
+    "\0228\n\030type_variation_reference\030\001 \001(\rR\026type"
+    "VariationReference\022F\n\013nullability\030\002 \001(\0162"
+    "$.skyproto.substrait.Type.NullabilityR\013n"
+    "ullability\032\210\001\n\004Date\0228\n\030type_variation_re"
     "ference\030\001 \001(\rR\026typeVariationReference\022F\n"
     "\013nullability\030\002 \001(\0162$.skyproto.substrait."
-    "Type.NullabilityR\013nullability\032\207\001\n\003I32\0228\n"
+    "Type.NullabilityR\013nullability\032\210\001\n\004Time\0228"
+    "\n\030type_variation_reference\030\001 \001(\rR\026typeVa"
+    "riationReference\022F\n\013nullability\030\002 \001(\0162$."
+    "skyproto.substrait.Type.NullabilityR\013nul"
+    "lability\032\217\001\n\013TimestampTZ\0228\n\030type_variati"
+    "on_reference\030\001 \001(\rR\026typeVariationReferen"
+    "ce\022F\n\013nullability\030\002 \001(\0162$.skyproto.subst"
+    "rait.Type.NullabilityR\013nullability\032\220\001\n\014I"
+    "ntervalYear\0228\n\030type_variation_reference\030"
+    "\001 \001(\rR\026typeVariationReference\022F\n\013nullabi"
+    "lity\030\002 \001(\0162$.skyproto.substrait.Type.Nul"
+    "labilityR\013nullability\032\300\001\n\013IntervalDay\0228\n"
     "\030type_variation_reference\030\001 \001(\rR\026typeVar"
     "iationReference\022F\n\013nullability\030\002 \001(\0162$.s"
     "kyproto.substrait.Type.NullabilityR\013null"
-    "ability\032\207\001\n\003I64\0228\n\030type_variation_refere"
-    "nce\030\001 \001(\rR\026typeVariationReference\022F\n\013nul"
-    "lability\030\002 \001(\0162$.skyproto.substrait.Type"
-    ".NullabilityR\013nullability\032\210\001\n\004FP32\0228\n\030ty"
-    "pe_variation_reference\030\001 \001(\rR\026typeVariat"
-    "ionReference\022F\n\013nullability\030\002 \001(\0162$.skyp"
-    "roto.substrait.Type.NullabilityR\013nullabi"
-    "lity\032\210\001\n\004FP64\0228\n\030type_variation_referenc"
-    "e\030\001 \001(\rR\026typeVariationReference\022F\n\013nulla"
-    "bility\030\002 \001(\0162$.skyproto.substrait.Type.N"
-    "ullabilityR\013nullability\032\212\001\n\006String\0228\n\030ty"
-    "pe_variation_reference\030\001 \001(\rR\026typeVariat"
-    "ionReference\022F\n\013nullability\030\002 \001(\0162$.skyp"
-    "roto.substrait.Type.NullabilityR\013nullabi"
-    "lity\032\212\001\n\006Binary\0228\n\030type_variation_refere"
-    "nce\030\001 \001(\rR\026typeVariationReference\022F\n\013nul"
-    "lability\030\002 \001(\0162$.skyproto.substrait.Type"
-    ".NullabilityR\013nullability\032\215\001\n\tTimestamp\022"
-    "8\n\030type_variation_reference\030\001 \001(\rR\026typeV"
-    "ariationReference\022F\n\013nullability\030\002 \001(\0162$"
-    ".skyproto.substrait.Type.NullabilityR\013nu"
-    "llability\032\210\001\n\004Date\0228\n\030type_variation_ref"
-    "erence\030\001 \001(\rR\026typeVariationReference\022F\n\013"
-    "nullability\030\002 \001(\0162$.skyproto.substrait.T"
-    "ype.NullabilityR\013nullability\032\210\001\n\004Time\0228\n"
+    "ability\022!\n\tprecision\030\003 \001(\005H\000R\tprecision\210"
+    "\001\001B\014\n\n_precision\032\262\001\n\020IntervalCompound\0228\n"
     "\030type_variation_reference\030\001 \001(\rR\026typeVar"
     "iationReference\022F\n\013nullability\030\002 \001(\0162$.s"
     "kyproto.substrait.Type.NullabilityR\013null"
-    "ability\032\217\001\n\013TimestampTZ\0228\n\030type_variatio"
-    "n_reference\030\001 \001(\rR\026typeVariationReferenc"
-    "e\022F\n\013nullability\030\002 \001(\0162$.skyproto.substr"
-    "ait.Type.NullabilityR\013nullability\032\220\001\n\014In"
-    "tervalYear\0228\n\030type_variation_reference\030\001"
-    " \001(\rR\026typeVariationReference\022F\n\013nullabil"
-    "ity\030\002 \001(\0162$.skyproto.substrait.Type.Null"
-    "abilityR\013nullability\032\300\001\n\013IntervalDay\0228\n\030"
-    "type_variation_reference\030\001 \001(\rR\026typeVari"
-    "ationReference\022F\n\013nullability\030\002 \001(\0162$.sk"
-    "yproto.substrait.Type.NullabilityR\013nulla"
-    "bility\022!\n\tprecision\030\003 \001(\005H\000R\tprecision\210\001"
-    "\001B\014\n\n_precision\032\262\001\n\020IntervalCompound\0228\n\030"
-    "type_variation_reference\030\001 \001(\rR\026typeVari"
-    "ationReference\022F\n\013nullability\030\002 \001(\0162$.sk"
-    "yproto.substrait.Type.NullabilityR\013nulla"
-    "bility\022\034\n\tprecision\030\003 \001(\005R\tprecision\032\210\001\n"
-    "\004UUID\0228\n\030type_variation_reference\030\001 \001(\rR"
-    "\026typeVariationReference\022F\n\013nullability\030\002"
-    " \001(\0162$.skyproto.substrait.Type.Nullabili"
-    "tyR\013nullability\032\245\001\n\tFixedChar\022\026\n\006length\030"
-    "\001 \001(\005R\006length\0228\n\030type_variation_referenc"
-    "e\030\002 \001(\rR\026typeVariationReference\022F\n\013nulla"
-    "bility\030\003 \001(\0162$.skyproto.substrait.Type.N"
-    "ullabilityR\013nullability\032\243\001\n\007VarChar\022\026\n\006l"
-    "ength\030\001 \001(\005R\006length\0228\n\030type_variation_re"
-    "ference\030\002 \001(\rR\026typeVariationReference\022F\n"
-    "\013nullability\030\003 \001(\0162$.skyproto.substrait."
-    "Type.NullabilityR\013nullability\032\247\001\n\013FixedB"
-    "inary\022\026\n\006length\030\001 \001(\005R\006length\0228\n\030type_va"
-    "riation_reference\030\002 \001(\rR\026typeVariationRe"
-    "ference\022F\n\013nullability\030\003 \001(\0162$.skyproto."
-    "substrait.Type.NullabilityR\013nullability\032"
-    "\277\001\n\007Decimal\022\024\n\005scale\030\001 \001(\005R\005scale\022\034\n\tpre"
-    "cision\030\002 \001(\005R\tprecision\0228\n\030type_variatio"
-    "n_reference\030\003 \001(\rR\026typeVariationReferenc"
-    "e\022F\n\013nullability\030\004 \001(\0162$.skyproto.substr"
-    "ait.Type.NullabilityR\013nullability\032\264\001\n\022Pr"
-    "ecisionTimestamp\022\034\n\tprecision\030\001 \001(\005R\tpre"
-    "cision\0228\n\030type_variation_reference\030\002 \001(\r"
+    "ability\022\034\n\tprecision\030\003 \001(\005R\tprecision\032\210\001"
+    "\n\004UUID\0228\n\030type_variation_reference\030\001 \001(\r"
     "R\026typeVariationReference\022F\n\013nullability\030"
-    "\003 \001(\0162$.skyproto.substrait.Type.Nullabil"
-    "ityR\013nullability\032\266\001\n\024PrecisionTimestampT"
-    "Z\022\034\n\tprecision\030\001 \001(\005R\tprecision\0228\n\030type_"
-    "variation_reference\030\002 \001(\rR\026typeVariation"
-    "Reference\022F\n\013nullability\030\003 \001(\0162$.skyprot"
-    "o.substrait.Type.NullabilityR\013nullabilit"
-    "y\032\272\001\n\006Struct\022.\n\005types\030\001 \003(\0132\030.skyproto.s"
-    "ubstrait.TypeR\005types\0228\n\030type_variation_r"
+    "\002 \001(\0162$.skyproto.substrait.Type.Nullabil"
+    "ityR\013nullability\032\245\001\n\tFixedChar\022\026\n\006length"
+    "\030\001 \001(\005R\006length\0228\n\030type_variation_referen"
+    "ce\030\002 \001(\rR\026typeVariationReference\022F\n\013null"
+    "ability\030\003 \001(\0162$.skyproto.substrait.Type."
+    "NullabilityR\013nullability\032\243\001\n\007VarChar\022\026\n\006"
+    "length\030\001 \001(\005R\006length\0228\n\030type_variation_r"
     "eference\030\002 \001(\rR\026typeVariationReference\022F"
     "\n\013nullability\030\003 \001(\0162$.skyproto.substrait"
-    ".Type.NullabilityR\013nullability\032\266\001\n\004List\022"
-    ",\n\004type\030\001 \001(\0132\030.skyproto.substrait.TypeR"
-    "\004type\0228\n\030type_variation_reference\030\002 \001(\rR"
-    "\026typeVariationReference\022F\n\013nullability\030\003"
-    " \001(\0162$.skyproto.substrait.Type.Nullabili"
-    "tyR\013nullability\032\343\001\n\003Map\022*\n\003key\030\001 \001(\0132\030.s"
-    "kyproto.substrait.TypeR\003key\022.\n\005value\030\002 \001"
-    "(\0132\030.skyproto.substrait.TypeR\005value\0228\n\030t"
-    "ype_variation_reference\030\003 \001(\rR\026typeVaria"
-    "tionReference\022F\n\013nullability\030\004 \001(\0162$.sky"
-    "proto.substrait.Type.NullabilityR\013nullab"
-    "ility\032\203\002\n\013UserDefined\022%\n\016type_reference\030"
-    "\001 \001(\rR\rtypeReference\0228\n\030type_variation_r"
-    "eference\030\002 \001(\rR\026typeVariationReference\022F"
-    "\n\013nullability\030\003 \001(\0162$.skyproto.substrait"
-    ".Type.NullabilityR\013nullability\022K\n\017type_p"
-    "arameters\030\004 \003(\0132\".skyproto.substrait.Typ"
-    "e.ParameterR\016typeParameters\032\347\001\n\tParamete"
-    "r\022,\n\004null\030\001 \001(\0132\026.google.protobuf.EmptyH"
-    "\000R\004null\0227\n\tdata_type\030\002 \001(\0132\030.skyproto.su"
-    "bstrait.TypeH\000R\010dataType\022\032\n\007boolean\030\003 \001("
-    "\010H\000R\007boolean\022\032\n\007integer\030\004 \001(\003H\000R\007integer"
-    "\022\024\n\004enum\030\005 \001(\tH\000R\004enum\022\030\n\006string\030\006 \001(\tH\000"
-    "R\006stringB\013\n\tparameter\"^\n\013Nullability\022\033\n\027"
-    "NULLABILITY_UNSPECIFIED\020\000\022\030\n\024NULLABILITY"
-    "_NULLABLE\020\001\022\030\n\024NULLABILITY_REQUIRED\020\002B\006\n"
-    "\004kind\"\\\n\013NamedStruct\022\024\n\005names\030\001 \003(\tR\005nam"
-    "es\0227\n\006struct\030\002 \001(\0132\037.skyproto.substrait."
-    "Type.StructR\006structB\214\001\n\026com.skyproto.sub"
-    "straitB\tTypeProtoP\001\242\002\003SSX\252\002\022Skyproto.Sub"
-    "strait\312\002\022Skyproto\\Substrait\342\002\036Skyproto\\S"
-    "ubstrait\\GPBMetadata\352\002\023Skyproto::Substra"
-    "itb\006proto3"
+    ".Type.NullabilityR\013nullability\032\247\001\n\013Fixed"
+    "Binary\022\026\n\006length\030\001 \001(\005R\006length\0228\n\030type_v"
+    "ariation_reference\030\002 \001(\rR\026typeVariationR"
+    "eference\022F\n\013nullability\030\003 \001(\0162$.skyproto"
+    ".substrait.Type.NullabilityR\013nullability"
+    "\032\277\001\n\007Decimal\022\024\n\005scale\030\001 \001(\005R\005scale\022\034\n\tpr"
+    "ecision\030\002 \001(\005R\tprecision\0228\n\030type_variati"
+    "on_reference\030\003 \001(\rR\026typeVariationReferen"
+    "ce\022F\n\013nullability\030\004 \001(\0162$.skyproto.subst"
+    "rait.Type.NullabilityR\013nullability\032\257\001\n\rP"
+    "recisionTime\022\034\n\tprecision\030\001 \001(\005R\tprecisi"
+    "on\0228\n\030type_variation_reference\030\002 \001(\rR\026ty"
+    "peVariationReference\022F\n\013nullability\030\003 \001("
+    "\0162$.skyproto.substrait.Type.NullabilityR"
+    "\013nullability\032\264\001\n\022PrecisionTimestamp\022\034\n\tp"
+    "recision\030\001 \001(\005R\tprecision\0228\n\030type_variat"
+    "ion_reference\030\002 \001(\rR\026typeVariationRefere"
+    "nce\022F\n\013nullability\030\003 \001(\0162$.skyproto.subs"
+    "trait.Type.NullabilityR\013nullability\032\266\001\n\024"
+    "PrecisionTimestampTZ\022\034\n\tprecision\030\001 \001(\005R"
+    "\tprecision\0228\n\030type_variation_reference\030\002"
+    " \001(\rR\026typeVariationReference\022F\n\013nullabil"
+    "ity\030\003 \001(\0162$.skyproto.substrait.Type.Null"
+    "abilityR\013nullability\032\272\001\n\006Struct\022.\n\005types"
+    "\030\001 \003(\0132\030.skyproto.substrait.TypeR\005types\022"
+    "8\n\030type_variation_reference\030\002 \001(\rR\026typeV"
+    "ariationReference\022F\n\013nullability\030\003 \001(\0162$"
+    ".skyproto.substrait.Type.NullabilityR\013nu"
+    "llability\032\266\001\n\004List\022,\n\004type\030\001 \001(\0132\030.skypr"
+    "oto.substrait.TypeR\004type\0228\n\030type_variati"
+    "on_reference\030\002 \001(\rR\026typeVariationReferen"
+    "ce\022F\n\013nullability\030\003 \001(\0162$.skyproto.subst"
+    "rait.Type.NullabilityR\013nullability\032\343\001\n\003M"
+    "ap\022*\n\003key\030\001 \001(\0132\030.skyproto.substrait.Typ"
+    "eR\003key\022.\n\005value\030\002 \001(\0132\030.skyproto.substra"
+    "it.TypeR\005value\0228\n\030type_variation_referen"
+    "ce\030\003 \001(\rR\026typeVariationReference\022F\n\013null"
+    "ability\030\004 \001(\0162$.skyproto.substrait.Type."
+    "NullabilityR\013nullability\032\203\002\n\013UserDefined"
+    "\022%\n\016type_reference\030\001 \001(\rR\rtypeReference\022"
+    "8\n\030type_variation_reference\030\002 \001(\rR\026typeV"
+    "ariationReference\022F\n\013nullability\030\003 \001(\0162$"
+    ".skyproto.substrait.Type.NullabilityR\013nu"
+    "llability\022K\n\017type_parameters\030\004 \003(\0132\".sky"
+    "proto.substrait.Type.ParameterR\016typePara"
+    "meters\032\347\001\n\tParameter\022,\n\004null\030\001 \001(\0132\026.goo"
+    "gle.protobuf.EmptyH\000R\004null\0227\n\tdata_type\030"
+    "\002 \001(\0132\030.skyproto.substrait.TypeH\000R\010dataT"
+    "ype\022\032\n\007boolean\030\003 \001(\010H\000R\007boolean\022\032\n\007integ"
+    "er\030\004 \001(\003H\000R\007integer\022\024\n\004enum\030\005 \001(\tH\000R\004enu"
+    "m\022\030\n\006string\030\006 \001(\tH\000R\006stringB\013\n\tparameter"
+    "\"^\n\013Nullability\022\033\n\027NULLABILITY_UNSPECIFI"
+    "ED\020\000\022\030\n\024NULLABILITY_NULLABLE\020\001\022\030\n\024NULLAB"
+    "ILITY_REQUIRED\020\002B\006\n\004kind\"\\\n\013NamedStruct\022"
+    "\024\n\005names\030\001 \003(\tR\005names\0227\n\006struct\030\002 \001(\0132\037."
+    "skyproto.substrait.Type.StructR\006structB\214"
+    "\001\n\026com.skyproto.substraitB\tTypeProtoP\001\242\002"
+    "\003SSX\252\002\022Skyproto.Substrait\312\002\022Skyproto\\Sub"
+    "strait\342\002\036Skyproto\\Substrait\\GPBMetadata\352"
+    "\002\023Skyproto::Substraitb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2ftype_2eproto_deps[1] =
     {
@@ -1439,13 +1486,13 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2ftype_2eproto_on
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2ftype_2eproto = {
     false,
     false,
-    6890,
+    7149,
     descriptor_table_protodef_skyproto_2fsubstrait_2ftype_2eproto,
     "skyproto/substrait/type.proto",
     &descriptor_table_skyproto_2fsubstrait_2ftype_2eproto_once,
     descriptor_table_skyproto_2fsubstrait_2ftype_2eproto_deps,
     1,
-    30,
+    31,
     schemas,
     file_default_instances,
     TableStruct_skyproto_2fsubstrait_2ftype_2eproto::offsets,
@@ -6703,6 +6750,269 @@ void Type_Decimal::InternalSwap(Type_Decimal* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
+class Type_PrecisionTime::_Internal {
+ public:
+};
+
+Type_PrecisionTime::Type_PrecisionTime(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.substrait.Type.PrecisionTime)
+}
+Type_PrecisionTime::Type_PrecisionTime(
+    ::google::protobuf::Arena* arena, const Type_PrecisionTime& from)
+    : Type_PrecisionTime(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE Type_PrecisionTime::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void Type_PrecisionTime::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, precision_),
+           0,
+           offsetof(Impl_, nullability_) -
+               offsetof(Impl_, precision_) +
+               sizeof(Impl_::nullability_));
+}
+Type_PrecisionTime::~Type_PrecisionTime() {
+  // @@protoc_insertion_point(destructor:skyproto.substrait.Type.PrecisionTime)
+  SharedDtor(*this);
+}
+inline void Type_PrecisionTime::SharedDtor(MessageLite& self) {
+  Type_PrecisionTime& this_ = static_cast<Type_PrecisionTime&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* Type_PrecisionTime::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) Type_PrecisionTime(arena);
+}
+constexpr auto Type_PrecisionTime::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(Type_PrecisionTime),
+                                            alignof(Type_PrecisionTime));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull Type_PrecisionTime::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_Type_PrecisionTime_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &Type_PrecisionTime::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<Type_PrecisionTime>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &Type_PrecisionTime::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<Type_PrecisionTime>(), &Type_PrecisionTime::ByteSizeLong,
+            &Type_PrecisionTime::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_._cached_size_),
+        false,
+    },
+    &Type_PrecisionTime::kDescriptorMethods,
+    &descriptor_table_skyproto_2fsubstrait_2ftype_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* Type_PrecisionTime::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> Type_PrecisionTime::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::substrait::Type_PrecisionTime>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 precision = 1 [json_name = "precision"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Type_PrecisionTime, _impl_.precision_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.precision_)}},
+    // uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Type_PrecisionTime, _impl_.type_variation_reference_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.type_variation_reference_)}},
+    // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Type_PrecisionTime, _impl_.nullability_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.nullability_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 precision = 1 [json_name = "precision"];
+    {PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.precision_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+    {PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.type_variation_reference_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+    {PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.nullability_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void Type_PrecisionTime::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.substrait.Type.PrecisionTime)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.precision_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.nullability_) -
+      reinterpret_cast<char*>(&_impl_.precision_)) + sizeof(_impl_.nullability_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* Type_PrecisionTime::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const Type_PrecisionTime& this_ = static_cast<const Type_PrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* Type_PrecisionTime::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const Type_PrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.substrait.Type.PrecisionTime)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 precision = 1 [json_name = "precision"];
+          if (this_._internal_precision() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_precision(), target);
+          }
+
+          // uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+          if (this_._internal_type_variation_reference() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                2, this_._internal_type_variation_reference(), target);
+          }
+
+          // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+          if (this_._internal_nullability() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                3, this_._internal_nullability(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.substrait.Type.PrecisionTime)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t Type_PrecisionTime::ByteSizeLong(const MessageLite& base) {
+          const Type_PrecisionTime& this_ = static_cast<const Type_PrecisionTime&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t Type_PrecisionTime::ByteSizeLong() const {
+          const Type_PrecisionTime& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.substrait.Type.PrecisionTime)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 precision = 1 [json_name = "precision"];
+            if (this_._internal_precision() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_precision());
+            }
+            // uint32 type_variation_reference = 2 [json_name = "typeVariationReference"];
+            if (this_._internal_type_variation_reference() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+                  this_._internal_type_variation_reference());
+            }
+            // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+            if (this_._internal_nullability() != 0) {
+              total_size += 1 +
+                            ::_pbi::WireFormatLite::EnumSize(this_._internal_nullability());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void Type_PrecisionTime::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<Type_PrecisionTime*>(&to_msg);
+  auto& from = static_cast<const Type_PrecisionTime&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.substrait.Type.PrecisionTime)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_precision() != 0) {
+    _this->_impl_.precision_ = from._impl_.precision_;
+  }
+  if (from._internal_type_variation_reference() != 0) {
+    _this->_impl_.type_variation_reference_ = from._impl_.type_variation_reference_;
+  }
+  if (from._internal_nullability() != 0) {
+    _this->_impl_.nullability_ = from._impl_.nullability_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Type_PrecisionTime::CopyFrom(const Type_PrecisionTime& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.substrait.Type.PrecisionTime)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void Type_PrecisionTime::InternalSwap(Type_PrecisionTime* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.nullability_)
+      + sizeof(Type_PrecisionTime::_impl_.nullability_)
+      - PROTOBUF_FIELD_OFFSET(Type_PrecisionTime, _impl_.precision_)>(
+          reinterpret_cast<char*>(&_impl_.precision_),
+          reinterpret_cast<char*>(&other->_impl_.precision_));
+}
+
+::google::protobuf::Metadata Type_PrecisionTime::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
 class Type_PrecisionTimestamp::_Internal {
  public:
 };
@@ -9291,6 +9601,19 @@ void Type::set_allocated_decimal(::skyproto::substrait::Type_Decimal* decimal) {
   }
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Type.decimal)
 }
+void Type::set_allocated_precision_time(::skyproto::substrait::Type_PrecisionTime* precision_time) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_kind();
+  if (precision_time) {
+    ::google::protobuf::Arena* submessage_arena = precision_time->GetArena();
+    if (message_arena != submessage_arena) {
+      precision_time = ::google::protobuf::internal::GetOwnedMessage(message_arena, precision_time, submessage_arena);
+    }
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ = precision_time;
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Type.precision_time)
+}
 void Type::set_allocated_precision_timestamp(::skyproto::substrait::Type_PrecisionTimestamp* precision_timestamp) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_kind();
@@ -9463,6 +9786,9 @@ Type::Type(
         break;
       case kDecimal:
         _impl_.kind_.decimal_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type_Decimal>(arena, *from._impl_.kind_.decimal_);
+        break;
+      case kPrecisionTime:
+        _impl_.kind_.precision_time_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type_PrecisionTime>(arena, *from._impl_.kind_.precision_time_);
         break;
       case kPrecisionTimestamp:
         _impl_.kind_.precision_timestamp_ = ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type_PrecisionTimestamp>(arena, *from._impl_.kind_.precision_timestamp_);
@@ -9685,6 +10011,14 @@ void Type::clear_kind() {
       }
       break;
     }
+    case kPrecisionTime: {
+      if (GetArena() == nullptr) {
+        delete _impl_.kind_.precision_time_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.kind_.precision_time_);
+      }
+      break;
+    }
     case kPrecisionTimestamp: {
       if (GetArena() == nullptr) {
         delete _impl_.kind_.precision_timestamp_;
@@ -9781,16 +10115,16 @@ const ::google::protobuf::internal::ClassData* Type::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 28, 27, 0, 7> Type::_table_ = {
+const ::_pbi::TcParseTable<0, 29, 28, 0, 7> Type::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    35, 0,  // max_field_number, fast_idx_mask
+    36, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
     33702312,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    28,  // num_field_entries
-    27,  // num_aux_entries
+    29,  // num_field_entries
+    28,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -9802,7 +10136,7 @@ const ::_pbi::TcParseTable<0, 28, 27, 0, 7> Type::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     33, 0, 1,
-    65528, 25,
+    65520, 25,
     65535, 65535
   }}, {{
     // .skyproto.substrait.Type.Boolean bool = 1 [json_name = "bool"];
@@ -9889,6 +10223,9 @@ const ::_pbi::TcParseTable<0, 28, 27, 0, 7> Type::_table_ = {
     // .skyproto.substrait.Type.IntervalCompound interval_compound = 35 [json_name = "intervalCompound"];
     {PROTOBUF_FIELD_OFFSET(Type, _impl_.kind_.interval_compound_), _Internal::kOneofCaseOffset + 0, 26,
     (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .skyproto.substrait.Type.PrecisionTime precision_time = 36 [json_name = "precisionTime"];
+    {PROTOBUF_FIELD_OFFSET(Type, _impl_.kind_.precision_time_), _Internal::kOneofCaseOffset + 0, 27,
+    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_Boolean>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_I8>()},
@@ -9917,6 +10254,7 @@ const ::_pbi::TcParseTable<0, 28, 27, 0, 7> Type::_table_ = {
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_PrecisionTimestamp>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_PrecisionTimestampTZ>()},
     {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_IntervalCompound>()},
+    {::_pbi::TcParser::GetTable<::skyproto::substrait::Type_PrecisionTime>()},
   }}, {{
   }},
 };
@@ -10116,6 +10454,12 @@ PROTOBUF_NOINLINE void Type::Clear() {
                   stream);
               break;
             }
+            case kPrecisionTime: {
+              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                  36, *this_._impl_.kind_.precision_time_, this_._impl_.kind_.precision_time_->GetCachedSize(), target,
+                  stream);
+              break;
+            }
             default:
               break;
           }
@@ -10267,6 +10611,12 @@ PROTOBUF_NOINLINE void Type::Clear() {
             case kDecimal: {
               total_size += 2 +
                             ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.decimal_);
+              break;
+            }
+            // .skyproto.substrait.Type.PrecisionTime precision_time = 36 [json_name = "precisionTime"];
+            case kPrecisionTime: {
+              total_size += 2 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.kind_.precision_time_);
               break;
             }
             // .skyproto.substrait.Type.PrecisionTimestamp precision_timestamp = 33 [json_name = "precisionTimestamp"];
@@ -10525,6 +10875,15 @@ void Type::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::pr
               ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type_Decimal>(arena, *from._impl_.kind_.decimal_);
         } else {
           _this->_impl_.kind_.decimal_->MergeFrom(from._internal_decimal());
+        }
+        break;
+      }
+      case kPrecisionTime: {
+        if (oneof_needs_init) {
+          _this->_impl_.kind_.precision_time_ =
+              ::google::protobuf::Message::CopyConstruct<::skyproto::substrait::Type_PrecisionTime>(arena, *from._impl_.kind_.precision_time_);
+        } else {
+          _this->_impl_.kind_.precision_time_->MergeFrom(from._internal_precision_time());
         }
         break;
       }

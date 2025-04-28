@@ -88,6 +88,9 @@ extern CrossRelDefaultTypeInternal _CrossRel_default_instance_;
 class DdlRel;
 struct DdlRelDefaultTypeInternal;
 extern DdlRelDefaultTypeInternal _DdlRel_default_instance_;
+class DynamicParameter;
+struct DynamicParameterDefaultTypeInternal;
+extern DynamicParameterDefaultTypeInternal _DynamicParameter_default_instance_;
 class ExchangeRel;
 struct ExchangeRelDefaultTypeInternal;
 extern ExchangeRelDefaultTypeInternal _ExchangeRel_default_instance_;
@@ -178,6 +181,9 @@ extern Expression_Literal_MapDefaultTypeInternal _Expression_Literal_Map_default
 class Expression_Literal_Map_KeyValue;
 struct Expression_Literal_Map_KeyValueDefaultTypeInternal;
 extern Expression_Literal_Map_KeyValueDefaultTypeInternal _Expression_Literal_Map_KeyValue_default_instance_;
+class Expression_Literal_PrecisionTime;
+struct Expression_Literal_PrecisionTimeDefaultTypeInternal;
+extern Expression_Literal_PrecisionTimeDefaultTypeInternal _Expression_Literal_PrecisionTime_default_instance_;
 class Expression_Literal_PrecisionTimestamp;
 struct Expression_Literal_PrecisionTimestampDefaultTypeInternal;
 extern Expression_Literal_PrecisionTimestampDefaultTypeInternal _Expression_Literal_PrecisionTimestamp_default_instance_;
@@ -352,6 +358,12 @@ extern ReadRelDefaultTypeInternal _ReadRel_default_instance_;
 class ReadRel_ExtensionTable;
 struct ReadRel_ExtensionTableDefaultTypeInternal;
 extern ReadRel_ExtensionTableDefaultTypeInternal _ReadRel_ExtensionTable_default_instance_;
+class ReadRel_IcebergTable;
+struct ReadRel_IcebergTableDefaultTypeInternal;
+extern ReadRel_IcebergTableDefaultTypeInternal _ReadRel_IcebergTable_default_instance_;
+class ReadRel_IcebergTable_MetadataFileRead;
+struct ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal;
+extern ReadRel_IcebergTable_MetadataFileReadDefaultTypeInternal _ReadRel_IcebergTable_MetadataFileRead_default_instance_;
 class ReadRel_LocalFiles;
 struct ReadRel_LocalFilesDefaultTypeInternal;
 extern ReadRel_LocalFilesDefaultTypeInternal _ReadRel_LocalFiles_default_instance_;
@@ -1990,7 +2002,7 @@ class ReferenceRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ReferenceRel*>(
         &_ReferenceRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 123;
+  static constexpr int kIndexInFileMessages = 127;
   friend void swap(ReferenceRel& a, ReferenceRel& b) { a.Swap(&b); }
   inline void Swap(ReferenceRel* other) {
     if (other == this) return;
@@ -2193,7 +2205,7 @@ class ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions final : public ::google:
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 13;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions& a, ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_ParquetReadOptions* other) {
     if (other == this) return;
@@ -2338,7 +2350,7 @@ class ReadRel_LocalFiles_FileOrFiles_OrcReadOptions final : public ::google::pro
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_OrcReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_OrcReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 13;
+  static constexpr int kIndexInFileMessages = 15;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_OrcReadOptions& a, ReadRel_LocalFiles_FileOrFiles_OrcReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_OrcReadOptions* other) {
     if (other == this) return;
@@ -2483,7 +2495,7 @@ class ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions final : public ::google::pr
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 14;
+  static constexpr int kIndexInFileMessages = 16;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions& a, ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_DwrfReadOptions* other) {
     if (other == this) return;
@@ -2629,7 +2641,7 @@ class ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions final : p
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 15;
+  static constexpr int kIndexInFileMessages = 17;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions& a, ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_DelimiterSeparatedTextReadOptions* other) {
     if (other == this) return;
@@ -2904,7 +2916,7 @@ class ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions final : public ::google::p
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions*>(
         &_ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 12;
+  static constexpr int kIndexInFileMessages = 14;
   friend void swap(ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions& a, ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions* other) {
     if (other == this) return;
@@ -2991,6 +3003,250 @@ class ReadRel_LocalFiles_FileOrFiles_ArrowReadOptions final : public ::google::p
 };
 // -------------------------------------------------------------------
 
+class ReadRel_IcebergTable_MetadataFileRead final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead) */ {
+ public:
+  inline ReadRel_IcebergTable_MetadataFileRead() : ReadRel_IcebergTable_MetadataFileRead(nullptr) {}
+  ~ReadRel_IcebergTable_MetadataFileRead() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ReadRel_IcebergTable_MetadataFileRead* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ReadRel_IcebergTable_MetadataFileRead));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ReadRel_IcebergTable_MetadataFileRead(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline ReadRel_IcebergTable_MetadataFileRead(const ReadRel_IcebergTable_MetadataFileRead& from) : ReadRel_IcebergTable_MetadataFileRead(nullptr, from) {}
+  inline ReadRel_IcebergTable_MetadataFileRead(ReadRel_IcebergTable_MetadataFileRead&& from) noexcept
+      : ReadRel_IcebergTable_MetadataFileRead(nullptr, std::move(from)) {}
+  inline ReadRel_IcebergTable_MetadataFileRead& operator=(const ReadRel_IcebergTable_MetadataFileRead& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ReadRel_IcebergTable_MetadataFileRead& operator=(ReadRel_IcebergTable_MetadataFileRead&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ReadRel_IcebergTable_MetadataFileRead& default_instance() {
+    return *internal_default_instance();
+  }
+  enum SnapshotCase {
+    kSnapshotId = 2,
+    kSnapshotTimestamp = 3,
+    SNAPSHOT_NOT_SET = 0,
+  };
+  static inline const ReadRel_IcebergTable_MetadataFileRead* internal_default_instance() {
+    return reinterpret_cast<const ReadRel_IcebergTable_MetadataFileRead*>(
+        &_ReadRel_IcebergTable_MetadataFileRead_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 9;
+  friend void swap(ReadRel_IcebergTable_MetadataFileRead& a, ReadRel_IcebergTable_MetadataFileRead& b) { a.Swap(&b); }
+  inline void Swap(ReadRel_IcebergTable_MetadataFileRead* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ReadRel_IcebergTable_MetadataFileRead* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ReadRel_IcebergTable_MetadataFileRead* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ReadRel_IcebergTable_MetadataFileRead>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ReadRel_IcebergTable_MetadataFileRead& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ReadRel_IcebergTable_MetadataFileRead& from) { ReadRel_IcebergTable_MetadataFileRead::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ReadRel_IcebergTable_MetadataFileRead* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead"; }
+
+ protected:
+  explicit ReadRel_IcebergTable_MetadataFileRead(::google::protobuf::Arena* arena);
+  ReadRel_IcebergTable_MetadataFileRead(::google::protobuf::Arena* arena, const ReadRel_IcebergTable_MetadataFileRead& from);
+  ReadRel_IcebergTable_MetadataFileRead(::google::protobuf::Arena* arena, ReadRel_IcebergTable_MetadataFileRead&& from) noexcept
+      : ReadRel_IcebergTable_MetadataFileRead(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kMetadataUriFieldNumber = 1,
+    kSnapshotIdFieldNumber = 2,
+    kSnapshotTimestampFieldNumber = 3,
+  };
+  // string metadata_uri = 1 [json_name = "metadataUri"];
+  void clear_metadata_uri() ;
+  const std::string& metadata_uri() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_metadata_uri(Arg_&& arg, Args_... args);
+  std::string* mutable_metadata_uri();
+  PROTOBUF_NODISCARD std::string* release_metadata_uri();
+  void set_allocated_metadata_uri(std::string* value);
+
+  private:
+  const std::string& _internal_metadata_uri() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_metadata_uri(
+      const std::string& value);
+  std::string* _internal_mutable_metadata_uri();
+
+  public:
+  // string snapshot_id = 2 [json_name = "snapshotId"];
+  bool has_snapshot_id() const;
+  void clear_snapshot_id() ;
+  const std::string& snapshot_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_snapshot_id(Arg_&& arg, Args_... args);
+  std::string* mutable_snapshot_id();
+  PROTOBUF_NODISCARD std::string* release_snapshot_id();
+  void set_allocated_snapshot_id(std::string* value);
+
+  private:
+  const std::string& _internal_snapshot_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_snapshot_id(
+      const std::string& value);
+  std::string* _internal_mutable_snapshot_id();
+
+  public:
+  // int64 snapshot_timestamp = 3 [json_name = "snapshotTimestamp"];
+  bool has_snapshot_timestamp() const;
+  void clear_snapshot_timestamp() ;
+  ::int64_t snapshot_timestamp() const;
+  void set_snapshot_timestamp(::int64_t value);
+
+  private:
+  ::int64_t _internal_snapshot_timestamp() const;
+  void _internal_set_snapshot_timestamp(::int64_t value);
+
+  public:
+  void clear_snapshot();
+  SnapshotCase snapshot_case() const;
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead)
+ private:
+  class _Internal;
+  void set_has_snapshot_id();
+  void set_has_snapshot_timestamp();
+  inline bool has_snapshot() const;
+  inline void clear_has_snapshot();
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 3, 0,
+      88, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const ReadRel_IcebergTable_MetadataFileRead& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr metadata_uri_;
+    union SnapshotUnion {
+      constexpr SnapshotUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::google::protobuf::internal::ArenaStringPtr snapshot_id_;
+      ::int64_t snapshot_timestamp_;
+    } snapshot_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class FunctionOption final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.FunctionOption) */ {
  public:
@@ -3050,7 +3306,7 @@ class FunctionOption final : public ::google::protobuf::Message
     return reinterpret_cast<const FunctionOption*>(
         &_FunctionOption_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 59;
+  static constexpr int kIndexInFileMessages = 61;
   friend void swap(FunctionOption& a, FunctionOption& b) { a.Swap(&b); }
   inline void Swap(FunctionOption* other) {
     if (other == this) return;
@@ -3269,7 +3525,7 @@ class Expression_WindowFunction_Bound_Unbounded final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Unbounded*>(
         &_Expression_WindowFunction_Bound_Unbounded_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 83;
+  static constexpr int kIndexInFileMessages = 86;
   friend void swap(Expression_WindowFunction_Bound_Unbounded& a, Expression_WindowFunction_Bound_Unbounded& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Unbounded* other) {
     if (other == this) return;
@@ -3415,7 +3671,7 @@ class Expression_WindowFunction_Bound_Preceding final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Preceding*>(
         &_Expression_WindowFunction_Bound_Preceding_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 80;
+  static constexpr int kIndexInFileMessages = 83;
   friend void swap(Expression_WindowFunction_Bound_Preceding& a, Expression_WindowFunction_Bound_Preceding& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Preceding* other) {
     if (other == this) return;
@@ -3605,7 +3861,7 @@ class Expression_WindowFunction_Bound_Following final : public ::google::protobu
     return reinterpret_cast<const Expression_WindowFunction_Bound_Following*>(
         &_Expression_WindowFunction_Bound_Following_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 81;
+  static constexpr int kIndexInFileMessages = 84;
   friend void swap(Expression_WindowFunction_Bound_Following& a, Expression_WindowFunction_Bound_Following& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_Following* other) {
     if (other == this) return;
@@ -3794,7 +4050,7 @@ class Expression_WindowFunction_Bound_CurrentRow final : public ::google::protob
     return reinterpret_cast<const Expression_WindowFunction_Bound_CurrentRow*>(
         &_Expression_WindowFunction_Bound_CurrentRow_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 82;
+  static constexpr int kIndexInFileMessages = 85;
   friend void swap(Expression_WindowFunction_Bound_CurrentRow& a, Expression_WindowFunction_Bound_CurrentRow& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound_CurrentRow* other) {
     if (other == this) return;
@@ -3940,7 +4196,7 @@ class Expression_MaskExpression_MapSelect_MapKeyExpression final : public ::goog
     return reinterpret_cast<const Expression_MaskExpression_MapSelect_MapKeyExpression*>(
         &_Expression_MaskExpression_MapSelect_MapKeyExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 109;
+  static constexpr int kIndexInFileMessages = 112;
   friend void swap(Expression_MaskExpression_MapSelect_MapKeyExpression& a, Expression_MaskExpression_MapSelect_MapKeyExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect_MapKeyExpression* other) {
     if (other == this) return;
@@ -4136,7 +4392,7 @@ class Expression_MaskExpression_MapSelect_MapKey final : public ::google::protob
     return reinterpret_cast<const Expression_MaskExpression_MapSelect_MapKey*>(
         &_Expression_MaskExpression_MapSelect_MapKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 108;
+  static constexpr int kIndexInFileMessages = 111;
   friend void swap(Expression_MaskExpression_MapSelect_MapKey& a, Expression_MaskExpression_MapSelect_MapKey& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect_MapKey* other) {
     if (other == this) return;
@@ -4332,7 +4588,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice final : publ
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 105;
+  static constexpr int kIndexInFileMessages = 108;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice& a, Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListSlice* other) {
     if (other == this) return;
@@ -4534,7 +4790,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem_ListElement final : pu
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem_ListElement*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_ListElement_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 104;
+  static constexpr int kIndexInFileMessages = 107;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListElement& a, Expression_MaskExpression_ListSelect_ListSelectItem_ListElement& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem_ListElement* other) {
     if (other == this) return;
@@ -4724,7 +4980,7 @@ class Expression_Literal_VarChar final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_VarChar*>(
         &_Expression_Literal_VarChar_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 62;
+  static constexpr int kIndexInFileMessages = 64;
   friend void swap(Expression_Literal_VarChar& a, Expression_Literal_VarChar& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_VarChar* other) {
     if (other == this) return;
@@ -4932,7 +5188,7 @@ class Expression_Literal_PrecisionTimestamp final : public ::google::protobuf::M
     return reinterpret_cast<const Expression_Literal_PrecisionTimestamp*>(
         &_Expression_Literal_PrecisionTimestamp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 64;
+  static constexpr int kIndexInFileMessages = 67;
   friend void swap(Expression_Literal_PrecisionTimestamp& a, Expression_Literal_PrecisionTimestamp& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_PrecisionTimestamp* other) {
     if (other == this) return;
@@ -5075,6 +5331,208 @@ class Expression_Literal_PrecisionTimestamp final : public ::google::protobuf::M
 };
 // -------------------------------------------------------------------
 
+class Expression_Literal_PrecisionTime final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.Expression.Literal.PrecisionTime) */ {
+ public:
+  inline Expression_Literal_PrecisionTime() : Expression_Literal_PrecisionTime(nullptr) {}
+  ~Expression_Literal_PrecisionTime() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(Expression_Literal_PrecisionTime* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(Expression_Literal_PrecisionTime));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR Expression_Literal_PrecisionTime(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline Expression_Literal_PrecisionTime(const Expression_Literal_PrecisionTime& from) : Expression_Literal_PrecisionTime(nullptr, from) {}
+  inline Expression_Literal_PrecisionTime(Expression_Literal_PrecisionTime&& from) noexcept
+      : Expression_Literal_PrecisionTime(nullptr, std::move(from)) {}
+  inline Expression_Literal_PrecisionTime& operator=(const Expression_Literal_PrecisionTime& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Expression_Literal_PrecisionTime& operator=(Expression_Literal_PrecisionTime&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Expression_Literal_PrecisionTime& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Expression_Literal_PrecisionTime* internal_default_instance() {
+    return reinterpret_cast<const Expression_Literal_PrecisionTime*>(
+        &_Expression_Literal_PrecisionTime_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 66;
+  friend void swap(Expression_Literal_PrecisionTime& a, Expression_Literal_PrecisionTime& b) { a.Swap(&b); }
+  inline void Swap(Expression_Literal_PrecisionTime* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Expression_Literal_PrecisionTime* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Expression_Literal_PrecisionTime* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<Expression_Literal_PrecisionTime>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Expression_Literal_PrecisionTime& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const Expression_Literal_PrecisionTime& from) { Expression_Literal_PrecisionTime::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(Expression_Literal_PrecisionTime* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.Expression.Literal.PrecisionTime"; }
+
+ protected:
+  explicit Expression_Literal_PrecisionTime(::google::protobuf::Arena* arena);
+  Expression_Literal_PrecisionTime(::google::protobuf::Arena* arena, const Expression_Literal_PrecisionTime& from);
+  Expression_Literal_PrecisionTime(::google::protobuf::Arena* arena, Expression_Literal_PrecisionTime&& from) noexcept
+      : Expression_Literal_PrecisionTime(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kValueFieldNumber = 2,
+    kPrecisionFieldNumber = 1,
+  };
+  // int64 value = 2 [json_name = "value"];
+  void clear_value() ;
+  ::int64_t value() const;
+  void set_value(::int64_t value);
+
+  private:
+  ::int64_t _internal_value() const;
+  void _internal_set_value(::int64_t value);
+
+  public:
+  // int32 precision = 1 [json_name = "precision"];
+  void clear_precision() ;
+  ::int32_t precision() const;
+  void set_precision(::int32_t value);
+
+  private:
+  ::int32_t _internal_precision() const;
+  void _internal_set_precision(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.Expression.Literal.PrecisionTime)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const Expression_Literal_PrecisionTime& from_msg);
+    ::int64_t value_;
+    ::int32_t precision_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class Expression_Literal_IntervalYearToMonth final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.Expression.Literal.IntervalYearToMonth) */ {
  public:
@@ -5134,7 +5592,7 @@ class Expression_Literal_IntervalYearToMonth final : public ::google::protobuf::
     return reinterpret_cast<const Expression_Literal_IntervalYearToMonth*>(
         &_Expression_Literal_IntervalYearToMonth_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 67;
+  static constexpr int kIndexInFileMessages = 70;
   friend void swap(Expression_Literal_IntervalYearToMonth& a, Expression_Literal_IntervalYearToMonth& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalYearToMonth* other) {
     if (other == this) return;
@@ -5341,7 +5799,7 @@ class Expression_Literal_IntervalDayToSecond final : public ::google::protobuf::
     return reinterpret_cast<const Expression_Literal_IntervalDayToSecond*>(
         &_Expression_Literal_IntervalDayToSecond_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 68;
+  static constexpr int kIndexInFileMessages = 71;
   friend void swap(Expression_Literal_IntervalDayToSecond& a, Expression_Literal_IntervalDayToSecond& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalDayToSecond* other) {
     if (other == this) return;
@@ -5592,7 +6050,7 @@ class Expression_Literal_Decimal final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Decimal*>(
         &_Expression_Literal_Decimal_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 63;
+  static constexpr int kIndexInFileMessages = 65;
   friend void swap(Expression_Literal_Decimal& a, Expression_Literal_Decimal& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Decimal* other) {
     if (other == this) return;
@@ -5811,7 +6269,7 @@ class Expression_FieldReference_RootReference final : public ::google::protobuf:
     return reinterpret_cast<const Expression_FieldReference_RootReference*>(
         &_Expression_FieldReference_RootReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 112;
+  static constexpr int kIndexInFileMessages = 115;
   friend void swap(Expression_FieldReference_RootReference& a, Expression_FieldReference_RootReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference_RootReference* other) {
     if (other == this) return;
@@ -5957,7 +6415,7 @@ class Expression_FieldReference_OuterReference final : public ::google::protobuf
     return reinterpret_cast<const Expression_FieldReference_OuterReference*>(
         &_Expression_FieldReference_OuterReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 113;
+  static constexpr int kIndexInFileMessages = 116;
   friend void swap(Expression_FieldReference_OuterReference& a, Expression_FieldReference_OuterReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference_OuterReference* other) {
     if (other == this) return;
@@ -6146,7 +6604,7 @@ class Expression_Enum_Empty final : public ::google::protobuf::internal::ZeroFie
     return reinterpret_cast<const Expression_Enum_Empty*>(
         &_Expression_Enum_Empty_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 60;
+  static constexpr int kIndexInFileMessages = 62;
   friend void swap(Expression_Enum_Empty& a, Expression_Enum_Empty& b) { a.Swap(&b); }
   inline void Swap(Expression_Enum_Empty* other) {
     if (other == this) return;
@@ -6292,7 +6750,7 @@ class Expression_EmbeddedFunction_WebAssemblyFunction final : public ::google::p
     return reinterpret_cast<const Expression_EmbeddedFunction_WebAssemblyFunction*>(
         &_Expression_EmbeddedFunction_WebAssemblyFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 95;
+  static constexpr int kIndexInFileMessages = 98;
   friend void swap(Expression_EmbeddedFunction_WebAssemblyFunction& a, Expression_EmbeddedFunction_WebAssemblyFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction_WebAssemblyFunction* other) {
     if (other == this) return;
@@ -6512,7 +6970,7 @@ class Expression_EmbeddedFunction_PythonPickleFunction final : public ::google::
     return reinterpret_cast<const Expression_EmbeddedFunction_PythonPickleFunction*>(
         &_Expression_EmbeddedFunction_PythonPickleFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 94;
+  static constexpr int kIndexInFileMessages = 97;
   friend void swap(Expression_EmbeddedFunction_PythonPickleFunction& a, Expression_EmbeddedFunction_PythonPickleFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction_PythonPickleFunction* other) {
     if (other == this) return;
@@ -6732,7 +7190,7 @@ class ExchangeRel_RoundRobin final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_RoundRobin*>(
         &_ExchangeRel_RoundRobin_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 38;
+  static constexpr int kIndexInFileMessages = 40;
   friend void swap(ExchangeRel_RoundRobin& a, ExchangeRel_RoundRobin& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_RoundRobin* other) {
     if (other == this) return;
@@ -6921,7 +7379,7 @@ class ExchangeRel_Broadcast final : public ::google::protobuf::internal::ZeroFie
     return reinterpret_cast<const ExchangeRel_Broadcast*>(
         &_ExchangeRel_Broadcast_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 37;
+  static constexpr int kIndexInFileMessages = 39;
   friend void swap(ExchangeRel_Broadcast& a, ExchangeRel_Broadcast& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_Broadcast* other) {
     if (other == this) return;
@@ -7072,7 +7530,7 @@ class ComparisonJoinKey_ComparisonType final : public ::google::protobuf::Messag
     return reinterpret_cast<const ComparisonJoinKey_ComparisonType*>(
         &_ComparisonJoinKey_ComparisonType_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 53;
+  static constexpr int kIndexInFileMessages = 55;
   friend void swap(ComparisonJoinKey_ComparisonType& a, ComparisonJoinKey_ComparisonType& b) { a.Swap(&b); }
   inline void Swap(ComparisonJoinKey_ComparisonType* other) {
     if (other == this) return;
@@ -7303,7 +7761,7 @@ class ReadRel_LocalFiles_FileOrFiles final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_LocalFiles_FileOrFiles*>(
         &_ReadRel_LocalFiles_FileOrFiles_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 16;
+  static constexpr int kIndexInFileMessages = 18;
   friend void swap(ReadRel_LocalFiles_FileOrFiles& a, ReadRel_LocalFiles_FileOrFiles& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles_FileOrFiles* other) {
     if (other == this) return;
@@ -7692,6 +8150,220 @@ class ReadRel_LocalFiles_FileOrFiles final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class ReadRel_IcebergTable final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.ReadRel.IcebergTable) */ {
+ public:
+  inline ReadRel_IcebergTable() : ReadRel_IcebergTable(nullptr) {}
+  ~ReadRel_IcebergTable() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ReadRel_IcebergTable* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ReadRel_IcebergTable));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ReadRel_IcebergTable(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline ReadRel_IcebergTable(const ReadRel_IcebergTable& from) : ReadRel_IcebergTable(nullptr, from) {}
+  inline ReadRel_IcebergTable(ReadRel_IcebergTable&& from) noexcept
+      : ReadRel_IcebergTable(nullptr, std::move(from)) {}
+  inline ReadRel_IcebergTable& operator=(const ReadRel_IcebergTable& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ReadRel_IcebergTable& operator=(ReadRel_IcebergTable&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ReadRel_IcebergTable& default_instance() {
+    return *internal_default_instance();
+  }
+  enum TableTypeCase {
+    kDirect = 1,
+    TABLE_TYPE_NOT_SET = 0,
+  };
+  static inline const ReadRel_IcebergTable* internal_default_instance() {
+    return reinterpret_cast<const ReadRel_IcebergTable*>(
+        &_ReadRel_IcebergTable_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 10;
+  friend void swap(ReadRel_IcebergTable& a, ReadRel_IcebergTable& b) { a.Swap(&b); }
+  inline void Swap(ReadRel_IcebergTable* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ReadRel_IcebergTable* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ReadRel_IcebergTable* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ReadRel_IcebergTable>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ReadRel_IcebergTable& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ReadRel_IcebergTable& from) { ReadRel_IcebergTable::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ReadRel_IcebergTable* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.ReadRel.IcebergTable"; }
+
+ protected:
+  explicit ReadRel_IcebergTable(::google::protobuf::Arena* arena);
+  ReadRel_IcebergTable(::google::protobuf::Arena* arena, const ReadRel_IcebergTable& from);
+  ReadRel_IcebergTable(::google::protobuf::Arena* arena, ReadRel_IcebergTable&& from) noexcept
+      : ReadRel_IcebergTable(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+  using MetadataFileRead = ReadRel_IcebergTable_MetadataFileRead;
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kDirectFieldNumber = 1,
+  };
+  // .skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead direct = 1 [json_name = "direct"];
+  bool has_direct() const;
+  private:
+  bool _internal_has_direct() const;
+
+  public:
+  void clear_direct() ;
+  const ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead& direct() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* release_direct();
+  ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* mutable_direct();
+  void set_allocated_direct(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* value);
+  void unsafe_arena_set_allocated_direct(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* value);
+  ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* unsafe_arena_release_direct();
+
+  private:
+  const ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead& _internal_direct() const;
+  ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* _internal_mutable_direct();
+
+  public:
+  void clear_table_type();
+  TableTypeCase table_type_case() const;
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.ReadRel.IcebergTable)
+ private:
+  class _Internal;
+  void set_has_direct();
+  inline bool has_table_type() const;
+  inline void clear_has_table_type();
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const ReadRel_IcebergTable& from_msg);
+    union TableTypeUnion {
+      constexpr TableTypeUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* direct_;
+    } table_type_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ReadRel_ExtensionTable final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.ReadRel.ExtensionTable) */ {
  public:
@@ -7751,7 +8423,7 @@ class ReadRel_ExtensionTable final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_ExtensionTable*>(
         &_ReadRel_ExtensionTable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 12;
   friend void swap(ReadRel_ExtensionTable& a, ReadRel_ExtensionTable& b) { a.Swap(&b); }
   inline void Swap(ReadRel_ExtensionTable* other) {
     if (other == this) return;
@@ -7947,7 +8619,7 @@ class ExtensionObject final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionObject*>(
         &_ExtensionObject_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 47;
+  static constexpr int kIndexInFileMessages = 49;
   friend void swap(ExtensionObject& a, ExtensionObject& b) { a.Swap(&b); }
   inline void Swap(ExtensionObject* other) {
     if (other == this) return;
@@ -8150,7 +8822,7 @@ class Expression_WindowFunction_Bound final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_WindowFunction_Bound*>(
         &_Expression_WindowFunction_Bound_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 84;
+  static constexpr int kIndexInFileMessages = 87;
   friend void swap(Expression_WindowFunction_Bound& a, Expression_WindowFunction_Bound& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction_Bound* other) {
     if (other == this) return;
@@ -8434,7 +9106,7 @@ class Expression_MaskExpression_ListSelect_ListSelectItem final : public ::googl
     return reinterpret_cast<const Expression_MaskExpression_ListSelect_ListSelectItem*>(
         &_Expression_MaskExpression_ListSelect_ListSelectItem_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 106;
+  static constexpr int kIndexInFileMessages = 109;
   friend void swap(Expression_MaskExpression_ListSelect_ListSelectItem& a, Expression_MaskExpression_ListSelect_ListSelectItem& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect_ListSelectItem* other) {
     if (other == this) return;
@@ -8667,7 +9339,7 @@ class Expression_Literal_IntervalCompound final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_Literal_IntervalCompound*>(
         &_Expression_Literal_IntervalCompound_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 69;
+  static constexpr int kIndexInFileMessages = 72;
   friend void swap(Expression_Literal_IntervalCompound& a, Expression_Literal_IntervalCompound& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_IntervalCompound* other) {
     if (other == this) return;
@@ -8885,7 +9557,7 @@ class Expression_Enum final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Enum*>(
         &_Expression_Enum_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 61;
+  static constexpr int kIndexInFileMessages = 63;
   friend void swap(Expression_Enum& a, Expression_Enum& b) { a.Swap(&b); }
   inline void Swap(Expression_Enum* other) {
     if (other == this) return;
@@ -9120,7 +9792,7 @@ class ExchangeRel_ExchangeTarget final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_ExchangeTarget*>(
         &_ExchangeRel_ExchangeTarget_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 39;
+  static constexpr int kIndexInFileMessages = 41;
   friend void swap(ExchangeRel_ExchangeTarget& a, ExchangeRel_ExchangeTarget& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_ExchangeTarget* other) {
     if (other == this) return;
@@ -10006,7 +10678,7 @@ class ReadRel_LocalFiles final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_LocalFiles*>(
         &_ReadRel_LocalFiles_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 17;
+  static constexpr int kIndexInFileMessages = 19;
   friend void swap(ReadRel_LocalFiles& a, ReadRel_LocalFiles& b) { a.Swap(&b); }
   inline void Swap(ReadRel_LocalFiles* other) {
     if (other == this) return;
@@ -10222,7 +10894,7 @@ class NamedTable final : public ::google::protobuf::Message
     return reinterpret_cast<const NamedTable*>(
         &_NamedTable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 52;
+  static constexpr int kIndexInFileMessages = 54;
   friend void swap(NamedTable& a, NamedTable& b) { a.Swap(&b); }
   inline void Swap(NamedTable* other) {
     if (other == this) return;
@@ -10442,7 +11114,7 @@ class NamedObjectWrite final : public ::google::protobuf::Message
     return reinterpret_cast<const NamedObjectWrite*>(
         &_NamedObjectWrite_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 46;
+  static constexpr int kIndexInFileMessages = 48;
   friend void swap(NamedObjectWrite& a, NamedObjectWrite& b) { a.Swap(&b); }
   inline void Swap(NamedObjectWrite* other) {
     if (other == this) return;
@@ -10662,7 +11334,7 @@ class Expression_MaskExpression_ListSelect final : public ::google::protobuf::Me
     return reinterpret_cast<const Expression_MaskExpression_ListSelect*>(
         &_Expression_MaskExpression_ListSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 107;
+  static constexpr int kIndexInFileMessages = 110;
   friend void swap(Expression_MaskExpression_ListSelect& a, Expression_MaskExpression_ListSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_ListSelect* other) {
     if (other == this) return;
@@ -10883,7 +11555,7 @@ class Expression_MaskExpression_MapSelect final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_MaskExpression_MapSelect*>(
         &_Expression_MaskExpression_MapSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 110;
+  static constexpr int kIndexInFileMessages = 113;
   friend void swap(Expression_MaskExpression_MapSelect& a, Expression_MaskExpression_MapSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_MapSelect* other) {
     if (other == this) return;
@@ -11140,7 +11812,7 @@ class Expression_MaskExpression_Select final : public ::google::protobuf::Messag
     return reinterpret_cast<const Expression_MaskExpression_Select*>(
         &_Expression_MaskExpression_Select_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 101;
+  static constexpr int kIndexInFileMessages = 104;
   friend void swap(Expression_MaskExpression_Select& a, Expression_MaskExpression_Select& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_Select* other) {
     if (other == this) return;
@@ -11393,7 +12065,7 @@ class Expression_MaskExpression_StructItem final : public ::google::protobuf::Me
     return reinterpret_cast<const Expression_MaskExpression_StructItem*>(
         &_Expression_MaskExpression_StructItem_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 103;
+  static constexpr int kIndexInFileMessages = 106;
   friend void swap(Expression_MaskExpression_StructItem& a, Expression_MaskExpression_StructItem& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_StructItem* other) {
     if (other == this) return;
@@ -11601,7 +12273,7 @@ class Expression_MaskExpression_StructSelect final : public ::google::protobuf::
     return reinterpret_cast<const Expression_MaskExpression_StructSelect*>(
         &_Expression_MaskExpression_StructSelect_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 102;
+  static constexpr int kIndexInFileMessages = 105;
   friend void swap(Expression_MaskExpression_StructSelect& a, Expression_MaskExpression_StructSelect& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression_StructSelect* other) {
     if (other == this) return;
@@ -11814,6 +12486,7 @@ class Expression_Literal final : public ::google::protobuf::Message
     kVarChar = 22,
     kFixedBinary = 23,
     kDecimal = 24,
+    kPrecisionTime = 37,
     kPrecisionTimestamp = 34,
     kPrecisionTimestampTz = 35,
     kStruct = 25,
@@ -11831,7 +12504,7 @@ class Expression_Literal final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal*>(
         &_Expression_Literal_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 73;
+  static constexpr int kIndexInFileMessages = 76;
   friend void swap(Expression_Literal& a, Expression_Literal& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal* other) {
     if (other == this) return;
@@ -11917,6 +12590,7 @@ class Expression_Literal final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
   using VarChar = Expression_Literal_VarChar;
   using Decimal = Expression_Literal_Decimal;
+  using PrecisionTime = Expression_Literal_PrecisionTime;
   using PrecisionTimestamp = Expression_Literal_PrecisionTimestamp;
   using Map = Expression_Literal_Map;
   using IntervalYearToMonth = Expression_Literal_IntervalYearToMonth;
@@ -11949,6 +12623,7 @@ class Expression_Literal final : public ::google::protobuf::Message
     kVarCharFieldNumber = 22,
     kFixedBinaryFieldNumber = 23,
     kDecimalFieldNumber = 24,
+    kPrecisionTimeFieldNumber = 37,
     kPrecisionTimestampFieldNumber = 34,
     kPrecisionTimestampTzFieldNumber = 35,
     kStructFieldNumber = 25,
@@ -12254,6 +12929,25 @@ class Expression_Literal final : public ::google::protobuf::Message
   ::skyproto::substrait::Expression_Literal_Decimal* _internal_mutable_decimal();
 
   public:
+  // .skyproto.substrait.Expression.Literal.PrecisionTime precision_time = 37 [json_name = "precisionTime"];
+  bool has_precision_time() const;
+  private:
+  bool _internal_has_precision_time() const;
+
+  public:
+  void clear_precision_time() ;
+  const ::skyproto::substrait::Expression_Literal_PrecisionTime& precision_time() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::Expression_Literal_PrecisionTime* release_precision_time();
+  ::skyproto::substrait::Expression_Literal_PrecisionTime* mutable_precision_time();
+  void set_allocated_precision_time(::skyproto::substrait::Expression_Literal_PrecisionTime* value);
+  void unsafe_arena_set_allocated_precision_time(::skyproto::substrait::Expression_Literal_PrecisionTime* value);
+  ::skyproto::substrait::Expression_Literal_PrecisionTime* unsafe_arena_release_precision_time();
+
+  private:
+  const ::skyproto::substrait::Expression_Literal_PrecisionTime& _internal_precision_time() const;
+  ::skyproto::substrait::Expression_Literal_PrecisionTime* _internal_mutable_precision_time();
+
+  public:
   // .skyproto.substrait.Expression.Literal.PrecisionTimestamp precision_timestamp = 34 [json_name = "precisionTimestamp"];
   bool has_precision_timestamp() const;
   private:
@@ -12477,6 +13171,7 @@ class Expression_Literal final : public ::google::protobuf::Message
   void set_has_var_char();
   void set_has_fixed_binary();
   void set_has_decimal();
+  void set_has_precision_time();
   void set_has_precision_timestamp();
   void set_has_precision_timestamp_tz();
   void set_has_struct_();
@@ -12492,7 +13187,7 @@ class Expression_Literal final : public ::google::protobuf::Message
   inline void clear_has_literal_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 32, 14,
+      1, 33, 15,
       94, 9>
       _table_;
 
@@ -12534,6 +13229,7 @@ class Expression_Literal final : public ::google::protobuf::Message
       ::skyproto::substrait::Expression_Literal_VarChar* var_char_;
       ::google::protobuf::internal::ArenaStringPtr fixed_binary_;
       ::skyproto::substrait::Expression_Literal_Decimal* decimal_;
+      ::skyproto::substrait::Expression_Literal_PrecisionTime* precision_time_;
       ::skyproto::substrait::Expression_Literal_PrecisionTimestamp* precision_timestamp_;
       ::skyproto::substrait::Expression_Literal_PrecisionTimestamp* precision_timestamp_tz_;
       ::skyproto::substrait::Expression_Literal_Struct* struct__;
@@ -12614,7 +13310,7 @@ class Expression_Literal_List final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_List*>(
         &_Expression_Literal_List_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 71;
+  static constexpr int kIndexInFileMessages = 74;
   friend void swap(Expression_Literal_List& a, Expression_Literal_List& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_List* other) {
     if (other == this) return;
@@ -12811,7 +13507,7 @@ class Expression_Literal_Map final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Map*>(
         &_Expression_Literal_Map_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 66;
+  static constexpr int kIndexInFileMessages = 69;
   friend void swap(Expression_Literal_Map& a, Expression_Literal_Map& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Map* other) {
     if (other == this) return;
@@ -13009,7 +13705,7 @@ class Expression_Literal_Map_KeyValue final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Map_KeyValue*>(
         &_Expression_Literal_Map_KeyValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 65;
+  static constexpr int kIndexInFileMessages = 68;
   friend void swap(Expression_Literal_Map_KeyValue& a, Expression_Literal_Map_KeyValue& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Map_KeyValue* other) {
     if (other == this) return;
@@ -13222,7 +13918,7 @@ class Expression_Literal_Struct final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_Struct*>(
         &_Expression_Literal_Struct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 70;
+  static constexpr int kIndexInFileMessages = 73;
   friend void swap(Expression_Literal_Struct& a, Expression_Literal_Struct& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_Struct* other) {
     if (other == this) return;
@@ -13424,7 +14120,7 @@ class Expression_Literal_UserDefined final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Literal_UserDefined*>(
         &_Expression_Literal_UserDefined_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 72;
+  static constexpr int kIndexInFileMessages = 75;
   friend void swap(Expression_Literal_UserDefined& a, Expression_Literal_UserDefined& b) { a.Swap(&b); }
   inline void Swap(Expression_Literal_UserDefined* other) {
     if (other == this) return;
@@ -13627,6 +14323,214 @@ class Expression_Literal_UserDefined final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class DynamicParameter final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.DynamicParameter) */ {
+ public:
+  inline DynamicParameter() : DynamicParameter(nullptr) {}
+  ~DynamicParameter() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(DynamicParameter* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(DynamicParameter));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR DynamicParameter(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline DynamicParameter(const DynamicParameter& from) : DynamicParameter(nullptr, from) {}
+  inline DynamicParameter(DynamicParameter&& from) noexcept
+      : DynamicParameter(nullptr, std::move(from)) {}
+  inline DynamicParameter& operator=(const DynamicParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DynamicParameter& operator=(DynamicParameter&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DynamicParameter& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DynamicParameter* internal_default_instance() {
+    return reinterpret_cast<const DynamicParameter*>(
+        &_DynamicParameter_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 124;
+  friend void swap(DynamicParameter& a, DynamicParameter& b) { a.Swap(&b); }
+  inline void Swap(DynamicParameter* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DynamicParameter* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DynamicParameter* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<DynamicParameter>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const DynamicParameter& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const DynamicParameter& from) { DynamicParameter::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(DynamicParameter* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.DynamicParameter"; }
+
+ protected:
+  explicit DynamicParameter(::google::protobuf::Arena* arena);
+  DynamicParameter(::google::protobuf::Arena* arena, const DynamicParameter& from);
+  DynamicParameter(::google::protobuf::Arena* arena, DynamicParameter&& from) noexcept
+      : DynamicParameter(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTypeFieldNumber = 1,
+    kParameterReferenceFieldNumber = 2,
+  };
+  // .skyproto.substrait.Type type = 1 [json_name = "type"];
+  bool has_type() const;
+  void clear_type() ;
+  const ::skyproto::substrait::Type& type() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::Type* release_type();
+  ::skyproto::substrait::Type* mutable_type();
+  void set_allocated_type(::skyproto::substrait::Type* value);
+  void unsafe_arena_set_allocated_type(::skyproto::substrait::Type* value);
+  ::skyproto::substrait::Type* unsafe_arena_release_type();
+
+  private:
+  const ::skyproto::substrait::Type& _internal_type() const;
+  ::skyproto::substrait::Type* _internal_mutable_type();
+
+  public:
+  // uint32 parameter_reference = 2 [json_name = "parameterReference"];
+  void clear_parameter_reference() ;
+  ::uint32_t parameter_reference() const;
+  void set_parameter_reference(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_parameter_reference() const;
+  void _internal_set_parameter_reference(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.DynamicParameter)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const DynamicParameter& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::skyproto::substrait::Type* type_;
+    ::uint32_t parameter_reference_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2falgebra_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RelCommon_Hint final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.RelCommon.Hint) */ {
  public:
@@ -13806,6 +14710,7 @@ class RelCommon_Hint final : public ::google::protobuf::Message
     kConstraintFieldNumber = 2,
     kOutputSchemaFieldNumber = 5,
     kAdvancedExtensionFieldNumber = 10,
+    kAliasHashFieldNumber = 6,
   };
   // repeated string output_names = 4 [json_name = "outputNames"];
   int output_names_size() const;
@@ -13939,12 +14844,22 @@ class RelCommon_Hint final : public ::google::protobuf::Message
   ::skyproto::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
 
   public:
+  // uint64 alias_hash = 6 [json_name = "aliasHash"];
+  void clear_alias_hash() ;
+  ::uint64_t alias_hash() const;
+  void set_alias_hash(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_alias_hash() const;
+  void _internal_set_alias_hash(::uint64_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:skyproto.substrait.RelCommon.Hint)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      4, 8, 6,
+      4, 9, 6,
       67, 2>
       _table_;
 
@@ -13972,6 +14887,7 @@ class RelCommon_Hint final : public ::google::protobuf::Message
     ::skyproto::substrait::RelCommon_Hint_RuntimeConstraint* constraint_;
     ::skyproto::substrait::NamedStruct* output_schema_;
     ::skyproto::substrait::extensions::AdvancedExtension* advanced_extension_;
+    ::uint64_t alias_hash_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -14044,7 +14960,7 @@ class Expression_ReferenceSegment final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_ReferenceSegment*>(
         &_Expression_ReferenceSegment_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 100;
+  static constexpr int kIndexInFileMessages = 103;
   friend void swap(Expression_ReferenceSegment& a, Expression_ReferenceSegment& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment* other) {
     if (other == this) return;
@@ -14300,7 +15216,7 @@ class Expression_ReferenceSegment_ListElement final : public ::google::protobuf:
     return reinterpret_cast<const Expression_ReferenceSegment_ListElement*>(
         &_Expression_ReferenceSegment_ListElement_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 99;
+  static constexpr int kIndexInFileMessages = 102;
   friend void swap(Expression_ReferenceSegment_ListElement& a, Expression_ReferenceSegment_ListElement& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_ListElement* other) {
     if (other == this) return;
@@ -14508,7 +15424,7 @@ class Expression_ReferenceSegment_MapKey final : public ::google::protobuf::Mess
     return reinterpret_cast<const Expression_ReferenceSegment_MapKey*>(
         &_Expression_ReferenceSegment_MapKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 97;
+  static constexpr int kIndexInFileMessages = 100;
   friend void swap(Expression_ReferenceSegment_MapKey& a, Expression_ReferenceSegment_MapKey& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_MapKey* other) {
     if (other == this) return;
@@ -14721,7 +15637,7 @@ class Expression_ReferenceSegment_StructField final : public ::google::protobuf:
     return reinterpret_cast<const Expression_ReferenceSegment_StructField*>(
         &_Expression_ReferenceSegment_StructField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 98;
+  static constexpr int kIndexInFileMessages = 101;
   friend void swap(Expression_ReferenceSegment_StructField& a, Expression_ReferenceSegment_StructField& b) { a.Swap(&b); }
   inline void Swap(Expression_ReferenceSegment_StructField* other) {
     if (other == this) return;
@@ -14929,7 +15845,7 @@ class Expression_MaskExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MaskExpression*>(
         &_Expression_MaskExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 111;
+  static constexpr int kIndexInFileMessages = 114;
   friend void swap(Expression_MaskExpression& a, Expression_MaskExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_MaskExpression* other) {
     if (other == this) return;
@@ -15239,6 +16155,7 @@ class RelCommon final : public ::google::protobuf::Message
   enum : int {
     kHintFieldNumber = 3,
     kAdvancedExtensionFieldNumber = 4,
+    kOperatorIdFieldNumber = 5,
     kDirectFieldNumber = 1,
     kEmitFieldNumber = 2,
   };
@@ -15270,6 +16187,17 @@ class RelCommon final : public ::google::protobuf::Message
   private:
   const ::skyproto::substrait::extensions::AdvancedExtension& _internal_advanced_extension() const;
   ::skyproto::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
+
+  public:
+  // optional uint32 operator_id = 5 [json_name = "operatorId"];
+  bool has_operator_id() const;
+  void clear_operator_id() ;
+  ::uint32_t operator_id() const;
+  void set_operator_id(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_operator_id() const;
+  void _internal_set_operator_id(::uint32_t value);
 
   public:
   // .skyproto.substrait.RelCommon.Direct direct = 1 [json_name = "direct"];
@@ -15321,7 +16249,7 @@ class RelCommon final : public ::google::protobuf::Message
   inline void clear_has_emit_kind();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 4, 4,
+      2, 5, 4,
       0, 2>
       _table_;
 
@@ -15343,6 +16271,7 @@ class RelCommon final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::substrait::RelCommon_Hint* hint_;
     ::skyproto::substrait::extensions::AdvancedExtension* advanced_extension_;
+    ::uint32_t operator_id_;
     union EmitKindUnion {
       constexpr EmitKindUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -15416,7 +16345,7 @@ class ExtensionLeafRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionLeafRel*>(
         &_ExtensionLeafRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 32;
+  static constexpr int kIndexInFileMessages = 34;
   friend void swap(ExtensionLeafRel& a, ExtensionLeafRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionLeafRel* other) {
     if (other == this) return;
@@ -15629,7 +16558,7 @@ class AggregateFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateFunction*>(
         &_AggregateFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 122;
+  static constexpr int kIndexInFileMessages = 126;
   friend void swap(AggregateFunction& a, AggregateFunction& b) { a.Swap(&b); }
   inline void Swap(AggregateFunction* other) {
     if (other == this) return;
@@ -15957,7 +16886,7 @@ class AggregateRel final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel*>(
         &_AggregateRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 25;
+  static constexpr int kIndexInFileMessages = 27;
   friend void swap(AggregateRel& a, AggregateRel& b) { a.Swap(&b); }
   inline void Swap(AggregateRel* other) {
     if (other == this) return;
@@ -16246,7 +17175,7 @@ class AggregateRel_Grouping final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel_Grouping*>(
         &_AggregateRel_Grouping_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 23;
+  static constexpr int kIndexInFileMessages = 25;
   friend void swap(AggregateRel_Grouping& a, AggregateRel_Grouping& b) { a.Swap(&b); }
   inline void Swap(AggregateRel_Grouping* other) {
     if (other == this) return;
@@ -16464,7 +17393,7 @@ class AggregateRel_Measure final : public ::google::protobuf::Message
     return reinterpret_cast<const AggregateRel_Measure*>(
         &_AggregateRel_Measure_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 24;
+  static constexpr int kIndexInFileMessages = 26;
   friend void swap(AggregateRel_Measure& a, AggregateRel_Measure& b) { a.Swap(&b); }
   inline void Swap(AggregateRel_Measure* other) {
     if (other == this) return;
@@ -16677,7 +17606,7 @@ class ComparisonJoinKey final : public ::google::protobuf::Message
     return reinterpret_cast<const ComparisonJoinKey*>(
         &_ComparisonJoinKey_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 54;
+  static constexpr int kIndexInFileMessages = 56;
   friend void swap(ComparisonJoinKey& a, ComparisonJoinKey& b) { a.Swap(&b); }
   inline void Swap(ComparisonJoinKey* other) {
     if (other == this) return;
@@ -16929,7 +17858,7 @@ class ConsistentPartitionWindowRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ConsistentPartitionWindowRel*>(
         &_ConsistentPartitionWindowRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 27;
+  static constexpr int kIndexInFileMessages = 29;
   friend void swap(ConsistentPartitionWindowRel& a, ConsistentPartitionWindowRel& b) { a.Swap(&b); }
   inline void Swap(ConsistentPartitionWindowRel* other) {
     if (other == this) return;
@@ -17217,7 +18146,7 @@ class ConsistentPartitionWindowRel_WindowRelFunction final : public ::google::pr
     return reinterpret_cast<const ConsistentPartitionWindowRel_WindowRelFunction*>(
         &_ConsistentPartitionWindowRel_WindowRelFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 26;
+  static constexpr int kIndexInFileMessages = 28;
   friend void swap(ConsistentPartitionWindowRel_WindowRelFunction& a, ConsistentPartitionWindowRel_WindowRelFunction& b) { a.Swap(&b); }
   inline void Swap(ConsistentPartitionWindowRel_WindowRelFunction* other) {
     if (other == this) return;
@@ -17533,7 +18462,7 @@ class CrossRel final : public ::google::protobuf::Message
     return reinterpret_cast<const CrossRel*>(
         &_CrossRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 21;
+  static constexpr int kIndexInFileMessages = 23;
   friend void swap(CrossRel& a, CrossRel& b) { a.Swap(&b); }
   inline void Swap(CrossRel* other) {
     if (other == this) return;
@@ -17785,7 +18714,7 @@ class DdlRel final : public ::google::protobuf::Message
     return reinterpret_cast<const DdlRel*>(
         &_DdlRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 48;
+  static constexpr int kIndexInFileMessages = 50;
   friend void swap(DdlRel& a, DdlRel& b) { a.Swap(&b); }
   inline void Swap(DdlRel* other) {
     if (other == this) return;
@@ -17919,6 +18848,7 @@ class DdlRel final : public ::google::protobuf::Message
     kTableDefaultsFieldNumber = 4,
     kViewDefinitionFieldNumber = 7,
     kCommonFieldNumber = 8,
+    kAdvancedExtensionFieldNumber = 9,
     kObjectFieldNumber = 5,
     kOpFieldNumber = 6,
     kNamedObjectFieldNumber = 1,
@@ -17982,6 +18912,21 @@ class DdlRel final : public ::google::protobuf::Message
   private:
   const ::skyproto::substrait::RelCommon& _internal_common() const;
   ::skyproto::substrait::RelCommon* _internal_mutable_common();
+
+  public:
+  // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+  bool has_advanced_extension() const;
+  void clear_advanced_extension() ;
+  const ::skyproto::substrait::extensions::AdvancedExtension& advanced_extension() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::extensions::AdvancedExtension* release_advanced_extension();
+  ::skyproto::substrait::extensions::AdvancedExtension* mutable_advanced_extension();
+  void set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  void unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  ::skyproto::substrait::extensions::AdvancedExtension* unsafe_arena_release_advanced_extension();
+
+  private:
+  const ::skyproto::substrait::extensions::AdvancedExtension& _internal_advanced_extension() const;
+  ::skyproto::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
 
   public:
   // .skyproto.substrait.DdlRel.DdlObject object = 5 [json_name = "object"];
@@ -18053,7 +18998,7 @@ class DdlRel final : public ::google::protobuf::Message
   inline void clear_has_write_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 8, 6,
+      3, 9, 7,
       0, 2>
       _table_;
 
@@ -18077,6 +19022,7 @@ class DdlRel final : public ::google::protobuf::Message
     ::skyproto::substrait::Expression_Literal_Struct* table_defaults_;
     ::skyproto::substrait::Rel* view_definition_;
     ::skyproto::substrait::RelCommon* common_;
+    ::skyproto::substrait::extensions::AdvancedExtension* advanced_extension_;
     int object_;
     int op_;
     union WriteTypeUnion {
@@ -18160,7 +19106,7 @@ class ExchangeRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel*>(
         &_ExchangeRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 40;
+  static constexpr int kIndexInFileMessages = 42;
   friend void swap(ExchangeRel& a, ExchangeRel& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel* other) {
     if (other == this) return;
@@ -18546,7 +19492,7 @@ class ExchangeRel_MultiBucketExpression final : public ::google::protobuf::Messa
     return reinterpret_cast<const ExchangeRel_MultiBucketExpression*>(
         &_ExchangeRel_MultiBucketExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 36;
+  static constexpr int kIndexInFileMessages = 38;
   friend void swap(ExchangeRel_MultiBucketExpression& a, ExchangeRel_MultiBucketExpression& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_MultiBucketExpression* other) {
     if (other == this) return;
@@ -18754,7 +19700,7 @@ class ExchangeRel_ScatterFields final : public ::google::protobuf::Message
     return reinterpret_cast<const ExchangeRel_ScatterFields*>(
         &_ExchangeRel_ScatterFields_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 34;
+  static constexpr int kIndexInFileMessages = 36;
   friend void swap(ExchangeRel_ScatterFields& a, ExchangeRel_ScatterFields& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_ScatterFields* other) {
     if (other == this) return;
@@ -18951,7 +19897,7 @@ class ExchangeRel_SingleBucketExpression final : public ::google::protobuf::Mess
     return reinterpret_cast<const ExchangeRel_SingleBucketExpression*>(
         &_ExchangeRel_SingleBucketExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 35;
+  static constexpr int kIndexInFileMessages = 37;
   friend void swap(ExchangeRel_SingleBucketExpression& a, ExchangeRel_SingleBucketExpression& b) { a.Swap(&b); }
   inline void Swap(ExchangeRel_SingleBucketExpression* other) {
     if (other == this) return;
@@ -19147,7 +20093,7 @@ class ExpandRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel*>(
         &_ExpandRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 43;
+  static constexpr int kIndexInFileMessages = 45;
   friend void swap(ExpandRel& a, ExpandRel& b) { a.Swap(&b); }
   inline void Swap(ExpandRel* other) {
     if (other == this) return;
@@ -19386,7 +20332,7 @@ class ExpandRel_ExpandField final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel_ExpandField*>(
         &_ExpandRel_ExpandField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 41;
+  static constexpr int kIndexInFileMessages = 43;
   friend void swap(ExpandRel_ExpandField& a, ExpandRel_ExpandField& b) { a.Swap(&b); }
   inline void Swap(ExpandRel_ExpandField* other) {
     if (other == this) return;
@@ -19617,7 +20563,7 @@ class ExpandRel_SwitchingField final : public ::google::protobuf::Message
     return reinterpret_cast<const ExpandRel_SwitchingField*>(
         &_ExpandRel_SwitchingField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 42;
+  static constexpr int kIndexInFileMessages = 44;
   friend void swap(ExpandRel_SwitchingField& a, ExpandRel_SwitchingField& b) { a.Swap(&b); }
   inline void Swap(ExpandRel_SwitchingField* other) {
     if (other == this) return;
@@ -19822,6 +20768,7 @@ class Expression final : public ::google::protobuf::Message
     kCast = 11,
     kSubquery = 12,
     kNested = 13,
+    kDynamicParameter = 14,
     kEnum = 10,
     REX_TYPE_NOT_SET = 0,
   };
@@ -19829,7 +20776,7 @@ class Expression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression*>(
         &_Expression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 120;
+  static constexpr int kIndexInFileMessages = 123;
   friend void swap(Expression& a, Expression& b) { a.Swap(&b); }
   inline void Swap(Expression* other) {
     if (other == this) return;
@@ -19942,6 +20889,7 @@ class Expression final : public ::google::protobuf::Message
     kCastFieldNumber = 11,
     kSubqueryFieldNumber = 12,
     kNestedFieldNumber = 13,
+    kDynamicParameterFieldNumber = 14,
     kEnumFieldNumber = 10,
   };
   // .skyproto.substrait.Expression.Literal literal = 1 [json_name = "literal"];
@@ -20153,6 +21101,25 @@ class Expression final : public ::google::protobuf::Message
   ::skyproto::substrait::Expression_Nested* _internal_mutable_nested();
 
   public:
+  // .skyproto.substrait.DynamicParameter dynamic_parameter = 14 [json_name = "dynamicParameter"];
+  bool has_dynamic_parameter() const;
+  private:
+  bool _internal_has_dynamic_parameter() const;
+
+  public:
+  void clear_dynamic_parameter() ;
+  const ::skyproto::substrait::DynamicParameter& dynamic_parameter() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::DynamicParameter* release_dynamic_parameter();
+  ::skyproto::substrait::DynamicParameter* mutable_dynamic_parameter();
+  void set_allocated_dynamic_parameter(::skyproto::substrait::DynamicParameter* value);
+  void unsafe_arena_set_allocated_dynamic_parameter(::skyproto::substrait::DynamicParameter* value);
+  ::skyproto::substrait::DynamicParameter* unsafe_arena_release_dynamic_parameter();
+
+  private:
+  const ::skyproto::substrait::DynamicParameter& _internal_dynamic_parameter() const;
+  ::skyproto::substrait::DynamicParameter* _internal_mutable_dynamic_parameter();
+
+  public:
   // .skyproto.substrait.Expression.Enum enum = 10 [json_name = "enum", deprecated = true];
   [[deprecated]]  bool has_enum_() const;
   private:
@@ -20188,12 +21155,13 @@ class Expression final : public ::google::protobuf::Message
   void set_has_cast();
   void set_has_subquery();
   void set_has_nested();
+  void set_has_dynamic_parameter();
   void set_has_enum_();
   inline bool has_rex_type() const;
   inline void clear_has_rex_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 12, 12,
+      0, 13, 13,
       0, 2>
       _table_;
 
@@ -20225,6 +21193,7 @@ class Expression final : public ::google::protobuf::Message
       ::skyproto::substrait::Expression_Cast* cast_;
       ::skyproto::substrait::Expression_Subquery* subquery_;
       ::skyproto::substrait::Expression_Nested* nested_;
+      ::skyproto::substrait::DynamicParameter* dynamic_parameter_;
       ::skyproto::substrait::Expression_Enum* enum__;
     } rex_type_;
     ::google::protobuf::internal::CachedSize _cached_size_;
@@ -20295,7 +21264,7 @@ class Expression_Cast final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Cast*>(
         &_Expression_Cast_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 88;
+  static constexpr int kIndexInFileMessages = 91;
   friend void swap(Expression_Cast& a, Expression_Cast& b) { a.Swap(&b); }
   inline void Swap(Expression_Cast* other) {
     if (other == this) return;
@@ -20551,7 +21520,7 @@ class Expression_FieldReference final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_FieldReference*>(
         &_Expression_FieldReference_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 114;
+  static constexpr int kIndexInFileMessages = 117;
   friend void swap(Expression_FieldReference& a, Expression_FieldReference& b) { a.Swap(&b); }
   inline void Swap(Expression_FieldReference* other) {
     if (other == this) return;
@@ -20858,7 +21827,7 @@ class Expression_IfThen final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_IfThen*>(
         &_Expression_IfThen_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 87;
+  static constexpr int kIndexInFileMessages = 90;
   friend void swap(Expression_IfThen& a, Expression_IfThen& b) { a.Swap(&b); }
   inline void Swap(Expression_IfThen* other) {
     if (other == this) return;
@@ -21074,7 +22043,7 @@ class Expression_IfThen_IfClause final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_IfThen_IfClause*>(
         &_Expression_IfThen_IfClause_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 86;
+  static constexpr int kIndexInFileMessages = 89;
   friend void swap(Expression_IfThen_IfClause& a, Expression_IfThen_IfClause& b) { a.Swap(&b); }
   inline void Swap(Expression_IfThen_IfClause* other) {
     if (other == this) return;
@@ -21287,7 +22256,7 @@ class Expression_MultiOrList final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MultiOrList*>(
         &_Expression_MultiOrList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 93;
+  static constexpr int kIndexInFileMessages = 96;
   friend void swap(Expression_MultiOrList& a, Expression_MultiOrList& b) { a.Swap(&b); }
   inline void Swap(Expression_MultiOrList* other) {
     if (other == this) return;
@@ -21504,7 +22473,7 @@ class Expression_MultiOrList_Record final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_MultiOrList_Record*>(
         &_Expression_MultiOrList_Record_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 92;
+  static constexpr int kIndexInFileMessages = 95;
   friend void swap(Expression_MultiOrList_Record& a, Expression_MultiOrList_Record& b) { a.Swap(&b); }
   inline void Swap(Expression_MultiOrList_Record* other) {
     if (other == this) return;
@@ -21707,7 +22676,7 @@ class Expression_Nested final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested*>(
         &_Expression_Nested_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 78;
+  static constexpr int kIndexInFileMessages = 81;
   friend void swap(Expression_Nested& a, Expression_Nested& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested* other) {
     if (other == this) return;
@@ -21987,7 +22956,7 @@ class Expression_Nested_List final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_List*>(
         &_Expression_Nested_List_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 77;
+  static constexpr int kIndexInFileMessages = 80;
   friend void swap(Expression_Nested_List& a, Expression_Nested_List& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_List* other) {
     if (other == this) return;
@@ -22184,7 +23153,7 @@ class Expression_Nested_Map final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Map*>(
         &_Expression_Nested_Map_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 75;
+  static constexpr int kIndexInFileMessages = 78;
   friend void swap(Expression_Nested_Map& a, Expression_Nested_Map& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Map* other) {
     if (other == this) return;
@@ -22382,7 +23351,7 @@ class Expression_Nested_Map_KeyValue final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Map_KeyValue*>(
         &_Expression_Nested_Map_KeyValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 74;
+  static constexpr int kIndexInFileMessages = 77;
   friend void swap(Expression_Nested_Map_KeyValue& a, Expression_Nested_Map_KeyValue& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Map_KeyValue* other) {
     if (other == this) return;
@@ -22595,7 +23564,7 @@ class Expression_Nested_Struct final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Nested_Struct*>(
         &_Expression_Nested_Struct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 76;
+  static constexpr int kIndexInFileMessages = 79;
   friend void swap(Expression_Nested_Struct& a, Expression_Nested_Struct& b) { a.Swap(&b); }
   inline void Swap(Expression_Nested_Struct* other) {
     if (other == this) return;
@@ -22792,7 +23761,7 @@ class Expression_ScalarFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_ScalarFunction*>(
         &_Expression_ScalarFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 79;
+  static constexpr int kIndexInFileMessages = 82;
   friend void swap(Expression_ScalarFunction& a, Expression_ScalarFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_ScalarFunction* other) {
     if (other == this) return;
@@ -23057,7 +24026,7 @@ class Expression_SingularOrList final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_SingularOrList*>(
         &_Expression_SingularOrList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 91;
+  static constexpr int kIndexInFileMessages = 94;
   friend void swap(Expression_SingularOrList& a, Expression_SingularOrList& b) { a.Swap(&b); }
   inline void Swap(Expression_SingularOrList* other) {
     if (other == this) return;
@@ -23279,7 +24248,7 @@ class Expression_Subquery final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery*>(
         &_Expression_Subquery_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 119;
+  static constexpr int kIndexInFileMessages = 122;
   friend void swap(Expression_Subquery& a, Expression_Subquery& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery* other) {
     if (other == this) return;
@@ -23558,7 +24527,7 @@ class Expression_Subquery_InPredicate final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery_InPredicate*>(
         &_Expression_Subquery_InPredicate_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 116;
+  static constexpr int kIndexInFileMessages = 119;
   friend void swap(Expression_Subquery_InPredicate& a, Expression_Subquery_InPredicate& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_InPredicate* other) {
     if (other == this) return;
@@ -23773,7 +24742,7 @@ class Expression_Subquery_Scalar final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_Subquery_Scalar*>(
         &_Expression_Subquery_Scalar_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 115;
+  static constexpr int kIndexInFileMessages = 118;
   friend void swap(Expression_Subquery_Scalar& a, Expression_Subquery_Scalar& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_Scalar* other) {
     if (other == this) return;
@@ -23969,7 +24938,7 @@ class Expression_Subquery_SetComparison final : public ::google::protobuf::Messa
     return reinterpret_cast<const Expression_Subquery_SetComparison*>(
         &_Expression_Subquery_SetComparison_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 118;
+  static constexpr int kIndexInFileMessages = 121;
   friend void swap(Expression_Subquery_SetComparison& a, Expression_Subquery_SetComparison& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_SetComparison* other) {
     if (other == this) return;
@@ -24250,7 +25219,7 @@ class Expression_Subquery_SetPredicate final : public ::google::protobuf::Messag
     return reinterpret_cast<const Expression_Subquery_SetPredicate*>(
         &_Expression_Subquery_SetPredicate_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 117;
+  static constexpr int kIndexInFileMessages = 120;
   friend void swap(Expression_Subquery_SetPredicate& a, Expression_Subquery_SetPredicate& b) { a.Swap(&b); }
   inline void Swap(Expression_Subquery_SetPredicate* other) {
     if (other == this) return;
@@ -24478,7 +25447,7 @@ class Expression_SwitchExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_SwitchExpression*>(
         &_Expression_SwitchExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 90;
+  static constexpr int kIndexInFileMessages = 93;
   friend void swap(Expression_SwitchExpression& a, Expression_SwitchExpression& b) { a.Swap(&b); }
   inline void Swap(Expression_SwitchExpression* other) {
     if (other == this) return;
@@ -24711,7 +25680,7 @@ class Expression_SwitchExpression_IfValue final : public ::google::protobuf::Mes
     return reinterpret_cast<const Expression_SwitchExpression_IfValue*>(
         &_Expression_SwitchExpression_IfValue_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 89;
+  static constexpr int kIndexInFileMessages = 92;
   friend void swap(Expression_SwitchExpression_IfValue& a, Expression_SwitchExpression_IfValue& b) { a.Swap(&b); }
   inline void Swap(Expression_SwitchExpression_IfValue* other) {
     if (other == this) return;
@@ -24924,7 +25893,7 @@ class Expression_WindowFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_WindowFunction*>(
         &_Expression_WindowFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 85;
+  static constexpr int kIndexInFileMessages = 88;
   friend void swap(Expression_WindowFunction& a, Expression_WindowFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_WindowFunction* other) {
     if (other == this) return;
@@ -25318,7 +26287,7 @@ class ExtensionMultiRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionMultiRel*>(
         &_ExtensionMultiRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 33;
+  static constexpr int kIndexInFileMessages = 35;
   friend void swap(ExtensionMultiRel& a, ExtensionMultiRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionMultiRel* other) {
     if (other == this) return;
@@ -25550,7 +26519,7 @@ class ExtensionSingleRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ExtensionSingleRel*>(
         &_ExtensionSingleRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 31;
+  static constexpr int kIndexInFileMessages = 33;
   friend void swap(ExtensionSingleRel& a, ExtensionSingleRel& b) { a.Swap(&b); }
   inline void Swap(ExtensionSingleRel* other) {
     if (other == this) return;
@@ -25790,7 +26759,7 @@ class FetchRel final : public ::google::protobuf::Message
     return reinterpret_cast<const FetchRel*>(
         &_FetchRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 22;
+  static constexpr int kIndexInFileMessages = 24;
   friend void swap(FetchRel& a, FetchRel& b) { a.Swap(&b); }
   inline void Swap(FetchRel* other) {
     if (other == this) return;
@@ -26109,7 +27078,7 @@ class FilterRel final : public ::google::protobuf::Message
     return reinterpret_cast<const FilterRel*>(
         &_FilterRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 29;
+  static constexpr int kIndexInFileMessages = 31;
   friend void swap(FilterRel& a, FilterRel& b) { a.Swap(&b); }
   inline void Swap(FilterRel* other) {
     if (other == this) return;
@@ -26362,7 +27331,7 @@ class FunctionArgument final : public ::google::protobuf::Message
     return reinterpret_cast<const FunctionArgument*>(
         &_FunctionArgument_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 58;
+  static constexpr int kIndexInFileMessages = 60;
   friend void swap(FunctionArgument& a, FunctionArgument& b) { a.Swap(&b); }
   inline void Swap(FunctionArgument* other) {
     if (other == this) return;
@@ -26613,7 +27582,7 @@ class HashJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const HashJoinRel*>(
         &_HashJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 55;
+  static constexpr int kIndexInFileMessages = 57;
   friend void swap(HashJoinRel& a, HashJoinRel& b) { a.Swap(&b); }
   inline void Swap(HashJoinRel* other) {
     if (other == this) return;
@@ -26976,7 +27945,7 @@ class JoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const JoinRel*>(
         &_JoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 20;
+  static constexpr int kIndexInFileMessages = 22;
   friend void swap(JoinRel& a, JoinRel& b) { a.Swap(&b); }
   inline void Swap(JoinRel* other) {
     if (other == this) return;
@@ -27299,7 +28268,7 @@ class MergeJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const MergeJoinRel*>(
         &_MergeJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 56;
+  static constexpr int kIndexInFileMessages = 58;
   friend void swap(MergeJoinRel& a, MergeJoinRel& b) { a.Swap(&b); }
   inline void Swap(MergeJoinRel* other) {
     if (other == this) return;
@@ -27662,7 +28631,7 @@ class NestedLoopJoinRel final : public ::google::protobuf::Message
     return reinterpret_cast<const NestedLoopJoinRel*>(
         &_NestedLoopJoinRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 57;
+  static constexpr int kIndexInFileMessages = 59;
   friend void swap(NestedLoopJoinRel& a, NestedLoopJoinRel& b) { a.Swap(&b); }
   inline void Swap(NestedLoopJoinRel* other) {
     if (other == this) return;
@@ -27968,7 +28937,7 @@ class ProjectRel final : public ::google::protobuf::Message
     return reinterpret_cast<const ProjectRel*>(
         &_ProjectRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 19;
+  static constexpr int kIndexInFileMessages = 21;
   friend void swap(ProjectRel& a, ProjectRel& b) { a.Swap(&b); }
   inline void Swap(ProjectRel* other) {
     if (other == this) return;
@@ -28218,13 +29187,14 @@ class ReadRel final : public ::google::protobuf::Message
     kLocalFiles = 6,
     kNamedTable = 7,
     kExtensionTable = 8,
+    kIcebergTable = 9,
     READ_TYPE_NOT_SET = 0,
   };
   static inline const ReadRel* internal_default_instance() {
     return reinterpret_cast<const ReadRel*>(
         &_ReadRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 18;
+  static constexpr int kIndexInFileMessages = 20;
   friend void swap(ReadRel& a, ReadRel& b) { a.Swap(&b); }
   inline void Swap(ReadRel* other) {
     if (other == this) return;
@@ -28309,6 +29279,7 @@ class ReadRel final : public ::google::protobuf::Message
   ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
   using NamedTable = ReadRel_NamedTable;
+  using IcebergTable = ReadRel_IcebergTable;
   using VirtualTable = ReadRel_VirtualTable;
   using ExtensionTable = ReadRel_ExtensionTable;
   using LocalFiles = ReadRel_LocalFiles;
@@ -28325,6 +29296,7 @@ class ReadRel final : public ::google::protobuf::Message
     kLocalFilesFieldNumber = 6,
     kNamedTableFieldNumber = 7,
     kExtensionTableFieldNumber = 8,
+    kIcebergTableFieldNumber = 9,
   };
   // .skyproto.substrait.RelCommon common = 1 [json_name = "common"];
   bool has_common() const;
@@ -28492,6 +29464,25 @@ class ReadRel final : public ::google::protobuf::Message
   ::skyproto::substrait::ReadRel_ExtensionTable* _internal_mutable_extension_table();
 
   public:
+  // .skyproto.substrait.ReadRel.IcebergTable iceberg_table = 9 [json_name = "icebergTable"];
+  bool has_iceberg_table() const;
+  private:
+  bool _internal_has_iceberg_table() const;
+
+  public:
+  void clear_iceberg_table() ;
+  const ::skyproto::substrait::ReadRel_IcebergTable& iceberg_table() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::ReadRel_IcebergTable* release_iceberg_table();
+  ::skyproto::substrait::ReadRel_IcebergTable* mutable_iceberg_table();
+  void set_allocated_iceberg_table(::skyproto::substrait::ReadRel_IcebergTable* value);
+  void unsafe_arena_set_allocated_iceberg_table(::skyproto::substrait::ReadRel_IcebergTable* value);
+  ::skyproto::substrait::ReadRel_IcebergTable* unsafe_arena_release_iceberg_table();
+
+  private:
+  const ::skyproto::substrait::ReadRel_IcebergTable& _internal_iceberg_table() const;
+  ::skyproto::substrait::ReadRel_IcebergTable* _internal_mutable_iceberg_table();
+
+  public:
   void clear_read_type();
   ReadTypeCase read_type_case() const;
   // @@protoc_insertion_point(class_scope:skyproto.substrait.ReadRel)
@@ -28501,11 +29492,12 @@ class ReadRel final : public ::google::protobuf::Message
   void set_has_local_files();
   void set_has_named_table();
   void set_has_extension_table();
+  void set_has_iceberg_table();
   inline bool has_read_type() const;
   inline void clear_has_read_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      4, 10, 10,
+      4, 11, 11,
       0, 2>
       _table_;
 
@@ -28538,6 +29530,7 @@ class ReadRel final : public ::google::protobuf::Message
       ::skyproto::substrait::ReadRel_LocalFiles* local_files_;
       ::skyproto::substrait::ReadRel_NamedTable* named_table_;
       ::skyproto::substrait::ReadRel_ExtensionTable* extension_table_;
+      ::skyproto::substrait::ReadRel_IcebergTable* iceberg_table_;
     } read_type_;
     ::uint32_t _oneof_case_[1];
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -28606,7 +29599,7 @@ class ReadRel_VirtualTable final : public ::google::protobuf::Message
     return reinterpret_cast<const ReadRel_VirtualTable*>(
         &_ReadRel_VirtualTable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 11;
   friend void swap(ReadRel_VirtualTable& a, ReadRel_VirtualTable& b) { a.Swap(&b); }
   inline void Swap(ReadRel_VirtualTable* other) {
     if (other == this) return;
@@ -28847,7 +29840,7 @@ class Rel final : public ::google::protobuf::Message
     return reinterpret_cast<const Rel*>(
         &_Rel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 45;
+  static constexpr int kIndexInFileMessages = 47;
   friend void swap(Rel& a, Rel& b) { a.Swap(&b); }
   inline void Swap(Rel* other) {
     if (other == this) return;
@@ -29530,7 +30523,7 @@ class SetRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SetRel*>(
         &_SetRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 30;
+  static constexpr int kIndexInFileMessages = 32;
   friend void swap(SetRel& a, SetRel& b) { a.Swap(&b); }
   inline void Swap(SetRel* other) {
     if (other == this) return;
@@ -29805,7 +30798,7 @@ class SortField final : public ::google::protobuf::Message
     return reinterpret_cast<const SortField*>(
         &_SortField_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 121;
+  static constexpr int kIndexInFileMessages = 125;
   friend void swap(SortField& a, SortField& b) { a.Swap(&b); }
   inline void Swap(SortField* other) {
     if (other == this) return;
@@ -30061,7 +31054,7 @@ class SortRel final : public ::google::protobuf::Message
     return reinterpret_cast<const SortRel*>(
         &_SortRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 28;
+  static constexpr int kIndexInFileMessages = 30;
   friend void swap(SortRel& a, SortRel& b) { a.Swap(&b); }
   inline void Swap(SortRel* other) {
     if (other == this) return;
@@ -30314,7 +31307,7 @@ class UpdateRel final : public ::google::protobuf::Message
     return reinterpret_cast<const UpdateRel*>(
         &_UpdateRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 51;
+  static constexpr int kIndexInFileMessages = 53;
   friend void swap(UpdateRel& a, UpdateRel& b) { a.Swap(&b); }
   inline void Swap(UpdateRel* other) {
     if (other == this) return;
@@ -30405,6 +31398,7 @@ class UpdateRel final : public ::google::protobuf::Message
     kTransformationsFieldNumber = 4,
     kTableSchemaFieldNumber = 2,
     kConditionFieldNumber = 3,
+    kAdvancedExtensionFieldNumber = 5,
     kNamedTableFieldNumber = 1,
   };
   // repeated .skyproto.substrait.UpdateRel.TransformExpression transformations = 4 [json_name = "transformations"];
@@ -30454,6 +31448,21 @@ class UpdateRel final : public ::google::protobuf::Message
   ::skyproto::substrait::Expression* _internal_mutable_condition();
 
   public:
+  // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+  bool has_advanced_extension() const;
+  void clear_advanced_extension() ;
+  const ::skyproto::substrait::extensions::AdvancedExtension& advanced_extension() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::extensions::AdvancedExtension* release_advanced_extension();
+  ::skyproto::substrait::extensions::AdvancedExtension* mutable_advanced_extension();
+  void set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  void unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  ::skyproto::substrait::extensions::AdvancedExtension* unsafe_arena_release_advanced_extension();
+
+  private:
+  const ::skyproto::substrait::extensions::AdvancedExtension& _internal_advanced_extension() const;
+  ::skyproto::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
+
+  public:
   // .skyproto.substrait.NamedTable named_table = 1 [json_name = "namedTable"];
   bool has_named_table() const;
   private:
@@ -30483,7 +31492,7 @@ class UpdateRel final : public ::google::protobuf::Message
   inline void clear_has_update_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 4,
+      2, 5, 5,
       0, 2>
       _table_;
 
@@ -30506,6 +31515,7 @@ class UpdateRel final : public ::google::protobuf::Message
     ::google::protobuf::RepeatedPtrField< ::skyproto::substrait::UpdateRel_TransformExpression > transformations_;
     ::skyproto::substrait::NamedStruct* table_schema_;
     ::skyproto::substrait::Expression* condition_;
+    ::skyproto::substrait::extensions::AdvancedExtension* advanced_extension_;
     union UpdateTypeUnion {
       constexpr UpdateTypeUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -30578,7 +31588,7 @@ class UpdateRel_TransformExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const UpdateRel_TransformExpression*>(
         &_UpdateRel_TransformExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 50;
+  static constexpr int kIndexInFileMessages = 52;
   friend void swap(UpdateRel_TransformExpression& a, UpdateRel_TransformExpression& b) { a.Swap(&b); }
   inline void Swap(UpdateRel_TransformExpression* other) {
     if (other == this) return;
@@ -30791,7 +31801,7 @@ class WriteRel final : public ::google::protobuf::Message
     return reinterpret_cast<const WriteRel*>(
         &_WriteRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 49;
+  static constexpr int kIndexInFileMessages = 51;
   friend void swap(WriteRel& a, WriteRel& b) { a.Swap(&b); }
   inline void Swap(WriteRel* other) {
     if (other == this) return;
@@ -30945,6 +31955,7 @@ class WriteRel final : public ::google::protobuf::Message
     kTableSchemaFieldNumber = 3,
     kInputFieldNumber = 5,
     kCommonFieldNumber = 7,
+    kAdvancedExtensionFieldNumber = 9,
     kOpFieldNumber = 4,
     kOutputFieldNumber = 6,
     kCreateModeFieldNumber = 8,
@@ -30994,6 +32005,21 @@ class WriteRel final : public ::google::protobuf::Message
   private:
   const ::skyproto::substrait::RelCommon& _internal_common() const;
   ::skyproto::substrait::RelCommon* _internal_mutable_common();
+
+  public:
+  // .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+  bool has_advanced_extension() const;
+  void clear_advanced_extension() ;
+  const ::skyproto::substrait::extensions::AdvancedExtension& advanced_extension() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::extensions::AdvancedExtension* release_advanced_extension();
+  ::skyproto::substrait::extensions::AdvancedExtension* mutable_advanced_extension();
+  void set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  void unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value);
+  ::skyproto::substrait::extensions::AdvancedExtension* unsafe_arena_release_advanced_extension();
+
+  private:
+  const ::skyproto::substrait::extensions::AdvancedExtension& _internal_advanced_extension() const;
+  ::skyproto::substrait::extensions::AdvancedExtension* _internal_mutable_advanced_extension();
 
   public:
   // .skyproto.substrait.WriteRel.WriteOp op = 4 [json_name = "op"];
@@ -31075,7 +32101,7 @@ class WriteRel final : public ::google::protobuf::Message
   inline void clear_has_write_type();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 8, 5,
+      3, 9, 6,
       0, 2>
       _table_;
 
@@ -31098,6 +32124,7 @@ class WriteRel final : public ::google::protobuf::Message
     ::skyproto::substrait::NamedStruct* table_schema_;
     ::skyproto::substrait::Rel* input_;
     ::skyproto::substrait::RelCommon* common_;
+    ::skyproto::substrait::extensions::AdvancedExtension* advanced_extension_;
     int op_;
     int output_;
     int create_mode_;
@@ -31174,7 +32201,7 @@ class RelRoot final : public ::google::protobuf::Message
     return reinterpret_cast<const RelRoot*>(
         &_RelRoot_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 44;
+  static constexpr int kIndexInFileMessages = 46;
   friend void swap(RelRoot& a, RelRoot& b) { a.Swap(&b); }
   inline void Swap(RelRoot* other) {
     if (other == this) return;
@@ -31399,7 +32426,7 @@ class Expression_EmbeddedFunction final : public ::google::protobuf::Message
     return reinterpret_cast<const Expression_EmbeddedFunction*>(
         &_Expression_EmbeddedFunction_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 96;
+  static constexpr int kIndexInFileMessages = 99;
   friend void swap(Expression_EmbeddedFunction& a, Expression_EmbeddedFunction& b) { a.Swap(&b); }
   inline void Swap(Expression_EmbeddedFunction* other) {
     if (other == this) return;
@@ -32248,6 +33275,28 @@ inline void RelCommon_Hint::set_allocated_alias(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.RelCommon.Hint.alias)
 }
 
+// uint64 alias_hash = 6 [json_name = "aliasHash"];
+inline void RelCommon_Hint::clear_alias_hash() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.alias_hash_ = ::uint64_t{0u};
+}
+inline ::uint64_t RelCommon_Hint::alias_hash() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.RelCommon.Hint.alias_hash)
+  return _internal_alias_hash();
+}
+inline void RelCommon_Hint::set_alias_hash(::uint64_t value) {
+  _internal_set_alias_hash(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.RelCommon.Hint.alias_hash)
+}
+inline ::uint64_t RelCommon_Hint::_internal_alias_hash() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.alias_hash_;
+}
+inline void RelCommon_Hint::_internal_set_alias_hash(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.alias_hash_ = value;
+}
+
 // repeated string output_names = 4 [json_name = "outputNames"];
 inline int RelCommon_Hint::_internal_output_names_size() const {
   return _internal_output_names().size();
@@ -32941,6 +33990,34 @@ inline void RelCommon::set_allocated_advanced_extension(::skyproto::substrait::e
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.RelCommon.advanced_extension)
 }
 
+// optional uint32 operator_id = 5 [json_name = "operatorId"];
+inline bool RelCommon::has_operator_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline void RelCommon::clear_operator_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.operator_id_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline ::uint32_t RelCommon::operator_id() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.RelCommon.operator_id)
+  return _internal_operator_id();
+}
+inline void RelCommon::set_operator_id(::uint32_t value) {
+  _internal_set_operator_id(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:skyproto.substrait.RelCommon.operator_id)
+}
+inline ::uint32_t RelCommon::_internal_operator_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.operator_id_;
+}
+inline void RelCommon::_internal_set_operator_id(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.operator_id_ = value;
+}
+
 inline bool RelCommon::has_emit_kind() const {
   return emit_kind_case() != EMIT_KIND_NOT_SET;
 }
@@ -33109,6 +34186,277 @@ inline void ReadRel_NamedTable::set_allocated_advanced_extension(::skyproto::sub
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.NamedTable.advanced_extension)
 }
 
+// -------------------------------------------------------------------
+
+// ReadRel_IcebergTable_MetadataFileRead
+
+// string metadata_uri = 1 [json_name = "metadataUri"];
+inline void ReadRel_IcebergTable_MetadataFileRead::clear_metadata_uri() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.metadata_uri_.ClearToEmpty();
+}
+inline const std::string& ReadRel_IcebergTable_MetadataFileRead::metadata_uri() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri)
+  return _internal_metadata_uri();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void ReadRel_IcebergTable_MetadataFileRead::set_metadata_uri(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.metadata_uri_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri)
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::mutable_metadata_uri() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_metadata_uri();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri)
+  return _s;
+}
+inline const std::string& ReadRel_IcebergTable_MetadataFileRead::_internal_metadata_uri() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.metadata_uri_.Get();
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::_internal_set_metadata_uri(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.metadata_uri_.Set(value, GetArena());
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::_internal_mutable_metadata_uri() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.metadata_uri_.Mutable( GetArena());
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::release_metadata_uri() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri)
+  return _impl_.metadata_uri_.Release();
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::set_allocated_metadata_uri(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.metadata_uri_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.metadata_uri_.IsDefault()) {
+    _impl_.metadata_uri_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.metadata_uri)
+}
+
+// string snapshot_id = 2 [json_name = "snapshotId"];
+inline bool ReadRel_IcebergTable_MetadataFileRead::has_snapshot_id() const {
+  return snapshot_case() == kSnapshotId;
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::set_has_snapshot_id() {
+  _impl_._oneof_case_[0] = kSnapshotId;
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::clear_snapshot_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (snapshot_case() == kSnapshotId) {
+    _impl_.snapshot_.snapshot_id_.Destroy();
+    clear_has_snapshot();
+  }
+}
+inline const std::string& ReadRel_IcebergTable_MetadataFileRead::snapshot_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id)
+  return _internal_snapshot_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void ReadRel_IcebergTable_MetadataFileRead::set_snapshot_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (snapshot_case() != kSnapshotId) {
+    clear_snapshot();
+
+    set_has_snapshot_id();
+    _impl_.snapshot_.snapshot_id_.InitDefault();
+  }
+  _impl_.snapshot_.snapshot_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id)
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::mutable_snapshot_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_snapshot_id();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id)
+  return _s;
+}
+inline const std::string& ReadRel_IcebergTable_MetadataFileRead::_internal_snapshot_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  if (snapshot_case() != kSnapshotId) {
+    return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
+  }
+  return _impl_.snapshot_.snapshot_id_.Get();
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::_internal_set_snapshot_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (snapshot_case() != kSnapshotId) {
+    clear_snapshot();
+
+    set_has_snapshot_id();
+    _impl_.snapshot_.snapshot_id_.InitDefault();
+  }
+  _impl_.snapshot_.snapshot_id_.Set(value, GetArena());
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::_internal_mutable_snapshot_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (snapshot_case() != kSnapshotId) {
+    clear_snapshot();
+
+    set_has_snapshot_id();
+    _impl_.snapshot_.snapshot_id_.InitDefault();
+  }
+  return _impl_.snapshot_.snapshot_id_.Mutable( GetArena());
+}
+inline std::string* ReadRel_IcebergTable_MetadataFileRead::release_snapshot_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id)
+  if (snapshot_case() != kSnapshotId) {
+    return nullptr;
+  }
+  clear_has_snapshot();
+  return _impl_.snapshot_.snapshot_id_.Release();
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::set_allocated_snapshot_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (has_snapshot()) {
+    clear_snapshot();
+  }
+  if (value != nullptr) {
+    set_has_snapshot_id();
+    _impl_.snapshot_.snapshot_id_.InitAllocated(value, GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_id)
+}
+
+// int64 snapshot_timestamp = 3 [json_name = "snapshotTimestamp"];
+inline bool ReadRel_IcebergTable_MetadataFileRead::has_snapshot_timestamp() const {
+  return snapshot_case() == kSnapshotTimestamp;
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::set_has_snapshot_timestamp() {
+  _impl_._oneof_case_[0] = kSnapshotTimestamp;
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::clear_snapshot_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (snapshot_case() == kSnapshotTimestamp) {
+    _impl_.snapshot_.snapshot_timestamp_ = ::int64_t{0};
+    clear_has_snapshot();
+  }
+}
+inline ::int64_t ReadRel_IcebergTable_MetadataFileRead::snapshot_timestamp() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_timestamp)
+  return _internal_snapshot_timestamp();
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::set_snapshot_timestamp(::int64_t value) {
+  if (snapshot_case() != kSnapshotTimestamp) {
+    clear_snapshot();
+    set_has_snapshot_timestamp();
+  }
+  _impl_.snapshot_.snapshot_timestamp_ = value;
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead.snapshot_timestamp)
+}
+inline ::int64_t ReadRel_IcebergTable_MetadataFileRead::_internal_snapshot_timestamp() const {
+  if (snapshot_case() == kSnapshotTimestamp) {
+    return _impl_.snapshot_.snapshot_timestamp_;
+  }
+  return ::int64_t{0};
+}
+
+inline bool ReadRel_IcebergTable_MetadataFileRead::has_snapshot() const {
+  return snapshot_case() != SNAPSHOT_NOT_SET;
+}
+inline void ReadRel_IcebergTable_MetadataFileRead::clear_has_snapshot() {
+  _impl_._oneof_case_[0] = SNAPSHOT_NOT_SET;
+}
+inline ReadRel_IcebergTable_MetadataFileRead::SnapshotCase ReadRel_IcebergTable_MetadataFileRead::snapshot_case() const {
+  return ReadRel_IcebergTable_MetadataFileRead::SnapshotCase(_impl_._oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// ReadRel_IcebergTable
+
+// .skyproto.substrait.ReadRel.IcebergTable.MetadataFileRead direct = 1 [json_name = "direct"];
+inline bool ReadRel_IcebergTable::has_direct() const {
+  return table_type_case() == kDirect;
+}
+inline bool ReadRel_IcebergTable::_internal_has_direct() const {
+  return table_type_case() == kDirect;
+}
+inline void ReadRel_IcebergTable::set_has_direct() {
+  _impl_._oneof_case_[0] = kDirect;
+}
+inline void ReadRel_IcebergTable::clear_direct() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (table_type_case() == kDirect) {
+    if (GetArena() == nullptr) {
+      delete _impl_.table_type_.direct_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.table_type_.direct_);
+    }
+    clear_has_table_type();
+  }
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* ReadRel_IcebergTable::release_direct() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ReadRel.IcebergTable.direct)
+  if (table_type_case() == kDirect) {
+    clear_has_table_type();
+    auto* temp = _impl_.table_type_.direct_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.table_type_.direct_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead& ReadRel_IcebergTable::_internal_direct() const {
+  return table_type_case() == kDirect ? *_impl_.table_type_.direct_ : reinterpret_cast<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead&>(::skyproto::substrait::_ReadRel_IcebergTable_MetadataFileRead_default_instance_);
+}
+inline const ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead& ReadRel_IcebergTable::direct() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReadRel.IcebergTable.direct)
+  return _internal_direct();
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* ReadRel_IcebergTable::unsafe_arena_release_direct() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.ReadRel.IcebergTable.direct)
+  if (table_type_case() == kDirect) {
+    clear_has_table_type();
+    auto* temp = _impl_.table_type_.direct_;
+    _impl_.table_type_.direct_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ReadRel_IcebergTable::unsafe_arena_set_allocated_direct(::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_table_type();
+  if (value) {
+    set_has_direct();
+    _impl_.table_type_.direct_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.ReadRel.IcebergTable.direct)
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* ReadRel_IcebergTable::_internal_mutable_direct() {
+  if (table_type_case() != kDirect) {
+    clear_table_type();
+    set_has_direct();
+    _impl_.table_type_.direct_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead>(GetArena());
+  }
+  return _impl_.table_type_.direct_;
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* ReadRel_IcebergTable::mutable_direct() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::ReadRel_IcebergTable_MetadataFileRead* _msg = _internal_mutable_direct();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ReadRel.IcebergTable.direct)
+  return _msg;
+}
+
+inline bool ReadRel_IcebergTable::has_table_type() const {
+  return table_type_case() != TABLE_TYPE_NOT_SET;
+}
+inline void ReadRel_IcebergTable::clear_has_table_type() {
+  _impl_._oneof_case_[0] = TABLE_TYPE_NOT_SET;
+}
+inline ReadRel_IcebergTable::TableTypeCase ReadRel_IcebergTable::table_type_case() const {
+  return ReadRel_IcebergTable::TableTypeCase(_impl_._oneof_case_[0]);
+}
 // -------------------------------------------------------------------
 
 // ReadRel_VirtualTable
@@ -35501,6 +36849,85 @@ inline ::skyproto::substrait::ReadRel_ExtensionTable* ReadRel::_internal_mutable
 inline ::skyproto::substrait::ReadRel_ExtensionTable* ReadRel::mutable_extension_table() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::skyproto::substrait::ReadRel_ExtensionTable* _msg = _internal_mutable_extension_table();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.ReadRel.extension_table)
+  return _msg;
+}
+
+// .skyproto.substrait.ReadRel.IcebergTable iceberg_table = 9 [json_name = "icebergTable"];
+inline bool ReadRel::has_iceberg_table() const {
+  return read_type_case() == kIcebergTable;
+}
+inline bool ReadRel::_internal_has_iceberg_table() const {
+  return read_type_case() == kIcebergTable;
+}
+inline void ReadRel::set_has_iceberg_table() {
+  _impl_._oneof_case_[0] = kIcebergTable;
+}
+inline void ReadRel::clear_iceberg_table() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (read_type_case() == kIcebergTable) {
+    if (GetArena() == nullptr) {
+      delete _impl_.read_type_.iceberg_table_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.read_type_.iceberg_table_);
+    }
+    clear_has_read_type();
+  }
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable* ReadRel::release_iceberg_table() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ReadRel.iceberg_table)
+  if (read_type_case() == kIcebergTable) {
+    clear_has_read_type();
+    auto* temp = _impl_.read_type_.iceberg_table_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.read_type_.iceberg_table_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::ReadRel_IcebergTable& ReadRel::_internal_iceberg_table() const {
+  return read_type_case() == kIcebergTable ? *_impl_.read_type_.iceberg_table_ : reinterpret_cast<::skyproto::substrait::ReadRel_IcebergTable&>(::skyproto::substrait::_ReadRel_IcebergTable_default_instance_);
+}
+inline const ::skyproto::substrait::ReadRel_IcebergTable& ReadRel::iceberg_table() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ReadRel.iceberg_table)
+  return _internal_iceberg_table();
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable* ReadRel::unsafe_arena_release_iceberg_table() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.ReadRel.iceberg_table)
+  if (read_type_case() == kIcebergTable) {
+    clear_has_read_type();
+    auto* temp = _impl_.read_type_.iceberg_table_;
+    _impl_.read_type_.iceberg_table_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ReadRel::unsafe_arena_set_allocated_iceberg_table(::skyproto::substrait::ReadRel_IcebergTable* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_read_type();
+  if (value) {
+    set_has_iceberg_table();
+    _impl_.read_type_.iceberg_table_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.ReadRel.iceberg_table)
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable* ReadRel::_internal_mutable_iceberg_table() {
+  if (read_type_case() != kIcebergTable) {
+    clear_read_type();
+    set_has_iceberg_table();
+    _impl_.read_type_.iceberg_table_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::ReadRel_IcebergTable>(GetArena());
+  }
+  return _impl_.read_type_.iceberg_table_;
+}
+inline ::skyproto::substrait::ReadRel_IcebergTable* ReadRel::mutable_iceberg_table() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::ReadRel_IcebergTable* _msg = _internal_mutable_iceberg_table();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ReadRel.iceberg_table)
   return _msg;
 }
 
@@ -45215,6 +46642,97 @@ inline void DdlRel::set_allocated_common(::skyproto::substrait::RelCommon* value
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DdlRel.common)
 }
 
+// .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+inline bool DdlRel::has_advanced_extension() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.advanced_extension_ != nullptr);
+  return value;
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& DdlRel::_internal_advanced_extension() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::extensions::AdvancedExtension* p = _impl_.advanced_extension_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::extensions::AdvancedExtension&>(::skyproto::substrait::extensions::_AdvancedExtension_default_instance_);
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& DdlRel::advanced_extension() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DdlRel.advanced_extension)
+  return _internal_advanced_extension();
+}
+inline void DdlRel::unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.DdlRel.advanced_extension)
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* DdlRel::release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::skyproto::substrait::extensions::AdvancedExtension* released = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* DdlRel::unsafe_arena_release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DdlRel.advanced_extension)
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::skyproto::substrait::extensions::AdvancedExtension* temp = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* DdlRel::_internal_mutable_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::extensions::AdvancedExtension>(GetArena());
+    _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(p);
+  }
+  return _impl_.advanced_extension_;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* DdlRel::mutable_advanced_extension() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000010u;
+  ::skyproto::substrait::extensions::AdvancedExtension* _msg = _internal_mutable_advanced_extension();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DdlRel.advanced_extension)
+  return _msg;
+}
+inline void DdlRel::set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DdlRel.advanced_extension)
+}
+
 inline bool DdlRel::has_write_type() const {
   return write_type_case() != WRITE_TYPE_NOT_SET;
 }
@@ -45735,6 +47253,97 @@ inline void WriteRel::set_allocated_common(::skyproto::substrait::RelCommon* val
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.WriteRel.common)
 }
 
+// .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 9 [json_name = "advancedExtension"];
+inline bool WriteRel::has_advanced_extension() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.advanced_extension_ != nullptr);
+  return value;
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& WriteRel::_internal_advanced_extension() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::extensions::AdvancedExtension* p = _impl_.advanced_extension_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::extensions::AdvancedExtension&>(::skyproto::substrait::extensions::_AdvancedExtension_default_instance_);
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& WriteRel::advanced_extension() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.WriteRel.advanced_extension)
+  return _internal_advanced_extension();
+}
+inline void WriteRel::unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.WriteRel.advanced_extension)
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* WriteRel::release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::skyproto::substrait::extensions::AdvancedExtension* released = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* WriteRel::unsafe_arena_release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.WriteRel.advanced_extension)
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::skyproto::substrait::extensions::AdvancedExtension* temp = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* WriteRel::_internal_mutable_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::extensions::AdvancedExtension>(GetArena());
+    _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(p);
+  }
+  return _impl_.advanced_extension_;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* WriteRel::mutable_advanced_extension() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000008u;
+  ::skyproto::substrait::extensions::AdvancedExtension* _msg = _internal_mutable_advanced_extension();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.WriteRel.advanced_extension)
+  return _msg;
+}
+inline void WriteRel::set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.WriteRel.advanced_extension)
+}
+
 inline bool WriteRel::has_write_type() const {
   return write_type_case() != WRITE_TYPE_NOT_SET;
 }
@@ -46183,6 +47792,97 @@ inline ::google::protobuf::RepeatedPtrField<::skyproto::substrait::UpdateRel_Tra
 UpdateRel::_internal_mutable_transformations() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.transformations_;
+}
+
+// .skyproto.substrait.extensions.AdvancedExtension advanced_extension = 5 [json_name = "advancedExtension"];
+inline bool UpdateRel::has_advanced_extension() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.advanced_extension_ != nullptr);
+  return value;
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& UpdateRel::_internal_advanced_extension() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::extensions::AdvancedExtension* p = _impl_.advanced_extension_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::extensions::AdvancedExtension&>(::skyproto::substrait::extensions::_AdvancedExtension_default_instance_);
+}
+inline const ::skyproto::substrait::extensions::AdvancedExtension& UpdateRel::advanced_extension() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.UpdateRel.advanced_extension)
+  return _internal_advanced_extension();
+}
+inline void UpdateRel::unsafe_arena_set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.UpdateRel.advanced_extension)
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* UpdateRel::release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::skyproto::substrait::extensions::AdvancedExtension* released = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* UpdateRel::unsafe_arena_release_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.UpdateRel.advanced_extension)
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::skyproto::substrait::extensions::AdvancedExtension* temp = _impl_.advanced_extension_;
+  _impl_.advanced_extension_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* UpdateRel::_internal_mutable_advanced_extension() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.advanced_extension_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::extensions::AdvancedExtension>(GetArena());
+    _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(p);
+  }
+  return _impl_.advanced_extension_;
+}
+inline ::skyproto::substrait::extensions::AdvancedExtension* UpdateRel::mutable_advanced_extension() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  ::skyproto::substrait::extensions::AdvancedExtension* _msg = _internal_mutable_advanced_extension();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.UpdateRel.advanced_extension)
+  return _msg;
+}
+inline void UpdateRel::set_allocated_advanced_extension(::skyproto::substrait::extensions::AdvancedExtension* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.advanced_extension_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+
+  _impl_.advanced_extension_ = reinterpret_cast<::skyproto::substrait::extensions::AdvancedExtension*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.UpdateRel.advanced_extension)
 }
 
 inline bool UpdateRel::has_update_type() const {
@@ -49235,6 +50935,54 @@ inline void Expression_Literal_Decimal::_internal_set_scale(::int32_t value) {
 
 // -------------------------------------------------------------------
 
+// Expression_Literal_PrecisionTime
+
+// int32 precision = 1 [json_name = "precision"];
+inline void Expression_Literal_PrecisionTime::clear_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.precision_ = 0;
+}
+inline ::int32_t Expression_Literal_PrecisionTime::precision() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.Literal.PrecisionTime.precision)
+  return _internal_precision();
+}
+inline void Expression_Literal_PrecisionTime::set_precision(::int32_t value) {
+  _internal_set_precision(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Expression.Literal.PrecisionTime.precision)
+}
+inline ::int32_t Expression_Literal_PrecisionTime::_internal_precision() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.precision_;
+}
+inline void Expression_Literal_PrecisionTime::_internal_set_precision(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.precision_ = value;
+}
+
+// int64 value = 2 [json_name = "value"];
+inline void Expression_Literal_PrecisionTime::clear_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = ::int64_t{0};
+}
+inline ::int64_t Expression_Literal_PrecisionTime::value() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.Literal.PrecisionTime.value)
+  return _internal_value();
+}
+inline void Expression_Literal_PrecisionTime::set_value(::int64_t value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Expression.Literal.PrecisionTime.value)
+}
+inline ::int64_t Expression_Literal_PrecisionTime::_internal_value() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.value_;
+}
+inline void Expression_Literal_PrecisionTime::_internal_set_value(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // Expression_Literal_PrecisionTimestamp
 
 // int32 precision = 1 [json_name = "precision"];
@@ -51318,6 +53066,85 @@ inline ::skyproto::substrait::Expression_Literal_Decimal* Expression_Literal::_i
 inline ::skyproto::substrait::Expression_Literal_Decimal* Expression_Literal::mutable_decimal() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::skyproto::substrait::Expression_Literal_Decimal* _msg = _internal_mutable_decimal();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.Literal.decimal)
+  return _msg;
+}
+
+// .skyproto.substrait.Expression.Literal.PrecisionTime precision_time = 37 [json_name = "precisionTime"];
+inline bool Expression_Literal::has_precision_time() const {
+  return literal_type_case() == kPrecisionTime;
+}
+inline bool Expression_Literal::_internal_has_precision_time() const {
+  return literal_type_case() == kPrecisionTime;
+}
+inline void Expression_Literal::set_has_precision_time() {
+  _impl_._oneof_case_[0] = kPrecisionTime;
+}
+inline void Expression_Literal::clear_precision_time() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (literal_type_case() == kPrecisionTime) {
+    if (GetArena() == nullptr) {
+      delete _impl_.literal_type_.precision_time_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.literal_type_.precision_time_);
+    }
+    clear_has_literal_type();
+  }
+}
+inline ::skyproto::substrait::Expression_Literal_PrecisionTime* Expression_Literal::release_precision_time() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.Expression.Literal.precision_time)
+  if (literal_type_case() == kPrecisionTime) {
+    clear_has_literal_type();
+    auto* temp = _impl_.literal_type_.precision_time_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.literal_type_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::Expression_Literal_PrecisionTime& Expression_Literal::_internal_precision_time() const {
+  return literal_type_case() == kPrecisionTime ? *_impl_.literal_type_.precision_time_ : reinterpret_cast<::skyproto::substrait::Expression_Literal_PrecisionTime&>(::skyproto::substrait::_Expression_Literal_PrecisionTime_default_instance_);
+}
+inline const ::skyproto::substrait::Expression_Literal_PrecisionTime& Expression_Literal::precision_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.Literal.precision_time)
+  return _internal_precision_time();
+}
+inline ::skyproto::substrait::Expression_Literal_PrecisionTime* Expression_Literal::unsafe_arena_release_precision_time() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.Expression.Literal.precision_time)
+  if (literal_type_case() == kPrecisionTime) {
+    clear_has_literal_type();
+    auto* temp = _impl_.literal_type_.precision_time_;
+    _impl_.literal_type_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void Expression_Literal::unsafe_arena_set_allocated_precision_time(::skyproto::substrait::Expression_Literal_PrecisionTime* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_literal_type();
+  if (value) {
+    set_has_precision_time();
+    _impl_.literal_type_.precision_time_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Expression.Literal.precision_time)
+}
+inline ::skyproto::substrait::Expression_Literal_PrecisionTime* Expression_Literal::_internal_mutable_precision_time() {
+  if (literal_type_case() != kPrecisionTime) {
+    clear_literal_type();
+    set_has_precision_time();
+    _impl_.literal_type_.precision_time_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Expression_Literal_PrecisionTime>(GetArena());
+  }
+  return _impl_.literal_type_.precision_time_;
+}
+inline ::skyproto::substrait::Expression_Literal_PrecisionTime* Expression_Literal::mutable_precision_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::Expression_Literal_PrecisionTime* _msg = _internal_mutable_precision_time();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.Literal.precision_time)
   return _msg;
 }
 
@@ -60200,6 +62027,85 @@ inline ::skyproto::substrait::Expression_Nested* Expression::mutable_nested() AB
   return _msg;
 }
 
+// .skyproto.substrait.DynamicParameter dynamic_parameter = 14 [json_name = "dynamicParameter"];
+inline bool Expression::has_dynamic_parameter() const {
+  return rex_type_case() == kDynamicParameter;
+}
+inline bool Expression::_internal_has_dynamic_parameter() const {
+  return rex_type_case() == kDynamicParameter;
+}
+inline void Expression::set_has_dynamic_parameter() {
+  _impl_._oneof_case_[0] = kDynamicParameter;
+}
+inline void Expression::clear_dynamic_parameter() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (rex_type_case() == kDynamicParameter) {
+    if (GetArena() == nullptr) {
+      delete _impl_.rex_type_.dynamic_parameter_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.rex_type_.dynamic_parameter_);
+    }
+    clear_has_rex_type();
+  }
+}
+inline ::skyproto::substrait::DynamicParameter* Expression::release_dynamic_parameter() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.Expression.dynamic_parameter)
+  if (rex_type_case() == kDynamicParameter) {
+    clear_has_rex_type();
+    auto* temp = _impl_.rex_type_.dynamic_parameter_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.rex_type_.dynamic_parameter_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::DynamicParameter& Expression::_internal_dynamic_parameter() const {
+  return rex_type_case() == kDynamicParameter ? *_impl_.rex_type_.dynamic_parameter_ : reinterpret_cast<::skyproto::substrait::DynamicParameter&>(::skyproto::substrait::_DynamicParameter_default_instance_);
+}
+inline const ::skyproto::substrait::DynamicParameter& Expression::dynamic_parameter() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Expression.dynamic_parameter)
+  return _internal_dynamic_parameter();
+}
+inline ::skyproto::substrait::DynamicParameter* Expression::unsafe_arena_release_dynamic_parameter() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.Expression.dynamic_parameter)
+  if (rex_type_case() == kDynamicParameter) {
+    clear_has_rex_type();
+    auto* temp = _impl_.rex_type_.dynamic_parameter_;
+    _impl_.rex_type_.dynamic_parameter_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void Expression::unsafe_arena_set_allocated_dynamic_parameter(::skyproto::substrait::DynamicParameter* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_rex_type();
+  if (value) {
+    set_has_dynamic_parameter();
+    _impl_.rex_type_.dynamic_parameter_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.Expression.dynamic_parameter)
+}
+inline ::skyproto::substrait::DynamicParameter* Expression::_internal_mutable_dynamic_parameter() {
+  if (rex_type_case() != kDynamicParameter) {
+    clear_rex_type();
+    set_has_dynamic_parameter();
+    _impl_.rex_type_.dynamic_parameter_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::DynamicParameter>(GetArena());
+  }
+  return _impl_.rex_type_.dynamic_parameter_;
+}
+inline ::skyproto::substrait::DynamicParameter* Expression::mutable_dynamic_parameter() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::DynamicParameter* _msg = _internal_mutable_dynamic_parameter();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Expression.dynamic_parameter)
+  return _msg;
+}
+
 // .skyproto.substrait.Expression.Enum enum = 10 [json_name = "enum", deprecated = true];
 inline bool Expression::has_enum_() const {
   return rex_type_case() == kEnum;
@@ -60288,6 +62194,123 @@ inline void Expression::clear_has_rex_type() {
 inline Expression::RexTypeCase Expression::rex_type_case() const {
   return Expression::RexTypeCase(_impl_._oneof_case_[0]);
 }
+// -------------------------------------------------------------------
+
+// DynamicParameter
+
+// .skyproto.substrait.Type type = 1 [json_name = "type"];
+inline bool DynamicParameter::has_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.type_ != nullptr);
+  return value;
+}
+inline const ::skyproto::substrait::Type& DynamicParameter::_internal_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::Type* p = _impl_.type_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::Type&>(::skyproto::substrait::_Type_default_instance_);
+}
+inline const ::skyproto::substrait::Type& DynamicParameter::type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DynamicParameter.type)
+  return _internal_type();
+}
+inline void DynamicParameter::unsafe_arena_set_allocated_type(::skyproto::substrait::Type* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.type_);
+  }
+  _impl_.type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.DynamicParameter.type)
+}
+inline ::skyproto::substrait::Type* DynamicParameter::release_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::Type* released = _impl_.type_;
+  _impl_.type_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::Type* DynamicParameter::unsafe_arena_release_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DynamicParameter.type)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::Type* temp = _impl_.type_;
+  _impl_.type_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::Type* DynamicParameter::_internal_mutable_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.type_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Type>(GetArena());
+    _impl_.type_ = reinterpret_cast<::skyproto::substrait::Type*>(p);
+  }
+  return _impl_.type_;
+}
+inline ::skyproto::substrait::Type* DynamicParameter::mutable_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skyproto::substrait::Type* _msg = _internal_mutable_type();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DynamicParameter.type)
+  return _msg;
+}
+inline void DynamicParameter::set_allocated_type(::skyproto::substrait::Type* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.type_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.type_ = reinterpret_cast<::skyproto::substrait::Type*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DynamicParameter.type)
+}
+
+// uint32 parameter_reference = 2 [json_name = "parameterReference"];
+inline void DynamicParameter::clear_parameter_reference() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.parameter_reference_ = 0u;
+}
+inline ::uint32_t DynamicParameter::parameter_reference() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DynamicParameter.parameter_reference)
+  return _internal_parameter_reference();
+}
+inline void DynamicParameter::set_parameter_reference(::uint32_t value) {
+  _internal_set_parameter_reference(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DynamicParameter.parameter_reference)
+}
+inline ::uint32_t DynamicParameter::_internal_parameter_reference() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.parameter_reference_;
+}
+inline void DynamicParameter::_internal_set_parameter_reference(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.parameter_reference_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // SortField

@@ -28,6 +28,7 @@
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
+#include "google/protobuf/generated_enum_reflection.h"
 #include "google/protobuf/unknown_field_set.h"
 #include "skyproto/substrait/algebra.pb.h"
 #include "skyproto/substrait/extensions/extensions.pb.h"
@@ -55,6 +56,15 @@ extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_skyproto_2fsubstrait_2fplan_2eproto;
 namespace skyproto {
 namespace substrait {
+class DecomposeStats;
+struct DecomposeStatsDefaultTypeInternal;
+extern DecomposeStatsDefaultTypeInternal _DecomposeStats_default_instance_;
+class DynamicParameterBinding;
+struct DynamicParameterBindingDefaultTypeInternal;
+extern DynamicParameterBindingDefaultTypeInternal _DynamicParameterBinding_default_instance_;
+class ExecutionStats;
+struct ExecutionStatsDefaultTypeInternal;
+extern ExecutionStatsDefaultTypeInternal _ExecutionStats_default_instance_;
 class Plan;
 struct PlanDefaultTypeInternal;
 extern PlanDefaultTypeInternal _Plan_default_instance_;
@@ -76,6 +86,43 @@ namespace protobuf {
 
 namespace skyproto {
 namespace substrait {
+enum DecomposeStats_StepID : int {
+  DecomposeStats_StepID_PARSE = 0,
+  DecomposeStats_StepID_SPLIT = 1,
+  DecomposeStats_StepID_MERGE = 2,
+  DecomposeStats_StepID_DELEGATE = 3,
+  DecomposeStats_StepID_TRANSLATE = 4,
+  DecomposeStats_StepID_ORIGIN = 5,
+  DecomposeStats_StepID_DecomposeStats_StepID_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  DecomposeStats_StepID_DecomposeStats_StepID_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool DecomposeStats_StepID_IsValid(int value);
+extern const uint32_t DecomposeStats_StepID_internal_data_[];
+constexpr DecomposeStats_StepID DecomposeStats_StepID_StepID_MIN = static_cast<DecomposeStats_StepID>(0);
+constexpr DecomposeStats_StepID DecomposeStats_StepID_StepID_MAX = static_cast<DecomposeStats_StepID>(5);
+constexpr int DecomposeStats_StepID_StepID_ARRAYSIZE = 5 + 1;
+const ::google::protobuf::EnumDescriptor*
+DecomposeStats_StepID_descriptor();
+template <typename T>
+const std::string& DecomposeStats_StepID_Name(T value) {
+  static_assert(std::is_same<T, DecomposeStats_StepID>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to StepID_Name().");
+  return DecomposeStats_StepID_Name(static_cast<DecomposeStats_StepID>(value));
+}
+template <>
+inline const std::string& DecomposeStats_StepID_Name(DecomposeStats_StepID value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<DecomposeStats_StepID_descriptor,
+                                                 0, 5>(
+      static_cast<int>(value));
+}
+inline bool DecomposeStats_StepID_Parse(absl::string_view name, DecomposeStats_StepID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DecomposeStats_StepID>(
+      DecomposeStats_StepID_descriptor(), name, value);
+}
 
 // ===================================================================
 
@@ -141,7 +188,7 @@ class Version final : public ::google::protobuf::Message
     return reinterpret_cast<const Version*>(
         &_Version_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(Version& a, Version& b) { a.Swap(&b); }
   inline void Swap(Version* other) {
     if (other == this) return;
@@ -332,6 +379,486 @@ class Version final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class ExecutionStats final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.ExecutionStats) */ {
+ public:
+  inline ExecutionStats() : ExecutionStats(nullptr) {}
+  ~ExecutionStats() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ExecutionStats* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ExecutionStats));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ExecutionStats(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline ExecutionStats(const ExecutionStats& from) : ExecutionStats(nullptr, from) {}
+  inline ExecutionStats(ExecutionStats&& from) noexcept
+      : ExecutionStats(nullptr, std::move(from)) {}
+  inline ExecutionStats& operator=(const ExecutionStats& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ExecutionStats& operator=(ExecutionStats&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ExecutionStats& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ExecutionStats* internal_default_instance() {
+    return reinterpret_cast<const ExecutionStats*>(
+        &_ExecutionStats_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(ExecutionStats& a, ExecutionStats& b) { a.Swap(&b); }
+  inline void Swap(ExecutionStats* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ExecutionStats* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ExecutionStats* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ExecutionStats>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ExecutionStats& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ExecutionStats& from) { ExecutionStats::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ExecutionStats* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.ExecutionStats"; }
+
+ protected:
+  explicit ExecutionStats(::google::protobuf::Arena* arena);
+  ExecutionStats(::google::protobuf::Arena* arena, const ExecutionStats& from);
+  ExecutionStats(::google::protobuf::Arena* arena, ExecutionStats&& from) noexcept
+      : ExecutionStats(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPipelineDescFieldNumber = 1,
+    kLatencyFieldNumber = 2,
+    kResultSizeFieldNumber = 3,
+  };
+  // repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+  int pipeline_desc_size() const;
+  private:
+  int _internal_pipeline_desc_size() const;
+
+  public:
+  void clear_pipeline_desc() ;
+  const std::string& pipeline_desc(int index) const;
+  std::string* mutable_pipeline_desc(int index);
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_pipeline_desc(int index, Arg_&& value, Args_... args);
+  std::string* add_pipeline_desc();
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void add_pipeline_desc(Arg_&& value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<std::string>& pipeline_desc() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* mutable_pipeline_desc();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_pipeline_desc() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_pipeline_desc();
+
+  public:
+  // repeated double latency = 2 [json_name = "latency"];
+  int latency_size() const;
+  private:
+  int _internal_latency_size() const;
+
+  public:
+  void clear_latency() ;
+  double latency(int index) const;
+  void set_latency(int index, double value);
+  void add_latency(double value);
+  const ::google::protobuf::RepeatedField<double>& latency() const;
+  ::google::protobuf::RepeatedField<double>* mutable_latency();
+
+  private:
+  const ::google::protobuf::RepeatedField<double>& _internal_latency() const;
+  ::google::protobuf::RepeatedField<double>* _internal_mutable_latency();
+
+  public:
+  // repeated uint64 result_size = 3 [json_name = "resultSize"];
+  int result_size_size() const;
+  private:
+  int _internal_result_size_size() const;
+
+  public:
+  void clear_result_size() ;
+  ::uint64_t result_size(int index) const;
+  void set_result_size(int index, ::uint64_t value);
+  void add_result_size(::uint64_t value);
+  const ::google::protobuf::RepeatedField<::uint64_t>& result_size() const;
+  ::google::protobuf::RepeatedField<::uint64_t>* mutable_result_size();
+
+  private:
+  const ::google::protobuf::RepeatedField<::uint64_t>& _internal_result_size() const;
+  ::google::protobuf::RepeatedField<::uint64_t>* _internal_mutable_result_size();
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.ExecutionStats)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 0,
+      55, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const ExecutionStats& from_msg);
+    ::google::protobuf::RepeatedPtrField<std::string> pipeline_desc_;
+    ::google::protobuf::RepeatedField<double> latency_;
+    ::google::protobuf::RepeatedField<::uint64_t> result_size_;
+    ::google::protobuf::internal::CachedSize _result_size_cached_byte_size_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2fplan_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DecomposeStats final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.DecomposeStats) */ {
+ public:
+  inline DecomposeStats() : DecomposeStats(nullptr) {}
+  ~DecomposeStats() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(DecomposeStats* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(DecomposeStats));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR DecomposeStats(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline DecomposeStats(const DecomposeStats& from) : DecomposeStats(nullptr, from) {}
+  inline DecomposeStats(DecomposeStats&& from) noexcept
+      : DecomposeStats(nullptr, std::move(from)) {}
+  inline DecomposeStats& operator=(const DecomposeStats& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DecomposeStats& operator=(DecomposeStats&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DecomposeStats& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DecomposeStats* internal_default_instance() {
+    return reinterpret_cast<const DecomposeStats*>(
+        &_DecomposeStats_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(DecomposeStats& a, DecomposeStats& b) { a.Swap(&b); }
+  inline void Swap(DecomposeStats* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DecomposeStats* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DecomposeStats* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<DecomposeStats>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const DecomposeStats& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const DecomposeStats& from) { DecomposeStats::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(DecomposeStats* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.DecomposeStats"; }
+
+ protected:
+  explicit DecomposeStats(::google::protobuf::Arena* arena);
+  DecomposeStats(::google::protobuf::Arena* arena, const DecomposeStats& from);
+  DecomposeStats(::google::protobuf::Arena* arena, DecomposeStats&& from) noexcept
+      : DecomposeStats(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+  using StepID = DecomposeStats_StepID;
+  static constexpr StepID PARSE = DecomposeStats_StepID_PARSE;
+  static constexpr StepID SPLIT = DecomposeStats_StepID_SPLIT;
+  static constexpr StepID MERGE = DecomposeStats_StepID_MERGE;
+  static constexpr StepID DELEGATE = DecomposeStats_StepID_DELEGATE;
+  static constexpr StepID TRANSLATE = DecomposeStats_StepID_TRANSLATE;
+  static constexpr StepID ORIGIN = DecomposeStats_StepID_ORIGIN;
+  static inline bool StepID_IsValid(int value) {
+    return DecomposeStats_StepID_IsValid(value);
+  }
+  static constexpr StepID StepID_MIN = DecomposeStats_StepID_StepID_MIN;
+  static constexpr StepID StepID_MAX = DecomposeStats_StepID_StepID_MAX;
+  static constexpr int StepID_ARRAYSIZE = DecomposeStats_StepID_StepID_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* StepID_descriptor() {
+    return DecomposeStats_StepID_descriptor();
+  }
+  template <typename T>
+  static inline const std::string& StepID_Name(T value) {
+    return DecomposeStats_StepID_Name(value);
+  }
+  static inline bool StepID_Parse(absl::string_view name, StepID* value) {
+    return DecomposeStats_StepID_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kStepIdFieldNumber = 1,
+    kOperatorIdFieldNumber = 2,
+    kLatencyFieldNumber = 3,
+  };
+  // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+  void clear_step_id() ;
+  ::skyproto::substrait::DecomposeStats_StepID step_id() const;
+  void set_step_id(::skyproto::substrait::DecomposeStats_StepID value);
+
+  private:
+  ::skyproto::substrait::DecomposeStats_StepID _internal_step_id() const;
+  void _internal_set_step_id(::skyproto::substrait::DecomposeStats_StepID value);
+
+  public:
+  // uint32 operator_id = 2 [json_name = "operatorId"];
+  void clear_operator_id() ;
+  ::uint32_t operator_id() const;
+  void set_operator_id(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_operator_id() const;
+  void _internal_set_operator_id(::uint32_t value);
+
+  public:
+  // double latency = 3 [json_name = "latency"];
+  void clear_latency() ;
+  double latency() const;
+  void set_latency(double value);
+
+  private:
+  double _internal_latency() const;
+  void _internal_set_latency(double value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.DecomposeStats)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const DecomposeStats& from_msg);
+    int step_id_;
+    ::uint32_t operator_id_;
+    double latency_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2fplan_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PlanVersion final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.PlanVersion) */ {
  public:
@@ -391,7 +918,7 @@ class PlanVersion final : public ::google::protobuf::Message
     return reinterpret_cast<const PlanVersion*>(
         &_PlanVersion_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(PlanVersion& a, PlanVersion& b) { a.Swap(&b); }
   inline void Swap(PlanVersion* other) {
     if (other == this) return;
@@ -528,6 +1055,214 @@ class PlanVersion final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class DynamicParameterBinding final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.DynamicParameterBinding) */ {
+ public:
+  inline DynamicParameterBinding() : DynamicParameterBinding(nullptr) {}
+  ~DynamicParameterBinding() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(DynamicParameterBinding* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(DynamicParameterBinding));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR DynamicParameterBinding(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline DynamicParameterBinding(const DynamicParameterBinding& from) : DynamicParameterBinding(nullptr, from) {}
+  inline DynamicParameterBinding(DynamicParameterBinding&& from) noexcept
+      : DynamicParameterBinding(nullptr, std::move(from)) {}
+  inline DynamicParameterBinding& operator=(const DynamicParameterBinding& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DynamicParameterBinding& operator=(DynamicParameterBinding&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DynamicParameterBinding& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DynamicParameterBinding* internal_default_instance() {
+    return reinterpret_cast<const DynamicParameterBinding*>(
+        &_DynamicParameterBinding_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 6;
+  friend void swap(DynamicParameterBinding& a, DynamicParameterBinding& b) { a.Swap(&b); }
+  inline void Swap(DynamicParameterBinding* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DynamicParameterBinding* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DynamicParameterBinding* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<DynamicParameterBinding>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const DynamicParameterBinding& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const DynamicParameterBinding& from) { DynamicParameterBinding::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(DynamicParameterBinding* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.DynamicParameterBinding"; }
+
+ protected:
+  explicit DynamicParameterBinding(::google::protobuf::Arena* arena);
+  DynamicParameterBinding(::google::protobuf::Arena* arena, const DynamicParameterBinding& from);
+  DynamicParameterBinding(::google::protobuf::Arena* arena, DynamicParameterBinding&& from) noexcept
+      : DynamicParameterBinding(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kValueFieldNumber = 2,
+    kParameterAnchorFieldNumber = 1,
+  };
+  // .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+  bool has_value() const;
+  void clear_value() ;
+  const ::skyproto::substrait::Expression_Literal& value() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::Expression_Literal* release_value();
+  ::skyproto::substrait::Expression_Literal* mutable_value();
+  void set_allocated_value(::skyproto::substrait::Expression_Literal* value);
+  void unsafe_arena_set_allocated_value(::skyproto::substrait::Expression_Literal* value);
+  ::skyproto::substrait::Expression_Literal* unsafe_arena_release_value();
+
+  private:
+  const ::skyproto::substrait::Expression_Literal& _internal_value() const;
+  ::skyproto::substrait::Expression_Literal* _internal_mutable_value();
+
+  public:
+  // uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+  void clear_parameter_anchor() ;
+  ::uint32_t parameter_anchor() const;
+  void set_parameter_anchor(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_parameter_anchor() const;
+  void _internal_set_parameter_anchor(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.DynamicParameterBinding)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const DynamicParameterBinding& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::skyproto::substrait::Expression_Literal* value_;
+    ::uint32_t parameter_anchor_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2fplan_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PlanRel final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.PlanRel) */ {
  public:
@@ -592,7 +1327,7 @@ class PlanRel final : public ::google::protobuf::Message
     return reinterpret_cast<const PlanRel*>(
         &_PlanRel_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 0;
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(PlanRel& a, PlanRel& b) { a.Swap(&b); }
   inline void Swap(PlanRel* other) {
     if (other == this) return;
@@ -835,7 +1570,7 @@ class Plan final : public ::google::protobuf::Message
     return reinterpret_cast<const Plan*>(
         &_Plan_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(Plan& a, Plan& b) { a.Swap(&b); }
   inline void Swap(Plan* other) {
     if (other == this) return;
@@ -926,6 +1661,9 @@ class Plan final : public ::google::protobuf::Message
     kExtensionsFieldNumber = 2,
     kRelationsFieldNumber = 3,
     kExpectedTypeUrlsFieldNumber = 5,
+    kParameterBindingsFieldNumber = 7,
+    kDecomposeStatsFieldNumber = 8,
+    kPlanIdFieldNumber = 9,
     kAdvancedExtensionsFieldNumber = 4,
     kVersionFieldNumber = 6,
   };
@@ -1002,6 +1740,56 @@ class Plan final : public ::google::protobuf::Message
   ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_expected_type_urls();
 
   public:
+  // repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+  int parameter_bindings_size() const;
+  private:
+  int _internal_parameter_bindings_size() const;
+
+  public:
+  void clear_parameter_bindings() ;
+  ::skyproto::substrait::DynamicParameterBinding* mutable_parameter_bindings(int index);
+  ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>* mutable_parameter_bindings();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>& _internal_parameter_bindings() const;
+  ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>* _internal_mutable_parameter_bindings();
+  public:
+  const ::skyproto::substrait::DynamicParameterBinding& parameter_bindings(int index) const;
+  ::skyproto::substrait::DynamicParameterBinding* add_parameter_bindings();
+  const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>& parameter_bindings() const;
+  // repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+  int decompose_stats_size() const;
+  private:
+  int _internal_decompose_stats_size() const;
+
+  public:
+  void clear_decompose_stats() ;
+  ::skyproto::substrait::DecomposeStats* mutable_decompose_stats(int index);
+  ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>* mutable_decompose_stats();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>& _internal_decompose_stats() const;
+  ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>* _internal_mutable_decompose_stats();
+  public:
+  const ::skyproto::substrait::DecomposeStats& decompose_stats(int index) const;
+  ::skyproto::substrait::DecomposeStats* add_decompose_stats();
+  const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>& decompose_stats() const;
+  // string plan_id = 9 [json_name = "planId"];
+  void clear_plan_id() ;
+  const std::string& plan_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_plan_id(Arg_&& arg, Args_... args);
+  std::string* mutable_plan_id();
+  PROTOBUF_NODISCARD std::string* release_plan_id();
+  void set_allocated_plan_id(std::string* value);
+
+  private:
+  const std::string& _internal_plan_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_plan_id(
+      const std::string& value);
+  std::string* _internal_mutable_plan_id();
+
+  public:
   // .skyproto.substrait.extensions.AdvancedExtension advanced_extensions = 4 [json_name = "advancedExtensions"];
   bool has_advanced_extensions() const;
   void clear_advanced_extensions() ;
@@ -1037,8 +1825,8 @@ class Plan final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 6, 5,
-      50, 2>
+      4, 9, 7,
+      65, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1061,6 +1849,9 @@ class Plan final : public ::google::protobuf::Message
     ::google::protobuf::RepeatedPtrField< ::skyproto::substrait::extensions::SimpleExtensionDeclaration > extensions_;
     ::google::protobuf::RepeatedPtrField< ::skyproto::substrait::PlanRel > relations_;
     ::google::protobuf::RepeatedPtrField<std::string> expected_type_urls_;
+    ::google::protobuf::RepeatedPtrField< ::skyproto::substrait::DynamicParameterBinding > parameter_bindings_;
+    ::google::protobuf::RepeatedPtrField< ::skyproto::substrait::DecomposeStats > decompose_stats_;
+    ::google::protobuf::internal::ArenaStringPtr plan_id_;
     ::skyproto::substrait::extensions::AdvancedExtension* advanced_extensions_;
     ::skyproto::substrait::Version* version_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -1081,6 +1872,234 @@ class Plan final : public ::google::protobuf::Message
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// DecomposeStats
+
+// .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+inline void DecomposeStats::clear_step_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.step_id_ = 0;
+}
+inline ::skyproto::substrait::DecomposeStats_StepID DecomposeStats::step_id() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.step_id)
+  return _internal_step_id();
+}
+inline void DecomposeStats::set_step_id(::skyproto::substrait::DecomposeStats_StepID value) {
+  _internal_set_step_id(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.step_id)
+}
+inline ::skyproto::substrait::DecomposeStats_StepID DecomposeStats::_internal_step_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skyproto::substrait::DecomposeStats_StepID>(_impl_.step_id_);
+}
+inline void DecomposeStats::_internal_set_step_id(::skyproto::substrait::DecomposeStats_StepID value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.step_id_ = value;
+}
+
+// uint32 operator_id = 2 [json_name = "operatorId"];
+inline void DecomposeStats::clear_operator_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.operator_id_ = 0u;
+}
+inline ::uint32_t DecomposeStats::operator_id() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.operator_id)
+  return _internal_operator_id();
+}
+inline void DecomposeStats::set_operator_id(::uint32_t value) {
+  _internal_set_operator_id(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.operator_id)
+}
+inline ::uint32_t DecomposeStats::_internal_operator_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.operator_id_;
+}
+inline void DecomposeStats::_internal_set_operator_id(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.operator_id_ = value;
+}
+
+// double latency = 3 [json_name = "latency"];
+inline void DecomposeStats::clear_latency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.latency_ = 0;
+}
+inline double DecomposeStats::latency() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.latency)
+  return _internal_latency();
+}
+inline void DecomposeStats::set_latency(double value) {
+  _internal_set_latency(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.latency)
+}
+inline double DecomposeStats::_internal_latency() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.latency_;
+}
+inline void DecomposeStats::_internal_set_latency(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.latency_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ExecutionStats
+
+// repeated string pipeline_desc = 1 [json_name = "pipelineDesc"];
+inline int ExecutionStats::_internal_pipeline_desc_size() const {
+  return _internal_pipeline_desc().size();
+}
+inline int ExecutionStats::pipeline_desc_size() const {
+  return _internal_pipeline_desc_size();
+}
+inline void ExecutionStats::clear_pipeline_desc() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pipeline_desc_.Clear();
+}
+inline std::string* ExecutionStats::add_pipeline_desc() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  std::string* _s = _internal_mutable_pipeline_desc()->Add();
+  // @@protoc_insertion_point(field_add_mutable:skyproto.substrait.ExecutionStats.pipeline_desc)
+  return _s;
+}
+inline const std::string& ExecutionStats::pipeline_desc(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ExecutionStats.pipeline_desc)
+  return _internal_pipeline_desc().Get(index);
+}
+inline std::string* ExecutionStats::mutable_pipeline_desc(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ExecutionStats.pipeline_desc)
+  return _internal_mutable_pipeline_desc()->Mutable(index);
+}
+template <typename Arg_, typename... Args_>
+inline void ExecutionStats::set_pipeline_desc(int index, Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_pipeline_desc()->Mutable(index),
+      std::forward<Arg_>(value), args... );
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ExecutionStats.pipeline_desc)
+}
+template <typename Arg_, typename... Args_>
+inline void ExecutionStats::add_pipeline_desc(Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_pipeline_desc(),
+                               std::forward<Arg_>(value),
+                               args... );
+  // @@protoc_insertion_point(field_add:skyproto.substrait.ExecutionStats.pipeline_desc)
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+ExecutionStats::pipeline_desc() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skyproto.substrait.ExecutionStats.pipeline_desc)
+  return _internal_pipeline_desc();
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+ExecutionStats::mutable_pipeline_desc() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skyproto.substrait.ExecutionStats.pipeline_desc)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_pipeline_desc();
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+ExecutionStats::_internal_pipeline_desc() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pipeline_desc_;
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+ExecutionStats::_internal_mutable_pipeline_desc() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.pipeline_desc_;
+}
+
+// repeated double latency = 2 [json_name = "latency"];
+inline int ExecutionStats::_internal_latency_size() const {
+  return _internal_latency().size();
+}
+inline int ExecutionStats::latency_size() const {
+  return _internal_latency_size();
+}
+inline void ExecutionStats::clear_latency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.latency_.Clear();
+}
+inline double ExecutionStats::latency(int index) const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ExecutionStats.latency)
+  return _internal_latency().Get(index);
+}
+inline void ExecutionStats::set_latency(int index, double value) {
+  _internal_mutable_latency()->Set(index, value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ExecutionStats.latency)
+}
+inline void ExecutionStats::add_latency(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_latency()->Add(value);
+  // @@protoc_insertion_point(field_add:skyproto.substrait.ExecutionStats.latency)
+}
+inline const ::google::protobuf::RepeatedField<double>& ExecutionStats::latency() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skyproto.substrait.ExecutionStats.latency)
+  return _internal_latency();
+}
+inline ::google::protobuf::RepeatedField<double>* ExecutionStats::mutable_latency()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skyproto.substrait.ExecutionStats.latency)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_latency();
+}
+inline const ::google::protobuf::RepeatedField<double>&
+ExecutionStats::_internal_latency() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.latency_;
+}
+inline ::google::protobuf::RepeatedField<double>* ExecutionStats::_internal_mutable_latency() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.latency_;
+}
+
+// repeated uint64 result_size = 3 [json_name = "resultSize"];
+inline int ExecutionStats::_internal_result_size_size() const {
+  return _internal_result_size().size();
+}
+inline int ExecutionStats::result_size_size() const {
+  return _internal_result_size_size();
+}
+inline void ExecutionStats::clear_result_size() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.result_size_.Clear();
+}
+inline ::uint64_t ExecutionStats::result_size(int index) const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ExecutionStats.result_size)
+  return _internal_result_size().Get(index);
+}
+inline void ExecutionStats::set_result_size(int index, ::uint64_t value) {
+  _internal_mutable_result_size()->Set(index, value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ExecutionStats.result_size)
+}
+inline void ExecutionStats::add_result_size(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_result_size()->Add(value);
+  // @@protoc_insertion_point(field_add:skyproto.substrait.ExecutionStats.result_size)
+}
+inline const ::google::protobuf::RepeatedField<::uint64_t>& ExecutionStats::result_size() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skyproto.substrait.ExecutionStats.result_size)
+  return _internal_result_size();
+}
+inline ::google::protobuf::RepeatedField<::uint64_t>* ExecutionStats::mutable_result_size()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skyproto.substrait.ExecutionStats.result_size)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_result_size();
+}
+inline const ::google::protobuf::RepeatedField<::uint64_t>&
+ExecutionStats::_internal_result_size() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.result_size_;
+}
+inline ::google::protobuf::RepeatedField<::uint64_t>* ExecutionStats::_internal_mutable_result_size() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.result_size_;
+}
+
 // -------------------------------------------------------------------
 
 // PlanRel
@@ -1646,6 +2665,152 @@ Plan::_internal_mutable_expected_type_urls() {
   return &_impl_.expected_type_urls_;
 }
 
+// repeated .skyproto.substrait.DynamicParameterBinding parameter_bindings = 7 [json_name = "parameterBindings"];
+inline int Plan::_internal_parameter_bindings_size() const {
+  return _internal_parameter_bindings().size();
+}
+inline int Plan::parameter_bindings_size() const {
+  return _internal_parameter_bindings_size();
+}
+inline void Plan::clear_parameter_bindings() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.parameter_bindings_.Clear();
+}
+inline ::skyproto::substrait::DynamicParameterBinding* Plan::mutable_parameter_bindings(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Plan.parameter_bindings)
+  return _internal_mutable_parameter_bindings()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>* Plan::mutable_parameter_bindings()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skyproto.substrait.Plan.parameter_bindings)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_parameter_bindings();
+}
+inline const ::skyproto::substrait::DynamicParameterBinding& Plan::parameter_bindings(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Plan.parameter_bindings)
+  return _internal_parameter_bindings().Get(index);
+}
+inline ::skyproto::substrait::DynamicParameterBinding* Plan::add_parameter_bindings() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skyproto::substrait::DynamicParameterBinding* _add = _internal_mutable_parameter_bindings()->Add();
+  // @@protoc_insertion_point(field_add:skyproto.substrait.Plan.parameter_bindings)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>& Plan::parameter_bindings() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skyproto.substrait.Plan.parameter_bindings)
+  return _internal_parameter_bindings();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>&
+Plan::_internal_parameter_bindings() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.parameter_bindings_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DynamicParameterBinding>*
+Plan::_internal_mutable_parameter_bindings() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.parameter_bindings_;
+}
+
+// repeated .skyproto.substrait.DecomposeStats decompose_stats = 8 [json_name = "decomposeStats"];
+inline int Plan::_internal_decompose_stats_size() const {
+  return _internal_decompose_stats().size();
+}
+inline int Plan::decompose_stats_size() const {
+  return _internal_decompose_stats_size();
+}
+inline void Plan::clear_decompose_stats() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.decompose_stats_.Clear();
+}
+inline ::skyproto::substrait::DecomposeStats* Plan::mutable_decompose_stats(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Plan.decompose_stats)
+  return _internal_mutable_decompose_stats()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>* Plan::mutable_decompose_stats()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:skyproto.substrait.Plan.decompose_stats)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_decompose_stats();
+}
+inline const ::skyproto::substrait::DecomposeStats& Plan::decompose_stats(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Plan.decompose_stats)
+  return _internal_decompose_stats().Get(index);
+}
+inline ::skyproto::substrait::DecomposeStats* Plan::add_decompose_stats() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::skyproto::substrait::DecomposeStats* _add = _internal_mutable_decompose_stats()->Add();
+  // @@protoc_insertion_point(field_add:skyproto.substrait.Plan.decompose_stats)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>& Plan::decompose_stats() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:skyproto.substrait.Plan.decompose_stats)
+  return _internal_decompose_stats();
+}
+inline const ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>&
+Plan::_internal_decompose_stats() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.decompose_stats_;
+}
+inline ::google::protobuf::RepeatedPtrField<::skyproto::substrait::DecomposeStats>*
+Plan::_internal_mutable_decompose_stats() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.decompose_stats_;
+}
+
+// string plan_id = 9 [json_name = "planId"];
+inline void Plan::clear_plan_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.plan_id_.ClearToEmpty();
+}
+inline const std::string& Plan::plan_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.Plan.plan_id)
+  return _internal_plan_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void Plan::set_plan_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.plan_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.substrait.Plan.plan_id)
+}
+inline std::string* Plan::mutable_plan_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_plan_id();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.Plan.plan_id)
+  return _s;
+}
+inline const std::string& Plan::_internal_plan_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.plan_id_.Get();
+}
+inline void Plan::_internal_set_plan_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.plan_id_.Set(value, GetArena());
+}
+inline std::string* Plan::_internal_mutable_plan_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.plan_id_.Mutable( GetArena());
+}
+inline std::string* Plan::release_plan_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.Plan.plan_id)
+  return _impl_.plan_id_.Release();
+}
+inline void Plan::set_allocated_plan_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.plan_id_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.plan_id_.IsDefault()) {
+    _impl_.plan_id_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Plan.plan_id)
+}
+
 // -------------------------------------------------------------------
 
 // PlanVersion
@@ -1912,6 +3077,123 @@ inline void Version::set_allocated_producer(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.Version.producer)
 }
 
+// -------------------------------------------------------------------
+
+// DynamicParameterBinding
+
+// uint32 parameter_anchor = 1 [json_name = "parameterAnchor"];
+inline void DynamicParameterBinding::clear_parameter_anchor() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.parameter_anchor_ = 0u;
+}
+inline ::uint32_t DynamicParameterBinding::parameter_anchor() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DynamicParameterBinding.parameter_anchor)
+  return _internal_parameter_anchor();
+}
+inline void DynamicParameterBinding::set_parameter_anchor(::uint32_t value) {
+  _internal_set_parameter_anchor(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DynamicParameterBinding.parameter_anchor)
+}
+inline ::uint32_t DynamicParameterBinding::_internal_parameter_anchor() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.parameter_anchor_;
+}
+inline void DynamicParameterBinding::_internal_set_parameter_anchor(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.parameter_anchor_ = value;
+}
+
+// .skyproto.substrait.Expression.Literal value = 2 [json_name = "value"];
+inline bool DynamicParameterBinding::has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.value_ != nullptr);
+  return value;
+}
+inline const ::skyproto::substrait::Expression_Literal& DynamicParameterBinding::_internal_value() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::Expression_Literal* p = _impl_.value_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::Expression_Literal&>(::skyproto::substrait::_Expression_Literal_default_instance_);
+}
+inline const ::skyproto::substrait::Expression_Literal& DynamicParameterBinding::value() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DynamicParameterBinding.value)
+  return _internal_value();
+}
+inline void DynamicParameterBinding::unsafe_arena_set_allocated_value(::skyproto::substrait::Expression_Literal* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_);
+  }
+  _impl_.value_ = reinterpret_cast<::skyproto::substrait::Expression_Literal*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.DynamicParameterBinding.value)
+}
+inline ::skyproto::substrait::Expression_Literal* DynamicParameterBinding::release_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::Expression_Literal* released = _impl_.value_;
+  _impl_.value_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::Expression_Literal* DynamicParameterBinding::unsafe_arena_release_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DynamicParameterBinding.value)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::Expression_Literal* temp = _impl_.value_;
+  _impl_.value_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::Expression_Literal* DynamicParameterBinding::_internal_mutable_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.value_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::Expression_Literal>(GetArena());
+    _impl_.value_ = reinterpret_cast<::skyproto::substrait::Expression_Literal*>(p);
+  }
+  return _impl_.value_;
+}
+inline ::skyproto::substrait::Expression_Literal* DynamicParameterBinding::mutable_value() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skyproto::substrait::Expression_Literal* _msg = _internal_mutable_value();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DynamicParameterBinding.value)
+  return _msg;
+}
+inline void DynamicParameterBinding::set_allocated_value(::skyproto::substrait::Expression_Literal* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.value_ = reinterpret_cast<::skyproto::substrait::Expression_Literal*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DynamicParameterBinding.value)
+}
+
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif  // __GNUC__
@@ -1920,6 +3202,19 @@ inline void Version::set_allocated_producer(std::string* value) {
 }  // namespace substrait
 }  // namespace skyproto
 
+
+namespace google {
+namespace protobuf {
+
+template <>
+struct is_proto_enum<::skyproto::substrait::DecomposeStats_StepID> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::skyproto::substrait::DecomposeStats_StepID>() {
+  return ::skyproto::substrait::DecomposeStats_StepID_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

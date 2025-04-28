@@ -90,6 +90,9 @@ extern ParameterizedType_ParameterizedMapDefaultTypeInternal _ParameterizedType_
 class ParameterizedType_ParameterizedNamedStruct;
 struct ParameterizedType_ParameterizedNamedStructDefaultTypeInternal;
 extern ParameterizedType_ParameterizedNamedStructDefaultTypeInternal _ParameterizedType_ParameterizedNamedStruct_default_instance_;
+class ParameterizedType_ParameterizedPrecisionTime;
+struct ParameterizedType_ParameterizedPrecisionTimeDefaultTypeInternal;
+extern ParameterizedType_ParameterizedPrecisionTimeDefaultTypeInternal _ParameterizedType_ParameterizedPrecisionTime_default_instance_;
 class ParameterizedType_ParameterizedPrecisionTimestamp;
 struct ParameterizedType_ParameterizedPrecisionTimestampDefaultTypeInternal;
 extern ParameterizedType_ParameterizedPrecisionTimestampDefaultTypeInternal _ParameterizedType_ParameterizedPrecisionTimestamp_default_instance_;
@@ -182,7 +185,7 @@ class ParameterizedType_ParameterizedUserDefined final : public ::google::protob
     return reinterpret_cast<const ParameterizedType_ParameterizedUserDefined*>(
         &_ParameterizedType_ParameterizedUserDefined_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 15;
+  static constexpr int kIndexInFileMessages = 16;
   friend void swap(ParameterizedType_ParameterizedUserDefined& a, ParameterizedType_ParameterizedUserDefined& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedUserDefined* other) {
     if (other == this) return;
@@ -822,7 +825,7 @@ class ParameterizedType_IntegerOption final : public ::google::protobuf::Message
     return reinterpret_cast<const ParameterizedType_IntegerOption*>(
         &_ParameterizedType_IntegerOption_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 16;
+  static constexpr int kIndexInFileMessages = 17;
   friend void swap(ParameterizedType_IntegerOption& a, ParameterizedType_IntegerOption& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_IntegerOption* other) {
     if (other == this) return;
@@ -1265,7 +1268,7 @@ class ParameterizedType_ParameterizedPrecisionTimestampTZ final : public ::googl
     return reinterpret_cast<const ParameterizedType_ParameterizedPrecisionTimestampTZ*>(
         &_ParameterizedType_ParameterizedPrecisionTimestampTZ_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 11;
   friend void swap(ParameterizedType_ParameterizedPrecisionTimestampTZ& a, ParameterizedType_ParameterizedPrecisionTimestampTZ& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedPrecisionTimestampTZ* other) {
     if (other == this) return;
@@ -1485,7 +1488,7 @@ class ParameterizedType_ParameterizedPrecisionTimestamp final : public ::google:
     return reinterpret_cast<const ParameterizedType_ParameterizedPrecisionTimestamp*>(
         &_ParameterizedType_ParameterizedPrecisionTimestamp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 10;
   friend void swap(ParameterizedType_ParameterizedPrecisionTimestamp& a, ParameterizedType_ParameterizedPrecisionTimestamp& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedPrecisionTimestamp* other) {
     if (other == this) return;
@@ -1634,6 +1637,226 @@ class ParameterizedType_ParameterizedPrecisionTimestamp final : public ::google:
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const ParameterizedType_ParameterizedPrecisionTimestamp& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::skyproto::substrait::ParameterizedType_IntegerOption* precision_;
+    ::uint32_t variation_pointer_;
+    int nullability_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2fparameterized_5ftypes_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ParameterizedType_ParameterizedPrecisionTime final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime) */ {
+ public:
+  inline ParameterizedType_ParameterizedPrecisionTime() : ParameterizedType_ParameterizedPrecisionTime(nullptr) {}
+  ~ParameterizedType_ParameterizedPrecisionTime() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ParameterizedType_ParameterizedPrecisionTime* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ParameterizedType_ParameterizedPrecisionTime));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ParameterizedType_ParameterizedPrecisionTime(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline ParameterizedType_ParameterizedPrecisionTime(const ParameterizedType_ParameterizedPrecisionTime& from) : ParameterizedType_ParameterizedPrecisionTime(nullptr, from) {}
+  inline ParameterizedType_ParameterizedPrecisionTime(ParameterizedType_ParameterizedPrecisionTime&& from) noexcept
+      : ParameterizedType_ParameterizedPrecisionTime(nullptr, std::move(from)) {}
+  inline ParameterizedType_ParameterizedPrecisionTime& operator=(const ParameterizedType_ParameterizedPrecisionTime& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ParameterizedType_ParameterizedPrecisionTime& operator=(ParameterizedType_ParameterizedPrecisionTime&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ParameterizedType_ParameterizedPrecisionTime& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ParameterizedType_ParameterizedPrecisionTime* internal_default_instance() {
+    return reinterpret_cast<const ParameterizedType_ParameterizedPrecisionTime*>(
+        &_ParameterizedType_ParameterizedPrecisionTime_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 9;
+  friend void swap(ParameterizedType_ParameterizedPrecisionTime& a, ParameterizedType_ParameterizedPrecisionTime& b) { a.Swap(&b); }
+  inline void Swap(ParameterizedType_ParameterizedPrecisionTime* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ParameterizedType_ParameterizedPrecisionTime* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ParameterizedType_ParameterizedPrecisionTime* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ParameterizedType_ParameterizedPrecisionTime>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ParameterizedType_ParameterizedPrecisionTime& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ParameterizedType_ParameterizedPrecisionTime& from) { ParameterizedType_ParameterizedPrecisionTime::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ParameterizedType_ParameterizedPrecisionTime* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime"; }
+
+ protected:
+  explicit ParameterizedType_ParameterizedPrecisionTime(::google::protobuf::Arena* arena);
+  ParameterizedType_ParameterizedPrecisionTime(::google::protobuf::Arena* arena, const ParameterizedType_ParameterizedPrecisionTime& from);
+  ParameterizedType_ParameterizedPrecisionTime(::google::protobuf::Arena* arena, ParameterizedType_ParameterizedPrecisionTime&& from) noexcept
+      : ParameterizedType_ParameterizedPrecisionTime(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPrecisionFieldNumber = 1,
+    kVariationPointerFieldNumber = 2,
+    kNullabilityFieldNumber = 3,
+  };
+  // .skyproto.substrait.ParameterizedType.IntegerOption precision = 1 [json_name = "precision"];
+  bool has_precision() const;
+  void clear_precision() ;
+  const ::skyproto::substrait::ParameterizedType_IntegerOption& precision() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::ParameterizedType_IntegerOption* release_precision();
+  ::skyproto::substrait::ParameterizedType_IntegerOption* mutable_precision();
+  void set_allocated_precision(::skyproto::substrait::ParameterizedType_IntegerOption* value);
+  void unsafe_arena_set_allocated_precision(::skyproto::substrait::ParameterizedType_IntegerOption* value);
+  ::skyproto::substrait::ParameterizedType_IntegerOption* unsafe_arena_release_precision();
+
+  private:
+  const ::skyproto::substrait::ParameterizedType_IntegerOption& _internal_precision() const;
+  ::skyproto::substrait::ParameterizedType_IntegerOption* _internal_mutable_precision();
+
+  public:
+  // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+  void clear_variation_pointer() ;
+  ::uint32_t variation_pointer() const;
+  void set_variation_pointer(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_variation_pointer() const;
+  void _internal_set_variation_pointer(::uint32_t value);
+
+  public:
+  // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+  void clear_nullability() ;
+  ::skyproto::substrait::Type_Nullability nullability() const;
+  void set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  private:
+  ::skyproto::substrait::Type_Nullability _internal_nullability() const;
+  void _internal_set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const ParameterizedType_ParameterizedPrecisionTime& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::skyproto::substrait::ParameterizedType_IntegerOption* precision_;
@@ -2840,6 +3063,7 @@ class ParameterizedType final : public ::google::protobuf::Message
     kVarchar = 22,
     kFixedBinary = 23,
     kDecimal = 24,
+    kPrecisionTime = 37,
     kPrecisionTimestamp = 34,
     kPrecisionTimestampTz = 35,
     kStruct = 25,
@@ -2854,7 +3078,7 @@ class ParameterizedType final : public ::google::protobuf::Message
     return reinterpret_cast<const ParameterizedType*>(
         &_ParameterizedType_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 17;
+  static constexpr int kIndexInFileMessages = 18;
   friend void swap(ParameterizedType& a, ParameterizedType& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType* other) {
     if (other == this) return;
@@ -2947,6 +3171,7 @@ class ParameterizedType final : public ::google::protobuf::Message
   using ParameterizedDecimal = ParameterizedType_ParameterizedDecimal;
   using ParameterizedIntervalDay = ParameterizedType_ParameterizedIntervalDay;
   using ParameterizedIntervalCompound = ParameterizedType_ParameterizedIntervalCompound;
+  using ParameterizedPrecisionTime = ParameterizedType_ParameterizedPrecisionTime;
   using ParameterizedPrecisionTimestamp = ParameterizedType_ParameterizedPrecisionTimestamp;
   using ParameterizedPrecisionTimestampTZ = ParameterizedType_ParameterizedPrecisionTimestampTZ;
   using ParameterizedStruct = ParameterizedType_ParameterizedStruct;
@@ -2979,6 +3204,7 @@ class ParameterizedType final : public ::google::protobuf::Message
     kVarcharFieldNumber = 22,
     kFixedBinaryFieldNumber = 23,
     kDecimalFieldNumber = 24,
+    kPrecisionTimeFieldNumber = 37,
     kPrecisionTimestampFieldNumber = 34,
     kPrecisionTimestampTzFieldNumber = 35,
     kStructFieldNumber = 25,
@@ -3197,19 +3423,19 @@ class ParameterizedType final : public ::google::protobuf::Message
   ::skyproto::substrait::Type_Date* _internal_mutable_date();
 
   public:
-  // .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
-  bool has_time() const;
+  // .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
+  [[deprecated]]  bool has_time() const;
   private:
   bool _internal_has_time() const;
 
   public:
-  void clear_time() ;
-  const ::skyproto::substrait::Type_Time& time() const;
-  PROTOBUF_NODISCARD ::skyproto::substrait::Type_Time* release_time();
-  ::skyproto::substrait::Type_Time* mutable_time();
-  void set_allocated_time(::skyproto::substrait::Type_Time* value);
-  void unsafe_arena_set_allocated_time(::skyproto::substrait::Type_Time* value);
-  ::skyproto::substrait::Type_Time* unsafe_arena_release_time();
+  [[deprecated]]  void clear_time() ;
+  [[deprecated]] const ::skyproto::substrait::Type_Time& time() const;
+  [[deprecated]] PROTOBUF_NODISCARD ::skyproto::substrait::Type_Time* release_time();
+  [[deprecated]] ::skyproto::substrait::Type_Time* mutable_time();
+  [[deprecated]] void set_allocated_time(::skyproto::substrait::Type_Time* value);
+  [[deprecated]] void unsafe_arena_set_allocated_time(::skyproto::substrait::Type_Time* value);
+  [[deprecated]] ::skyproto::substrait::Type_Time* unsafe_arena_release_time();
 
   private:
   const ::skyproto::substrait::Type_Time& _internal_time() const;
@@ -3387,6 +3613,25 @@ class ParameterizedType final : public ::google::protobuf::Message
   ::skyproto::substrait::ParameterizedType_ParameterizedDecimal* _internal_mutable_decimal();
 
   public:
+  // .skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime precision_time = 37 [json_name = "precisionTime"];
+  bool has_precision_time() const;
+  private:
+  bool _internal_has_precision_time() const;
+
+  public:
+  void clear_precision_time() ;
+  const ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime& precision_time() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* release_precision_time();
+  ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* mutable_precision_time();
+  void set_allocated_precision_time(::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* value);
+  void unsafe_arena_set_allocated_precision_time(::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* value);
+  ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* unsafe_arena_release_precision_time();
+
+  private:
+  const ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime& _internal_precision_time() const;
+  ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* _internal_mutable_precision_time();
+
+  public:
   // .skyproto.substrait.ParameterizedType.ParameterizedPrecisionTimestamp precision_timestamp = 34 [json_name = "precisionTimestamp"];
   bool has_precision_timestamp() const;
   private:
@@ -3557,6 +3802,7 @@ class ParameterizedType final : public ::google::protobuf::Message
   void set_has_varchar();
   void set_has_fixed_binary();
   void set_has_decimal();
+  void set_has_precision_time();
   void set_has_precision_timestamp();
   void set_has_precision_timestamp_tz();
   void set_has_struct_();
@@ -3569,7 +3815,7 @@ class ParameterizedType final : public ::google::protobuf::Message
   inline void clear_has_kind();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 29, 28,
+      0, 30, 29,
       0, 7>
       _table_;
 
@@ -3611,6 +3857,7 @@ class ParameterizedType final : public ::google::protobuf::Message
       ::skyproto::substrait::ParameterizedType_ParameterizedVarChar* varchar_;
       ::skyproto::substrait::ParameterizedType_ParameterizedFixedBinary* fixed_binary_;
       ::skyproto::substrait::ParameterizedType_ParameterizedDecimal* decimal_;
+      ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* precision_time_;
       ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTimestamp* precision_timestamp_;
       ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTimestampTZ* precision_timestamp_tz_;
       ::skyproto::substrait::ParameterizedType_ParameterizedStruct* struct__;
@@ -3688,7 +3935,7 @@ class ParameterizedType_ParameterizedList final : public ::google::protobuf::Mes
     return reinterpret_cast<const ParameterizedType_ParameterizedList*>(
         &_ParameterizedType_ParameterizedList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 13;
+  static constexpr int kIndexInFileMessages = 14;
   friend void swap(ParameterizedType_ParameterizedList& a, ParameterizedType_ParameterizedList& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedList* other) {
     if (other == this) return;
@@ -3908,7 +4155,7 @@ class ParameterizedType_ParameterizedMap final : public ::google::protobuf::Mess
     return reinterpret_cast<const ParameterizedType_ParameterizedMap*>(
         &_ParameterizedType_ParameterizedMap_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 14;
+  static constexpr int kIndexInFileMessages = 15;
   friend void swap(ParameterizedType_ParameterizedMap& a, ParameterizedType_ParameterizedMap& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedMap* other) {
     if (other == this) return;
@@ -4145,7 +4392,7 @@ class ParameterizedType_ParameterizedStruct final : public ::google::protobuf::M
     return reinterpret_cast<const ParameterizedType_ParameterizedStruct*>(
         &_ParameterizedType_ParameterizedStruct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 12;
   friend void swap(ParameterizedType_ParameterizedStruct& a, ParameterizedType_ParameterizedStruct& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedStruct* other) {
     if (other == this) return;
@@ -4581,7 +4828,7 @@ class ParameterizedType_ParameterizedNamedStruct final : public ::google::protob
     return reinterpret_cast<const ParameterizedType_ParameterizedNamedStruct*>(
         &_ParameterizedType_ParameterizedNamedStruct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 12;
+  static constexpr int kIndexInFileMessages = 13;
   friend void swap(ParameterizedType_ParameterizedNamedStruct& a, ParameterizedType_ParameterizedNamedStruct& b) { a.Swap(&b); }
   inline void Swap(ParameterizedType_ParameterizedNamedStruct* other) {
     if (other == this) return;
@@ -6080,6 +6327,150 @@ inline ::skyproto::substrait::Type_Nullability ParameterizedType_ParameterizedIn
   return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
 }
 inline void ParameterizedType_ParameterizedIntervalCompound::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ParameterizedType_ParameterizedPrecisionTime
+
+// .skyproto.substrait.ParameterizedType.IntegerOption precision = 1 [json_name = "precision"];
+inline bool ParameterizedType_ParameterizedPrecisionTime::has_precision() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.precision_ != nullptr);
+  return value;
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::clear_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.precision_ != nullptr) _impl_.precision_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::skyproto::substrait::ParameterizedType_IntegerOption& ParameterizedType_ParameterizedPrecisionTime::_internal_precision() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::ParameterizedType_IntegerOption* p = _impl_.precision_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::ParameterizedType_IntegerOption&>(::skyproto::substrait::_ParameterizedType_IntegerOption_default_instance_);
+}
+inline const ::skyproto::substrait::ParameterizedType_IntegerOption& ParameterizedType_ParameterizedPrecisionTime::precision() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.precision)
+  return _internal_precision();
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::unsafe_arena_set_allocated_precision(::skyproto::substrait::ParameterizedType_IntegerOption* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.precision_);
+  }
+  _impl_.precision_ = reinterpret_cast<::skyproto::substrait::ParameterizedType_IntegerOption*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.precision)
+}
+inline ::skyproto::substrait::ParameterizedType_IntegerOption* ParameterizedType_ParameterizedPrecisionTime::release_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::ParameterizedType_IntegerOption* released = _impl_.precision_;
+  _impl_.precision_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::ParameterizedType_IntegerOption* ParameterizedType_ParameterizedPrecisionTime::unsafe_arena_release_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.precision)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::ParameterizedType_IntegerOption* temp = _impl_.precision_;
+  _impl_.precision_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::ParameterizedType_IntegerOption* ParameterizedType_ParameterizedPrecisionTime::_internal_mutable_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.precision_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::ParameterizedType_IntegerOption>(GetArena());
+    _impl_.precision_ = reinterpret_cast<::skyproto::substrait::ParameterizedType_IntegerOption*>(p);
+  }
+  return _impl_.precision_;
+}
+inline ::skyproto::substrait::ParameterizedType_IntegerOption* ParameterizedType_ParameterizedPrecisionTime::mutable_precision() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skyproto::substrait::ParameterizedType_IntegerOption* _msg = _internal_mutable_precision();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.precision)
+  return _msg;
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::set_allocated_precision(::skyproto::substrait::ParameterizedType_IntegerOption* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.precision_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.precision_ = reinterpret_cast<::skyproto::substrait::ParameterizedType_IntegerOption*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.precision)
+}
+
+// uint32 variation_pointer = 2 [json_name = "variationPointer"];
+inline void ParameterizedType_ParameterizedPrecisionTime::clear_variation_pointer() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.variation_pointer_ = 0u;
+}
+inline ::uint32_t ParameterizedType_ParameterizedPrecisionTime::variation_pointer() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.variation_pointer)
+  return _internal_variation_pointer();
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::set_variation_pointer(::uint32_t value) {
+  _internal_set_variation_pointer(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.variation_pointer)
+}
+inline ::uint32_t ParameterizedType_ParameterizedPrecisionTime::_internal_variation_pointer() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.variation_pointer_;
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::_internal_set_variation_pointer(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.variation_pointer_ = value;
+}
+
+// .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+inline void ParameterizedType_ParameterizedPrecisionTime::clear_nullability() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = 0;
+}
+inline ::skyproto::substrait::Type_Nullability ParameterizedType_ParameterizedPrecisionTime::nullability() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.nullability)
+  return _internal_nullability();
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::set_nullability(::skyproto::substrait::Type_Nullability value) {
+  _internal_set_nullability(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime.nullability)
+}
+inline ::skyproto::substrait::Type_Nullability ParameterizedType_ParameterizedPrecisionTime::_internal_nullability() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
+}
+inline void ParameterizedType_ParameterizedPrecisionTime::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.nullability_ = value;
 }
@@ -7964,7 +8355,7 @@ inline ::skyproto::substrait::Type_Date* ParameterizedType::mutable_date() ABSL_
   return _msg;
 }
 
-// .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
+// .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
 inline bool ParameterizedType::has_time() const {
   return kind_case() == kTime;
 }
@@ -8707,6 +9098,85 @@ inline ::skyproto::substrait::ParameterizedType_ParameterizedDecimal* Parameteri
 inline ::skyproto::substrait::ParameterizedType_ParameterizedDecimal* ParameterizedType::mutable_decimal() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::skyproto::substrait::ParameterizedType_ParameterizedDecimal* _msg = _internal_mutable_decimal();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.ParameterizedType.decimal)
+  return _msg;
+}
+
+// .skyproto.substrait.ParameterizedType.ParameterizedPrecisionTime precision_time = 37 [json_name = "precisionTime"];
+inline bool ParameterizedType::has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline bool ParameterizedType::_internal_has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline void ParameterizedType::set_has_precision_time() {
+  _impl_._oneof_case_[0] = kPrecisionTime;
+}
+inline void ParameterizedType::clear_precision_time() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (kind_case() == kPrecisionTime) {
+    if (GetArena() == nullptr) {
+      delete _impl_.kind_.precision_time_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.kind_.precision_time_);
+    }
+    clear_has_kind();
+  }
+}
+inline ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* ParameterizedType::release_precision_time() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.ParameterizedType.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime& ParameterizedType::_internal_precision_time() const {
+  return kind_case() == kPrecisionTime ? *_impl_.kind_.precision_time_ : reinterpret_cast<::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime&>(::skyproto::substrait::_ParameterizedType_ParameterizedPrecisionTime_default_instance_);
+}
+inline const ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime& ParameterizedType::precision_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.ParameterizedType.precision_time)
+  return _internal_precision_time();
+}
+inline ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* ParameterizedType::unsafe_arena_release_precision_time() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.ParameterizedType.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ParameterizedType::unsafe_arena_set_allocated_precision_time(::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_kind();
+  if (value) {
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.ParameterizedType.precision_time)
+}
+inline ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* ParameterizedType::_internal_mutable_precision_time() {
+  if (kind_case() != kPrecisionTime) {
+    clear_kind();
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime>(GetArena());
+  }
+  return _impl_.kind_.precision_time_;
+}
+inline ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* ParameterizedType::mutable_precision_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::ParameterizedType_ParameterizedPrecisionTime* _msg = _internal_mutable_precision_time();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.ParameterizedType.precision_time)
   return _msg;
 }
 

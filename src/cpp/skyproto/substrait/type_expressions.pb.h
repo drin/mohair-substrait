@@ -85,6 +85,9 @@ extern DerivationExpression_ExpressionMapDefaultTypeInternal _DerivationExpressi
 class DerivationExpression_ExpressionNamedStruct;
 struct DerivationExpression_ExpressionNamedStructDefaultTypeInternal;
 extern DerivationExpression_ExpressionNamedStructDefaultTypeInternal _DerivationExpression_ExpressionNamedStruct_default_instance_;
+class DerivationExpression_ExpressionPrecisionTime;
+struct DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal;
+extern DerivationExpression_ExpressionPrecisionTimeDefaultTypeInternal _DerivationExpression_ExpressionPrecisionTime_default_instance_;
 class DerivationExpression_ExpressionPrecisionTimestamp;
 struct DerivationExpression_ExpressionPrecisionTimestampDefaultTypeInternal;
 extern DerivationExpression_ExpressionPrecisionTimestampDefaultTypeInternal _DerivationExpression_ExpressionPrecisionTimestamp_default_instance_;
@@ -263,7 +266,7 @@ class DerivationExpression_ExpressionUserDefined final : public ::google::protob
     return reinterpret_cast<const DerivationExpression_ExpressionUserDefined*>(
         &_DerivationExpression_ExpressionUserDefined_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 12;
+  static constexpr int kIndexInFileMessages = 13;
   friend void swap(DerivationExpression_ExpressionUserDefined& a, DerivationExpression_ExpressionUserDefined& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionUserDefined* other) {
     if (other == this) return;
@@ -495,6 +498,7 @@ class DerivationExpression final : public ::google::protobuf::Message
     kVarchar = 22,
     kFixedBinary = 23,
     kDecimal = 24,
+    kPrecisionTime = 43,
     kPrecisionTimestamp = 40,
     kPrecisionTimestampTz = 41,
     kStruct = 25,
@@ -515,7 +519,7 @@ class DerivationExpression final : public ::google::protobuf::Message
     return reinterpret_cast<const DerivationExpression*>(
         &_DerivationExpression_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 18;
+  static constexpr int kIndexInFileMessages = 19;
   friend void swap(DerivationExpression& a, DerivationExpression& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression* other) {
     if (other == this) return;
@@ -603,6 +607,7 @@ class DerivationExpression final : public ::google::protobuf::Message
   using ExpressionVarChar = DerivationExpression_ExpressionVarChar;
   using ExpressionFixedBinary = DerivationExpression_ExpressionFixedBinary;
   using ExpressionDecimal = DerivationExpression_ExpressionDecimal;
+  using ExpressionPrecisionTime = DerivationExpression_ExpressionPrecisionTime;
   using ExpressionPrecisionTimestamp = DerivationExpression_ExpressionPrecisionTimestamp;
   using ExpressionIntervalDay = DerivationExpression_ExpressionIntervalDay;
   using ExpressionIntervalCompound = DerivationExpression_ExpressionIntervalCompound;
@@ -640,6 +645,7 @@ class DerivationExpression final : public ::google::protobuf::Message
     kVarcharFieldNumber = 22,
     kFixedBinaryFieldNumber = 23,
     kDecimalFieldNumber = 24,
+    kPrecisionTimeFieldNumber = 43,
     kPrecisionTimestampFieldNumber = 40,
     kPrecisionTimestampTzFieldNumber = 41,
     kStructFieldNumber = 25,
@@ -864,19 +870,19 @@ class DerivationExpression final : public ::google::protobuf::Message
   ::skyproto::substrait::Type_Date* _internal_mutable_date();
 
   public:
-  // .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
-  bool has_time() const;
+  // .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
+  [[deprecated]]  bool has_time() const;
   private:
   bool _internal_has_time() const;
 
   public:
-  void clear_time() ;
-  const ::skyproto::substrait::Type_Time& time() const;
-  PROTOBUF_NODISCARD ::skyproto::substrait::Type_Time* release_time();
-  ::skyproto::substrait::Type_Time* mutable_time();
-  void set_allocated_time(::skyproto::substrait::Type_Time* value);
-  void unsafe_arena_set_allocated_time(::skyproto::substrait::Type_Time* value);
-  ::skyproto::substrait::Type_Time* unsafe_arena_release_time();
+  [[deprecated]]  void clear_time() ;
+  [[deprecated]] const ::skyproto::substrait::Type_Time& time() const;
+  [[deprecated]] PROTOBUF_NODISCARD ::skyproto::substrait::Type_Time* release_time();
+  [[deprecated]] ::skyproto::substrait::Type_Time* mutable_time();
+  [[deprecated]] void set_allocated_time(::skyproto::substrait::Type_Time* value);
+  [[deprecated]] void unsafe_arena_set_allocated_time(::skyproto::substrait::Type_Time* value);
+  [[deprecated]] ::skyproto::substrait::Type_Time* unsafe_arena_release_time();
 
   private:
   const ::skyproto::substrait::Type_Time& _internal_time() const;
@@ -1052,6 +1058,25 @@ class DerivationExpression final : public ::google::protobuf::Message
   private:
   const ::skyproto::substrait::DerivationExpression_ExpressionDecimal& _internal_decimal() const;
   ::skyproto::substrait::DerivationExpression_ExpressionDecimal* _internal_mutable_decimal();
+
+  public:
+  // .skyproto.substrait.DerivationExpression.ExpressionPrecisionTime precision_time = 43 [json_name = "precisionTime"];
+  bool has_precision_time() const;
+  private:
+  bool _internal_has_precision_time() const;
+
+  public:
+  void clear_precision_time() ;
+  const ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime& precision_time() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* release_precision_time();
+  ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* mutable_precision_time();
+  void set_allocated_precision_time(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* value);
+  void unsafe_arena_set_allocated_precision_time(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* value);
+  ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* unsafe_arena_release_precision_time();
+
+  private:
+  const ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime& _internal_precision_time() const;
+  ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* _internal_mutable_precision_time();
 
   public:
   // .skyproto.substrait.DerivationExpression.ExpressionPrecisionTimestamp precision_timestamp = 40 [json_name = "precisionTimestamp"];
@@ -1326,6 +1351,7 @@ class DerivationExpression final : public ::google::protobuf::Message
   void set_has_varchar();
   void set_has_fixed_binary();
   void set_has_decimal();
+  void set_has_precision_time();
   void set_has_precision_timestamp();
   void set_has_precision_timestamp_tz();
   void set_has_struct_();
@@ -1344,7 +1370,7 @@ class DerivationExpression final : public ::google::protobuf::Message
   inline void clear_has_kind();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 35, 31,
+      0, 36, 32,
       121, 7>
       _table_;
 
@@ -1386,6 +1412,7 @@ class DerivationExpression final : public ::google::protobuf::Message
       ::skyproto::substrait::DerivationExpression_ExpressionVarChar* varchar_;
       ::skyproto::substrait::DerivationExpression_ExpressionFixedBinary* fixed_binary_;
       ::skyproto::substrait::DerivationExpression_ExpressionDecimal* decimal_;
+      ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* precision_time_;
       ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestamp* precision_timestamp_;
       ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTimestampTZ* precision_timestamp_tz_;
       ::skyproto::substrait::DerivationExpression_ExpressionStruct* struct__;
@@ -1469,7 +1496,7 @@ class DerivationExpression_BinaryOp final : public ::google::protobuf::Message
     return reinterpret_cast<const DerivationExpression_BinaryOp*>(
         &_DerivationExpression_BinaryOp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 15;
+  static constexpr int kIndexInFileMessages = 16;
   friend void swap(DerivationExpression_BinaryOp& a, DerivationExpression_BinaryOp& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_BinaryOp* other) {
     if (other == this) return;
@@ -2401,7 +2428,7 @@ class DerivationExpression_ExpressionIntervalCompound final : public ::google::p
     return reinterpret_cast<const DerivationExpression_ExpressionIntervalCompound*>(
         &_DerivationExpression_ExpressionIntervalCompound_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(DerivationExpression_ExpressionIntervalCompound& a, DerivationExpression_ExpressionIntervalCompound& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionIntervalCompound* other) {
     if (other == this) return;
@@ -2621,7 +2648,7 @@ class DerivationExpression_ExpressionIntervalDay final : public ::google::protob
     return reinterpret_cast<const DerivationExpression_ExpressionIntervalDay*>(
         &_DerivationExpression_ExpressionIntervalDay_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(DerivationExpression_ExpressionIntervalDay& a, DerivationExpression_ExpressionIntervalDay& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionIntervalDay* other) {
     if (other == this) return;
@@ -2841,7 +2868,7 @@ class DerivationExpression_ExpressionList final : public ::google::protobuf::Mes
     return reinterpret_cast<const DerivationExpression_ExpressionList*>(
         &_DerivationExpression_ExpressionList_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 11;
   friend void swap(DerivationExpression_ExpressionList& a, DerivationExpression_ExpressionList& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionList* other) {
     if (other == this) return;
@@ -3061,7 +3088,7 @@ class DerivationExpression_ExpressionMap final : public ::google::protobuf::Mess
     return reinterpret_cast<const DerivationExpression_ExpressionMap*>(
         &_DerivationExpression_ExpressionMap_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 12;
   friend void swap(DerivationExpression_ExpressionMap& a, DerivationExpression_ExpressionMap& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionMap* other) {
     if (other == this) return;
@@ -3239,6 +3266,226 @@ class DerivationExpression_ExpressionMap final : public ::google::protobuf::Mess
 };
 // -------------------------------------------------------------------
 
+class DerivationExpression_ExpressionPrecisionTime final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime) */ {
+ public:
+  inline DerivationExpression_ExpressionPrecisionTime() : DerivationExpression_ExpressionPrecisionTime(nullptr) {}
+  ~DerivationExpression_ExpressionPrecisionTime() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(DerivationExpression_ExpressionPrecisionTime* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(DerivationExpression_ExpressionPrecisionTime));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR DerivationExpression_ExpressionPrecisionTime(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline DerivationExpression_ExpressionPrecisionTime(const DerivationExpression_ExpressionPrecisionTime& from) : DerivationExpression_ExpressionPrecisionTime(nullptr, from) {}
+  inline DerivationExpression_ExpressionPrecisionTime(DerivationExpression_ExpressionPrecisionTime&& from) noexcept
+      : DerivationExpression_ExpressionPrecisionTime(nullptr, std::move(from)) {}
+  inline DerivationExpression_ExpressionPrecisionTime& operator=(const DerivationExpression_ExpressionPrecisionTime& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DerivationExpression_ExpressionPrecisionTime& operator=(DerivationExpression_ExpressionPrecisionTime&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DerivationExpression_ExpressionPrecisionTime& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DerivationExpression_ExpressionPrecisionTime* internal_default_instance() {
+    return reinterpret_cast<const DerivationExpression_ExpressionPrecisionTime*>(
+        &_DerivationExpression_ExpressionPrecisionTime_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(DerivationExpression_ExpressionPrecisionTime& a, DerivationExpression_ExpressionPrecisionTime& b) { a.Swap(&b); }
+  inline void Swap(DerivationExpression_ExpressionPrecisionTime* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DerivationExpression_ExpressionPrecisionTime* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DerivationExpression_ExpressionPrecisionTime* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<DerivationExpression_ExpressionPrecisionTime>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const DerivationExpression_ExpressionPrecisionTime& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const DerivationExpression_ExpressionPrecisionTime& from) { DerivationExpression_ExpressionPrecisionTime::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(DerivationExpression_ExpressionPrecisionTime* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "skyproto.substrait.DerivationExpression.ExpressionPrecisionTime"; }
+
+ protected:
+  explicit DerivationExpression_ExpressionPrecisionTime(::google::protobuf::Arena* arena);
+  DerivationExpression_ExpressionPrecisionTime(::google::protobuf::Arena* arena, const DerivationExpression_ExpressionPrecisionTime& from);
+  DerivationExpression_ExpressionPrecisionTime(::google::protobuf::Arena* arena, DerivationExpression_ExpressionPrecisionTime&& from) noexcept
+      : DerivationExpression_ExpressionPrecisionTime(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPrecisionFieldNumber = 1,
+    kVariationPointerFieldNumber = 2,
+    kNullabilityFieldNumber = 3,
+  };
+  // .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+  bool has_precision() const;
+  void clear_precision() ;
+  const ::skyproto::substrait::DerivationExpression& precision() const;
+  PROTOBUF_NODISCARD ::skyproto::substrait::DerivationExpression* release_precision();
+  ::skyproto::substrait::DerivationExpression* mutable_precision();
+  void set_allocated_precision(::skyproto::substrait::DerivationExpression* value);
+  void unsafe_arena_set_allocated_precision(::skyproto::substrait::DerivationExpression* value);
+  ::skyproto::substrait::DerivationExpression* unsafe_arena_release_precision();
+
+  private:
+  const ::skyproto::substrait::DerivationExpression& _internal_precision() const;
+  ::skyproto::substrait::DerivationExpression* _internal_mutable_precision();
+
+  public:
+  // uint32 variation_pointer = 2 [json_name = "variationPointer"];
+  void clear_variation_pointer() ;
+  ::uint32_t variation_pointer() const;
+  void set_variation_pointer(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_variation_pointer() const;
+  void _internal_set_variation_pointer(::uint32_t value);
+
+  public:
+  // .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+  void clear_nullability() ;
+  ::skyproto::substrait::Type_Nullability nullability() const;
+  void set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  private:
+  ::skyproto::substrait::Type_Nullability _internal_nullability() const;
+  void _internal_set_nullability(::skyproto::substrait::Type_Nullability value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const DerivationExpression_ExpressionPrecisionTime& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::skyproto::substrait::DerivationExpression* precision_;
+    ::uint32_t variation_pointer_;
+    int nullability_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_skyproto_2fsubstrait_2ftype_5fexpressions_2eproto;
+};
+// -------------------------------------------------------------------
+
 class DerivationExpression_ExpressionPrecisionTimestamp final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:skyproto.substrait.DerivationExpression.ExpressionPrecisionTimestamp) */ {
  public:
@@ -3298,7 +3545,7 @@ class DerivationExpression_ExpressionPrecisionTimestamp final : public ::google:
     return reinterpret_cast<const DerivationExpression_ExpressionPrecisionTimestamp*>(
         &_DerivationExpression_ExpressionPrecisionTimestamp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(DerivationExpression_ExpressionPrecisionTimestamp& a, DerivationExpression_ExpressionPrecisionTimestamp& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionPrecisionTimestamp* other) {
     if (other == this) return;
@@ -3518,7 +3765,7 @@ class DerivationExpression_ExpressionPrecisionTimestampTZ final : public ::googl
     return reinterpret_cast<const DerivationExpression_ExpressionPrecisionTimestampTZ*>(
         &_DerivationExpression_ExpressionPrecisionTimestampTZ_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(DerivationExpression_ExpressionPrecisionTimestampTZ& a, DerivationExpression_ExpressionPrecisionTimestampTZ& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionPrecisionTimestampTZ* other) {
     if (other == this) return;
@@ -3738,7 +3985,7 @@ class DerivationExpression_ExpressionStruct final : public ::google::protobuf::M
     return reinterpret_cast<const DerivationExpression_ExpressionStruct*>(
         &_DerivationExpression_ExpressionStruct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 9;
   friend void swap(DerivationExpression_ExpressionStruct& a, DerivationExpression_ExpressionStruct& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionStruct* other) {
     if (other == this) return;
@@ -4179,7 +4426,7 @@ class DerivationExpression_IfElse final : public ::google::protobuf::Message
     return reinterpret_cast<const DerivationExpression_IfElse*>(
         &_DerivationExpression_IfElse_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 13;
+  static constexpr int kIndexInFileMessages = 14;
   friend void swap(DerivationExpression_IfElse& a, DerivationExpression_IfElse& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_IfElse* other) {
     if (other == this) return;
@@ -4409,7 +4656,7 @@ class DerivationExpression_ReturnProgram final : public ::google::protobuf::Mess
     return reinterpret_cast<const DerivationExpression_ReturnProgram*>(
         &_DerivationExpression_ReturnProgram_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 17;
+  static constexpr int kIndexInFileMessages = 18;
   friend void swap(DerivationExpression_ReturnProgram& a, DerivationExpression_ReturnProgram& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ReturnProgram* other) {
     if (other == this) return;
@@ -4625,7 +4872,7 @@ class DerivationExpression_ReturnProgram_Assignment final : public ::google::pro
     return reinterpret_cast<const DerivationExpression_ReturnProgram_Assignment*>(
         &_DerivationExpression_ReturnProgram_Assignment_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 16;
+  static constexpr int kIndexInFileMessages = 17;
   friend void swap(DerivationExpression_ReturnProgram_Assignment& a, DerivationExpression_ReturnProgram_Assignment& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ReturnProgram_Assignment* other) {
     if (other == this) return;
@@ -4839,7 +5086,7 @@ class DerivationExpression_UnaryOp final : public ::google::protobuf::Message
     return reinterpret_cast<const DerivationExpression_UnaryOp*>(
         &_DerivationExpression_UnaryOp_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 14;
+  static constexpr int kIndexInFileMessages = 15;
   friend void swap(DerivationExpression_UnaryOp& a, DerivationExpression_UnaryOp& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_UnaryOp* other) {
     if (other == this) return;
@@ -5066,7 +5313,7 @@ class DerivationExpression_ExpressionNamedStruct final : public ::google::protob
     return reinterpret_cast<const DerivationExpression_ExpressionNamedStruct*>(
         &_DerivationExpression_ExpressionNamedStruct_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 10;
   friend void swap(DerivationExpression_ExpressionNamedStruct& a, DerivationExpression_ExpressionNamedStruct& b) { a.Swap(&b); }
   inline void Swap(DerivationExpression_ExpressionNamedStruct* other) {
     if (other == this) return;
@@ -5906,6 +6153,150 @@ inline ::skyproto::substrait::Type_Nullability DerivationExpression_ExpressionDe
   return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
 }
 inline void DerivationExpression_ExpressionDecimal::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// DerivationExpression_ExpressionPrecisionTime
+
+// .skyproto.substrait.DerivationExpression precision = 1 [json_name = "precision"];
+inline bool DerivationExpression_ExpressionPrecisionTime::has_precision() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.precision_ != nullptr);
+  return value;
+}
+inline void DerivationExpression_ExpressionPrecisionTime::clear_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.precision_ != nullptr) _impl_.precision_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::skyproto::substrait::DerivationExpression& DerivationExpression_ExpressionPrecisionTime::_internal_precision() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::skyproto::substrait::DerivationExpression* p = _impl_.precision_;
+  return p != nullptr ? *p : reinterpret_cast<const ::skyproto::substrait::DerivationExpression&>(::skyproto::substrait::_DerivationExpression_default_instance_);
+}
+inline const ::skyproto::substrait::DerivationExpression& DerivationExpression_ExpressionPrecisionTime::precision() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.precision)
+  return _internal_precision();
+}
+inline void DerivationExpression_ExpressionPrecisionTime::unsafe_arena_set_allocated_precision(::skyproto::substrait::DerivationExpression* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.precision_);
+  }
+  _impl_.precision_ = reinterpret_cast<::skyproto::substrait::DerivationExpression*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.precision)
+}
+inline ::skyproto::substrait::DerivationExpression* DerivationExpression_ExpressionPrecisionTime::release_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::DerivationExpression* released = _impl_.precision_;
+  _impl_.precision_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::skyproto::substrait::DerivationExpression* DerivationExpression_ExpressionPrecisionTime::unsafe_arena_release_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.precision)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::skyproto::substrait::DerivationExpression* temp = _impl_.precision_;
+  _impl_.precision_ = nullptr;
+  return temp;
+}
+inline ::skyproto::substrait::DerivationExpression* DerivationExpression_ExpressionPrecisionTime::_internal_mutable_precision() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.precision_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::DerivationExpression>(GetArena());
+    _impl_.precision_ = reinterpret_cast<::skyproto::substrait::DerivationExpression*>(p);
+  }
+  return _impl_.precision_;
+}
+inline ::skyproto::substrait::DerivationExpression* DerivationExpression_ExpressionPrecisionTime::mutable_precision() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::skyproto::substrait::DerivationExpression* _msg = _internal_mutable_precision();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.precision)
+  return _msg;
+}
+inline void DerivationExpression_ExpressionPrecisionTime::set_allocated_precision(::skyproto::substrait::DerivationExpression* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.precision_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.precision_ = reinterpret_cast<::skyproto::substrait::DerivationExpression*>(value);
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.precision)
+}
+
+// uint32 variation_pointer = 2 [json_name = "variationPointer"];
+inline void DerivationExpression_ExpressionPrecisionTime::clear_variation_pointer() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.variation_pointer_ = 0u;
+}
+inline ::uint32_t DerivationExpression_ExpressionPrecisionTime::variation_pointer() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.variation_pointer)
+  return _internal_variation_pointer();
+}
+inline void DerivationExpression_ExpressionPrecisionTime::set_variation_pointer(::uint32_t value) {
+  _internal_set_variation_pointer(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.variation_pointer)
+}
+inline ::uint32_t DerivationExpression_ExpressionPrecisionTime::_internal_variation_pointer() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.variation_pointer_;
+}
+inline void DerivationExpression_ExpressionPrecisionTime::_internal_set_variation_pointer(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.variation_pointer_ = value;
+}
+
+// .skyproto.substrait.Type.Nullability nullability = 3 [json_name = "nullability"];
+inline void DerivationExpression_ExpressionPrecisionTime::clear_nullability() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nullability_ = 0;
+}
+inline ::skyproto::substrait::Type_Nullability DerivationExpression_ExpressionPrecisionTime::nullability() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.nullability)
+  return _internal_nullability();
+}
+inline void DerivationExpression_ExpressionPrecisionTime::set_nullability(::skyproto::substrait::Type_Nullability value) {
+  _internal_set_nullability(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DerivationExpression.ExpressionPrecisionTime.nullability)
+}
+inline ::skyproto::substrait::Type_Nullability DerivationExpression_ExpressionPrecisionTime::_internal_nullability() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::skyproto::substrait::Type_Nullability>(_impl_.nullability_);
+}
+inline void DerivationExpression_ExpressionPrecisionTime::_internal_set_nullability(::skyproto::substrait::Type_Nullability value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.nullability_ = value;
 }
@@ -8882,7 +9273,7 @@ inline ::skyproto::substrait::Type_Date* DerivationExpression::mutable_date() AB
   return _msg;
 }
 
-// .skyproto.substrait.Type.Time time = 17 [json_name = "time"];
+// .skyproto.substrait.Type.Time time = 17 [json_name = "time", deprecated = true];
 inline bool DerivationExpression::has_time() const {
   return kind_case() == kTime;
 }
@@ -9625,6 +10016,85 @@ inline ::skyproto::substrait::DerivationExpression_ExpressionDecimal* Derivation
 inline ::skyproto::substrait::DerivationExpression_ExpressionDecimal* DerivationExpression::mutable_decimal() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::skyproto::substrait::DerivationExpression_ExpressionDecimal* _msg = _internal_mutable_decimal();
   // @@protoc_insertion_point(field_mutable:skyproto.substrait.DerivationExpression.decimal)
+  return _msg;
+}
+
+// .skyproto.substrait.DerivationExpression.ExpressionPrecisionTime precision_time = 43 [json_name = "precisionTime"];
+inline bool DerivationExpression::has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline bool DerivationExpression::_internal_has_precision_time() const {
+  return kind_case() == kPrecisionTime;
+}
+inline void DerivationExpression::set_has_precision_time() {
+  _impl_._oneof_case_[0] = kPrecisionTime;
+}
+inline void DerivationExpression::clear_precision_time() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (kind_case() == kPrecisionTime) {
+    if (GetArena() == nullptr) {
+      delete _impl_.kind_.precision_time_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.kind_.precision_time_);
+    }
+    clear_has_kind();
+  }
+}
+inline ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* DerivationExpression::release_precision_time() {
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DerivationExpression.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime& DerivationExpression::_internal_precision_time() const {
+  return kind_case() == kPrecisionTime ? *_impl_.kind_.precision_time_ : reinterpret_cast<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime&>(::skyproto::substrait::_DerivationExpression_ExpressionPrecisionTime_default_instance_);
+}
+inline const ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime& DerivationExpression::precision_time() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DerivationExpression.precision_time)
+  return _internal_precision_time();
+}
+inline ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* DerivationExpression::unsafe_arena_release_precision_time() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:skyproto.substrait.DerivationExpression.precision_time)
+  if (kind_case() == kPrecisionTime) {
+    clear_has_kind();
+    auto* temp = _impl_.kind_.precision_time_;
+    _impl_.kind_.precision_time_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void DerivationExpression::unsafe_arena_set_allocated_precision_time(::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_kind();
+  if (value) {
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:skyproto.substrait.DerivationExpression.precision_time)
+}
+inline ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* DerivationExpression::_internal_mutable_precision_time() {
+  if (kind_case() != kPrecisionTime) {
+    clear_kind();
+    set_has_precision_time();
+    _impl_.kind_.precision_time_ =
+        ::google::protobuf::Message::DefaultConstruct<::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime>(GetArena());
+  }
+  return _impl_.kind_.precision_time_;
+}
+inline ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* DerivationExpression::mutable_precision_time() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::skyproto::substrait::DerivationExpression_ExpressionPrecisionTime* _msg = _internal_mutable_precision_time();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DerivationExpression.precision_time)
   return _msg;
 }
 

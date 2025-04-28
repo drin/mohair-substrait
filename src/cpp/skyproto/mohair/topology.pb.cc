@@ -27,16 +27,16 @@ namespace _fl = ::google::protobuf::internal::field_layout;
 namespace skyproto {
 namespace mohair {
 
-inline constexpr MemoryResources::Impl_::Impl_(
+inline constexpr MemorySpec::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         count_mebibytes_{0u},
-        memory_type_{static_cast< ::skyproto::mohair::MemoryType >(0)},
-        count_channels_{0u},
-        memory_freq_{0u} {}
+        memory_type_{static_cast< ::skyproto::mohair::MemorySpec_MemoryType >(0)},
+        memory_freq_{0u},
+        count_channels_{0u} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR MemoryResources::MemoryResources(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR MemorySpec::MemorySpec(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -44,25 +44,53 @@ PROTOBUF_CONSTEXPR MemoryResources::MemoryResources(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct MemoryResourcesDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MemoryResourcesDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MemoryResourcesDefaultTypeInternal() {}
+struct MemorySpecDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MemorySpecDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MemorySpecDefaultTypeInternal() {}
   union {
-    MemoryResources _instance;
+    MemorySpec _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MemoryResourcesDefaultTypeInternal _MemoryResources_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MemorySpecDefaultTypeInternal _MemorySpec_default_instance_;
 
-inline constexpr ComputeResources::Impl_::Impl_(
+inline constexpr CpuSpec::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : core_freqs_{},
-        count_cores_{0u},
+      : _cached_size_{0},
+        core_freqs_{},
+        cache_sizes_{},
+        _cache_sizes_cached_byte_size_{0},
+        count_threads_{0u} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR CpuSpec::CpuSpec(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct CpuSpecDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CpuSpecDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CpuSpecDefaultTypeInternal() {}
+  union {
+    CpuSpec _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CpuSpecDefaultTypeInternal _CpuSpec_default_instance_;
+
+inline constexpr PlatformSpec::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : cpu_info_{},
+        mem_info_{},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR ComputeResources::ComputeResources(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR PlatformSpec::PlatformSpec(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -70,28 +98,29 @@ PROTOBUF_CONSTEXPR ComputeResources::ComputeResources(::_pbi::ConstantInitialize
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct ComputeResourcesDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ComputeResourcesDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ComputeResourcesDefaultTypeInternal() {}
+struct PlatformSpecDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PlatformSpecDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PlatformSpecDefaultTypeInternal() {}
   union {
-    ComputeResources _instance;
+    PlatformSpec _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ComputeResourcesDefaultTypeInternal _ComputeResources_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PlatformSpecDefaultTypeInternal _PlatformSpec_default_instance_;
 
 inline constexpr ServiceConfig::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        downstream_services_{},
-        service_compute_{},
-        service_location_(
+        downstream_{},
+        label_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        service_mem_{nullptr},
+        location_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        service_platform_{nullptr},
         is_active_{false},
-        platform_class_{static_cast< ::skyproto::mohair::DeviceClass >(0)},
         decompose_alg_{static_cast< ::skyproto::mohair::DecomposeAlg >(0)} {}
 
 template <typename>
@@ -121,32 +150,46 @@ static constexpr const ::_pb::ServiceDescriptor**
 const ::uint32_t
     TableStruct_skyproto_2fmohair_2ftopology_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ComputeResources, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::CpuSpec, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::CpuSpec, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ComputeResources, _impl_.count_cores_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ComputeResources, _impl_.core_freqs_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::CpuSpec, _impl_.core_freqs_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::CpuSpec, _impl_.cache_sizes_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::CpuSpec, _impl_.count_threads_),
+        ~0u,
+        ~0u,
+        0,
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _impl_.count_mebibytes_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _impl_.memory_type_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _impl_.count_channels_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemoryResources, _impl_.memory_freq_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _impl_.count_mebibytes_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _impl_.memory_type_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _impl_.memory_freq_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::MemorySpec, _impl_.count_channels_),
         ~0u,
         0,
         1,
         2,
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::PlatformSpec, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::PlatformSpec, _impl_.cpu_info_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::PlatformSpec, _impl_.mem_info_),
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -156,70 +199,68 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.is_active_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_location_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.platform_class_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.downstream_services_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_mem_),
-        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_compute_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.label_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.location_),
         PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.decompose_alg_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.service_platform_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::mohair::ServiceConfig, _impl_.downstream_),
         ~0u,
         ~0u,
-        ~0u,
-        ~0u,
-        0,
         ~0u,
         1,
+        0,
+        ~0u,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::skyproto::mohair::ComputeResources)},
-        {10, 22, -1, sizeof(::skyproto::mohair::MemoryResources)},
-        {26, 41, -1, sizeof(::skyproto::mohair::ServiceConfig)},
+        {0, 11, -1, sizeof(::skyproto::mohair::CpuSpec)},
+        {14, 26, -1, sizeof(::skyproto::mohair::MemorySpec)},
+        {30, -1, -1, sizeof(::skyproto::mohair::PlatformSpec)},
+        {40, 54, -1, sizeof(::skyproto::mohair::ServiceConfig)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
-    &::skyproto::mohair::_ComputeResources_default_instance_._instance,
-    &::skyproto::mohair::_MemoryResources_default_instance_._instance,
+    &::skyproto::mohair::_CpuSpec_default_instance_._instance,
+    &::skyproto::mohair::_MemorySpec_default_instance_._instance,
+    &::skyproto::mohair::_PlatformSpec_default_instance_._instance,
     &::skyproto::mohair::_ServiceConfig_default_instance_._instance,
 };
 const char descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\036skyproto/mohair/topology.proto\022\017skypro"
-    "to.mohair\032\031google/protobuf/any.proto\"R\n\020"
-    "ComputeResources\022\037\n\013count_cores\030\001 \001(\rR\nc"
-    "ountCores\022\035\n\ncore_freqs\030\002 \003(\002R\tcoreFreqs"
-    "\"\202\002\n\017MemoryResources\022\'\n\017count_mebibytes\030"
-    "\001 \001(\rR\016countMebibytes\022A\n\013memory_type\030\002 \001"
-    "(\0162\033.skyproto.mohair.MemoryTypeH\000R\nmemor"
-    "yType\210\001\001\022*\n\016count_channels\030\003 \001(\rH\001R\rcoun"
-    "tChannels\210\001\001\022$\n\013memory_freq\030\004 \001(\rH\002R\nmem"
-    "oryFreq\210\001\001B\016\n\014_memory_typeB\021\n\017_count_cha"
-    "nnelsB\016\n\014_memory_freq\"\354\003\n\rServiceConfig\022"
-    "\033\n\tis_active\030\001 \001(\010R\010isActive\022)\n\020service_"
-    "location\030\002 \001(\tR\017serviceLocation\022C\n\016platf"
-    "orm_class\030\003 \001(\0162\034.skyproto.mohair.Device"
-    "ClassR\rplatformClass\022O\n\023downstream_servi"
-    "ces\030\004 \003(\0132\036.skyproto.mohair.ServiceConfi"
-    "gR\022downstreamServices\022F\n\013service_mem\030\005 \001"
-    "(\0132 .skyproto.mohair.MemoryResourcesH\000R\n"
-    "serviceMem\210\001\001\022J\n\017service_compute\030\006 \003(\0132!"
-    ".skyproto.mohair.ComputeResourcesR\016servi"
-    "ceCompute\022G\n\rdecompose_alg\030\007 \001(\0162\035.skypr"
-    "oto.mohair.DecomposeAlgH\001R\014decomposeAlg\210"
-    "\001\001B\016\n\014_service_memB\020\n\016_decompose_alg*\202\001\n"
-    "\013DeviceClass\022\027\n\023DEVICE_CLASS_SERVER\020\000\022\026\n"
-    "\022DEVICE_CLASS_DRIVE\020\001\022\024\n\020DEVICE_CLASS_SO"
-    "C\020\002\022\026\n\022DEVICE_CLASS_ARRAY\020\003\022\024\n\020DEVICE_CL"
-    "ASS_DPU\020\004*v\n\nMemoryType\022\023\n\017MEMORY_TYPE_D"
-    "DR\020\000\022\024\n\020MEMORY_TYPE_GDDR\020\001\022\023\n\017MEMORY_TYP"
-    "E_NVM\020\002\022\023\n\017MEMORY_TYPE_CXL\020\003\022\023\n\017MEMORY_T"
-    "YPE_CAM\020\004*s\n\014DecomposeAlg\022\010\n\004None\020\000\022\024\n\020L"
-    "ongPipelineLeaf\020\001\022\024\n\020LongPipelineHead\020\002\022"
-    "\020\n\014TallJoinLeaf\020\003\022\020\n\014WideJoinHead\020\004\022\t\n\005E"
-    "ager\020\005B\201\001\n\023com.skyproto.mohairB\rTopology"
-    "ProtoP\001\242\002\003SMX\252\002\017Skyproto.Mohair\312\002\017Skypro"
-    "to\\Mohair\342\002\033Skyproto\\Mohair\\GPBMetadata\352"
-    "\002\020Skyproto::Mohairb\006proto3"
+    "to.mohair\032\031google/protobuf/any.proto\"\310\001\n"
+    "\007CpuSpec\022\035\n\ncore_freqs\030\001 \003(\002R\tcoreFreqs\022"
+    "\037\n\013cache_sizes\030\002 \003(\rR\ncacheSizes\022(\n\rcoun"
+    "t_threads\030\003 \001(\rH\000R\014countThreads\210\001\001\"A\n\013De"
+    "viceClass\022\n\n\006SERVER\020\000\022\t\n\005DRIVE\020\001\022\007\n\003SOC\020"
+    "\002\022\t\n\005ARRAY\020\003\022\007\n\003DPU\020\004B\020\n\016_count_threads\""
+    "\304\002\n\nMemorySpec\022\'\n\017count_mebibytes\030\001 \001(\rR"
+    "\016countMebibytes\022L\n\013memory_type\030\002 \001(\0162&.s"
+    "kyproto.mohair.MemorySpec.MemoryTypeH\000R\n"
+    "memoryType\210\001\001\022$\n\013memory_freq\030\003 \001(\rH\001R\nme"
+    "moryFreq\210\001\001\022*\n\016count_channels\030\004 \001(\rH\002R\rc"
+    "ountChannels\210\001\001\":\n\nMemoryType\022\007\n\003DDR\020\000\022\010"
+    "\n\004GDDR\020\001\022\007\n\003NVM\020\002\022\007\n\003CXL\020\003\022\007\n\003CAM\020\004B\016\n\014_"
+    "memory_typeB\016\n\014_memory_freqB\021\n\017_count_ch"
+    "annels\"{\n\014PlatformSpec\0223\n\010cpu_info\030\001 \003(\013"
+    "2\030.skyproto.mohair.CpuSpecR\007cpuInfo\0226\n\010m"
+    "em_info\030\002 \003(\0132\033.skyproto.mohair.MemorySp"
+    "ecR\007memInfo\"\335\002\n\rServiceConfig\022\033\n\tis_acti"
+    "ve\030\001 \001(\010R\010isActive\022\024\n\005label\030\002 \001(\tR\005label"
+    "\022\032\n\010location\030\003 \001(\tR\010location\022G\n\rdecompos"
+    "e_alg\030\004 \001(\0162\035.skyproto.mohair.DecomposeA"
+    "lgH\000R\014decomposeAlg\210\001\001\022M\n\020service_platfor"
+    "m\030\005 \001(\0132\035.skyproto.mohair.PlatformSpecH\001"
+    "R\017servicePlatform\210\001\001\022>\n\ndownstream\030\006 \003(\013"
+    "2\036.skyproto.mohair.ServiceConfigR\ndownst"
+    "reamB\020\n\016_decompose_algB\023\n\021_service_platf"
+    "orm*s\n\014DecomposeAlg\022\010\n\004None\020\000\022\024\n\020LongPip"
+    "elineLeaf\020\001\022\024\n\020LongPipelineHead\020\002\022\020\n\014Tal"
+    "lJoinLeaf\020\003\022\020\n\014WideJoinHead\020\004\022\t\n\005Eager\020\005"
+    "B\201\001\n\023com.skyproto.mohairB\rTopologyProtoP"
+    "\001\242\002\003SMX\252\002\017Skyproto.Mohair\312\002\017Skyproto\\Moh"
+    "air\342\002\033Skyproto\\Mohair\\GPBMetadata\352\002\020Skyp"
+    "roto::Mohairb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fmohair_2ftopology_2eproto_deps[1] =
     {
@@ -229,13 +270,13 @@ static ::absl::once_flag descriptor_table_skyproto_2fmohair_2ftopology_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fmohair_2ftopology_2eproto = {
     false,
     false,
-    1426,
+    1340,
     descriptor_table_protodef_skyproto_2fmohair_2ftopology_2eproto,
     "skyproto/mohair/topology.proto",
     &descriptor_table_skyproto_2fmohair_2ftopology_2eproto_once,
     descriptor_table_skyproto_2fmohair_2ftopology_2eproto_deps,
     1,
-    3,
+    4,
     schemas,
     file_default_instances,
     TableStruct_skyproto_2fmohair_2ftopology_2eproto::offsets,
@@ -244,24 +285,52 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fmoh
 };
 namespace skyproto {
 namespace mohair {
-const ::google::protobuf::EnumDescriptor* DeviceClass_descriptor() {
+const ::google::protobuf::EnumDescriptor* CpuSpec_DeviceClass_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skyproto_2fmohair_2ftopology_2eproto);
   return file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[0];
 }
-PROTOBUF_CONSTINIT const uint32_t DeviceClass_internal_data_[] = {
+PROTOBUF_CONSTINIT const uint32_t CpuSpec_DeviceClass_internal_data_[] = {
     327680u, 0u, };
-bool DeviceClass_IsValid(int value) {
+bool CpuSpec_DeviceClass_IsValid(int value) {
   return 0 <= value && value <= 4;
 }
-const ::google::protobuf::EnumDescriptor* MemoryType_descriptor() {
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr CpuSpec_DeviceClass CpuSpec::SERVER;
+constexpr CpuSpec_DeviceClass CpuSpec::DRIVE;
+constexpr CpuSpec_DeviceClass CpuSpec::SOC;
+constexpr CpuSpec_DeviceClass CpuSpec::ARRAY;
+constexpr CpuSpec_DeviceClass CpuSpec::DPU;
+constexpr CpuSpec_DeviceClass CpuSpec::DeviceClass_MIN;
+constexpr CpuSpec_DeviceClass CpuSpec::DeviceClass_MAX;
+constexpr int CpuSpec::DeviceClass_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+const ::google::protobuf::EnumDescriptor* MemorySpec_MemoryType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skyproto_2fmohair_2ftopology_2eproto);
   return file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[1];
 }
-PROTOBUF_CONSTINIT const uint32_t MemoryType_internal_data_[] = {
+PROTOBUF_CONSTINIT const uint32_t MemorySpec_MemoryType_internal_data_[] = {
     327680u, 0u, };
-bool MemoryType_IsValid(int value) {
+bool MemorySpec_MemoryType_IsValid(int value) {
   return 0 <= value && value <= 4;
 }
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr MemorySpec_MemoryType MemorySpec::DDR;
+constexpr MemorySpec_MemoryType MemorySpec::GDDR;
+constexpr MemorySpec_MemoryType MemorySpec::NVM;
+constexpr MemorySpec_MemoryType MemorySpec::CXL;
+constexpr MemorySpec_MemoryType MemorySpec::CAM;
+constexpr MemorySpec_MemoryType MemorySpec::MemoryType_MIN;
+constexpr MemorySpec_MemoryType MemorySpec::MemoryType_MAX;
+constexpr int MemorySpec::MemoryType_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::google::protobuf::EnumDescriptor* DecomposeAlg_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_skyproto_2fmohair_2ftopology_2eproto);
   return file_level_enum_descriptors_skyproto_2fmohair_2ftopology_2eproto[2];
@@ -273,187 +342,219 @@ bool DecomposeAlg_IsValid(int value) {
 }
 // ===================================================================
 
-class ComputeResources::_Internal {
+class CpuSpec::_Internal {
  public:
+  using HasBits =
+      decltype(std::declval<CpuSpec>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_._has_bits_);
 };
 
-ComputeResources::ComputeResources(::google::protobuf::Arena* arena)
+CpuSpec::CpuSpec(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:skyproto.mohair.ComputeResources)
+  // @@protoc_insertion_point(arena_constructor:skyproto.mohair.CpuSpec)
 }
-inline PROTOBUF_NDEBUG_INLINE ComputeResources::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE CpuSpec::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::skyproto::mohair::ComputeResources& from_msg)
-      : core_freqs_{visibility, arena, from.core_freqs_},
-        _cached_size_{0} {}
+    const Impl_& from, const ::skyproto::mohair::CpuSpec& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        core_freqs_{visibility, arena, from.core_freqs_},
+        cache_sizes_{visibility, arena, from.cache_sizes_},
+        _cache_sizes_cached_byte_size_{0} {}
 
-ComputeResources::ComputeResources(
+CpuSpec::CpuSpec(
     ::google::protobuf::Arena* arena,
-    const ComputeResources& from)
+    const CpuSpec& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  ComputeResources* const _this = this;
+  CpuSpec* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.count_cores_ = from._impl_.count_cores_;
+  _impl_.count_threads_ = from._impl_.count_threads_;
 
-  // @@protoc_insertion_point(copy_constructor:skyproto.mohair.ComputeResources)
+  // @@protoc_insertion_point(copy_constructor:skyproto.mohair.CpuSpec)
 }
-inline PROTOBUF_NDEBUG_INLINE ComputeResources::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE CpuSpec::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : core_freqs_{visibility, arena},
-        _cached_size_{0} {}
+      : _cached_size_{0},
+        core_freqs_{visibility, arena},
+        cache_sizes_{visibility, arena},
+        _cache_sizes_cached_byte_size_{0} {}
 
-inline void ComputeResources::SharedCtor(::_pb::Arena* arena) {
+inline void CpuSpec::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.count_cores_ = {};
+  _impl_.count_threads_ = {};
 }
-ComputeResources::~ComputeResources() {
-  // @@protoc_insertion_point(destructor:skyproto.mohair.ComputeResources)
+CpuSpec::~CpuSpec() {
+  // @@protoc_insertion_point(destructor:skyproto.mohair.CpuSpec)
   SharedDtor(*this);
 }
-inline void ComputeResources::SharedDtor(MessageLite& self) {
-  ComputeResources& this_ = static_cast<ComputeResources&>(self);
+inline void CpuSpec::SharedDtor(MessageLite& self) {
+  CpuSpec& this_ = static_cast<CpuSpec&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* ComputeResources::PlacementNew_(const void*, void* mem,
+inline void* CpuSpec::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) ComputeResources(arena);
+  return ::new (mem) CpuSpec(arena);
 }
-constexpr auto ComputeResources::InternalNewImpl_() {
+constexpr auto CpuSpec::InternalNewImpl_() {
   constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_.core_freqs_) +
-          decltype(ComputeResources::_impl_.core_freqs_)::
+      PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.core_freqs_) +
+          decltype(CpuSpec::_impl_.core_freqs_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.cache_sizes_) +
+          decltype(CpuSpec::_impl_.cache_sizes_)::
               InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
   });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::ZeroInit(
-        sizeof(ComputeResources), alignof(ComputeResources), *arena_bits);
+        sizeof(CpuSpec), alignof(CpuSpec), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&ComputeResources::PlacementNew_,
-                                 sizeof(ComputeResources),
-                                 alignof(ComputeResources));
+    return ::google::protobuf::internal::MessageCreator(&CpuSpec::PlacementNew_,
+                                 sizeof(CpuSpec),
+                                 alignof(CpuSpec));
   }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull ComputeResources::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull CpuSpec::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_ComputeResources_default_instance_._instance,
+        &_CpuSpec_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &ComputeResources::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<ComputeResources>(),
+        &CpuSpec::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<CpuSpec>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &ComputeResources::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<ComputeResources>(), &ComputeResources::ByteSizeLong,
-            &ComputeResources::_InternalSerialize,
+        &CpuSpec::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<CpuSpec>(), &CpuSpec::ByteSizeLong,
+            &CpuSpec::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_._cached_size_),
         false,
     },
-    &ComputeResources::kDescriptorMethods,
+    &CpuSpec::kDescriptorMethods,
     &descriptor_table_skyproto_2fmohair_2ftopology_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* ComputeResources::GetClassData() const {
+const ::google::protobuf::internal::ClassData* CpuSpec::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ComputeResources::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> CpuSpec::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::skyproto::mohair::ComputeResources>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::skyproto::mohair::CpuSpec>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated float core_freqs = 2 [json_name = "coreFreqs"];
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated float core_freqs = 1 [json_name = "coreFreqs"];
     {::_pbi::TcParser::FastF32P1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_.core_freqs_)}},
-    // uint32 count_cores = 1 [json_name = "countCores"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ComputeResources, _impl_.count_cores_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_.count_cores_)}},
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.core_freqs_)}},
+    // repeated uint32 cache_sizes = 2 [json_name = "cacheSizes"];
+    {::_pbi::TcParser::FastV32P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.cache_sizes_)}},
+    // optional uint32 count_threads = 3 [json_name = "countThreads"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CpuSpec, _impl_.count_threads_), 0>(),
+     {24, 0, 0, PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.count_threads_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // uint32 count_cores = 1 [json_name = "countCores"];
-    {PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_.count_cores_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
-    // repeated float core_freqs = 2 [json_name = "coreFreqs"];
-    {PROTOBUF_FIELD_OFFSET(ComputeResources, _impl_.core_freqs_), 0, 0,
+    // repeated float core_freqs = 1 [json_name = "coreFreqs"];
+    {PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.core_freqs_), -1, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
+    // repeated uint32 cache_sizes = 2 [json_name = "cacheSizes"];
+    {PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.cache_sizes_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
+    // optional uint32 count_threads = 3 [json_name = "countThreads"];
+    {PROTOBUF_FIELD_OFFSET(CpuSpec, _impl_.count_threads_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
   }},
   // no aux_entries
   {{
   }},
 };
 
-PROTOBUF_NOINLINE void ComputeResources::Clear() {
-// @@protoc_insertion_point(message_clear_start:skyproto.mohair.ComputeResources)
+PROTOBUF_NOINLINE void CpuSpec::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.mohair.CpuSpec)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _impl_.core_freqs_.Clear();
-  _impl_.count_cores_ = 0u;
+  _impl_.cache_sizes_.Clear();
+  _impl_.count_threads_ = 0u;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* ComputeResources::_InternalSerialize(
+        ::uint8_t* CpuSpec::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const ComputeResources& this_ = static_cast<const ComputeResources&>(base);
+          const CpuSpec& this_ = static_cast<const CpuSpec&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* ComputeResources::_InternalSerialize(
+        ::uint8_t* CpuSpec::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const ComputeResources& this_ = *this;
+          const CpuSpec& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:skyproto.mohair.ComputeResources)
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.mohair.CpuSpec)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // uint32 count_cores = 1 [json_name = "countCores"];
-          if (this_._internal_count_cores() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-                1, this_._internal_count_cores(), target);
+          // repeated float core_freqs = 1 [json_name = "coreFreqs"];
+          if (this_._internal_core_freqs_size() > 0) {
+            target = stream->WriteFixedPacked(1, this_._internal_core_freqs(), target);
           }
 
-          // repeated float core_freqs = 2 [json_name = "coreFreqs"];
-          if (this_._internal_core_freqs_size() > 0) {
-            target = stream->WriteFixedPacked(2, this_._internal_core_freqs(), target);
+          // repeated uint32 cache_sizes = 2 [json_name = "cacheSizes"];
+          {
+            int byte_size = this_._impl_._cache_sizes_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteUInt32Packed(
+                  2, this_._internal_cache_sizes(), byte_size, target);
+            }
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional uint32 count_threads = 3 [json_name = "countThreads"];
+          if (cached_has_bits & 0x00000001u) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+                3, this_._internal_count_threads(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -461,18 +562,18 @@ PROTOBUF_NOINLINE void ComputeResources::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:skyproto.mohair.ComputeResources)
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.mohair.CpuSpec)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t ComputeResources::ByteSizeLong(const MessageLite& base) {
-          const ComputeResources& this_ = static_cast<const ComputeResources&>(base);
+        ::size_t CpuSpec::ByteSizeLong(const MessageLite& base) {
+          const CpuSpec& this_ = static_cast<const CpuSpec&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ComputeResources::ByteSizeLong() const {
-          const ComputeResources& this_ = *this;
+        ::size_t CpuSpec::ByteSizeLong() const {
+          const CpuSpec& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:skyproto.mohair.ComputeResources)
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.mohair.CpuSpec)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -481,7 +582,7 @@ PROTOBUF_NOINLINE void ComputeResources::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated float core_freqs = 2 [json_name = "coreFreqs"];
+            // repeated float core_freqs = 1 [json_name = "coreFreqs"];
             {
               std::size_t data_size = std::size_t{4} *
                   ::_pbi::FromIntSize(this_._internal_core_freqs_size());
@@ -491,139 +592,152 @@ PROTOBUF_NOINLINE void ComputeResources::Clear() {
                                       static_cast<int32_t>(data_size));
               total_size += tag_size + data_size;
             }
+            // repeated uint32 cache_sizes = 2 [json_name = "cacheSizes"];
+            {
+              total_size +=
+                  ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
+                      this_._internal_cache_sizes(), 1,
+                      this_._impl_._cache_sizes_cached_byte_size_);
+            }
           }
            {
-            // uint32 count_cores = 1 [json_name = "countCores"];
-            if (this_._internal_count_cores() != 0) {
+            // optional uint32 count_threads = 3 [json_name = "countThreads"];
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
               total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-                  this_._internal_count_cores());
+                  this_._internal_count_threads());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
 
-void ComputeResources::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<ComputeResources*>(&to_msg);
-  auto& from = static_cast<const ComputeResources&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.mohair.ComputeResources)
+void CpuSpec::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<CpuSpec*>(&to_msg);
+  auto& from = static_cast<const CpuSpec&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.mohair.CpuSpec)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   _this->_internal_mutable_core_freqs()->MergeFrom(from._internal_core_freqs());
-  if (from._internal_count_cores() != 0) {
-    _this->_impl_.count_cores_ = from._impl_.count_cores_;
+  _this->_internal_mutable_cache_sizes()->MergeFrom(from._internal_cache_sizes());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.count_threads_ = from._impl_.count_threads_;
   }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void ComputeResources::CopyFrom(const ComputeResources& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.mohair.ComputeResources)
+void CpuSpec::CopyFrom(const CpuSpec& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.mohair.CpuSpec)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void ComputeResources::InternalSwap(ComputeResources* PROTOBUF_RESTRICT other) {
+void CpuSpec::InternalSwap(CpuSpec* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.core_freqs_.InternalSwap(&other->_impl_.core_freqs_);
-        swap(_impl_.count_cores_, other->_impl_.count_cores_);
+  _impl_.cache_sizes_.InternalSwap(&other->_impl_.cache_sizes_);
+        swap(_impl_.count_threads_, other->_impl_.count_threads_);
 }
 
-::google::protobuf::Metadata ComputeResources::GetMetadata() const {
+::google::protobuf::Metadata CpuSpec::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class MemoryResources::_Internal {
+class MemorySpec::_Internal {
  public:
   using HasBits =
-      decltype(std::declval<MemoryResources>()._impl_._has_bits_);
+      decltype(std::declval<MemorySpec>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_._has_bits_);
 };
 
-MemoryResources::MemoryResources(::google::protobuf::Arena* arena)
+MemorySpec::MemorySpec(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:skyproto.mohair.MemoryResources)
+  // @@protoc_insertion_point(arena_constructor:skyproto.mohair.MemorySpec)
 }
-MemoryResources::MemoryResources(
-    ::google::protobuf::Arena* arena, const MemoryResources& from)
-    : MemoryResources(arena) {
+MemorySpec::MemorySpec(
+    ::google::protobuf::Arena* arena, const MemorySpec& from)
+    : MemorySpec(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE MemoryResources::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE MemorySpec::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void MemoryResources::SharedCtor(::_pb::Arena* arena) {
+inline void MemorySpec::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, count_mebibytes_),
            0,
-           offsetof(Impl_, memory_freq_) -
+           offsetof(Impl_, count_channels_) -
                offsetof(Impl_, count_mebibytes_) +
-               sizeof(Impl_::memory_freq_));
+               sizeof(Impl_::count_channels_));
 }
-MemoryResources::~MemoryResources() {
-  // @@protoc_insertion_point(destructor:skyproto.mohair.MemoryResources)
+MemorySpec::~MemorySpec() {
+  // @@protoc_insertion_point(destructor:skyproto.mohair.MemorySpec)
   SharedDtor(*this);
 }
-inline void MemoryResources::SharedDtor(MessageLite& self) {
-  MemoryResources& this_ = static_cast<MemoryResources&>(self);
+inline void MemorySpec::SharedDtor(MessageLite& self) {
+  MemorySpec& this_ = static_cast<MemorySpec&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* MemoryResources::PlacementNew_(const void*, void* mem,
+inline void* MemorySpec::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) MemoryResources(arena);
+  return ::new (mem) MemorySpec(arena);
 }
-constexpr auto MemoryResources::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(MemoryResources),
-                                            alignof(MemoryResources));
+constexpr auto MemorySpec::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(MemorySpec),
+                                            alignof(MemorySpec));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull MemoryResources::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull MemorySpec::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_MemoryResources_default_instance_._instance,
+        &_MemorySpec_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &MemoryResources::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<MemoryResources>(),
+        &MemorySpec::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<MemorySpec>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &MemoryResources::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<MemoryResources>(), &MemoryResources::ByteSizeLong,
-            &MemoryResources::_InternalSerialize,
+        &MemorySpec::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<MemorySpec>(), &MemorySpec::ByteSizeLong,
+            &MemorySpec::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_._cached_size_),
         false,
     },
-    &MemoryResources::kDescriptorMethods,
+    &MemorySpec::kDescriptorMethods,
     &descriptor_table_skyproto_2fmohair_2ftopology_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* MemoryResources::GetClassData() const {
+const ::google::protobuf::internal::ClassData* MemorySpec::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MemoryResources::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MemorySpec::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_._has_bits_),
     0, // no _extensions_
     4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -636,35 +750,35 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MemoryResources::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::skyproto::mohair::MemoryResources>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::skyproto::mohair::MemorySpec>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // optional uint32 memory_freq = 4 [json_name = "memoryFreq"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemoryResources, _impl_.memory_freq_), 2>(),
-     {32, 2, 0, PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.memory_freq_)}},
+    // optional uint32 count_channels = 4 [json_name = "countChannels"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemorySpec, _impl_.count_channels_), 2>(),
+     {32, 2, 0, PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_channels_)}},
     // uint32 count_mebibytes = 1 [json_name = "countMebibytes"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemoryResources, _impl_.count_mebibytes_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.count_mebibytes_)}},
-    // optional .skyproto.mohair.MemoryType memory_type = 2 [json_name = "memoryType"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemoryResources, _impl_.memory_type_), 0>(),
-     {16, 0, 0, PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.memory_type_)}},
-    // optional uint32 count_channels = 3 [json_name = "countChannels"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemoryResources, _impl_.count_channels_), 1>(),
-     {24, 1, 0, PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.count_channels_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemorySpec, _impl_.count_mebibytes_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_mebibytes_)}},
+    // optional .skyproto.mohair.MemorySpec.MemoryType memory_type = 2 [json_name = "memoryType"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemorySpec, _impl_.memory_type_), 0>(),
+     {16, 0, 0, PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.memory_type_)}},
+    // optional uint32 memory_freq = 3 [json_name = "memoryFreq"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MemorySpec, _impl_.memory_freq_), 1>(),
+     {24, 1, 0, PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.memory_freq_)}},
   }}, {{
     65535, 65535
   }}, {{
     // uint32 count_mebibytes = 1 [json_name = "countMebibytes"];
-    {PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.count_mebibytes_), -1, 0,
+    {PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_mebibytes_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
-    // optional .skyproto.mohair.MemoryType memory_type = 2 [json_name = "memoryType"];
-    {PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.memory_type_), _Internal::kHasBitsOffset + 0, 0,
+    // optional .skyproto.mohair.MemorySpec.MemoryType memory_type = 2 [json_name = "memoryType"];
+    {PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.memory_type_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
-    // optional uint32 count_channels = 3 [json_name = "countChannels"];
-    {PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.count_channels_), _Internal::kHasBitsOffset + 1, 0,
+    // optional uint32 memory_freq = 3 [json_name = "memoryFreq"];
+    {PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.memory_freq_), _Internal::kHasBitsOffset + 1, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
-    // optional uint32 memory_freq = 4 [json_name = "memoryFreq"];
-    {PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.memory_freq_), _Internal::kHasBitsOffset + 2, 0,
+    // optional uint32 count_channels = 4 [json_name = "countChannels"];
+    {PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_channels_), _Internal::kHasBitsOffset + 2, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
   }},
   // no aux_entries
@@ -672,8 +786,8 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MemoryResources::_table_ = {
   }},
 };
 
-PROTOBUF_NOINLINE void MemoryResources::Clear() {
-// @@protoc_insertion_point(message_clear_start:skyproto.mohair.MemoryResources)
+PROTOBUF_NOINLINE void MemorySpec::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.mohair.MemorySpec)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -683,25 +797,25 @@ PROTOBUF_NOINLINE void MemoryResources::Clear() {
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
     ::memset(&_impl_.memory_type_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.memory_freq_) -
-        reinterpret_cast<char*>(&_impl_.memory_type_)) + sizeof(_impl_.memory_freq_));
+        reinterpret_cast<char*>(&_impl_.count_channels_) -
+        reinterpret_cast<char*>(&_impl_.memory_type_)) + sizeof(_impl_.count_channels_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* MemoryResources::_InternalSerialize(
+        ::uint8_t* MemorySpec::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const MemoryResources& this_ = static_cast<const MemoryResources&>(base);
+          const MemorySpec& this_ = static_cast<const MemorySpec&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* MemoryResources::_InternalSerialize(
+        ::uint8_t* MemorySpec::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const MemoryResources& this_ = *this;
+          const MemorySpec& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:skyproto.mohair.MemoryResources)
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.mohair.MemorySpec)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -713,25 +827,25 @@ PROTOBUF_NOINLINE void MemoryResources::Clear() {
           }
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // optional .skyproto.mohair.MemoryType memory_type = 2 [json_name = "memoryType"];
+          // optional .skyproto.mohair.MemorySpec.MemoryType memory_type = 2 [json_name = "memoryType"];
           if (cached_has_bits & 0x00000001u) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteEnumToArray(
                 2, this_._internal_memory_type(), target);
           }
 
-          // optional uint32 count_channels = 3 [json_name = "countChannels"];
+          // optional uint32 memory_freq = 3 [json_name = "memoryFreq"];
           if (cached_has_bits & 0x00000002u) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-                3, this_._internal_count_channels(), target);
+                3, this_._internal_memory_freq(), target);
           }
 
-          // optional uint32 memory_freq = 4 [json_name = "memoryFreq"];
+          // optional uint32 count_channels = 4 [json_name = "countChannels"];
           if (cached_has_bits & 0x00000004u) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-                4, this_._internal_memory_freq(), target);
+                4, this_._internal_count_channels(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -739,18 +853,18 @@ PROTOBUF_NOINLINE void MemoryResources::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:skyproto.mohair.MemoryResources)
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.mohair.MemorySpec)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t MemoryResources::ByteSizeLong(const MessageLite& base) {
-          const MemoryResources& this_ = static_cast<const MemoryResources&>(base);
+        ::size_t MemorySpec::ByteSizeLong(const MessageLite& base) {
+          const MemorySpec& this_ = static_cast<const MemorySpec&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t MemoryResources::ByteSizeLong() const {
-          const MemoryResources& this_ = *this;
+        ::size_t MemorySpec::ByteSizeLong() const {
+          const MemorySpec& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:skyproto.mohair.MemoryResources)
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.mohair.MemorySpec)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -767,30 +881,30 @@ PROTOBUF_NOINLINE void MemoryResources::Clear() {
           }
           cached_has_bits = this_._impl_._has_bits_[0];
           if (cached_has_bits & 0x00000007u) {
-            // optional .skyproto.mohair.MemoryType memory_type = 2 [json_name = "memoryType"];
+            // optional .skyproto.mohair.MemorySpec.MemoryType memory_type = 2 [json_name = "memoryType"];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_memory_type());
             }
-            // optional uint32 count_channels = 3 [json_name = "countChannels"];
+            // optional uint32 memory_freq = 3 [json_name = "memoryFreq"];
             if (cached_has_bits & 0x00000002u) {
               total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-                  this_._internal_count_channels());
+                  this_._internal_memory_freq());
             }
-            // optional uint32 memory_freq = 4 [json_name = "memoryFreq"];
+            // optional uint32 count_channels = 4 [json_name = "countChannels"];
             if (cached_has_bits & 0x00000004u) {
               total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-                  this_._internal_memory_freq());
+                  this_._internal_count_channels());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
 
-void MemoryResources::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<MemoryResources*>(&to_msg);
-  auto& from = static_cast<const MemoryResources&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.mohair.MemoryResources)
+void MemorySpec::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<MemorySpec*>(&to_msg);
+  auto& from = static_cast<const MemorySpec&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.mohair.MemorySpec)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -804,37 +918,314 @@ void MemoryResources::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
       _this->_impl_.memory_type_ = from._impl_.memory_type_;
     }
     if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.count_channels_ = from._impl_.count_channels_;
+      _this->_impl_.memory_freq_ = from._impl_.memory_freq_;
     }
     if (cached_has_bits & 0x00000004u) {
-      _this->_impl_.memory_freq_ = from._impl_.memory_freq_;
+      _this->_impl_.count_channels_ = from._impl_.count_channels_;
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void MemoryResources::CopyFrom(const MemoryResources& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.mohair.MemoryResources)
+void MemorySpec::CopyFrom(const MemorySpec& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.mohair.MemorySpec)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void MemoryResources::InternalSwap(MemoryResources* PROTOBUF_RESTRICT other) {
+void MemorySpec::InternalSwap(MemorySpec* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.memory_freq_)
-      + sizeof(MemoryResources::_impl_.memory_freq_)
-      - PROTOBUF_FIELD_OFFSET(MemoryResources, _impl_.count_mebibytes_)>(
+      PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_channels_)
+      + sizeof(MemorySpec::_impl_.count_channels_)
+      - PROTOBUF_FIELD_OFFSET(MemorySpec, _impl_.count_mebibytes_)>(
           reinterpret_cast<char*>(&_impl_.count_mebibytes_),
           reinterpret_cast<char*>(&other->_impl_.count_mebibytes_));
 }
 
-::google::protobuf::Metadata MemoryResources::GetMetadata() const {
+::google::protobuf::Metadata MemorySpec::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class PlatformSpec::_Internal {
+ public:
+};
+
+PlatformSpec::PlatformSpec(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:skyproto.mohair.PlatformSpec)
+}
+inline PROTOBUF_NDEBUG_INLINE PlatformSpec::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::mohair::PlatformSpec& from_msg)
+      : cpu_info_{visibility, arena, from.cpu_info_},
+        mem_info_{visibility, arena, from.mem_info_},
+        _cached_size_{0} {}
+
+PlatformSpec::PlatformSpec(
+    ::google::protobuf::Arena* arena,
+    const PlatformSpec& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  PlatformSpec* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.mohair.PlatformSpec)
+}
+inline PROTOBUF_NDEBUG_INLINE PlatformSpec::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : cpu_info_{visibility, arena},
+        mem_info_{visibility, arena},
+        _cached_size_{0} {}
+
+inline void PlatformSpec::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+PlatformSpec::~PlatformSpec() {
+  // @@protoc_insertion_point(destructor:skyproto.mohair.PlatformSpec)
+  SharedDtor(*this);
+}
+inline void PlatformSpec::SharedDtor(MessageLite& self) {
+  PlatformSpec& this_ = static_cast<PlatformSpec&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* PlatformSpec::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) PlatformSpec(arena);
+}
+constexpr auto PlatformSpec::InternalNewImpl_() {
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.cpu_info_) +
+          decltype(PlatformSpec::_impl_.cpu_info_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.mem_info_) +
+          decltype(PlatformSpec::_impl_.mem_info_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(PlatformSpec), alignof(PlatformSpec), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&PlatformSpec::PlacementNew_,
+                                 sizeof(PlatformSpec),
+                                 alignof(PlatformSpec));
+  }
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull PlatformSpec::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_PlatformSpec_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &PlatformSpec::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<PlatformSpec>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &PlatformSpec::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<PlatformSpec>(), &PlatformSpec::ByteSizeLong,
+            &PlatformSpec::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_._cached_size_),
+        false,
+    },
+    &PlatformSpec::kDescriptorMethods,
+    &descriptor_table_skyproto_2fmohair_2ftopology_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* PlatformSpec::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> PlatformSpec::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    2,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::skyproto::mohair::PlatformSpec>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // repeated .skyproto.mohair.MemorySpec mem_info = 2 [json_name = "memInfo"];
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 1, PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.mem_info_)}},
+    // repeated .skyproto.mohair.CpuSpec cpu_info = 1 [json_name = "cpuInfo"];
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.cpu_info_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated .skyproto.mohair.CpuSpec cpu_info = 1 [json_name = "cpuInfo"];
+    {PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.cpu_info_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skyproto.mohair.MemorySpec mem_info = 2 [json_name = "memInfo"];
+    {PROTOBUF_FIELD_OFFSET(PlatformSpec, _impl_.mem_info_), 0, 1,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::mohair::CpuSpec>()},
+    {::_pbi::TcParser::GetTable<::skyproto::mohair::MemorySpec>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void PlatformSpec::Clear() {
+// @@protoc_insertion_point(message_clear_start:skyproto.mohair.PlatformSpec)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.cpu_info_.Clear();
+  _impl_.mem_info_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* PlatformSpec::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const PlatformSpec& this_ = static_cast<const PlatformSpec&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* PlatformSpec::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const PlatformSpec& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:skyproto.mohair.PlatformSpec)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated .skyproto.mohair.CpuSpec cpu_info = 1 [json_name = "cpuInfo"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_cpu_info_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_cpu_info().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    1, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // repeated .skyproto.mohair.MemorySpec mem_info = 2 [json_name = "memInfo"];
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_mem_info_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_mem_info().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    2, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:skyproto.mohair.PlatformSpec)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t PlatformSpec::ByteSizeLong(const MessageLite& base) {
+          const PlatformSpec& this_ = static_cast<const PlatformSpec&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t PlatformSpec::ByteSizeLong() const {
+          const PlatformSpec& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:skyproto.mohair.PlatformSpec)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .skyproto.mohair.CpuSpec cpu_info = 1 [json_name = "cpuInfo"];
+            {
+              total_size += 1UL * this_._internal_cpu_info_size();
+              for (const auto& msg : this_._internal_cpu_info()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+            // repeated .skyproto.mohair.MemorySpec mem_info = 2 [json_name = "memInfo"];
+            {
+              total_size += 1UL * this_._internal_mem_info_size();
+              for (const auto& msg : this_._internal_mem_info()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void PlatformSpec::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<PlatformSpec*>(&to_msg);
+  auto& from = static_cast<const PlatformSpec&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:skyproto.mohair.PlatformSpec)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_cpu_info()->MergeFrom(
+      from._internal_cpu_info());
+  _this->_internal_mutable_mem_info()->MergeFrom(
+      from._internal_mem_info());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PlatformSpec::CopyFrom(const PlatformSpec& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:skyproto.mohair.PlatformSpec)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void PlatformSpec::InternalSwap(PlatformSpec* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.cpu_info_.InternalSwap(&other->_impl_.cpu_info_);
+  _impl_.mem_info_.InternalSwap(&other->_impl_.mem_info_);
+}
+
+::google::protobuf::Metadata PlatformSpec::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -861,9 +1252,9 @@ inline PROTOBUF_NDEBUG_INLINE ServiceConfig::Impl_::Impl_(
     const Impl_& from, const ::skyproto::mohair::ServiceConfig& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
-        downstream_services_{visibility, arena, from.downstream_services_},
-        service_compute_{visibility, arena, from.service_compute_},
-        service_location_(arena, from.service_location_) {}
+        downstream_{visibility, arena, from.downstream_},
+        label_(arena, from.label_),
+        location_(arena, from.location_) {}
 
 ServiceConfig::ServiceConfig(
     ::google::protobuf::Arena* arena,
@@ -879,8 +1270,8 @@ ServiceConfig::ServiceConfig(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.service_mem_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::mohair::MemoryResources>(
-                              arena, *from._impl_.service_mem_)
+  _impl_.service_platform_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::skyproto::mohair::PlatformSpec>(
+                              arena, *from._impl_.service_platform_)
                         : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, is_active_),
@@ -896,17 +1287,17 @@ inline PROTOBUF_NDEBUG_INLINE ServiceConfig::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
-        downstream_services_{visibility, arena},
-        service_compute_{visibility, arena},
-        service_location_(arena) {}
+        downstream_{visibility, arena},
+        label_(arena),
+        location_(arena) {}
 
 inline void ServiceConfig::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, service_mem_),
+               offsetof(Impl_, service_platform_),
            0,
            offsetof(Impl_, decompose_alg_) -
-               offsetof(Impl_, service_mem_) +
+               offsetof(Impl_, service_platform_) +
                sizeof(Impl_::decompose_alg_));
 }
 ServiceConfig::~ServiceConfig() {
@@ -917,8 +1308,9 @@ inline void ServiceConfig::SharedDtor(MessageLite& self) {
   ServiceConfig& this_ = static_cast<ServiceConfig&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.service_location_.Destroy();
-  delete this_._impl_.service_mem_;
+  this_._impl_.label_.Destroy();
+  this_._impl_.location_.Destroy();
+  delete this_._impl_.service_platform_;
   this_._impl_.~Impl_();
 }
 
@@ -928,12 +1320,8 @@ inline void* ServiceConfig::PlacementNew_(const void*, void* mem,
 }
 constexpr auto ServiceConfig::InternalNewImpl_() {
   constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_services_) +
-          decltype(ServiceConfig::_impl_.downstream_services_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_compute_) +
-          decltype(ServiceConfig::_impl_.service_compute_)::
+      PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_) +
+          decltype(ServiceConfig::_impl_.downstream_)::
               InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
   });
@@ -974,16 +1362,16 @@ const ::google::protobuf::internal::ClassData* ServiceConfig::GetClassData() con
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 7, 3, 54, 2> ServiceConfig::_table_ = {
+const ::_pbi::TcParseTable<3, 6, 2, 51, 2> ServiceConfig::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_._has_bits_),
     0, // no _extensions_
-    7, 56,  // max_field_number, fast_idx_mask
+    6, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967168,  // skipmap
+    4294967232,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    7,  // num_field_entries
-    3,  // num_aux_entries
+    6,  // num_field_entries
+    2,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -996,56 +1384,51 @@ const ::_pbi::TcParseTable<3, 7, 3, 54, 2> ServiceConfig::_table_ = {
     // bool is_active = 1 [json_name = "isActive"];
     {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(ServiceConfig, _impl_.is_active_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.is_active_)}},
-    // string service_location = 2 [json_name = "serviceLocation"];
+    // string label = 2 [json_name = "label"];
     {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_location_)}},
-    // .skyproto.mohair.DeviceClass platform_class = 3 [json_name = "platformClass"];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServiceConfig, _impl_.platform_class_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.platform_class_)}},
-    // repeated .skyproto.mohair.ServiceConfig downstream_services = 4 [json_name = "downstreamServices"];
-    {::_pbi::TcParser::FastMtR1,
-     {34, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_services_)}},
-    // optional .skyproto.mohair.MemoryResources service_mem = 5 [json_name = "serviceMem"];
-    {::_pbi::TcParser::FastMtS1,
-     {42, 0, 1, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_mem_)}},
-    // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
-    {::_pbi::TcParser::FastMtR1,
-     {50, 63, 2, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_compute_)}},
-    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.label_)}},
+    // string location = 3 [json_name = "location"];
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.location_)}},
+    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 4 [json_name = "decomposeAlg"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServiceConfig, _impl_.decompose_alg_), 1>(),
-     {56, 1, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_)}},
+     {32, 1, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_)}},
+    // optional .skyproto.mohair.PlatformSpec service_platform = 5 [json_name = "servicePlatform"];
+    {::_pbi::TcParser::FastMtS1,
+     {42, 0, 0, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_platform_)}},
+    // repeated .skyproto.mohair.ServiceConfig downstream = 6 [json_name = "downstream"];
+    {::_pbi::TcParser::FastMtR1,
+     {50, 63, 1, PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_)}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
     // bool is_active = 1 [json_name = "isActive"];
     {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.is_active_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
-    // string service_location = 2 [json_name = "serviceLocation"];
-    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_location_), -1, 0,
+    // string label = 2 [json_name = "label"];
+    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.label_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // .skyproto.mohair.DeviceClass platform_class = 3 [json_name = "platformClass"];
-    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.platform_class_), -1, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
-    // repeated .skyproto.mohair.ServiceConfig downstream_services = 4 [json_name = "downstreamServices"];
-    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_services_), -1, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional .skyproto.mohair.MemoryResources service_mem = 5 [json_name = "serviceMem"];
-    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_mem_), _Internal::kHasBitsOffset + 0, 1,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
-    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_compute_), -1, 2,
-    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+    // string location = 3 [json_name = "location"];
+    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.location_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // optional .skyproto.mohair.DecomposeAlg decompose_alg = 4 [json_name = "decomposeAlg"];
     {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_), _Internal::kHasBitsOffset + 1, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
+    // optional .skyproto.mohair.PlatformSpec service_platform = 5 [json_name = "servicePlatform"];
+    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_platform_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .skyproto.mohair.ServiceConfig downstream = 6 [json_name = "downstream"];
+    {PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.downstream_), -1, 1,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
+    {::_pbi::TcParser::GetTable<::skyproto::mohair::PlatformSpec>()},
     {::_pbi::TcParser::GetTable<::skyproto::mohair::ServiceConfig>()},
-    {::_pbi::TcParser::GetTable<::skyproto::mohair::MemoryResources>()},
-    {::_pbi::TcParser::GetTable<::skyproto::mohair::ComputeResources>()},
   }}, {{
-    "\35\0\20\0\0\0\0\0"
+    "\35\0\5\10\0\0\0\0"
     "skyproto.mohair.ServiceConfig"
-    "service_location"
+    "label"
+    "location"
   }},
 };
 
@@ -1056,17 +1439,15 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.downstream_services_.Clear();
-  _impl_.service_compute_.Clear();
-  _impl_.service_location_.ClearToEmpty();
+  _impl_.downstream_.Clear();
+  _impl_.label_.ClearToEmpty();
+  _impl_.location_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(_impl_.service_mem_ != nullptr);
-    _impl_.service_mem_->Clear();
+    ABSL_DCHECK(_impl_.service_platform_ != nullptr);
+    _impl_.service_platform_->Clear();
   }
-  ::memset(&_impl_.is_active_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.platform_class_) -
-      reinterpret_cast<char*>(&_impl_.is_active_)) + sizeof(_impl_.platform_class_));
+  _impl_.is_active_ = false;
   _impl_.decompose_alg_ = 0;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1094,56 +1475,46 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
                 1, this_._internal_is_active(), target);
           }
 
-          // string service_location = 2 [json_name = "serviceLocation"];
-          if (!this_._internal_service_location().empty()) {
-            const std::string& _s = this_._internal_service_location();
+          // string label = 2 [json_name = "label"];
+          if (!this_._internal_label().empty()) {
+            const std::string& _s = this_._internal_label();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.mohair.ServiceConfig.service_location");
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.mohair.ServiceConfig.label");
             target = stream->WriteStringMaybeAliased(2, _s, target);
           }
 
-          // .skyproto.mohair.DeviceClass platform_class = 3 [json_name = "platformClass"];
-          if (this_._internal_platform_class() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteEnumToArray(
-                3, this_._internal_platform_class(), target);
-          }
-
-          // repeated .skyproto.mohair.ServiceConfig downstream_services = 4 [json_name = "downstreamServices"];
-          for (unsigned i = 0, n = static_cast<unsigned>(
-                                   this_._internal_downstream_services_size());
-               i < n; i++) {
-            const auto& repfield = this_._internal_downstream_services().Get(i);
-            target =
-                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                    4, repfield, repfield.GetCachedSize(),
-                    target, stream);
+          // string location = 3 [json_name = "location"];
+          if (!this_._internal_location().empty()) {
+            const std::string& _s = this_._internal_location();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.mohair.ServiceConfig.location");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
           }
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // optional .skyproto.mohair.MemoryResources service_mem = 5 [json_name = "serviceMem"];
+          // optional .skyproto.mohair.DecomposeAlg decompose_alg = 4 [json_name = "decomposeAlg"];
+          if (cached_has_bits & 0x00000002u) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteEnumToArray(
+                4, this_._internal_decompose_alg(), target);
+          }
+
+          // optional .skyproto.mohair.PlatformSpec service_platform = 5 [json_name = "servicePlatform"];
           if (cached_has_bits & 0x00000001u) {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                5, *this_._impl_.service_mem_, this_._impl_.service_mem_->GetCachedSize(), target,
+                5, *this_._impl_.service_platform_, this_._impl_.service_platform_->GetCachedSize(), target,
                 stream);
           }
 
-          // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
+          // repeated .skyproto.mohair.ServiceConfig downstream = 6 [json_name = "downstream"];
           for (unsigned i = 0, n = static_cast<unsigned>(
-                                   this_._internal_service_compute_size());
+                                   this_._internal_downstream_size());
                i < n; i++) {
-            const auto& repfield = this_._internal_service_compute().Get(i);
+            const auto& repfield = this_._internal_downstream().Get(i);
             target =
                 ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                     6, repfield, repfield.GetCachedSize(),
                     target, stream);
-          }
-
-          // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
-          if (cached_has_bits & 0x00000002u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteEnumToArray(
-                7, this_._internal_decompose_alg(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1171,34 +1542,32 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated .skyproto.mohair.ServiceConfig downstream_services = 4 [json_name = "downstreamServices"];
+            // repeated .skyproto.mohair.ServiceConfig downstream = 6 [json_name = "downstream"];
             {
-              total_size += 1UL * this_._internal_downstream_services_size();
-              for (const auto& msg : this_._internal_downstream_services()) {
-                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-              }
-            }
-            // repeated .skyproto.mohair.ComputeResources service_compute = 6 [json_name = "serviceCompute"];
-            {
-              total_size += 1UL * this_._internal_service_compute_size();
-              for (const auto& msg : this_._internal_service_compute()) {
+              total_size += 1UL * this_._internal_downstream_size();
+              for (const auto& msg : this_._internal_downstream()) {
                 total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
               }
             }
           }
            {
-            // string service_location = 2 [json_name = "serviceLocation"];
-            if (!this_._internal_service_location().empty()) {
+            // string label = 2 [json_name = "label"];
+            if (!this_._internal_label().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_service_location());
+                                              this_._internal_label());
+            }
+            // string location = 3 [json_name = "location"];
+            if (!this_._internal_location().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_location());
             }
           }
            {
-            // optional .skyproto.mohair.MemoryResources service_mem = 5 [json_name = "serviceMem"];
+            // optional .skyproto.mohair.PlatformSpec service_platform = 5 [json_name = "servicePlatform"];
             cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.service_mem_);
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.service_platform_);
             }
           }
            {
@@ -1206,14 +1575,9 @@ PROTOBUF_NOINLINE void ServiceConfig::Clear() {
             if (this_._internal_is_active() != 0) {
               total_size += 2;
             }
-            // .skyproto.mohair.DeviceClass platform_class = 3 [json_name = "platformClass"];
-            if (this_._internal_platform_class() != 0) {
-              total_size += 1 +
-                            ::_pbi::WireFormatLite::EnumSize(this_._internal_platform_class());
-            }
           }
            {
-            // optional .skyproto.mohair.DecomposeAlg decompose_alg = 7 [json_name = "decomposeAlg"];
+            // optional .skyproto.mohair.DecomposeAlg decompose_alg = 4 [json_name = "decomposeAlg"];
             if (cached_has_bits & 0x00000002u) {
               total_size += 1 +
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_decompose_alg());
@@ -1232,28 +1596,26 @@ void ServiceConfig::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::g
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_downstream_services()->MergeFrom(
-      from._internal_downstream_services());
-  _this->_internal_mutable_service_compute()->MergeFrom(
-      from._internal_service_compute());
-  if (!from._internal_service_location().empty()) {
-    _this->_internal_set_service_location(from._internal_service_location());
+  _this->_internal_mutable_downstream()->MergeFrom(
+      from._internal_downstream());
+  if (!from._internal_label().empty()) {
+    _this->_internal_set_label(from._internal_label());
+  }
+  if (!from._internal_location().empty()) {
+    _this->_internal_set_location(from._internal_location());
   }
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    ABSL_DCHECK(from._impl_.service_mem_ != nullptr);
-    if (_this->_impl_.service_mem_ == nullptr) {
-      _this->_impl_.service_mem_ =
-          ::google::protobuf::Message::CopyConstruct<::skyproto::mohair::MemoryResources>(arena, *from._impl_.service_mem_);
+    ABSL_DCHECK(from._impl_.service_platform_ != nullptr);
+    if (_this->_impl_.service_platform_ == nullptr) {
+      _this->_impl_.service_platform_ =
+          ::google::protobuf::Message::CopyConstruct<::skyproto::mohair::PlatformSpec>(arena, *from._impl_.service_platform_);
     } else {
-      _this->_impl_.service_mem_->MergeFrom(*from._impl_.service_mem_);
+      _this->_impl_.service_platform_->MergeFrom(*from._impl_.service_platform_);
     }
   }
   if (from._internal_is_active() != 0) {
     _this->_impl_.is_active_ = from._impl_.is_active_;
-  }
-  if (from._internal_platform_class() != 0) {
-    _this->_impl_.platform_class_ = from._impl_.platform_class_;
   }
   if (cached_has_bits & 0x00000002u) {
     _this->_impl_.decompose_alg_ = from._impl_.decompose_alg_;
@@ -1276,15 +1638,15 @@ void ServiceConfig::InternalSwap(ServiceConfig* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.downstream_services_.InternalSwap(&other->_impl_.downstream_services_);
-  _impl_.service_compute_.InternalSwap(&other->_impl_.service_compute_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.service_location_, &other->_impl_.service_location_, arena);
+  _impl_.downstream_.InternalSwap(&other->_impl_.downstream_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.label_, &other->_impl_.label_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.location_, &other->_impl_.location_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.decompose_alg_)
       + sizeof(ServiceConfig::_impl_.decompose_alg_)
-      - PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_mem_)>(
-          reinterpret_cast<char*>(&_impl_.service_mem_),
-          reinterpret_cast<char*>(&other->_impl_.service_mem_));
+      - PROTOBUF_FIELD_OFFSET(ServiceConfig, _impl_.service_platform_)>(
+          reinterpret_cast<char*>(&_impl_.service_platform_),
+          reinterpret_cast<char*>(&other->_impl_.service_platform_));
 }
 
 ::google::protobuf::Metadata ServiceConfig::GetMetadata() const {
