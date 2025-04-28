@@ -94,12 +94,18 @@ namespace mohair {
   using skyproto::mohair::SkyResultRel;
   using skyproto::mohair::SkyLakeRel;
 
-  // Topology level
-  using skyproto::mohair::ServiceConfig;
-  using skyproto::mohair::DeviceClass;
-
   // Decomposition options
   using skyproto::mohair::DecomposeAlg;
+
+  // Topology level
+  using skyproto::mohair::ServiceConfig;
+  using skyproto::mohair::PlatformSpec;
+  using skyproto::mohair::CpuSpec;
+  using skyproto::mohair::MemorySpec;
+
+  // Statistics
+  using skyproto::substrait::ExecutionStats;
+  using skyproto::substrait::DecomposeStats;
 
 } // namespace: mohair
 
@@ -129,6 +135,10 @@ namespace mohair {
 
   //! Stringify a steady clock timestamp as microseconds
   string StringifyTS(const SteadyTS& ts);
+
+  //! Return the difference between two timestamps as microsecond ticks
+  std::chrono::microseconds::rep
+  MicroTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
 
   //! Stringify the difference between two timestamps as microseconds
   string StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);

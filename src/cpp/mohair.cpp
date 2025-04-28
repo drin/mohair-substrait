@@ -52,8 +52,8 @@ namespace mohair {
     return std::to_string(ts_ms.count());
   }
 
-  string
-  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
+  std::chrono::microseconds::rep
+  MicroTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
     auto start_ms = std::chrono::duration_cast<std::chrono::microseconds>(
       ts_start.time_since_epoch()
     );
@@ -62,7 +62,12 @@ namespace mohair {
       ts_stop.time_since_epoch()
     );
 
-    return std::to_string(stop_ms.count() - start_ms.count());
+    return stop_ms.count() - start_ms.count();
+  }
+
+  string
+  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
+    return std::to_string(MicroTSDiff(ts_start, ts_stop));
   }
 
   string PathForInstantiatedLog(const string& logger_name) {
