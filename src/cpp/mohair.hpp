@@ -43,11 +43,11 @@
   }
 
 
-#define MohairInitLogger(logger_name) {   \
-  MOHAIR_ASSERT(                          \
-     "Failed to initialize logger"        \
-    ,MohairLogger(logger_name) != nullptr \
-  );                                      \
+#define MohairInitLogger(logger_name) {           \
+  MOHAIR_ASSERT(                                  \
+     "Failed to initialize logger"                \
+    ,mohair::MohairLogger(logger_name) != nullptr \
+  );                                              \
 }
 
 #define MohairStartTS(phase_name) \
@@ -116,7 +116,8 @@ namespace mohair {
   const string version_patch   = MOHAIR_VERSION_PATCH;
 
   // >> Static variables
-  static uint32_t UUIDGenerator { 0 };
+  static uint32_t PlanAnchor_UUID   { 0 };
+  static uint32_t PlanOperator_UUID { 0 };
 
 } // namespace: mohair
 
@@ -138,10 +139,9 @@ namespace mohair {
 
   // TODO: hide `Message` to be internal linkage only
   // >> Wrapper functions for protobuf framework
-  bool StringifyPlan (const Plan&    plan_msg, string*  text_result);
-  bool StringifyRel  (const Rel&     rel_msg , string*  text_result);
-  bool SerializeJson (const string&  msg_json, Message* msg_result );
-  bool JsonifyMessage(const Message& msg     , string*  json_result);
+  bool StringifyMessage(const Message& msg     , string* text_result);
+  bool StringifyPlan   (const Plan&    plan_msg, string* text_result);
+  bool StringifyRel    (const Rel&     rel_msg , string* text_result);
 
   // >> Reader functions
   // helper functions

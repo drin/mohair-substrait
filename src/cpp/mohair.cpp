@@ -113,18 +113,6 @@ namespace mohair {
     return StringifyMessage(rel_msg, text_result);
   }
 
-  // TODO: decide if I should return a status object that has an error message
-  // Wrapper implementation for `JsonStringToMessage`
-  bool SerializeJson(const string& msg_json, Message* msg_result) {
-    absl::Status status = JsonStringToMessage(msg_json, msg_result);
-    return status.ok();
-  }
-
-  bool JsonifyMessage(const Message& msg, string* json_result) {
-    absl::Status status = MessageToJsonString(msg, json_result);
-    return status.ok();
-  }
-
 
   //! Helper function to traverse a plan and gather its final schema
   void ResolveResultSchema(Rel* view_op) {
@@ -230,8 +218,7 @@ namespace mohair {
 
   //! Move an operator into a PlanRel and create a ReferenceRel to it
   PlanRel* MoveOpToReference(Plan* plan, Rel* op) {
-    // UUIDGenerator is static
-    uint32_t anchor_id = ++UUIDGenerator;
+    uint32_t anchor_id = ++PlanAnchor_UUID;
 
     // Create a place to move the operator to
     unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
@@ -256,7 +243,7 @@ namespace mohair {
   }
 
   //! Move a PlanRel into an operator tree by swapping it with its ReferenceRel
-  //  NOTE: returns 0 on failure (UUIDGenerator starts at 1)
+  //  NOTE: returns 0 on failure (PlanAnchor_UUID starts at 1)
   uint32_t MoveReferenceToOp(Plan* plan, Rel* ref_rel) {
     if (not ref_rel->has_reference()) { return 0; }
 
@@ -278,7 +265,7 @@ namespace mohair {
 
   //! Create a ReferenceRel pointing to `PlanRel` and hang it on parent_rel
   uint32_t CreateReferenceRel(Rel* parent_rel, PlanRel* anchor_rel) {
-    uint32_t anchor_id { ++UUIDGenerator };
+    uint32_t anchor_id { ++PlanAnchor_UUID };
 
     // Set the anchor ID
     anchor_rel->set_subtree_anchor(anchor_id);
@@ -574,10 +561,6 @@ namespace mohair {
   unique_ptr<Plan> SubstraitPlanFromString(const string &plan_msg) {
     unique_ptr<Plan> substrait_plan { std::make_unique<Plan>() };
     substrait_plan->ParseFromString(plan_msg);
-
-    #if MOHAIR_DEBUG
-      substrait_plan->PrintDebugString();
-    #endif
 
     return substrait_plan;
   }

@@ -125,6 +125,12 @@ namespace mohair {
     auto   read_schema = std::make_unique<SubstraitSchema>();
     read_schema->CopyFrom(extrel_op->schema());
 
+    // NOTE: Now that ExtensionLeaf has a RelCommon, we have to set its output schema
+    rel_op->mutable_common()
+          ->mutable_hint()
+          ->mutable_output_schema()
+          ->CopyFrom(*read_schema);
+
     return std::make_unique<MohairRel>(
        rel_op
       ,rel_msg
@@ -137,8 +143,7 @@ namespace mohair {
   //! Templated helper function for moving a `Rel` to be a reference rel
   template <typename RelType>
   ReferenceRel* MoveToRefRel(int32_t refrel_pos, PlanRel* plan_refrel, RelType* rel_op) {
-    // UUIDGenerator is static
-    uint32_t anchor_id = ++UUIDGenerator;
+    uint32_t anchor_id = ++PlanAnchor_UUID;
 
     // Move the ProjectRel into the PlanRel
     unique_ptr<Rel> anchor_rel { std::make_unique<Rel>() };
@@ -318,6 +323,32 @@ namespace mohair {
   const string MohairOp::ViewStr()  { return this->ToString(); }
   const string MohairOp::GetName()  { return ""; }
 
+  void MohairOp::AssignOpID() {
+    RelCommon* rel_common = GetRelCommon(substrait_rel);
+    if (not rel_common->has_operator_id()) {
+      PlanOpID = ++PlanOperator_UUID;
+      rel_common->set_operator_id(PlanOpID);
+    }
+  }
+
+  //! A function that populates a vector of operators in breadth-first order
+  void MohairOp::UpdateOperatorIDs(vector<MohairOp*>& plan_ops) {
+    plan_ops.push_back(this);
+
+    // plan_ops grows as long as elements are pushed to it
+    for (size_t ndx_op = 0; ndx_op < plan_ops.size(); ++ndx_op) {
+      // for each op, update it's ID
+      MohairOp* op = plan_ops[ndx_op];
+      op->AssignOpID();
+
+      // then, push its inputs to the end of plan_ops
+      unique_ptr<MohairOp>* op_inputs = op->GetOpInputs();
+      for (size_t ndx_input = 0; ndx_input < op->GetOpArity(); ++ndx_input) {
+        plan_ops.push_back(op_inputs[ndx_input].get());
+      }
+    }
+  }
+
   bool   MohairOp::IsSink()     { return false; }
   bool   MohairOp::IsOrigin()   { return false; }
   size_t MohairOp::GetOpArity() { return 0;     }
@@ -331,27 +362,29 @@ namespace mohair {
   // >> ToString implementations for each op type
   // leaf ops
   const string OpErr::ToString()       { return u8"Err()"; }
-  const string OpReference::ToString() { return u8"Ref(" + std::to_string(rel_op->subtree_reference()) + ")"; }
+  const string OpReference::ToString() {
+    return u8"Ref(" + std::to_string(rel_op->subtree_reference()) + ")";
+  }
 
-  const string OpRead::ToString()          { return u8"Read("             + table_name + u8")"; }
-  const string OpSkyRead::ToString()       { return u8"SkyRead("          + table_name + u8")"; }
-  const string OpPartitionRead::ToString() { return u8"SkyPartitionRead(" + table_name + u8")"; }
-  const string OpSliceRead::ToString()     { return u8"SkySliceRead("     + table_name + u8")"; }
-  const string OpViewRead::ToString()      { return u8"SkyResultRead("    + table_name + u8")"; }
+  const string OpRead::ToString()          { return u8"Scan("         + table_name + u8")"; }
+  const string OpSkyRead::ToString()       { return u8"Sky("          + table_name + u8")"; }
+  const string OpPartitionRead::ToString() { return u8"SkyPartition(" + table_name + u8")"; }
+  const string OpSliceRead::ToString()     { return u8"SkySlice("     + table_name + u8")"; }
+  const string OpViewRead::ToString()      { return u8"SkyResult("    + table_name + u8")"; }
 
   // streaming ops
-  const string OpProj::ToString()  { return u8"Π()";   }
-  const string OpSel::ToString()   { return u8"σ()";   }
-  const string OpLimit::ToString() { return u8"Lim()"; }
+  const string OpProj::ToString()  { return u8"π";   }
+  const string OpSel::ToString()   { return u8"σ";   }
+  const string OpLimit::ToString() { return u8"⌈n⌉"; }
 
   // sink ops
-  const string OpSort::ToString()      { return u8"Sort()"; }
-  const string OpAggr::ToString()      { return u8"Aggr()"; }
+  const string OpSort::ToString()      { return u8"⊕"; }
+  const string OpAggr::ToString()      { return u8"Γ"; }
 
-  const string OpCrossJoin::ToString() { return u8"×()"; }
-  const string OpJoin::ToString()      { return u8"⋈()"; }
-  const string OpHashJoin::ToString()  { return u8"⋈→()"; }
-  const string OpMergeJoin::ToString() { return u8"⋈⊕()"; }
+  const string OpCrossJoin::ToString() { return u8"×"; }
+  const string OpJoin::ToString()      { return u8"⋈"; }
+  const string OpHashJoin::ToString()  { return u8"⋈→"; }
+  const string OpMergeJoin::ToString() { return u8"⋈⊕"; }
 
   // >> Accessor methods for the number inputs into an operator
   size_t OpProj::GetOpArity()  { return 1; }
@@ -415,45 +448,63 @@ namespace mohair {
   }
 
   //! Wraps substrait `Rel` messages in `MohairOp` instances
-  unique_ptr<MohairOp> MohairFrom(Plan* plan_msg, Rel* rel_msg) {
+  unique_ptr<MohairOp> MohairFrom(Plan* plan, Rel* rel_msg) {
     switch(rel_msg->rel_type_case()) {
       // Unary streaming operators
       case Rel::RelTypeCase::kProject: {
-        return FromUnaryOpMsg<ProjectRel, OpProj>(plan_msg, rel_msg, rel_msg->mutable_project());
+        return FromUnaryOpMsg<ProjectRel, OpProj>(
+          plan, rel_msg, rel_msg->mutable_project()
+        );
       }
 
       case Rel::RelTypeCase::kFilter: {
-        return FromUnaryOpMsg<FilterRel, OpSel>(plan_msg, rel_msg, rel_msg->mutable_filter());
+        return FromUnaryOpMsg<FilterRel, OpSel>(
+          plan, rel_msg, rel_msg->mutable_filter()
+        );
       }
 
       case Rel::RelTypeCase::kFetch: {
-        return FromUnaryOpMsg<FetchRel, OpLimit>(plan_msg, rel_msg, rel_msg->mutable_fetch());
+        return FromUnaryOpMsg<FetchRel, OpLimit>(
+          plan, rel_msg, rel_msg->mutable_fetch()
+        );
       }
 
       // Unary sink operators
       case Rel::RelTypeCase::kSort: {
-        return FromUnaryOpMsg<SortRel, OpSort>(plan_msg, rel_msg, rel_msg->mutable_sort());
+        return FromUnaryOpMsg<SortRel, OpSort>(
+          plan, rel_msg, rel_msg->mutable_sort()
+        );
       }
 
       case Rel::RelTypeCase::kAggregate: {
-        return FromUnaryOpMsg<AggregateRel, OpAggr>(plan_msg, rel_msg, rel_msg->mutable_aggregate());
+        return FromUnaryOpMsg<AggregateRel, OpAggr>(
+          plan, rel_msg, rel_msg->mutable_aggregate()
+        );
       }
 
       // Binary sink operators
       case Rel::RelTypeCase::kJoin: {
-        return FromBinaryOpMsg<JoinRel, OpJoin>(plan_msg, rel_msg, rel_msg->mutable_join());
+        return FromBinaryOpMsg<JoinRel, OpJoin>(
+          plan, rel_msg, rel_msg->mutable_join()
+        );
       }
 
       case Rel::RelTypeCase::kCross: {
-        return FromBinaryOpMsg<CrossRel, OpCrossJoin>(plan_msg, rel_msg, rel_msg->mutable_cross());
+        return FromBinaryOpMsg<CrossRel, OpCrossJoin>(
+          plan, rel_msg, rel_msg->mutable_cross()
+        );
       }
 
       case Rel::RelTypeCase::kHashJoin: {
-        return FromBinaryOpMsg<HashJoinRel, OpHashJoin>(plan_msg, rel_msg, rel_msg->mutable_hash_join());
+        return FromBinaryOpMsg<HashJoinRel, OpHashJoin>(
+          plan, rel_msg, rel_msg->mutable_hash_join()
+        );
       }
 
       case Rel::RelTypeCase::kMergeJoin: {
-        return FromBinaryOpMsg<MergeJoinRel, OpMergeJoin>(plan_msg, rel_msg, rel_msg->mutable_merge_join());
+        return FromBinaryOpMsg<MergeJoinRel, OpMergeJoin>(
+          plan, rel_msg, rel_msg->mutable_merge_join()
+        );
       }
 
       // Leaf operators
@@ -463,8 +514,8 @@ namespace mohair {
         // The whole point of propagating a pointer to the plan is so that
         // we can descend into the subplan this ReferenceRel points to
         unique_ptr<MohairOp> subplan_root;
-        for (int plan_relndx = 0; plan_relndx < plan_msg->relations_size(); ++plan_relndx) {
-          PlanRel* subplan = plan_msg->mutable_relations(plan_relndx);
+        for (int plan_relndx = 0; plan_relndx < plan->relations_size(); ++plan_relndx) {
+          PlanRel* subplan = plan->mutable_relations(plan_relndx);
 
           if (subplan->subtree_anchor() == rel_op->subtree_reference()) {
             if (subplan->has_root()) {
@@ -472,7 +523,7 @@ namespace mohair {
               return nullptr;
             }
 
-            subplan_root = MohairFrom(plan_msg, subplan->mutable_rel());
+            subplan_root = MohairFrom(plan, subplan->mutable_rel());
             break;
           }
         }
