@@ -3,11 +3,19 @@ name = "mohair-substrait"
 version = "0.1.0"
 description = ""
 authors = ["Aldrin Montana <octalene.dev@pm.me>"]
+license = "Apache License 2.0"
+packages = [
+   { include = "mohair",   from = "src/python" }
+  ,{ include = "skyproto", from = "src/python" }
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
 pyyaml = "^6.0.2"
+protobuf = "==5.29.3"
+numpy = "^2.2.4"
+matplotlib = "^3.10.1"
 
 
 [build-system]
