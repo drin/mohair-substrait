@@ -35,17 +35,22 @@ namespace mohair {
 
   // >> Query operators
   struct MohairOp {
+    uint32_t                    PlanOpID;
     Rel*                        substrait_rel;
     unique_ptr<SubstraitSchema> schema;
 
     virtual ~MohairOp() = default;
 
     MohairOp(Rel* rel, unique_ptr<SubstraitSchema>&& input_schema)
-      : substrait_rel(rel), schema(std::move(input_schema)) {}
+      : substrait_rel(rel), schema(std::move(input_schema)) {
+    }
 
     virtual const string ToString();
     virtual const string ViewStr();
     virtual const string GetName();
+
+    virtual void   AssignOpID();
+    virtual void   UpdateOperatorIDs(vector<MohairOp*>& plan_ops);
 
     virtual bool   IsSink();
     virtual bool   IsOrigin();
@@ -79,22 +84,27 @@ namespace mohair {
 
   // NOTE: deciding what stage to put a pipeline into can be: early/late materialization
   struct PipelineStage {
-    MohairOp*      sink;
-    PipelineStage* next;
-    PipelineVector pipelines;
-    vector<string> origin_names;
-    size_t         length;
-    size_t         width;
+    MohairOp*        sink;
+    PipelineStage*   next;
+    PipelineVector   pipelines;
+    vector<uint64_t> origin_hashes;
+    size_t           length;
+    size_t           width;
+
+    string           stage_desc;
+    uint64_t         stage_hash;
 
     PipelineStage(MohairOp* dest, PipelineStage* next_stage, size_t stage_width)
-      : sink(dest), next(next_stage), length(0), width(stage_width) {
+      : sink(dest), next(next_stage), length(0), width(stage_width), stage_hash(0) {
       pipelines.reserve(stage_width);
     }
 
     const string ToString(string prefix);
     const string ViewStr() { return this->ToString(""); }
 
-    OpPipeline&  CreatePipeline(MohairOp* sink_next);
+    //! Default value for upstream_hash is the FNV-1a offset basis
+    uint64_t    Hash(uint64_t upstream_hash = 14695981039346656037ULL);
+    OpPipeline& CreatePipeline(MohairOp* sink_next);
   };
 
   struct OpPipeline {
@@ -103,15 +113,22 @@ namespace mohair {
     MohairOp*         source;
     vector<MohairOp*> pipe_ops;
 
+    string            flow_desc { "" };
+    uint64_t          flow_hash { 0  };
+
     OpPipeline(MohairOp* dest, MohairOp* dest_next)
-      : sink(dest), next(dest_next), source(nullptr) {}
+      : sink(dest), next(dest_next), source(nullptr), flow_hash(0) {
+      flow_desc = string { sink->ToString() };
+    }
 
     const string ToString(string prefix);
     const string ViewStr() { return this->ToString(""); }
 
-    size_t       Size();
-    void         AddOp(MohairOp* pipe_op);
-    void         SetSource(MohairOp* src);
+    size_t   Size();
+    uint64_t Hash();
+    uint64_t Hash(uint64_t upstream_hash);
+    void     AddOp(MohairOp* pipe_op);
+    void     SetSource(MohairOp* src);
   };
 
   // >> Query plans
@@ -125,24 +142,33 @@ namespace mohair {
 
     StageVector                     pipeline_stages;
     vector<OpPipeline*>             origin_pipelines;
+    vector<MohairOp*>               plan_ops;
 
     unordered_map<uint64_t, string> fn_anchors;
 
     virtual ~SystemPlan() {}
 
     SystemPlan(unique_ptr<PlanMessage>&& plan, unique_ptr<MohairOp>&& op)
-      : plan_msg(std::move(plan)), plan_root(std::move(op)) {}
+      : plan_msg(std::move(plan)), plan_root(std::move(op)) {
+      constexpr size_t initial_countops { 32 };
+      plan_ops.reserve(initial_countops);
+    }
 
     // >> Accessors
     //! Access the function name associated with the given anchor
     string         FnNameForAnchor(uint64_t anchor_id);
     const RelRoot& RootRelation() const;
 
+    uint64_t Hash() const;
+
     // >> Convenience methods
 
     //! Create a PipelineStage (ending with `sink`) and associate it with the downstream
     //  PipelineStage (where output of the new stage will flow to).
-    PipelineStage& CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
+    PipelineStage&    CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
+
+    //! Searches for pipeline sink operators that are in the root subtree
+    vector<MohairOp*> FindOriginPipelines();
 
     //! Builds pipelines from plan operators and discovers plan characteristics
     void BuildPipelines();
@@ -169,6 +195,7 @@ namespace mohair {
     size_t            stage_ndx;
     MohairOp*         superplan_mergerel;
     vector<MohairOp*> subplan_rootrels;
+    vector<uint64_t>  origin_hashes;
 
     //! Constructs a plan split from the given pipeline stage.
     //  If the stage has many pipelines, the anchor is the stage's sink.
@@ -182,32 +209,57 @@ namespace mohair {
 
       // We propagate subplans
       else {
-        // Assume stage sink is the merge relation, unless it's unary
-        // IDEA: if sink is join, then it reduces memory pressure to make it the merge relation
-        //       otherwise, it reduces data movement across the network to push it down
-        superplan_mergerel = split_stage->sink;
+        // Default merge relation is the stage sink
+        uint32_t anchor_opid = 0;
+        superplan_mergerel   = split_stage->sink;
+
+        // TODO: needs validating experiments
+        // TODO: if many downstream engines, an operator could be split into 2 partial
+        //       operators.
+        // hypothesis (one downstream engine):
+        //    if sink has many inputs, using it as the merge relation reduces memory
+        //    pressure at downstream engines (and is thus preferable).
+        //    if sink is unary, it reduces data movement across network to push it down
         if (split_stage->width == 1 and split_stage->pipelines[0]->next != nullptr) {
+          RelCommon* sink_common = GetRelCommon(split_stage->sink->substrait_rel);
+
+          anchor_opid        = sink_common->operator_id();
           superplan_mergerel = split_stage->pipelines[0]->next;
         }
+
+        // TODO: clean up
+        // Cache this for debugging purposes
+        origin_hashes = split_stage->origin_hashes;
 
         size_t count_inputs = superplan_mergerel->GetOpArity();
         subplan_rootrels.reserve(count_inputs);
         for (size_t input_ndx = 0; input_ndx < count_inputs; ++input_ndx) {
-          subplan_rootrels.push_back(
-            superplan_mergerel->GetOpInputs()[input_ndx].get()
-          );
+          MohairOp*  subplan_root   = superplan_mergerel->GetOpInputs()[input_ndx].get();
+          RelCommon* subplan_common = GetRelCommon(subplan_root->substrait_rel);
+
+          // use operator id to capture the correct anchor rel
+          if (anchor_opid == 0 or anchor_opid == subplan_common->operator_id()) {
+            subplan_rootrels.push_back(subplan_root);
+          }
         }
       }
+
+      // Clear split override annotation to reduce confusion
+      superplan_mergerel->substrait_rel->clear_has_splitoverride();
     }
 
     //! Finds a candidate split given a decision algorithm
     static unique_ptr<PlanSplit>
     FindSplit(SystemPlan* sys_plan, const DecomposeAlg& method = DecomposeAlg::None);
 
+    void PrintSplit();
     bool CanSplit();
     bool MergeResultRel(Rel* result_rel);
     bool MergeSubplan(PlanMessage* subplan_msg);
+    bool MergeOriginResult(OpPipeline* origin_pipe, Rel* result_rel);
 
+    vector<OpPipeline*>             RemainingOrigins();
+    unique_ptr<PlanMessage>         ExtractOriginMessage(OpPipeline* origin_pipe);
     unique_ptr<PlanMessage>         ExtractExecSubplan();
     vector<unique_ptr<PlanMessage>> ExtractSubplans();
   };
