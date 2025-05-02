@@ -87,12 +87,14 @@ namespace protobuf {
 namespace skyproto {
 namespace substrait {
 enum DecomposeStats_StepID : int {
-  DecomposeStats_StepID_PARSE = 0,
-  DecomposeStats_StepID_SPLIT = 1,
-  DecomposeStats_StepID_MERGE = 2,
-  DecomposeStats_StepID_DELEGATE = 3,
-  DecomposeStats_StepID_TRANSLATE = 4,
-  DecomposeStats_StepID_ORIGIN = 5,
+  DecomposeStats_StepID_UNKNOWN = 0,
+  DecomposeStats_StepID_PARSE = 1,
+  DecomposeStats_StepID_SPLIT = 2,
+  DecomposeStats_StepID_MERGE = 3,
+  DecomposeStats_StepID_DELEGATE = 4,
+  DecomposeStats_StepID_TRANSLATE = 5,
+  DecomposeStats_StepID_MATERIALIZE = 6,
+  DecomposeStats_StepID_ORIGIN = 7,
   DecomposeStats_StepID_DecomposeStats_StepID_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   DecomposeStats_StepID_DecomposeStats_StepID_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -102,8 +104,8 @@ enum DecomposeStats_StepID : int {
 bool DecomposeStats_StepID_IsValid(int value);
 extern const uint32_t DecomposeStats_StepID_internal_data_[];
 constexpr DecomposeStats_StepID DecomposeStats_StepID_StepID_MIN = static_cast<DecomposeStats_StepID>(0);
-constexpr DecomposeStats_StepID DecomposeStats_StepID_StepID_MAX = static_cast<DecomposeStats_StepID>(5);
-constexpr int DecomposeStats_StepID_StepID_ARRAYSIZE = 5 + 1;
+constexpr DecomposeStats_StepID DecomposeStats_StepID_StepID_MAX = static_cast<DecomposeStats_StepID>(7);
+constexpr int DecomposeStats_StepID_StepID_ARRAYSIZE = 7 + 1;
 const ::google::protobuf::EnumDescriptor*
 DecomposeStats_StepID_descriptor();
 template <typename T>
@@ -116,7 +118,7 @@ const std::string& DecomposeStats_StepID_Name(T value) {
 template <>
 inline const std::string& DecomposeStats_StepID_Name(DecomposeStats_StepID value) {
   return ::google::protobuf::internal::NameOfDenseEnum<DecomposeStats_StepID_descriptor,
-                                                 0, 5>(
+                                                 0, 7>(
       static_cast<int>(value));
 }
 inline bool DecomposeStats_StepID_Parse(absl::string_view name, DecomposeStats_StepID* value) {
@@ -766,11 +768,13 @@ class DecomposeStats final : public ::google::protobuf::Message
   ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
   using StepID = DecomposeStats_StepID;
+  static constexpr StepID UNKNOWN = DecomposeStats_StepID_UNKNOWN;
   static constexpr StepID PARSE = DecomposeStats_StepID_PARSE;
   static constexpr StepID SPLIT = DecomposeStats_StepID_SPLIT;
   static constexpr StepID MERGE = DecomposeStats_StepID_MERGE;
   static constexpr StepID DELEGATE = DecomposeStats_StepID_DELEGATE;
   static constexpr StepID TRANSLATE = DecomposeStats_StepID_TRANSLATE;
+  static constexpr StepID MATERIALIZE = DecomposeStats_StepID_MATERIALIZE;
   static constexpr StepID ORIGIN = DecomposeStats_StepID_ORIGIN;
   static inline bool StepID_IsValid(int value) {
     return DecomposeStats_StepID_IsValid(value);
@@ -791,11 +795,30 @@ class DecomposeStats final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kStepIdFieldNumber = 1,
-    kOperatorIdFieldNumber = 2,
-    kLatencyFieldNumber = 3,
+    kEngineIdFieldNumber = 1,
+    kStepIdFieldNumber = 2,
+    kOperatorIdFieldNumber = 3,
+    kStartTsFieldNumber = 4,
+    kStopTsFieldNumber = 5,
+    kLatencyFieldNumber = 6,
   };
-  // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+  // string engine_id = 1 [json_name = "engineId"];
+  void clear_engine_id() ;
+  const std::string& engine_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_engine_id(Arg_&& arg, Args_... args);
+  std::string* mutable_engine_id();
+  PROTOBUF_NODISCARD std::string* release_engine_id();
+  void set_allocated_engine_id(std::string* value);
+
+  private:
+  const std::string& _internal_engine_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_engine_id(
+      const std::string& value);
+  std::string* _internal_mutable_engine_id();
+
+  public:
+  // .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
   void clear_step_id() ;
   ::skyproto::substrait::DecomposeStats_StepID step_id() const;
   void set_step_id(::skyproto::substrait::DecomposeStats_StepID value);
@@ -805,7 +828,7 @@ class DecomposeStats final : public ::google::protobuf::Message
   void _internal_set_step_id(::skyproto::substrait::DecomposeStats_StepID value);
 
   public:
-  // uint32 operator_id = 2 [json_name = "operatorId"];
+  // uint32 operator_id = 3 [json_name = "operatorId"];
   void clear_operator_id() ;
   ::uint32_t operator_id() const;
   void set_operator_id(::uint32_t value);
@@ -815,7 +838,27 @@ class DecomposeStats final : public ::google::protobuf::Message
   void _internal_set_operator_id(::uint32_t value);
 
   public:
-  // double latency = 3 [json_name = "latency"];
+  // uint64 start_ts = 4 [json_name = "startTs"];
+  void clear_start_ts() ;
+  ::uint64_t start_ts() const;
+  void set_start_ts(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_start_ts() const;
+  void _internal_set_start_ts(::uint64_t value);
+
+  public:
+  // uint64 stop_ts = 5 [json_name = "stopTs"];
+  void clear_stop_ts() ;
+  ::uint64_t stop_ts() const;
+  void set_stop_ts(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_stop_ts() const;
+  void _internal_set_stop_ts(::uint64_t value);
+
+  public:
+  // double latency = 6 [json_name = "latency"];
   void clear_latency() ;
   double latency() const;
   void set_latency(double value);
@@ -830,8 +873,8 @@ class DecomposeStats final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 0,
-      0, 2>
+      3, 6, 0,
+      51, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -848,8 +891,11 @@ class DecomposeStats final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const DecomposeStats& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr engine_id_;
     int step_id_;
     ::uint32_t operator_id_;
+    ::uint64_t start_ts_;
+    ::uint64_t stop_ts_;
     double latency_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -1876,7 +1922,55 @@ class Plan final : public ::google::protobuf::Message
 
 // DecomposeStats
 
-// .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+// string engine_id = 1 [json_name = "engineId"];
+inline void DecomposeStats::clear_engine_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.engine_id_.ClearToEmpty();
+}
+inline const std::string& DecomposeStats::engine_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.engine_id)
+  return _internal_engine_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void DecomposeStats::set_engine_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.engine_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.engine_id)
+}
+inline std::string* DecomposeStats::mutable_engine_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_engine_id();
+  // @@protoc_insertion_point(field_mutable:skyproto.substrait.DecomposeStats.engine_id)
+  return _s;
+}
+inline const std::string& DecomposeStats::_internal_engine_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.engine_id_.Get();
+}
+inline void DecomposeStats::_internal_set_engine_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.engine_id_.Set(value, GetArena());
+}
+inline std::string* DecomposeStats::_internal_mutable_engine_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.engine_id_.Mutable( GetArena());
+}
+inline std::string* DecomposeStats::release_engine_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:skyproto.substrait.DecomposeStats.engine_id)
+  return _impl_.engine_id_.Release();
+}
+inline void DecomposeStats::set_allocated_engine_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.engine_id_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.engine_id_.IsDefault()) {
+    _impl_.engine_id_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:skyproto.substrait.DecomposeStats.engine_id)
+}
+
+// .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
 inline void DecomposeStats::clear_step_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.step_id_ = 0;
@@ -1898,7 +1992,7 @@ inline void DecomposeStats::_internal_set_step_id(::skyproto::substrait::Decompo
   _impl_.step_id_ = value;
 }
 
-// uint32 operator_id = 2 [json_name = "operatorId"];
+// uint32 operator_id = 3 [json_name = "operatorId"];
 inline void DecomposeStats::clear_operator_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.operator_id_ = 0u;
@@ -1920,7 +2014,51 @@ inline void DecomposeStats::_internal_set_operator_id(::uint32_t value) {
   _impl_.operator_id_ = value;
 }
 
-// double latency = 3 [json_name = "latency"];
+// uint64 start_ts = 4 [json_name = "startTs"];
+inline void DecomposeStats::clear_start_ts() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.start_ts_ = ::uint64_t{0u};
+}
+inline ::uint64_t DecomposeStats::start_ts() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.start_ts)
+  return _internal_start_ts();
+}
+inline void DecomposeStats::set_start_ts(::uint64_t value) {
+  _internal_set_start_ts(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.start_ts)
+}
+inline ::uint64_t DecomposeStats::_internal_start_ts() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.start_ts_;
+}
+inline void DecomposeStats::_internal_set_start_ts(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.start_ts_ = value;
+}
+
+// uint64 stop_ts = 5 [json_name = "stopTs"];
+inline void DecomposeStats::clear_stop_ts() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.stop_ts_ = ::uint64_t{0u};
+}
+inline ::uint64_t DecomposeStats::stop_ts() const {
+  // @@protoc_insertion_point(field_get:skyproto.substrait.DecomposeStats.stop_ts)
+  return _internal_stop_ts();
+}
+inline void DecomposeStats::set_stop_ts(::uint64_t value) {
+  _internal_set_stop_ts(value);
+  // @@protoc_insertion_point(field_set:skyproto.substrait.DecomposeStats.stop_ts)
+}
+inline ::uint64_t DecomposeStats::_internal_stop_ts() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.stop_ts_;
+}
+inline void DecomposeStats::_internal_set_stop_ts(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.stop_ts_ = value;
+}
+
+// double latency = 6 [json_name = "latency"];
 inline void DecomposeStats::clear_latency() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.latency_ = 0;

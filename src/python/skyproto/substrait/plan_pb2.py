@@ -26,7 +26,7 @@ from skyproto.substrait import algebra_pb2 as skyproto_dot_substrait_dot_algebra
 from skyproto.substrait.extensions import extensions_pb2 as skyproto_dot_substrait_dot_extensions_dot_extensions__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dskyproto/substrait/plan.proto\x12\x12skyproto.substrait\x1a skyproto/substrait/algebra.proto\x1a.skyproto/substrait/extensions/extensions.proto\"\xe3\x01\n\x0e\x44\x65\x63omposeStats\x12\x42\n\x07step_id\x18\x01 \x01(\x0e\x32).skyproto.substrait.DecomposeStats.StepIDR\x06stepId\x12\x1f\n\x0boperator_id\x18\x02 \x01(\rR\noperatorId\x12\x18\n\x07latency\x18\x03 \x01(\x01R\x07latency\"R\n\x06StepID\x12\t\n\x05PARSE\x10\x00\x12\t\n\x05SPLIT\x10\x01\x12\t\n\x05MERGE\x10\x02\x12\x0c\n\x08\x44\x45LEGATE\x10\x03\x12\r\n\tTRANSLATE\x10\x04\x12\n\n\x06ORIGIN\x10\x05\"p\n\x0e\x45xecutionStats\x12#\n\rpipeline_desc\x18\x01 \x03(\tR\x0cpipelineDesc\x12\x18\n\x07latency\x18\x02 \x03(\x01R\x07latency\x12\x1f\n\x0bresult_size\x18\x03 \x03(\x04R\nresultSize\"\x9c\x01\n\x07PlanRel\x12+\n\x03rel\x18\x01 \x01(\x0b\x32\x17.skyproto.substrait.RelH\x00R\x03rel\x12\x31\n\x04root\x18\x02 \x01(\x0b\x32\x1b.skyproto.substrait.RelRootH\x00R\x04root\x12%\n\x0esubtree_anchor\x18\x03 \x01(\rR\rsubtreeAnchorB\n\n\x08rel_type\"\x80\x05\n\x04Plan\x12\x35\n\x07version\x18\x06 \x01(\x0b\x32\x1b.skyproto.substrait.VersionR\x07version\x12X\n\x0e\x65xtension_uris\x18\x01 \x03(\x0b\x32\x31.skyproto.substrait.extensions.SimpleExtensionURIR\rextensionUris\x12Y\n\nextensions\x18\x02 \x03(\x0b\x32\x39.skyproto.substrait.extensions.SimpleExtensionDeclarationR\nextensions\x12\x39\n\trelations\x18\x03 \x03(\x0b\x32\x1b.skyproto.substrait.PlanRelR\trelations\x12\x61\n\x13\x61\x64vanced_extensions\x18\x04 \x01(\x0b\x32\x30.skyproto.substrait.extensions.AdvancedExtensionR\x12\x61\x64vancedExtensions\x12,\n\x12\x65xpected_type_urls\x18\x05 \x03(\tR\x10\x65xpectedTypeUrls\x12Z\n\x12parameter_bindings\x18\x07 \x03(\x0b\x32+.skyproto.substrait.DynamicParameterBindingR\x11parameterBindings\x12K\n\x0f\x64\x65\x63ompose_stats\x18\x08 \x03(\x0b\x32\".skyproto.substrait.DecomposeStatsR\x0e\x64\x65\x63omposeStats\x12\x17\n\x07plan_id\x18\t \x01(\tR\x06planId\"D\n\x0bPlanVersion\x12\x35\n\x07version\x18\x06 \x01(\x0b\x32\x1b.skyproto.substrait.VersionR\x07version\"\xa9\x01\n\x07Version\x12!\n\x0cmajor_number\x18\x01 \x01(\rR\x0bmajorNumber\x12!\n\x0cminor_number\x18\x02 \x01(\rR\x0bminorNumber\x12!\n\x0cpatch_number\x18\x03 \x01(\rR\x0bpatchNumber\x12\x19\n\x08git_hash\x18\x04 \x01(\tR\x07gitHash\x12\x1a\n\x08producer\x18\x05 \x01(\tR\x08producer\"\x82\x01\n\x17\x44ynamicParameterBinding\x12)\n\x10parameter_anchor\x18\x01 \x01(\rR\x0fparameterAnchor\x12<\n\x05value\x18\x02 \x01(\x0b\x32&.skyproto.substrait.Expression.LiteralR\x05valueB\x8c\x01\n\x16\x63om.skyproto.substraitB\tPlanProtoP\x01\xa2\x02\x03SSX\xaa\x02\x12Skyproto.Substrait\xca\x02\x12Skyproto\\Substrait\xe2\x02\x1eSkyproto\\Substrait\\GPBMetadata\xea\x02\x13Skyproto::Substraitb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dskyproto/substrait/plan.proto\x12\x12skyproto.substrait\x1a skyproto/substrait/algebra.proto\x1a.skyproto/substrait/extensions/extensions.proto\"\xd2\x02\n\x0e\x44\x65\x63omposeStats\x12\x1b\n\tengine_id\x18\x01 \x01(\tR\x08\x65ngineId\x12\x42\n\x07step_id\x18\x02 \x01(\x0e\x32).skyproto.substrait.DecomposeStats.StepIDR\x06stepId\x12\x1f\n\x0boperator_id\x18\x03 \x01(\rR\noperatorId\x12\x19\n\x08start_ts\x18\x04 \x01(\x04R\x07startTs\x12\x17\n\x07stop_ts\x18\x05 \x01(\x04R\x06stopTs\x12\x18\n\x07latency\x18\x06 \x01(\x01R\x07latency\"p\n\x06StepID\x12\x0b\n\x07UNKNOWN\x10\x00\x12\t\n\x05PARSE\x10\x01\x12\t\n\x05SPLIT\x10\x02\x12\t\n\x05MERGE\x10\x03\x12\x0c\n\x08\x44\x45LEGATE\x10\x04\x12\r\n\tTRANSLATE\x10\x05\x12\x0f\n\x0bMATERIALIZE\x10\x06\x12\n\n\x06ORIGIN\x10\x07\"p\n\x0e\x45xecutionStats\x12#\n\rpipeline_desc\x18\x01 \x03(\tR\x0cpipelineDesc\x12\x18\n\x07latency\x18\x02 \x03(\x01R\x07latency\x12\x1f\n\x0bresult_size\x18\x03 \x03(\x04R\nresultSize\"\x9c\x01\n\x07PlanRel\x12+\n\x03rel\x18\x01 \x01(\x0b\x32\x17.skyproto.substrait.RelH\x00R\x03rel\x12\x31\n\x04root\x18\x02 \x01(\x0b\x32\x1b.skyproto.substrait.RelRootH\x00R\x04root\x12%\n\x0esubtree_anchor\x18\x03 \x01(\rR\rsubtreeAnchorB\n\n\x08rel_type\"\x80\x05\n\x04Plan\x12\x35\n\x07version\x18\x06 \x01(\x0b\x32\x1b.skyproto.substrait.VersionR\x07version\x12X\n\x0e\x65xtension_uris\x18\x01 \x03(\x0b\x32\x31.skyproto.substrait.extensions.SimpleExtensionURIR\rextensionUris\x12Y\n\nextensions\x18\x02 \x03(\x0b\x32\x39.skyproto.substrait.extensions.SimpleExtensionDeclarationR\nextensions\x12\x39\n\trelations\x18\x03 \x03(\x0b\x32\x1b.skyproto.substrait.PlanRelR\trelations\x12\x61\n\x13\x61\x64vanced_extensions\x18\x04 \x01(\x0b\x32\x30.skyproto.substrait.extensions.AdvancedExtensionR\x12\x61\x64vancedExtensions\x12,\n\x12\x65xpected_type_urls\x18\x05 \x03(\tR\x10\x65xpectedTypeUrls\x12Z\n\x12parameter_bindings\x18\x07 \x03(\x0b\x32+.skyproto.substrait.DynamicParameterBindingR\x11parameterBindings\x12K\n\x0f\x64\x65\x63ompose_stats\x18\x08 \x03(\x0b\x32\".skyproto.substrait.DecomposeStatsR\x0e\x64\x65\x63omposeStats\x12\x17\n\x07plan_id\x18\t \x01(\tR\x06planId\"D\n\x0bPlanVersion\x12\x35\n\x07version\x18\x06 \x01(\x0b\x32\x1b.skyproto.substrait.VersionR\x07version\"\xa9\x01\n\x07Version\x12!\n\x0cmajor_number\x18\x01 \x01(\rR\x0bmajorNumber\x12!\n\x0cminor_number\x18\x02 \x01(\rR\x0bminorNumber\x12!\n\x0cpatch_number\x18\x03 \x01(\rR\x0bpatchNumber\x12\x19\n\x08git_hash\x18\x04 \x01(\tR\x07gitHash\x12\x1a\n\x08producer\x18\x05 \x01(\tR\x08producer\"\x82\x01\n\x17\x44ynamicParameterBinding\x12)\n\x10parameter_anchor\x18\x01 \x01(\rR\x0fparameterAnchor\x12<\n\x05value\x18\x02 \x01(\x0b\x32&.skyproto.substrait.Expression.LiteralR\x05valueB\x8c\x01\n\x16\x63om.skyproto.substraitB\tPlanProtoP\x01\xa2\x02\x03SSX\xaa\x02\x12Skyproto.Substrait\xca\x02\x12Skyproto\\Substrait\xe2\x02\x1eSkyproto\\Substrait\\GPBMetadata\xea\x02\x13Skyproto::Substraitb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,19 +35,19 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\026com.skyproto.substraitB\tPlanProtoP\001\242\002\003SSX\252\002\022Skyproto.Substrait\312\002\022Skyproto\\Substrait\342\002\036Skyproto\\Substrait\\GPBMetadata\352\002\023Skyproto::Substrait'
   _globals['_DECOMPOSESTATS']._serialized_start=136
-  _globals['_DECOMPOSESTATS']._serialized_end=363
-  _globals['_DECOMPOSESTATS_STEPID']._serialized_start=281
-  _globals['_DECOMPOSESTATS_STEPID']._serialized_end=363
-  _globals['_EXECUTIONSTATS']._serialized_start=365
-  _globals['_EXECUTIONSTATS']._serialized_end=477
-  _globals['_PLANREL']._serialized_start=480
-  _globals['_PLANREL']._serialized_end=636
-  _globals['_PLAN']._serialized_start=639
-  _globals['_PLAN']._serialized_end=1279
-  _globals['_PLANVERSION']._serialized_start=1281
-  _globals['_PLANVERSION']._serialized_end=1349
-  _globals['_VERSION']._serialized_start=1352
-  _globals['_VERSION']._serialized_end=1521
-  _globals['_DYNAMICPARAMETERBINDING']._serialized_start=1524
-  _globals['_DYNAMICPARAMETERBINDING']._serialized_end=1654
+  _globals['_DECOMPOSESTATS']._serialized_end=474
+  _globals['_DECOMPOSESTATS_STEPID']._serialized_start=362
+  _globals['_DECOMPOSESTATS_STEPID']._serialized_end=474
+  _globals['_EXECUTIONSTATS']._serialized_start=476
+  _globals['_EXECUTIONSTATS']._serialized_end=588
+  _globals['_PLANREL']._serialized_start=591
+  _globals['_PLANREL']._serialized_end=747
+  _globals['_PLAN']._serialized_start=750
+  _globals['_PLAN']._serialized_end=1390
+  _globals['_PLANVERSION']._serialized_start=1392
+  _globals['_PLANVERSION']._serialized_end=1460
+  _globals['_VERSION']._serialized_start=1463
+  _globals['_VERSION']._serialized_end=1632
+  _globals['_DYNAMICPARAMETERBINDING']._serialized_start=1635
+  _globals['_DYNAMICPARAMETERBINDING']._serialized_end=1765
 # @@protoc_insertion_point(module_scope)

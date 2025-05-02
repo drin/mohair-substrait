@@ -90,8 +90,13 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr DecomposeStats::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : step_id_{static_cast< ::skyproto::substrait::DecomposeStats_StepID >(0)},
+      : engine_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        step_id_{static_cast< ::skyproto::substrait::DecomposeStats_StepID >(0)},
         operator_id_{0u},
+        start_ts_{::uint64_t{0u}},
+        stop_ts_{::uint64_t{0u}},
         latency_{0},
         _cached_size_{0} {}
 
@@ -243,8 +248,11 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.engine_id_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.step_id_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.operator_id_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.start_ts_),
+        PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.stop_ts_),
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::DecomposeStats, _impl_.latency_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::skyproto::substrait::ExecutionStats, _internal_metadata_),
@@ -335,12 +343,12 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::skyproto::substrait::DecomposeStats)},
-        {11, -1, -1, sizeof(::skyproto::substrait::ExecutionStats)},
-        {22, -1, -1, sizeof(::skyproto::substrait::PlanRel)},
-        {34, 51, -1, sizeof(::skyproto::substrait::Plan)},
-        {60, 69, -1, sizeof(::skyproto::substrait::PlanVersion)},
-        {70, -1, -1, sizeof(::skyproto::substrait::Version)},
-        {83, 93, -1, sizeof(::skyproto::substrait::DynamicParameterBinding)},
+        {14, -1, -1, sizeof(::skyproto::substrait::ExecutionStats)},
+        {25, -1, -1, sizeof(::skyproto::substrait::PlanRel)},
+        {37, 54, -1, sizeof(::skyproto::substrait::Plan)},
+        {63, 72, -1, sizeof(::skyproto::substrait::PlanVersion)},
+        {73, -1, -1, sizeof(::skyproto::substrait::Version)},
+        {86, 96, -1, sizeof(::skyproto::substrait::DynamicParameterBinding)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::skyproto::substrait::_DecomposeStats_default_instance_._instance,
@@ -356,49 +364,51 @@ const char descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto[] ABSL_
     "\n\035skyproto/substrait/plan.proto\022\022skyprot"
     "o.substrait\032 skyproto/substrait/algebra."
     "proto\032.skyproto/substrait/extensions/ext"
-    "ensions.proto\"\343\001\n\016DecomposeStats\022B\n\007step"
-    "_id\030\001 \001(\0162).skyproto.substrait.Decompose"
-    "Stats.StepIDR\006stepId\022\037\n\013operator_id\030\002 \001("
-    "\rR\noperatorId\022\030\n\007latency\030\003 \001(\001R\007latency\""
-    "R\n\006StepID\022\t\n\005PARSE\020\000\022\t\n\005SPLIT\020\001\022\t\n\005MERGE"
-    "\020\002\022\014\n\010DELEGATE\020\003\022\r\n\tTRANSLATE\020\004\022\n\n\006ORIGI"
-    "N\020\005\"p\n\016ExecutionStats\022#\n\rpipeline_desc\030\001"
-    " \003(\tR\014pipelineDesc\022\030\n\007latency\030\002 \003(\001R\007lat"
-    "ency\022\037\n\013result_size\030\003 \003(\004R\nresultSize\"\234\001"
-    "\n\007PlanRel\022+\n\003rel\030\001 \001(\0132\027.skyproto.substr"
-    "ait.RelH\000R\003rel\0221\n\004root\030\002 \001(\0132\033.skyproto."
-    "substrait.RelRootH\000R\004root\022%\n\016subtree_anc"
-    "hor\030\003 \001(\rR\rsubtreeAnchorB\n\n\010rel_type\"\200\005\n"
-    "\004Plan\0225\n\007version\030\006 \001(\0132\033.skyproto.substr"
-    "ait.VersionR\007version\022X\n\016extension_uris\030\001"
-    " \003(\01321.skyproto.substrait.extensions.Sim"
-    "pleExtensionURIR\rextensionUris\022Y\n\nextens"
-    "ions\030\002 \003(\01329.skyproto.substrait.extensio"
-    "ns.SimpleExtensionDeclarationR\nextension"
-    "s\0229\n\trelations\030\003 \003(\0132\033.skyproto.substrai"
-    "t.PlanRelR\trelations\022a\n\023advanced_extensi"
-    "ons\030\004 \001(\01320.skyproto.substrait.extension"
-    "s.AdvancedExtensionR\022advancedExtensions\022"
-    ",\n\022expected_type_urls\030\005 \003(\tR\020expectedTyp"
-    "eUrls\022Z\n\022parameter_bindings\030\007 \003(\0132+.skyp"
-    "roto.substrait.DynamicParameterBindingR\021"
-    "parameterBindings\022K\n\017decompose_stats\030\010 \003"
-    "(\0132\".skyproto.substrait.DecomposeStatsR\016"
-    "decomposeStats\022\027\n\007plan_id\030\t \001(\tR\006planId\""
-    "D\n\013PlanVersion\0225\n\007version\030\006 \001(\0132\033.skypro"
-    "to.substrait.VersionR\007version\"\251\001\n\007Versio"
-    "n\022!\n\014major_number\030\001 \001(\rR\013majorNumber\022!\n\014"
-    "minor_number\030\002 \001(\rR\013minorNumber\022!\n\014patch"
-    "_number\030\003 \001(\rR\013patchNumber\022\031\n\010git_hash\030\004"
-    " \001(\tR\007gitHash\022\032\n\010producer\030\005 \001(\tR\010produce"
-    "r\"\202\001\n\027DynamicParameterBinding\022)\n\020paramet"
-    "er_anchor\030\001 \001(\rR\017parameterAnchor\022<\n\005valu"
-    "e\030\002 \001(\0132&.skyproto.substrait.Expression."
-    "LiteralR\005valueB\214\001\n\026com.skyproto.substrai"
-    "tB\tPlanProtoP\001\242\002\003SSX\252\002\022Skyproto.Substrai"
-    "t\312\002\022Skyproto\\Substrait\342\002\036Skyproto\\Substr"
-    "ait\\GPBMetadata\352\002\023Skyproto::Substraitb\006p"
-    "roto3"
+    "ensions.proto\"\322\002\n\016DecomposeStats\022\033\n\tengi"
+    "ne_id\030\001 \001(\tR\010engineId\022B\n\007step_id\030\002 \001(\0162)"
+    ".skyproto.substrait.DecomposeStats.StepI"
+    "DR\006stepId\022\037\n\013operator_id\030\003 \001(\rR\noperator"
+    "Id\022\031\n\010start_ts\030\004 \001(\004R\007startTs\022\027\n\007stop_ts"
+    "\030\005 \001(\004R\006stopTs\022\030\n\007latency\030\006 \001(\001R\007latency"
+    "\"p\n\006StepID\022\013\n\007UNKNOWN\020\000\022\t\n\005PARSE\020\001\022\t\n\005SP"
+    "LIT\020\002\022\t\n\005MERGE\020\003\022\014\n\010DELEGATE\020\004\022\r\n\tTRANSL"
+    "ATE\020\005\022\017\n\013MATERIALIZE\020\006\022\n\n\006ORIGIN\020\007\"p\n\016Ex"
+    "ecutionStats\022#\n\rpipeline_desc\030\001 \003(\tR\014pip"
+    "elineDesc\022\030\n\007latency\030\002 \003(\001R\007latency\022\037\n\013r"
+    "esult_size\030\003 \003(\004R\nresultSize\"\234\001\n\007PlanRel"
+    "\022+\n\003rel\030\001 \001(\0132\027.skyproto.substrait.RelH\000"
+    "R\003rel\0221\n\004root\030\002 \001(\0132\033.skyproto.substrait"
+    ".RelRootH\000R\004root\022%\n\016subtree_anchor\030\003 \001(\r"
+    "R\rsubtreeAnchorB\n\n\010rel_type\"\200\005\n\004Plan\0225\n\007"
+    "version\030\006 \001(\0132\033.skyproto.substrait.Versi"
+    "onR\007version\022X\n\016extension_uris\030\001 \003(\01321.sk"
+    "yproto.substrait.extensions.SimpleExtens"
+    "ionURIR\rextensionUris\022Y\n\nextensions\030\002 \003("
+    "\01329.skyproto.substrait.extensions.Simple"
+    "ExtensionDeclarationR\nextensions\0229\n\trela"
+    "tions\030\003 \003(\0132\033.skyproto.substrait.PlanRel"
+    "R\trelations\022a\n\023advanced_extensions\030\004 \001(\013"
+    "20.skyproto.substrait.extensions.Advance"
+    "dExtensionR\022advancedExtensions\022,\n\022expect"
+    "ed_type_urls\030\005 \003(\tR\020expectedTypeUrls\022Z\n\022"
+    "parameter_bindings\030\007 \003(\0132+.skyproto.subs"
+    "trait.DynamicParameterBindingR\021parameter"
+    "Bindings\022K\n\017decompose_stats\030\010 \003(\0132\".skyp"
+    "roto.substrait.DecomposeStatsR\016decompose"
+    "Stats\022\027\n\007plan_id\030\t \001(\tR\006planId\"D\n\013PlanVe"
+    "rsion\0225\n\007version\030\006 \001(\0132\033.skyproto.substr"
+    "ait.VersionR\007version\"\251\001\n\007Version\022!\n\014majo"
+    "r_number\030\001 \001(\rR\013majorNumber\022!\n\014minor_num"
+    "ber\030\002 \001(\rR\013minorNumber\022!\n\014patch_number\030\003"
+    " \001(\rR\013patchNumber\022\031\n\010git_hash\030\004 \001(\tR\007git"
+    "Hash\022\032\n\010producer\030\005 \001(\tR\010producer\"\202\001\n\027Dyn"
+    "amicParameterBinding\022)\n\020parameter_anchor"
+    "\030\001 \001(\rR\017parameterAnchor\022<\n\005value\030\002 \001(\0132&"
+    ".skyproto.substrait.Expression.LiteralR\005"
+    "valueB\214\001\n\026com.skyproto.substraitB\tPlanPr"
+    "otoP\001\242\002\003SSX\252\002\022Skyproto.Substrait\312\002\022Skypr"
+    "oto\\Substrait\342\002\036Skyproto\\Substrait\\GPBMe"
+    "tadata\352\002\023Skyproto::Substraitb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_deps[2] =
     {
@@ -409,7 +419,7 @@ static ::absl::once_flag descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_on
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_skyproto_2fsubstrait_2fplan_2eproto = {
     false,
     false,
-    1805,
+    1916,
     descriptor_table_protodef_skyproto_2fsubstrait_2fplan_2eproto,
     "skyproto/substrait/plan.proto",
     &descriptor_table_skyproto_2fsubstrait_2fplan_2eproto_once,
@@ -429,18 +439,20 @@ const ::google::protobuf::EnumDescriptor* DecomposeStats_StepID_descriptor() {
   return file_level_enum_descriptors_skyproto_2fsubstrait_2fplan_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t DecomposeStats_StepID_internal_data_[] = {
-    393216u, 0u, };
+    524288u, 0u, };
 bool DecomposeStats_StepID_IsValid(int value) {
-  return 0 <= value && value <= 5;
+  return 0 <= value && value <= 7;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 
+constexpr DecomposeStats_StepID DecomposeStats::UNKNOWN;
 constexpr DecomposeStats_StepID DecomposeStats::PARSE;
 constexpr DecomposeStats_StepID DecomposeStats::SPLIT;
 constexpr DecomposeStats_StepID DecomposeStats::MERGE;
 constexpr DecomposeStats_StepID DecomposeStats::DELEGATE;
 constexpr DecomposeStats_StepID DecomposeStats::TRANSLATE;
+constexpr DecomposeStats_StepID DecomposeStats::MATERIALIZE;
 constexpr DecomposeStats_StepID DecomposeStats::ORIGIN;
 constexpr DecomposeStats_StepID DecomposeStats::StepID_MIN;
 constexpr DecomposeStats_StepID DecomposeStats::StepID_MAX;
@@ -463,15 +475,40 @@ DecomposeStats::DecomposeStats(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:skyproto.substrait.DecomposeStats)
 }
+inline PROTOBUF_NDEBUG_INLINE DecomposeStats::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::skyproto::substrait::DecomposeStats& from_msg)
+      : engine_id_(arena, from.engine_id_),
+        _cached_size_{0} {}
+
 DecomposeStats::DecomposeStats(
-    ::google::protobuf::Arena* arena, const DecomposeStats& from)
-    : DecomposeStats(arena) {
-  MergeFrom(from);
+    ::google::protobuf::Arena* arena,
+    const DecomposeStats& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  DecomposeStats* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, step_id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, step_id_),
+           offsetof(Impl_, latency_) -
+               offsetof(Impl_, step_id_) +
+               sizeof(Impl_::latency_));
+
+  // @@protoc_insertion_point(copy_constructor:skyproto.substrait.DecomposeStats)
 }
 inline PROTOBUF_NDEBUG_INLINE DecomposeStats::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
+      : engine_id_(arena),
+        _cached_size_{0} {}
 
 inline void DecomposeStats::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -490,6 +527,7 @@ inline void DecomposeStats::SharedDtor(MessageLite& self) {
   DecomposeStats& this_ = static_cast<DecomposeStats&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.engine_id_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -498,7 +536,7 @@ inline void* DecomposeStats::PlacementNew_(const void*, void* mem,
   return ::new (mem) DecomposeStats(arena);
 }
 constexpr auto DecomposeStats::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(DecomposeStats),
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(DecomposeStats),
                                             alignof(DecomposeStats));
 }
 PROTOBUF_CONSTINIT
@@ -529,15 +567,15 @@ const ::google::protobuf::internal::ClassData* DecomposeStats::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> DecomposeStats::_table_ = {
+const ::_pbi::TcParseTable<3, 6, 0, 51, 2> DecomposeStats::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    6, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967232,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    6,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -548,30 +586,52 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> DecomposeStats::_table_ = {
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+    // string engine_id = 1 [json_name = "engineId"];
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.engine_id_)}},
+    // .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DecomposeStats, _impl_.step_id_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_)}},
-    // uint32 operator_id = 2 [json_name = "operatorId"];
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_)}},
+    // uint32 operator_id = 3 [json_name = "operatorId"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(DecomposeStats, _impl_.operator_id_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.operator_id_)}},
-    // double latency = 3 [json_name = "latency"];
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.operator_id_)}},
+    // uint64 start_ts = 4 [json_name = "startTs"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(DecomposeStats, _impl_.start_ts_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.start_ts_)}},
+    // uint64 stop_ts = 5 [json_name = "stopTs"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(DecomposeStats, _impl_.stop_ts_), 63>(),
+     {40, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.stop_ts_)}},
+    // double latency = 6 [json_name = "latency"];
     {::_pbi::TcParser::FastF64S1,
-     {25, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_)}},
+     {49, 63, 0, PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_)}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
-    // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+    // string engine_id = 1 [json_name = "engineId"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.engine_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
     {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.step_id_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
-    // uint32 operator_id = 2 [json_name = "operatorId"];
+    // uint32 operator_id = 3 [json_name = "operatorId"];
     {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.operator_id_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
-    // double latency = 3 [json_name = "latency"];
+    // uint64 start_ts = 4 [json_name = "startTs"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.start_ts_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
+    // uint64 stop_ts = 5 [json_name = "stopTs"];
+    {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.stop_ts_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
+    // double latency = 6 [json_name = "latency"];
     {PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
   }},
   // no aux_entries
   {{
+    "\41\11\0\0\0\0\0\0"
+    "skyproto.substrait.DecomposeStats"
+    "engine_id"
   }},
 };
 
@@ -582,6 +642,7 @@ PROTOBUF_NOINLINE void DecomposeStats::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.engine_id_.ClearToEmpty();
   ::memset(&_impl_.step_id_, 0, static_cast<::size_t>(
       reinterpret_cast<char*>(&_impl_.latency_) -
       reinterpret_cast<char*>(&_impl_.step_id_)) + sizeof(_impl_.latency_));
@@ -603,25 +664,47 @@ PROTOBUF_NOINLINE void DecomposeStats::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+          // string engine_id = 1 [json_name = "engineId"];
+          if (!this_._internal_engine_id().empty()) {
+            const std::string& _s = this_._internal_engine_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "skyproto.substrait.DecomposeStats.engine_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
           if (this_._internal_step_id() != 0) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteEnumToArray(
-                1, this_._internal_step_id(), target);
+                2, this_._internal_step_id(), target);
           }
 
-          // uint32 operator_id = 2 [json_name = "operatorId"];
+          // uint32 operator_id = 3 [json_name = "operatorId"];
           if (this_._internal_operator_id() != 0) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-                2, this_._internal_operator_id(), target);
+                3, this_._internal_operator_id(), target);
           }
 
-          // double latency = 3 [json_name = "latency"];
+          // uint64 start_ts = 4 [json_name = "startTs"];
+          if (this_._internal_start_ts() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+                4, this_._internal_start_ts(), target);
+          }
+
+          // uint64 stop_ts = 5 [json_name = "stopTs"];
+          if (this_._internal_stop_ts() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+                5, this_._internal_stop_ts(), target);
+          }
+
+          // double latency = 6 [json_name = "latency"];
           if (::absl::bit_cast<::uint64_t>(this_._internal_latency()) != 0) {
             target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteDoubleToArray(
-                3, this_._internal_latency(), target);
+                6, this_._internal_latency(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -649,17 +732,32 @@ PROTOBUF_NOINLINE void DecomposeStats::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // .skyproto.substrait.DecomposeStats.StepID step_id = 1 [json_name = "stepId"];
+            // string engine_id = 1 [json_name = "engineId"];
+            if (!this_._internal_engine_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_engine_id());
+            }
+            // .skyproto.substrait.DecomposeStats.StepID step_id = 2 [json_name = "stepId"];
             if (this_._internal_step_id() != 0) {
               total_size += 1 +
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_step_id());
             }
-            // uint32 operator_id = 2 [json_name = "operatorId"];
+            // uint32 operator_id = 3 [json_name = "operatorId"];
             if (this_._internal_operator_id() != 0) {
               total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
                   this_._internal_operator_id());
             }
-            // double latency = 3 [json_name = "latency"];
+            // uint64 start_ts = 4 [json_name = "startTs"];
+            if (this_._internal_start_ts() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+                  this_._internal_start_ts());
+            }
+            // uint64 stop_ts = 5 [json_name = "stopTs"];
+            if (this_._internal_stop_ts() != 0) {
+              total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+                  this_._internal_stop_ts());
+            }
+            // double latency = 6 [json_name = "latency"];
             if (::absl::bit_cast<::uint64_t>(this_._internal_latency()) != 0) {
               total_size += 9;
             }
@@ -676,11 +774,20 @@ void DecomposeStats::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (!from._internal_engine_id().empty()) {
+    _this->_internal_set_engine_id(from._internal_engine_id());
+  }
   if (from._internal_step_id() != 0) {
     _this->_impl_.step_id_ = from._impl_.step_id_;
   }
   if (from._internal_operator_id() != 0) {
     _this->_impl_.operator_id_ = from._impl_.operator_id_;
+  }
+  if (from._internal_start_ts() != 0) {
+    _this->_impl_.start_ts_ = from._impl_.start_ts_;
+  }
+  if (from._internal_stop_ts() != 0) {
+    _this->_impl_.stop_ts_ = from._impl_.stop_ts_;
   }
   if (::absl::bit_cast<::uint64_t>(from._internal_latency()) != 0) {
     _this->_impl_.latency_ = from._impl_.latency_;
@@ -698,7 +805,10 @@ void DecomposeStats::CopyFrom(const DecomposeStats& from) {
 
 void DecomposeStats::InternalSwap(DecomposeStats* PROTOBUF_RESTRICT other) {
   using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.engine_id_, &other->_impl_.engine_id_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(DecomposeStats, _impl_.latency_)
       + sizeof(DecomposeStats::_impl_.latency_)
