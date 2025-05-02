@@ -133,12 +133,16 @@ namespace mohair {
 
 namespace mohair {
 
-  //! Stringify a steady clock timestamp as microseconds
-  string StringifyTS(const SteadyTS& ts);
+  //! Return the timestamps as microsecond ticks
+  std::chrono::microseconds::rep
+  MicroTSVal(const SteadyTS& tstamp);
 
   //! Return the difference between two timestamps as microsecond ticks
   std::chrono::microseconds::rep
   MicroTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);
+
+  //! Stringify a steady clock timestamp as microseconds
+  string StringifyTS(const SteadyTS& ts);
 
   //! Stringify the difference between two timestamps as microseconds
   string StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop);

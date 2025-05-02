@@ -43,30 +43,25 @@ namespace mohair {
 namespace mohair {
 
   // >> Convenience functions for time logging
-
-  string StringifyTS(const SteadyTS& ts) {
-    auto ts_ms = std::chrono::duration_cast<std::chrono::microseconds>(
-      ts.time_since_epoch()
+  std::chrono::microseconds::rep
+  MicroTSVal(const SteadyTS& tstamp) {
+    auto stamp_ms = std::chrono::duration_cast<std::chrono::microseconds>(
+      tstamp.time_since_epoch()
     );
 
-    return std::to_string(ts_ms.count());
+    return stamp_ms.count();
   }
 
   std::chrono::microseconds::rep
   MicroTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
-    auto start_ms = std::chrono::duration_cast<std::chrono::microseconds>(
-      ts_start.time_since_epoch()
-    );
-
-    auto stop_ms = std::chrono::duration_cast<std::chrono::microseconds>(
-      ts_stop.time_since_epoch()
-    );
-
-    return stop_ms.count() - start_ms.count();
+    return MicroTSVal(ts_stop) - MicroTSVal(ts_start);
   }
 
-  string
-  StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
+  string StringifyTS(const SteadyTS& ts) {
+    return std::to_string(MicroTSVal(ts));
+  }
+
+  string StringifyTSDiff(const SteadyTS& ts_start, const SteadyTS& ts_stop) {
     return std::to_string(MicroTSDiff(ts_start, ts_stop));
   }
 
