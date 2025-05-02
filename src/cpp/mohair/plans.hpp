@@ -84,19 +84,24 @@ namespace mohair {
 
   // NOTE: deciding what stage to put a pipeline into can be: early/late materialization
   struct PipelineStage {
-    MohairOp*        sink;
     PipelineStage*   next;
+    MohairOp*        sink;
     PipelineVector   pipelines;
     vector<uint64_t> origin_hashes;
     size_t           length;
     size_t           width;
 
+    //! Stage descriptor and hash include the sink, thus building on what a downstream
+    //  pipeline already constructed
     string           stage_desc;
     uint64_t         stage_hash;
 
-    PipelineStage(MohairOp* dest, PipelineStage* next_stage, size_t stage_width)
-      : sink(dest), next(next_stage), length(0), width(stage_width), stage_hash(0) {
-      pipelines.reserve(stage_width);
+    PipelineStage(PipelineStage* next_stage, MohairOp* dest)
+      : next(next_stage), sink(dest), length(0), stage_hash(0) {
+      stage_desc = string { sink->ToString() };
+      width      = sink->GetOpArity();
+
+      pipelines.reserve(width);
     }
 
     const string ToString(string prefix);
@@ -104,29 +109,31 @@ namespace mohair {
 
     //! Default value for upstream_hash is the FNV-1a offset basis
     uint64_t    Hash(uint64_t upstream_hash = 14695981039346656037ULL);
-    OpPipeline& CreatePipeline(MohairOp* sink_next);
+    OpPipeline& CreatePipeline(OpPipeline* next_pipe);
+
+    //! A convenience method to be called when an origin pipeline is built
+    void AddOriginPipeline(OpPipeline& origin_pipe);
   };
 
   struct OpPipeline {
+    OpPipeline*       next;
     MohairOp*         sink;
-    MohairOp*         next;
     MohairOp*         source;
     vector<MohairOp*> pipe_ops;
 
-    string            flow_desc { "" };
-    uint64_t          flow_hash { 0  };
+    //! Flow descriptor and hash for a pipeline are exclusive of the sink
+    string            flow_desc;
+    uint64_t          flow_hash;
+    vector<uint64_t>  upstream_hashes;
 
-    OpPipeline(MohairOp* dest, MohairOp* dest_next)
-      : sink(dest), next(dest_next), source(nullptr), flow_hash(0) {
-      flow_desc = string { sink->ToString() };
-    }
+    OpPipeline(OpPipeline* next_pipe, MohairOp* dest)
+      : next(next_pipe), sink(dest), source(nullptr), flow_desc(""), flow_hash(0) {}
 
     const string ToString(string prefix);
     const string ViewStr() { return this->ToString(""); }
 
     size_t   Size();
     uint64_t Hash();
-    uint64_t Hash(uint64_t upstream_hash);
     void     AddOp(MohairOp* pipe_op);
     void     SetSource(MohairOp* src);
   };
@@ -163,9 +170,9 @@ namespace mohair {
 
     // >> Convenience methods
 
-    //! Create a PipelineStage (ending with `sink`) and associate it with the downstream
-    //  PipelineStage (where output of the new stage will flow to).
-    PipelineStage&    CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width);
+    //! Create a new upstream PipelineStage and associate it with the given downstream
+    //  stage and sink operator.
+    PipelineStage& CreatePipelineStage(PipelineStage* next, MohairOp* sink);
 
     //! Searches for pipeline sink operators that are in the root subtree
     vector<MohairOp*> FindOriginPipelines();
@@ -221,10 +228,19 @@ namespace mohair {
         //    pressure at downstream engines (and is thus preferable).
         //    if sink is unary, it reduces data movement across network to push it down
         if (split_stage->width == 1 and split_stage->pipelines[0]->next != nullptr) {
-          RelCommon* sink_common = GetRelCommon(split_stage->sink->substrait_rel);
+          OpPipeline* next_pipe = split_stage->pipelines[0]->next;
+          MohairOp*   sink_next = next_pipe->sink;
+          if (not next_pipe->pipe_ops.empty()) {
+            sink_next = next_pipe->pipe_ops.back();
+          }
 
-          anchor_opid        = sink_common->operator_id();
-          superplan_mergerel = split_stage->pipelines[0]->next;
+          // Set the merge operator to be downstream of the stage sink
+          // (so we can delegate the stage sink)
+          superplan_mergerel = sink_next;
+
+          // Set anchor operator ID to the sink operator, so we can find the correct
+          // pointer (merge op -> anchor op) to modify
+          anchor_opid = GetRelCommon(split_stage->sink->substrait_rel)->operator_id();
         }
 
         // TODO: clean up

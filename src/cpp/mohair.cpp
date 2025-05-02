@@ -298,11 +298,10 @@ namespace mohair {
 
   //! Create a SkyResultRel that describes how to read a remote materialized result
   unique_ptr<SkyResultRel> CreateResultRelForPlan(Plan* view_plan) {
-    PlanRel*         root_subtree = GetPlanRoot(view_plan);
-    const Rel&       root_rel     = root_subtree->root().input();
-    const RelCommon& rel_common   = GetRelCommon(root_rel);
+    PlanRel*         view_planrel = GetPlanRoot(view_plan);
+    const RelCommon& view_common  = GetRelCommon(view_planrel->root().input());
 
-    if (not rel_common.hint().has_output_schema()) {
+    if (not view_common.hint().has_output_schema()) {
       std::cerr << "Could not find output schema to construct SkyResultRel from"
                 << std::endl
       ;
@@ -310,7 +309,7 @@ namespace mohair {
     }
 
     auto result_op = std::make_unique<SkyResultRel>();
-    result_op->mutable_schema()->CopyFrom(rel_common.hint().output_schema());
+    result_op->mutable_schema()->CopyFrom(view_common.hint().output_schema());
 
     return result_op;
   }

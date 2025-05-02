@@ -184,7 +184,19 @@ namespace mohair {
   uint64_t OpPipeline::Hash() {
     static std::hash<string> descr_hasher;
 
-    if (flow_hash == 0) { flow_hash = descr_hasher(this->flow_desc); }
+    if (flow_hash == 0) {
+      flow_hash = descr_hasher(this->flow_desc);
+      for (uint64_t upstream_hash : upstream_hashes) {
+        CombineHashes(flow_hash, upstream_hash);
+      }
+
+      // Pipeline's responsibility to maintain identity of the end streaming op
+      if (not pipe_ops.empty()) {
+        RelCommon* pipe_common = GetRelCommon(pipe_ops[0]->substrait_rel);
+        pipe_common->mutable_hint()->set_alias_hash(flow_hash);
+        pipe_common->mutable_hint()->set_alias(flow_desc);
+      }
+    }
 
     return flow_hash;
   }
@@ -256,6 +268,7 @@ namespace mohair {
     CombineHashes(stage_hash, upstream_hash);
 
     // Store the value in the plan for later re-use
+    // Stage's responsibility to maintain identify of the sink and source ops
     stage_common->mutable_hint()->set_alias_hash(stage_hash);
     stage_common->mutable_hint()->set_alias(stage_desc);
     return stage_hash;
@@ -264,13 +277,29 @@ namespace mohair {
   //! Create a pipeline flowing to the same sink and with a pointer to the sink's
   //  downstream operator (where output flows to); this operator is considered when
   //  splitting the plan.
-  OpPipeline& PipelineStage::CreatePipeline(MohairOp* sink_next) {
-    auto new_pipeline = (
-      pipelines.emplace_back(std::make_unique<OpPipeline>(sink, sink_next))
-               .get()
+  OpPipeline& PipelineStage::CreatePipeline(OpPipeline* next_pipe) {
+    auto& new_pipeline = pipelines.emplace_back(
+      std::make_unique<OpPipeline>(next_pipe, sink)
     );
 
-    return *new_pipeline;
+    return *(new_pipeline.get());
+  }
+
+  //! Ensures the next downstream pipeline gets updated, but all downstream stages get
+  //  updated membership
+  void PipelineStage::AddOriginPipeline(OpPipeline& origin_pipe) {
+    uint64_t origin_hash = origin_pipe.Hash();
+
+    // Make sure the downstream pipeline gets updated
+    if (origin_pipe.next != nullptr) {
+      origin_pipe.next->upstream_hashes.push_back(origin_hash);
+    }
+
+    // Update origin membership
+    PipelineStage* stage_itr = this;
+    for (; stage_itr != nullptr; stage_itr = stage_itr->next) {
+      stage_itr->origin_hashes.push_back(origin_hash);
+    }
   }
 
 
@@ -297,13 +326,12 @@ namespace mohair {
   }
 
   PipelineStage&
-  SystemPlan::CreatePipelineStage(MohairOp* sink, PipelineStage* next, size_t width) {
-    auto new_stage = (
-      pipeline_stages.emplace_back(std::make_unique<PipelineStage>(sink, next, width))
-                     .get()
+  SystemPlan::CreatePipelineStage(PipelineStage* next, MohairOp* sink) {
+    auto& new_stage = pipeline_stages.emplace_back(
+      std::make_unique<PipelineStage>(next, sink)
     );
 
-    return *new_stage;
+    return *(new_stage.get());
   }
 
   // TODO: figure out what happens with an OpReference
@@ -322,12 +350,11 @@ namespace mohair {
 
     // Base case: we hit an origin operator (e.g. ReadRel or SkyPartitionRel)
     if (current_op->IsOrigin()) {
+      // Add to plan-wide index
       plan->origin_pipelines.push_back(&current_pipe);
 
-      PipelineStage* stage_itr = &current_stage;
-      for (; stage_itr != nullptr; stage_itr = stage_itr->next) {
-        stage_itr->origin_hashes.push_back(current_pipe.Hash());
-      }
+      // Allow stage to update metadata
+      current_stage.AddOriginPipeline(current_pipe);
 
       return;
     }
@@ -337,18 +364,16 @@ namespace mohair {
 
     // Create a new stage with the sink operator
     // NOTE: "upstream" means closer to the __origin__ of data flow (source table)
-    size_t         count_inputs   = current_op->GetOpArity();
     PipelineStage& upstream_stage = plan->CreatePipelineStage(
-      current_op, &current_stage, count_inputs
+      &current_stage, current_op
     );
 
     // For each input operator, create a pipeline and recurse
+    size_t count_inputs = current_op->GetOpArity();
     for (size_t child_ndx = 0; child_ndx < count_inputs; ++child_ndx) {
       MohairOp* child_op  = (current_op->GetOpInputs()[child_ndx]).get();
-      MohairOp* sink_next = current_pipe.sink;
-      if (not current_pipe.pipe_ops.empty()) { sink_next = current_pipe.pipe_ops.back(); }
 
-      OpPipeline& upstream_pipe = upstream_stage.CreatePipeline(sink_next);
+      OpPipeline& upstream_pipe = upstream_stage.CreatePipeline(&current_pipe);
       BuildPipelineWithOp(plan, upstream_stage, upstream_pipe, child_op);
 
       // When a pipeline is fully built, see if it's the longest for the stage
@@ -360,12 +385,12 @@ namespace mohair {
 
   //! Creates all pipelines for the plan
   void SystemPlan::BuildPipelines() {
-    size_t count_inputs = plan_root->GetOpArity();
 
     // Base case: Create a pipeline stage with the root operator as a sink.
     // NOTE: this base case is special to substrait (any operator can be a root operator)
-    PipelineStage& final_stage = CreatePipelineStage(plan_root.get(), nullptr, count_inputs);
+    PipelineStage& final_stage = CreatePipelineStage(nullptr, plan_root.get());
 
+    size_t count_inputs = plan_root->GetOpArity();
     for (size_t child_ndx = 0; child_ndx < count_inputs; ++child_ndx) {
       OpPipeline& stage_pipe = final_stage.CreatePipeline(nullptr);
 
@@ -715,29 +740,24 @@ namespace mohair {
     vector<unique_ptr<PlanMessage>> subplan_msgs;
     subplan_msgs.reserve(subplan_rootrels.size());
 
-    MOHAIR_ASSERT("Super plan root should be first", super_plan->relations(0).has_root());
-    const RelRoot&   super_root   = super_plan->relations(0).root();
-    const RelCommon& super_common = GetRelCommon(super_root.input());
-
+    // Gather root operators for each subplan and handle any preprocessing
     for (size_t subplan_ndx = 0; subplan_ndx < subplan_rootrels.size(); ++subplan_ndx) {
       auto plan_copy = std::make_unique<Plan>();
       plan_copy->CopyFrom(*super_plan);
 
-      // It is required that we clear the output names in the subplan messages;
-      // otherwise, we will always project the wrong columns from subplans
-      int      root_ndx     = FindPlanRoot(*plan_copy);
-      PlanRel* planrel_copy = plan_copy->mutable_relations(root_ndx);
+      PlanRel* subplan_planroot = plan_copy->mutable_relations(0);
+      MOHAIR_ASSERT("Expected first PlanRel to be root", subplan_planroot->has_root());
 
-      planrel_copy->clear_subtree_anchor();
-      if (not planrel_copy->root().names().empty()) {
-        planrel_copy->mutable_root()->clear_names();
+      // Pushdown plans should not propagate the output names of the source plan.
+      if (not subplan_planroot->root().names().empty()) {
+        subplan_planroot->mutable_root()->clear_names();
       }
 
-      RelCommon* subplan_common = GetRelCommon(
-        planrel_copy->mutable_root()->mutable_input()
+      // Verify the pipeline has an identity
+      MOHAIR_ASSERT(
+         "Missing pipeline identity"
+        ,GetRelCommon(subplan_planroot->root().input()).hint().alias_hash() != 0
       );
-
-      subplan_common->mutable_hint()->set_alias_hash(super_common.hint().alias_hash());
 
       subplan_msgs.push_back(PlanMessage::FromPlan(std::move(plan_copy)));
     }
