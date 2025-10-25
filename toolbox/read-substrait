@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+# ------------------------------
+# Dependencies
+
+# >> Standard modules
+import sys
+
+from pathlib import Path
+
+
+# >> Internal
+from mohair.plans import SystemPlan
+
+
+
+# ------------------------------
+# Module variables
+
+
+# ------------------------------
+# Functions
+def ValidateArgs():
+    if len(sys.argv) != 2:
+        sys.exit('Usage: read-substrait <path-to-file>')
+
+    if not Path(sys.argv[1]).is_file():
+        sys.exit(f'Cannot find file: [{sys.argv[1]}]')
+
+
+# ------------------------------
+# Main logic
+
+if __name__ == '__main__':
+    ValidateArgs()
+
+    # Take a file path to the substrait plan as an optional input
+    plan_fpath = Path(sys.argv[1])
+    print(f'Parsed plan source: {plan_fpath}')
+
+    sys_plan = SystemPlan.FromFile(plan_fpath)
+    sys_plan.BuildPipelines()
+
+    # print the structure
+    print(sys_plan.ViewStr())

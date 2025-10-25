@@ -50,7 +50,10 @@ from skyproto.substrait.algebra_pb2 import AggregateRel, SortRel
 from skyproto.substrait.algebra_pb2 import CrossRel, JoinRel, HashJoinRel, MergeJoinRel
 
 #       |> Mohair extensions
-from skyproto.mohair.algebra_pb2 import SkyRel, SkySliceRel, SkyPartitionRel
+from skyproto.mohair.algebra_pb2 import ( SkyRel
+                                         ,SkySliceRel
+                                         ,SkyPartitionRel
+                                         ,SkyResultRel)
 
 # >> Mohair types
 from mohair.types import MohairOp, StreamOp, SinkOp, OriginOp
@@ -195,6 +198,23 @@ class ReadSkyPartition(OriginOp):
     def partition_key(self):
         return self.substrait_op.partition
 
+@dataclass
+class ReadSkyResultRel(OriginOp):
+    """
+    A custom query operator to be used in a mohair pushback plan. This provides a way to
+    communicate a materialized query result that can be pulled from a remote query engine.
+    """
+
+    substrait_op: SkyResultRel
+    op_inputs   : tuple[()] = ()
+
+    def __str__(self) -> str:
+        return f'SkyResultRel({self.source_name})'
+
+    def __post_init__(self):
+        self.source_name = self.substrait_op.result_name
+        self.source_id   = int(self.source_name)
+
 
 # >> Query operators that cannot stream data
 @dataclass
@@ -319,10 +339,16 @@ def _from_extleaf(leaf_op: ExtensionLeafRel) -> Any:
         leaf_op.detail.Unpack(sky_partrel)
         return MohairFrom(sky_partrel)
 
+    elif leaf_op.detail.Is(SkyResultRel.DESCRIPTOR):
+        sky_result = SkyResultRel()
+        leaf_op.detail.Unpack(sky_result)
+        return MohairFrom(sky_result)
+
     raise NotImplementedError(
-        f'Unknown extension type: {leaf_op.detail.TypeName()}'
+        f'No handler for extension type: {leaf_op.detail.TypeName()}'
     )
 
+# Leaf relations for skytether scans
 @MohairFrom.register
 def _from_skyrel(sky_op: SkyRel) -> Any:
     logger.debug('translating <SkyRel>')
@@ -340,6 +366,13 @@ def _from_skypartitionrel(sky_op: SkyPartitionRel) -> Any:
     logger.debug('translating <SkyPartitionRel>')
 
     return ReadSkyPartition(sky_op)
+
+# Leaf relations for skytether results and pushback
+@MohairFrom.register
+def _from_skyresultrel(sky_op: SkyResultRel) -> Any:
+    logger.debug('translating <SkyResultRel>')
+
+    return ReadSkyResultRel(sky_op)
 
 
 # >> Translations for join and n-ary relations

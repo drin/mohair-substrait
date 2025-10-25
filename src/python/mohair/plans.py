@@ -164,8 +164,6 @@ class SystemPlan:
 
     pipeline_stages : list[PipelineStage] = field(default_factory=list)
     origin_pipelines: list[OpPipeline]    = field(default_factory=list)
-    plan_ops        : list[MohairOp]      = field(default_factory=list)
-    fn_anchors      : dict[int, str]      = field(default_factory=dict)
 
 
     @classmethod

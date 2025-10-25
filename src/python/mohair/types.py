@@ -50,7 +50,7 @@ from mohair import CreateMohairLogger
 logger = CreateMohairLogger(__name__)
 
 # >> Forward references (Type aliases)
-type MohairOp     = 'MohairOp'
+type MohairOp = 'MohairOp'
 
 
 # ------------------------------
